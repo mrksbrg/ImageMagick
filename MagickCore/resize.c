@@ -4701,76 +4701,56 @@ static void url_encode(const char *uri,char *encode_uri)
   *p='\0';
 }
 
-MagickExport Image *ThumbnailImage(const Image *image,const size_t columns,
-  const size_t rows,ExceptionInfo *exception)
+/*
+  Reduce a copy of the image to the thumbnail size in up to three steps:
+  sample to four times the size, box-filter to twice, then resize.
+*/
+static Image *ResizeThumbnail(const Image *image,Image *thumbnail_image,
+  const size_t columns,const size_t rows,ExceptionInfo *exception)
 {
-#define SampleFactor  5
-
-  char
-    encode_uri[3*MagickPathExtent+1] = "/0";
-
-  const char
-    *name,
-    *mime_type;
-
   Image
-    *thumbnail_image;
+    *clone_image = thumbnail_image;
 
-  struct stat
-    attributes;
+  ssize_t
+    x_factor,
+    y_factor;
 
-  assert(image != (Image *) NULL);
-  assert(image->signature == MagickCoreSignature);
-  assert(exception != (ExceptionInfo *) NULL);
-  assert(exception->signature == MagickCoreSignature);
-  if (IsEventLogging() != MagickFalse)
-    (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",image->filename);
-  thumbnail_image=CloneImage(image,0,0,MagickTrue,exception);
-  if (thumbnail_image == (Image *) NULL)
-    return(thumbnail_image);
-  if ((columns != image->columns) || (rows != image->rows))
+  x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double) 
+    columns));
+  y_factor=(ssize_t) (image->rows*MagickSafeReciprocal((double) rows));
+  if ((x_factor > 4) && (y_factor > 4))
     {
-      Image
-        *clone_image = thumbnail_image;
-
-      ssize_t
-        x_factor,
-        y_factor;
-
-      x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double) 
-        columns));
-      y_factor=(ssize_t) (image->rows*MagickSafeReciprocal((double) rows));
-      if ((x_factor > 4) && (y_factor > 4))
+      thumbnail_image=SampleImage(clone_image,4*columns,4*rows,exception);
+      if (thumbnail_image != (Image *) NULL)
         {
-          thumbnail_image=SampleImage(clone_image,4*columns,4*rows,exception);
-          if (thumbnail_image != (Image *) NULL)
-            {
-              clone_image=DestroyImage(clone_image);
-              clone_image=thumbnail_image;
-            }
+          clone_image=DestroyImage(clone_image);
+          clone_image=thumbnail_image;
         }
-      if ((x_factor > 2) && (y_factor > 2))
-        {
-          thumbnail_image=ResizeImage(clone_image,2*columns,2*rows,BoxFilter,
-            exception);
-          if (thumbnail_image != (Image *) NULL)
-            {
-              clone_image=DestroyImage(clone_image);
-              clone_image=thumbnail_image;
-            }
-        }
-      thumbnail_image=ResizeImage(clone_image,columns,rows,image->filter ==
-        UndefinedFilter ? LanczosSharpFilter : image->filter,exception);
-      clone_image=DestroyImage(clone_image);
-      if (thumbnail_image == (Image *) NULL)
-        return(thumbnail_image);
     }
-  (void) ParseAbsoluteGeometry("0x0+0+0",&thumbnail_image->page);
-  thumbnail_image->depth=8;
-  thumbnail_image->interlace=NoInterlace;
-  /*
-    Strip all profiles except color profiles.
-  */
+  if ((x_factor > 2) && (y_factor > 2))
+    {
+      thumbnail_image=ResizeImage(clone_image,2*columns,2*rows,BoxFilter,
+        exception);
+      if (thumbnail_image != (Image *) NULL)
+        {
+          clone_image=DestroyImage(clone_image);
+          clone_image=thumbnail_image;
+        }
+    }
+  thumbnail_image=ResizeImage(clone_image,columns,rows,image->filter ==
+    UndefinedFilter ? LanczosSharpFilter : image->filter,exception);
+  clone_image=DestroyImage(clone_image);
+  return(thumbnail_image);
+}
+
+/*
+  Remove every profile from the thumbnail except the color profiles.
+*/
+static void StripThumbnailProfiles(Image *thumbnail_image)
+{
+  const char
+    *name;
+
   ResetImageProfileIterator(thumbnail_image);
   for (name=GetNextImageProfile(thumbnail_image); name != (const char *) NULL; )
   {
@@ -4781,7 +4761,23 @@ MagickExport Image *ThumbnailImage(const Image *image,const size_t columns,
      }
     name=GetNextImageProfile(thumbnail_image);
   }
-  (void) DeleteImageProperty(thumbnail_image,"comment");
+}
+
+/*
+  Record where the thumbnail came from, as the Thumb:: properties.
+*/
+static void SetThumbnailProperties(const Image *image,Image *thumbnail_image,
+  ExceptionInfo *exception)
+{
+  char
+    encode_uri[3*MagickPathExtent+1] = "/0";
+
+  const char
+    *mime_type;
+
+  struct stat
+    attributes;
+
   url_encode(image->filename,encode_uri);
   if (*image->filename != '/')
     (void) FormatImageProperty(thumbnail_image,"Thumb::URI","./%s",encode_uri);
@@ -4805,5 +4801,40 @@ MagickExport Image *ThumbnailImage(const Image *image,const size_t columns,
     (double) image->magick_rows);
   (void) FormatImageProperty(thumbnail_image,"Thumb::Document::Pages","%.17g",
     (double) GetImageListLength(image));
+}
+
+MagickExport Image *ThumbnailImage(const Image *image,const size_t columns,
+  const size_t rows,ExceptionInfo *exception)
+{
+#define SampleFactor  5
+
+  Image
+    *thumbnail_image;
+
+  assert(image != (Image *) NULL);
+  assert(image->signature == MagickCoreSignature);
+  assert(exception != (ExceptionInfo *) NULL);
+  assert(exception->signature == MagickCoreSignature);
+  if (IsEventLogging() != MagickFalse)
+    (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",image->filename);
+  thumbnail_image=CloneImage(image,0,0,MagickTrue,exception);
+  if (thumbnail_image == (Image *) NULL)
+    return(thumbnail_image);
+  if ((columns != image->columns) || (rows != image->rows))
+    {
+      thumbnail_image=ResizeThumbnail(image,thumbnail_image,columns,rows,
+        exception);
+      if (thumbnail_image == (Image *) NULL)
+        return(thumbnail_image);
+    }
+  (void) ParseAbsoluteGeometry("0x0+0+0",&thumbnail_image->page);
+  thumbnail_image->depth=8;
+  thumbnail_image->interlace=NoInterlace;
+  /*
+    Strip all profiles except color profiles.
+  */
+  StripThumbnailProfiles(thumbnail_image);
+  (void) DeleteImageProperty(thumbnail_image,"comment");
+  SetThumbnailProperties(image,thumbnail_image,exception);
   return(thumbnail_image);
 }
