@@ -3985,6 +3985,24 @@ MagickExport MagickBooleanType ModulateImage(Image *image,const char *modulate,
 }
 
 /*
+  Negate the channels of one pixel that are marked for update.
+*/
+static inline void NegatePixelChannels(const Image *image,Quantum *q)
+{
+  ssize_t
+    j;
+
+  for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+  {
+    PixelChannel channel = GetPixelChannelChannel(image,j);
+    PixelTrait traits = GetPixelChannelTraits(image,channel);
+    if ((traits & UpdatePixelTrait) == 0)
+      continue;
+    q[j]=QuantumRange-q[j];
+  }
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -4083,22 +4101,12 @@ MagickExport MagickBooleanType NegateImage(Image *image,
           }
         for (x=0; x < (ssize_t) image->columns; x++)
         {
-          ssize_t
-            j;
-
           if (IsPixelGray(image,q) == MagickFalse)
             {
               q+=(ptrdiff_t) GetPixelChannels(image);
               continue;
             }
-          for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
-          {
-            PixelChannel channel = GetPixelChannelChannel(image,j);
-            PixelTrait traits = GetPixelChannelTraits(image,channel);
-            if ((traits & UpdatePixelTrait) == 0)
-              continue;
-            q[j]=QuantumRange-q[j];
-          }
+          NegatePixelChannels(image,q);
           q+=(ptrdiff_t) GetPixelChannels(image);
         }
         sync=SyncCacheViewAuthenticPixels(image_view,exception);
@@ -4143,17 +4151,7 @@ MagickExport MagickBooleanType NegateImage(Image *image,
       }
     for (x=0; x < (ssize_t) image->columns; x++)
     {
-      ssize_t
-        j;
-
-      for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
-      {
-        PixelChannel channel = GetPixelChannelChannel(image,j);
-        PixelTrait traits = GetPixelChannelTraits(image,channel);
-        if ((traits & UpdatePixelTrait) == 0)
-          continue;
-        q[j]=QuantumRange-q[j];
-      }
+      NegatePixelChannels(image,q);
       q+=(ptrdiff_t) GetPixelChannels(image);
     }
     if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
