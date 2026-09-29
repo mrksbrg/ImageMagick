@@ -1519,6 +1519,83 @@ MagickExport MagickBooleanType ContrastImage(Image *image,
 }
 
 /*
+  Map each level to its stretched value between the black and white levels.
+*/
+static void BuildStretchMap(const Image *image,const Quantum *black,
+  const Quantum *white,Quantum *stretch_map)
+{
+  ssize_t
+    i;
+
+  (void) memset(stretch_map,0,(MaxMap+1)*GetPixelChannels(image)*
+    sizeof(*stretch_map));
+  for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+  {
+    ssize_t
+      j;
+
+    for (j=0; j <= (ssize_t) MaxMap; j++)
+    {
+      double
+        gamma;
+
+      gamma=MagickSafeReciprocal(white[i]-black[i]);
+      if (j < (ssize_t) black[i])
+        stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=(Quantum) 0;
+      else
+        if (j > (ssize_t) white[i])
+          stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=QuantumRange;
+        else
+          if (black[i] != white[i])
+            stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=
+              ScaleMapToQuantum((double) (MaxMap*gamma*(j-(double) black[i])));
+    }
+  }
+}
+
+/*
+  Apply the stretch map to the colormap of a PseudoClass image.
+*/
+static void StretchColormap(Image *image,const Quantum *stretch_map)
+{
+  ssize_t
+    i,
+    j;
+
+  for (j=0; j < (ssize_t) image->colors; j++)
+  {
+    if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+      {
+        i=GetPixelChannelOffset(image,RedPixelChannel);
+        image->colormap[j].red=(MagickRealType) stretch_map[
+          GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
+          image->colormap[j].red))+(size_t) i];
+      }
+    if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+      {
+        i=GetPixelChannelOffset(image,GreenPixelChannel);
+        image->colormap[j].green=(MagickRealType) stretch_map[
+          GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
+          image->colormap[j].green))+(size_t) i];
+      }
+    if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+      {
+        i=GetPixelChannelOffset(image,BluePixelChannel);
+        image->colormap[j].blue=(MagickRealType) stretch_map[
+          GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
+          image->colormap[j].blue))+(size_t) i];
+      }
+    if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+      {
+        i=GetPixelChannelOffset(image,AlphaPixelChannel);
+        image->colormap[j].alpha=(MagickRealType) stretch_map[
+          GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
+          image->colormap[j].alpha))+(size_t) i];
+      }
+  }
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -1693,69 +1770,13 @@ MagickExport MagickBooleanType ContrastStretchImage(Image *image,
   /*
     Stretch the histogram to create the stretched image mapping.
   */
-  (void) memset(stretch_map,0,(MaxMap+1)*GetPixelChannels(image)*
-    sizeof(*stretch_map));
-  for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-  {
-    ssize_t
-      j;
-
-    for (j=0; j <= (ssize_t) MaxMap; j++)
-    {
-      double
-        gamma;
-
-      gamma=MagickSafeReciprocal(white[i]-black[i]);
-      if (j < (ssize_t) black[i])
-        stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=(Quantum) 0;
-      else
-        if (j > (ssize_t) white[i])
-          stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=QuantumRange;
-        else
-          if (black[i] != white[i])
-            stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=
-              ScaleMapToQuantum((double) (MaxMap*gamma*(j-(double) black[i])));
-    }
-  }
+  BuildStretchMap(image,black,white,stretch_map);
   if (image->storage_class == PseudoClass)
     {
-      ssize_t
-        j;
-
       /*
         Stretch-contrast colormap.
       */
-      for (j=0; j < (ssize_t) image->colors; j++)
-      {
-        if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
-          {
-            i=GetPixelChannelOffset(image,RedPixelChannel);
-            image->colormap[j].red=(MagickRealType) stretch_map[
-              GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
-              image->colormap[j].red))+(size_t) i];
-          }
-        if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
-          {
-            i=GetPixelChannelOffset(image,GreenPixelChannel);
-            image->colormap[j].green=(MagickRealType) stretch_map[
-              GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
-              image->colormap[j].green))+(size_t) i];
-          }
-        if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
-          {
-            i=GetPixelChannelOffset(image,BluePixelChannel);
-            image->colormap[j].blue=(MagickRealType) stretch_map[
-              GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
-              image->colormap[j].blue))+(size_t) i];
-          }
-        if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
-          {
-            i=GetPixelChannelOffset(image,AlphaPixelChannel);
-            image->colormap[j].alpha=(MagickRealType) stretch_map[
-              GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
-              image->colormap[j].alpha))+(size_t) i];
-          }
-      }
+      StretchColormap(image,stretch_map);
     }
   /*
     Stretch-contrast image.
