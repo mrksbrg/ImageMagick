@@ -1144,12 +1144,14 @@ MagickExport Image *IntegralRotateImage(const Image *image,size_t rotations,
 %
 */
 /*
-  Shear one row left: transfer its pixels left-to-right, blending each with
-  its neighbor by area, and fill the vacated end with the background.
+  Shear one row or column backward - left, or up - transferring its pixels
+  in increasing order, blending each with its neighbor by area, and fill
+  the vacated end with the background. length and offset are the length and
+  x offset of a row, or the height and y offset of a column.
 */
-static void XShearRowLeft(const Image *image,Quantum *p,const size_t width,
-  const ssize_t x_offset,const ssize_t step,const double area,
-  const PixelInfo background)
+static void ShearLineBackward(const Image *image,Quantum *p,
+  const size_t length,const ssize_t offset,const ssize_t step,
+  const double area,const PixelInfo background)
 {
   PixelInfo
     pixel,
@@ -1168,12 +1170,12 @@ static void XShearRowLeft(const Image *image,Quantum *p,const size_t width,
   /*
     Transfer pixels left-to-right.
   */
-  if (step > x_offset)
+  if (step > offset)
     return;
   q=p-step*(ssize_t) GetPixelChannels(image);
-  for (i=0; i < (ssize_t) width; i++)
+  for (i=0; i < (ssize_t) length; i++)
   {
-    if ((x_offset+i) < step)
+    if ((offset+i) < step)
       {
         p+=(ptrdiff_t) GetPixelChannels(image);
         GetPixelInfoPixel(image,p,&pixel);
@@ -1333,7 +1335,7 @@ static MagickBooleanType XShearImage(Image *image,const double degrees,
     {
       case LEFT:
       {
-        XShearRowLeft(image,p,width,x_offset,step,area,background);
+        ShearLineBackward(image,p,width,x_offset,step,area,background);
         break;
       }
       case RIGHT:
@@ -1398,63 +1400,6 @@ static MagickBooleanType XShearImage(Image *image,const double degrees,
 %    o exception: return any errors or warnings in this structure.
 %
 */
-/*
-  Shear one column up: transfer its pixels top-to-bottom, blending each with
-  its neighbor by area, and fill the vacated end with the background.
-*/
-static void YShearColumnUp(const Image *image,Quantum *p,const size_t height,
-  const ssize_t y_offset,const ssize_t step,const double area,
-  const PixelInfo background)
-{
-  PixelInfo
-    pixel,
-    source,
-    destination;
-
-  Quantum
-    *magick_restrict q;
-
-  ssize_t
-    i;
-
-  pixel=background;
-  GetPixelInfo(image,&source);
-  GetPixelInfo(image,&destination);
-  /*
-    Transfer pixels top-to-bottom.
-  */
-  if (step > y_offset)
-    return;
-  q=p-step*(ssize_t) GetPixelChannels(image);
-  for (i=0; i < (ssize_t) height; i++)
-  {
-    if ((y_offset+i) < step)
-      {
-        p+=(ptrdiff_t) GetPixelChannels(image);
-        GetPixelInfoPixel(image,p,&pixel);
-        q+=(ptrdiff_t) GetPixelChannels(image);
-        continue;
-      }
-    GetPixelInfoPixel(image,p,&source);
-    CompositePixelInfoAreaBlend(&pixel,(double) pixel.alpha,
-      &source,(double) GetPixelAlpha(image,p),area,
-      &destination);
-    SetPixelViaPixelInfo(image,&destination,q);
-    GetPixelInfoPixel(image,p,&pixel);
-    p+=(ptrdiff_t) GetPixelChannels(image);
-    q+=(ptrdiff_t) GetPixelChannels(image);
-  }
-  CompositePixelInfoAreaBlend(&pixel,(double) pixel.alpha,
-    &background,(double) background.alpha,area,&destination);
-  SetPixelViaPixelInfo(image,&destination,q);
-  q+=(ptrdiff_t) GetPixelChannels(image);
-  for (i=0; i < (step-1); i++)
-  {
-    SetPixelViaPixelInfo(image,&background,q);
-    q+=(ptrdiff_t) GetPixelChannels(image);
-  }
-}
-
 /*
   Shear one column down: transfer its pixels bottom-to-top, blending each
   with its neighbor by area, and fill the vacated end with the background.
@@ -1590,7 +1535,7 @@ static MagickBooleanType YShearImage(Image *image,const double degrees,
     {
       case UP:
       {
-        YShearColumnUp(image,p,height,y_offset,step,area,background);
+        ShearLineBackward(image,p,height,y_offset,step,area,background);
         break;
       }
       case DOWN:
