@@ -721,6 +721,24 @@ static MagickBooleanType Classify(Image *image,short **extrema,
 %      in the zero_crossing array.
 %
 */
+/*
+  True when an even number of crossings lie strictly between k and bound in
+  the row, and bound is not k itself.
+*/
+static MagickBooleanType HasEvenCrossingGap(const short *crossings,
+  const ssize_t k,const ssize_t bound)
+{
+  ssize_t
+    count,
+    l;
+
+  count=0;
+  for (l=k+1; l < bound; l++)
+    if (crossings[l] != 0)
+      count++;
+  return((((count % 2) == 0) && (bound != k)) ? MagickTrue : MagickFalse);
+}
+
 static void ConsolidateCrossings(ZeroCrossing *zero_crossing,
   const size_t number_crossings)
 {
@@ -733,7 +751,6 @@ static void ConsolidateCrossings(ZeroCrossing *zero_crossing,
   ssize_t
     center,
     correct,
-    count,
     left,
     right;
 
@@ -773,11 +790,8 @@ static void ConsolidateCrossings(ZeroCrossing *zero_crossing,
       correct=(-1);
       if (zero_crossing[i+1].crossings[j] != 0)
         {
-          count=0;
-          for (l=k+1; l < center; l++)
-            if (zero_crossing[i+1].crossings[l] != 0)
-              count++;
-          if (((count % 2) == 0) && (center != k))
+          if (HasEvenCrossingGap(zero_crossing[i+1].crossings,k,center) !=
+              MagickFalse)
             correct=center;
         }
       /*
@@ -785,11 +799,8 @@ static void ConsolidateCrossings(ZeroCrossing *zero_crossing,
       */
       if (correct == -1)
         {
-          count=0;
-          for (l=k+1; l < left; l++)
-            if (zero_crossing[i+1].crossings[l] != 0)
-              count++;
-          if (((count % 2) == 0) && (left != k))
+          if (HasEvenCrossingGap(zero_crossing[i+1].crossings,k,left) !=
+              MagickFalse)
             correct=left;
         }
       /*
@@ -797,11 +808,8 @@ static void ConsolidateCrossings(ZeroCrossing *zero_crossing,
       */
       if (correct == -1)
         {
-          count=0;
-          for (l=k+1; l < right; l++)
-            if (zero_crossing[i+1].crossings[l] != 0)
-              count++;
-          if (((count % 2) == 0) && (right != k))
+          if (HasEvenCrossingGap(zero_crossing[i+1].crossings,k,right) !=
+              MagickFalse)
             correct=right;
         }
       l=(ssize_t) zero_crossing[i].crossings[j];
