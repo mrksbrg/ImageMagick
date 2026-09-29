@@ -2172,6 +2172,83 @@ MagickExport Image *ShadowImage(const Image *image,const double alpha,
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  Set one pixel of the sketch noise to value in every channel the source
+  image defines.
+*/
+static inline void SetSketchNoisePixel(const Image *image,
+  const Image *random_image,const double value,Quantum *q)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) GetPixelChannels(random_image); i++)
+  {
+    PixelChannel channel = GetPixelChannelChannel(image,i);
+    PixelTrait traits = GetPixelChannelTraits(image,channel);
+    if (traits == UndefinedPixelTrait)
+      continue;
+    q[i]=ClampToQuantum((double) QuantumRange*value);
+  }
+}
+
+/*
+  Turn the sketch noise into the dodge layer: motion-blur it, find its
+  edges, and normalize, negate and halve the result. random_image is
+  consumed.
+*/
+static Image *SketchDodgeImage(Image *random_image,const double radius,
+  const double sigma,const double angle,ExceptionInfo *exception)
+{
+  Image
+    *blur_image,
+    *dodge_image;
+
+  MagickBooleanType
+    status;
+
+  blur_image=MotionBlurImage(random_image,radius,sigma,angle,exception);
+  random_image=DestroyImage(random_image);
+  if (blur_image == (Image *) NULL)
+    return((Image *) NULL);
+  dodge_image=EdgeImage(blur_image,radius,exception);
+  blur_image=DestroyImage(blur_image);
+  if (dodge_image == (Image *) NULL)
+    return((Image *) NULL);
+  status=ClampImage(dodge_image,exception);
+  if (status != MagickFalse)
+    status=NormalizeImage(dodge_image,exception);
+  if (status != MagickFalse)
+    status=NegateImage(dodge_image,MagickFalse,exception);
+  if (status != MagickFalse)
+    status=TransformImage(&dodge_image,(char *) NULL,"50%",exception);
+  return(dodge_image);
+}
+
+/*
+  Blend the source image over the dodged sketch.
+*/
+static Image *BlendSketchImage(const Image *image,Image *sketch_image,
+  ExceptionInfo *exception)
+{
+  Image
+    *blend_image;
+
+  blend_image=CloneImage(image,0,0,MagickTrue,exception);
+  if (blend_image == (Image *) NULL)
+    {
+      sketch_image=DestroyImage(sketch_image);
+      return((Image *) NULL);
+    }
+  if (blend_image->alpha_trait != BlendPixelTrait)
+    (void) SetImageAlpha(blend_image,TransparentAlpha,exception);
+  (void) SetImageArtifact(blend_image,"compose:args","20x80");
+  (void) CompositeImage(sketch_image,blend_image,BlendCompositeOp,MagickTrue,
+    0,0,exception);
+  blend_image=DestroyImage(blend_image);
+  return(sketch_image);
+}
+
 MagickExport Image *SketchImage(const Image *image,const double radius,
   const double sigma,const double angle,ExceptionInfo *exception)
 {
@@ -2179,8 +2256,6 @@ MagickExport Image *SketchImage(const Image *image,const double radius,
     *random_view;
 
   Image
-    *blend_image,
-    *blur_image,
     *dodge_image,
     *random_image,
     *sketch_image;
@@ -2239,18 +2314,8 @@ MagickExport Image *SketchImage(const Image *image,const double radius,
       double
         value;
 
-      ssize_t
-        i;
-
       value=GetPseudoRandomValue(random_info[id]);
-      for (i=0; i < (ssize_t) GetPixelChannels(random_image); i++)
-      {
-        PixelChannel channel = GetPixelChannelChannel(image,i);
-        PixelTrait traits = GetPixelChannelTraits(image,channel);
-        if (traits == UndefinedPixelTrait)
-          continue;
-        q[i]=ClampToQuantum((double) QuantumRange*value);
-      }
+      SetSketchNoisePixel(image,random_image,value,q);
       q+=(ptrdiff_t) GetPixelChannels(random_image);
     }
     if (SyncCacheViewAuthenticPixels(random_view,exception) == MagickFalse)
@@ -2263,21 +2328,9 @@ MagickExport Image *SketchImage(const Image *image,const double radius,
       random_image=DestroyImage(random_image);
       return(random_image);
     }
-  blur_image=MotionBlurImage(random_image,radius,sigma,angle,exception);
-  random_image=DestroyImage(random_image);
-  if (blur_image == (Image *) NULL)
-    return((Image *) NULL);
-  dodge_image=EdgeImage(blur_image,radius,exception);
-  blur_image=DestroyImage(blur_image);
+  dodge_image=SketchDodgeImage(random_image,radius,sigma,angle,exception);
   if (dodge_image == (Image *) NULL)
     return((Image *) NULL);
-  status=ClampImage(dodge_image,exception);
-  if (status != MagickFalse)
-    status=NormalizeImage(dodge_image,exception);
-  if (status != MagickFalse)
-    status=NegateImage(dodge_image,MagickFalse,exception);
-  if (status != MagickFalse)
-    status=TransformImage(&dodge_image,(char *) NULL,"50%",exception);
   sketch_image=CloneImage(image,0,0,MagickTrue,exception);
   if (sketch_image == (Image *) NULL)
     {
@@ -2287,19 +2340,7 @@ MagickExport Image *SketchImage(const Image *image,const double radius,
   (void) CompositeImage(sketch_image,dodge_image,ColorDodgeCompositeOp,
     MagickTrue,0,0,exception);
   dodge_image=DestroyImage(dodge_image);
-  blend_image=CloneImage(image,0,0,MagickTrue,exception);
-  if (blend_image == (Image *) NULL)
-    {
-      sketch_image=DestroyImage(sketch_image);
-      return((Image *) NULL);
-    }
-  if (blend_image->alpha_trait != BlendPixelTrait)
-    (void) SetImageAlpha(blend_image,TransparentAlpha,exception);
-  (void) SetImageArtifact(blend_image,"compose:args","20x80");
-  (void) CompositeImage(sketch_image,blend_image,BlendCompositeOp,MagickTrue,
-    0,0,exception);
-  blend_image=DestroyImage(blend_image);
-  return(sketch_image);
+  return(BlendSketchImage(image,sketch_image,exception));
 }
 
 /*
