@@ -46,7 +46,7 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "5"          # bump when normalisation or execution changes
+HARNESS_VERSION = "7"          # bump when normalisation or execution changes
 
 LISTS = ["Colorspace", "Compose", "Distort", "Filter", "Interpolate",
          "VirtualPixel", "Morphology", "Kernel", "Evaluate", "Statistic",
@@ -91,6 +91,10 @@ NORMALISE = [
     # Source locations in exception messages carry line numbers and function
     # names, which refactoring legitimately changes.
     (re.compile(rb" @ (error|warning|fatal)/[^\s']+"), rb" @ \1/LOCATION"),
+    # The build stamp in -version (git revision and date at configure time)
+    # differs between the base and candidate builds by design.
+    (re.compile(rb"(Version: ImageMagick \S+ \S+ \S+ \S+ )[0-9a-f]+:[0-9]{8}"),
+     rb"\1BUILDSTAMP"),
     # Temporary file names are random.
     (re.compile(rb"magick-[A-Za-z0-9_-]{8,}"), rb"magick-TMPFILE"),
     # Timing lines in identify -verbose, info:, json:, yaml:.
@@ -103,6 +107,11 @@ NORMALISE = [
     (re.compile(rb"/(CreationDate|ModDate) \(D:[0-9]+[^)]*\)"), rb"/\1 (D:DATE)"),
     (re.compile(rb"<xmp:(CreateDate|ModifyDate|MetadataDate)>[^<]*<"), rb"<xmp:\1>DATE<"),
 ]
+BUILD_TREE_RE = re.compile(re.escape(OUT.encode()) +
+                           rb"/(?:(?:src|base)/[0-9a-f]{40}|cand|cov|asan|mull-[A-Za-z0-9_]+)")
+# conjure takes `-key value` script variables, not options; -version and -list
+# are accepted only as the first argument. None of them gets -seed.
+UNSEEDED = ("conjure", "-version", "-list")
 # Subcommands take their options after the subcommand name.
 SUBCOMMANDS = ("compare", "identify", "montage", "composite", "conjure", "stream",
                "convert", "mogrify")
@@ -111,6 +120,10 @@ SUBCOMMANDS = ("compare", "identify", "montage", "composite", "conjure", "stream
 def normalise(data, case_dir=None):
     if case_dir:  # absolute paths differ between the base and cand sides
         data = data.replace(case_dir.encode(), b"CASEDIR").replace(WORK.encode(), b"WORK")
+    # Build and source trees differ too (-list configure, -list mime print the
+    # configuration paths): the base builds in a worktree, the candidate in
+    # the checkout itself. Inner paths first, then the checkout.
+    data = BUILD_TREE_RE.sub(b"BUILDTREE", data).replace(ROOT.encode(), b"BUILDTREE")
     for pattern, repl in NORMALISE:
         data = pattern.sub(repl, data)
     return data
@@ -267,7 +280,7 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
         # Every random generator is seeded; unseeded ones read /dev/urandom.
         # conjure takes `-key value` script variables, not options, so MSL
         # cases must avoid random operators instead.
-        if argv and argv[0] == "conjure":
+        if argv and argv[0] in UNSEEDED:
             argv = WRAPPER + [binary] + argv
         else:
             at = 1 if argv and argv[0] in SUBCOMMANDS else 0
@@ -506,16 +519,20 @@ def cmd_selfcheck(args):
     base_bin = args.base_bin or build("base", args.base)
     manifest, all_cases = load_cases(base_bin)
     todo = select(all_cases, args.filter)
-    first = parallel(lambda c: run_case(base_bin, "self1", c, manifest), todo, args.jobs, "run 1")
-    second = parallel(lambda c: run_case(base_bin, "self2", c, manifest), todo, args.jobs, "run 2")
-    flaky = [c for c in todo if not same(first[c["id"]], second[c["id"]])]
-    print("selfcheck: %d cases, %d nondeterministic" % (len(todo), len(flaky)))
+    # Two runs are not enough: a case that differs 30% of the time under load
+    # (resize/06b5a45abd, an upstream bug) agrees with itself in 58% of pairs
+    # and passed. --repeat 4 would have caught it three times in four.
+    runs = [parallel(lambda c: run_case(base_bin, "self%d" % n, c, manifest), todo, args.jobs,
+                     "run %d" % n) for n in range(1, args.repeat + 1)]
+    flaky = [c for c in todo if any(not same(runs[0][c["id"]], r[c["id"]]) for r in runs[1:])]
+    print("selfcheck: %d cases, %d runs each, %d nondeterministic"
+          % (len(todo), args.repeat, len(flaky)))
     for c in flaky:
-        print("  %s  %s: %s" % (c["id"], c["label"], "; ".join(explain(first[c["id"]],
-                                                                      second[c["id"]]))))
+        other = next(r[c["id"]] for r in runs[1:] if not same(runs[0][c["id"]], r[c["id"]]))
+        print("  %s  %s: %s" % (c["id"], c["label"], "; ".join(explain(runs[0][c["id"]], other))))
     if not flaky:
-        for side in ("self1", "self2"):
-            shutil.rmtree(os.path.join(WORK, "runs", side), ignore_errors=True)
+        for n in range(1, args.repeat + 1):
+            shutil.rmtree(os.path.join(WORK, "runs", "self%d" % n), ignore_errors=True)
     return 1 if flaky else 0
 
 
@@ -561,6 +578,9 @@ def main():
             s.add_argument("--no-cache", action="store_true")
             s.add_argument("--show", type=int, default=20, help="divergences to print")
             s.add_argument("--explain", action="store_true", help="pixel deltas for divergences")
+        if name == "selfcheck":
+            s.add_argument("--repeat", type=int, default=2,
+                           help="runs per case; 4 or more after changing the catalogue")
         if name == "exec":
             s.add_argument("--bin", required=True)
         if name == "list":

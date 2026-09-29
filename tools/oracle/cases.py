@@ -101,6 +101,12 @@ FONT = "Generic.ttf"  # copied from PerlMagick/t
 # so those outputs change from run to run. The oracle keeps them off that path.
 DEST_WIDER_UNSTABLE = ("Displace", "Distort")
 
+# Upstream bug (ORACLE.md): -scale 50% under a bilevel write mask leaves output
+# pixels unwritten, so the image holds whatever memory held: under a parallel
+# load 19 of 64 runs of the same command differed. selfcheck, which runs each
+# case twice, missed it, and it counted as a kill in 155 mutation runs.
+WRITE_MASK_UNSTABLE = ("-scale 50%",)
+
 
 def img(name):
     return "{C}/%s.miff" % name
@@ -413,8 +419,13 @@ ENCODE_VARIANTS = {
     "mono": [[]], "pal": [[]], "ptif": [[]], "rgb": [[]],
     "rgba": [[]], "gray": [[]], "cmyk": [[]], "uyvy": [[]], "ycbcr": [[]], "h": [[]],
     "html": [[]], "json": [[]], "yaml": [[]], "txt": [[]], "sparse-color": [[]],
-    "histogram": [[]], "info": [[]], "svg": [[]], "ps": [[]],
-    "ps2": [[]], "ps3": [[]], "eps": [[]], "pdf": [[], ["-compress", "Zip"]],
+    "histogram": [[]], "info": [[]], "svg": [[]],
+    # The PostScript and PDF writers hold most callers of MagickCore/compress.c.
+    "ps": [[]] + [["-compress", c] for c in ("RLE", "Fax", "Group4", "JPEG")],
+    "ps2": [[]] + [["-compress", c] for c in ("LZW", "RLE", "Zip", "Fax", "Group4", "JPEG")],
+    "ps3": [[]] + [["-compress", c] for c in ("LZW", "RLE", "Zip", "Fax", "Group4", "JPEG")],
+    "eps": [[], ["-compress", "LZW"]],
+    "pdf": [[]] + [["-compress", c] for c in ("Zip", "LZW", "RLE", "Fax", "Group4", "JPEG")],
     "pcl": [[]], "braille": [[]], "ftxt": [[]], "qoi": [[]],
     "farbfeld": [[]], "mask": [[]], "strimg": [[]],
     "wpg": [[]], "fl32": [[]], "ashlar": [[]],
@@ -527,8 +538,9 @@ def generate(lists, writable_formats):
                                  [how, geo]))
     for how in ("-scale 150%", "-sample 60%", "-resize 150%", "-resize 40%", "-scale 50%",
                 "-scale 150x100%"):
-        cases.append(_op("resize", "rose write-mask %s" % how, [img("rose")],
-                         ["-write-mask", img("bilevel")] + how.split() + ["+write-mask"]))
+        if how not in WRITE_MASK_UNSTABLE:
+            cases.append(_op("resize", "rose write-mask %s" % how, [img("rose")],
+                             ["-write-mask", img("bilevel")] + how.split() + ["+write-mask"]))
         # A mask of exactly one half: `<= QuantumRange/2` against `<` differs only there.
         cases.append(_case("resize", "rose half write-mask %s" % how,
                            [["-size", "70x46", "xc:gray(50%)", "mask.miff"],
@@ -797,6 +809,20 @@ def generate(lists, writable_formats):
                            ["dec.miff"]))
         cases.append(_case("decode", "identify -verbose " + fname,
                            [["identify", "-verbose"] + pre + [spec]], []))
+
+    # ---- cipher.c: -encipher then -decipher, a round trip
+    for name in ("rose", "rose_alpha", "gray16"):
+        cases.append(_case("cipher", "encipher " + name,
+                           [[img(name), "-encipher", "pass.txt", "enc.miff"],
+                            ["enc.miff", "-decipher", "pass.txt"] + FLOAT_OUT + ["dec.miff"]],
+                           ["enc.miff", "dec.miff"],
+                           files={"pass.txt": "A refactoring changes no behaviour.\n"}))
+
+    # ---- version.c and the -list printers of the infrastructure files
+    cases.append(_case("info", "version", [["-version"]], []))
+    for name in ("configure", "mime", "policy", "log", "locale", "type", "font", "delegate",
+                 "coder", "magic", "resource", "format"):
+        cases.append(_case("info", "list " + name, [["-list", name]], []))
 
     # ---- MVG and SVG through the internal renderer
     for mvg in ("draw.mvg",):

@@ -181,6 +181,19 @@ kinds in the table.
 
 ## Sweep 1: the 25 largest MagickCore files
 
+> [!WARNING]
+> **Correction in progress (2026-09-29).** 141 of this sweep's kills (10%), 10 of
+> sweep 2's and 4 of `colormap.c`'s full run were made by one nondeterministic
+> case, `resize/06b5a45abd` (an upstream bug, see ORACLE.md): it differs from
+> itself in about one run in three under load, so a mutant run on it "died"
+> by chance. They were concentrated in the infrastructure files - `property.c`
+> 34, `cache.c` 28, `blob.c` 23, `image.c` 16 - whose scores rose most in the
+> capped reruns below, because killer-first ordering had ranked this case
+> highly on its own false kills. The case is out of the catalogue and the 155
+> mutants are being rerun; until the tables here are regenerated
+> (`build-oracle/finalize.py`), read the figures for those four files as too
+> high. Files whose kills did not involve it are unaffected.
+
 One Mull build covered the 25 largest MagickCore files that the oracle build
 compiles (44,458 mutants). It left out the X11 files (`display.c`,
 `xwindow.c`, `widget.c`), which are built `--without-x`, as well as
@@ -321,6 +334,19 @@ nondeterministic. Rerunning the affected survivors against it:
 `compare.c` went from 75% to 86% on executed lines with one edit. The
 `statistic.c` survivors turned out not to be about precision: they are
 boundary checks and moment arithmetic whose results no case prints.
+
+A second round of additions targets the hardly exercised files of sweep 2:
+`-encipher`/`-decipher` round trips (`cipher.c`), PostScript, EPS and PDF
+output with every compression method (`compress.c`), `-version`
+(`version.c`), and twelve `-list` printers (`configure`, `mime`, `policy`,
+`log`, `locale`, `type`, `font`, `delegate`, `coder`, `magic`, `resource`,
+`format`). Two harness changes came with them: `-version` and `-list` are
+only accepted as the first argument, so they no longer get `-seed 1`
+prepended (with it, all thirteen failed and compared equal, testing nothing),
+and the build stamp in `-version` and the build-tree paths in the `-list`
+output are normalised. The catalogue is now 9,702 cases, 0 nondeterministic
+in `selfcheck --repeat 4` under full load. The mutation effect on those files
+has not been measured yet.
 
 ## Sweep 2: the remaining 58 MagickCore files
 

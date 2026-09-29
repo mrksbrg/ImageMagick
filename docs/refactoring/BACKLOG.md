@@ -10,6 +10,12 @@ by Code Health. Scores are the committed baseline
   from 40-100 sampled mutants, so treat differences of a few points as noise, and run the
   function's own mutants before refactoring anything near the line.
 
+> [!WARNING]
+> The protection figures for `property.c`, `cache.c`, `blob.c` and `image.c`
+> are too high until a rerun finishes: a nondeterministic case made some of
+> their kills (see the warning in `MUTATION.md`). Do not start on those four
+> on the strength of this table.
+
 How the groups were drawn:
 
 | Group | Rule |

@@ -35,9 +35,9 @@ The score must read 8.88. If it does not, this file changed after the task was w
 
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
-| 1 | `CycleColormapImage` | 188 | 11 | - | 2 | public | 1 | 12 | 11 of 12 |
-| 2 | `SortColormapByIntensity` | 299 | 13 | - | - | public | 1 | 1 | 13 of 16 |
-| 3 | `AcquireImageColormap` | 105 | - | - | - | public | - | 2363 | 10 of 11 |
+| 1 | `CycleColormapImage` | 188 | 11 | - | 2 | public | 1 | 12 | 14 of 15 |
+| 2 | `SortColormapByIntensity` | 299 | 13 | - | - | public | 1 | 1 | 15 of 18 |
+| 3 | `AcquireImageColormap` | 105 | - | - | - | public | - | 2363 | 12 of 12 |
 
 Thresholds for C: cyclomatic complexity under 9, nesting depth under 4. **Cases** is how many oracle cases execute the function; **Mutants killed** counts the sampled mutants on lines the oracle executes. A function with no cases cannot be checked and is listed last: skip it and report it.
 
@@ -71,7 +71,6 @@ Commit message: `refactor(MagickCore/colormap.c): simplify SortColormapByIntensi
 
 - **Recipe E (extract function)** - a large method; extract its self-contained blocks.
 - Public function: its name and signature must not change.
-- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/colormap.c): simplify AcquireImageColormap`
 

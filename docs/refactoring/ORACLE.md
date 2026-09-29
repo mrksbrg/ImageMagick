@@ -110,7 +110,10 @@ every pixel value exactly, so the comparison sees rounding differences that an
 
 `selfcheck` runs the baseline twice without the cache and reports anything
 that differs from itself. It must report 0 before a clean `run` means
-anything; run it after changing the catalogue. A case that times out on the
+anything; run it after changing the catalogue, with `--repeat 4` or more.
+Two runs are not enough: a case that goes wrong one time in three agrees with
+itself in more than half of all pairs, and one such case (see Known upstream
+issues) went unnoticed for a day. A case that times out on the
 baseline is reported by `run` as a catalogue bug: it compares nothing and costs
 30 seconds on every run.
 
@@ -183,6 +186,18 @@ refactoring commit.
   strip at x = 64–69. AddressSanitizer reports nothing, so it is not an
   out-of-bounds access. The catalogue avoids this case (`DEST_WIDER_UNSTABLE`
   in `cases.py`).
+- **`-scale` under a write mask leaves output pixels unwritten.**
+  `magick rose: -write-mask bilevel.miff -scale 50% +write-mask out.miff`
+  (with the corpus's bilevel mask) gives different output from run to run:
+  under a parallel load, 19 of 64 runs of the same command differed from the
+  rest, by garbage values rather than rounding (an absolute-error count of
+  about 4e36 between the variants). Where the mask forbids a write,
+  `ScaleImage` apparently leaves the destination pixel as it found it, in a
+  cache that was never initialised. Run alone, the output looks stable, so
+  `selfcheck` with two runs missed it; it had been counted as a kill in 155
+  mutation runs before it was found. The catalogue avoids this case
+  (`WRITE_MASK_UNSTABLE` in `cases.py`); the eleven other write-mask cases
+  were stable in 16 runs each.
 - **The PDF writer does not consult `SOURCE_DATE_EPOCH`.** `GetPdfCreationDate()`
   in `coders/pdf.c` uses `-define pdf:create-epoch` if given, and otherwise the
   output file's ctime, which cannot be set. So PDF output is not reproducible
