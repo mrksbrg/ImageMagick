@@ -668,6 +668,65 @@ static void SetKaiserFilterBeta(const Image *image,ResizeFilter *resize_filter)
 }
 
 /*
+  The "filter:lobes" override of the filter support.
+*/
+static void ApplyFilterLobes(const Image *image,ResizeFilter *resize_filter)
+{
+  const char
+    *artifact;
+
+  artifact=GetImageArtifact(image,"filter:lobes");
+  if (artifact != (const char *) NULL)
+    {
+      ssize_t
+        lobes;
+
+      lobes=(ssize_t) StringToLong(artifact);
+      if (lobes < 1)
+        lobes=1;
+      resize_filter->support=(double) lobes;
+    }
+}
+
+/*
+  The expert blur, support and window-support overrides, and the window
+  scaling that follows from them.
+*/
+static void ApplyFilterBlurAndSupport(const Image *image,ResizeFilter *resize_filter)
+{
+  const char
+    *artifact;
+
+  /*
+    Expert blur override.
+  */
+  artifact=GetImageArtifact(image,"filter:blur");
+  if (artifact != (const char *) NULL)
+    resize_filter->blur*=StringToDouble(artifact,(char **) NULL);
+  if (resize_filter->blur < MagickEpsilon)
+    resize_filter->blur=(double) MagickEpsilon;
+  /*
+    Expert override of the support setting.
+  */
+  artifact=GetImageArtifact(image,"filter:support");
+  if (artifact != (const char *) NULL)
+    resize_filter->support=fabs(StringToDouble(artifact,(char **) NULL));
+  /*
+    Scale windowing function separately to the support 'clipping' window
+    that calling operator is planning to actually use. (Expert override)
+  */
+  resize_filter->window_support=resize_filter->support; /* default */
+  artifact=GetImageArtifact(image,"filter:win-support");
+  if (artifact != (const char *) NULL)
+    resize_filter->window_support=fabs(StringToDouble(artifact,(char **) NULL));
+  /*
+    Adjust window function scaling to match windowing support for weighting
+    function.  This avoids a division on every filter call.
+  */
+  resize_filter->scale*=MagickSafeReciprocal(resize_filter->window_support);
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -1150,17 +1209,7 @@ MagickPrivate ResizeFilter *AcquireResizeFilter(const Image *image,
   }
 
   /* Support Overrides */
-  artifact=GetImageArtifact(image,"filter:lobes");
-  if (artifact != (const char *) NULL)
-    {
-      ssize_t
-        lobes;
-
-      lobes=(ssize_t) StringToLong(artifact);
-      if (lobes < 1)
-        lobes=1;
-      resize_filter->support=(double) lobes;
-    }
+  ApplyFilterLobes(image,resize_filter);
   if (resize_filter->filter == Jinc)
     {
       /*
@@ -1177,33 +1226,7 @@ MagickPrivate ResizeFilter *AcquireResizeFilter(const Image *image,
         resize_filter->blur*=floor(resize_filter->support)/
           resize_filter->support;
     }
-  /*
-    Expert blur override.
-  */
-  artifact=GetImageArtifact(image,"filter:blur");
-  if (artifact != (const char *) NULL)
-    resize_filter->blur*=StringToDouble(artifact,(char **) NULL);
-  if (resize_filter->blur < MagickEpsilon)
-    resize_filter->blur=(double) MagickEpsilon;
-  /*
-    Expert override of the support setting.
-  */
-  artifact=GetImageArtifact(image,"filter:support");
-  if (artifact != (const char *) NULL)
-    resize_filter->support=fabs(StringToDouble(artifact,(char **) NULL));
-  /*
-    Scale windowing function separately to the support 'clipping' window
-    that calling operator is planning to actually use. (Expert override)
-  */
-  resize_filter->window_support=resize_filter->support; /* default */
-  artifact=GetImageArtifact(image,"filter:win-support");
-  if (artifact != (const char *) NULL)
-    resize_filter->window_support=fabs(StringToDouble(artifact,(char **) NULL));
-  /*
-    Adjust window function scaling to match windowing support for weighting
-    function.  This avoids a division on every filter call.
-  */
-  resize_filter->scale*=MagickSafeReciprocal(resize_filter->window_support);
+  ApplyFilterBlurAndSupport(image,resize_filter);
   /*
     Set Cubic Spline B,C values, calculate Cubic coefficients.
   */
