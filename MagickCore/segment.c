@@ -243,6 +243,69 @@ static void
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  Print the fuzzy c-means statistics: the settings, and each cluster's size,
+  extents and center.
+*/
+static void PrintClusterStatistics(const Cluster *head,
+  const double cluster_threshold,const double weighting_exponent,
+  const size_t number_clusters)
+{
+  const Cluster
+    *cluster;
+
+  /*
+    Print cluster statistics.
+  */
+  (void) FormatLocaleFile(stdout,"Fuzzy C-means Statistics\n");
+  (void) FormatLocaleFile(stdout,"===================\n\n");
+  (void) FormatLocaleFile(stdout,"\tCluster Threshold = %g\n",(double)
+    cluster_threshold);
+  (void) FormatLocaleFile(stdout,"\tWeighting Exponent = %g\n",(double)
+    weighting_exponent);
+  (void) FormatLocaleFile(stdout,"\tTotal Number of Clusters = %.17g\n\n",
+    (double) number_clusters);
+  /*
+    Print the total number of points per cluster.
+  */
+  (void) FormatLocaleFile(stdout,"\n\nNumber of Vectors Per Cluster\n");
+  (void) FormatLocaleFile(stdout,"=============================\n\n");
+  for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+    (void) FormatLocaleFile(stdout,"Cluster #%.17g = %.17g\n",(double)
+      cluster->id,(double) cluster->count);
+  /*
+    Print the cluster extents.
+  */
+  (void) FormatLocaleFile(stdout,
+    "\n\n\nCluster Extents:        (Vector Size: %d)\n",MaxDimension);
+  (void) FormatLocaleFile(stdout,"================");
+  for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+  {
+    (void) FormatLocaleFile(stdout,"\n\nCluster #%.17g\n\n",(double)
+      cluster->id);
+    (void) FormatLocaleFile(stdout,
+      "%.17g-%.17g  %.17g-%.17g  %.17g-%.17g\n",(double)
+      cluster->red.left,(double) cluster->red.right,(double)
+      cluster->green.left,(double) cluster->green.right,(double)
+      cluster->blue.left,(double) cluster->blue.right);
+  }
+  /*
+    Print the cluster center values.
+  */
+  (void) FormatLocaleFile(stdout,
+    "\n\n\nCluster Center Values:        (Vector Size: %d)\n",MaxDimension);
+  (void) FormatLocaleFile(stdout,"=====================");
+  for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+  {
+    (void) FormatLocaleFile(stdout,"\n\nCluster #%.17g\n\n",(double)
+      cluster->id);
+    (void) FormatLocaleFile(stdout,"%g  %g  %g\n",(double)
+      cluster->red.center,(double) cluster->green.center,(double)
+      cluster->blue.center);
+  }
+  (void) FormatLocaleFile(stdout,"\n");
+}
+
 static MagickBooleanType Classify(Image *image,short **extrema,
   const double cluster_threshold,const double weighting_exponent,
   const MagickBooleanType verbose,ExceptionInfo *exception)
@@ -458,56 +521,8 @@ static MagickBooleanType Classify(Image *image,short **extrema,
   number_clusters=(size_t) count;
   if (verbose != MagickFalse)
     {
-      /*
-        Print cluster statistics.
-      */
-      (void) FormatLocaleFile(stdout,"Fuzzy C-means Statistics\n");
-      (void) FormatLocaleFile(stdout,"===================\n\n");
-      (void) FormatLocaleFile(stdout,"\tCluster Threshold = %g\n",(double)
-        cluster_threshold);
-      (void) FormatLocaleFile(stdout,"\tWeighting Exponent = %g\n",(double)
-        weighting_exponent);
-      (void) FormatLocaleFile(stdout,"\tTotal Number of Clusters = %.17g\n\n",
-        (double) number_clusters);
-      /*
-        Print the total number of points per cluster.
-      */
-      (void) FormatLocaleFile(stdout,"\n\nNumber of Vectors Per Cluster\n");
-      (void) FormatLocaleFile(stdout,"=============================\n\n");
-      for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
-        (void) FormatLocaleFile(stdout,"Cluster #%.17g = %.17g\n",(double)
-          cluster->id,(double) cluster->count);
-      /*
-        Print the cluster extents.
-      */
-      (void) FormatLocaleFile(stdout,
-        "\n\n\nCluster Extents:        (Vector Size: %d)\n",MaxDimension);
-      (void) FormatLocaleFile(stdout,"================");
-      for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
-      {
-        (void) FormatLocaleFile(stdout,"\n\nCluster #%.17g\n\n",(double)
-          cluster->id);
-        (void) FormatLocaleFile(stdout,
-          "%.17g-%.17g  %.17g-%.17g  %.17g-%.17g\n",(double)
-          cluster->red.left,(double) cluster->red.right,(double)
-          cluster->green.left,(double) cluster->green.right,(double)
-          cluster->blue.left,(double) cluster->blue.right);
-      }
-      /*
-        Print the cluster center values.
-      */
-      (void) FormatLocaleFile(stdout,
-        "\n\n\nCluster Center Values:        (Vector Size: %d)\n",MaxDimension);
-      (void) FormatLocaleFile(stdout,"=====================");
-      for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
-      {
-        (void) FormatLocaleFile(stdout,"\n\nCluster #%.17g\n\n",(double)
-          cluster->id);
-        (void) FormatLocaleFile(stdout,"%g  %g  %g\n",(double)
-          cluster->red.center,(double) cluster->green.center,(double)
-          cluster->blue.center);
-      }
-      (void) FormatLocaleFile(stdout,"\n");
+      PrintClusterStatistics(head,cluster_threshold,weighting_exponent,
+        number_clusters);
     }
   if (number_clusters > 256)
     ThrowClassifyException(ImageError,"TooManyClusters",image->filename);
