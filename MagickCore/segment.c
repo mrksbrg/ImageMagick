@@ -244,6 +244,22 @@ static void
 %
 */
 /*
+  True when the pixel lies within the cluster's extents, widened by
+  SafeMargin on every side.
+*/
+static inline MagickBooleanType IsPixelInCluster(const PixelInfo *pixel,
+  const Cluster *cluster)
+{
+  return(((pixel->red >= (double) (cluster->red.left-SafeMargin)) &&
+    (pixel->red <= (double) (cluster->red.right+SafeMargin)) &&
+    (pixel->green >= (double) (cluster->green.left-SafeMargin)) &&
+    (pixel->green <= (double) (cluster->green.right+SafeMargin)) &&
+    (pixel->blue >= (double) (cluster->blue.left-SafeMargin)) &&
+    (pixel->blue <= (double) (cluster->blue.right+SafeMargin))) ?
+    MagickTrue : MagickFalse);
+}
+
+/*
   Print the fuzzy c-means statistics: the settings, and each cluster's size,
   extents and center.
 */
@@ -452,12 +468,7 @@ static MagickBooleanType Classify(Image *image,short **extrema,
       pixel.green=(double) ScaleQuantumToChar(GetPixelGreen(image,p));
       pixel.blue=(double) ScaleQuantumToChar(GetPixelBlue(image,p));
       for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
-        if ((pixel.red >= (double) (cluster->red.left-SafeMargin)) &&
-            (pixel.red <= (double) (cluster->red.right+SafeMargin)) &&
-            (pixel.green >= (double) (cluster->green.left-SafeMargin)) &&
-            (pixel.green <= (double) (cluster->green.right+SafeMargin)) &&
-            (pixel.blue >= (double) (cluster->blue.left-SafeMargin)) &&
-            (pixel.blue <= (double) (cluster->blue.right+SafeMargin)))
+        if (IsPixelInCluster(&pixel,cluster) != MagickFalse)
           {
             /*
               Count this pixel.
@@ -594,12 +605,7 @@ static MagickBooleanType Classify(Image *image,short **extrema,
       pixel.blue=(double) ScaleQuantumToChar(GetPixelBlue(image,q));
       for (c=head; c != (Cluster *) NULL; c=c->next)
       {
-        if ((pixel.red >= (double) (c->red.left-SafeMargin)) &&
-            (pixel.red <= (double) (c->red.right+SafeMargin)) &&
-            (pixel.green >= (double) (c->green.left-SafeMargin)) &&
-            (pixel.green <= (double) (c->green.right+SafeMargin)) &&
-            (pixel.blue >= (double) (c->blue.left-SafeMargin)) &&
-            (pixel.blue <= (double) (c->blue.right+SafeMargin)))
+        if (IsPixelInCluster(&pixel,c) != MagickFalse)
           {
             /*
               Classify this pixel.
