@@ -4100,6 +4100,55 @@ exit_cleanup:
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  The "convolve:bias" setting, or bias unchanged if it is absent or invalid
+  (with a warning).
+*/
+static double GetConvolveBias(const Image *image,double bias,
+  ExceptionInfo *exception)
+{
+  const char
+    *artifact;
+
+  artifact = GetImageArtifact(image,"convolve:bias");
+  if ( artifact != (const char *) NULL) {
+    if (IsGeometry(artifact) == MagickFalse)
+      (void) ThrowMagickException(exception,GetMagickModule(),
+           OptionWarning,"InvalidSetting","'%s' '%s'",
+           "convolve:bias",artifact);
+    else
+      bias=StringToDoubleInterval(artifact,(double) QuantumRange+1.0);
+  }
+  return(bias);
+}
+
+/*
+  The "morphology:compose" setting, or compose unchanged if it is absent or
+  unrecognized (with a warning).
+*/
+static CompositeOperator GetMorphologyCompose(const Image *image,
+  CompositeOperator compose,ExceptionInfo *exception)
+{
+  const char
+    *artifact;
+
+  ssize_t
+    parse;
+
+  artifact = GetImageArtifact(image,"morphology:compose");
+  if ( artifact != (const char *) NULL) {
+    parse=ParseCommandOption(MagickComposeOptions,
+      MagickFalse,artifact);
+    if ( parse < 0 )
+      (void) ThrowMagickException(exception,GetMagickModule(),
+           OptionWarning,"UnrecognizedComposeOperator","'%s' '%s'",
+           "morphology:compose",artifact);
+    else
+      compose=(CompositeOperator)parse;
+  }
+  return(compose);
+}
+
 MagickExport Image *MorphologyImage(const Image *image,
   const MorphologyMethod method,const ssize_t iterations,
   const KernelInfo *kernel,ExceptionInfo *exception)
@@ -4135,15 +4184,7 @@ MagickExport Image *MorphologyImage(const Image *image,
    */
   if ( method == ConvolveMorphology || method == CorrelateMorphology ) {
       /* Get the bias value as it will be needed */
-      artifact = GetImageArtifact(image,"convolve:bias");
-      if ( artifact != (const char *) NULL) {
-        if (IsGeometry(artifact) == MagickFalse)
-          (void) ThrowMagickException(exception,GetMagickModule(),
-               OptionWarning,"InvalidSetting","'%s' '%s'",
-               "convolve:bias",artifact);
-        else
-          bias=StringToDoubleInterval(artifact,(double) QuantumRange+1.0);
-      }
+      bias=GetConvolveBias(image,bias,exception);
 
       /* Scale kernel according to user wishes */
       artifact = GetImageArtifact(image,"convolve:scale");
@@ -4173,22 +4214,7 @@ MagickExport Image *MorphologyImage(const Image *image,
    * Otherwise merge resulting images using compose method given.
    * Default for 'HitAndMiss' is 'Lighten'.
    */
-  {
-    ssize_t
-      parse;
-
-    artifact = GetImageArtifact(image,"morphology:compose");
-    if ( artifact != (const char *) NULL) {
-      parse=ParseCommandOption(MagickComposeOptions,
-        MagickFalse,artifact);
-      if ( parse < 0 )
-        (void) ThrowMagickException(exception,GetMagickModule(),
-             OptionWarning,"UnrecognizedComposeOperator","'%s' '%s'",
-             "morphology:compose",artifact);
-      else
-        compose=(CompositeOperator)parse;
-    }
-  }
+  compose=GetMorphologyCompose(image,compose,exception);
   /* Apply the Morphology */
   morphology_image = MorphologyApply(image,method,iterations,
     curr_kernel,compose,bias,exception);
