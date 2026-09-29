@@ -4083,6 +4083,40 @@ MagickExport Image *SampleImage(const Image *image,const size_t columns,
 }
 
 /*
+  Read one scanline into x_vector, alpha-weighting the channels that blend.
+*/
+static void ImportScaleScanline(const Image *image,const Quantum *p,
+  double alpha,double *x_vector)
+{
+  ssize_t
+    i,
+    x;
+
+  for (x=0; x < (ssize_t) image->columns; x++)
+  {
+    if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
+      {
+        p+=(ptrdiff_t) GetPixelChannels(image);
+        continue;
+      }
+    if (image->alpha_trait != UndefinedPixelTrait)
+      alpha=QuantumScale*(double) GetPixelAlpha(image,p);
+    for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    {
+      PixelChannel channel = GetPixelChannelChannel(image,i);
+      PixelTrait traits = GetPixelChannelTraits(image,channel);
+      if ((traits & BlendPixelTrait) == 0)
+        {
+          x_vector[x*(ssize_t) GetPixelChannels(image)+i]=(double) p[i];
+          continue;
+        }
+      x_vector[x*(ssize_t) GetPixelChannels(image)+i]=alpha*(double) p[i];
+    }
+    p+=(ptrdiff_t) GetPixelChannels(image);
+  }
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -4244,28 +4278,7 @@ MagickExport Image *ScaleImage(const Image *image,const size_t columns,
             status=MagickFalse;
             break;
           }
-        for (x=0; x < (ssize_t) image->columns; x++)
-        {
-          if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
-            {
-              p+=(ptrdiff_t) GetPixelChannels(image);
-              continue;
-            }
-          if (image->alpha_trait != UndefinedPixelTrait)
-            alpha=QuantumScale*(double) GetPixelAlpha(image,p);
-          for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-          {
-            PixelChannel channel = GetPixelChannelChannel(image,i);
-            PixelTrait traits = GetPixelChannelTraits(image,channel);
-            if ((traits & BlendPixelTrait) == 0)
-              {
-                x_vector[x*(ssize_t) GetPixelChannels(image)+i]=(double) p[i];
-                continue;
-              }
-            x_vector[x*(ssize_t) GetPixelChannels(image)+i]=alpha*(double) p[i];
-          }
-          p+=(ptrdiff_t) GetPixelChannels(image);
-        }
+        ImportScaleScanline(image,p,alpha,x_vector);
       }
     else
       {
@@ -4287,30 +4300,7 @@ MagickExport Image *ScaleImage(const Image *image,const size_t columns,
                   status=MagickFalse;
                   break;
                 }
-              for (x=0; x < (ssize_t) image->columns; x++)
-              {
-                if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
-                  {
-                    p+=(ptrdiff_t) GetPixelChannels(image);
-                    continue;
-                  }
-                if (image->alpha_trait != UndefinedPixelTrait)
-                  alpha=QuantumScale*(double) GetPixelAlpha(image,p);
-                for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-                {
-                  PixelChannel channel = GetPixelChannelChannel(image,i);
-                  PixelTrait traits = GetPixelChannelTraits(image,channel);
-                  if ((traits & BlendPixelTrait) == 0)
-                    {
-                      x_vector[x*(ssize_t) GetPixelChannels(image)+i]=
-                        (double) p[i];
-                      continue;
-                    }
-                  x_vector[x*(ssize_t) GetPixelChannels(image)+i]=alpha*
-                    (double) p[i];
-                }
-                p+=(ptrdiff_t) GetPixelChannels(image);
-              }
+              ImportScaleScanline(image,p,alpha,x_vector);
               number_rows++;
             }
           for (x=0; x < (ssize_t) image->columns; x++)
@@ -4333,30 +4323,7 @@ MagickExport Image *ScaleImage(const Image *image,const size_t columns,
                 status=MagickFalse;
                 break;
               }
-            for (x=0; x < (ssize_t) image->columns; x++)
-            {
-              if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
-                {
-                  p+=(ptrdiff_t) GetPixelChannels(image);
-                  continue;
-                }
-              if (image->alpha_trait != UndefinedPixelTrait)
-                alpha=QuantumScale*(double) GetPixelAlpha(image,p);
-              for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-              {
-                PixelChannel channel = GetPixelChannelChannel(image,i);
-                PixelTrait traits = GetPixelChannelTraits(image,channel);
-                if ((traits & BlendPixelTrait) == 0)
-                  {
-                    x_vector[x*(ssize_t) GetPixelChannels(image)+i]=
-                      (double) p[i];
-                    continue;
-                  }
-                x_vector[x*(ssize_t) GetPixelChannels(image)+i]=alpha*
-                  (double) p[i];
-              }
-              p+=(ptrdiff_t) GetPixelChannels(image);
-            }
+            ImportScaleScanline(image,p,alpha,x_vector);
             number_rows++;
             next_row=MagickFalse;
           }
