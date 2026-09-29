@@ -710,6 +710,78 @@ MagickExport Image *ColorizeImage(const Image *image,const char *blend,
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  Log the 6x6 color matrix, one row per line.
+*/
+static void LogColorMatrix(double ColorMatrix[6][6])
+{
+  ssize_t
+    u,
+    v;
+
+  char
+    format[MagickPathExtent],
+    *message;
+
+  (void) LogMagickEvent(TransformEvent,GetMagickModule(),
+    "  ColorMatrix image with color matrix:");
+  message=AcquireString("");
+  for (v=0; v < 6; v++)
+  {
+    *message='\0';
+    (void) FormatLocaleString(format,MagickPathExtent,"%.17g: ",(double) v);
+    (void) ConcatenateString(&message,format);
+    for (u=0; u < 6; u++)
+    {
+      (void) FormatLocaleString(format,MagickPathExtent,"%+f ",
+        ColorMatrix[v][u]);
+      (void) ConcatenateString(&message,format);
+    }
+    (void) LogMagickEvent(TransformEvent,GetMagickModule(),"%s",message);
+  }
+  message=DestroyString(message);
+}
+
+/*
+  Apply the color matrix to the pixel read from p.
+*/
+static PixelInfo ApplyColorMatrix(const Image *image,
+  double ColorMatrix[6][6],const KernelInfo *color_matrix,const Quantum *p,
+  PixelInfo pixel)
+{
+  ssize_t
+    h;
+
+  size_t
+    height;
+
+  height=color_matrix->height > 6 ? 6UL : color_matrix->height;
+  for (h=0; h < (ssize_t) height; h++)
+  {
+    double
+      sum;
+
+    sum=ColorMatrix[h][0]*(double) GetPixelRed(image,p)+ColorMatrix[h][1]*
+      (double) GetPixelGreen(image,p)+ColorMatrix[h][2]*(double)
+      GetPixelBlue(image,p);
+    if (image->colorspace == CMYKColorspace)
+      sum+=ColorMatrix[h][3]*(double) GetPixelBlack(image,p);
+    if (image->alpha_trait != UndefinedPixelTrait)
+      sum+=ColorMatrix[h][4]*(double) GetPixelAlpha(image,p);
+    sum+=(double) QuantumRange*ColorMatrix[h][5];
+    switch (h)
+    {
+      case 0: pixel.red=sum; break;
+      case 1: pixel.green=sum; break;
+      case 2: pixel.blue=sum; break;
+      case 3: pixel.black=sum; break;
+      case 4: pixel.alpha=sum; break;
+      default: break;
+    }
+  }
+  return(pixel);
+}
+
 MagickExport Image *ColorMatrixImage(const Image *image,
   const KernelInfo *color_matrix,ExceptionInfo *exception)
 {
@@ -777,27 +849,7 @@ MagickExport Image *ColorMatrixImage(const Image *image,
     }
   if (image->debug != MagickFalse)
     {
-      char
-        format[MagickPathExtent],
-        *message;
-
-      (void) LogMagickEvent(TransformEvent,GetMagickModule(),
-        "  ColorMatrix image with color matrix:");
-      message=AcquireString("");
-      for (v=0; v < 6; v++)
-      {
-        *message='\0';
-        (void) FormatLocaleString(format,MagickPathExtent,"%.17g: ",(double) v);
-        (void) ConcatenateString(&message,format);
-        for (u=0; u < 6; u++)
-        {
-          (void) FormatLocaleString(format,MagickPathExtent,"%+f ",
-            ColorMatrix[v][u]);
-          (void) ConcatenateString(&message,format);
-        }
-        (void) LogMagickEvent(TransformEvent,GetMagickModule(),"%s",message);
-      }
-      message=DestroyString(message);
+      LogColorMatrix(ColorMatrix);
     }
   /*
     Apply the ColorMatrix to image.
@@ -837,37 +889,8 @@ MagickExport Image *ColorMatrixImage(const Image *image,
     GetPixelInfo(image,&pixel);
     for (x=0; x < (ssize_t) image->columns; x++)
     {
-      ssize_t
-        h;
-
-      size_t
-        height;
-
       GetPixelInfoPixel(image,p,&pixel);
-      height=color_matrix->height > 6 ? 6UL : color_matrix->height;
-      for (h=0; h < (ssize_t) height; h++)
-      {
-        double
-          sum;
-
-        sum=ColorMatrix[h][0]*(double) GetPixelRed(image,p)+ColorMatrix[h][1]*
-          (double) GetPixelGreen(image,p)+ColorMatrix[h][2]*(double)
-          GetPixelBlue(image,p);
-        if (image->colorspace == CMYKColorspace)
-          sum+=ColorMatrix[h][3]*(double) GetPixelBlack(image,p);
-        if (image->alpha_trait != UndefinedPixelTrait)
-          sum+=ColorMatrix[h][4]*(double) GetPixelAlpha(image,p);
-        sum+=(double) QuantumRange*ColorMatrix[h][5];
-        switch (h)
-        {
-          case 0: pixel.red=sum; break;
-          case 1: pixel.green=sum; break;
-          case 2: pixel.blue=sum; break;
-          case 3: pixel.black=sum; break;
-          case 4: pixel.alpha=sum; break;
-          default: break;
-        }
-      }
+      pixel=ApplyColorMatrix(image,ColorMatrix,color_matrix,p,pixel);
       SetPixelViaPixelInfo(color_image,&pixel,q);
       p+=(ptrdiff_t) GetPixelChannels(image);
       q+=(ptrdiff_t) GetPixelChannels(color_image);
