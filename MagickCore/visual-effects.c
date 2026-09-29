@@ -527,18 +527,81 @@ MagickExport Image *CharcoalImage(const Image *image,const double radius,
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  Colorize reads its arguments only; ColorizePixel below expands it, as
+  ColorizeImage did.
+*/
+#define Colorize(pixel,blend_percentage,colorize)  \
+  ((((double) pixel)*(100.0-(blend_percentage))+(colorize)*(blend_percentage))/100.0)
+
+/*
+  The per-channel blend percentages given by the blend geometry.
+*/
+static PixelInfo GetColorizeBlend(const Image *colorize_image,
+  const char *blend)
+{
+  GeometryInfo
+    geometry_info;
+
+  MagickStatusType
+    flags;
+
+  PixelInfo
+    blend_percentage;
+
+  GetPixelInfo(colorize_image,&blend_percentage);
+  flags=ParseGeometry(blend,&geometry_info);
+  blend_percentage.red=geometry_info.rho;
+  blend_percentage.green=geometry_info.rho;
+  blend_percentage.blue=geometry_info.rho;
+  blend_percentage.black=geometry_info.rho;
+  blend_percentage.alpha=(MagickRealType) TransparentAlpha;
+  if ((flags & SigmaValue) != 0)
+    blend_percentage.green=geometry_info.sigma;
+  if ((flags & XiValue) != 0)
+    blend_percentage.blue=geometry_info.xi;
+  if ((flags & PsiValue) != 0)
+    blend_percentage.alpha=geometry_info.psi;
+  if (blend_percentage.colorspace == CMYKColorspace)
+    {
+      if ((flags & PsiValue) != 0)
+        blend_percentage.black=geometry_info.psi;
+      if ((flags & ChiValue) != 0)
+        blend_percentage.alpha=geometry_info.chi;
+    }
+  return(blend_percentage);
+}
+
+/*
+  Colorize one pixel's defined channels, other than those only copied.
+*/
+static inline void ColorizePixel(Image *colorize_image,
+  const PixelInfo blend_percentage,const PixelInfo *colorize,Quantum *q)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) GetPixelChannels(colorize_image); i++)
+  {
+    PixelTrait traits = GetPixelChannelTraits(colorize_image,
+      (PixelChannel) i);
+    if (traits == UndefinedPixelTrait)
+      continue;
+    if ((traits & CopyPixelTrait) != 0)
+      continue;
+    SetPixelChannel(colorize_image,(PixelChannel) i,ClampToQuantum(
+      Colorize(q[i],GetPixelInfoChannel(&blend_percentage,(PixelChannel) i),
+      GetPixelInfoChannel(colorize,(PixelChannel) i))),q);
+  }
+}
+
 MagickExport Image *ColorizeImage(const Image *image,const char *blend,
   const PixelInfo *colorize,ExceptionInfo *exception)
 {
 #define ColorizeImageTag  "Colorize/Image"
-#define Colorize(pixel,blend_percentage,colorize)  \
-  ((((double) pixel)*(100.0-(blend_percentage))+(colorize)*(blend_percentage))/100.0)
 
   CacheView
     *image_view;
-
-  GeometryInfo
-    geometry_info;
 
   Image
     *colorize_image;
@@ -548,9 +611,6 @@ MagickExport Image *ColorizeImage(const Image *image,const char *blend,
 
   MagickOffsetType
     progress;
-
-  MagickStatusType
-    flags;
 
   PixelInfo
     blend_percentage;
@@ -583,26 +643,7 @@ MagickExport Image *ColorizeImage(const Image *image,const char *blend,
     (void) SetImageAlpha(colorize_image,OpaqueAlpha,exception);
   if (blend == (const char *) NULL)
     return(colorize_image);
-  GetPixelInfo(colorize_image,&blend_percentage);
-  flags=ParseGeometry(blend,&geometry_info);
-  blend_percentage.red=geometry_info.rho;
-  blend_percentage.green=geometry_info.rho;
-  blend_percentage.blue=geometry_info.rho;
-  blend_percentage.black=geometry_info.rho;
-  blend_percentage.alpha=(MagickRealType) TransparentAlpha;
-  if ((flags & SigmaValue) != 0)
-    blend_percentage.green=geometry_info.sigma;
-  if ((flags & XiValue) != 0)
-    blend_percentage.blue=geometry_info.xi;
-  if ((flags & PsiValue) != 0)
-    blend_percentage.alpha=geometry_info.psi;
-  if (blend_percentage.colorspace == CMYKColorspace)
-    {
-      if ((flags & PsiValue) != 0)
-        blend_percentage.black=geometry_info.psi;
-      if ((flags & ChiValue) != 0)
-        blend_percentage.alpha=geometry_info.chi;
-    }
+  blend_percentage=GetColorizeBlend(colorize_image,blend);
   /*
     Colorize DirectClass image.
   */
@@ -635,21 +676,7 @@ MagickExport Image *ColorizeImage(const Image *image,const char *blend,
       }
     for (x=0; x < (ssize_t) colorize_image->columns; x++)
     {
-      ssize_t
-        i;
-
-      for (i=0; i < (ssize_t) GetPixelChannels(colorize_image); i++)
-      {
-        PixelTrait traits = GetPixelChannelTraits(colorize_image,
-          (PixelChannel) i);
-        if (traits == UndefinedPixelTrait)
-          continue;
-        if ((traits & CopyPixelTrait) != 0)
-          continue;
-        SetPixelChannel(colorize_image,(PixelChannel) i,ClampToQuantum(
-          Colorize(q[i],GetPixelInfoChannel(&blend_percentage,(PixelChannel) i),
-          GetPixelInfoChannel(colorize,(PixelChannel) i))),q);
-      }
+      ColorizePixel(colorize_image,blend_percentage,colorize,q);
       q+=(ptrdiff_t) GetPixelChannels(colorize_image);
     }
     sync=SyncCacheViewAuthenticPixels(image_view,exception);
