@@ -326,7 +326,11 @@ def main():
     start, done = time.time(), len(results)
     total = done + len(mutants)
     with concurrent.futures.ThreadPoolExecutor(args.jobs) as pool, open(partial, "a") as log:
-        for r in pool.map(guarded, mutants):
+        # As each finishes, not in submission order: one slow mutant once held
+        # back 50 finished results for most of an hour, unsaved.
+        futures = [pool.submit(guarded, m) for m in mutants]
+        for future in concurrent.futures.as_completed(futures):
+            r = future.result()
             results.append(r)
             log.write(json.dumps(r) + "\n")
             log.flush()

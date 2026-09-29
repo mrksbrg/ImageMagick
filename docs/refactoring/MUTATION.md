@@ -275,9 +275,9 @@ tools/oracle/classify.py build-oracle/work/mutation-sweep25-final.json --kind un
 | threads-resources | 2 | 2 | thread counts and resource limits |
 | **unmatched** | **289** | **108** | read by hand: equivalent, or a gap in the catalogue |
 
-In sweep 2, the same kinds covered 137 of 692 survivors (52 logging, 28
-threads and resources, 30 loop bounds, 19 free guards, 8 others), 222 were
-unreached and 333 unmatched, 184 of those capped.
+In sweep 2 (final), the same kinds covered 128 of 650 survivors (51 logging,
+24 threads and resources, 29 loop bounds, 16 free guards, 8 others), 222
+were unreached and 300 unmatched, 104 of those capped.
 
 The rules match the source line, so they name a likely kind, not a proven
 one, and they are easy to fool. While tuning them: a `NULL` test before
@@ -327,26 +327,29 @@ boundary checks and moment arithmetic whose results no case prints.
 A second build covered every other MagickCore file the oracle build compiles
 (23,964 mutants; `image-view.c` and `deprecate.c` compile to nothing here).
 40 random mutants per file, all of them for the small ones: 2,061 in all, in
-53 minutes of mutation after three restarts (see "Output is capped").
-Results: `build-oracle/work/mutation-sweep60.json`.
+53 minutes of mutation after three restarts (see "Output is capped"), then
+2.8 hours rerunning the 266 capped survivors with a 1,500-case cap, which
+killed 42 of them. Results: `build-oracle/work/mutation-sweep60-final.json`.
 
-**Overall: 852 killed (41.3%), 64.4% on executed lines.** The files fall into
+**Overall: 894 killed (43.4%), 67.6% on executed lines.** The files fall into
 three groups:
 
 | Group | Mutants | Reached | Killed, executed lines |
 | --- | ---: | ---: | ---: |
-| Image operations: `decorate`, `fourier`, `colormap`, `shear`, `segment`, `histogram`, `gem`, `resample`, `montage`, `feature`, `paint`, `transform`, `matrix`, `attribute`, `channel`, `annotate`, `layer`, `quantum`, `identify`, `vision`, `prepress`, `geometry` | 897 | 81% | 74% |
-| Infrastructure: `policy`, `log`, `memory`, `resource`, `xml-tree`, `token`, `list`, `locale`, `magic`, `type`, `delegate`, `registry`, `splay-tree`, `exception`, `signature`, … | 937 | 62% | 53% |
+| Image operations: `decorate`, `fourier`, `colormap`, `shear`, `segment`, `histogram`, `gem`, `resample`, `montage`, `feature`, `paint`, `transform`, `matrix`, `attribute`, `channel`, `annotate`, `layer`, `quantum`, `identify`, `vision`, `prepress`, `geometry` | 897 | 81% | 76% |
+| Infrastructure: `policy`, `log`, `memory`, `resource`, `xml-tree`, `token`, `list`, `locale`, `magic`, `type`, `delegate`, `registry`, `splay-tree`, `exception`, `signature`, … | 937 | 62% | 57% |
 | Hardly exercised: `cipher`, `distribute-cache`, `module`, `mime`, `version`, `compress`, `configure` | 227 | 7% | – |
 
 - **The image operations match sweep 1.** They are as well protected as the
   large files, and `decorate.c` (93%), `segment.c` (90%), `fourier.c`,
   `colormap.c`, `shear.c` and `semaphore.c` (80–82%) are among the best
   measured anywhere.
-- **Infrastructure is weaker, but uncertain.** 266 of its 470 executed
-  survivors are capped, and many of the rest are logging (52) or thread and
-  resource limits (28), which the oracle cannot see by design. Refactoring
-  there needs per-function uncapped runs first.
+- **Infrastructure is weaker, and the reruns confirm it.** Unlike sweep 1,
+  where raising the cap killed a third of the capped survivors, here it
+  killed only 16% (42 of 266). Most survivors are real: logging (51) and
+  thread and resource limits (24), which the oracle cannot see by design,
+  and code paths no case drives, such as policy rules, locale handling and
+  XML configuration parsing. 155 remain capped even at 1,500 cases.
 - **Seven files are essentially untested by the oracle.** `cipher.c`
   (`-encipher`/`-decipher`), `compress.c` (Huffman, LZW and RLE for the PS,
   PDF and TIFF writers), `configure.c` and `mime.c` (`-list` output),
@@ -359,60 +362,60 @@ three groups:
 | `cipher.c` | 40 | 0 | 0 | 0 | 0 | – |
 | `distribute-cache.c` | 40 | 0 | 0 | 0 | 0 | – |
 | `module.c` | 7 | 0 | 0 | 0 | 0 | – |
-| `policy.c` | 40 | 14 | 1 | 13 | 13 | 7% |
 | `log.c` | 40 | 14 | 2 | 12 | 12 | 14% |
-| `monitor.c` | 9 | 9 | 2 | 7 | 7 | 22% |
-| `random.c` | 40 | 25 | 6 | 19 | 19 | 24% |
+| `random.c` | 40 | 25 | 6 | 19 | 2 | 24% |
 | `cache-view.c` | 29 | 10 | 3 | 7 | 6 | 30% |
 | `type.c` | 40 | 30 | 9 | 21 | 1 | 30% |
-| `resource.c` | 40 | 28 | 10 | 18 | 14 | 36% |
-| `constitute.c` | 40 | 31 | 14 | 17 | 15 | 45% |
-| `delegate.c` | 40 | 26 | 12 | 14 | 5 | 46% |
+| `monitor.c` | 9 | 9 | 3 | 6 | 6 | 33% |
+| `policy.c` | 40 | 14 | 5 | 9 | 9 | 36% |
+| `resource.c` | 40 | 28 | 11 | 17 | 13 | 39% |
+| `delegate.c` | 40 | 26 | 12 | 14 | 0 | 46% |
 | `registry.c` | 31 | 21 | 10 | 11 | 6 | 48% |
-| `timer.c` | 35 | 31 | 15 | 16 | 7 | 48% |
-| `memory.c` | 40 | 24 | 12 | 12 | 12 | 50% |
 | `thread.c` | 2 | 2 | 1 | 1 | 0 | 50% |
 | `version.c` | 20 | 2 | 1 | 1 | 0 | 50% |
+| `timer.c` | 35 | 31 | 16 | 15 | 6 | 52% |
 | `vision.c` | 40 | 11 | 6 | 5 | 0 | 55% |
-| `magick.c` | 40 | 27 | 15 | 12 | 12 | 56% |
+| `constitute.c` | 40 | 31 | 17 | 14 | 12 | 55% |
 | `layer.c` | 40 | 25 | 14 | 11 | 0 | 56% |
-| `xml-tree.c` | 40 | 14 | 8 | 6 | 2 | 57% |
+| `xml-tree.c` | 40 | 14 | 8 | 6 | 0 | 57% |
 | `splay-tree.c` | 40 | 24 | 14 | 10 | 9 | 58% |
-| `token.c` | 40 | 24 | 14 | 10 | 6 | 58% |
 | `artifact.c` | 25 | 20 | 12 | 8 | 6 | 60% |
 | `client.c` | 5 | 5 | 3 | 2 | 2 | 60% |
-| `quantum.c` | 40 | 36 | 22 | 14 | 13 | 61% |
-| `geometry.c` | 40 | 26 | 16 | 10 | 10 | 62% |
-| `locale.c` | 40 | 29 | 18 | 11 | 11 | 62% |
-| `magic.c` | 40 | 29 | 18 | 11 | 11 | 62% |
-| `configure.c` | 40 | 8 | 5 | 3 | 3 | 62% |
-| `linked-list.c` | 40 | 16 | 10 | 6 | 6 | 62% |
-| `list.c` | 40 | 32 | 20 | 12 | 6 | 62% |
-| `utility.c` | 40 | 11 | 7 | 4 | 4 | 64% |
-| `exception.c` | 40 | 35 | 23 | 12 | 11 | 66% |
+| `locale.c` | 40 | 29 | 18 | 11 | 2 | 62% |
+| `list.c` | 40 | 32 | 20 | 12 | 4 | 62% |
+| `magic.c` | 40 | 29 | 19 | 10 | 10 | 66% |
+| `exception.c` | 40 | 35 | 23 | 12 | 4 | 66% |
 | `annotate.c` | 40 | 30 | 20 | 10 | 0 | 67% |
-| `signature.c` | 40 | 34 | 23 | 11 | 7 | 68% |
+| `token.c` | 40 | 24 | 16 | 8 | 4 | 67% |
+| `signature.c` | 40 | 34 | 23 | 11 | 0 | 68% |
 | `feature.c` | 40 | 38 | 26 | 12 | 0 | 68% |
-| `resample.c` | 40 | 39 | 27 | 12 | 12 | 69% |
-| `gem.c` | 40 | 40 | 28 | 12 | 3 | 70% |
+| `linked-list.c` | 40 | 16 | 11 | 5 | 4 | 69% |
+| `resample.c` | 40 | 39 | 27 | 12 | 0 | 69% |
+| `quantum.c` | 40 | 36 | 25 | 11 | 9 | 69% |
+| `gem.c` | 40 | 40 | 28 | 12 | 0 | 70% |
 | `prepress.c` | 17 | 17 | 12 | 5 | 0 | 71% |
+| `utility.c` | 40 | 11 | 8 | 3 | 3 | 73% |
 | `attribute.c` | 40 | 30 | 22 | 8 | 1 | 73% |
 | `paint.c` | 40 | 34 | 25 | 9 | 0 | 74% |
+| `configure.c` | 40 | 8 | 6 | 2 | 2 | 75% |
+| `memory.c` | 40 | 24 | 18 | 6 | 6 | 75% |
 | `montage.c` | 40 | 36 | 27 | 9 | 0 | 75% |
 | `transform.c` | 40 | 31 | 24 | 7 | 0 | 77% |
 | `histogram.c` | 40 | 36 | 28 | 8 | 0 | 78% |
-| `coder.c` | 40 | 15 | 12 | 3 | 3 | 80% |
-| `colormap.c` | 40 | 40 | 32 | 8 | 3 | 80% |
 | `matrix.c` | 40 | 30 | 24 | 6 | 0 | 80% |
 | `semaphore.c` | 20 | 20 | 16 | 4 | 4 | 80% |
 | `shear.c` | 40 | 35 | 28 | 7 | 0 | 80% |
-| `channel.c` | 40 | 26 | 21 | 5 | 2 | 81% |
+| `channel.c` | 40 | 26 | 21 | 5 | 0 | 81% |
+| `magick.c` | 40 | 27 | 22 | 5 | 4 | 81% |
 | `static.c` | 21 | 11 | 9 | 2 | 2 | 82% |
 | `compress.c` | 40 | 6 | 5 | 1 | 0 | 83% |
+| `geometry.c` | 40 | 26 | 22 | 4 | 4 | 85% |
+| `colormap.c` | 40 | 40 | 34 | 6 | 1 | 85% |
 | `identify.c` | 40 | 27 | 23 | 4 | 0 | 85% |
 | `fourier.c` | 40 | 37 | 32 | 5 | 0 | 86% |
 | `segment.c` | 40 | 30 | 27 | 3 | 0 | 90% |
 | `decorate.c` | 40 | 40 | 37 | 3 | 0 | 92% |
+| `coder.c` | 40 | 15 | 14 | 1 | 1 | 93% |
 | `mime.c` | 40 | 1 | 1 | 0 | 0 | 100% |
 
 ### Consequences for the campaign
