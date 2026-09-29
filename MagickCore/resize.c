@@ -3954,6 +3954,68 @@ record_resize_transform:
 }
 
 /*
+  The point within each sample region that SampleImage takes, from
+  "sample:offset" or the region's middle.
+*/
+static PointInfo GetSampleOffset(const Image *image)
+{
+  PointInfo
+    sample_offset;
+
+  sample_offset.x=0.5-MagickEpsilon;
+  sample_offset.y=sample_offset.x;
+  {
+    const char
+      *value;
+
+    value=GetImageArtifact(image,"sample:offset");
+    if (value != (char *) NULL)
+      {
+        GeometryInfo
+          geometry_info;
+
+        MagickStatusType
+          flags;
+
+        (void) ParseGeometry(value,&geometry_info);
+        flags=ParseGeometry(value,&geometry_info);
+        sample_offset.x=sample_offset.y=geometry_info.rho/100.0-MagickEpsilon;
+        if ((flags & SigmaValue) != 0)
+          sample_offset.y=geometry_info.sigma/100.0-MagickEpsilon;
+      }
+  }
+  return(sample_offset);
+}
+
+/*
+  Copy the channels the sample and source images share, from p to q.
+*/
+static void CopySampledPixel(const Image *image,Image *sample_image,
+  const Quantum *p,Quantum *q)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) GetPixelChannels(sample_image); i++)
+  {
+    PixelChannel
+      channel;
+
+    PixelTrait
+      image_traits,
+      traits;
+
+    channel=GetPixelChannelChannel(sample_image,i);
+    traits=GetPixelChannelTraits(sample_image,channel);
+    image_traits=GetPixelChannelTraits(image,channel);
+    if ((traits == UndefinedPixelTrait) ||
+        (image_traits == UndefinedPixelTrait))
+      continue;
+    SetPixelChannel(sample_image,channel,p[i],q);
+  }
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -4027,28 +4089,7 @@ MagickExport Image *SampleImage(const Image *image,const size_t columns,
   /*
     Set the sampling offset, default is in the mid-point of sample regions.
   */
-  sample_offset.x=0.5-MagickEpsilon;
-  sample_offset.y=sample_offset.x;
-  {
-    const char
-      *value;
-
-    value=GetImageArtifact(image,"sample:offset");
-    if (value != (char *) NULL)
-      {
-        GeometryInfo
-          geometry_info;
-
-        MagickStatusType
-          flags;
-
-        (void) ParseGeometry(value,&geometry_info);
-        flags=ParseGeometry(value,&geometry_info);
-        sample_offset.x=sample_offset.y=geometry_info.rho/100.0-MagickEpsilon;
-        if ((flags & SigmaValue) != 0)
-          sample_offset.y=geometry_info.sigma/100.0-MagickEpsilon;
-      }
-  }
+  sample_offset=GetSampleOffset(image);
   /*
     Sample each row.
   */
@@ -4086,7 +4127,6 @@ MagickExport Image *SampleImage(const Image *image,const size_t columns,
         *magick_restrict p;
 
       ssize_t
-        i,
         x_offset,
         y_offset;
 
@@ -4105,23 +4145,7 @@ MagickExport Image *SampleImage(const Image *image,const size_t columns,
           status=MagickFalse;
           break;
         }
-      for (i=0; i < (ssize_t) GetPixelChannels(sample_image); i++)
-      {
-        PixelChannel
-          channel;
-
-        PixelTrait
-          image_traits,
-          traits;
-
-        channel=GetPixelChannelChannel(sample_image,i);
-        traits=GetPixelChannelTraits(sample_image,channel);
-        image_traits=GetPixelChannelTraits(image,channel);
-        if ((traits == UndefinedPixelTrait) ||
-            (image_traits == UndefinedPixelTrait))
-          continue;
-        SetPixelChannel(sample_image,channel,p[i],q);
-      }
+      CopySampledPixel(image,sample_image,p,q);
       q+=(ptrdiff_t) GetPixelChannels(sample_image);
     }
     if (SyncCacheViewAuthenticPixels(sample_view,exception) == MagickFalse)
