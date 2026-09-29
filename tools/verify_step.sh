@@ -26,6 +26,9 @@ warn=$(grep -E "$(basename "$file")[^ ]*: (warning|error)" build-oracle/cand/mak
 echo "build:  ok${warn:+ (warnings below)}"
 [ -n "$warn" ] && echo "$warn"
 
+long=$(git diff -U0 -- "$file" | grep '^+[^+]' | awk 'length > 81 {print "        " length-1 " columns: " substr($0,2,60)}')
+[ -n "$long" ] && echo "style:  added lines over 80 columns (ImageMagick wraps at 80)" && echo "$long"
+
 g=$(python3 tools/refactor_guard.py "$file" 2>&1); gs=$?
 c=$(python3 tools/refactor_guard.py --calls "$file" 2>&1); cs=$?
 echo "guard:  $(echo "$g" | grep -E '^(OK|WARN|FAIL)' | head -1 | cut -c1-70)"
