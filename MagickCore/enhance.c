@@ -3168,13 +3168,65 @@ MagickExport MagickBooleanType LevelImage(Image *image,const double black_point,
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  LevelizeValue reads black_point, white_point and gamma from where it is
+  expanded; the helpers below and LevelizeImage all name them so.
+*/
+#define LevelizeValue(x) ClampToQuantum(((MagickRealType) gamma_pow((double) \
+  (QuantumScale*((double) x)),gamma))*(white_point-black_point)+black_point)
+
+/*
+  Levelize the colormap of a PseudoClass image.
+*/
+static void LevelizeColormap(Image *image,const double black_point,
+  const double white_point,const double gamma)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) image->colors; i++)
+  {
+    /*
+      Level colormap.
+    */
+    if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].red=(double) LevelizeValue(image->colormap[i].red);
+    if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].green=(double) LevelizeValue(
+        image->colormap[i].green);
+    if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].blue=(double) LevelizeValue(image->colormap[i].blue);
+    if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].alpha=(double) LevelizeValue(
+        image->colormap[i].alpha);
+  }
+}
+
+/*
+  Levelize the channels of one pixel that are marked for update.
+*/
+static inline void LevelizePixelChannels(const Image *image,
+  const double black_point,const double white_point,const double gamma,
+  Quantum *q)
+{
+  ssize_t
+    j;
+
+  for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+  {
+    PixelChannel channel = GetPixelChannelChannel(image,j);
+    PixelTrait traits = GetPixelChannelTraits(image,channel);
+    if ((traits & UpdatePixelTrait) == 0)
+      continue;
+    q[j]=LevelizeValue(q[j]);
+  }
+}
+
 MagickExport MagickBooleanType LevelizeImage(Image *image,
   const double black_point,const double white_point,const double gamma,
   ExceptionInfo *exception)
 {
 #define LevelizeImageTag  "Levelize/Image"
-#define LevelizeValue(x) ClampToQuantum(((MagickRealType) gamma_pow((double) \
-  (QuantumScale*((double) x)),gamma))*(white_point-black_point)+black_point)
 
   CacheView
     *image_view;
@@ -3184,9 +3236,6 @@ MagickExport MagickBooleanType LevelizeImage(Image *image,
 
   MagickOffsetType
     progress;
-
-  ssize_t
-    i;
 
   ssize_t
     y;
@@ -3199,22 +3248,7 @@ MagickExport MagickBooleanType LevelizeImage(Image *image,
   if (IsEventLogging() != MagickFalse)
     (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",image->filename);
   if (image->storage_class == PseudoClass)
-    for (i=0; i < (ssize_t) image->colors; i++)
-    {
-      /*
-        Level colormap.
-      */
-      if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].red=(double) LevelizeValue(image->colormap[i].red);
-      if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].green=(double) LevelizeValue(
-          image->colormap[i].green);
-      if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].blue=(double) LevelizeValue(image->colormap[i].blue);
-      if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].alpha=(double) LevelizeValue(
-          image->colormap[i].alpha);
-    }
+    LevelizeColormap(image,black_point,white_point,gamma);
   /*
     Level image.
   */
@@ -3243,17 +3277,7 @@ MagickExport MagickBooleanType LevelizeImage(Image *image,
       }
     for (x=0; x < (ssize_t) image->columns; x++)
     {
-      ssize_t
-        j;
-
-      for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
-      {
-        PixelChannel channel = GetPixelChannelChannel(image,j);
-        PixelTrait traits = GetPixelChannelTraits(image,channel);
-        if ((traits & UpdatePixelTrait) == 0)
-          continue;
-        q[j]=LevelizeValue(q[j]);
-      }
+      LevelizePixelChannels(image,black_point,white_point,gamma,q);
       q+=(ptrdiff_t) GetPixelChannels(image);
     }
     if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
