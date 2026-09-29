@@ -727,6 +727,76 @@ static void ApplyFilterBlurAndSupport(const Image *image,ResizeFilter *resize_fi
 }
 
 /*
+  Report the filter's settings and graph for the "filter:verbose" expert
+  option, once per image.
+*/
+static void ReportResizeFilter(const Image *image,
+  const ResizeFilter *resize_filter,FilterType filter_type,
+  FilterType window_type,const double B,const double C)
+{
+  double
+    support,
+    x;
+
+  /*
+    Set the weighting function properly when the weighting function may not
+    exactly match the filter of the same name.  EG: a Point filter is
+    really uses a Box weighting function with a different support than is
+    typically used.
+  */
+  if (resize_filter->filter == Box)       filter_type=BoxFilter;
+  if (resize_filter->filter == Sinc)      filter_type=SincFilter;
+  if (resize_filter->filter == SincFast)  filter_type=SincFastFilter;
+  if (resize_filter->filter == Jinc)      filter_type=JincFilter;
+  if (resize_filter->filter == CubicBC)   filter_type=CubicFilter;
+  if (resize_filter->window == Box)       window_type=BoxFilter;
+  if (resize_filter->window == Sinc)      window_type=SincFilter;
+  if (resize_filter->window == SincFast)  window_type=SincFastFilter;
+  if (resize_filter->window == Jinc)      window_type=JincFilter;
+  if (resize_filter->window == CubicBC)   window_type=CubicFilter;
+  /*
+    Report Filter Details.
+  */
+  support=GetResizeFilterSupport(resize_filter);  /* practical support */
+  (void) FormatLocaleFile(stdout,"# Resampling Filter (for graphing)\n#\n");
+  (void) FormatLocaleFile(stdout,"# filter = %s\n",
+    CommandOptionToMnemonic(MagickFilterOptions,filter_type));
+  (void) FormatLocaleFile(stdout,"# window = %s\n",
+    CommandOptionToMnemonic(MagickFilterOptions,window_type));
+  (void) FormatLocaleFile(stdout,"# support = %.*g\n",
+    GetMagickPrecision(),(double) resize_filter->support);
+  (void) FormatLocaleFile(stdout,"# window-support = %.*g\n",
+    GetMagickPrecision(),(double) resize_filter->window_support);
+  (void) FormatLocaleFile(stdout,"# scale-blur = %.*g\n",
+    GetMagickPrecision(),(double) resize_filter->blur);
+  if ((filter_type == GaussianFilter) || (window_type == GaussianFilter))
+    (void) FormatLocaleFile(stdout,"# gaussian-sigma = %.*g\n",
+      GetMagickPrecision(),(double) resize_filter->coefficient[0]);
+  if ((filter_type == KaiserFilter) || (window_type == KaiserFilter))
+    (void) FormatLocaleFile(stdout,"# kaiser-beta = %.*g\n",
+      GetMagickPrecision(),(double) resize_filter->coefficient[0]);
+  (void) FormatLocaleFile(stdout,"# practical-support = %.*g\n",
+    GetMagickPrecision(), (double) support);
+  if ((filter_type == CubicFilter) || (window_type == CubicFilter))
+    (void) FormatLocaleFile(stdout,"# B,C = %.*g,%.*g\n",
+      GetMagickPrecision(),(double) B,GetMagickPrecision(),(double) C);
+  (void) FormatLocaleFile(stdout,"\n");
+  /*
+    Output values of resulting filter graph -- for graphing filter result.
+  */
+  for (x=0.0; x <= support; x+=0.01)
+    (void) FormatLocaleFile(stdout,"%5.2lf\t%.*g\n",x,GetMagickPrecision(),
+      (double) GetResizeFilterWeight(resize_filter,x));
+  /*
+    A final value so gnuplot can graph the 'stop' properly.
+  */
+  (void) FormatLocaleFile(stdout,"%5.2lf\t%.*g\n",support,
+    GetMagickPrecision(),0.0);
+  /* Output the above once only for each image - remove setting */
+  (void) DeleteImageArtifact((Image *) image,"filter:verbose");
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -1285,66 +1355,7 @@ MagickPrivate ResizeFilter *AcquireResizeFilter(const Image *image,
     #pragma omp single
 #endif
     {
-      double
-        support,
-        x;
-
-      /*
-        Set the weighting function properly when the weighting function may not
-        exactly match the filter of the same name.  EG: a Point filter is
-        really uses a Box weighting function with a different support than is
-        typically used.
-      */
-      if (resize_filter->filter == Box)       filter_type=BoxFilter;
-      if (resize_filter->filter == Sinc)      filter_type=SincFilter;
-      if (resize_filter->filter == SincFast)  filter_type=SincFastFilter;
-      if (resize_filter->filter == Jinc)      filter_type=JincFilter;
-      if (resize_filter->filter == CubicBC)   filter_type=CubicFilter;
-      if (resize_filter->window == Box)       window_type=BoxFilter;
-      if (resize_filter->window == Sinc)      window_type=SincFilter;
-      if (resize_filter->window == SincFast)  window_type=SincFastFilter;
-      if (resize_filter->window == Jinc)      window_type=JincFilter;
-      if (resize_filter->window == CubicBC)   window_type=CubicFilter;
-      /*
-        Report Filter Details.
-      */
-      support=GetResizeFilterSupport(resize_filter);  /* practical support */
-      (void) FormatLocaleFile(stdout,"# Resampling Filter (for graphing)\n#\n");
-      (void) FormatLocaleFile(stdout,"# filter = %s\n",
-        CommandOptionToMnemonic(MagickFilterOptions,filter_type));
-      (void) FormatLocaleFile(stdout,"# window = %s\n",
-        CommandOptionToMnemonic(MagickFilterOptions,window_type));
-      (void) FormatLocaleFile(stdout,"# support = %.*g\n",
-        GetMagickPrecision(),(double) resize_filter->support);
-      (void) FormatLocaleFile(stdout,"# window-support = %.*g\n",
-        GetMagickPrecision(),(double) resize_filter->window_support);
-      (void) FormatLocaleFile(stdout,"# scale-blur = %.*g\n",
-        GetMagickPrecision(),(double) resize_filter->blur);
-      if ((filter_type == GaussianFilter) || (window_type == GaussianFilter))
-        (void) FormatLocaleFile(stdout,"# gaussian-sigma = %.*g\n",
-          GetMagickPrecision(),(double) resize_filter->coefficient[0]);
-      if ((filter_type == KaiserFilter) || (window_type == KaiserFilter))
-        (void) FormatLocaleFile(stdout,"# kaiser-beta = %.*g\n",
-          GetMagickPrecision(),(double) resize_filter->coefficient[0]);
-      (void) FormatLocaleFile(stdout,"# practical-support = %.*g\n",
-        GetMagickPrecision(), (double) support);
-      if ((filter_type == CubicFilter) || (window_type == CubicFilter))
-        (void) FormatLocaleFile(stdout,"# B,C = %.*g,%.*g\n",
-          GetMagickPrecision(),(double) B,GetMagickPrecision(),(double) C);
-      (void) FormatLocaleFile(stdout,"\n");
-      /*
-        Output values of resulting filter graph -- for graphing filter result.
-      */
-      for (x=0.0; x <= support; x+=0.01)
-        (void) FormatLocaleFile(stdout,"%5.2lf\t%.*g\n",x,GetMagickPrecision(),
-          (double) GetResizeFilterWeight(resize_filter,x));
-      /*
-        A final value so gnuplot can graph the 'stop' properly.
-      */
-      (void) FormatLocaleFile(stdout,"%5.2lf\t%.*g\n",support,
-        GetMagickPrecision(),0.0);
-      /* Output the above once only for each image - remove setting */
-      (void) DeleteImageArtifact((Image *) image,"filter:verbose");
+      ReportResizeFilter(image,resize_filter,filter_type,window_type,B,C);
     }
   return(resize_filter);
 }
