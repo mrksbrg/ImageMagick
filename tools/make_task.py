@@ -113,6 +113,12 @@ def main():
     rel = args.file
     base = os.path.basename(rel)
     src = open(os.path.join(REPO, rel), errors="replace").read().split("\n")
+    # Function ranges, mutation results and survivor lines all come from the
+    # base build, so they are read against the base source; once a file has
+    # been refactored, its working-tree line numbers no longer match them.
+    base_ref = oracle.BASE_REF if hasattr(oracle, "BASE_REF") else "origin/main"
+    base_src = subprocess.run(["git", "show", "%s:%s" % (base_ref, rel)], cwd=REPO,
+                              capture_output=True, text=True, errors="replace").stdout.split("\n")
 
     data = review(rel)
     smells = per_function_smells(data)
@@ -134,8 +140,8 @@ def main():
             # function; the coverage mapping starts at the brace. The signature
             # is the nearest line above the brace that names the function.
             info["line"] = next((n for n in range(lo, max(lo - 8, 1), -1)
-                                 if re.search(r"\b%s\(" % re.escape(name), src[n - 1])), lo)
-        omp = sum(1 for line in src[lo - 1:hi] if "#pragma omp" in line)
+                                 if re.search(r"\b%s\(" % re.escape(name), base_src[n - 1])), lo)
+        omp = sum(1 for line in base_src[lo - 1:hi] if "#pragma omp" in line)
         reach = len(casemap.cases_for(name, fmap))
         mine = [m for m in muts if lo <= m["line"] <= hi]
         killed = sum(1 for m in mine if m["status"] == "killed")
@@ -229,9 +235,9 @@ def main():
                   "it. Consider adding cases before a structural change." % r["reach"])
             kinds = {}
             for m in r["survived"]:
-                after = " ".join(src[m["line"]:m["line"] + 2])
+                after = " ".join(base_src[m["line"]:m["line"] + 2])
                 kinds.setdefault(classify.kind_of(dict(m, line_executed=True),
-                                                  src[m["line"] - 1].strip(), after), []).append(m)
+                                                  base_src[m["line"] - 1].strip(), after), []).append(m)
             harmless = sum(len(v) for k, v in kinds.items() if k != "unmatched")
             gaps = sorted(kinds.get("unmatched", []), key=lambda m: m["line"])
             if gaps:
@@ -239,8 +245,8 @@ def main():
                   "harmless kind. Take extra care on these lines, and consider closing the gap "
                   "first:" % len(gaps))
                 for m in gaps[:6]:
-                    code = src[m["line"] - 1].strip()[:80]
-                    w("  - line %d, `%s`: `%s`" % (m["line"], m["mutator"][4:], code))
+                    code = base_src[m["line"] - 1].strip()[:80]
+                    w("  - base line %d, `%s`: `%s`" % (m["line"], m["mutator"][4:], code))
                 if len(gaps) > 6:
                     w("  - and %d more (`tools/oracle/mutate.py --function %s`)" % (
                         len(gaps) - 6, r["name"]))
