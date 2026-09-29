@@ -4574,6 +4574,43 @@ MagickExport MagickBooleanType SigmoidalContrastImage(Image *image,
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  Level the a and b channels by the "white-balance:vibrance" black point.
+*/
+static MagickBooleanType ApplyWhiteBalanceVibrance(Image *image,
+  const char *artifact,ExceptionInfo *exception)
+{
+  ChannelType
+    channel_mask;
+
+  double
+    black_point = 0.0;
+
+  GeometryInfo
+    geometry_info;
+
+  MagickBooleanType
+    status;
+
+  MagickStatusType
+    flags;
+
+  /*
+    Level the a & b channels.
+  */
+  flags=ParseGeometry(artifact,&geometry_info);
+  if ((flags & RhoValue) != 0)
+    black_point=geometry_info.rho;
+  if ((flags & PercentValue) != 0)
+    black_point*=((double) QuantumRange/100.0);
+  channel_mask=SetImageChannelMask(image,(ChannelType) (aChannel |
+    bChannel));
+  status=LevelImage(image,black_point,(double)
+    QuantumRange-black_point,1.0,exception);
+  (void) SetImageChannelMask(image,channel_mask);
+  return(status);
+}
+
 MagickExport MagickBooleanType WhiteBalanceImage(Image *image,
   ExceptionInfo *exception)
 {
@@ -4692,33 +4729,8 @@ MagickExport MagickBooleanType WhiteBalanceImage(Image *image,
   image_view=DestroyCacheView(image_view);
   artifact=GetImageArtifact(image,"white-balance:vibrance");
   if (artifact != (const char *) NULL)
-    {
-      ChannelType
-        channel_mask;
-
-      double
-        black_point = 0.0;
-
-      GeometryInfo
-        geometry_info;
-
-      MagickStatusType
-        flags;
-
-      /*
-        Level the a & b channels.
-      */
-      flags=ParseGeometry(artifact,&geometry_info);
-      if ((flags & RhoValue) != 0)
-        black_point=geometry_info.rho;
-      if ((flags & PercentValue) != 0)
-        black_point*=((double) QuantumRange/100.0);
-      channel_mask=SetImageChannelMask(image,(ChannelType) (aChannel |
-        bChannel));
-      status&=(MagickStatusType) LevelImage(image,black_point,(double)
-        QuantumRange-black_point,1.0,exception);
-      (void) SetImageChannelMask(image,channel_mask);
-    }
+    status&=(MagickStatusType) ApplyWhiteBalanceVibrance(image,artifact,
+      exception);
   status&=(MagickStatusType) TransformImageColorspace(image,sRGBColorspace,
     exception);
   return(status != 0 ? MagickTrue : MagickFalse);
