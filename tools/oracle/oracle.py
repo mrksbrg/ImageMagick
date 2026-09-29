@@ -46,7 +46,7 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "7"          # bump when normalisation or execution changes
+HARNESS_VERSION = "8"          # bump when normalisation or execution changes
 
 LISTS = ["Colorspace", "Compose", "Distort", "Filter", "Interpolate",
          "VirtualPixel", "Morphology", "Kernel", "Evaluate", "Statistic",
@@ -272,6 +272,10 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
         with open(os.path.join(d, name), "w") as f:
             f.write(text.replace("{C}", CORPUS_REL))
     rcs, outs, errs = [], [], []
+    # stdin is a named file for the cases that read "-", and nothing otherwise;
+    # inheriting the driver's stdin would make results depend on how it was run.
+    stdin_path = os.path.join(d, expand([case["stdin"]], manifest)[0]) if case.get("stdin") \
+        else os.devnull
     started = time.time()
     for step in case["steps"]:
         for n in os.listdir(d):  # files read back must not carry today's date
@@ -289,9 +293,10 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
         # into memory, and only READ_CAP of each is read back.
         out_path, err_path = d + ".stdout", d + ".stderr"
         try:
-            with open(out_path, "wb") as fo, open(err_path, "wb") as fe:
-                r = subprocess.run(argv, cwd=d, env=env_for(binary, d, extra_env), stdout=fo,
-                                   stderr=fe, timeout=timeout or TIMEOUT)
+            with open(out_path, "wb") as fo, open(err_path, "wb") as fe, \
+                    open(stdin_path, "rb") as fi:
+                r = subprocess.run(argv, cwd=d, env=env_for(binary, d, extra_env), stdin=fi,
+                                   stdout=fo, stderr=fe, timeout=timeout or TIMEOUT)
             rcs.append(r.returncode)
             outs.append(normalise(read_capped(out_path), d))
             errs.append(normalise(read_capped(err_path), d))

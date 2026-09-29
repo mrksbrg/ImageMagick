@@ -453,14 +453,19 @@ def _split(opstr):
     return shlex.split(opstr)
 
 
-def _case(family, label, steps, outputs, stdout=True, files=None):
-    """`files` maps a name to text written into the case directory first."""
+def _case(family, label, steps, outputs, stdout=True, files=None, stdin=None):
+    """`files` maps a name to text written into the case directory first;
+    `stdin` names a file (corpus paths as `{C}/...`) fed to every step."""
     key = steps if not files else [steps, sorted(files.items())]
+    if stdin:
+        key = [key, "stdin", stdin]
     ident = hashlib.sha1(json.dumps(key).encode()).hexdigest()[:10]
     c = {"id": "%s/%s" % (family, ident), "family": family, "label": label,
          "steps": steps, "outputs": outputs, "stdout": stdout}
     if files:
         c["files"] = files
+    if stdin:
+        c["stdin"] = stdin
     return c
 
 
@@ -809,6 +814,70 @@ def generate(lists, writable_formats):
                            ["dec.miff"]))
         cases.append(_case("decode", "identify -verbose " + fname,
                            [["identify", "-verbose"] + pre + [spec]], []))
+
+    # ---- infrastructure: how the work is done rather than what it computes.
+    # Mutation testing found blob.c, cache.c, image.c, property.c and option.c
+    # the least protected code the oracle reaches (docs/refactoring/MUTATION.md):
+    # small images read from plain files never take their other paths.
+    # The pixel cache on disk, and memory-mapped.
+    for tag, limits in (("disk", ["-limit", "memory", "0", "-limit", "map", "0"]),
+                        ("map", ["-limit", "memory", "0"])):
+        for op in ("-resize 150%", "-blur 0x1", "-rotate 30", "-flop", "-colorspace Lab",
+                   "-distort SRT 20", "-morphology Dilate Disk:1", "-crop 30x20+10+10 +repage"):
+            cases.append(_op("infra", "%s cache rose %s" % (tag, op), limits + [img("rose")],
+                             op.split()))
+        cases.append(_op("infra", "%s cache seq -append" % tag, limits + [img("seq")],
+                         ["-append"]))
+        cases.append(_op("infra", "%s cache rose clone composite" % tag,
+                         limits + [img("rose")], ["(", "+clone", "-negate", ")", "-composite"]))
+    # Compressed streams and in-memory blobs (blob.c, registry.c).
+    for ext in ("gz", "bz2"):
+        cases.append(_case("infra", "blob %s round trip" % ext,
+                           [[img("rose"), "out.miff." + ext],
+                            ["out.miff." + ext] + FLOAT_OUT + ["dec.miff"]],
+                           ["out.miff." + ext, "dec.miff"]))
+    for fmt in ("png", "miff", "ppm", "gif", "tiff"):
+        cases.append(_case("infra", "stdout " + fmt, [[img("rose"), fmt + ":-"]], []))
+    for fmt in ("", "miff:", "ppm:"):
+        src = "{C}/rose.miff" if fmt != "ppm:" else "{C}/files/PerlMagick/t/MasterImage_70x46.ppm"
+        cases.append(_case("infra", "stdin %s-" % fmt, [[fmt + "-"] + FLOAT_OUT + ["out.miff"]],
+                           ["out.miff"], stdin=src))
+    cases.append(_op("infra", "mpr registry", [img("rose")],
+                     ["-write", "mpr:a", "+delete", "mpr:a", "-negate", "mpr:a", "-append"]))
+    cases.append(_case("infra", "write mid-pipeline",
+                       [[img("rose"), "-write", "mid.miff", "-negate"] + FLOAT_OUT + ["out.miff"]],
+                       ["mid.miff", "out.miff"]))
+    cases.append(_op("infra", "inline data URI",
+                     ["inline:data:image/gif;base64,"
+                      "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"], []))
+    # Filename syntax (image.c, option.c): frames, crops and sizes on read,
+    # explicit formats, lists, scene numbering, filename escapes.
+    for spec in ("seq.miff[0]", "seq.miff[1-2]", "seq.miff[2,0]", "seq.miff[-1]",
+                 "rose.miff[20x20+5+5]", "rose.miff[50%]", "rose.miff[30x20]", "rose.miff[1]",
+                 "anim.miff[0--1]"):
+        cases.append(_op("infra", "read " + spec, ["{C}/" + spec], []))
+    cases.append(_op("infra", "explicit format prefix", ["miff:{C}/rose.miff"], [],
+                     out="png:out.dat"))
+    cases.append(_case("infra", "@list of files", [["@list.txt", "-append"] + FLOAT_OUT
+                                                     + ["out.miff"]], ["out.miff"],
+                       files={"list.txt": "{C}/rose.miff\n{C}/granite.miff\n"}))
+    cases.append(_case("infra", "+adjoin scene numbering",
+                       [[img("seq"), "-scene", "5", "+adjoin", "out-%02d.miff"]], []))
+    cases.append(_case("infra", "filename escape",
+                       [[img("rose"), "-set", "filename:dims", "%wx%h",
+                         "out-%[filename:dims].miff"]], []))
+    # Properties, options and artifacts (property.c, option.c).
+    cases.append(_case("infra", "set and read properties",
+                       [[img("rose"), "-set", "label", "Hello", "-set", "comment", "World",
+                         "-set", "Title", "A title", "-define", "myopt=1",
+                         "-set", "option:myopt2", "x", "-format",
+                         "%[label]|%[comment]|%[Title]|%[property:Title]|%[option:myopt]|"
+                         "%[myopt]|%[option:myopt2]|%l|%c\n", "info:"]], []))
+    cases.append(_case("infra", "list every property",
+                       [[img("rose"), "-set", "comment", "x", "-format", "%[*]\n", "info:"]], []))
+    cases.append(_case("infra", "comment and label settings",
+                       [["-comment", "%wx%h %m", "-label", "%f", img("rose"), "-format",
+                         "%c|%l\n", "info:"]], []))
 
     # ---- cipher.c: -encipher then -decipher, a round trip
     for name in ("rose", "rose_alpha", "gray16"):
