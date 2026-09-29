@@ -616,6 +616,58 @@ static double Welch(const double x,
 }
 
 /*
+  The Gaussian sigma, from "filter:sigma" or half a pixel.
+*/
+static void SetGaussianFilterSigma(const Image *image,ResizeFilter *resize_filter)
+{
+  const char
+    *artifact;
+
+  double
+    value;
+
+  value=0.5;    /* gaussian sigma default, half pixel */
+  artifact=GetImageArtifact(image,"filter:sigma");
+  if (artifact != (const char *) NULL)
+    value=StringToDouble(artifact,(char **) NULL);
+  /* Define coefficients for Gaussian */
+  resize_filter->coefficient[0]=value;                 /* note sigma too */
+  resize_filter->coefficient[1]=MagickSafeReciprocal(2.0*value*value); /* sigma scaling */
+  resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
+     /* normalization - not actually needed or used! */
+  if ( value > 0.5 )
+    resize_filter->support *= 2*value;  /* increase support linearly */
+}
+
+/*
+  The Kaiser beta, from "filter:alpha", "filter:kaiser-beta" or
+  "filter:kaiser-alpha", or 6.5.
+*/
+static void SetKaiserFilterBeta(const Image *image,ResizeFilter *resize_filter)
+{
+  const char
+    *artifact;
+
+  double
+    value;
+
+  value=6.5; /* default beta value for Kaiser bessel windowing function */
+  artifact=GetImageArtifact(image,"filter:alpha");  /* FUTURE: depreciate */
+  if (artifact != (const char *) NULL)
+    value=StringToDouble(artifact,(char **) NULL);
+  artifact=GetImageArtifact(image,"filter:kaiser-beta");
+  if (artifact != (const char *) NULL)
+    value=StringToDouble(artifact,(char **) NULL);
+  artifact=GetImageArtifact(image,"filter:kaiser-alpha");
+  if (artifact != (const char *) NULL)
+    value=StringToDouble(artifact,(char **) NULL)*MagickPI;
+  /* Define coefficients for Kaiser Windowing Function */
+  resize_filter->coefficient[0]=value;         /* alpha */
+  resize_filter->coefficient[1]=MagickSafeReciprocal(I0(value));
+    /* normalization */
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -810,8 +862,7 @@ MagickPrivate ResizeFilter *AcquireResizeFilter(const Image *image,
 
   double
     B,
-    C,
-    value;
+    C;
 
   FilterType
     filter_type,
@@ -1089,36 +1140,13 @@ MagickPrivate ResizeFilter *AcquireResizeFilter(const Image *image,
   /* User Gaussian Sigma Override - no support change */
   if ((resize_filter->filter == Gaussian) ||
       (resize_filter->window == Gaussian) ) {
-    value=0.5;    /* gaussian sigma default, half pixel */
-    artifact=GetImageArtifact(image,"filter:sigma");
-    if (artifact != (const char *) NULL)
-      value=StringToDouble(artifact,(char **) NULL);
-    /* Define coefficients for Gaussian */
-    resize_filter->coefficient[0]=value;                 /* note sigma too */
-    resize_filter->coefficient[1]=MagickSafeReciprocal(2.0*value*value); /* sigma scaling */
-    resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
-       /* normalization - not actually needed or used! */
-    if ( value > 0.5 )
-      resize_filter->support *= 2*value;  /* increase support linearly */
+    SetGaussianFilterSigma(image,resize_filter);
   }
 
   /* User Kaiser Alpha Override - no support change */
   if ((resize_filter->filter == Kaiser) ||
       (resize_filter->window == Kaiser) ) {
-    value=6.5; /* default beta value for Kaiser bessel windowing function */
-    artifact=GetImageArtifact(image,"filter:alpha");  /* FUTURE: depreciate */
-    if (artifact != (const char *) NULL)
-      value=StringToDouble(artifact,(char **) NULL);
-    artifact=GetImageArtifact(image,"filter:kaiser-beta");
-    if (artifact != (const char *) NULL)
-      value=StringToDouble(artifact,(char **) NULL);
-    artifact=GetImageArtifact(image,"filter:kaiser-alpha");
-    if (artifact != (const char *) NULL)
-      value=StringToDouble(artifact,(char **) NULL)*MagickPI;
-    /* Define coefficients for Kaiser Windowing Function */
-    resize_filter->coefficient[0]=value;         /* alpha */
-    resize_filter->coefficient[1]=MagickSafeReciprocal(I0(value));
-      /* normalization */
+    SetKaiserFilterBeta(image,resize_filter);
   }
 
   /* Support Overrides */
