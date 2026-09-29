@@ -2394,6 +2394,54 @@ static inline double gamma_pow(const double value,const double gamma)
   return(value < 0.0 ? value : pow(value,gamma));
 }
 
+/*
+  Gamma-correct the colormap of a PseudoClass image through gamma_map.
+*/
+static void GammaCorrectColormap(Image *image,const Quantum *gamma_map)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) image->colors; i++)
+  {
+    /*
+      Gamma-correct colormap.
+    */
+    if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].red=(double) gamma_map[ScaleQuantumToMap(
+        ClampToQuantum(image->colormap[i].red))];
+    if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].green=(double) gamma_map[ScaleQuantumToMap(
+        ClampToQuantum(image->colormap[i].green))];
+    if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].blue=(double) gamma_map[ScaleQuantumToMap(
+        ClampToQuantum(image->colormap[i].blue))];
+    if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].alpha=(double) gamma_map[ScaleQuantumToMap(
+        ClampToQuantum(image->colormap[i].alpha))];
+  }
+}
+
+/*
+  Gamma-correct one pixel's channels that are marked for update.
+*/
+static inline void GammaCorrectPixelChannels(const Image *image,
+  const Quantum *gamma_map,Quantum *q)
+{
+  ssize_t
+    j;
+
+  for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+  {
+    PixelChannel channel = GetPixelChannelChannel(image,j);
+    PixelTrait traits = GetPixelChannelTraits(image,channel);
+    if ((traits & UpdatePixelTrait) == 0)
+      continue;
+    q[j]=gamma_map[ScaleQuantumToMap(ClampToQuantum((MagickRealType)
+      q[j]))];
+  }
+}
+
 MagickExport MagickBooleanType GammaImage(Image *image,const double gamma,
   ExceptionInfo *exception)
 {
@@ -2436,24 +2484,7 @@ MagickExport MagickBooleanType GammaImage(Image *image,const double gamma,
       gamma_map[i]=ScaleMapToQuantum((double) (MaxMap*pow((double) i/
         MaxMap,MagickSafeReciprocal(gamma))));
   if (image->storage_class == PseudoClass)
-    for (i=0; i < (ssize_t) image->colors; i++)
-    {
-      /*
-        Gamma-correct colormap.
-      */
-      if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].red=(double) gamma_map[ScaleQuantumToMap(
-          ClampToQuantum(image->colormap[i].red))];
-      if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].green=(double) gamma_map[ScaleQuantumToMap(
-          ClampToQuantum(image->colormap[i].green))];
-      if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].blue=(double) gamma_map[ScaleQuantumToMap(
-          ClampToQuantum(image->colormap[i].blue))];
-      if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].alpha=(double) gamma_map[ScaleQuantumToMap(
-          ClampToQuantum(image->colormap[i].alpha))];
-    }
+    GammaCorrectColormap(image,gamma_map);
   /*
     Gamma-correct image.
   */
@@ -2482,18 +2513,7 @@ MagickExport MagickBooleanType GammaImage(Image *image,const double gamma,
       }
     for (x=0; x < (ssize_t) image->columns; x++)
     {
-      ssize_t
-        j;
-
-      for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
-      {
-        PixelChannel channel = GetPixelChannelChannel(image,j);
-        PixelTrait traits = GetPixelChannelTraits(image,channel);
-        if ((traits & UpdatePixelTrait) == 0)
-          continue;
-        q[j]=gamma_map[ScaleQuantumToMap(ClampToQuantum((MagickRealType)
-          q[j]))];
-      }
+      GammaCorrectPixelChannels(image,gamma_map,q);
       q+=(ptrdiff_t) GetPixelChannels(image);
     }
     if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
