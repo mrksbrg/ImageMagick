@@ -797,6 +797,18 @@ static void ReportResizeFilter(const Image *image,
 }
 
 /*
+  A cylindrical request for a windowed Sinc, other than an explicit SincFast,
+  becomes a windowed Jinc.
+*/
+static inline MagickBooleanType IsJincPromotion(
+  const MagickBooleanType cylindrical,const FilterType filter_type,
+  const FilterType filter)
+{
+  return(((cylindrical != MagickFalse) && (filter_type == SincFastFilter) &&
+    (filter != SincFastFilter)) ? MagickTrue : MagickFalse);
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -1173,8 +1185,7 @@ MagickPrivate ResizeFilter *AcquireResizeFilter(const Image *image,
   window_type=mapping[filter].window;
   resize_filter->blur=1.0;
   /* Promote 1D Windowed Sinc Filters to a 2D Windowed Jinc filters */
-  if ((cylindrical != MagickFalse) && (filter_type == SincFastFilter) &&
-      (filter != SincFastFilter))
+  if (IsJincPromotion(cylindrical,filter_type,filter) != MagickFalse)
     filter_type=JincFilter;  /* 1D Windowed Sinc => 2D Windowed Jinc filters */
 
   /* Expert filter setting override */
