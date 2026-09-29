@@ -2998,6 +2998,56 @@ static inline double LevelPixel(const double black_point,
   return(level_pixel);
 }
 
+/*
+  Level the colormap of a PseudoClass image.
+*/
+static void LevelColormap(Image *image,const double black_point,
+  const double white_point,const double gamma)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) image->colors; i++)
+  {
+    /*
+      Level colormap.
+    */
+    if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].red=(double) ClampToQuantum(LevelPixel(black_point,
+        white_point,gamma,image->colormap[i].red));
+    if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].green=(double) ClampToQuantum(LevelPixel(black_point,
+        white_point,gamma,image->colormap[i].green));
+    if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].blue=(double) ClampToQuantum(LevelPixel(black_point,
+        white_point,gamma,image->colormap[i].blue));
+    if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+      image->colormap[i].alpha=(double) ClampToQuantum(LevelPixel(black_point,
+        white_point,gamma,image->colormap[i].alpha));
+  }
+}
+
+/*
+  Level the channels of one pixel that are marked for update.
+*/
+static inline void LevelPixelChannels(const Image *image,
+  const double black_point,const double white_point,const double gamma,
+  Quantum *q)
+{
+  ssize_t
+    j;
+
+  for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+  {
+    PixelChannel channel = GetPixelChannelChannel(image,j);
+    PixelTrait traits = GetPixelChannelTraits(image,channel);
+    if ((traits & UpdatePixelTrait) == 0)
+      continue;
+    q[j]=ClampToQuantum(LevelPixel(black_point,white_point,gamma,
+      (double) q[j]));
+  }
+}
+
 MagickExport MagickBooleanType LevelImage(Image *image,const double black_point,
   const double white_point,const double gamma,ExceptionInfo *exception)
 {
@@ -3013,7 +3063,6 @@ MagickExport MagickBooleanType LevelImage(Image *image,const double black_point,
     progress;
 
   ssize_t
-    i,
     y;
 
   /*
@@ -3024,24 +3073,7 @@ MagickExport MagickBooleanType LevelImage(Image *image,const double black_point,
   if (IsEventLogging() != MagickFalse)
     (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",image->filename);
   if (image->storage_class == PseudoClass)
-    for (i=0; i < (ssize_t) image->colors; i++)
-    {
-      /*
-        Level colormap.
-      */
-      if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].red=(double) ClampToQuantum(LevelPixel(black_point,
-          white_point,gamma,image->colormap[i].red));
-      if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].green=(double) ClampToQuantum(LevelPixel(black_point,
-          white_point,gamma,image->colormap[i].green));
-      if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].blue=(double) ClampToQuantum(LevelPixel(black_point,
-          white_point,gamma,image->colormap[i].blue));
-      if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
-        image->colormap[i].alpha=(double) ClampToQuantum(LevelPixel(black_point,
-          white_point,gamma,image->colormap[i].alpha));
-    }
+    LevelColormap(image,black_point,white_point,gamma);
   /*
     Level image.
   */
@@ -3070,18 +3102,7 @@ MagickExport MagickBooleanType LevelImage(Image *image,const double black_point,
       }
     for (x=0; x < (ssize_t) image->columns; x++)
     {
-      ssize_t
-        j;
-
-      for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
-      {
-        PixelChannel channel = GetPixelChannelChannel(image,j);
-        PixelTrait traits = GetPixelChannelTraits(image,channel);
-        if ((traits & UpdatePixelTrait) == 0)
-          continue;
-        q[j]=ClampToQuantum(LevelPixel(black_point,white_point,gamma,
-          (double) q[j]));
-      }
+      LevelPixelChannels(image,black_point,white_point,gamma,q);
       q+=(ptrdiff_t) GetPixelChannels(image);
     }
     if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
