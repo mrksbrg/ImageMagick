@@ -425,7 +425,7 @@ three groups:
   every file has well-tested and untested functions side by side.
 - The best measured protection, 85% or more on executed lines with high
   reach: `colorspace.c`, `statistic.c`, `enhance.c`, `threshold.c`,
-  `compare.c`, `cache.c`, `property.c`'s reached code, and `resize.c` (87%).
+  `compare.c`, `cache.c`, `property.c`'s reached code, and `resize.c` (88%).
   From sweep 2: `decorate.c` (93%), `segment.c` (90%), `fourier.c`,
   `colormap.c` and `shear.c` (80–82%). The image-processing ones among these
   are the safest starting points; `cache.c` is well protected but is the

@@ -386,6 +386,27 @@ def select(cases, pattern):
     return [c for c in cases if rx.search(c["id"]) or rx.search(c["label"])]
 
 
+def select_by_function(todo, all_cases, functions):
+    """The cases that execute any of these functions, from casemap.json.
+
+    Names are those of the base code, so name the function being refactored,
+    not a helper just extracted from it: the original still calls the helper,
+    so its cases are the ones that matter. A function no case reaches is an
+    error, not an empty pass: the oracle cannot vouch for it at all.
+    """
+    import casemap  # here, not at the top: casemap imports this module
+    fmap = casemap.load_map(all_cases)
+    wanted = set()
+    for name in functions:
+        ids = casemap.cases_for(name, fmap)
+        if not ids:
+            sys.exit("oracle: no case executes %s; the oracle cannot check it "
+                     "(see docs/refactoring/MUTATION.md)" % name)
+        print("oracle: %d cases execute %s" % (len(ids), name))
+        wanted.update(ids)
+    return [c for c in todo if c["id"] in wanted]
+
+
 def parallel(fn, items, jobs, label):
     results, done, start = {}, 0, time.time()
     with concurrent.futures.ThreadPoolExecutor(jobs) as pool:
@@ -405,6 +426,8 @@ def cmd_run(args):
     cand_bin = args.cand_bin or build("cand")
     manifest, all_cases = load_cases(base_bin)
     todo = select(all_cases, args.filter)
+    if args.function:
+        todo = select_by_function(todo, all_cases, args.function)
     cpath = cache_path(base_bin, manifest)
     cache = {}
     if os.path.exists(cpath) and not args.no_cache:
@@ -417,7 +440,7 @@ def cmd_run(args):
                             args.jobs, "baseline")
         for c in missing:
             cache[case_key(c)] = base_res[c["id"]]
-        if not args.filter:  # drop entries for cases no longer in the catalogue
+        if not args.filter and not args.function:  # drop entries no longer in the catalogue
             live = {case_key(c) for c in todo}
             cache = {k: v for k, v in cache.items() if k in live}
         os.makedirs(os.path.dirname(cpath), exist_ok=True)
@@ -530,6 +553,8 @@ def main():
         s.add_argument("--base", default="origin/main", help="baseline git ref")
         s.add_argument("--base-bin", help="use this baseline binary instead of building")
         s.add_argument("--filter", help="regex on case id or label")
+        s.add_argument("--function", action="append",
+                       help="only cases executing this function (casemap.json); repeatable")
         s.add_argument("-j", "--jobs", type=int, default=os.cpu_count())
         if name == "run":
             s.add_argument("--cand-bin", help="use this candidate binary instead of building")

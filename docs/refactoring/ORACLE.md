@@ -17,6 +17,7 @@ pixel by one unit passes both.
 tools/oracle/oracle.py run                      # working tree against origin/main
 tools/oracle/oracle.py run --base HEAD~1        # against another ref
 tools/oracle/oracle.py run --filter '^compose/' # a subset, by case id or label
+tools/oracle/oracle.py run --function ScaleImage # only the cases that execute a function
 tools/oracle/oracle.py run --explain            # add pixel deltas for divergences
 tools/oracle/oracle.py list [-v]                # what the catalogue contains
 tools/oracle/oracle.py selfcheck                # baseline against itself
@@ -26,6 +27,13 @@ The baseline is built once per commit and its results are cached per binary,
 so after the first run only the candidate executes. A warm run takes about
 2 minutes on an 8-core M-series Mac; a cold run (new baseline) about 3.5.
 The candidate build is incremental: a one-file change rebuilds in seconds.
+
+`--function` picks the cases from `build-oracle/work/casemap.json`, so a
+refactoring commit is checked in seconds rather than minutes; it refuses a
+function no case executes. It was tried on a real change before the campaign
+started: Recipe P on `url_encode` in `resize.c` passed on all 78 cases that
+reach it in 9 seconds, and the same change with its condition inverted, which
+`refactor_guard.py` cannot see, diverged on 23 of them.
 
 A divergence is reported with the command line and what differed. Candidate
 outputs of diverging cases are kept in `build-oracle/work/runs/cand/`, and the
