@@ -1202,12 +1202,15 @@ static void ShearLineBackward(const Image *image,Quantum *p,
 }
 
 /*
-  Shear one row right: transfer its pixels right-to-left, blending each with
-  its neighbor by area, and fill the vacated end with the background.
+  Shear one row or column forward - right, or down - transferring its pixels
+  in decreasing order, blending each with its neighbor by area, and fill
+  the vacated end with the background. length, offset and extent are the
+  length, x offset and image columns for a row, or the height, y offset and
+  image rows for a column.
 */
-static void XShearRowRight(const Image *image,Quantum *p,const size_t width,
-  const ssize_t x_offset,const ssize_t step,const double area,
-  const PixelInfo background)
+static void ShearLineForward(const Image *image,Quantum *p,
+  const size_t length,const ssize_t offset,const size_t extent,
+  const ssize_t step,const double area,const PixelInfo background)
 {
   PixelInfo
     pixel,
@@ -1226,13 +1229,13 @@ static void XShearRowRight(const Image *image,Quantum *p,const size_t width,
   /*
     Transfer pixels right-to-left.
   */
-  p+=(ptrdiff_t) width*GetPixelChannels(image);
+  p+=(ptrdiff_t) length*GetPixelChannels(image);
   q=p+step*(ssize_t) GetPixelChannels(image);
-  for (i=0; i < (ssize_t) width; i++)
+  for (i=0; i < (ssize_t) length; i++)
   {
     p-=(ptrdiff_t)GetPixelChannels(image);
     q-=GetPixelChannels(image);
-    if ((size_t) (x_offset+(ssize_t) width+step-i) > image->columns)
+    if ((size_t) (offset+(ssize_t) length+step-i) > extent)
       continue;
     GetPixelInfoPixel(image,p,&source);
     CompositePixelInfoAreaBlend(&pixel,(double) pixel.alpha,
@@ -1340,7 +1343,8 @@ static MagickBooleanType XShearImage(Image *image,const double degrees,
       }
       case RIGHT:
       {
-        XShearRowRight(image,p,width,x_offset,step,area,background);
+        ShearLineForward(image,p,width,x_offset,image->columns,step,area,
+          background);
         break;
       }
     }
@@ -1400,57 +1404,6 @@ static MagickBooleanType XShearImage(Image *image,const double degrees,
 %    o exception: return any errors or warnings in this structure.
 %
 */
-/*
-  Shear one column down: transfer its pixels bottom-to-top, blending each
-  with its neighbor by area, and fill the vacated end with the background.
-*/
-static void YShearColumnDown(const Image *image,Quantum *p,const size_t height,
-  const ssize_t y_offset,const ssize_t step,const double area,
-  const PixelInfo background)
-{
-  PixelInfo
-    pixel,
-    source,
-    destination;
-
-  Quantum
-    *magick_restrict q;
-
-  ssize_t
-    i;
-
-  pixel=background;
-  GetPixelInfo(image,&source);
-  GetPixelInfo(image,&destination);
-  /*
-    Transfer pixels bottom-to-top.
-  */
-  p+=(ptrdiff_t) height*GetPixelChannels(image);
-  q=p+step*(ssize_t) GetPixelChannels(image);
-  for (i=0; i < (ssize_t) height; i++)
-  {
-    p-=(ptrdiff_t)GetPixelChannels(image);
-    q-=GetPixelChannels(image);
-    if ((size_t) (y_offset+(ssize_t) height+step-i) > image->rows)
-      continue;
-    GetPixelInfoPixel(image,p,&source);
-    CompositePixelInfoAreaBlend(&pixel,(double) pixel.alpha,
-      &source,(double) GetPixelAlpha(image,p),area,
-      &destination);
-    SetPixelViaPixelInfo(image,&destination,q);
-    GetPixelInfoPixel(image,p,&pixel);
-  }
-  CompositePixelInfoAreaBlend(&pixel,(double) pixel.alpha,
-    &background,(double) background.alpha,area,&destination);
-  q-=GetPixelChannels(image);
-  SetPixelViaPixelInfo(image,&destination,q);
-  for (i=0; i < (step-1); i++)
-  {
-    q-=GetPixelChannels(image);
-    SetPixelViaPixelInfo(image,&background,q);
-  }
-}
-
 static MagickBooleanType YShearImage(Image *image,const double degrees,
   const size_t width,const size_t height,const ssize_t x_offset,
   const ssize_t y_offset,ExceptionInfo *exception)
@@ -1540,7 +1493,8 @@ static MagickBooleanType YShearImage(Image *image,const double degrees,
       }
       case DOWN:
       {
-        YShearColumnDown(image,p,height,y_offset,step,area,background);
+        ShearLineForward(image,p,height,y_offset,image->rows,step,area,
+          background);
         break;
       }
     }
