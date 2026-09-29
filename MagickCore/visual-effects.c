@@ -987,7 +987,7 @@ MagickExport Image *ColorMatrixImage(const Image *image,
   distortion leaves where it is.
 */
 static inline void CopyUndistortedPixel(const Image *canvas_image,
-  Image *implode_image,const Quantum *p,Quantum *q)
+  Image *distorted_image,const Quantum *p,Quantum *q)
 {
   ssize_t
     i;
@@ -996,12 +996,12 @@ static inline void CopyUndistortedPixel(const Image *canvas_image,
   {
     PixelChannel channel = GetPixelChannelChannel(canvas_image,i);
     PixelTrait traits = GetPixelChannelTraits(canvas_image,channel);
-    PixelTrait implode_traits = GetPixelChannelTraits(implode_image,
+    PixelTrait distorted_traits = GetPixelChannelTraits(distorted_image,
       channel);
     if ((traits == UndefinedPixelTrait) ||
-        (implode_traits == UndefinedPixelTrait))
+        (distorted_traits == UndefinedPixelTrait))
       continue;
-    SetPixelChannel(implode_image,channel,p[i],q);
+    SetPixelChannel(distorted_image,channel,p[i],q);
   }
 }
 
@@ -3001,22 +3001,7 @@ MagickExport Image *SwirlImage(const Image *image,double degrees,
       delta.x=scale.x*(double) (x-center.x);
       distance=delta.x*delta.x+delta.y*delta.y;
       if (distance >= (radius*radius))
-        {
-          ssize_t
-            i;
-
-          for (i=0; i < (ssize_t) GetPixelChannels(canvas_image); i++)
-          {
-            PixelChannel channel = GetPixelChannelChannel(canvas_image,i);
-            PixelTrait traits = GetPixelChannelTraits(canvas_image,channel);
-            PixelTrait swirl_traits = GetPixelChannelTraits(swirl_image,
-              channel);
-            if ((traits == UndefinedPixelTrait) ||
-                (swirl_traits == UndefinedPixelTrait))
-              continue;
-            SetPixelChannel(swirl_image,channel,p[i],q);
-          }
-        }
+        CopyUndistortedPixel(canvas_image,swirl_image,p,q);
       else
         {
           double
