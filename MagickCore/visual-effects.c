@@ -982,6 +982,29 @@ MagickExport Image *ColorMatrixImage(const Image *image,
 %    o exception: return any errors or warnings in this structure.
 %
 */
+/*
+  Copy the channels both images define from p to q, for a pixel the
+  distortion leaves where it is.
+*/
+static inline void CopyUndistortedPixel(const Image *canvas_image,
+  Image *implode_image,const Quantum *p,Quantum *q)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) GetPixelChannels(canvas_image); i++)
+  {
+    PixelChannel channel = GetPixelChannelChannel(canvas_image,i);
+    PixelTrait traits = GetPixelChannelTraits(canvas_image,channel);
+    PixelTrait implode_traits = GetPixelChannelTraits(implode_image,
+      channel);
+    if ((traits == UndefinedPixelTrait) ||
+        (implode_traits == UndefinedPixelTrait))
+      continue;
+    SetPixelChannel(implode_image,channel,p[i],q);
+  }
+}
+
 MagickExport Image *ImplodeImage(const Image *image,const double amount,
   const PixelInterpolateMethod method,ExceptionInfo *exception)
 {
@@ -1100,26 +1123,13 @@ MagickExport Image *ImplodeImage(const Image *image,const double amount,
     delta.y=scale.y*((double) y-center.y);
     for (x=0; x < (ssize_t) canvas_image->columns; x++)
     {
-      ssize_t
-        i;
-
       /*
         Determine if the pixel is within an ellipse.
       */
       delta.x=scale.x*((double) x-center.x);
       distance=delta.x*delta.x+delta.y*delta.y;
       if (distance >= (radius*radius))
-        for (i=0; i < (ssize_t) GetPixelChannels(canvas_image); i++)
-        {
-          PixelChannel channel = GetPixelChannelChannel(canvas_image,i);
-          PixelTrait traits = GetPixelChannelTraits(canvas_image,channel);
-          PixelTrait implode_traits = GetPixelChannelTraits(implode_image,
-            channel);
-          if ((traits == UndefinedPixelTrait) ||
-              (implode_traits == UndefinedPixelTrait))
-            continue;
-          SetPixelChannel(implode_image,channel,p[i],q);
-        }
+        CopyUndistortedPixel(canvas_image,implode_image,p,q);
       else
         {
           double
