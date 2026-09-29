@@ -2027,6 +2027,138 @@ MagickExport Image *EnhanceImage(const Image *image,ExceptionInfo *exception)
 }
 
 /*
+  Count the image's intensities per channel into histogram.
+*/
+static MagickBooleanType FormEqualizeHistogram(const Image *image,
+  double *histogram,ExceptionInfo *exception)
+{
+  CacheView
+    *image_view;
+
+  MagickBooleanType
+    status;
+
+  ssize_t
+    i,
+    y;
+
+  status=MagickTrue;
+  (void) memset(histogram,0,(MaxMap+1)*GetPixelChannels(image)*
+    sizeof(*histogram));
+  image_view=AcquireVirtualCacheView(image,exception);
+  for (y=0; y < (ssize_t) image->rows; y++)
+  {
+    const Quantum
+      *magick_restrict p;
+
+    ssize_t
+      x;
+
+    if (status == MagickFalse)
+      continue;
+    p=GetCacheViewVirtualPixels(image_view,0,y,image->columns,1,exception);
+    if (p == (const Quantum *) NULL)
+      {
+        status=MagickFalse;
+        continue;
+      }
+    for (x=0; x < (ssize_t) image->columns; x++)
+    {
+      for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+      {
+        double
+          intensity;
+
+        intensity=(double) p[i];
+        if ((image->channel_mask & SyncChannels) != 0)
+          intensity=GetPixelIntensity(image,p);
+        histogram[GetPixelChannels(image)*ScaleQuantumToMap(
+          ClampToQuantum(intensity))+(size_t) i]++;
+      }
+      p+=(ptrdiff_t) GetPixelChannels(image);
+    }
+  }
+  image_view=DestroyCacheView(image_view);
+  return(status);
+}
+
+/*
+  Integrate the histogram into the cumulative map, per channel.
+*/
+static void IntegrateEqualizeHistogram(const Image *image,
+  const double *histogram,double *map)
+{
+  ssize_t
+    i;
+
+  for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+  {
+    double
+      intensity;
+
+    ssize_t
+      j;
+
+    intensity=0.0;
+    for (j=0; j <= (ssize_t) MaxMap; j++)
+    {
+      intensity+=histogram[(ssize_t) GetPixelChannels(image)*j+i];
+      map[(ssize_t) GetPixelChannels(image)*j+i]=intensity;
+    }
+  }
+}
+
+/*
+  Equalize the colormap of a PseudoClass image.
+*/
+static void EqualizeColormap(Image *image,const double *equalize_map,
+  const double *black,const double *white)
+{
+  ssize_t
+    j;
+
+  for (j=0; j < (ssize_t) image->colors; j++)
+  {
+    if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+      {
+        PixelChannel channel = GetPixelChannelChannel(image,
+          RedPixelChannel);
+        if (black[channel] != white[channel])
+          image->colormap[j].red=equalize_map[(ssize_t)
+            GetPixelChannels(image)*ScaleQuantumToMap(
+            ClampToQuantum(image->colormap[j].red))+channel];
+      }
+    if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+      {
+        PixelChannel channel = GetPixelChannelChannel(image,
+          GreenPixelChannel);
+        if (black[channel] != white[channel])
+          image->colormap[j].green=equalize_map[(ssize_t)
+            GetPixelChannels(image)*ScaleQuantumToMap(
+            ClampToQuantum(image->colormap[j].green))+channel];
+      }
+    if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+      {
+        PixelChannel channel = GetPixelChannelChannel(image,
+          BluePixelChannel);
+        if (black[channel] != white[channel])
+          image->colormap[j].blue=equalize_map[(ssize_t)
+            GetPixelChannels(image)*ScaleQuantumToMap(
+            ClampToQuantum(image->colormap[j].blue))+channel];
+      }
+    if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+      {
+        PixelChannel channel = GetPixelChannelChannel(image,
+          AlphaPixelChannel);
+        if (black[channel] != white[channel])
+          image->colormap[j].alpha=equalize_map[(ssize_t)
+            GetPixelChannels(image)*ScaleQuantumToMap(
+            ClampToQuantum(image->colormap[j].alpha))+channel];
+      }
+  }
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -2108,61 +2240,11 @@ MagickExport MagickBooleanType EqualizeImage(Image *image,
   /*
     Form histogram.
   */
-  status=MagickTrue;
-  (void) memset(histogram,0,(MaxMap+1)*GetPixelChannels(image)*
-    sizeof(*histogram));
-  image_view=AcquireVirtualCacheView(image,exception);
-  for (y=0; y < (ssize_t) image->rows; y++)
-  {
-    const Quantum
-      *magick_restrict p;
-
-    ssize_t
-      x;
-
-    if (status == MagickFalse)
-      continue;
-    p=GetCacheViewVirtualPixels(image_view,0,y,image->columns,1,exception);
-    if (p == (const Quantum *) NULL)
-      {
-        status=MagickFalse;
-        continue;
-      }
-    for (x=0; x < (ssize_t) image->columns; x++)
-    {
-      for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-      {
-        double
-          intensity;
-
-        intensity=(double) p[i];
-        if ((image->channel_mask & SyncChannels) != 0)
-          intensity=GetPixelIntensity(image,p);
-        histogram[GetPixelChannels(image)*ScaleQuantumToMap(
-          ClampToQuantum(intensity))+(size_t) i]++;
-      }
-      p+=(ptrdiff_t) GetPixelChannels(image);
-    }
-  }
-  image_view=DestroyCacheView(image_view);
+  status=FormEqualizeHistogram(image,histogram,exception);
   /*
     Integrate the histogram to get the equalization map.
   */
-  for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-  {
-    double
-      intensity;
-
-    ssize_t
-      j;
-
-    intensity=0.0;
-    for (j=0; j <= (ssize_t) MaxMap; j++)
-    {
-      intensity+=histogram[(ssize_t) GetPixelChannels(image)*j+i];
-      map[(ssize_t) GetPixelChannels(image)*j+i]=intensity;
-    }
-  }
+  IntegrateEqualizeHistogram(image,histogram,map);
   (void) memset(equalize_map,0,(MaxMap+1)*GetPixelChannels(image)*
     sizeof(*equalize_map));
   (void) memset(black,0,sizeof(*black));
@@ -2184,51 +2266,10 @@ MagickExport MagickBooleanType EqualizeImage(Image *image,
   map=(double *) RelinquishMagickMemory(map);
   if (image->storage_class == PseudoClass)
     {
-      ssize_t
-        j;
-
       /*
         Equalize colormap.
       */
-      for (j=0; j < (ssize_t) image->colors; j++)
-      {
-        if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
-          {
-            PixelChannel channel = GetPixelChannelChannel(image,
-              RedPixelChannel);
-            if (black[channel] != white[channel])
-              image->colormap[j].red=equalize_map[(ssize_t)
-                GetPixelChannels(image)*ScaleQuantumToMap(
-                ClampToQuantum(image->colormap[j].red))+channel];
-          }
-        if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
-          {
-            PixelChannel channel = GetPixelChannelChannel(image,
-              GreenPixelChannel);
-            if (black[channel] != white[channel])
-              image->colormap[j].green=equalize_map[(ssize_t)
-                GetPixelChannels(image)*ScaleQuantumToMap(
-                ClampToQuantum(image->colormap[j].green))+channel];
-          }
-        if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
-          {
-            PixelChannel channel = GetPixelChannelChannel(image,
-              BluePixelChannel);
-            if (black[channel] != white[channel])
-              image->colormap[j].blue=equalize_map[(ssize_t)
-                GetPixelChannels(image)*ScaleQuantumToMap(
-                ClampToQuantum(image->colormap[j].blue))+channel];
-          }
-        if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
-          {
-            PixelChannel channel = GetPixelChannelChannel(image,
-              AlphaPixelChannel);
-            if (black[channel] != white[channel])
-              image->colormap[j].alpha=equalize_map[(ssize_t)
-                GetPixelChannels(image)*ScaleQuantumToMap(
-                ClampToQuantum(image->colormap[j].alpha))+channel];
-          }
-      }
+      EqualizeColormap(image,equalize_map,black,white);
     }
   /*
     Equalize image.
