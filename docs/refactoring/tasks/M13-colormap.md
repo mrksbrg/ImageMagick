@@ -37,7 +37,7 @@ The score must read 8.88. If it does not, this file changed after the task was w
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | 1 | `CycleColormapImage` | 188 | 11 | - | 2 | public | 1 | 12 | 14 of 15 |
 | 2 | `SortColormapByIntensity` | 299 | 13 | - | - | public | 1 | 1 | 15 of 18 |
-| 3 | `AcquireImageColormap` | 105 | - | - | - | public | - | 2363 | 12 of 12 |
+| 3 | `AcquireImageColormap` | 105 | - | - | - | public | - | 2420 | 12 of 12 |
 
 Thresholds for C: cyclomatic complexity under 9, nesting depth under 4. **Cases** is how many oracle cases execute the function; **Mutants killed** counts the sampled mutants on lines the oracle executes. A function with no cases cannot be checked and is listed last: skip it and report it.
 

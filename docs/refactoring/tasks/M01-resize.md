@@ -40,14 +40,14 @@ The score must read 1.39. If it does not, this file changed after the task was w
 
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
-| 1 | `ScaleImage` | 4114 | 98 | 7 | 23 | public | - | 56 | 171 of 208 |
-| 2 | `AcquireResizeFilter` | 804 | 69 | - | 11 | public | 1 | 949 | 60 of 73 |
+| 1 | `ScaleImage` | 4114 | 98 | 7 | 23 | public | - | 55 | 171 of 208 |
+| 2 | `AcquireResizeFilter` | 804 | 69 | - | 11 | public | 1 | 984 | 60 of 73 |
 | 3 | `MagnifyImage` | 2886 | 35 | 4 | 5 | public | 2 | 49 | 45 of 47 |
-| 4 | `SampleImage` | 3925 | 26 | 4 | 5 | public | 1 | 68 | 32 of 34 |
-| 5 | `HorizontalFilter` | 3337 | - | 5 | 5 | static | 2 | 611 | 83 of 86 |
-| 6 | `VerticalFilter` | 3553 | - | 5 | 5 | static | 2 | 611 | 73 of 77 |
+| 4 | `SampleImage` | 3925 | 26 | 4 | 5 | public | 1 | 103 | 32 of 34 |
+| 5 | `HorizontalFilter` | 3337 | - | 5 | 5 | static | 2 | 646 | 83 of 86 |
+| 6 | `VerticalFilter` | 3553 | - | 5 | 5 | static | 2 | 646 | 73 of 77 |
 | 7 | `InterpolativeResizeImage` | 1750 | - | 4 | 3 | public | 2 | 44 | 23 of 28 |
-| 8 | `ThumbnailImage` | 4599 | 19 | - | 3 | public | - | 78 | 20 of 26 |
+| 8 | `ThumbnailImage` | 4599 | 19 | - | 3 | public | - | 113 | 20 of 26 |
 | 9 | `Scale3X` | 2797 | 24 | - | 2 | static | - | 4 | 2 of 3 |
 | 10 | `Fish2X` | 2445 | 31 | - | - | static | - | 4 | 8 of 12 |
 | 11 | `CubicSpline` | 250 | 12 | - | 2 | static | - | 13 | 38 of 47 |

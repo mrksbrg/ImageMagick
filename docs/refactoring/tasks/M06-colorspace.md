@@ -41,13 +41,13 @@ The score must read 2.57. If it does not, this file changed after the task was w
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | 1 | `TransformsRGBImage` | 1828 | 151 | 4 | 19 | static | 14 | 371 | 32 of 35 |
-| 2 | `sRGBTransformImage` | 727 | 142 | 4 | 16 | static | 13 | 732 | 35 of 37 |
+| 2 | `sRGBTransformImage` | 727 | 142 | 4 | 16 | static | 13 | 742 | 35 of 37 |
 | 3 | `ConvertRGBToGeneric` | 416 | 30 | - | - | public | - | 448 | - |
 | 4 | `ConvertGenericToRGB` | 127 | 30 | - | - | public | - | 218 | - |
 | 5 | `ConvertHSLToRGB` | 312 | 9 | - | - | public | - | 34 | 6 of 7 |
-| 6 | `SetImageColorspace` | 1567 | - | - | - | public | - | 2796 | - |
+| 6 | `SetImageColorspace` | 1567 | - | - | - | public | - | 2824 | - |
 | 7 | `SetImageGray` | 1647 | - | - | - | public | - | 20 | 2 of 2 |
-| 8 | `SetImageMonochrome` | 1704 | - | - | - | public | - | 132 | 2 of 2 |
+| 8 | `SetImageMonochrome` | 1704 | - | - | - | public | - | 182 | 2 of 2 |
 | 9 | `ConvertRGBToHSL` | 602 | - | - | - | public | - | 81 | 5 of 5 |
 
 Thresholds for C: cyclomatic complexity under 9, nesting depth under 4. **Cases** is how many oracle cases execute the function; **Mutants killed** counts the sampled mutants on lines the oracle executes. A function with no cases cannot be checked and is listed last: skip it and report it.

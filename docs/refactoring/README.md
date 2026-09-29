@@ -60,7 +60,7 @@ so it runs after every commit.
 
 **The oracle only protects what it reaches.** Mutation testing
 ([`MUTATION.md`](MUTATION.md)) measured how often it notices a deliberate change: in
-MagickCore, 82% of mutants on executed lines in the 25 largest files, 68% in the rest,
+MagickCore, 77% of mutants on executed lines in the 25 largest files, 68% in the rest,
 and much less in code the catalogue never drives. That is why the backlog ranks files by
 protection first and by Code Health second.
 

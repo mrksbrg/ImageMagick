@@ -49,7 +49,7 @@ The score must read 1.89. If it does not, this file changed after the task was w
 | 6 | `KapurThreshold` | 392 | 17 | 4 | 4 | static | - | 12 | 9 of 11 |
 | 7 | `ClampImage` | 1087 | 16 | 4 | 4 | public | 2 | 117 | 2 of 3 |
 | 8 | `RandomThresholdImage` | 2231 | 19 | 4 | 3 | public | 2 | 12 | 3 of 4 |
-| 9 | `BilevelImage` | 805 | 18 | 4 | 3 | public | 2 | 138 | 2 of 2 |
+| 9 | `BilevelImage` | 805 | 18 | 4 | 3 | public | 2 | 156 | 2 of 2 |
 | 10 | `AdaptiveThresholdImage` | 182 | - | 5 | 5 | public | 2 | 12 | 8 of 8 |
 | 11 | `TriangleThreshold` | 570 | 15 | - | 5 | static | - | 12 | 11 of 11 |
 | 12 | `RangeThresholdImage` | 2377 | - | 4 | 3 | public | 2 | 12 | 5 of 7 |

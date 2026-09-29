@@ -44,7 +44,7 @@ The score must read 1.53. If it does not, this file changed after the task was w
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | 1 | `EqualizeImage` | 2053 | 45 | 4 | 12 | public | 2 | 38 | 10 of 11 |
-| 2 | `ContrastStretchImage` | 1558 | 49 | 4 | 10 | public | 2 | 142 | 10 of 12 |
+| 2 | `ContrastStretchImage` | 1558 | 49 | 4 | 10 | public | 2 | 160 | 10 of 12 |
 | 3 | `NegateImage` | 3953 | 38 | 5 | 8 | public | 2 | 76 | 2 of 2 |
 | 4 | `GrayscaleImage` | 2487 | 33 | 4 | 5 | public | 2 | 46 | - |
 | 5 | `GammaImage` | 2335 | 25 | 4 | 5 | public | 2 | 5 | 3 of 3 |

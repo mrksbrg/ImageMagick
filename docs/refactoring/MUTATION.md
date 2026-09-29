@@ -181,18 +181,14 @@ kinds in the table.
 
 ## Sweep 1: the 25 largest MagickCore files
 
-> [!WARNING]
-> **Correction in progress (2026-09-29).** 141 of this sweep's kills (10%), 10 of
-> sweep 2's and 4 of `colormap.c`'s full run were made by one nondeterministic
-> case, `resize/06b5a45abd` (an upstream bug, see ORACLE.md): it differs from
-> itself in about one run in three under load, so a mutant run on it "died"
-> by chance. They were concentrated in the infrastructure files - `property.c`
-> 34, `cache.c` 28, `blob.c` 23, `image.c` 16 - whose scores rose most in the
-> capped reruns below, because killer-first ordering had ranked this case
-> highly on its own false kills. The case is out of the catalogue and the 155
-> mutants are being rerun; until the tables here are regenerated
-> (`build-oracle/finalize.py`), read the figures for those four files as too
-> high. Files whose kills did not involve it are unaffected.
+> [!NOTE]
+> **Corrected on 2026-09-29.** One case, `resize/06b5a45abd`, turned out to
+> differ from itself about one run in three under load (an upstream bug, see
+> ORACLE.md), and 155 mutation runs had counted it as a kill. Rerun without
+> it, 116 of the 141 in this sweep survived. The figures below are the
+> corrected ones; an earlier version of this section reported 81.6% on
+> executed lines and called the infrastructure files well protected, which
+> was wrong.
 
 One Mull build covered the 25 largest MagickCore files that the oracle build
 compiles (44,458 mutants). It left out the X11 files (`display.c`,
@@ -203,40 +199,40 @@ compiles (44,458 mutants). It left out the X11 files (`display.c`,
 and a final rerun against the extended catalogue (see "Catalogue changes").
 Merged results: `build-oracle/work/mutation-sweep25-final.json`.
 
-**Overall: 1,448 killed (57.9%). 81.6% of mutants on lines the oracle
+**Overall: 1,332 killed (53.3%). 76.9% of mutants on lines the oracle
 executes are killed.** 726 mutants (29%) sit on lines no case executes.
 
 | File | Mutants | Reached | Killed | Survived on executed lines | of which capped | Kill rate, executed lines |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `profile.c` | 100 | 23 | 4 | 19 | 1 | 17% |
+| `blob.c` | 100 | 50 | 28 | 22 | 16 | 56% |
+| `property.c` | 100 | 41 | 25 | 16 | 12 | 61% |
+| `cache.c` | 100 | 62 | 40 | 22 | 19 | 65% |
+| `image.c` | 100 | 79 | 51 | 28 | 13 | 65% |
+| `option.c` | 100 | 76 | 54 | 22 | 9 | 71% |
 | `draw.c` | 100 | 76 | 56 | 20 | 0 | 74% |
 | `stream.c` | 100 | 78 | 58 | 20 | 0 | 74% |
 | `composite.c` | 100 | 86 | 64 | 22 | 0 | 74% |
 | `effect.c` | 100 | 89 | 67 | 22 | 0 | 75% |
+| `string.c` | 100 | 69 | 52 | 17 | 5 | 75% |
 | `distort.c` | 100 | 68 | 52 | 16 | 0 | 76% |
+| `color.c` | 100 | 70 | 54 | 16 | 2 | 77% |
 | `fx.c` | 100 | 71 | 55 | 16 | 0 | 77% |
 | `quantize.c` | 100 | 85 | 67 | 18 | 0 | 79% |
 | `morphology.c` | 100 | 81 | 65 | 16 | 7 | 80% |
-| `color.c` | 100 | 73 | 59 | 14 | 0 | 81% |
-| `image.c` | 100 | 80 | 65 | 15 | 0 | 81% |
-| `option.c` | 100 | 76 | 62 | 14 | 1 | 82% |
+| `quantum-export.c` | 100 | 32 | 26 | 6 | 2 | 81% |
+| `quantum-import.c` | 100 | 38 | 31 | 7 | 2 | 82% |
 | `visual-effects.c` | 100 | 86 | 71 | 15 | 0 | 83% |
-| `string.c` | 100 | 70 | 58 | 12 | 0 | 83% |
 | `threshold.c` | 100 | 87 | 74 | 13 | 0 | 85% |
-| `quantum-export.c` | 100 | 34 | 29 | 5 | 1 | 85% |
-| `blob.c` | 100 | 55 | 47 | 8 | 2 | 85% |
 | `compare.c` | 100 | 84 | 72 | 12 | 0 | 86% |
 | `pixel.c` | 100 | 35 | 30 | 5 | 0 | 86% |
 | `enhance.c` | 100 | 78 | 67 | 11 | 0 | 86% |
-| `quantum-import.c` | 100 | 40 | 35 | 5 | 0 | 88% |
 | `statistic.c` | 100 | 97 | 86 | 11 | 0 | 89% |
-| `property.c` | 100 | 61 | 56 | 5 | 1 | 92% |
 | `colorspace.c` | 100 | 90 | 83 | 7 | 0 | 92% |
-| `cache.c` | 100 | 71 | 66 | 5 | 2 | 93% |
 
 "Reached" means the mutant is on a line some case executes. Capped survivors
-were rerun uncapped (`composite.c`) or with a 1,500-case cap (the rest); 15
-remain capped.
+were rerun uncapped (`composite.c`) or with a 1,500-case cap (the rest); 88
+remain capped, nearly all in the infrastructure files.
 
 ### What sweep 1 says
 
@@ -248,7 +244,7 @@ remain capped.
   import/export for pixel layouts the catalogue never asks for (index+alpha,
   gray+alpha, opacity, multispectral, and `ExportQuantumPixel`'s storage types).
 - **Where the oracle does execute a line, it usually notices a change.**
-  Every file but `profile.c` kills 74–93% of mutants on executed lines. `resize.c` was at 83%
+  The image-processing files kill 74-92% of mutants on executed lines. `resize.c` was at 83%
   before its targeted rounds (round 1: 615 killed, 127 survivors on executed
   lines).
 - **`composite.c` needed an uncapped run to settle.** It looked like the best
@@ -258,13 +254,21 @@ remain capped.
   the 47 were killed beyond the cap. The 22 real survivors are mostly exact
   breakpoints in blend formulas (`RoundToUnity(Sca) <= 0.5`, `Dca > 0.25`)
   and dissolve and geometry boundaries.
-- **The infrastructure files were never weak; the cap made them look so.**
-  With 300 cases per mutant, `cache.c`, `blob.c`, `image.c` and `option.c`
-  scored 65–76%. With 1,500, proven killers first, 48 of the 134 capped
-  survivors died, and those files now score 81–93%. The functions they hold
-  (`ReadBlob`, `GetImagePixelCache`, `ParseCommandOption`) are reached by
-  nearly every case, and the killing case is some specific one among
-  thousands.
+- **The infrastructure files are the weak spot.** `blob.c` (56%),
+  `property.c` (61%), `cache.c` and `image.c` (65%) and `option.c` (71%) are,
+  after `profile.c`, the least protected code the oracle reaches. The oracle
+  checks what commands output, and these files mostly decide *how* the work
+  is done: memory, memory-mapped or disk pixel caches, reading through files,
+  pipes, memory blobs or compressed streams, filename syntax (`img.png[2]`,
+  `png:-`, `@list`), settings and properties. With small corpus images read
+  from plain files, a mutant in the other paths changes nothing visible.
+  Cases aimed at those paths - a forced disk cache (`-limit memory 0`),
+  stdin and stdout, `.gz` input, frame and list syntax, more `-define` and
+  `%[...]` escapes - are the way to raise them, and they are cheap.
+- **The cap hides fewer kills than it seemed.** Raising it to 1,500 cases
+  appeared to kill a third of the capped survivors; most of those kills were
+  the flaky case. `composite.c`, rerun with no cap at all, is the clean
+  measurement: 30 of its 47 capped survivors were real kills beyond the cap.
 
 ### Kinds of survivors
 
@@ -278,15 +282,15 @@ tools/oracle/classify.py build-oracle/work/mutation-sweep25-final.json --kind un
 
 | Kind | Survivors | Of which capped | Meaning |
 | --- | ---: | ---: | --- |
-| unreached | 393 | 145 | no case executes the line: needs a new input |
-| logging | 21 | 7 | only changes `-debug` output |
-| progress | 9 | 2 | only changes `-monitor` callbacks |
-| free-guard | 10 | 6 | `NULL` test before a free: a leak, never visible in output |
-| channel-bound | 12 | 0 | per-channel loop one step past the end, over padding |
-| loop-bound | 47 | 6 | a loop runs once more or once less, usually over scratch space |
+| unreached | 436 | 188 | no case executes the line: needs a new input |
+| logging | 27 | 11 | only changes `-debug` output |
+| progress | 9 | 0 | only changes `-monitor` callbacks |
+| free-guard | 9 | 5 | `NULL` test before a free: a leak, never visible in output |
+| channel-bound | 10 | 0 | per-channel loop one step past the end, over padding |
+| loop-bound | 49 | 6 | a loop runs once more or once less, usually over scratch space |
 | memory-size | 9 | 3 | allocation or copy size: invisible while the buffer is big enough |
-| threads-resources | 2 | 2 | thread counts and resource limits |
-| **unmatched** | **289** | **108** | read by hand: equivalent, or a gap in the catalogue |
+| threads-resources | 3 | 2 | thread counts and resource limits |
+| **unmatched** | **283** | **61** | read by hand: equivalent, or a gap in the catalogue |
 
 In sweep 2 (final), the same kinds covered 128 of 650 survivors (51 logging,
 24 threads and resources, 29 loop bounds, 16 free guards, 8 others), 222
@@ -357,7 +361,7 @@ A second build covered every other MagickCore file the oracle build compiles
 2.8 hours rerunning the 266 capped survivors with a 1,500-case cap, which
 killed 42 of them. Results: `build-oracle/work/mutation-sweep60-final.json`.
 
-**Overall: 894 killed (43.4%), 67.6% on executed lines.** The files fall into
+**Overall: 893 killed (43.3%), 67.5% on executed lines.** The files fall into
 three groups:
 
 | Group | Mutants | Reached | Killed, executed lines |
@@ -420,11 +424,11 @@ three groups:
 | `quantum.c` | 40 | 36 | 25 | 11 | 9 | 69% |
 | `gem.c` | 40 | 40 | 28 | 12 | 0 | 70% |
 | `prepress.c` | 17 | 17 | 12 | 5 | 0 | 71% |
+| `memory.c` | 40 | 24 | 17 | 7 | 7 | 71% |
 | `utility.c` | 40 | 11 | 8 | 3 | 3 | 73% |
 | `attribute.c` | 40 | 30 | 22 | 8 | 1 | 73% |
 | `paint.c` | 40 | 34 | 25 | 9 | 0 | 74% |
 | `configure.c` | 40 | 8 | 6 | 2 | 2 | 75% |
-| `memory.c` | 40 | 24 | 18 | 6 | 6 | 75% |
 | `montage.c` | 40 | 36 | 27 | 9 | 0 | 75% |
 | `transform.c` | 40 | 31 | 24 | 7 | 0 | 77% |
 | `histogram.c` | 40 | 36 | 28 | 8 | 0 | 78% |
@@ -450,16 +454,19 @@ three groups:
   mandatory rather than advised. File-level scores are only a rough guide:
   every file has well-tested and untested functions side by side.
 - The best measured protection, 85% or more on executed lines with high
-  reach: `colorspace.c`, `statistic.c`, `enhance.c`, `threshold.c`,
-  `compare.c`, `cache.c`, `property.c`'s reached code, and `resize.c` (88%).
-  From sweep 2: `decorate.c` (93%), `segment.c` (90%), `fourier.c`,
-  `colormap.c` and `shear.c` (80–82%). The image-processing ones among these
-  are the safest starting points; `cache.c` is well protected but is the
-  pixel cache under everything, a poor place to learn the process.
-- The middle, 74–83%: `draw.c`, `stream.c`, `composite.c`, `effect.c`,
-  `distort.c`, `fx.c`, `quantize.c`, `morphology.c`, `color.c`, `image.c`,
-  `option.c`, `visual-effects.c`, `string.c`. Fine to refactor after the
-  per-function check and, where survivors point at a gap, a case or two.
+  reach: `colorspace.c` (92%), `statistic.c` (89%), `enhance.c`,
+  `compare.c`, `pixel.c`'s reached code, `threshold.c` (85-86%), and
+  `resize.c` (88%). From sweep 2: `decorate.c` (93%), `segment.c` (90%),
+  `colormap.c`, `shear.c` and `fourier.c`'s one compiled function (80-89%).
+  These are the safest starting points.
+- The middle, 74-83%: `visual-effects.c`, `quantum-import.c`,
+  `quantum-export.c`, `morphology.c`, `quantize.c`, `fx.c`, `color.c`,
+  `distort.c`, `string.c`, `effect.c`, `composite.c`, `stream.c`, `draw.c`.
+  Fine to refactor after the per-function check and, where survivors point
+  at a gap, a case or two.
+- The infrastructure files - `blob.c`, `property.c`, `cache.c`, `image.c`,
+  `option.c` - wait for cases aimed at their paths. They are also the files
+  every other file depends on, so a mistake there costs the most.
 - Do not refactor `profile.c` until the corpus has images with EXIF, 8BIM,
   IPTC and XMP profiles, nor the seven hardly exercised files of sweep 2
   until they have cases.
