@@ -4165,6 +4165,82 @@ static void ExportScaleScanline(const Image *image,Image *scale_image,
 }
 
 /*
+  Scale one scanline in the X direction, from scanline into scale_scanline.
+*/
+static void ScaleScanlineX(const Image *image,const Image *scale_image,
+  const double *scanline,double *scale_scanline)
+{
+  double
+    pixel[CompositePixelChannel];
+
+  MagickBooleanType
+    next_column;
+
+  PointInfo
+    scale,
+    span;
+
+  ssize_t
+    i,
+    t,
+    x;
+
+  for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    pixel[i]=0.0;
+  next_column=MagickFalse;
+  span.x=1.0;
+  t=0;
+  for (x=0; x < (ssize_t) image->columns; x++)
+  {
+    scale.x=(double) scale_image->columns/(double) image->columns;
+    while (scale.x >= span.x)
+    {
+      if (next_column != MagickFalse)
+        {
+          for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+            pixel[i]=0.0;
+          t++;
+        }
+      for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+      {
+        PixelChannel channel = GetPixelChannelChannel(image,i);
+        PixelTrait traits = GetPixelChannelTraits(image,channel);
+        if (traits == UndefinedPixelTrait)
+          continue;
+        pixel[i]+=span.x*scanline[x*(ssize_t) GetPixelChannels(image)+i];
+        scale_scanline[t*(ssize_t) GetPixelChannels(image)+i]=pixel[i];
+      }
+      scale.x-=span.x;
+      span.x=1.0;
+      next_column=MagickTrue;
+    }
+    if (scale.x > 0)
+      {
+        if (next_column != MagickFalse)
+          {
+            for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+              pixel[i]=0.0;
+            next_column=MagickFalse;
+            t++;
+          }
+        for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+          pixel[i]+=scale.x*scanline[x*(ssize_t)
+            GetPixelChannels(image)+i];
+        span.x-=scale.x;
+      }
+  }
+  if (span.x > 0)
+    {
+      for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+        pixel[i]+=span.x*
+          scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];
+    }
+  if ((next_column == MagickFalse) && (t < (ssize_t) scale_image->columns))
+    for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+      scale_scanline[t*(ssize_t) GetPixelChannels(image)+i]=pixel[i];
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -4214,7 +4290,6 @@ MagickExport Image *ScaleImage(const Image *image,const size_t columns,
     *scale_image;
 
   MagickBooleanType
-    next_column,
     next_row,
     proceed,
     status;
@@ -4399,65 +4474,10 @@ MagickExport Image *ScaleImage(const Image *image,const size_t columns,
       }
     else
       {
-        ssize_t
-          t;
-
         /*
           Scale X direction.
         */
-        for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-          pixel[i]=0.0;
-        next_column=MagickFalse;
-        span.x=1.0;
-        t=0;
-        for (x=0; x < (ssize_t) image->columns; x++)
-        {
-          scale.x=(double) scale_image->columns/(double) image->columns;
-          while (scale.x >= span.x)
-          {
-            if (next_column != MagickFalse)
-              {
-                for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-                  pixel[i]=0.0;
-                t++;
-              }
-            for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-            {
-              PixelChannel channel = GetPixelChannelChannel(image,i);
-              PixelTrait traits = GetPixelChannelTraits(image,channel);
-              if (traits == UndefinedPixelTrait)
-                continue;
-              pixel[i]+=span.x*scanline[x*(ssize_t) GetPixelChannels(image)+i];
-              scale_scanline[t*(ssize_t) GetPixelChannels(image)+i]=pixel[i];
-            }
-            scale.x-=span.x;
-            span.x=1.0;
-            next_column=MagickTrue;
-          }
-          if (scale.x > 0)
-            {
-              if (next_column != MagickFalse)
-                {
-                  for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-                    pixel[i]=0.0;
-                  next_column=MagickFalse;
-                  t++;
-                }
-              for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-                pixel[i]+=scale.x*scanline[x*(ssize_t)
-                  GetPixelChannels(image)+i];
-              span.x-=scale.x;
-            }
-        }
-      if (span.x > 0)
-        {
-          for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-            pixel[i]+=span.x*
-              scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];
-        }
-      if ((next_column == MagickFalse) && (t < (ssize_t) scale_image->columns))
-        for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-          scale_scanline[t*(ssize_t) GetPixelChannels(image)+i]=pixel[i];
+        ScaleScanlineX(image,scale_image,scanline,scale_scanline);
       /*
         Transfer scanline to scaled image.
       */
