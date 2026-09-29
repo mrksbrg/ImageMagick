@@ -201,6 +201,8 @@ def main():
     p.add_argument("--limit", type=int, help="random sample of this many mutants")
     p.add_argument("--ids", help="file listing mutant ids to run, one per line (e.g. to recheck survivors)")
     p.add_argument("--per-file", type=int, help="random sample of this many mutants per file")
+    p.add_argument("--cases", help="only cases whose id matches this regex, e.g. '^infra/' to "
+                   "ask whether new cases kill what the old ones missed")
     p.add_argument("--max-cases", type=int, default=300,
                    help="cases tried per mutant, spread over case families (0: all)")
     p.add_argument("--seed", type=int, default=1)
@@ -242,6 +244,9 @@ def main():
     # casemap.json and llvm-cov spell names the same way (`resize.c:Triangle`
     # for statics), so an exact lookup cannot confuse two files' statics.
     relevant = {m["function"]: fmap.get(m["function"], []) for m in mutants if m["function"]}
+    if args.cases:
+        keep = re.compile(args.cases)
+        relevant = {f: [i for i in ids if keep.search(i)] for f, ids in relevant.items()}
     print("mutate: %d mutants in %s, %d functions" % (len(mutants), args.file, len(relevant)))
 
     # Baseline: the same binary with no mutant switched on.
