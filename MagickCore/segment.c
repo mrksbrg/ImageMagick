@@ -1527,6 +1527,90 @@ static void FreeNodes(IntervalTree *node)
   node=(IntervalTree *) RelinquishMagickMemory(node);
 }
 
+/*
+  Force each scale's first and last crossings to the interval ends.
+*/
+static void ForceCrossingEndpoints(ZeroCrossing *zero_crossing,
+  const size_t number_crossings)
+{
+  ssize_t
+    i,
+    j;
+
+  for (i=0; i <= (ssize_t) number_crossings; i++)
+  {
+    for (j=0; j < 255; j++)
+      if (zero_crossing[i].crossings[j] != 0)
+        break;
+    zero_crossing[i].crossings[0]=(-zero_crossing[i].crossings[j]);
+    for (j=255; j > 0; j--)
+      if (zero_crossing[i].crossings[j] != 0)
+        break;
+    zero_crossing[i].crossings[255]=(-zero_crossing[i].crossings[j]);
+  }
+}
+
+/*
+  Mark the extremum of one active node's interval in extrema: the peak or
+  valley of the histogram at the node's tau.
+*/
+static void MarkNodeExtrema(const ZeroCrossing *zero_crossing,
+  const size_t number_crossings,const IntervalTree *node,short *extrema)
+{
+  double
+    value;
+
+  MagickBooleanType
+    peak;
+
+  ssize_t
+    index,
+    j,
+    k,
+    x;
+
+  /*
+    Find this tau in zero crossings list.
+  */
+  k=0;
+  for (j=0; j <= (ssize_t) number_crossings; j++)
+    if (zero_crossing[j].tau == node->tau)
+      k=j;
+  /*
+    Find the value of the peak.
+  */
+  peak=zero_crossing[k].crossings[node->right] == -1 ? MagickTrue :
+    MagickFalse;
+  index=node->left;
+  value=zero_crossing[k].histogram[index];
+  for (x=node->left; x <= node->right; x++)
+  {
+    if (peak != MagickFalse)
+      {
+        if (zero_crossing[k].histogram[x] > value)
+          {
+            value=zero_crossing[k].histogram[x];
+            index=x;
+          }
+      }
+    else
+      if (zero_crossing[k].histogram[x] < value)
+        {
+          value=zero_crossing[k].histogram[x];
+          index=x;
+        }
+  }
+  for (x=node->left; x <= node->right; x++)
+  {
+    if (index == 0)
+      index=256;
+    if (peak != MagickFalse)
+      extrema[x]=(short) index;
+    else
+      extrema[x]=(short) (-index);
+  }
+}
+
 static double OptimalTau(const ssize_t *histogram,const double max_tau,
   const double min_tau,const double delta_tau,const double smooth_threshold,
   short *extrema)
@@ -1535,29 +1619,21 @@ static double OptimalTau(const ssize_t *histogram,const double max_tau,
     average_tau,
     *derivative,
     *second_derivative,
-    tau,
-    value;
+    tau;
 
   IntervalTree
     **list,
-    *node,
     *root;
 
-  MagickBooleanType
-    peak;
-
   ssize_t
-    i,
-    x;
+    i;
 
   size_t
     count,
     number_crossings;
 
   ssize_t
-    index,
     j,
-    k,
     number_nodes;
 
   ZeroCrossing
@@ -1620,17 +1696,7 @@ static double OptimalTau(const ssize_t *histogram,const double max_tau,
   /*
     Force endpoints to be included in the interval.
   */
-  for (i=0; i <= (ssize_t) number_crossings; i++)
-  {
-    for (j=0; j < 255; j++)
-      if (zero_crossing[i].crossings[j] != 0)
-        break;
-    zero_crossing[i].crossings[0]=(-zero_crossing[i].crossings[j]);
-    for (j=255; j > 0; j--)
-      if (zero_crossing[i].crossings[j] != 0)
-        break;
-    zero_crossing[i].crossings[255]=(-zero_crossing[i].crossings[j]);
-  }
+  ForceCrossingEndpoints(zero_crossing,number_crossings);
   /*
     Initialize interval tree.
   */
@@ -1654,47 +1720,7 @@ static double OptimalTau(const ssize_t *histogram,const double max_tau,
     extrema[i]=0;
   for (i=0; i < number_nodes; i++)
   {
-    /*
-      Find this tau in zero crossings list.
-    */
-    k=0;
-    node=list[i];
-    for (j=0; j <= (ssize_t) number_crossings; j++)
-      if (zero_crossing[j].tau == node->tau)
-        k=j;
-    /*
-      Find the value of the peak.
-    */
-    peak=zero_crossing[k].crossings[node->right] == -1 ? MagickTrue :
-      MagickFalse;
-    index=node->left;
-    value=zero_crossing[k].histogram[index];
-    for (x=node->left; x <= node->right; x++)
-    {
-      if (peak != MagickFalse)
-        {
-          if (zero_crossing[k].histogram[x] > value)
-            {
-              value=zero_crossing[k].histogram[x];
-              index=x;
-            }
-        }
-      else
-        if (zero_crossing[k].histogram[x] < value)
-          {
-            value=zero_crossing[k].histogram[x];
-            index=x;
-          }
-    }
-    for (x=node->left; x <= node->right; x++)
-    {
-      if (index == 0)
-        index=256;
-      if (peak != MagickFalse)
-        extrema[x]=(short) index;
-      else
-        extrema[x]=(short) (-index);
-    }
+    MarkNodeExtrema(zero_crossing,number_crossings,list[i],extrema);
   }
   /*
     Determine the average tau.
