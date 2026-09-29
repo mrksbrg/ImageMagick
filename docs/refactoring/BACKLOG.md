@@ -10,6 +10,12 @@ by Code Health. Scores are the committed baseline
   from 40-100 sampled mutants, so treat differences of a few points as noise, and run the
   function's own mutants before refactoring anything near the line.
 
+**Progress, 2026-09-30:** 40 refactoring commits on eight files, 0 divergences across
+the whole catalogue. Current scores are in the Status column and in
+[`codehealth-current.json`](codehealth-current.json); the Code Health column keeps the
+baseline. Where each file stands, and why some functions stop, is in the playbook's
+*Known plateaus*.
+
 How the groups were drawn:
 
 | Group | Rule |
@@ -73,16 +79,16 @@ needs before refactoring:
 
 | Code Health | File | Lines | Mutants reached | Killed, executed lines | Status |
 | ---: | --- | ---: | ---: | ---: | --- |
-| 1.39 | `MagickCore/resize.c` | 4704 | 97% | 88% | open, [M01](tasks/M01-resize.md) |
+| 1.39 | `MagickCore/resize.c` | 4704 | 97% | 88% | in progress, 1.59 ([M01](tasks/M01-resize.md)) |
 | 1.46 | `MagickCore/compare.c` | 4987 | 88% | 86% | open, [M02](tasks/M02-compare.md) |
-| 1.53 | `MagickCore/enhance.c` | 4596 | 78% | 86% | open, [M03](tasks/M03-enhance.md) |
-| 1.53 | `MagickCore/morphology.c` | 4764 | 81% | 80% | open, [M04](tasks/M04-morphology.md) |
-| 1.55 | `MagickCore/visual-effects.c` | 3789 | 86% | 83% | open, [M05](tasks/M05-visual-effects.md) |
+| 1.53 | `MagickCore/enhance.c` | 4596 | 78% | 86% | in progress, 2.12 ([M03](tasks/M03-enhance.md)) |
+| 1.53 | `MagickCore/morphology.c` | 4764 | 81% | 80% | in progress, 1.63 ([M04](tasks/M04-morphology.md)) |
+| 1.55 | `MagickCore/visual-effects.c` | 3789 | 86% | 83% | in progress, 1.75 ([M05](tasks/M05-visual-effects.md)) |
 | 1.73 | `MagickCore/geometry.c` | 1831 | 65% | 85% | open |
-| 1.89 | `MagickCore/threshold.c` | 2648 | 87% | 85% | open, [M08](tasks/M08-threshold.md) |
-| 1.92 | `MagickCore/statistic.c` | 3158 | 97% | 89% | open, [M07](tasks/M07-statistic.md) |
+| 1.89 | `MagickCore/threshold.c` | 2648 | 87% | 85% | in progress, 2.06 ([M08](tasks/M08-threshold.md)) |
+| 1.92 | `MagickCore/statistic.c` | 3158 | 97% | 89% | in progress, 2.14 ([M07](tasks/M07-statistic.md)) |
 | 2.16 | `MagickCore/identify.c` | 1705 | 68% | 85% | open |
-| 2.30 | `MagickCore/segment.c` | 1934 | 79% | 86% | open, [M10](tasks/M10-segment.md) |
+| 2.30 | `MagickCore/segment.c` | 1934 | 79% | 86% | in progress, 3.00 ([M10](tasks/M10-segment.md)) |
 | 2.57 | `MagickCore/colorspace.c` | 2899 | 90% | 92% | open, [M06](tasks/M06-colorspace.md) |
 | 3.08 | `MagickCore/fourier.c` | 1626 | 92% | 86% | waits for FFTW (Linux) |
 | 3.28 | `MagickCore/channel.c` | 1394 | 65% | 81% | open |
@@ -106,7 +112,7 @@ needs before refactoring:
 | 1.74 | `MagickCore/distort.c` | 3466 | 68% | 76% | open |
 | 1.82 | `MagickCore/quantize.c` | 4150 | 85% | 79% | open |
 | 1.99 | `MagickCore/transform.c` | 2599 | 78% | 77% | open |
-| 2.05 | `MagickCore/shear.c` | 1830 | 82% | 80% | open, [M09](tasks/M09-shear.md) |
+| 2.05 | `MagickCore/shear.c` | 1830 | 82% | 80% | in progress, 2.90 ([M09](tasks/M09-shear.md)) |
 | 2.25 | `MagickCore/color.c` | 2792 | 70% | 77% | open |
 | 2.45 | `MagickCore/stream.c` | 2832 | 78% | 74% | open |
 | 2.58 | `MagickCore/attribute.c` | 2444 | 75% | 73% | open |

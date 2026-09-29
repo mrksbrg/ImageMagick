@@ -43,6 +43,28 @@ The debt is concentrated in MagickCore: more than half its files are Red, and it
 score 1.02-1.14 (`display.c`, `pixel.c`, `xwindow.c`, `fx.c`). For comparison, 3SX
 started with 19 Red files out of 482.
 
+### Where it stands (2026-09-30)
+
+The first refactoring night: 40 commits, each one recipe on one function, each checked
+by the build, the literal and call guards, the oracle on every case reaching the
+function, and the CodeScene pre-commit gate. A full oracle run over all 9,751 cases
+afterwards: 0 diverged.
+
+| File | Baseline | Now |
+| --- | ---: | ---: |
+| `MagickCore/shear.c` | 2.05 | 2.90 |
+| `MagickCore/segment.c` | 2.30 | 3.00 |
+| `MagickCore/enhance.c` | 1.53 | 2.12 |
+| `MagickCore/statistic.c` | 1.92 | 2.14 |
+| `MagickCore/resize.c` | 1.39 | 1.59 |
+| `MagickCore/visual-effects.c` | 1.55 | 1.75 |
+| `MagickCore/threshold.c` | 1.89 | 2.06 |
+| `MagickCore/morphology.c` | 1.53 | 1.63 |
+
+No file has left the Red band yet. What moved the scores was removing Brain Methods,
+ten of them; what stops them is recorded in the playbook's *Known plateaus*,
+including a proposed change to the OpenMP rule that would unlock the largest functions.
+
 ---
 
 ## The central risk

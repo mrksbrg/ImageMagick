@@ -410,9 +410,77 @@ report the case, with the review before and after, and the project owner decides
 
 ## Known plateaus
 
-None recorded yet. When a file stops improving and no recipe in this catalogue applies,
-record it here: the file, its score, the smells left, and which 3SX recipe might reach
-them.
+Recorded during the first refactoring night (2026-09-29/30). Each is a function no recipe
+in this catalogue reaches without breaking one of its rules; the note says what might.
+
+| File | Function | What blocks it | What might reach it |
+| --- | --- | --- | --- |
+| `resize.c` | `HorizontalFilter`, `VerticalFilter` (Brain Methods) | every inner block reads about ten loop variables: a helper would take 6-11 arguments and trade one smell for another | Recipe A (parameter object) on the helper, once extracted |
+| `resize.c` | `InterpolativeResizeImage` (Brain Method) | its pixel loop assigns the shared `status`, which the OpenMP rule forbids moving | the OpenMP amendment proposed below |
+| `resize.c` | `MagnifyImage` | its method `switch` sets three outputs | 3SX Recipe L (lookup table) |
+| `resize.c` | `ScaleImage` (Y direction) | the block updates span, scale, the row state and the status | none known |
+| `morphology.c` | `MorphologyPrimitive` (Brain Method) | its method arms are dense nested loops: extracting them moved the nesting into helpers, and the file score fell (1.63 -> 1.59); the change was reverted | 3SX Recipe M (decision table), or none |
+| `morphology.c` | `MorphologyApply` (Brain Method) | a staged state machine whose loops update several shared image variables | none known |
+| `threshold.c` | `AdaptiveThresholdImage` (Brain Method) | running sums updated across the window loops; helpers would take 7-9 arguments | Recipe A after extraction |
+| `statistic.c` | `StatisticImage` (Brain Method) | the per-channel statistic is extracted; what remains needs about nine arguments | Recipe A after extraction |
+| `colorspace.c` | `sRGBTransformImage`, `TransformsRGBImage` (cc 142, 151) | each `switch` arm contains its own parallel region, and moving an arm moves its pragma | the OpenMP amendment proposed below, then Recipe X |
+| `segment.c` | `Classify` (Brain Method) | the cluster passes update the cluster list and several counters | none known |
+
+Functions no case reaches are not plateaus but gaps: `ColorDecisionListImage`
+(enhance.c), `PolaroidImage` (visual-effects.c) and `GetImageDynamicThreshold`
+(segment.c) have no oracle case at all, and must not be changed until they have one.
+
+### What worked
+
+- **The Brain Method pattern.** In this codebase a Brain Method is typically a
+  colormap branch plus an OpenMP pixel loop whose inner block applies a per-channel
+  formula. Extracting the colormap loop and the per-pixel channel loop (the latter
+  writes only through `q` and loop-body locals, so the OpenMP rule holds) removed the
+  Brain Method from `LevelImage`, `LevelizeImage`, `SigmoidalContrastImage`,
+  `RangeThresholdImage`, `FunctionImage`, `XShearImage`, `YShearImage`, `SketchImage`,
+  `MorphologyImage` and `OptimalTau`. Each removal moved the file score by 0.09-0.44;
+  ordinary extractions elsewhere in a file mostly did not move it at all.
+- **Deduplicating the campaign's own helpers.** Extracting mirror-image functions
+  (`XShearImage`/`YShearImage`) produced near-identical helpers; merging them with
+  Recipe D afterwards removed the duplication finding (`shear.c` 2.49 -> 2.90).
+
+### Practical points
+
+- **Put a helper directly before the function it came from**, not before the
+  function's comment banner: ImageMagick often defines static helpers (`url_encode`,
+  the `Modulate*` family) between the banner and the function, and a helper placed
+  above them fails to compile.
+- **Macros defined inside a function** (`LevelizeValue`, `ScaledSig`, `Colorize`) are
+  file-scope from their `#define` onwards; the preprocessor ignores function scope.
+  To extract code that expands one, move the `#define` above the helper and give the
+  helper parameters of the names the macro reads. Say so in the commit.
+- **CodeScene's start line** for a function often includes the comment block above it
+  (it reported `AcquireImageColormap` at line 40, not 105). Use the compiler's view of
+  where a function starts; `tools/make_task.py` does.
+- **A score can fall when two extractions resemble each other.** Extracting
+  `ContrastStretchImage`'s histogram pass made it resemble `EqualizeImage`'s, and the
+  duplication finding cost more than the complexity saved (1.61 -> 1.60); leaving
+  that block in place gave 1.65. The pre-commit gate is what catches this.
+- `refactor_guard.py --calls` fails on a renamed function until the rename is declared
+  (`--renamed OLD=NEW`); that is legal only for a file-local static, and in practice
+  only for a helper this campaign created.
+
+### Proposed amendment: moving a complete parallel region (needs the owner's decision)
+
+The OpenMP rule forbids moving a `#pragma omp` line, even together with the whole loop
+it governs. That blocks the two largest functions in MagickCore (`colorspace.c`, cc 142
+and 151), whose `switch` arms each hold a complete parallel region, and several Brain
+Methods. A narrower rule would still guarantee that nothing a thread shares changes:
+
+> A complete parallel region - the pragma, its clauses unchanged, and the loop it
+> governs - may be moved into a `static` helper, provided every variable named in its
+> clauses (`shared`, `private`, `reduction`, ...) is either declared inside the helper
+> or passed to it by pointer exactly as the region used it, and the helper returns any
+> value the region left in a caller variable (typically `status`).
+
+Not applied. The oracle cannot check threading, so this rule's safety rests on reading
+alone; an OpenMP-enabled build with `-fsanitize=thread` on the moved functions would be
+the check to add first.
 
 ---
 
