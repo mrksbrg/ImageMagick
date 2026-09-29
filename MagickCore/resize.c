@@ -618,7 +618,8 @@ static double Welch(const double x,
 /*
   The Gaussian sigma, from "filter:sigma" or half a pixel.
 */
-static void SetGaussianFilterSigma(const Image *image,ResizeFilter *resize_filter)
+static void SetGaussianFilterSigma(const Image *image,
+  ResizeFilter *resize_filter)
 {
   const char
     *artifact;
@@ -692,7 +693,8 @@ static void ApplyFilterLobes(const Image *image,ResizeFilter *resize_filter)
   The expert blur, support and window-support overrides, and the window
   scaling that follows from them.
 */
-static void ApplyFilterBlurAndSupport(const Image *image,ResizeFilter *resize_filter)
+static void ApplyFilterBlurAndSupport(const Image *image,
+  ResizeFilter *resize_filter)
 {
   const char
     *artifact;
@@ -4654,8 +4656,9 @@ MagickExport Image *ScaleImage(const Image *image,const size_t columns,
 
 static inline MagickBooleanType IsUnreservedURIChar(const char *uri)
 {
-  return(((('a' <= *uri) && (*uri <= 'z')) || (('A' <= *uri) && (*uri <= 'Z')) ||
-    (('0' <= *uri) && (*uri <= '9')) || (strchr("/-_.~",*uri) != 0)) ?
+  return(((('a' <= *uri) && (*uri <= 'z')) ||
+    (('A' <= *uri) && (*uri <= 'Z')) || (('0' <= *uri) && (*uri <= '9')) ||
+    (strchr("/-_.~",*uri) != 0)) ?
     MagickTrue : MagickFalse);
 }
 
