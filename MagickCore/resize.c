@@ -3320,6 +3320,28 @@ MagickExport Image *ResampleImage(const Image *image,const double x_resolution,
 }
 
 /*
+  A resize to the image's own size with no filter requested is a copy.
+*/
+static inline MagickBooleanType IsUnchangedResize(const Image *image,
+  const size_t columns,const size_t rows,const FilterType filter)
+{
+  return(((columns == image->columns) && (rows == image->rows) &&
+    (filter == UndefinedFilter)) ? MagickTrue : MagickFalse);
+}
+
+/*
+  Without a requested filter, palette images, images with alpha, and
+  enlargements default to the Mitchell filter.
+*/
+static inline MagickBooleanType IsMitchellPreferred(const Image *image,
+  const double x_factor,const double y_factor)
+{
+  return(((image->storage_class == PseudoClass) ||
+    (image->alpha_trait != UndefinedPixelTrait) ||
+    ((x_factor*y_factor) > 1.0)) ? MagickTrue : MagickFalse);
+}
+
+/*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
 %                                                                             %
@@ -3874,8 +3896,7 @@ MagickExport Image *ResizeImage(const Image *image,const size_t columns,
     (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",image->filename);
   if ((columns == 0) || (rows == 0))
     ThrowImageException(ImageError,"NegativeOrZeroImageSize");
-  if ((columns == image->columns) && (rows == image->rows) &&
-      (filter == UndefinedFilter))
+  if (IsUnchangedResize(image,columns,rows,filter) != MagickFalse)
     return(CloneImage(image,0,0,MagickTrue,exception));
   /*
     Acquire resize filter.
@@ -3889,9 +3910,7 @@ MagickExport Image *ResizeImage(const Image *image,const size_t columns,
     if ((x_factor == 1.0) && (y_factor == 1.0))
       filter_type=PointFilter;
     else
-      if ((image->storage_class == PseudoClass) ||
-          (image->alpha_trait != UndefinedPixelTrait) ||
-          ((x_factor*y_factor) > 1.0))
+      if (IsMitchellPreferred(image,x_factor,y_factor) != MagickFalse)
         filter_type=MitchellFilter;
   resize_filter=AcquireResizeFilter(image,filter_type,MagickFalse,exception);
 #if defined(MAGICKCORE_OPENCL_SUPPORT)
