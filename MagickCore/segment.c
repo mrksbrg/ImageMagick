@@ -1369,13 +1369,74 @@ static void Stability(IntervalTree *node)
   Stability(node->child);
 }
 
+/*
+  Split one interval node at the crossings of the next scale, as children
+  and siblings. Returns MagickFalse if a node cannot be allocated; the
+  caller then frees the tree.
+*/
+static MagickBooleanType SplitIntervalNode(IntervalTree *head,
+  const ZeroCrossing *zero_crossing,const ssize_t i)
+{
+  IntervalTree
+    *node;
+
+  ssize_t
+    k,
+    left;
+
+  left=head->left;
+  node=head;
+  for (k=head->left+1; k < head->right; k++)
+  {
+    if (zero_crossing[i+1].crossings[k] != 0)
+      {
+        if (node == head)
+          {
+            node->child=(IntervalTree *) AcquireQuantumMemory(1,
+              sizeof(*node->child));
+            node=node->child;
+          }
+        else
+          {
+            node->sibling=(IntervalTree *) AcquireQuantumMemory(1,
+              sizeof(*node->sibling));
+            node=node->sibling;
+          }
+        if (node == (IntervalTree *) NULL)
+          {
+            return(MagickFalse);
+          }
+        node->tau=zero_crossing[i+1].tau;
+        node->child=(IntervalTree *) NULL;
+        node->sibling=(IntervalTree *) NULL;
+        node->left=left;
+        node->right=k;
+        left=k;
+      }
+    }
+  if (left != head->left)
+    {
+      node->sibling=(IntervalTree *) AcquireQuantumMemory(1,
+        sizeof(*node->sibling));
+      node=node->sibling;
+      if (node == (IntervalTree *) NULL)
+        {
+          return(MagickFalse);
+        }
+      node->tau=zero_crossing[i+1].tau;
+      node->child=(IntervalTree *) NULL;
+      node->sibling=(IntervalTree *) NULL;
+      node->left=left;
+      node->right=head->right;
+    }
+  return(MagickTrue);
+}
+
 static IntervalTree *InitializeIntervalTree(const ZeroCrossing *zero_crossing,
   const size_t number_crossings)
 {
   IntervalTree
-    *head,
     **list,
-    *node,
     *root;
 
   ssize_t
@@ -1383,8 +1444,6 @@ static IntervalTree *InitializeIntervalTree(const ZeroCrossing *zero_crossing,
 
   ssize_t
     j,
-    k,
-    left,
     number_nodes;
 
   /*
@@ -1418,55 +1477,11 @@ static IntervalTree *InitializeIntervalTree(const ZeroCrossing *zero_crossing,
     */
     for (j=0; j < number_nodes; j++)
     {
-      head=list[j];
-      left=head->left;
-      node=head;
-      for (k=head->left+1; k < head->right; k++)
-      {
-        if (zero_crossing[i+1].crossings[k] != 0)
-          {
-            if (node == head)
-              {
-                node->child=(IntervalTree *) AcquireQuantumMemory(1,
-                  sizeof(*node->child));
-                node=node->child;
-              }
-            else
-              {
-                node->sibling=(IntervalTree *) AcquireQuantumMemory(1,
-                  sizeof(*node->sibling));
-                node=node->sibling;
-              }
-            if (node == (IntervalTree *) NULL)
-              {
-                list=(IntervalTree **) RelinquishMagickMemory(list);
-                FreeNodes(root);
-                return((IntervalTree *) NULL);
-              }
-            node->tau=zero_crossing[i+1].tau;
-            node->child=(IntervalTree *) NULL;
-            node->sibling=(IntervalTree *) NULL;
-            node->left=left;
-            node->right=k;
-            left=k;
-          }
-        }
-      if (left != head->left)
+      if (SplitIntervalNode(list[j],zero_crossing,i) == MagickFalse)
         {
-          node->sibling=(IntervalTree *) AcquireQuantumMemory(1,
-            sizeof(*node->sibling));
-          node=node->sibling;
-          if (node == (IntervalTree *) NULL)
-            {
-              list=(IntervalTree **) RelinquishMagickMemory(list);
-              FreeNodes(root);
-              return((IntervalTree *) NULL);
-            }
-          node->tau=zero_crossing[i+1].tau;
-          node->child=(IntervalTree *) NULL;
-          node->sibling=(IntervalTree *) NULL;
-          node->left=left;
-          node->right=head->right;
+          list=(IntervalTree **) RelinquishMagickMemory(list);
+          FreeNodes(root);
+          return((IntervalTree *) NULL);
         }
     }
   }
