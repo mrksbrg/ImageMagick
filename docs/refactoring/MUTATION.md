@@ -516,6 +516,64 @@ three groups:
   `mutate.py --function NAME --max-cases 0`. A single function is reached by
   far fewer cases than the whole file.
 
+## Linux (WSL2): the first full runs
+
+Everything above was measured on the MacBook. The campaign now runs on a Windows desktop,
+in WSL2 Ubuntu 24.04 with clang 18 and Mull 0.34.1 for LLVM 18 (see
+[`PORTING.md`](PORTING.md)). No Mac figure transfers: more delegates compile, and the
+libraries, fonts and compiler differ. Measured 2026-09-30, `selfcheck --repeat 4`: 9,745
+cases, 0 nondeterministic.
+
+One Mull build mutates `colorspace.c` and `morphology.c` (`build.sh mull
+'MagickCore/(colorspace|morphology)\.c$' phase1b`). Every mutant ran, not a sample; then
+every capped survivor was rerun against all the cases that reach it (`--max-cases 0`).
+
+| File | Mutants | Killed | Survived | of which capped | No coverage | Uncapped rerun |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `colorspace.c` | 550 | 393 | 156 | 145 | 1 | killed 46 more; **439 killed (80%)**, 110 real survivors |
+| `morphology.c` | 1,258 | 823 | 405 | 321 | 30 | in progress (168 of 321 rerun so far) |
+
+A full run took 8.5 minutes for `colorspace.c` and about 45 for `morphology.c` on 16
+threads; the uncapped reruns take longer per mutant, since a function in these files is
+reached by thousands of cases. On this machine (16 GB, WSL given half) mutation runs use
+`-j 8`: at 16 jobs Windows ran short of memory and the run was stopped twice. Results
+are saved as they arrive, so a stopped run resumes where it was.
+
+### colorspace.c through the readiness gate
+
+The gate is the one in [`VERIFICATION.md`](VERIFICATION.md): killed / (killed + unmatched
++ unreached survivors), leaving out only the kinds `classify.py` names as unobservable.
+Survivors on lines no case executes count as gaps, not as excused.
+
+| Function | Mutants | Killed | Unobservable | Unmatched | Unreached | Gate | Verdict |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `TransformsRGBImage` | 232 | 176 | 4 | 18 | 34 | 77% | careful |
+| `sRGBTransformImage` | 214 | 176 | 3 | 8 | 27 | 83% | careful |
+| `ConvertHSLToRGB` | 41 | 40 | 0 | 1 | 0 | 98% | ready |
+| `ConvertRGBToHSL` | 26 | 23 | 0 | 3 | 0 | 88% | careful |
+| `SetImageColorspace` | 7 | 6 | 1 | 0 | 0 | 100% | ready |
+| `TransformImageColorspace` | 7 | 6 | 1 | 0 | 0 | 100% | ready |
+| `SetImageGray` | 6 | 5 | 1 | 0 | 0 | 100% | ready |
+| `SetImageMonochrome` | 5 | 4 | 1 | 0 | 0 | 100% | ready |
+| `RoundToYCC` | 5 | 3 | 0 | 2 | 0 | 60% | not ready |
+| `ConvertGenericToRGB` | 3 | 0 | 0 | 0 | 3 | 0% | not ready |
+| `ConvertRGBToGeneric` | 3 | 0 | 0 | 0 | 3 | 0% | not ready |
+| `GetImageColorspaceType` | 1 | 0 | 0 | 0 | 0 | - | no cases |
+| **All** | 550 | 439 | 11 | 32 | 67 | **82%** | |
+
+**The gap the two big functions share.** Most of their unreached survivors sit in the
+`PseudoClass` branch: colorspace conversion of a palette image. The catalogue converts
+colorspaces only on truecolor images, although the corpus already holds `palette.miff`.
+That branch accounts for 31 of the 61 unreached survivors of `TransformsRGBImage` and
+`sRGBTransformImage`; `palette.miff -colorspace <X>` cases should lift both towards
+ready. The rest: an invalid `colorspace:illuminant` define (`illuminant_type < 0`), error
+paths after a failed `SyncImage`, and `LogColorspace`, whose own parameters account for
+10 unmatched survivors. Not yet added.
+
+The merge-and-gate script used here is not in git yet: `build-oracle/irq/gate.py` on the
+WSL clone. Reports: `build-oracle/work/mutation-full-*.json`, `mutation-uncap-*.json`,
+and the gated results `gate-colorspace.json`.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
