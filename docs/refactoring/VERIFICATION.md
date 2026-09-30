@@ -74,6 +74,36 @@ guard cannot see. A mismatch proves nothing either way (inlining can be declined
 out differently), and the commit falls back to guard-only. Not in the 3SX playbook: it is
 proposed here as an addition.
 
+**Prototype, measured on the 42 file changes in `night1-refactoring` (2026-09-30).** Each
+file is compiled before and after with the oracle build's own flags, at `-O2 -g0`, with
+`-D__LINE__=0` and at the same path: ImageMagick's exception macros embed `__LINE__` and
+`__FILE__`, so without that every function below an edit differs. Functions are compared
+structurally: values are identified by what computes them rather than by their numbers,
+side-effect-free instructions form a set within their block, and calls, loads and stores
+keep their order.
+
+| Result | File changes |
+| --- | ---: |
+| identical after optimisation, every function in the file | **18** of 42 |
+| differs | 24 |
+
+Why the others differ, in the cases read with `llvm-diff`: an extraction moved a local
+variable with an initialiser into the helper (`ThumbnailImage`'s 12 KB `encode_uri`,
+now set up only on the path that uses it), a deduplicated helper is not inlined because
+it has two callers (the shear and `ModulateImage` commits), or the merged control flow
+has a different shape (`SigmoidalContrastImage` has four more `phi` nodes). These are
+behaviour-preserving, but not identical code, and the check proves only identity.
+
+**Does it catch mistakes?** Typical slips planted in the lines each identical commit
+added (`<` to `<=`, `>` to `>=`, two arguments swapped): all 16 that change behaviour
+were reported as differing, including all 5 argument swaps, which the guard cannot see.
+The one plant reported identical was `if (lobes < 1) lobes=1;` with `<=`, an equivalent
+mutant, which the compiler rightly reduces to the same code.
+
+So the comparison can carry about 40% of extractions to a proof stronger than the oracle's,
+and says nothing about the rest. The prototype scripts are in `build-oracle/irq/` on the
+WSL clone (not in git); making them a tool is part of step 3.
+
 ---
 
 ## The readiness gate, per function
@@ -130,7 +160,7 @@ The share of each group over all 441 functions is not measured yet (step 2).
 | --- | --- | --- |
 | 1 | Write the three levels and the readiness gate into `PLAYBOOK.md` and `AGENTS.md`; extend the backlog with a verification-level column | open |
 | 2 | Classify all 441 never-called functions into the groups above; list the cases to add for the first group, ordered by the code each would reach | open |
-| 3 | Prototype the machine-code comparison on the 41 refactorings in `night1-refactoring`; report how often it matches | open |
+| 3 | Prototype the machine-code comparison on the refactorings in `night1-refactoring`; report how often it matches | prototype done: 18 of 42 identical, 16 of 16 planted slips caught (above). Next: a tool in `tools/`, run by `verify_step.sh` |
 | 4 | Run `oracle.py` on Windows, base against candidate as `magick.exe` builds, so that `nt-base.c` becomes oracle-verified | open |
 | 5 | Add `wide` (and `win`) to `build.sh`, so the compile checks are one command like the others; find what `deprecate.c` needs | open |
 | 6 | OpenCL at runtime: `pocl` 5.0 (Ubuntu 24.04) aborts compiling ImageMagick's kernels (`Assertion 'region_entry_barrier != NULL' failed`); try a newer `pocl`. If it works and `selfcheck` is clean, `accelerate.c` can be oracle-verified | open |
