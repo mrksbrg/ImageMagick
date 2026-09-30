@@ -128,6 +128,20 @@ git checkout -- <file>
 python3 tools/oracle/oracle.py run              # the whole catalogue, ~2 minutes warm
 ```
 
+## CodeScene
+
+Code Health is measured with CodeScene, through its MCP server (`cs-mcp`) where the
+harness has one, or through `tools/ch.py`, which talks to the same server. Do not use the
+`cs` command-line tool for measurement.
+
+- After changing code, run `code_health_review` (or `tools/ch.py --review`) on each changed
+  file. If Code Health drops, fix the issues, review again, and confirm the result with
+  `code_health_score`.
+- Before finishing, run `pre_commit_code_health_safeguard` (or
+  `tools/codescene_precommit.py`), and stop only when it passes.
+- This applies to the campaign's own tools in `tools/` as well as to ImageMagick's
+  sources. For ImageMagick, the playbook's rules still decide which changes are allowed.
+
 ## Commits
 
 - One recipe, one function, one commit.
