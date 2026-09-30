@@ -899,6 +899,28 @@ ignores its alpha arguments; `-colorize` never applies its alpha percentage (cha
 are indexed by offset). `SteganoImage` wraps its position at `columns*columns`, not
 `columns*rows`.
 
+### resize.c, after the pilot
+
+The pilot's three rounds left 149 survivors in `resize.c`. Rerun against today's catalogue
+(10,050 cases; capped survivors against up to 1,500 cases), one more is killed and 69
+remain unmatched; all 69 are read now. The gate is 94% before and after (`gate.py`, today's
+verdicts applied to both): 842 of 985 killed, 42 functions ready, 5 careful
+(`AcquireResizeFilter` 87%, `SampleImage` 84%, `InterpolativeResizeImage` 88%,
+`BesselOrderOne` 89%, `SincFast` 83%), 2 not ready (`ThumbnailImage` 74%, `Fish2X` 73%).
+
+- **37 equivalent**, most of them the piecewise kernels' breakpoints, as the pilot
+  found; also Jinc's negative-argument branches (it only ever passes x >= 0) and a Gaussian
+  coefficient the source marks as unused.
+- **6 gaps, now closed:** `filter:window=Undefined`, a Gaussian `filter:sigma` above 0.5,
+  `filter:b` without `filter:c`, and `-resample` without `-density`. The last is odd:
+  `magick rose: -density 72 -resample 144` reports 72 dpi, because the `-density` setting
+  is re-applied after `-resample` and overwrites the resolution `ResampleImage` sets.
+- **24 unresolved**, and these are where to look before refactoring the two not-ready
+  functions: the write-mask tests of `ScaleImage`/`SampleImage` (their output is the same
+  for every write mask tried, so the per-pixel mask values do not seem to reach it),
+  `ScaleImage`'s row and span bookkeeping, `ThumbnailImage`'s sampling shortcut for
+  reduction factors above 2 and 4, and ties in `fish2x`.
+
 ### Cases that test nothing
 
 `tools/oracle/deadcases.py` runs the catalogue on the base build and groups the cases

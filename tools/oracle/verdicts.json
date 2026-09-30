@@ -5521,6 +5521,702 @@
    "verdict": "gap",
    "why": "`magick -perceptible` fails (missing from the option table), and the convert cases used epsilon 0.1 in quantum units, which changes almost nothing; a palette with epsilon 30000 reaches the colormap",
    "killed_by": "convert {C}/rose_alpha.miff -colors 16 -channel RGBA -perceptible 30000 -define quantum:format=floating-point -depth 32"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 2.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.0)",
+   "at": 6,
+   "nth": 1,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 2.0)",
+   "at": 6,
+   "nth": 1,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 3.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.0)",
+   "at": 6,
+   "nth": 2,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 2.0)",
+   "at": 6,
+   "nth": 2,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 3.0)",
+   "at": 6,
+   "nth": 1,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicSpline",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 4.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Lagrange",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (x > resize_filter->support)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a Lagrange basis polynomial is 0 at its last node, so x == support gives 0 either way"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2013",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 0.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2013",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2013",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 2.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2021",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 0.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2021",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2021",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 2.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2021",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 3.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "MagicKernelSharp2021",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 4.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Quadratic",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 0.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Quadratic",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.5)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Triangle",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Welch",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 1.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "BesselOrderOne",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 0.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "x == 0 has already returned"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "BesselOrderOne",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 8.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "differs only at pi*x == 8 exactly, which no sample (every 0.01) or pixel distance hits"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "BesselOrderOne",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (p < 0.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a branch for negative arguments; Jinc calls BesselOrderOne(pi*x) with x >= 0 only"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "InterpolativeResizeImage",
+   "mutator": "cxx_eq_to_ne",
+   "src": "if (status == MagickFalse)",
+   "at": 11,
+   "nth": 1,
+   "verdict": "unresolved",
+   "why": "an error-status test after InterpolativeResize's row loop"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Hq2XPatternToNumber",
+   "mutator": "cxx_mul_to_div",
+   "src": "result+=order*(unsigned int) pattern[i];",
+   "at": 13,
+   "nth": 0,
+   "verdict": "unobservable",
+   "why": "order/pattern equals order*pattern for pattern 1, and for pattern 0 the division by zero yields 0 on arm64 (x86 traps, so Linux should kill it)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Fish2X",
+   "mutator": "cxx_gt_to_ge",
+   "src": "CopyPixels(pixels,(ssize_t) (intensities[0] > intensities[1] ? 0 : 1),result,",
+   "at": 44,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a tie between two equal intensities in fish2x; not killed by two tie-rich patterns"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Fish2X",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (ae && (!bd || intensities[1] > intensities[0]))",
+   "at": 33,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a tie between two equal intensities in fish2x; not killed by two tie-rich patterns"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "Fish2X",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (bd && (!ae || intensities[0] > intensities[1]))",
+   "at": 33,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a tie between two equal intensities in fish2x; not killed by two tie-rich patterns"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ResampleImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (resample_image != (Image *) NULL)",
+   "at": 19,
+   "nth": 0,
+   "verdict": "gap",
+   "why": "every -resample case also sets -density, which overwrites the resolution ResampleImage sets",
+   "killed_by": "{C}/rose.miff -resample 144 -define quantum:format=floating-point -depth 32"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "SampleImage",
+   "mutator": "cxx_le_to_lt",
+   "src": "if (GetPixelWriteMask(sample_image,q) <= (QuantumRange/2))",
+   "at": 38,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a write-mask test: -scale/-sample output is the same for every write mask tried (50%, black, gradient), so the per-pixel mask values do not seem to reach it; not killed"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_le_to_lt",
+   "src": "if (GetPixelWriteMask(image,p) <= (QuantumRange/2))",
+   "at": 31,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a write-mask test: -scale/-sample output is the same for every write mask tried (50%, black, gradient), so the per-pixel mask values do not seem to reach it; not killed"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "(number_rows < (ssize_t) image->rows))",
+   "at": 13,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the source-row bookkeeping of ScaleImage; not killed by 8 scalings with red and black virtual pixels"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_le_to_lt",
+   "src": "if (GetPixelWriteMask(image,p) <= (QuantumRange/2))",
+   "at": 31,
+   "nth": 1,
+   "verdict": "unresolved",
+   "why": "a write-mask test: -scale/-sample output is the same for every write mask tried (50%, black, gradient), so the per-pixel mask values do not seem to reach it; not killed"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "src": "number_rows++;",
+   "at": 11,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the source-row bookkeeping of ScaleImage; not killed by 8 scalings with red and black virtual pixels"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if ((next_row != MagickFalse) && (number_rows < (ssize_t) image->rows))",
+   "at": 46,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the source-row bookkeeping of ScaleImage; not killed by 8 scalings with red and black virtual pixels"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_le_to_lt",
+   "src": "if (GetPixelWriteMask(image,p) <= (QuantumRange/2))",
+   "at": 31,
+   "nth": 2,
+   "verdict": "unresolved",
+   "why": "a write-mask test: -scale/-sample output is the same for every write mask tried (50%, black, gradient), so the per-pixel mask values do not seem to reach it; not killed"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "src": "number_rows++;",
+   "at": 11,
+   "nth": 1,
+   "verdict": "unresolved",
+   "why": "the source-row bookkeeping of ScaleImage; not killed by 8 scalings with red and black virtual pixels"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_le_to_lt",
+   "src": "if (GetPixelWriteMask(scale_image,q) <= (QuantumRange/2))",
+   "at": 37,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a write-mask test: -scale/-sample output is the same for every write mask tried (50%, black, gradient), so the per-pixel mask values do not seem to reach it; not killed"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (span.x > 0)",
+   "at": 11,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "at span 0 the term added is 0"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_gt_to_le",
+   "src": "if (span.x > 0)",
+   "at": 11,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the remainder of a column span; not killed by 8 scalings, perhaps because the remainder is never positive here"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_sub_to_add",
+   "src": "scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];",
+   "at": 11,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the remainder of a column span; not killed by 8 scalings, perhaps because the remainder is never positive here"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the remainder of a column span; not killed by 8 scalings, perhaps because the remainder is never positive here"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_add_to_sub",
+   "src": "scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];",
+   "at": 48,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the remainder of a column span; not killed by 8 scalings, perhaps because the remainder is never positive here"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if ((next_column == MagickFalse) && (t < (ssize_t) scale_image->columns))",
+   "at": 39,
+   "nth": 0,
+   "verdict": "unobservable",
+   "why": "writes one pixel past the end of the scanline buffer, into padding; ASan would see it"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ScaleImage",
+   "mutator": "cxx_le_to_lt",
+   "src": "if (GetPixelWriteMask(scale_image,q) <= (QuantumRange/2))",
+   "at": 37,
+   "nth": 1,
+   "verdict": "unresolved",
+   "why": "a write-mask test: -scale/-sample output is the same for every write mask tried (50%, black, gradient), so the per-pixel mask values do not seem to reach it; not killed"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ThumbnailImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double)",
+   "at": 34,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "thumbnail's sampling shortcut for large reduction factors; not killed with factors of exactly 2, 4 and 8"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ThumbnailImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if ((x_factor > 4) && (y_factor > 4))",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "thumbnail's sampling shortcut for large reduction factors; not killed with factors of exactly 2, 4 and 8"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ThumbnailImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if ((x_factor > 4) && (y_factor > 4))",
+   "at": 32,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "thumbnail's sampling shortcut for large reduction factors; not killed with factors of exactly 2, 4 and 8"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ThumbnailImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if ((x_factor > 2) && (y_factor > 2))",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "thumbnail's sampling shortcut for large reduction factors; not killed with factors of exactly 2, 4 and 8"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "ThumbnailImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (mime_type != (const char *) NULL)",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "Thumb::Mimetype is set only for images with a mime:type property, which no reader tried here sets"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "CubicBC",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (x < 2.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a breakpoint of a continuous piecewise kernel: both pieces give 0 at x == 2"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "SincFast",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (x > 4.0)",
+   "at": 6,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "at x == 4 the exact and the approximated sinc both give 0"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_lt_to_le",
+   "src": "if ((UndefinedFilter < option) && (option < SentinelFilter))",
+   "at": 21,
+   "nth": 2,
+   "verdict": "gap",
+   "why": "no case sets filter:window=Undefined",
+   "killed_by": "{C}/rose.miff -define filter:window=Undefined -define filter:verbose=1 -resize 50%"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_lt_to_le",
+   "src": "if ((UndefinedFilter < option) && (option < SentinelFilter))",
+   "at": 42,
+   "nth": 2,
+   "verdict": "equivalent",
+   "why": "ParseCommandOption never returns SentinelFilter"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_mul_to_div",
+   "src": "resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);",
+   "at": 60,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "coefficient[2] is never read (the source says so)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_mul_to_div",
+   "src": "resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);",
+   "at": 66,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "coefficient[2] is never read (the source says so)"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if ( value > 0.5 )",
+   "at": 11,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "at sigma 0.5 the support is multiplied by 1"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_gt_to_le",
+   "src": "if ( value > 0.5 )",
+   "at": 11,
+   "nth": 0,
+   "verdict": "gap",
+   "why": "no case sets a Gaussian sigma other than the default 0.5",
+   "killed_by": "{C}/rose.miff -filter Gaussian -define filter:sigma=0.8 -define filter:verbose=1 -resize 50%"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (lobes < 1)",
+   "at": 10,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (resize_filter->support > 16)",
+   "at": 27,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "at support 16 both branches pick jinc_zeros[15]"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_sub_to_add",
+   "src": "C=(1.0-B)/2.0; /* Calculate C to get a Keys cubic filter. */",
+   "at": 6,
+   "nth": 0,
+   "verdict": "gap",
+   "why": "no case sets filter:b without filter:c",
+   "killed_by": "{C}/rose.miff -filter Cubic -define filter:b=0.3 -define filter:verbose=1 -resize 50%"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_div_to_mul",
+   "src": "C=(1.0-B)/2.0; /* Calculate C to get a Keys cubic filter. */",
+   "at": 9,
+   "nth": 0,
+   "verdict": "gap",
+   "why": "no case sets filter:b without filter:c",
+   "killed_by": "{C}/rose.miff -filter Cubic -define filter:b=0.3 -define filter:verbose=1 -resize 50%"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "AcquireResizeFilter",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (artifact != (const char *) NULL)",
+   "at": 13,
+   "nth": 11,
+   "verdict": "gap",
+   "why": "no case sets filter:b without filter:c",
+   "killed_by": "{C}/rose.miff -filter Cubic -define filter:b=0.3 -define filter:verbose=1 -resize 50%"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "HorizontalFilter",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (support < 0.5)",
+   "at": 12,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "VerticalFilter",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (support < 0.5)",
+   "at": 12,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "VerticalFilter",
+   "mutator": "cxx_sub_to_add",
+   "src": "image->columns,(size_t) (contribution[n-1].pixel-contribution[0].pixel+1),",
+   "at": 48,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "requests two more source rows than the contributions use; the extra rows are never read"
+  },
+  {
+   "file": "MagickCore/resize.c",
+   "function": "VerticalFilter",
+   "mutator": "cxx_mul_to_div",
+   "src": "alpha=contribution[j].weight*QuantumScale*(double)",
+   "at": 28,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the alpha-weighted branch of VerticalFilter; not killed by resizing rose_alpha three ways"
   }
  ]
 }

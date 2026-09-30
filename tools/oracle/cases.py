@@ -1324,6 +1324,14 @@ GAP_COMMANDS += [
     "{C}/rose.miff -size 70x46 -read-mask xc:gray(50%) -precision 17 -verbose -write info:",
     "{C}/rose.miff -size 70x46 -write-mask xc:gray(50%) -statistic Median 3",
 ]
+# resize.c: -resample without -density (the setting overwrites the resolution
+# ResampleImage sets), and filter defines no case set
+GAP_COMMANDS += [
+    "{C}/rose.miff -resample 144",
+    "{C}/rose.miff -define filter:window=Undefined -define filter:verbose=1 -resize 50%",
+    "{C}/rose.miff -filter Gaussian -define filter:sigma=0.8 -define filter:verbose=1 -resize 50%",
+    "{C}/rose.miff -filter Cubic -define filter:b=0.3 -define filter:verbose=1 -resize 50%",
+]
 # compare.c: every metric with a read mask of exactly QuantumRange/2 on one image
 # only (the utility masks both, and the test ORs the two masks)
 GAP_COMMANDS += [
