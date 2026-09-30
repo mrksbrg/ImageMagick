@@ -7,11 +7,19 @@
 #   tools/oracle/build.sh mull <regex> [name]
 #                                          candidate with Mull mutants in matching
 #                                          files, in build-oracle/mull-<name>
+#   tools/oracle/build.sh wide             candidate with X11 and OpenCL as well:
+#                                          a compile check for display.c,
+#                                          xwindow.c, widget.c, animate.c,
+#                                          accelerate.c and opencl.c
+#   tools/oracle/build.sh win              on Windows, from MSYS2 UCRT64: gcc,
+#                                          compiles nt-base.c, nt-feature.c and
+#                                          the Windows branches (needs a checkout
+#                                          with LF line endings)
 #
-# Every flavour uses the same configure flags (apart from coverage
-# instrumentation), so any difference in output comes from the source and not
-# from the build. Prints the path of the built binary on the last line of
-# stdout.
+# The oracle flavours (base, cand, cov, mull) use the same configure flags
+# (apart from coverage instrumentation), so any difference in output comes
+# from the source and not from the build. Prints the path of the built binary
+# on the last line of stdout.
 #
 # Builds live under build-oracle/, which .git/info/exclude keeps out of git.
 # A baseline is built once per commit and then reused; the candidate build is
@@ -40,16 +48,20 @@ OPT_CFLAGS="-O2 -g"
 LINK_FLAGS=""
 [ "$(uname)" = Linux ] && LINK_FLAGS="-fopenmp=libgomp"
 
-configure_and_make() {  # <srcdir> <builddir> <extra cflags>
+CC_NAME=clang CXX_NAME=clang++ EXE=""
+
+configure_and_make() {  # <srcdir> <builddir> <extra cflags> [configure flags...]
   local src=$1 bld=$2 extra=$3
+  shift 3
   mkdir -p "$bld"
   if [ ! -f "$bld/Makefile" ]; then
-    (cd "$bld" && CC=clang CXX=clang++ \
+    # Later flags win, so the extra ones can override CONFIG_FLAGS.
+    (cd "$bld" && CC=$CC_NAME CXX=$CXX_NAME \
        CFLAGS="$OPT_CFLAGS $extra" CXXFLAGS="$OPT_CFLAGS $extra" LDFLAGS="$LINK_FLAGS $extra" \
-       "$src/configure" "${CONFIG_FLAGS[@]}" > configure.log 2>&1) \
+       "$src/configure" "${CONFIG_FLAGS[@]}" "$@" > configure.log 2>&1) \
       || { echo "configure failed, see $bld/configure.log" >&2; exit 1; }
   fi
-  make -C "$bld" -j"$JOBS" utilities/magick > "$bld/make.log" 2>&1 \
+  make -C "$bld" -j"$JOBS" "utilities/magick$EXE" > "$bld/make.log" 2>&1 \
     || { tail -30 "$bld/make.log" >&2; echo "build failed, see $bld/make.log" >&2; exit 1; }
 }
 
@@ -113,8 +125,27 @@ case "${1:-}" in
       || { tail -30 "$bld/make.log" >&2; echo "build failed, see $bld/make.log" >&2; exit 1; }
     echo "$bld/utilities/magick"
     ;;
+  wide)
+    # Not an oracle build: no case reaches X11 code without an X server, and
+    # OpenCL aborts inside pocl 5.0 (docs/refactoring/VERIFICATION.md).
+    configure_and_make "$ROOT" "$OUT/wide" "" --with-x --enable-opencl
+    echo "$OUT/wide/utilities/magick"
+    ;;
+  win)
+    case "$(uname)" in
+      MINGW*|MSYS*) ;;
+      *) echo "build.sh win runs on Windows, in an MSYS2 UCRT64 shell" >&2; exit 1 ;;
+    esac
+    if head -1 "$ROOT/configure" | grep -q $'\r'; then
+      echo "configure has CRLF line endings: use a clone made with core.autocrlf=false" >&2
+      exit 1
+    fi
+    CC_NAME=gcc CXX_NAME=g++ EXE=.exe
+    configure_and_make "$ROOT" "$OUT/win" "" --without-modules
+    echo "$OUT/win/utilities/magick.exe"
+    ;;
   *)
-    sed -n '2,17p' "$0" >&2
+    sed -n '2,27p' "$0" >&2
     exit 2
     ;;
 esac

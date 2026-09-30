@@ -661,6 +661,52 @@ kinds the gate leaves out. That reclassified 18 survivors in `morphology.c` and 
 catalogue now has 9,867 cases. Survivors in the angle comparisons of `RotateKernelInfo`
 (`angle <= 22.5`, `135.0 < angle`, ...) remain counted: an exact angle is testable.
 
+## Linux sweep: every compiled MagickCore file
+
+One Mull build of all MagickCore files (`build.sh mull 'MagickCore/[^/]+\.c$' sweep-linux`,
+built with `JOBS=4`: at 12 jobs the compiler ran out of memory on `composite.c`), then
+60 random mutants per file (`mutate.py --per-file 60 --seed 1`, default cap of 300 cases,
+`-j 8`): 4,506 mutants in 79 minutes, on the catalogue of 9,867 cases. Run from a
+terminal outside Claude Code, whose background jobs were stopped three times when Windows
+ran short of memory. Report: `build-oracle/work/mutation-sweep-linux.json`.
+
+| MagickCore, 4,506 sampled mutants | |
+| --- | ---: |
+| killed, of all mutants | **70.0%** |
+| killed, of mutants on executed lines | **88.9%** |
+| reach: mutants in functions some case executes | 85% |
+| gate over the reached functions (`gate.py`) | **85.7%** |
+| strict: the gate with never-executed functions counted as gaps | **72.2%** |
+| survivors that hit the case cap, not yet rerun | 190 |
+
+The Mac sweeps killed 53% (sweep 1) and 43% (sweep 2) of all mutants and 77% and 68% on
+executed lines; the difference is the grown catalogue (the infra cases, the 122 cases of
+the two rounds above) as much as the platform, so the two are not a like-for-like
+comparison. With 60 mutants a file, a file's figure is good to about ten points either
+way: `morphology.c` shows 95% here and 81% in its full run.
+
+Files by the strict figure (reach and gate folded together):
+
+- **Not reached at all:** `display.c`, `xwindow.c`, `animate.c` (X11, which the oracle
+  build leaves out), `distribute-cache.c` (a network server), `module.c` (static build).
+- **Below 50%:** `cache-view.c` 10%, `version.c` 15%, `profile.c` 20%, `mime.c` 32%,
+  `blob.c` 36%, `compress.c` 37%, `quantum-import.c` 37%, `delegate.c` 39%, `color.c` 39%,
+  `linked-list.c` 42%, `log.c` 42%, `constitute.c` 45%, `annotate.c` 47%. In
+  `compress.c`, `linked-list.c` and `log.c` what is reached is well checked (gate 96-100%)
+  but much is never executed; in `blob.c`, `constitute.c`, `delegate.c` and
+  `quantum-import.c` the reverse: reached, and weakly checked.
+- **50-75%:** `composite.c`, `cache.c`, `pixel.c`, `configure.c`, `splay-tree.c`,
+  `utility.c`, `channel.c`, `quantum-export.c`, `token.c`, `matrix.c`, `vision.c`,
+  `string.c`, `attribute.c`, `layer.c`, `type.c`, `cipher.c`, `artifact.c`, `stream.c`,
+  `compare.c`, `policy.c`, `static.c`.
+- **75% and above:** the other 51 files, most of the image operations among them:
+  `effect.c`, `resize.c`, `decorate.c`, `statistic.c`, `morphology.c`, `feature.c`,
+  `colormap.c`, `threshold.c`, `transform.c`, `identify.c` and `gem.c` at 90% or more.
+
+The capped survivors cluster in the infrastructure files (`composite.c` 31, `constitute.c`
+30, `blob.c` 20, `color.c` 19, `cache.c` and `channel.c` 18): rerun those uncapped before
+reading them as gaps.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
