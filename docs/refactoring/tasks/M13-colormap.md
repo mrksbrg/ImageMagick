@@ -37,7 +37,7 @@ The score must read 8.88. If it does not, this file changed after the task was w
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | 1 | `CycleColormapImage` | 188 | 11 | - | 2 | public | 1 | 12 | 14 of 15 |
 | 2 | `SortColormapByIntensity` | 299 | 13 | - | - | public | 1 | 1 | 15 of 18 |
-| 3 | `AcquireImageColormap` | 105 | - | - | - | public | - | 2424 | 12 of 12 |
+| 3 | `AcquireImageColormap` | 105 | - | - | - | public | - | 2434 | 12 of 12 |
 
 Thresholds for C: cyclomatic complexity under 9, nesting depth under 4. **Cases** is how many oracle cases execute the function; **Mutants killed** counts the sampled mutants on lines the oracle executes. A function with no cases cannot be checked and is listed last: skip it and report it.
 
@@ -53,7 +53,7 @@ Work **one function at a time, in the order above**, and run the verification in
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 1 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/colormap.c): simplify CycleColormapImage`
 
@@ -63,7 +63,7 @@ Commit message: `refactor(MagickCore/colormap.c): simplify CycleColormapImage`
 - Contains 1 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - Only 1 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
-- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/colormap.c): simplify SortColormapByIntensity`
 

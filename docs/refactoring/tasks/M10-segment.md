@@ -40,14 +40,14 @@ The score must read 2.30. If it does not, this file changed after the task was w
 
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
-| 1 | `ConsolidateCrossings` | 703 | 28 | 5 | 7 | static | - | 26 | 52 of 59 |
-| 2 | `Classify` | 246 | - | 5 | 11 | static | 3 | 26 | 102 of 112 |
-| 3 | `OptimalTau` | 1509 | - | 4 | 5 | static | - | 26 | 34 of 55 |
-| 4 | `InitializeIntervalTree` | 1343 | 10 | 5 | 2 | static | - | 26 | 18 of 19 |
-| 5 | `ZeroCrossHistogram` | 1897 | 9 | - | 3 | static | - | 26 | 19 of 19 |
-| 6 | `DefineRegion` | 820 | - | - | 2 | static | - | 26 | 11 of 13 |
-| 7 | `ScaleSpace` | 1718 | - | - | 2 | static | - | 26 | 18 of 22 |
-| 8 | `SegmentImage` | 1796 | 10 | - | - | public | - | 26 | 10 of 12 |
+| 1 | `ConsolidateCrossings` | 703 | 28 | 5 | 7 | static | - | 29 | 52 of 59 |
+| 2 | `Classify` | 246 | - | 5 | 11 | static | 3 | 29 | 105 of 112 |
+| 3 | `OptimalTau` | 1509 | - | 4 | 5 | static | - | 29 | 34 of 55 |
+| 4 | `InitializeIntervalTree` | 1343 | 10 | 5 | 2 | static | - | 29 | 18 of 19 |
+| 5 | `ZeroCrossHistogram` | 1897 | 9 | - | 3 | static | - | 29 | 19 of 19 |
+| 6 | `DefineRegion` | 820 | - | - | 2 | static | - | 29 | 11 of 13 |
+| 7 | `ScaleSpace` | 1718 | - | - | 2 | static | - | 29 | 18 of 22 |
+| 8 | `SegmentImage` | 1796 | 10 | - | - | public | - | 29 | 10 of 12 |
 | 9 | `GetImageDynamicThreshold` | 933 | - | 4 | 8 | public | - | 0 | - |
 
 Thresholds for C: cyclomatic complexity under 9, nesting depth under 4. **Cases** is how many oracle cases execute the function; **Mutants killed** counts the sampled mutants on lines the oracle executes. A function with no cases cannot be checked and is listed last: skip it and report it.
@@ -63,12 +63,7 @@ Work **one function at a time, in the order above**, and run the verification in
 - **Recipe G (guard clauses)** - nesting is 5, target is under 4.
 - **Recipe E (extract function)** - 7 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- The oracle missed 4 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 747, `lt_to_le`: `if (k < 0)`
-  - base line 758, `post_inc_to_post_dec`: `count++;`
-  - base line 770, `post_inc_to_post_dec`: `count++;`
-  - base line 782, `post_inc_to_post_dec`: `count++;`
-- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 7 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify ConsolidateCrossings`
 
@@ -79,14 +74,10 @@ Commit message: `refactor(MagickCore/segment.c): simplify ConsolidateCrossings`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - **Recipe A (parameter object)** - 6 arguments; the function is `static`, so check that its address is never taken.
 - Contains 3 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
-- The oracle missed 6 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 402, `post_inc_to_post_dec`: `count++;`
-  - base line 435, `gt_to_ge`: `if ((cluster->count > 0) &&`
-  - base line 436, `ge_to_gt`: `(cluster->count >= (count*cluster_threshold/100.0)))`
-  - base line 436, `mul_to_div`: `(cluster->count >= (count*cluster_threshold/100.0)))`
+- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
   - base line 512, `gt_to_ge`: `if (number_clusters > 256)`
   - base line 629, `div_to_mul`: `ratio=numerator/distance_squared;`
-- 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 5 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify Classify`
 
@@ -95,15 +86,11 @@ Commit message: `refactor(MagickCore/segment.c): simplify Classify`
 - **Recipe G (guard clauses)** - nesting is 4, target is under 4.
 - **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
 - **Recipe A (parameter object)** - 6 arguments; the function is `static`, so check that its address is never taken.
-- The oracle missed 15 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 1555, `sub_to_add`: `count=(size_t) ((max_tau-min_tau)/delta_tau)+2;`
-  - base line 1555, `div_to_mul`: `count=(size_t) ((max_tau-min_tau)/delta_tau)+2;`
-  - base line 1555, `add_to_sub`: `count=(size_t) ((max_tau-min_tau)/delta_tau)+2;`
-  - base line 1563, `lt_to_ge`: `for (i=0; i < (ssize_t) count; i++)`
+- The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
   - base line 1604, `lt_to_ge`: `for (j=0; j < 255; j++)`
-  - base line 1604, `post_inc_to_post_dec`: `for (j=0; j < 255; j++)`
-  - and 9 more (`tools/oracle/mutate.py --function OptimalTau`)
-- 6 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+  - base line 1605, `ne_to_eq`: `if (zero_crossing[i].crossings[j] != 0)`
+  - base line 1607, `minus_to_noop`: `zero_crossing[i].crossings[0]=(-zero_crossing[i].crossings[j]);`
+- 18 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify OptimalTau`
 
@@ -112,7 +99,7 @@ Commit message: `refactor(MagickCore/segment.c): simplify OptimalTau`
 - **Recipe G (guard clauses)** - nesting is 5, target is under 4.
 - **Recipe E (extract function)** - 2 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify InitializeIntervalTree`
 
@@ -128,19 +115,16 @@ Commit message: `refactor(MagickCore/segment.c): simplify ZeroCrossHistogram`
 #### Step 6: `DefineRegion` (line 820)
 
 - **Recipe E (extract function)** - 2 nested blocks; each bump is a missing function.
-- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
+- The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
   - base line 834, `gt_to_ge`: `if (extents->index > 255)`
-  - base line 841, `lt_to_le`: `if (extrema[extents->index] < 0)`
+- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify DefineRegion`
 
 #### Step 7: `ScaleSpace` (line 1718)
 
 - **Recipe E (extract function)** - 2 nested blocks; each bump is a missing function.
-- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 1736, `le_to_gt`: `for (x=0; x <= 255; x++)`
-  - base line 1741, `lt_to_le`: `if (gamma[x] < MagickEpsilon)`
-- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify ScaleSpace`
 
@@ -149,9 +133,7 @@ Commit message: `refactor(MagickCore/segment.c): simplify ScaleSpace`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Recipe A does not apply: this function is public, and its signature is the API.
 - Public function: its name and signature must not change.
-- The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 1859, `lt_to_ge`: `for (i=0; i < MaxDimension; i++)`
-- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/segment.c): simplify SegmentImage`
 

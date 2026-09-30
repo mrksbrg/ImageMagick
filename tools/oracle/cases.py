@@ -1109,7 +1109,7 @@ def _cipher_cases():
 def _info_cases():
     yield _case("info", "version", [["-version"]], [])
     for name in ("configure", "mime", "policy", "log", "locale", "type", "font", "delegate",
-                 "coder", "magic", "resource", "format"):
+                 "coder", "magic", "resource", "format", "threshold"):
         yield _case("info", "list " + name, [["-list", name]], [])
 
 
@@ -1188,6 +1188,94 @@ CDL = """<ColorCorrectionCollection xmlns="urn:ASC:CDL:v1.2">
 </ColorCorrectionCollection>
 """
 CDL_INPUTS = ["rose", "rose_alpha", "palette", "gray16"]
+# Whole commands, {C} for the corpus, as tools/oracle/verdicts.json names them.
+_VERBOSE_AT = "-precision 17 -define auto-threshold:verbose=1 -auto-threshold "
+GAP_COMMANDS = [
+    # threshold.c: -auto-threshold prints its threshold; a histogram whose maximum
+    # entropy is at bin 0 (Kapur), one not starting at 0 and one symmetric about
+    # its peak (Triangle)
+    "{C}/rose.miff " + _VERBOSE_AT + "Triangle",
+    "-size 18x1 xc:black -size 1x1 xc:gray50 xc:white +append " + _VERBOSE_AT + "Kapur",
+    "-size 1x1 xc:rgb(20,20,20) xc:rgb(30,30,30) xc:rgb(40,40,40) xc:rgb(40,40,40) "
+    "xc:rgb(40,40,40) xc:rgb(40,40,40) xc:rgb(60,60,60) xc:rgb(80,80,80) "
+    "xc:rgb(100,100,100) +append " + _VERBOSE_AT + "Triangle",
+    "-size 1x1 xc:rgb(0,0,0) xc:rgb(5,5,5) xc:rgb(5,5,5) xc:rgb(5,5,5) xc:rgb(1,1,1) "
+    "xc:rgb(9,9,9) xc:rgb(10,10,10) +append " + _VERBOSE_AT + "Triangle",
+    # per-channel thresholds, CMYK with alpha included
+    "{C}/rose.miff -black-threshold 20,40,60%",
+    "{C}/cmyk.miff -black-threshold 20,30,40,50,60%",
+    "{C}/rose_alpha.miff -colorspace CMYK -black-threshold 20,30,40,50,60%",
+    "{C}/rose.miff -white-threshold 60,70,80%",
+    "{C}/cmyk.miff -white-threshold 60,70,80,50,40%",
+    "{C}/rose_alpha.miff -colorspace CMYK -white-threshold 60,70,80,50,40%",
+    "{C}/rose.miff -colorspace Lab -define color:illuminant=A "
+    "-color-threshold 'cielab(50,10,10)-cielab(80,40,40)'",
+    # -ordered-dither: the divisor-2 map, a leading separator, several levels, level 1
+    "{C}/rose.miff -ordered-dither threshold",
+    "{C}/rose.miff -ordered-dither ,o4x4",
+    "{C}/rose.miff -ordered-dither o4x4,3,6,9",
+    "{C}/rose.miff -ordered-dither o4x4,1",
+    "{C}/rose.miff -ordered-dither o4x4,1,3",
+    # limits in percent, and pixels exactly on the -range-threshold limits
+    "{C}/rose.miff -seed 3 -random-threshold 20x80%",
+    "-size 1x1 xc:gray(10%) xc:gray(20%) xc:gray(50%) xc:gray(80%) xc:gray(90%) +append "
+    "( {C}/gray16.miff -scale 5x5! ) -append -range-threshold 10,20,80,90%",
+    # decorate.c: frames smaller than their bevels (errors), a matte colour with
+    # alpha or with black, a frame larger than a 1x1 image, bevels of exactly half
+    "{C}/rose.miff -frame 3x10+2+2",
+    "{C}/rose.miff -frame 10x3+2+2",
+    "{C}/rose.miff -mattecolor #8888 -frame 10x10+3+3",
+    "{C}/cmyk.miff -mattecolor cmyk(10%,20%,30%,40%) -frame 10x10+3+3",
+    "{C}/tiny.miff -frame 2x2+1+1",
+    "{C}/rose.miff -raise 35x10",
+    "{C}/rose.miff -raise 10x23",
+    # segment.c: a cluster with no pixels; cluster thresholds that prune
+    "{C}/wizard.miff -segment 1x0.01",
+    "{C}/photo.miff -segment 50x0.5",
+    "{C}/photo.miff -segment 99x0.5",
+    # shear.c: rotating a virtual canvas, images taller than one rotation tile,
+    # shears of 0 on one axis and with transparent background, and -deskew on
+    # skewed images with the angle printed (one with pixels on the threshold)
+    "{C}/rose.miff -repage 100x80+5+7 -rotate 90",
+    "{C}/rose.miff -repage 100x80+5+7 -rotate 180",
+    "{C}/rose.miff -repage 100x80+5+7 -rotate 270",
+    "{C}/rose.miff -scale 300x200! -rotate 90",
+    "{C}/rose.miff -scale 300x200! -rotate 270",
+    "{C}/rose.miff -shear 0x20",
+    "{C}/rose.miff -shear 20x0",
+    "{C}/rose.miff -background none -shear 10x30",
+    # auto-crop averages the border for the background; =1 is the only width
+    # IsStringTrue lets through, =true gives width 0
+    "{C}/rose.miff -define deskew:auto-crop=1 -deskew 40%",
+    "{C}/rose_alpha.miff -define deskew:auto-crop=1 -deskew 40%",
+    "{C}/rose.miff -define deskew:auto-crop=true -deskew 40%",
+    "{C}/rose.miff -background white -rotate 7 -define deskew:auto-crop=1 -deskew 40%",
+    "{C}/rose.miff -background white -rotate 7 -deskew 40% -precision 17 "
+    "-print %[deskew:angle]",
+    "-size 70x40 xc:white -fill rgb(102,200,200) -draw 'line 0,10 69,16' "
+    "-fill rgb(200,102,200) -draw 'line 0,20 69,26' -fill rgb(200,200,102) "
+    "-draw 'line 0,30 69,36' -deskew 26214 -precision 17 -print %[deskew:angle]",
+    # compare.c: a 1x1 PHASE, a masklight colour, subimage searches with an equal-size
+    # and an inexact patch
+    "compare -metric PHASE {C}/tiny.miff {C}/tiny.miff",
+    "compare -metric AE -size 70x46 -read-mask xc:gray(20%) -define compare:masklight-color=blue "
+    "{C}/rose.miff {C}/rose_blur.miff",
+    # (small: a full-size equal search is too slow on a Mull build, and a baseline
+    # that times out is dropped)
+    "compare -metric RMSE -subimage-search ( {C}/rose.miff -crop 20x20+0+0 +repage ) "
+    "( {C}/rose_blur.miff -crop 20x20+0+0 +repage )",
+    "compare -metric RMSE -subimage-search {C}/rose.miff "
+    "( {C}/rose_blur.miff -crop 20x20+10+10 +repage )",
+]
+# compare.c: every metric with a read mask of exactly QuantumRange/2 on one image
+# only (the utility masks both, and the test ORs the two masks)
+GAP_COMMANDS += [
+    "-size 70x46 " + images + " -metric " + metric +
+    " -compare -precision 17 -print %[distortion]"
+    for metric in ("AE", "DPC", "DSSIM", "Fuzz", "MAE", "MEPP", "MSE", "NCC", "PAE", "PDC",
+                   "PHASE", "PHASH", "PSNR", "RMSE", "SSIM")
+    for images in ("{C}/rose.miff -read-mask xc:gray(50%) {C}/rose_blur.miff",
+                   "{C}/rose.miff ( {C}/rose_blur.miff -read-mask xc:gray(50%) )")]
 # Through mogrify.c, whose -gamma is GammaImage (`magick -gamma` uses EvaluateImage).
 GAP_CONVERT_CASES = [
     ("convert palette -gamma", ["-gamma", "1.6"], "palette"),
@@ -1202,6 +1290,8 @@ def _gap_cases():
     for name in CDL_INPUTS:
         yield _with_inputs(_op("gaps", name + " -cdl", [img(name)], ["-cdl", "cc.xml"]),
                            files={"cc.xml": CDL})
+    for command in GAP_COMMANDS:
+        yield _op("gaps", command.replace("{C}/", ""), [], _fmt(command))
     for label, args, name in GAP_CONVERT_CASES:
         yield _case("gaps", label, [["convert", img(name)] + args + FLOAT_OUT + ["out.miff"]],
                     ["out.miff"])

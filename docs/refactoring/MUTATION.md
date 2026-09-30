@@ -779,6 +779,69 @@ The line coverage the reports use (`build-oracle/oracle.lcov`) had been made by 
 `casemap.py`, after changing the catalogue. Reports:
 `build-oracle/work/mutation-enhance-merged.json` (the full run with the reruns merged).
 
+## Reading survivors by hand: six more Phase 1 files (Mac)
+
+The same reading for `threshold.c`, `decorate.c`, `colormap.c`, `segment.c`, `shear.c` and
+`compare.c`, measured on the MacBook on 2026-09-30 from their full runs. 222 verdicts, all
+in `verdicts.json`; every gap verdict was confirmed by rerunning its mutant through
+`mutate.py` against the new case, not only by the probe. The `gaps` family is now 123 cases.
+
+| File | Mutants | Killed | Gate | Ready / careful / not ready | Still open |
+| --- | ---: | ---: | ---: | --- | --- |
+| `threshold.c` | 557 | 410 → 443 | 85% → **91%** | 7/10/3 → 15/4/1 | 5 unresolved |
+| `decorate.c` | 368 | 338 → 351 | 94% → **98%** | 3/0/0 → 3/0/0 | none |
+| `colormap.c` | 46 | 41 → 41 | 98% → **98%** | 3/0/1 → 3/0/1 | 1 unresolved |
+| `segment.c` | 443 | 303 → 306 | 75% → **76%** | 13/2/1 → 14/1/1 | 6 unresolved |
+| `shear.c` | 511 | 333 → 388 | 73% → **85%** | 3/5/2 → 7/2/1 | 5 unresolved |
+| `compare.c` | 672 | 505 → 537 | 81% → **88%** | 10/8/5 → 18/2/3 | 4 unresolved |
+
+What keeps `segment.c`, `shear.c` and `compare.c` low is code the command line cannot
+reach, not weak cases: `GetImageDynamicThreshold` (81 mutants), `ShearRotateImage` (45)
+and `IsImagesEqual` (22) have no caller in MagickCore, MagickWand or the coders. They are
+the "public API only" group of `VERIFICATION.md`.
+
+**What the gaps had in common**, beyond `enhance.c`'s:
+
+- **Arguments given one way only.** Every `-black-threshold` and `-white-threshold`
+  argument was a single value, so per-channel parsing (sigma, xi, psi, chi) and the CMYK
+  branches never ran. Every `-random-threshold` was in quantum units (`20x80`,
+  not `20x80%`), so nearly every pixel lay above the maximum and the random branch was
+  almost never taken.
+- **Thresholds that never hit a pixel exactly.** Percentages are computed in floating
+  point: 40% of QuantumRange is not exactly 26214, so `<` against `<=` is invisible. An
+  8-bit channel value times 257 is exact (102 × 257 = 26214), so `-deskew 26214` with
+  pixels of 102, or pixels at exactly 10, 20, 80 and 90% for `-range-threshold`, reach
+  the boundary.
+- **Outputs that hide the value.** `-auto-threshold` and `-deskew` reduce an image to one
+  number and then threshold or rotate with it; a small change in the number rarely moves
+  a pixel. `-define auto-threshold:verbose=1` and `-print %[deskew:angle]` at
+  `-precision 17` print it.
+- **`compare` masks both images.** The read-mask test is `mask(image) <= half ||
+  mask(reconstruct) <= half`, and the `compare` utility applies `-read-mask` to both, so a
+  mutant of one half is hidden by the other. `magick A -read-mask M B -metric X -compare`
+  masks one image only; two such cases per metric close 24 survivors.
+- **No virtual canvas, no large images, no degenerate shears.** No case rotated an image
+  with a page offset, one taller than a rotation tile (170 rows), or sheared by 0 on one
+  axis.
+
+**Things found on the way, for `ORACLE.md` or upstream:**
+
+- `segment.c`: the cluster threshold is compared with the number of clusters kept so far
+  (`count*cluster_threshold/100.0`, `count` reset to 0 just before), not with the pixel
+  count, so thresholds below about 99% prune nothing. Looks like an upstream bug.
+- `shear.c`: `deskew:auto-crop` is both the switch and the border width, and
+  `IsStringTrue` accepts only `1` of the widths. In `GetImageBackgroundColor`, `p` is not
+  advanced for the skipped middle pixels, so the right-hand border reads the wrong pixels.
+- `magick -verbose` ends with an elapsed-time line; the oracle normalises it, a probe that
+  does not sees false kills. `-segment` output changes with the OpenMP thread count; the
+  oracle runs single-threaded.
+- **A case whose baseline times out tests nothing, silently.** `mutate.py` drops it, and
+  the mutants it was written for show as survivors or as having no coverage. A
+  subimage search on a full-size image did this on a Mull build. `mutate.py` now prints
+  the cases it leaves out.
+- Each file's mutants live in one Mull build (`mull-sweep25` or `mull-sweep60`); a probe
+  against the wrong build shows every mutant surviving.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
