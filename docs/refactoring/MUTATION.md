@@ -531,13 +531,17 @@ every capped survivor was rerun against all the cases that reach it (`--max-case
 | File | Mutants | Killed | Survived | of which capped | No coverage | Uncapped rerun |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `colorspace.c` | 550 | 393 | 156 | 145 | 1 | killed 46 more; **439 killed (80%)**, 110 real survivors |
-| `morphology.c` | 1,258 | 823 | 405 | 321 | 30 | in progress (168 of 321 rerun so far) |
+| `morphology.c` | 1,258 | 823 | 405 | 321 | 30 | killed 15 more; **838 killed (67%)**, 390 real survivors |
 
 A full run took 8.5 minutes for `colorspace.c` and about 45 for `morphology.c` on 16
 threads; the uncapped reruns take longer per mutant, since a function in these files is
 reached by thousands of cases. On this machine (16 GB, WSL given half) mutation runs use
 `-j 8`: at 16 jobs Windows ran short of memory and the run was stopped twice. Results
 are saved as they arrive, so a stopped run resumes where it was.
+
+**Capped survivors are mostly real here.** On the Mac, uncapped reruns killed about a
+third of the capped survivors; here they killed 46 of 145 in `colorspace.c` and only 15
+of 321 in `morphology.c`. Read a capped survivor in these two files as a probable gap.
 
 ### colorspace.c through the readiness gate
 
@@ -573,6 +577,39 @@ paths after a failed `SyncImage`, and `LogColorspace`, whose own parameters acco
 The merge-and-gate script used here is not in git yet: `build-oracle/irq/gate.py` on the
 WSL clone. Reports: `build-oracle/work/mutation-full-*.json`, `mutation-uncap-*.json`,
 and the gated results `gate-colorspace.json`.
+
+### morphology.c through the readiness gate
+
+**All: 838 killed, 23 unobservable, 185 unmatched, 182 unreached; gate 70%.**
+
+| Function | Mutants | Killed | Unobservable | Unmatched | Unreached | Gate | Verdict |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `AcquireKernelBuiltIn` | 469 | 312 | 3 | 72 | 82 | 67% | not ready |
+| `MorphologyPrimitive` | 211 | 175 | 8 | 24 | 4 | 86% | careful |
+| `MorphologyPrimitiveDirect` | 182 | 100 | 3 | 13 | 66 | 56% | not ready |
+| `RotateKernelInfo` | 101 | 57 | 1 | 33 | 10 | 57% | not ready |
+| `MorphologyApply` | 78 | 50 | 2 | 13 | 13 | 66% | not ready |
+| `ParseKernelArray` | 58 | 48 | 2 | 8 | 0 | 86% | careful |
+| `ParseKernelName` | 33 | 25 | 0 | 4 | 4 | 76% | careful |
+| `ScaleKernelInfo` | 26 | 15 | 0 | 11 | 0 | 58% | not ready |
+| `ShowKernelInfo` | 22 | 0 | 0 | 0 | 0 | - | no cases |
+| `MorphologyImage` | 14 | 10 | 1 | 2 | 1 | 77% | careful |
+| `AcquireKernelInfo` | 11 | 8 | 1 | 0 | 2 | 80% | careful |
+| `SameKernelInfo` | 11 | 9 | 1 | 1 | 0 | 90% | ready |
+| `CalcKernelMetaData` | 8 | 6 | 0 | 2 | 0 | 75% | careful |
+| `ScaleGeometryKernelInfo` | 4 | 2 | 0 | 2 | 0 | 50% | not ready |
+| `ZeroKernelNans`, `UnityAddKernelInfo` | 8 | 0 | 0 | 0 | 0 | - | no cases |
+| seven small helpers (`CloneKernelInfo`, `fact`, `ExpandMirrorKernelInfo`, ...) | 22 | 21 | 1 | 0 | 0 | 100% | ready |
+
+**The gaps, all reachable from the command line:**
+
+- `-morphology Voronoi` has no case: 66 unreached survivors in `MorphologyPrimitiveDirect`.
+- The `LoG` and `Comet` kernels have no case: 35 and 19 survivors in `AcquireKernelBuiltIn`.
+- The Blur kernel's rotation (`Blur:0x1,<angle>` and its variants) is unchecked: 40
+  survivors in `RotateKernelInfo`.
+- Kernel scaling has only two `convolve:scale` cases: 11 unmatched in `ScaleKernelInfo`.
+- `ShowKernelInfo` prints the kernel with `-define morphology:showKernel=1`; no case
+  asks for it.
 
 ## How to use this in the campaign
 
