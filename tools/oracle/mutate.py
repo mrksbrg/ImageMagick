@@ -63,7 +63,7 @@ import casemap  # noqa: E402
 import oracle   # noqa: E402
 
 MUTANT_ID = re.compile(r"^([a-z_]+):(/[^:]+):(\d+):(\d+):(\d+):(\d+)$")
-LLVM_COV = "/Library/Developer/CommandLineTools/usr/bin/llvm-cov"
+LLVM_COV = oracle.llvm_tool("llvm-cov")
 # A mutant that loops forever should cost seconds, not minutes, but a case that
 # is merely slow must not time out and pass for a kill. Mull builds run every
 # case several times slower than a normal build (one case takes 9.4 s), so a
@@ -143,16 +143,18 @@ def plain(name):
 
 
 def sandbox(binary):
-    """A sandbox-exec prefix that lets a mutant run magick and write under
-    build-oracle/, and nothing else.
+    """A prefix that lets a mutant run magick and write under build-oracle/,
+    and nothing else: sandbox-exec on macOS, bubblewrap on Linux.
 
     delegate.c runs the commands in delegates.xml: lpr, `open -a Preview`,
     curl, gimp, `... ; /bin/rm`. The case catalogue never asks for those, but
     a mutant can skip the check that stops them (policy.c is mutated too), and
     it would then print, open windows or use the network on the real machine.
-    The operating system enforces this profile, so no mutant can switch it off.
+    The operating system enforces this, so no mutant can switch it off.
     """
     out = os.path.realpath(oracle.OUT)
+    if not oracle.MACOS:
+        return bwrap_sandbox(out)
     profile = ("(version 1)(allow default)"
                "(deny process-exec)(allow process-exec (literal \"%s\"))"
                "(deny network*)"
@@ -160,6 +162,24 @@ def sandbox(binary):
                " (literal \"/dev/null\") (literal \"/dev/tty\") (literal \"/dev/dtracehelper\"))"
                % (os.path.realpath(binary), out))
     return ["/usr/bin/sandbox-exec", "-p", profile]
+
+
+def bwrap_sandbox(out):
+    """bubblewrap has no rule that allows exec of one binary only, so the
+    sandbox holds no other program to run: /usr/lib, /usr/share and /etc for
+    magick's libraries, fonts and configuration, but no /usr/bin, /bin or
+    /sbin, hence no shell for a delegate command to start. No network, and
+    the only writable paths are build-oracle/ and a private /tmp."""
+    root = os.path.realpath(oracle.ROOT)
+    args = ["bwrap", "--unshare-all", "--die-with-parent", "--new-session",
+            "--ro-bind", "/usr/lib", "/usr/lib", "--symlink", "usr/lib", "/lib"]
+    if os.path.isdir("/usr/lib64"):
+        args += ["--ro-bind", "/usr/lib64", "/usr/lib64", "--symlink", "usr/lib64", "/lib64"]
+    args += ["--ro-bind", "/usr/share", "/usr/share", "--ro-bind", "/etc", "/etc"]
+    if os.path.isdir("/var/cache/fontconfig"):  # without it every case rebuilds the font cache
+        args += ["--ro-bind", "/var/cache/fontconfig", "/var/cache/fontconfig"]
+    return args + ["--dev", "/dev", "--proc", "/proc", "--tmpfs", "/tmp",
+                   "--ro-bind", root, root, "--bind", out, out, "--"]
 
 
 def kill_counts(exclude):

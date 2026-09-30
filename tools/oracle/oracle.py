@@ -46,12 +46,27 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "8"          # bump when normalisation or execution changes
+HARNESS_VERSION = "9"        # bump when normalisation or execution changes
 
 LISTS = ["Colorspace", "Compose", "Distort", "Filter", "Interpolate",
          "VirtualPixel", "Morphology", "Kernel", "Evaluate", "Statistic",
          "Noise", "Dither", "Layers", "Complex", "Intensity", "SparseColor",
          "Type", "Preview", "Metric"]
+MACOS = sys.platform == "darwin"
+
+
+def llvm_tool(name):
+    """llvm-profdata, llvm-cov, ... from the LLVM that builds with `clang`.
+
+    On macOS not through xcrun: from an x86_64 Python under Rosetta, xcrun
+    fails to load. On Linux, the versioned name matching `clang` comes first,
+    so a second LLVM on the system cannot read the profiles by mistake.
+    """
+    if MACOS:
+        return "/Library/Developer/CommandLineTools/usr/bin/" + name
+    major = subprocess.run(["clang", "-dumpversion"], stdout=subprocess.PIPE,
+                           check=True).stdout.decode().split(".")[0]
+    return shutil.which("%s-%s" % (name, major)) or shutil.which(name) or name
 
 
 # ---------------------------------------------------------------------------
@@ -61,7 +76,7 @@ def env_for(binary, case_dir, extra_env=None):
     bld = os.path.dirname(os.path.dirname(os.path.abspath(binary)))
     src = source_dir_of(bld)
     env = {
-        "PATH": "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin",
+        "PATH": "/usr/bin:/bin:/usr/sbin:/sbin" + (":/opt/homebrew/bin" if MACOS else ""),
         "HOME": case_dir,
         "LC_ALL": "C", "LANG": "C", "TZ": "UTC",
         "MAGICK_CONFIGURE_PATH": "%s/config:%s/config" % (bld, src),
@@ -69,6 +84,12 @@ def env_for(binary, case_dir, extra_env=None):
         "MAGICK_THREAD_LIMIT": "1", "OMP_NUM_THREADS": "1",
         "SOURCE_DATE_EPOCH": str(FIXED_MTIME),
     }
+    if not MACOS:
+        # Some paths read heap memory they never wrote (single-channel raw
+        # formats read back into a full image, `-sample` under a write mask):
+        # with glibc their output changed from run to run. A fixed fill byte
+        # for every malloc makes that garbage the same in every build and run.
+        env["MALLOC_PERTURB_"] = "165"
     if "LLVM_PROFILE_FILE" in os.environ:
         env["LLVM_PROFILE_FILE"] = os.environ["LLVM_PROFILE_FILE"]
     env.update(extra_env or {})  # per-case profiles, Mull mutant switches

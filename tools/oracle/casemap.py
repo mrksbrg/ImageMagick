@@ -28,8 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import oracle  # noqa: E402
 
 MAP = os.path.join(oracle.WORK, "casemap.json")
-# Not through xcrun: from an x86_64 Python under Rosetta, xcrun fails to load.
-PROFDATA = "/Library/Developer/CommandLineTools/usr/bin/llvm-profdata"
+PROFDATA = oracle.llvm_tool("llvm-profdata")
 RAW = os.path.join(oracle.WORK, "casemap-raw")
 
 

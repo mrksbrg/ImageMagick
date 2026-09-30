@@ -34,13 +34,18 @@ JOBS=${JOBS:-$(sysctl -n hw.ncpu 2>/dev/null || nproc)}
 CONFIG_FLAGS=(--disable-shared --enable-static --disable-openmp --without-perl
               --disable-docs --without-x)
 OPT_CFLAGS="-O2 -g"
+# Ubuntu's libraw_r.pc links with -fopenmp, which clang resolves to libomp;
+# LibRaw itself is built against GCC's libgomp, so link that one instead.
+# ImageMagick stays without OpenMP, and the oracle sets OMP_NUM_THREADS=1.
+LINK_FLAGS=""
+[ "$(uname)" = Linux ] && LINK_FLAGS="-fopenmp=libgomp"
 
 configure_and_make() {  # <srcdir> <builddir> <extra cflags>
   local src=$1 bld=$2 extra=$3
   mkdir -p "$bld"
   if [ ! -f "$bld/Makefile" ]; then
     (cd "$bld" && CC=clang CXX=clang++ \
-       CFLAGS="$OPT_CFLAGS $extra" CXXFLAGS="$OPT_CFLAGS $extra" LDFLAGS="$extra" \
+       CFLAGS="$OPT_CFLAGS $extra" CXXFLAGS="$OPT_CFLAGS $extra" LDFLAGS="$LINK_FLAGS $extra" \
        "$src/configure" "${CONFIG_FLAGS[@]}" > configure.log 2>&1) \
       || { echo "configure failed, see $bld/configure.log" >&2; exit 1; }
   fi
@@ -72,8 +77,9 @@ case "${1:-}" in
     ;;
   mull)
     # Mutants compiled into the binary, each behind its own switch, for the
-    # source files matching <path-regex> only. Needs Homebrew llvm@21 and the
-    # matching Mull package in build-oracle/mull (see docs/refactoring/MUTATION.md).
+    # source files matching <path-regex> only. Needs, on macOS, Homebrew
+    # llvm@21 and the matching Mull package in build-oracle/mull, and on Linux
+    # the Mull .deb for the system clang's LLVM (see docs/refactoring/MUTATION.md).
     regex=${2:?usage: build.sh mull <path-regex> [name]}
     slug=${3:-$(echo "$regex" | tr -c 'A-Za-z0-9\n' '_')}
     bld="$OUT/mull-$slug"
@@ -82,15 +88,24 @@ case "${1:-}" in
     # upwards; every object is compiled somewhere under $bld.
     # Single-quoted YAML: a regex's backslashes are not escapes there.
     printf "includePaths:\n  - '%s'\n" "$regex" > "$bld/mull.yml"
-    llvm=/opt/homebrew/opt/llvm@21/bin
-    plugin="$OUT/mull/lib/mull-ir-frontend-21"
-    [ -x "$llvm/clang" ] && [ -f "$plugin" ] || { echo "llvm@21 or Mull missing" >&2; exit 1; }
-    if [ ! -f "$bld/Makefile" ]; then
+    if [ "$(uname)" = Darwin ]; then
+      llvm=/opt/homebrew/opt/llvm@21/bin
+      plugin="$OUT/mull/lib/mull-ir-frontend-21"
       # /usr/bin/ld explicitly: an older ld earlier on PATH (Anaconda's)
       # cannot read the current SDK.
+      ldflags="-fuse-ld=/usr/bin/ld"
+    else
+      # The system clang's LLVM, and the Mull .deb built for that version.
+      major=$(clang -dumpversion | cut -d. -f1)
+      llvm=/usr/lib/llvm-$major/bin
+      plugin=/usr/lib/mull-ir-frontend-$major
+      ldflags="$LINK_FLAGS"
+    fi
+    [ -x "$llvm/clang" ] && [ -f "$plugin" ] || { echo "$llvm/clang or $plugin missing" >&2; exit 1; }
+    if [ ! -f "$bld/Makefile" ]; then
       (cd "$bld" && CC="$llvm/clang" CXX="$llvm/clang++" \
          CFLAGS="$OPT_CFLAGS -grecord-command-line -fpass-plugin=$plugin" \
-         CXXFLAGS="$OPT_CFLAGS" LDFLAGS="-fuse-ld=/usr/bin/ld" \
+         CXXFLAGS="$OPT_CFLAGS" LDFLAGS="$ldflags" \
          "$ROOT/configure" "${CONFIG_FLAGS[@]}" > configure.log 2>&1) \
         || { echo "configure failed, see $bld/configure.log" >&2; exit 1; }
     fi
