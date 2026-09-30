@@ -362,6 +362,12 @@ class _Run:
         unstable = sorted(i for i in needed if "timeout" in base[i]["rc"])
         for i in unstable:  # a case that times out unmutated can kill nothing honestly
             base.pop(i)
+        if unstable:
+            # Say so: a dropped case tests nothing, and a mutant it was meant
+            # for then survives or shows no coverage with no sign of why.
+            # Subimage search on a full-size image was one, on a Mull build.
+            print("mutate: %d case(s) time out unmutated and are left out: %s"
+                  % (len(unstable), " ".join(unstable[:10])), flush=True)
         shutil.rmtree(os.path.join(oracle.WORK, "runs", "mbase-" + self.slug), ignore_errors=True)
         return base
 
