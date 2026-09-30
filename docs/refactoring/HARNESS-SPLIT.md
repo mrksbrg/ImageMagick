@@ -157,13 +157,31 @@ The same on both machines, so the results can be compared:
 6. Rerun the survivors against the new cases only (`--cases`), gate again, and record the
    before and after in `MUTATION.md`, in a section headed with the file and the machine.
 
-A file is done when its **adjusted score** is **90% or more** (`gate.py` prints it on the
-file's `ALL` row, with the plain score and the reach), or when what is left is written
-down as out of reach, with the reason: no CLI path, an external program, X11 without a
-display, OpenCL without a working runtime. The adjusted score counts functions no case
-executes as gaps: every function is to be refactored in the end, and an unreached one is
-the least protected of all. So low reach calls for new inputs or new ways to drive the
-code, and high reach with a low adjusted score for sharper comparisons.
+### When a file is trusted
+
+The aim of this phase is test cases we can trust for every file. A file is **trusted**
+when all of these hold:
+
+- a **full run**: every mutant Mull generates for the file, not a sample;
+- every capped survivor **rerun uncapped**;
+- an **adjusted score of 90% or more** (`gate.py`, the file's `ALL` row). It counts the
+  mutants in functions no case executes as gaps, so unreached code lowers it: a file cannot
+  be trusted for code its cases never run;
+- every excused survivor **named with its reason**, by a `classify.py` rule or a hand
+  verdict in `verdicts.json`; a `gap` verdict only once its case is in and has killed it;
+- every survivor still open **listed** in the file's section of `MUTATION.md`.
+
+Otherwise the file is **not trusted**, and its section says why: API functions no command
+reaches, X11 without a display, OpenCL without a working runtime, an external program.
+Writing the reason down does not make a file trusted. It tells the later refactoring phase
+that the file can only be guard-verified.
+
+**Open: the operator set.** Mull runs its default operators (equality, relational,
+arithmetic, increment, unary minus). They do not model the two slips refactoring makes
+most: a statement lost in an extraction (statement deletion, `cxx_remove_void_call`) and a
+condition rebuilt wrongly (logical connectors, `&&` and `||`). A trial on `colorspace.c` and
+`quantum-import.c` measures what adding them costs and finds. Until it is decided, full
+runs use the defaults; a file trusted on them may need a rerun with the extra operators.
 
 ## Working in the same repository
 
