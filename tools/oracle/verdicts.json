@@ -744,6 +744,756 @@
    "why": "no case raises a bevel exactly half the image width"
   },
   {
+   "at": 36,
+   "file": "MagickCore/delegate.c",
+   "function": "CopyDelegateFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/delegate.c",
+   "function": "CopyDelegateFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((overwrite == MagickFalse) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/delegate.c",
+   "function": "CopyDelegateFile",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(GetPathAttributes(destination,&attributes) != MagickFalse))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((asynchronous == MagickFalse) && (message !=  (char *) NULL))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((i != 1) && (IsExecutableToken(arguments[i]) == MagickFalse))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*arguments[1] == '\\0')",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (arguments == (char **) NULL)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (i=0; i < (ssize_t) number_arguments; i++)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=1; i < (ssize_t) number_arguments; i++)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (status < 0)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(strpbrk(sanitize_command,\"&;<>|\") != (char *) NULL))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((asynchronous != MagickFalse) ||",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((asynchronous == MagickFalse) && (message !=  (char *) NULL))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((i != 1) && (IsExecutableToken(arguments[i]) == MagickFalse))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (asynchronous != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (message != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/delegate.c",
+   "function": "GetDelegateInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(decode,\"*\") == 0)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/delegate.c",
+   "function": "GetDelegateInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(decode,delegate_info->decode) == 0)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/delegate.c",
+   "function": "GetDelegateInfo",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (delegate_info->mode > 0)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/delegate.c",
+   "function": "GetDelegateInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (delegate_info->mode < 0)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/delegate.c",
+   "function": "GetDelegateInfoList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(GlobExpression(delegate_info->decode,pattern,MagickFalse) != MagickFalse ||",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/delegate.c",
+   "function": "GetDelegateInfoList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "GlobExpression(delegate_info->encode,pattern,MagickFalse) != MagickFalse))",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*p == '\\0') || (*p == '\\'') || (*p == '\"'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*p == '\\0') || (*p == '\\'') || (*p == '\"'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*p == '\\0') || (*p == '\\'') || (*p == '\"'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*p == '%')",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (number != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((isspace((int) ((unsigned char) *p)) != 0) && (*p != '\\0'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((isspace((int) ((unsigned char) *p)) != 0) && (*p != '\\0'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(IsRightsAuthorized(DelegatePolicyDomain,rights,decode) == MagickFalse))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 74,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((temporary != MagickFalse) && (AcquireUniqueFilename(image->filename) ==",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 75,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (CopyDelegateFile(image->filename,input_filename,MagickFalse,exception) == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "temporary=(*image->filename == '\\0') ? MagickTrue : MagickFalse;",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "((encode != (const char *) NULL) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(delegate_info->decode != (char *) NULL))))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(delegate_info->encode != (char *) NULL)) ||",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for ( ; commands[i] != (char *) NULL; i++)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (p=image; p != (Image *) NULL; p=GetNextImageInList(p))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((decode != (const char *) NULL) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((delegate_info->mode != 0) && (((decode != (const char *) NULL) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((delegate_info->mode != 0) && (((decode != (const char *) NULL) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((encode != (const char *) NULL) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((strcmp(input_filename,output_filename) != 0) &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((temporary != MagickFalse) && (AcquireUniqueFilename(image->filename) ==",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsPathAccessible(input_filename) != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (IsPathAccessible(input_filename) != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (LocaleCompare(magick,\"NULL\") != 0)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (clone_info->adjoin != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (delegate_info->spawn != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->temporary != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 5,
+   "src": "if (temporary != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "magick=InterpretImageProperties(image_info,image,decode != (char *) NULL ?",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for ( ; commands[i] != (char *) NULL; i++)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; commands[i] != (char *) NULL; i++)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "((token[2] == '\\\\') || (token[2] == '/')))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "((token[2] == '\\\\') || (token[2] == '/')))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*token == '\\'') || (*token == '\"'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*token == '\\'') || (*token == '\"'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((isalpha((int) *token) != 0) && (token[1] == ':') &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((token == (const char *) NULL) || (*token == '\\0'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((token == (const char *) NULL) || (*token == '\\0'))",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == '%')",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == '-')",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == '/')",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (length >= 3)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (length >= 3)",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/delegate.c",
+   "function": "IsExecutableToken",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((isalpha((int) *token) != 0) && (token[1] == ':') &&",
+   "verdict": "unobservable",
+   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/delegate.c",
+   "function": "ListDelegateInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (j=0; commands[j] != (char *) NULL; j++)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/delegate.c",
+   "function": "ListDelegateInfo",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (j=1; commands[j] != (char *) NULL; j++)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "extent=strlen(token)+MagickPathExtent;",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == quote)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bracket_depth > 0)",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "the status LoadDelegateCache returns, which its callers do not pass on to the CLI"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
    "at": 14,
    "file": "MagickCore/enhance.c",
    "function": "AutoGammaImage",
@@ -1500,6 +2250,856 @@
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unobservable",
    "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "AcquireProfileStringInfo",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (length > GetMaxProfileSize())",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "GetProfilesFromResourceBlock",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (((length_byte+1) & 0x01) != 0)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/profile.c",
+   "function": "GetProfilesFromResourceBlock",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((p > (datum+length-count)) || (count > (ssize_t) length) ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/profile.c",
+   "function": "GetProfilesFromResourceBlock",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (p > (datum+length-4))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/profile.c",
+   "function": "GetProfilesFromResourceBlock",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "(count <= 0))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/profile.c",
+   "function": "GetProfilesFromResourceBlock",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((p > (datum+length-count)) || (count > (ssize_t) length) ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPNumeratorAndDenominator",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "approximation=num/(double) den;",
+   "verdict": "unresolved",
+   "why": "the continued-fraction approximation of a non-integer resolution; not killed by 72.5 and 7"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPNumeratorAndDenominator",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (value > (double) MAGICK_ULONG_MAX)",
+   "verdict": "equivalent",
+   "why": "compares with MAGICK_ULONG_MAX; a resolution never comes near it"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPNumeratorAndDenominator",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (fraction <= 0.0)",
+   "verdict": "unresolved",
+   "why": "the continued-fraction approximation of a non-integer resolution; not killed by 72.5 and 7"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPNumeratorAndDenominator",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; i < 128; i++)",
+   "verdict": "unresolved",
+   "why": "the continued-fraction iteration count; not killed by 72.5 and 7"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPNumeratorAndDenominator",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if (fabs(approximation-value) <= MagickEpsilon)",
+   "verdict": "unresolved",
+   "why": "the continued-fraction approximation of a non-integer resolution; not killed by 72.5 and 7"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPOffsets",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(((size_t) (pos-datum)+tag_length) > length) ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPOffsets",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(((size_t) (pos-datum)+tag_length) > length) ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPOffsets",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPOffsets",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (((LocaleCompare(name, \"exif\") == 0) || (LocaleCompare(name, \"app1\") == 0)) &&",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 72,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (((LocaleCompare(name, \"exif\") == 0) || (LocaleCompare(name, \"app1\") == 0)) &&",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(name,\"xmp\") == 0)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(GetStringInfoLength(profile) > 2))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(GetStringInfoLength(profile) > 2))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (length != GetStringInfoLength(profile))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/profile.c",
+   "function": "PatchCorruptProfile",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p != (unsigned char *) NULL)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(CompareStringInfo(icc_profile,profile) == 0))",
+   "verdict": "unresolved",
+   "why": "ProfileImage's test for an identical ICC profile; the one corpus ICC profile did not tell the branches apart"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "(CompareStringInfo(icc_profile,profile) == 0))",
+   "verdict": "unresolved",
+   "why": "ProfileImage's test for an identical ICC profile; the one corpus ICC profile did not tell the branches apart"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (LocaleCompare(value,\"1\") != 0)",
+   "verdict": "unresolved",
+   "why": "the sRGB-profile identification of ProfileImage; needs a second, different ICC profile"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (LocaleCompare(value,\"R98.\") != 0)",
+   "verdict": "unresolved",
+   "why": "the sRGB-profile identification of ProfileImage; needs a second, different ICC profile"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "ReadProfileByte",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (*length < 1)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "ReadProfileMSBLong",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (*length < 4)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "ReadProfileMSBShort",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (*length < 2)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/profile.c",
+   "function": "ReplaceXMPValue",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (new_length > length)",
+   "verdict": "equivalent",
+   "why": "new_length == length needs no resize either way"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/profile.c",
+   "function": "ReplaceXMPValue",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (new_length < length)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/profile.c",
+   "function": "ReplaceXMPValue",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (new_length < length)",
+   "verdict": "equivalent",
+   "why": "new_length == length needs no resize either way"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/profile.c",
+   "function": "SetImageProfileInternal",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((LocaleCompare(name,\"xmp\") == 0) &&",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/profile.c",
+   "function": "SetImageProfileInternal",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (recursive == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/profile.c",
+   "function": "SetImageProfileInternal",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((length == 0) || (length > GetMaxProfileSize()))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "SetImageProfileInternal",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((length > 4) && (LocaleCompare(key,\"app1\") == 0) &&",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/profile.c",
+   "function": "Sync8BimProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (id == 0x0422)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "Sync8BimProfile",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((count >= (ssize_t) length) || (count < 0))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/profile.c",
+   "function": "Sync8BimProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((count > (ssize_t) length) || (count < 0))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "Sync8BimProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (length < 7)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "((size_t) (offset+(ssize_t) number_bytes) > length))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "if (number_entries > ((directory_length-6)/12))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(components == 1) && (number_bytes == 4))",
+   "verdict": "unresolved",
+   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(components == 1) && (number_bytes == 4))",
+   "verdict": "unresolved",
+   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(tag_value == TAG_INTEROP_OFFSET)) && (format == 4) &&",
+   "verdict": "unresolved",
+   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(tag_value == TAG_INTEROP_OFFSET)) && (format == 4) &&",
+   "verdict": "unresolved",
+   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (((tag_value == TAG_EXIF_OFFSET) ||",
+   "verdict": "unresolved",
+   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (number_bytes == 4)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (number_bytes == 4)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (number_bytes == 8)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (number_bytes == 8)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((offset < 0) || ((size_t) offset >= length))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((directory < exif) || (directory > (exif+length-2)))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (number_entries > ((directory_length-6)/12))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (q > (exif+length-12))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (number_bytes <= 4)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((directory < exif) || (directory > (exif+length-2)))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((offset < 0) ||",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((offset < 0) || ((size_t) offset >= length))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((ssize_t) number_bytes < components)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (components < 0)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (directory_length < 6)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (length < 16)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (length < 16)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < number_bytes)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "directory_length=length-(size_t) (directory-exif);",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "directory_length=length-(size_t) (directory-exif);",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if (number_entries > ((directory_length-6)/12))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/profile.c",
+   "function": "SyncXMPProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*value == '\\0'))",
+   "verdict": "unresolved",
+   "why": "the empty-value test before YResolution; not killed with unequal and equal densities"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/profile.c",
+   "function": "SyncXMPProfile",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/profile.c",
+   "function": "SyncXMPProfile",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||",
+   "verdict": "equivalent",
+   "why": "fabs(x+y) > eps is true for every positive resolution, and then the value is recomputed, which gives the same string"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/profile.c",
+   "function": "TryAccumulate",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((accumulated < 0.0) || (accumulated > (double) MAGICK_ULONG_MAX))",
+   "verdict": "equivalent",
+   "why": "compares with MAGICK_ULONG_MAX; a resolution never comes near it"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/profile.c",
+   "function": "TryAccumulate",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (term > (double) MAGICK_ULONG_MAX)",
+   "verdict": "equivalent",
+   "why": "compares with MAGICK_ULONG_MAX; a resolution never comes near it"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "TryAccumulate",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((accumulated < 0.0) || (accumulated > (double) MAGICK_ULONG_MAX))",
+   "verdict": "equivalent",
+   "why": "an accumulated value of exactly 0 is accepted either way"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/profile.c",
+   "function": "ValidateXMPProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (IsStringTrue(artifact) == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "xmp:validate: no case sets it, and a case with it has not been probed yet"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "extract_profile=AcquireStringInfo(offset+extent);",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (((length_byte+1) & 0x01) != 0)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(name,\"xmp\") == 0)",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (p > (datum+length-4))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/profile.c",
+   "function": "WriteTo8BimProfile",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
+   "verdict": "unresolved",
+   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
   },
   {
    "at": 9,
@@ -4979,6 +6579,936 @@
    "src": "if ((flags & SigmaValue) != 0)",
    "verdict": "gap",
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 1,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (fabs(M11) < 0.0)",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (M11 < 0.0)",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (fabs(M11) < 0.0)",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "unresolved",
+   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/vision.c",
+   "function": "CircularityThreshold",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((ssize_t) pixels[2*v+u] == i)",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == ';')",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (*q == ';')",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(artifact,\"decreasing\") == 0)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (image->colorspace == CMYKColorspace)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (image->colorspace == CMYKColorspace)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "((y+dy) < 0) || ((y+dy) >= (ssize_t) image->rows))",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(object[i].area >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 2,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 3,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 4,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 5,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 6,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((first >= 0) &&",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if ((first >= 0) &&",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((id >= 0) && (id < (ssize_t) component_image->colors))",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (id >= (ssize_t) MaxColormapSize)",
+   "verdict": "equivalent",
+   "why": "needs exactly MaxColormapSize (65536) objects"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (top_ids >= (ssize_t) component_image->colors)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (x >= (ssize_t) object[id].bounding_box.width)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (y >= (ssize_t) object[id].bounding_box.height)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "dx=connectivity > 4 ? connect8[k][1] : connect4[k][1];",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "dy=connectivity > 4 ? connect8[k][0] : connect4[k][0];",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (n > (ssize_t) MaxColormapSize)",
+   "verdict": "equivalent",
+   "why": "needs exactly MaxColormapSize (65536) objects"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "if (n > (ssize_t) MaxColormapSize)",
+   "verdict": "equivalent",
+   "why": "needs exactly MaxColormapSize (65536) objects"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (object[i].area > object[background_id].area)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (x > (ssize_t) object[id].bounding_box.width)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (y > (ssize_t) object[id].bounding_box.height)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "step=(ssize_t) (first > last ? -1 : 1);",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "step=(ssize_t) (first > last ? -1 : 1);",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "step=(ssize_t) (first > last ? -1 : 1);",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_gt_to_le",
+   "nth": 1,
+   "src": "step=(ssize_t) (first > last ? -1 : 1);",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 3,
+   "src": "for (i=0; i < (ssize_t) component_image->colors; i++)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 5,
+   "src": "for (i=0; i < (ssize_t) component_image->colors; i++)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 7,
+   "src": "for (i=0; i < (ssize_t) component_image->colors; i++)",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(first < (ssize_t) component_image->colors))",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "(first < (ssize_t) component_image->colors))",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(neighbors[j] < id)))",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 3,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 4,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 5,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 6,
+   "src": "if (((object[i].metric[n] < min_threshold) ||",
+   "verdict": "unresolved",
+   "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((id >= 0) && (id < (ssize_t) component_image->colors))",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (first < 0)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (first < 0)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (ox < oy)",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (top_ids < 0)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (x < object[id].bounding_box.x)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (x < object[id].bounding_box.x)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (y < object[id].bounding_box.y)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (y < object[id].bounding_box.y)",
+   "verdict": "equivalent",
+   "why": "keeps a running minimum or maximum: at equality both branches keep the same value"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "object[i].color.black/=(QuantumScale*object[i].area);",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "object[i].key=order*key;",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "(object[i].metric[n] >= max_threshold)) && (i != background_id))",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 5,
+   "src": "if (artifact != (const char *) NULL)",
+   "verdict": "unresolved",
+   "why": "an edge of the keep/remove list parsing; not killed by the lists tried (ranges, reversed ranges, ';')"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/vision.c",
+   "function": "ConnectedComponentsImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 14,
+   "src": "if (artifact != (const char *) NULL)",
+   "verdict": "unresolved",
+   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "EccentricityThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "EccentricityThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "EccentricityThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "EccentricityThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "EccentricityThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "EccentricityThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "MajorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "MajorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "MajorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "MajorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "MajorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "MajorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "MinorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "MinorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M02+=(y-centroid.y)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "MinorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "MinorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M11+=(x-centroid.x)*(y-centroid.y);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/vision.c",
+   "function": "MinorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/vision.c",
+   "function": "MinorAxisThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "M20+=(x-centroid.x)*(x-centroid.x);",
+   "verdict": "unresolved",
+   "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/vision.c",
+   "function": "PerimeterThreshold",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((ssize_t) pixels[2*v+u] == i)",
+   "verdict": "unresolved",
+   "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
   },
   {
    "at": 26,
