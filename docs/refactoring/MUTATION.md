@@ -937,6 +937,78 @@ messages, and are worth fixing in the catalogue:
 | 11 | `unrecognized option` | `-perceptible` (9) |
 | 9 | `option deprecated` | `+shade` |
 
+## quantum-import.c and quantum-export.c (Windows)
+
+Full runs (default operators) on WSL, capped survivors rerun uncapped, then cases for the
+gaps. Both files hold one routine per pixel layout and per depth, and nearly every
+survivor sat on code no case ran: 336 and 232 survivors on unexecuted lines, 159 and 97
+mutants in functions never called. What little was reached was checked well (6 and 2
+unmatched survivors).
+
+The cases (243, family `quantum`, in the Windows block of `cases.py`): the raw layouts
+the raw family never wrote (`graya`, `bgro`, `ycbcra`) at 17 depths and sample formats;
+the layouts it has, at the depths it skipped (2, 10 and 24 bits, 24-bit floats, signed
+samples, little-endian); UYVY and PAL; palette images in MIFF at depths 1 to 16 and with
+alpha; and one image with a meta channel, which takes the multispectral path.
+Floating-point BGRO is left out: its reads are not reproducible (ORACLE.md, *Known
+upstream issues*). `selfcheck --repeat 8` over the family: 0 nondeterministic.
+
+| File | Mutants | Killed | Plain | Reach | Adjusted |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `quantum-import.c`, before | 868 | 362 | 42% | 82% | 42% |
+| `quantum-import.c`, after | 868 | 492 | 57% | 94% | **58%** |
+| `quantum-export.c`, before | 781 | 415 | 53% | 88% | 56% |
+| `quantum-export.c`, after | 781 | 480 | 61% | 88% | **65%** |
+
+Neither file is trusted yet: the survivors left are still mostly unreached.
+
+## Which mutation operators (Windows, 2026-09-30)
+
+Every figure so far comes from **Mull's default operators**: `mull.yml` names only the
+files (`includePaths`), so Mull applies its default group at every place in those files
+where an operator fits. In all of MagickCore that is 35,266 mutants: equality (`==`/`!=`,
+12,330), relational and boundary (`<` to `<=` or `>=` and so on, 10,438), arithmetic (`*`,
+`/`, `+`, `-`, `%`, 9,270), increment (`++` to `--`, 3,036) and unary minus (192). "Full"
+in this file means every such mutant of a file; "sample" means 60 of them at random.
+
+These model operator slips. The slips refactoring makes are often of another kind: a
+statement lost in an extraction (Recipe E), a condition rebuilt wrongly (Recipe P).
+Offutt et al.'s sufficient set (ABS, AOR, LCR, ROR, UOI) has logical-connector replacement
+(LCR); statement deletion (SDL) has been found cost-effective as well. A pilot added
+`cxx_remove_void_call`, `cxx_logical` and `cxx_remove_negation` to the defaults for
+`colorspace.c` and `quantum-import.c` (build `mull-trial-ops`, script
+`build-oracle/trial-ops.sh`), and ran only the new mutants:
+
+| | `colorspace.c` | `quantum-import.c` |
+| --- | ---: | ---: |
+| default mutants | 550 | 868 |
+| new mutants | 98 (+18%) | 530 (+61%) |
+| killed by the existing cases | 93 | 236 |
+| open on reached lines | 5 | 4 |
+| unreached lines / functions never called | 0 / 0 | 201 / 89 |
+| extra time, with the uncapped reruns | about 1 minute | about 8 minutes |
+
+**All 628 new mutants are statement deletions.** `cxx_logical` and `cxx_remove_negation`
+generated none, at `-O0` as at `-O2`, by group name or by the operators' own names, and
+`cxx_all` adds only `cxx_replace_scalar_call`. The likely reason: Mull mutates LLVM IR, where
+C's `&&` and `||` have become branches and `!x` on an `int` a comparison with zero, so the
+patterns these operators look for do not occur. So LCR, one of the five sufficient
+operators, cannot be had from Mull for this code; nor can ABS. It would take a
+source-level tool (Dextool Mutate implements the set) or a small rewriter that switches
+`a && b` to `a || b` behind the same environment switch Mull uses.
+
+Statement deletion is cheap and finds the kind of survivor that matters: in
+`colorspace.c`, removing `GetPixelInfo(image,&zero)` (lines 800, 2130) or the three
+`SetPixelRed/Green/Blue(...gray...)` calls (2283-2285); in `quantum-import.c`, three
+`SetPixelAlpha(image,OpaqueAlpha,q)` calls. Not all of them may be gaps (the gray values
+may already equal the channels they set), and none has been read yet.
+
+Proposed, not decided: three named operator profiles, so that every figure says which set
+it was measured with. `default` (`cxx_default`); `extended` (`cxx_all`, which in practice is
+the defaults with statement deletion and scalar-call replacement); `literature`, the
+sufficient set as far as Mull can express it (AOR, ROR, SDL for void calls, UOI in part;
+no LCR, no ABS). The project owner decides.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:

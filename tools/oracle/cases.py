@@ -994,6 +994,91 @@ def _raw_format_cases(f):
                     steps, [enc, "dec.miff"])
 
 
+# ---- gaps found on the Windows machine (docs/refactoring/HARNESS-SPLIT.md)
+# quantum-import.c and quantum-export.c: one routine per pixel layout and
+# depth, and the raw family above reaches only some of them.
+_FLOAT = ["-define", "quantum:format=floating-point"]
+_SIGNED = ["-define", "quantum:format=signed"]
+# Layouts the raw family never writes: GrayAlpha, BGRO and YCbCrA.
+QUANTUM_NEW_FORMATS = ["graya", "bgro", "ycbcra"]
+QUANTUM_NEW_FORMAT_DEPTHS = [
+    ("8", []), ("1", []), ("2", []), ("4", []), ("10", []), ("12", []), ("16", []),
+    ("24", []), ("32", []), ("16", _FLOAT), ("24", _FLOAT), ("32", _FLOAT),
+    ("64", _FLOAT), ("8", _SIGNED), ("16", _SIGNED), ("16", ["-endian", "LSB"]),
+    ("8", ["-interlace", "plane"]),
+]
+# Depths and sample formats the raw family skips, for the layouts it has:
+# 2, 10 and 24 bits, 24-bit floats, signed samples, little-endian.
+QUANTUM_OLD_FORMATS = ["gray", "rgb", "bgr", "rgba", "bgra", "rgbo", "o", "a", "cmyk",
+                       "cmyka"]
+QUANTUM_EXTRA_DEPTHS = [
+    ("2", []), ("10", []), ("24", []), ("24", _FLOAT), ("8", _SIGNED), ("16", _SIGNED),
+    ("16", ["-endian", "LSB"]),
+]
+# Palette images are stored as colormap indexes, at their own depths.
+QUANTUM_INDEX_DEPTHS = ["1", "2", "4", "8", "16"]
+# Upstream bug (ORACLE.md, "Known upstream issues"): reading BGRO as
+# floating point gives a different image from run to run, single-threaded and
+# with a fixed malloc fill: 3 decodes in 12 runs at 64 bits, 2 at 24 and 32.
+# Integer and signed BGRO, and RGBO at every depth, are stable.
+QUANTUM_UNSTABLE = {("bgro", "floating-point")}
+
+
+def _quantum_unstable(f, extra):
+    return (f, "floating-point") in QUANTUM_UNSTABLE and _FLOAT[1] in extra
+
+
+def _quantum_round_trip(f, depth, extra, name):
+    enc = "enc.%s" % f
+    steps = [[img(name), "-depth", depth] + extra + ["%s:%s" % (f, enc)],
+             ["-size", "{W:%s}x{H:%s}" % (name, name), "-depth", depth] + extra
+             + ["%s:%s" % (f, enc)] + FLOAT_OUT + ["dec.miff"]]
+    return _case("quantum", "%s -depth %s %s -> %s" % (name, depth, " ".join(extra), f),
+                 steps, [enc, "dec.miff"])
+
+
+def _quantum_layout_cases(writable_formats):
+    combos = itertools.chain(
+        itertools.product(QUANTUM_NEW_FORMATS, QUANTUM_NEW_FORMAT_DEPTHS),
+        itertools.product(QUANTUM_OLD_FORMATS, QUANTUM_EXTRA_DEPTHS))
+    for (f, (depth, extra)), name in itertools.product(combos, ("rose_alpha", "hdri")):
+        if f in writable_formats and not _quantum_unstable(f, extra):
+            yield _quantum_round_trip(f, depth, extra, name)
+
+
+def _quantum_yuv_cases():
+    # CbYCrY: UYVY and PAL, 16 bits a pixel, read back with the geometry.
+    for f in ("uyvy", "pal"):
+        steps = [[img("rose"), "%s:enc.%s" % (f, f)],
+                 ["-size", "{W:rose}x{H:rose}", "%s:enc.%s" % (f, f)] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantum", "rose -> %s -> miff" % f, steps, ["enc." + f, "dec.miff"])
+
+
+def _quantum_index_cases():
+    for depth in QUANTUM_INDEX_DEPTHS:
+        steps = [[img("palette"), "-depth", depth, "miff:enc.miff"],
+                 ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantum", "palette -depth %s -> miff" % depth, steps,
+                    ["enc.miff", "dec.miff"])
+    steps = [[img("rose_alpha"), "-colors", "8", "-type", "PaletteAlpha", "miff:enc.miff"],
+             ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
+    yield _case("quantum", "rose_alpha PaletteAlpha -> miff", steps, ["enc.miff", "dec.miff"])
+
+
+def _quantum_meta_cases():
+    # A meta channel makes the image multispectral: its own import and export.
+    steps = [[img("rose"), "-channel-fx", "red=>meta", "miff:enc.miff"],
+             ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
+    yield _case("quantum", "rose red=>meta -> miff", steps, ["enc.miff", "dec.miff"])
+
+
+def _quantum_cases(writable_formats):
+    yield from _quantum_layout_cases(writable_formats)
+    yield from _quantum_yuv_cases()
+    yield from _quantum_index_cases()
+    yield from _quantum_meta_cases()
+
+
 # ---- decoders over the frozen reader corpus
 # Raw decode files, read with an explicit format prefix.
 _RAW_DECODE_SUFFIXES = (".cmyk", ".gray", ".rgba", ".rgb", ".uyvy", ".yuv")
@@ -1431,6 +1516,7 @@ def generate(lists, writable_formats):
         _type_cases(lists), _preview_cases(lists),
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
+        _quantum_cases(writable_formats),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
