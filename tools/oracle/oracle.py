@@ -356,7 +356,10 @@ def write_case_files(d, case):
 
 def fix_dates(d):
     for n in os.listdir(d):  # files read back must not carry today's date
-        os.utime(os.path.join(d, n), (FIXED_MTIME, FIXED_MTIME))
+        try:
+            os.utime(os.path.join(d, n), (FIXED_MTIME, FIXED_MTIME))
+        except FileNotFoundError:  # a temporary file removed since the listing
+            pass
 
 
 def command_line(binary, argv):
