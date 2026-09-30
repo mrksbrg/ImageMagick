@@ -1,0 +1,763 @@
+{
+ "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
+ "verdicts": [
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "BrightnessContrastImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (contrast < 0.0)",
+   "at": 13,
+   "verdict": "equivalent",
+   "why": "at contrast 0 both formulas give slope 1",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClipCLAHEHistogram",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (histogram[i] > clip_limit)",
+   "at": 17,
+   "verdict": "equivalent",
+   "why": "at equality the excess added is histogram[i]-clip_limit = 0",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClipCLAHEHistogram",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (step < 1)",
+   "at": 9,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "GenerateCLAHELut",
+   "mutator": "cxx_sub_to_add",
+   "src": "delta=(unsigned short) ((range_info->max-range_info->min)/number_bins+1);",
+   "at": 40,
+   "verdict": "equivalent",
+   "why": "range_info->min is always 0 (CLAHEImage, the only caller, sets it), so -min and +min are the same",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "GenerateCLAHELut",
+   "mutator": "cxx_sub_to_add",
+   "src": "lut[i]=(unsigned short) ((i-range_info->min)/delta);",
+   "at": 27,
+   "verdict": "equivalent",
+   "why": "range_info->min is always 0 (CLAHEImage, the only caller, sets it), so -min and +min are the same",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "MapCLAHEHistogram",
+   "mutator": "cxx_sub_to_add",
+   "src": "scale=(double) (range_info->max-range_info->min)/number_pixels;",
+   "at": 31,
+   "verdict": "equivalent",
+   "why": "range_info->min is always 0 (CLAHEImage, the only caller, sets it), so -min and +min are the same",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "MapCLAHEHistogram",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (histogram[i] > range_info->max)",
+   "at": 17,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "CLAHE",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (limit < 1UL)",
+   "at": 10,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "CLAHEImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (tile_info.width < 2)",
+   "at": 20,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "CLAHEImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (tile_info.height < 2)",
+   "at": 21,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "CLAHEImage",
+   "mutator": "cxx_eq_to_ne",
+   "src": "status=CLAHE(&clahe_info,&tile_info,&range_info,number_bins == 0 ?",
+   "at": 60,
+   "verdict": "gap",
+   "why": "every case uses 128 bins, the value the mutant substitutes",
+   "killed_by": "{C}/rose.miff -clahe 10x20!+64+3",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "CLAHEImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "n=clahe_info.width*(size_t) (tile_info.y/2);",
+   "at": 18,
+   "verdict": "gap",
+   "why": "no case pads the tiles vertically by 4 or more rows, so tile_info.y/2 was always 0 or 1",
+   "killed_by": "{C}/rose.miff -clahe 10x20!+64+3",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "CLAHEImage",
+   "mutator": "cxx_eq_to_ne",
+   "src": "if (TransformImageColorspace(image,colorspace,exception) == MagickFalse)",
+   "at": 57,
+   "verdict": "unobservable",
+   "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((IsGrayColorspace(image->colorspace) != MagickFalse) &&",
+   "at": 41,
+   "verdict": "gap",
+   "why": "no case applies a colour clut to a gray image",
+   "killed_by": "{C}/gray16.miff {C}/rose.miff -clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_eq_to_ne",
+   "src": "(IsGrayColorspace(clut_image->colorspace) == MagickFalse))",
+   "at": 42,
+   "verdict": "gap",
+   "why": "no case applies a colour clut to a gray image",
+   "killed_by": "{C}/gray16.miff {C}/rose.miff -clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "status=InterpolatePixelInfo(clut_image,clut_view,method,(double) i*",
+   "at": 66,
+   "verdict": "gap",
+   "why": "the only clut (gray16) is a vertical gradient, constant along x",
+   "killed_by": "{C}/gray16.miff {C}/rose.miff -clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_sub_to_add",
+   "src": "((double) clut_image->columns-adjust)/MaxMap,(double) i*",
+   "at": 29,
+   "verdict": "gap",
+   "why": "the only clut (gray16) is a vertical gradient, constant along x",
+   "killed_by": "{C}/gray16.miff {C}/rose.miff -clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_div_to_mul",
+   "src": "((double) clut_image->columns-adjust)/MaxMap,(double) i*",
+   "at": 37,
+   "verdict": "gap",
+   "why": "the only clut (gray16) is a vertical gradient, constant along x",
+   "killed_by": "{C}/gray16.miff {C}/rose.miff -clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((traits & UpdatePixelTrait) != 0)",
+   "at": 32,
+   "verdict": "gap",
+   "why": "no case applies a clut to a CMYK image",
+   "killed_by": "{C}/cmyk.miff {C}/rose.miff -clut",
+   "nth": 3
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((traits & UpdatePixelTrait) != 0)",
+   "at": 32,
+   "verdict": "gap",
+   "why": "no case applies a clut to an image with alpha",
+   "killed_by": "{C}/rose_alpha.miff {C}/rose.miff -clut",
+   "nth": 4
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((clut_image->alpha_trait != UndefinedPixelTrait) &&",
+   "at": 29,
+   "verdict": "equivalent",
+   "why": "alpha traits include Update only when the image has alpha, and ActivateAlphaChannel returns early when it already has; not killed by 4 clut pairs",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0))",
+   "at": 49,
+   "verdict": "gap",
+   "why": "no case uses a clut with alpha",
+   "killed_by": "{C}/rose.miff {C}/rose_alpha.miff -clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "Contrast",
+   "mutator": "cxx_mul_to_div",
+   "src": "brightness+=0.5*sign*(0.5*(sin((double) (MagickPI*(brightness-0.5)))+1.0)-",
+   "at": 15,
+   "verdict": "equivalent",
+   "why": "0.5/sign equals 0.5*sign exactly for sign = +1 or -1",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "Contrast",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (brightness > 1.0)",
+   "at": 15,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "Contrast",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (brightness < 0.0)",
+   "at": 15,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (intensity > black_point)",
+   "at": 14,
+   "verdict": "gap",
+   "why": "the black point is never a whole count of pixels that a cumulative histogram reaches exactly",
+   "killed_by": "{C}/gray16.miff -contrast-stretch 64x64",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (intensity > ((double) image->columns*image->rows-white_point))",
+   "at": 14,
+   "verdict": "gap",
+   "why": "the white point is never a whole count of pixels that a cumulative histogram reaches exactly",
+   "killed_by": "{C}/gray16.miff -contrast-stretch 64x64",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (j < (ssize_t) black[i])",
+   "at": 6,
+   "verdict": "equivalent",
+   "why": "at j == black the stretch formula gives 0 as well; not killed by 3 probes with float output",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=(Quantum) 0;",
+   "at": 45,
+   "verdict": "unobservable",
+   "why": "writes 0 to entries j' <= 1 of other channels, which only matters for pixels at exactly quantum 1; the j = 0 division by zero yields 0 on arm64 but traps on x86, so the Linux build should kill it",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (j > (ssize_t) white[i])",
+   "at": 6,
+   "verdict": "equivalent",
+   "why": "at j == white the stretch formula gives QuantumRange as well; not killed by 3 probes with float output",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_add_to_sub",
+   "src": "image->colormap[j].red))+(size_t) i];",
+   "at": 24,
+   "verdict": "equivalent",
+   "why": "the red channel's offset i is 0, and +0 equals -0; not killed by 3 probes",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "verdict": "unresolved",
+   "why": "not killed by 15 probes (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output). Probably the colormap alpha never reaches the output here, but LevelImage's identical branch is observable, so this is not proven",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EnhanceImage",
+   "mutator": "cxx_gt_to_ge",
+   "src": "if (total_weight > MagickEpsilon)",
+   "at": 17,
+   "verdict": "equivalent",
+   "why": "total_weight is at least 80: the centre pixel always matches itself",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EqualizeImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "src": "ClampToQuantum(intensity))+(size_t) i]++;",
+   "at": 38,
+   "verdict": "equivalent",
+   "why": "negating every count negates map, black and white alike, so every ratio (map-black)/(white-black) is exactly unchanged",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EqualizeImage",
+   "mutator": "cxx_add_to_sub",
+   "src": "ClampToQuantum(image->colormap[j].red))+channel];",
+   "at": 39,
+   "verdict": "equivalent",
+   "why": "the red channel is 0, and +0 equals -0",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "verdict": "unresolved",
+   "why": "not killed by 15 probes (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output). Probably the colormap alpha never reaches the output here, but LevelImage's identical branch is observable, so this is not proven",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "GammaImage",
+   "mutator": "cxx_eq_to_ne",
+   "src": "if (image->storage_class == PseudoClass)",
+   "at": 25,
+   "verdict": "gap",
+   "why": "`magick -gamma` uses EvaluateImage; GammaImage is reached only through convert/mogrify, which never run on a palette image",
+   "killed_by": "convert {C}/palette.miff -gamma 1.6",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (image->colorspace != hald_image->colorspace)",
+   "at": 22,
+   "verdict": "gap",
+   "why": "no case applies a hald clut to an image in another colorspace",
+   "killed_by": "{C}/gray16.miff hald:4 -hald-clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (((GetPixelBlackTraits(image) & UpdatePixelTrait) != 0) &&",
+   "at": 53,
+   "verdict": "gap",
+   "why": "no case uses a CMYK hald clut",
+   "killed_by": "{C}/cmyk.miff ( hald:4 -colorspace CMYK ) -hald-clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_eq_to_ne",
+   "src": "(image->colorspace == CMYKColorspace))",
+   "at": 19,
+   "verdict": "gap",
+   "why": "no case uses a CMYK hald clut",
+   "killed_by": "{C}/cmyk.miff ( hald:4 -colorspace CMYK ) -hald-clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0) &&",
+   "at": 53,
+   "verdict": "gap",
+   "why": "no case applies a hald clut to an image with alpha",
+   "killed_by": "{C}/rose_alpha.miff hald:4 -hald-clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "(image->alpha_trait != UndefinedPixelTrait))",
+   "at": 20,
+   "verdict": "gap",
+   "why": "no case applies a hald clut to an image with alpha",
+   "killed_by": "{C}/rose_alpha.miff hald:4 -hald-clut",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LevelImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "verdict": "gap",
+   "why": "no case levels a palette image with alpha",
+   "killed_by": "{C}/rose_alpha.miff -colors 16 -level 10%,90%",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LevelizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "verdict": "unresolved",
+   "why": "not killed by 15 probes (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output). Probably the colormap alpha never reaches the output here, but LevelImage's identical branch is observable, so this is not proven",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LevelImageColors",
+   "mutator": "cxx_eq_to_ne",
+   "src": "((IsGrayColorspace(black_color->colorspace) == MagickFalse) ||",
+   "at": 44,
+   "verdict": "gap",
+   "why": "no case levels a gray image with exactly one of the two colours gray",
+   "killed_by": "{C}/gray16.miff -level-colors navy,gray(80%)",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LevelImageColors",
+   "mutator": "cxx_eq_to_ne",
+   "src": "(IsGrayColorspace(white_color->colorspace) == MagickFalse)))",
+   "at": 43,
+   "verdict": "gap",
+   "why": "no case levels a gray image with exactly one of the two colours gray",
+   "killed_by": "{C}/gray16.miff -level-colors gray(20%),gold",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LevelImageColors",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 50,
+   "verdict": "gap",
+   "why": "every +level-colors case has red 0 or 255 in both colours, which leaves red unchanged",
+   "killed_by": "{C}/rose.miff +level-colors #402000,#c0e0ff",
+   "nth": 1
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LevelImageColors",
+   "mutator": "cxx_ne_to_eq",
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "at": 14,
+   "verdict": "unobservable",
+   "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LinearStretchImage",
+   "mutator": "cxx_ge_to_gt",
+   "src": "if (intensity >= black_point)",
+   "at": 14,
+   "verdict": "gap",
+   "why": "the black point is never a whole count of pixels that a cumulative histogram reaches exactly",
+   "killed_by": "{C}/gray16.miff -linear-stretch 64x64",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "LinearStretchImage",
+   "mutator": "cxx_ge_to_gt",
+   "src": "if (intensity >= white_point)",
+   "at": 14,
+   "verdict": "gap",
+   "why": "the white point is never a whole count of pixels that a cumulative histogram reaches exactly",
+   "killed_by": "{C}/gray16.miff -linear-stretch 64x64",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (artifact != (const char *) NULL)",
+   "at": 13,
+   "verdict": "gap",
+   "why": "no case sets -define modulate:colorspace",
+   "killed_by": "{C}/rose.miff -define modulate:colorspace=HSB -modulate 110/90/80",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (artifact != (const char *) NULL)",
+   "at": 13,
+   "verdict": "gap",
+   "why": "no case sets -define color:illuminant for -modulate (with Lab and illuminant A it makes no difference; with LCHab and D50 it does)",
+   "killed_by": "{C}/rose.miff -define color:illuminant=D50 -define modulate:colorspace=LCHab -modulate 110/90/80",
+   "nth": 1
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "InverseScaledSigmoidal",
+   "mutator": "cxx_lt_to_le",
+   "src": "argument < -1+MagickEpsilon",
+   "at": 9,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "InverseScaledSigmoidal",
+   "mutator": "cxx_gt_to_ge",
+   "src": "( argument > 1-MagickEpsilon ? 1-MagickEpsilon : argument )",
+   "at": 11,
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches give the same value",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "SigmoidalContrastImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (contrast < MagickEpsilon)",
+   "at": 13,
+   "verdict": "equivalent",
+   "why": "at contrast == MagickEpsilon the operator leaves the image unchanged as well (probed: identical output)",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "SigmoidalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "verdict": "unresolved",
+   "why": "not killed by 15 probes (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output). Probably the colormap alpha never reaches the output here, but LevelImage's identical branch is observable, so this is not proven",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "SigmoidalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "verdict": "unresolved",
+   "why": "not killed by 15 probes (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output). Probably the colormap alpha never reaches the output here, but LevelImage's identical branch is observable, so this is not proven",
+   "nth": 1
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "WhiteBalanceImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "at": 14,
+   "verdict": "unobservable",
+   "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only",
+   "nth": 0
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "AutoGammaImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unobservable",
+   "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(",
+   "at": 23,
+   "nth": 3,
+   "verdict": "unresolved",
+   "why": "the colormap alpha of a palette image, like the unresolved alpha branches of LevelizeImage and SigmoidalContrastImage: not killed by any probe (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output), although LevelImage's identical branch is observable"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ContrastStretchImage",
+   "mutator": "cxx_add_to_sub",
+   "src": "image->colormap[j].alpha))+(size_t) i];",
+   "at": 26,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the colormap alpha of a palette image, like the unresolved alpha branches of LevelizeImage and SigmoidalContrastImage: not killed by any probe (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output), although LevelImage's identical branch is observable"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if (black[channel] != white[channel])",
+   "at": 19,
+   "nth": 3,
+   "verdict": "unresolved",
+   "why": "the colormap alpha of a palette image, like the unresolved alpha branches of LevelizeImage and SigmoidalContrastImage: not killed by any probe (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output), although LevelImage's identical branch is observable"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "src": "GetPixelChannels(image)*ScaleQuantumToMap(",
+   "at": 23,
+   "nth": 3,
+   "verdict": "unresolved",
+   "why": "the colormap alpha of a palette image, like the unresolved alpha branches of LevelizeImage and SigmoidalContrastImage: not killed by any probe (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output), although LevelImage's identical branch is observable"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "EqualizeImage",
+   "mutator": "cxx_add_to_sub",
+   "src": "ClampToQuantum(image->colormap[j].alpha))+channel];",
+   "at": 41,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the colormap alpha of a palette image, like the unresolved alpha branches of LevelizeImage and SigmoidalContrastImage: not killed by any probe (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output), although LevelImage's identical branch is observable"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "GammaImage",
+   "mutator": "cxx_ne_to_eq",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "at": 52,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "the colormap alpha of a palette image, like the unresolved alpha branches of LevelizeImage and SigmoidalContrastImage: not killed by any probe (palette with alpha via -colors 16, alpha halved, -channel A, RGB, RGBA; MIFF and PNG8 output), although LevelImage's identical branch is observable"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "area=(point.y < 0.5) ? 0.0 : 1.0;",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a boundary at exactly half a clut step: needs a channel value that lands exactly on it; not constructed yet"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "HaldClutImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "area=(point.z < 0.5)? 0.0 : 1.0;",
+   "at": 14,
+   "nth": 0,
+   "verdict": "unresolved",
+   "why": "a boundary at exactly half a clut step: needs a channel value that lands exactly on it; not constructed yet"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateHSB",
+   "mutator": "cxx_sub_to_add",
+   "src": "hue+=fmod((percent_hue-100.0),200.0)/200.0;",
+   "at": 22,
+   "nth": 0,
+   "verdict": "gap",
+   "why": "hue wraps visibly only with out-of-gamut values; no case modulated the HDRI image in HSB",
+   "killed_by": "{C}/hdri.miff -define modulate:colorspace=HSB -modulate 110/100/95"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateHSI",
+   "mutator": "cxx_sub_to_add",
+   "src": "hue+=fmod((percent_hue-100.0),200.0)/200.0;",
+   "at": 22,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "fmod(p+100,200) and fmod(p-100,200) differ by 200, one full turn of hue, and this colorspace's conversion is periodic in hue; not killed on rose or on the HDRI image"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateHSV",
+   "mutator": "cxx_sub_to_add",
+   "src": "hue+=fmod((percent_hue-100.0),200.0)/200.0;",
+   "at": 22,
+   "nth": 0,
+   "verdict": "gap",
+   "why": "hue wraps visibly only with out-of-gamut values; no case modulated the HDRI image in HSV",
+   "killed_by": "{C}/hdri.miff -define modulate:colorspace=HSV -modulate 110/100/95"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateLCHab",
+   "mutator": "cxx_sub_to_add",
+   "src": "hue+=fmod((percent_hue-100.0),200.0)/200.0;",
+   "at": 22,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "fmod(p+100,200) and fmod(p-100,200) differ by 200, one full turn of hue, and this colorspace's conversion is periodic in hue; not killed on rose or on the HDRI image"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateLCHuv",
+   "mutator": "cxx_sub_to_add",
+   "src": "hue+=fmod((percent_hue-100.0),200.0)/200.0;",
+   "at": 22,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "fmod(p+100,200) and fmod(p-100,200) differ by 200, one full turn of hue, and this colorspace's conversion is periodic in hue; not killed on rose or on the HDRI image"
+  },
+  {
+   "file": "MagickCore/enhance.c",
+   "function": "ModulateImage",
+   "mutator": "cxx_lt_to_le",
+   "src": "if (illuminant_type < 0)",
+   "at": 20,
+   "nth": 0,
+   "verdict": "equivalent",
+   "why": "differs only for illuminant 0, Undefined, which gives the same output with or without the colorspace reset (probed with LCHab)"
+  }
+ ]
+}

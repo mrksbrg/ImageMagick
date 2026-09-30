@@ -1123,6 +1123,90 @@ def _mvg_cases():
                     ["out.miff"])
 
 
+# ---- gaps found by reading surviving mutants (tools/oracle/verdicts.json).
+# Each case killed the survivors named beside it when it was added; the
+# verdict explains why no existing case could.
+GAP_CASES = [
+    # enhance.c
+    ("rose -clahe 10x20!+64+3", ["-clahe", "10x20!+64+3"], ["rose"]),  # bins other than 128, tall padding
+    ("gray16 rose -clut", ["-clut"], ["gray16", "rose"]),                # colour clut on gray; clut varies in x
+    ("cmyk rose -clut", ["-clut"], ["cmyk", "rose"]),
+    ("rose_alpha rose -clut", ["-clut"], ["rose_alpha", "rose"]),
+    ("rose rose_alpha -clut", ["-clut"], ["rose", "rose_alpha"]),         # clut with alpha
+    ("gray16 -contrast-stretch 64x64", ["-contrast-stretch", "64x64"], ["gray16"]),  # 64 pixels a level
+    ("gray16 -linear-stretch 64x64", ["-linear-stretch", "64x64"], ["gray16"]),
+    ("gray16 hald -hald-clut", ["-hald-clut"], ["gray16", "hald"]),       # colorspace differs from the clut's
+    ("rose_alpha hald -hald-clut", ["-hald-clut"], ["rose_alpha", "hald"]),
+    ("cmyk hald-cmyk -hald-clut", ["(", img("hald"), "-colorspace", "CMYK", ")", "-hald-clut"],
+     ["cmyk"]),
+    ("rose_alpha -colors 16 -level", ["-colors", "16", "-level", "10%,90%"], ["rose_alpha"]),
+    ("gray16 -level-colors navy,gray", ["-level-colors", "navy,gray(80%)"], ["gray16"]),
+    ("gray16 -level-colors gray,gold", ["-level-colors", "gray(20%),gold"], ["gray16"]),
+    ("rose +level-colors mid red", ["+level-colors", "#402000,#c0e0ff"], ["rose"]),
+    ("rose modulate:colorspace", ["-define", "modulate:colorspace=HSB", "-modulate", "110/90/80"],
+     ["rose"]),
+    ("rose modulate color:illuminant", ["-define", "color:illuminant=D50", "-define",
+                                        "modulate:colorspace=LCHab", "-modulate", "110/90/80"],
+     ["rose"]),
+]
+# Code in enhance.c that no case executed.
+REACH_CASES = [
+    ("rose -channel RG -auto-gamma", ["-channel", "RG", "-auto-gamma"], ["rose"]),  # per channel
+    ("rose +negate", ["+negate"], ["rose"]),                                # gray pixels only
+    ("gray16 +negate", ["+negate"], ["gray16"]),
+    ("palette +negate", ["+negate"], ["palette"]),
+    ("rose nearest hald -hald-clut", ["-interpolate", "Nearest", img("hald"), "-hald-clut"],
+     ["rose"]),
+    ("rose_alpha -colors 16 -equalize", ["-colors", "16", "-equalize"], ["rose_alpha"]),
+    ("rose_alpha -colors 16 -contrast-stretch", ["-colors", "16", "-contrast-stretch", "2%x1%"],
+     ["rose_alpha"]),
+    ("rose invalid color:illuminant", ["-define", "color:illuminant=bogus", "-define",
+                                       "modulate:colorspace=LCHab", "-modulate", "110/90/80"],
+     ["rose"]),  # an invalid illuminant also resets the colorspace to the default
+    ("rose white-balance:vibrance %", ["-define", "white-balance:vibrance=10%", "-white-balance"],
+     ["rose"]),
+    ("rose white-balance:vibrance", ["-define", "white-balance:vibrance=2000", "-white-balance"],
+     ["rose"]),
+] + [("%s modulate:colorspace=%s" % (name, cs), ["-define", "modulate:colorspace=" + cs,
+                                                 "-modulate", "110/100/95"], [name])
+     # the HDRI image's out-of-gamut values make a wrong hue wrap visible
+     for name in ("rose", "hdri")
+     for cs in ("HCL", "HCLp", "HSB", "HSI", "HSV", "HWB", "LCHab", "LCHuv")]
+# ColorDecisionListImage: the sample from its documentation, with offsets that
+# keep every value positive (a negative base to Power 0.8 is NaN).
+CDL = """<ColorCorrectionCollection xmlns="urn:ASC:CDL:v1.2">
+  <ColorCorrection id="cc03345">
+    <SOPNode>
+      <Slope> 0.9 1.2 0.5 </Slope>
+      <Offset> 0.04 0.05 0.06 </Offset>
+      <Power> 1.0 0.8 1.5 </Power>
+    </SOPNode>
+    <SATNode>
+      <Saturation> 0.85 </Saturation>
+    </SATNode>
+  </ColorCorrection>
+</ColorCorrectionCollection>
+"""
+CDL_INPUTS = ["rose", "rose_alpha", "palette", "gray16"]
+# Through mogrify.c, whose -gamma is GammaImage (`magick -gamma` uses EvaluateImage).
+GAP_CONVERT_CASES = [
+    ("convert palette -gamma", ["-gamma", "1.6"], "palette"),
+]
+
+
+def _gap_cases():
+    for label, args, names in GAP_CASES:
+        yield _op("gaps", label, [img(n) for n in names], args)
+    for label, args, names in REACH_CASES:
+        yield _op("gaps", label, [img(n) for n in names], args)
+    for name in CDL_INPUTS:
+        yield _with_inputs(_op("gaps", name + " -cdl", [img(name)], ["-cdl", "cc.xml"]),
+                           files={"cc.xml": CDL})
+    for label, args, name in GAP_CONVERT_CASES:
+        yield _case("gaps", label, [["convert", img(name)] + args + FLOAT_OUT + ["out.miff"]],
+                    ["out.miff"])
+
+
 def _unique(cases):
     """Identical argv from different families: keep the first."""
     seen, unique = set(), []
@@ -1157,7 +1241,7 @@ def generate(lists, writable_formats):
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
-        _cipher_cases(), _info_cases(), _mvg_cases(),
+        _cipher_cases(), _info_cases(), _mvg_cases(), _gap_cases(),
     )
     return _unique(c for family in families for c in family)
 

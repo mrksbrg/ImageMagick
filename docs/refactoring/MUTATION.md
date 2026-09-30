@@ -707,6 +707,78 @@ The capped survivors cluster in the infrastructure files (`composite.c` 31, `con
 30, `blob.c` 20, `color.c` 19, `cache.c` and `channel.c` 18): rerun those uncapped before
 reading them as gaps.
 
+## Reading survivors by hand: enhance.c (Mac)
+
+The gate counts every survivor `classify.py` cannot name against the function. Most of
+those are either equivalent mutants or gaps a single case would close, and only reading
+tells which. Measured on the MacBook on 2026-09-30, from the full run of `enhance.c`
+(983 mutants, none capped), while the WSL machine ran `morphology.c`: the figures are
+Mac figures, but the verdicts below are about the source and hold on both machines.
+
+**Verdicts are kept in `tools/oracle/verdicts.json`**, which `classify.py` and
+`make_task.py` read. Each is keyed by function, mutator, the mutated line's text and the
+operator's column in it, not by line number, so it survives edits elsewhere in the file;
+once the line itself changes, the survivor is unmatched again and has to be reread. The
+kinds are `equivalent`, `unobservable` (a real change the CLI cannot show), `gap` (with
+`killed_by`, a case that killed it) and `unresolved` (counts as a gap). Every gap verdict
+was checked by running the mutant against the proposed case before it was recorded.
+
+The 58 unmatched survivors of the first run:
+
+| Verdict | Count | What they were |
+| --- | ---: | --- |
+| equivalent | 23 | clamps at their own bound (`< 2` → `<= 2` before setting 2), `range_info->min` that is always 0, the red channel's offset 0 (`+i` → `-i`), `0.5*sign` → `0.5/sign` for sign ±1, and `histogram[..]++` → `--` in EqualizeImage, which negates every count and leaves every ratio exactly as it was |
+| unobservable | 4 | three return statuses that every CLI caller discards (`(void) CLAHEImage(...)`); one index error that divides by zero, which yields 0 on arm64 and traps on x86, so the Linux build should kill it |
+| gap | 26 | closed by 17 new cases, below |
+| unresolved | 5 | the colormap alpha of palette images in ContrastStretch, Equalize, Levelize and SigmoidalContrast: no probe kills them, yet LevelImage's identical branch is observable |
+
+**What the gaps had in common** is inputs the families never combine:
+
+- `-clut` ran only as `rose gray16`: a colour image, a gray clut, a clut that is a vertical
+  gradient (so the x coordinate never mattered), no CMYK, no alpha on either side.
+- `-hald-clut` ran only on `rose`: no gray, CMYK or alpha image, no CMYK clut.
+- Histogram thresholds (`-contrast-stretch`, `-linear-stretch`) were given only as
+  percentages, which never land exactly on a cumulative pixel count, so `>` against `>=`
+  was invisible. `gray16` has exactly 64 pixels a level, and `64x64` hits it.
+- `-clahe` ran only with 128 bins, the value one mutant substitutes, and with tiles that
+  were never padded by more than 3 rows.
+- `-level-colors` used colours whose red is 0 or 255, which leaves red unchanged.
+- `-modulate` never had `modulate:colorspace` or `color:illuminant` set.
+- **`magick -gamma` does not call GammaImage** (it uses EvaluateImage); only `convert`
+  and `mogrify` do. The convert family runs every operator on `rose` and `rose_alpha`
+  only, so GammaImage never saw a palette image. The same holds for every other
+  operator whose `mogrify.c` path differs from `operation.c`; not measured yet.
+
+A second round of 30 cases reached code no case executed: `-cdl` (ColorDecisionListImage,
+66 mutants, none reached before), `+negate`, per-channel `-auto-gamma`, nearest-neighbour
+hald cluts, `white-balance:vibrance`, and `-modulate` in each of its eight other
+colorspaces on `rose` and on the HDRI image (a wrong hue wrap shows only with
+out-of-gamut values). All 47 are the `gaps` family in `cases.py`; `selfcheck --repeat 4`:
+0 nondeterministic. The 15 new survivors on newly reached lines were read as well.
+
+| | Before | After |
+| --- | ---: | --- |
+| Catalogue | 9,751 | 9,798 cases |
+| `enhance.c` lines executed | 66.5% (lcov of 2026-09-28) | 83.5% |
+| Killed | 677 of 983 (69%) | 823 of 983 (84%) |
+| Functions with no case | 9 | 0 |
+| Gate, whole file | 76% | **93%** |
+| Functions ready | 15 of 40 | 35 of 40 |
+| Functions not ready | 14 | 0 |
+| Functions careful | 11 | 5: `EqualizeImage`, `CLAHEImage`, `SigmoidalContrastImage`, `ContrastImage`, `LevelizeImage` (89-86%) |
+
+The gate is killed / (killed + gaps + unresolved + unmatched + unreached + no coverage),
+leaving out the harmless kinds and the hand verdicts equivalent and unobservable; the
+"before" column already uses today's verdicts, so the change is the new cases' doing.
+What is left against the file is 13 unresolved survivors (the colormap alpha branches,
+and two boundaries at exactly half a hald-clut step) and 45 on lines still unreached,
+almost all progress-monitor and error paths.
+
+The line coverage the reports use (`build-oracle/oracle.lcov`) had been made by hand;
+`tools/oracle/linecov.py` now regenerates it (about 100 s on the Mac). Rerun it, and
+`casemap.py`, after changing the catalogue. Reports:
+`build-oracle/work/mutation-enhance-merged.json` (the full run with the reruns merged).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:

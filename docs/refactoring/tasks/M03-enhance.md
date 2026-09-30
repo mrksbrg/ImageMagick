@@ -43,18 +43,18 @@ The score must read 1.53. If it does not, this file changed after the task was w
 
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
-| 1 | `EqualizeImage` | 2053 | 45 | 4 | 12 | public | 2 | 38 | 74 of 84 |
-| 2 | `ContrastStretchImage` | 1558 | 49 | 4 | 10 | public | 2 | 160 | 79 of 94 |
-| 3 | `NegateImage` | 3953 | 38 | 5 | 8 | public | 2 | 80 | 25 of 28 |
-| 4 | `GrayscaleImage` | 2487 | 33 | 4 | 5 | public | 2 | 46 | 31 of 33 |
-| 5 | `GammaImage` | 2335 | 25 | 4 | 5 | public | 2 | 5 | 22 of 25 |
-| 6 | `ModulateImage` | 3645 | 44 | - | 5 | public | 2 | 16 | 17 of 22 |
-| 7 | `ClipCLAHEHistogram` | 303 | 15 | 4 | 4 | static | - | 12 | 29 of 32 |
-| 8 | `CLAHEImage` | 620 | 30 | - | 4 | public | - | 12 | 44 of 54 |
-| 9 | `SigmoidalContrastImage` | 4280 | - | 4 | 5 | public | 2 | 24 | 27 of 34 |
-| 10 | `ClutImage` | 840 | 25 | - | 4 | public | 2 | 1 | 22 of 33 |
-| 11 | `HaldClutImage` | 2699 | 30 | - | 3 | public | 2 | 1 | 43 of 50 |
-| 12 | `WhiteBalanceImage` | 4448 | 22 | - | 4 | public | 2 | 12 | 23 of 26 |
+| 1 | `EqualizeImage` | 2053 | 45 | 4 | 12 | public | 2 | 39 | 74 of 87 |
+| 2 | `ContrastStretchImage` | 1558 | 49 | 4 | 10 | public | 2 | 162 | 81 of 96 |
+| 3 | `NegateImage` | 3953 | 38 | 5 | 8 | public | 2 | 83 | 42 of 46 |
+| 4 | `ColorDecisionListImage` | 1018 | 43 | 4 | 7 | public | 2 | 4 | 57 of 64 |
+| 5 | `GrayscaleImage` | 2487 | 33 | 4 | 5 | public | 2 | 46 | 31 of 33 |
+| 6 | `GammaImage` | 2335 | 25 | 4 | 5 | public | 2 | 6 | 28 of 32 |
+| 7 | `ModulateImage` | 3645 | 44 | - | 5 | public | 2 | 35 | 20 of 24 |
+| 8 | `ClipCLAHEHistogram` | 303 | 15 | 4 | 4 | static | - | 13 | 29 of 32 |
+| 9 | `CLAHEImage` | 620 | 30 | - | 4 | public | - | 13 | 46 of 54 |
+| 10 | `SigmoidalContrastImage` | 4280 | - | 4 | 5 | public | 2 | 24 | 27 of 34 |
+| 11 | `ClutImage` | 840 | 25 | - | 4 | public | 2 | 5 | 30 of 33 |
+| 12 | `HaldClutImage` | 2699 | 30 | - | 3 | public | 2 | 5 | 50 of 54 |
 
 Thresholds for C: cyclomatic complexity under 9, nesting depth under 4. **Cases** is how many oracle cases execute the function; **Mutants killed** counts the sampled mutants on lines the oracle executes. A function with no cases cannot be checked and is listed last: skip it and report it.
 
@@ -71,11 +71,12 @@ Work **one function at a time, in the order above**, and run the verification in
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 2142, `post_inc_to_post_dec`: `ClampToQuantum(intensity))+(size_t) i]++;`
-  - base line 2202, `add_to_sub`: `ClampToQuantum(image->colormap[j].red))+channel];`
+- The oracle missed 4 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
   - base line 2222, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
-- 7 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+  - base line 2226, `ne_to_eq`: `if (black[channel] != white[channel])`
+  - base line 2228, `mul_to_div`: `GetPixelChannels(image)*ScaleQuantumToMap(`
+  - base line 2229, `add_to_sub`: `ClampToQuantum(image->colormap[j].alpha))+channel];`
+- 9 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/enhance.c): simplify EqualizeImage`
 
@@ -86,15 +87,11 @@ Commit message: `refactor(MagickCore/enhance.c): simplify EqualizeImage`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- The oracle missed 7 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 1679, `gt_to_ge`: `if (intensity > black_point)`
-  - base line 1687, `gt_to_ge`: `if (intensity > ((double) image->columns*image->rows-white_point))`
-  - base line 1709, `lt_to_le`: `if (j < (ssize_t) black[i])`
-  - base line 1710, `mul_to_div`: `stretch_map[(ssize_t) GetPixelChannels(image)*j+i]=(Quantum) 0;`
-  - base line 1712, `gt_to_ge`: `if (j > (ssize_t) white[i])`
-  - base line 1735, `add_to_sub`: `image->colormap[j].red))+(size_t) i];`
-  - and 1 more (`tools/oracle/mutate.py --function ContrastStretchImage`)
-- 8 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
+  - base line 1751, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
+  - base line 1755, `mul_to_div`: `GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(`
+  - base line 1756, `add_to_sub`: `image->colormap[j].alpha))+(size_t) i];`
+- 12 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/enhance.c): simplify ContrastStretchImage`
 
@@ -105,142 +102,118 @@ Commit message: `refactor(MagickCore/enhance.c): simplify ContrastStretchImage`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/enhance.c): simplify NegateImage`
 
-#### Step 4: `GrayscaleImage` (line 2487)
+#### Step 4: `ColorDecisionListImage` (line 1018)
+
+- **Recipe G (guard clauses)** - nesting is 4, target is under 4.
+- **Recipe E (extract function)** - 7 nested blocks; each bump is a missing function.
+- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
+- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
+- Public function: its name and signature must not change.
+- Only 4 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
+- 7 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+
+Commit message: `refactor(MagickCore/enhance.c): simplify ColorDecisionListImage`
+
+### Wave 2
+
+#### Step 5: `GrayscaleImage` (line 2487)
 
 - **Recipe G (guard clauses)** - nesting is 4, target is under 4.
 - **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/enhance.c): simplify GrayscaleImage`
 
-### Wave 2
-
-#### Step 5: `GammaImage` (line 2335)
+#### Step 6: `GammaImage` (line 2335)
 
 - **Recipe G (guard clauses)** - nesting is 4, target is under 4.
 - **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
+- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
+- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
+- Public function: its name and signature must not change.
+- Only 6 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
+- The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
+  - base line 2391, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
+- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+
+Commit message: `refactor(MagickCore/enhance.c): simplify GammaImage`
+
+#### Step 7: `ModulateImage` (line 3645)
+
+- **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
+- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
+- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
+- Public function: its name and signature must not change.
+- 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+
+Commit message: `refactor(MagickCore/enhance.c): simplify ModulateImage`
+
+#### Step 8: `ClipCLAHEHistogram` (line 303)
+
+- **Recipe G (guard clauses)** - nesting is 4, target is under 4.
+- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
+- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
+- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+
+Commit message: `refactor(MagickCore/enhance.c): simplify ClipCLAHEHistogram`
+
+### Wave 3
+
+#### Step 9: `CLAHEImage` (line 620)
+
+- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
+- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
+- Recipe A does not apply: this function is public, and its signature is the API.
+- Public function: its name and signature must not change.
+- 8 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+
+Commit message: `refactor(MagickCore/enhance.c): simplify CLAHEImage`
+
+#### Step 10: `SigmoidalContrastImage` (line 4280)
+
+- **Recipe G (guard clauses)** - nesting is 4, target is under 4.
+- **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
+- Recipe A does not apply: this function is public, and its signature is the API.
+- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
+- Public function: its name and signature must not change.
+- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
+  - base line 4336, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
+  - base line 4352, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
+- 5 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+
+Commit message: `refactor(MagickCore/enhance.c): simplify SigmoidalContrastImage`
+
+#### Step 11: `ClutImage` (line 840)
+
+- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - Only 5 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
-- The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 2376, `eq_to_ne`: `if (image->storage_class == PseudoClass)`
-- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
-
-Commit message: `refactor(MagickCore/enhance.c): simplify GammaImage`
-
-#### Step 6: `ModulateImage` (line 3645)
-
-- **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
-- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
-- Public function: its name and signature must not change.
-- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 3704, `ne_to_eq`: `if (artifact != (const char *) NULL)`
-  - base line 3708, `ne_to_eq`: `if (artifact != (const char *) NULL)`
-- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
-
-Commit message: `refactor(MagickCore/enhance.c): simplify ModulateImage`
-
-#### Step 7: `ClipCLAHEHistogram` (line 303)
-
-- **Recipe G (guard clauses)** - nesting is 4, target is under 4.
-- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
-- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 322, `gt_to_ge`: `if (histogram[i] > clip_limit)`
-  - base line 362, `lt_to_le`: `if (step < 1)`
-- 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
-
-Commit message: `refactor(MagickCore/enhance.c): simplify ClipCLAHEHistogram`
-
-#### Step 8: `CLAHEImage` (line 620)
-
-- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
-- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- Recipe A does not apply: this function is public, and its signature is the API.
-- Public function: its name and signature must not change.
-- The oracle missed 5 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 669, `lt_to_le`: `if (tile_info.width < 2)`
-  - base line 674, `lt_to_le`: `if (tile_info.height < 2)`
-  - base line 740, `eq_to_ne`: `status=CLAHE(&clahe_info,&tile_info,&range_info,number_bins == 0 ?`
-  - base line 749, `mul_to_div`: `n=clahe_info.width*(size_t) (tile_info.y/2);`
-  - base line 790, `eq_to_ne`: `if (TransformImageColorspace(image,colorspace,exception) == MagickFalse)`
-- 5 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
-
-Commit message: `refactor(MagickCore/enhance.c): simplify CLAHEImage`
-
-### Wave 3
-
-#### Step 9: `SigmoidalContrastImage` (line 4280)
-
-- **Recipe G (guard clauses)** - nesting is 4, target is under 4.
-- **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
-- Recipe A does not apply: this function is public, and its signature is the API.
-- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
-- Public function: its name and signature must not change.
-- The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 4314, `lt_to_le`: `if (contrast < MagickEpsilon)`
-  - base line 4336, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
-  - base line 4352, `ne_to_eq`: `if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)`
-- 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
-
-Commit message: `refactor(MagickCore/enhance.c): simplify SigmoidalContrastImage`
-
-#### Step 10: `ClutImage` (line 840)
-
-- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
-- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
-- Public function: its name and signature must not change.
-- Only 1 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
-- The oracle missed 9 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 871, `ne_to_eq`: `if ((IsGrayColorspace(image->colorspace) != MagickFalse) &&`
-  - base line 872, `eq_to_ne`: `(IsGrayColorspace(clut_image->colorspace) == MagickFalse))`
-  - base line 888, `mul_to_div`: `status=InterpolatePixelInfo(clut_image,clut_view,method,(double) i*`
-  - base line 889, `sub_to_add`: `((double) clut_image->columns-adjust)/MaxMap,(double) i*`
-  - base line 889, `div_to_mul`: `((double) clut_image->columns-adjust)/MaxMap,(double) i*`
-  - base line 939, `ne_to_eq`: `if ((traits & UpdatePixelTrait) != 0)`
-  - and 3 more (`tools/oracle/mutate.py --function ClutImage`)
-- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- 3 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/enhance.c): simplify ClutImage`
 
-#### Step 11: `HaldClutImage` (line 2699)
+#### Step 12: `HaldClutImage` (line 2699)
 
 - **Recipe E (extract function)** - 3 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- Only 1 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
-- The oracle missed 5 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 2746, `ne_to_eq`: `if (image->colorspace != hald_image->colorspace)`
-  - base line 2840, `ne_to_eq`: `if (((GetPixelBlackTraits(image) & UpdatePixelTrait) != 0) &&`
-  - base line 2841, `eq_to_ne`: `(image->colorspace == CMYKColorspace))`
-  - base line 2843, `ne_to_eq`: `if (((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0) &&`
-  - base line 2844, `ne_to_eq`: `(image->alpha_trait != UndefinedPixelTrait))`
-- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
+- Only 5 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
+- The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
+  - base line 2815, `lt_to_le`: `area=(point.y < 0.5) ? 0.0 : 1.0;`
+  - base line 2831, `lt_to_le`: `area=(point.z < 0.5)? 0.0 : 1.0;`
+- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/enhance.c): simplify HaldClutImage`
-
-#### Step 12: `WhiteBalanceImage` (line 4448)
-
-- **Recipe E (extract function)** - 4 nested blocks; each bump is a missing function.
-- **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
-- Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
-- Public function: its name and signature must not change.
-- The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - base line 4595, `ne_to_eq`: `return(status != 0 ? MagickTrue : MagickFalse);`
-- 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
-
-Commit message: `refactor(MagickCore/enhance.c): simplify WhiteBalanceImage`
 
 ## 6. Verification after every commit
 
