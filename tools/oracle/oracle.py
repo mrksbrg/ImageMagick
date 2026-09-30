@@ -23,6 +23,7 @@ measures what the oracle reaches.
 """
 
 import argparse
+import collections
 import concurrent.futures
 import glob
 import hashlib
@@ -168,6 +169,13 @@ def magick(binary, argv, cwd, timeout=TIMEOUT):
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=timeout)
 
 
+# Corpus images made here rather than in the catalogue.
+CORPUS_EXTRAS = {
+    "rose_patch": ["rose:", "-crop", "10x8+20+15", "+repage"],
+    "hald": ["hald:8", "-level", "5%,95%"],
+}
+
+
 def ensure_corpus(binary):
     """Build the input corpus once and freeze it. Returns the manifest."""
     manifest_path = os.path.join(CORPUS, "manifest.json")
@@ -177,43 +185,75 @@ def ensure_corpus(binary):
     tmp = CORPUS + ".tmp"
     shutil.rmtree(tmp, ignore_errors=True)
     os.makedirs(os.path.join(tmp, "files"))
+    make_catalogue_images(binary, tmp)
+    make_extra_images(binary, tmp)
+    write_corpus_texts(tmp)
+    files = decode_files()
+    copy_decode_files(files, tmp)
+    dims = corpus_dims(binary, tmp)
+    manifest = {"digest": freeze(tmp), "dims": dims, "decode_files": files}
+    with open(os.path.join(tmp, "manifest.json"), "w") as f:
+        json.dump(manifest, f, indent=1)
+    os.rename(tmp, CORPUS)
+    return manifest
+
+
+def make_catalogue_images(binary, tmp):
     for name, spec in catalogue.CORPUS.items():
         out = os.path.join(tmp, name + ".miff")
         if isinstance(spec, tuple):
             shutil.copyfile(os.path.join(ROOT, spec[1]), out)
-        else:
-            r = magick(binary, spec + [out], tmp)
-            if r.returncode != 0:
-                sys.exit("corpus: %s failed: %s" % (name, r.stderr.decode(errors="replace")))
-    extras = {
-        "rose_patch": ["rose:", "-crop", "10x8+20+15", "+repage"],
-        "hald": ["hald:8", "-level", "5%,95%"],
-    }
-    for name, spec in extras.items():
+            continue
+        r = magick(binary, spec + [out], tmp)
+        if r.returncode != 0:
+            sys.exit("corpus: %s failed: %s" % (name, r.stderr.decode(errors="replace")))
+
+
+def make_extra_images(binary, tmp):
+    for name, spec in CORPUS_EXTRAS.items():
         r = magick(binary, spec + [os.path.join(tmp, name + ".miff")], tmp)
         if r.returncode != 0:
             sys.exit("corpus: %s failed" % name)
+
+
+def write_corpus_texts(tmp):
     shutil.copyfile(os.path.join(ROOT, "PerlMagick/t", catalogue.FONT),
                     os.path.join(tmp, catalogue.FONT))
     with open(os.path.join(tmp, "draw.mvg"), "w") as f:
         f.write(catalogue.MVG)
     with open(os.path.join(tmp, "draw.svg"), "w") as f:
         f.write(catalogue.SVG)
+
+
+def decode_files():
+    """The source-tree files the decode cases read, relative to ROOT."""
     files = list(catalogue.DECODE_FILES)
     for pattern in catalogue.DECODE_GLOBS:
         files += sorted(os.path.relpath(p, ROOT) for p in glob.glob(os.path.join(ROOT, pattern))
                         if os.path.isfile(p))
-    files = sorted(set(files))
+    return sorted(set(files))
+
+
+def copy_decode_files(files, tmp):
     for rel in files:
         dst = os.path.join(tmp, "files", rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copyfile(os.path.join(ROOT, rel), dst)
+
+
+def corpus_dims(binary, tmp):
+    """Width, height and depth of every corpus image, for {W:name} and friends."""
     dims = {}
-    for name in list(catalogue.CORPUS) + list(extras):
+    for name in list(catalogue.CORPUS) + list(CORPUS_EXTRAS):
         r = magick(binary, ["identify", "-format", "%w %h %z\\n",
                             os.path.join(tmp, name + ".miff")], tmp)
         w, h, d = r.stdout.decode().split("\n")[0].split()
         dims[name] = {"W": w, "H": h, "D": d}
+    return dims
+
+
+def freeze(tmp):
+    """Give every corpus file the fixed date and return a digest of them all."""
     h = hashlib.sha256()
     for dirpath, _, names in sorted(os.walk(tmp)):
         for n in sorted(names):
@@ -222,11 +262,7 @@ def ensure_corpus(binary):
             h.update(os.path.relpath(p, tmp).encode() + b"\0")
             with open(p, "rb") as f:
                 h.update(hashlib.sha256(f.read()).digest())
-    manifest = {"digest": h.hexdigest(), "dims": dims, "decode_files": files}
-    with open(os.path.join(tmp, "manifest.json"), "w") as f:
-        json.dump(manifest, f, indent=1)
-    os.rename(tmp, CORPUS)
-    return manifest
+    return h.hexdigest()
 
 
 def build_lists(binary):
@@ -289,9 +325,7 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
     d = case_dir(side, case)
     shutil.rmtree(d, ignore_errors=True)
     os.makedirs(d)
-    for name, text in case.get("files", {}).items():  # e.g. an MSL script
-        with open(os.path.join(d, name), "w") as f:
-            f.write(text.replace("{C}", CORPUS_REL))
+    write_case_files(d, case)
     rcs, outs, errs = [], [], []
     # stdin is a named file for the cases that read "-", and nothing otherwise;
     # inheriting the driver's stdin would make results depend on how it was run.
@@ -299,48 +333,14 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
         else os.devnull
     started = time.time()
     for step in case["steps"]:
-        for n in os.listdir(d):  # files read back must not carry today's date
-            os.utime(os.path.join(d, n), (FIXED_MTIME, FIXED_MTIME))
-        argv = expand(step, manifest)
-        # Every random generator is seeded; unseeded ones read /dev/urandom.
-        # conjure takes `-key value` script variables, not options, so MSL
-        # cases must avoid random operators instead.
-        if argv and argv[0] in UNSEEDED:
-            argv = WRAPPER + [binary] + argv
-        else:
-            at = 1 if argv and argv[0] in SUBCOMMANDS else 0
-            argv = WRAPPER + [binary] + argv[:at] + ["-seed", "1"] + argv[at:]
-        # stdout and stderr go to files beside the case directory, not
-        # into memory, and only READ_CAP of each is read back.
-        out_path, err_path = d + ".stdout", d + ".stderr"
-        try:
-            with open(out_path, "wb") as fo, open(err_path, "wb") as fe, \
-                    open(stdin_path, "rb") as fi:
-                r = subprocess.run(argv, cwd=d, env=env_for(binary, d, extra_env), stdin=fi,
-                                   stdout=fo, stderr=fe, timeout=timeout or TIMEOUT)
-            rcs.append(r.returncode)
-            outs.append(normalise(read_capped(out_path), d))
-            errs.append(normalise(read_capped(err_path), d))
-        except subprocess.TimeoutExpired:
-            rcs.append("timeout")
-            outs.append(b"")
-            errs.append(b"")
-        finally:
-            for path in (out_path, err_path):
-                if os.path.exists(path):
-                    os.remove(path)
-    files = {}
-    for dirpath, _, names in os.walk(d):
-        for n in sorted(names):
-            p = os.path.join(dirpath, n)
-            try:
-                data = read_capped(p)
-            except FileNotFoundError:  # a temporary file removed while we walked
-                files[os.path.relpath(p, d)] = "vanished"
-                continue
-            if needs_normalising(data):
-                data = normalise(data, d)
-            files[os.path.relpath(p, d)] = digest(data)
+        fix_dates(d)
+        argv = command_line(binary, expand(step, manifest))
+        rc, step_out, step_err = run_step(argv, d, stdin_path, env=env_for(binary, d, extra_env),
+                                          timeout=timeout or TIMEOUT)
+        rcs.append(rc)
+        outs.append(step_out)
+        errs.append(step_err)
+    files = case_files(d)
     out, err = b"\n".join(outs), b"\n".join(errs)
     return {"rc": rcs, "out": digest(out), "err": digest(err), "files": files,
             "secs": round(time.time() - started, 3),
@@ -348,8 +348,81 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
             "err_text": err[:600].decode(errors="replace")}
 
 
+def write_case_files(d, case):
+    for name, text in case.get("files", {}).items():  # e.g. an MSL script
+        with open(os.path.join(d, name), "w") as f:
+            f.write(text.replace("{C}", CORPUS_REL))
+
+
+def fix_dates(d):
+    for n in os.listdir(d):  # files read back must not carry today's date
+        os.utime(os.path.join(d, n), (FIXED_MTIME, FIXED_MTIME))
+
+
+def command_line(binary, argv):
+    """The full command for one expanded step, wrapper and seed included."""
+    # Every random generator is seeded; unseeded ones read /dev/urandom.
+    # conjure takes `-key value` script variables, not options, so MSL
+    # cases must avoid random operators instead.
+    if argv and argv[0] in UNSEEDED:
+        return WRAPPER + [binary] + argv
+    at = 1 if argv and argv[0] in SUBCOMMANDS else 0
+    return WRAPPER + [binary] + argv[:at] + ["-seed", "1"] + argv[at:]
+
+
+def run_step(argv, d, stdin_path, **run_options):
+    """Exit status (or "timeout"), normalised stdout and normalised stderr of
+    one command run in case directory d."""
+    # stdout and stderr go to files beside the case directory, not
+    # into memory, and only READ_CAP of each is read back.
+    out_path, err_path = d + ".stdout", d + ".stderr"
+    try:
+        with open(out_path, "wb") as fo, open(err_path, "wb") as fe, \
+                open(stdin_path, "rb") as fi:
+            r = subprocess.run(argv, cwd=d, stdin=fi, stdout=fo, stderr=fe, **run_options)
+        return (r.returncode, normalise(read_capped(out_path), d),
+                normalise(read_capped(err_path), d))
+    except subprocess.TimeoutExpired:
+        return "timeout", b"", b""
+    finally:
+        remove_existing(out_path, err_path)
+
+
+def remove_existing(*paths):
+    for path in paths:
+        if os.path.exists(path):
+            os.remove(path)
+
+
+def case_files(d):
+    """Digest of every file in case directory d, by path relative to it."""
+    files = {}
+    for dirpath, _, names in os.walk(d):
+        for n in sorted(names):
+            p = os.path.join(dirpath, n)
+            files[os.path.relpath(p, d)] = file_result(p, d)
+    return files
+
+
+def file_result(p, d):
+    try:
+        data = read_capped(p)
+    except FileNotFoundError:  # a temporary file removed while we walked
+        return "vanished"
+    if needs_normalising(data):
+        data = normalise(data, d)
+    return digest(data)
+
+
+# What two results must agree on; the rest (timings, text excerpts) may differ.
+COMPARED = ("rc", "out", "err", "files")
+
+
 def same(a, b):
-    return all(a[k] == b[k] for k in ("rc", "out", "err", "files"))
+    for k in COMPARED:
+        if a[k] != b[k]:
+            return False
+    return True
 
 
 def explain(a, b):
@@ -360,15 +433,20 @@ def explain(a, b):
         why.append("stdout differs")
     if a["err"] != b["err"]:
         why.append("stderr differs")
-    for n in sorted(set(a["files"]) | set(b["files"])):
-        if a["files"].get(n) != b["files"].get(n):
-            if n not in a["files"]:
-                why.append("%s only in candidate" % n)
-            elif n not in b["files"]:
-                why.append("%s missing in candidate" % n)
-            else:
-                why.append("%s differs" % n)
-    return why
+    return why + file_differences(a["files"], b["files"])
+
+
+def file_differences(a, b):
+    names = sorted(set(a) | set(b))
+    return [file_difference(n, a, b) for n in names if a.get(n) != b.get(n)]
+
+
+def file_difference(n, a, b):
+    if n not in a:
+        return "%s only in candidate" % n
+    if n not in b:
+        return "%s missing in candidate" % n
+    return "%s differs" % n
 
 
 def pixel_delta(binary, base_file, cand_file):
@@ -460,35 +538,69 @@ def parallel(fn, items, jobs, label):
     return results
 
 
+# One oracle run: the two binaries, the corpus manifest, the cases selected
+# and the baseline results by case_key.
+Run = collections.namedtuple("Run", "base_bin cand_bin manifest todo cache")
+
+
 def cmd_run(args):
     base_bin = args.base_bin or build("base", args.base)
     cand_bin = args.cand_bin or build("cand")
     manifest, all_cases = load_cases(base_bin)
-    todo = select(all_cases, args.filter)
-    if args.function:
-        todo = select_by_function(todo, all_cases, args.function)
+    todo = select_run_cases(all_cases, args)
     cpath = cache_path(base_bin, manifest)
-    cache = {}
-    if os.path.exists(cpath) and not args.no_cache:
-        with open(cpath) as f:
-            cache = json.load(f)
+    cache = read_cache(cpath, args.no_cache)
     missing = [c for c in todo if case_key(c) not in cache]
     start = time.time()
     if missing:
-        base_res = parallel(lambda c: run_case(base_bin, "base", c, manifest), missing,
-                            args.jobs, "baseline")
-        for c in missing:
-            cache[case_key(c)] = base_res[c["id"]]
+        cache.update(run_baseline(base_bin, missing, manifest, args.jobs))
         if not args.filter and not args.function:  # drop entries no longer in the catalogue
-            live = {case_key(c) for c in todo}
-            cache = {k: v for k, v in cache.items() if k in live}
-        os.makedirs(os.path.dirname(cpath), exist_ok=True)
-        with open(cpath + ".tmp", "w") as f:
-            json.dump(cache, f)
-        os.replace(cpath + ".tmp", cpath)
+            cache = prune_cache(cache, todo)
+        write_cache(cpath, cache)
         shutil.rmtree(os.path.join(WORK, "runs", "base"), ignore_errors=True)
     cand_res = parallel(lambda c: run_case(cand_bin, "cand", c, manifest), todo,
                         args.jobs, "candidate")
+    failures = compare(todo, cache, cand_res)
+    report(Run(base_bin, cand_bin, manifest, todo, cache), failures, time.time() - start, args)
+    return 1 if failures else 0
+
+
+def select_run_cases(all_cases, args):
+    todo = select(all_cases, args.filter)
+    if args.function:
+        todo = select_by_function(todo, all_cases, args.function)
+    return todo
+
+
+def read_cache(cpath, no_cache):
+    if no_cache or not os.path.exists(cpath):
+        return {}
+    with open(cpath) as f:
+        return json.load(f)
+
+
+def run_baseline(base_bin, missing, manifest, jobs):
+    """Baseline results for these cases, by case_key."""
+    base_res = parallel(lambda c: run_case(base_bin, "base", c, manifest), missing,
+                        jobs, "baseline")
+    return {case_key(c): base_res[c["id"]] for c in missing}
+
+
+def prune_cache(cache, todo):
+    live = {case_key(c) for c in todo}
+    return {k: v for k, v in cache.items() if k in live}
+
+
+def write_cache(cpath, cache):
+    os.makedirs(os.path.dirname(cpath), exist_ok=True)
+    with open(cpath + ".tmp", "w") as f:
+        json.dump(cache, f)
+    os.replace(cpath + ".tmp", cpath)
+
+
+def compare(todo, cache, cand_res):
+    """(case, baseline, candidate) for every case that diverged. The outputs
+    of the cases that agree are removed; those of the rest are kept."""
     failures = []
     for c in todo:
         b, k = cache[case_key(c)], cand_res[c["id"]]
@@ -496,49 +608,76 @@ def cmd_run(args):
             shutil.rmtree(case_dir("cand", c), ignore_errors=True)
         else:
             failures.append((c, b, k))
-    report(failures, todo, cache, base_bin, cand_bin, manifest, time.time() - start, args)
-    return 1 if failures else 0
+    return failures
 
 
-def report(failures, todo, cache, base_bin, cand_bin, manifest, elapsed, args):
-    failing_base = sum(1 for c in todo if cache[case_key(c)]["rc"] != [0] * len(c["steps"]))
-    print("oracle: %d cases, %d diverged, %.0fs  (baseline %s)"
-          % (len(todo), len(failures), elapsed, base_bin.split("/")[-3][:10]))
-    print("        %d cases exit non-zero on the baseline (error paths, compared too)"
-          % failing_base)
-    slow = [c for c in todo if "timeout" in cache[case_key(c)]["rc"]]
-    if slow:  # a timeout compares nothing and costs TIMEOUT seconds per run
-        print("  CATALOGUE BUG: %d cases time out on the baseline; fix them in cases.py:" % len(slow))
-        for c in slow[:10]:
-            print("    %s  %s" % (c["id"], c["label"]))
-    detail = []
-    for c, b, k in failures:
-        why = explain(b, k)
-        entry = {"id": c["id"], "label": c["label"], "why": why,
-                 "steps": [" ".join(expand(s, manifest)) for s in c["steps"]],
-                 "base_err": b["err_text"], "cand_err": k["err_text"]}
-        detail.append(entry)
-    for e in detail[:args.show]:
-        print("\n  DIVERGED %s  %s" % (e["id"], e["label"]))
-        for s in e["steps"]:
-            print("    $ magick %s" % s)
-        for w in e["why"]:
-            print("    - %s" % w)
-    if len(detail) > args.show:
-        print("\n  ... %d more" % (len(detail) - args.show))
+def report(run, failures, elapsed, args):
+    print_summary(run, len(failures), elapsed)
+    detail = [divergence(c, b, k, run.manifest) for c, b, k in failures]
+    print_divergences(detail, args.show)
     if failures and args.explain:
-        # Re-run the baseline for the first failures so pixel deltas can be shown.
-        for c, b, k in failures[:args.show]:
-            run_case(base_bin, "base", c, manifest)
-            for n in sorted(k["files"]):
-                bf, kf = os.path.join(case_dir("base", c), n), os.path.join(case_dir("cand", c), n)
-                if n.endswith(".miff") and os.path.exists(bf) and b["files"].get(n) != k["files"].get(n):
-                    print("  %s %s: %s" % (c["id"], n, pixel_delta(cand_bin, bf, kf)))
+        print_pixel_deltas(run, failures[:args.show])
     with open(os.path.join(WORK, "last-report.json"), "w") as f:
-        json.dump({"cases": len(todo), "diverged": detail}, f, indent=1)
+        json.dump({"cases": len(run.todo), "diverged": detail}, f, indent=1)
     if failures:
         print("\n  full report: %s" % os.path.relpath(os.path.join(WORK, "last-report.json"), ROOT))
         print("  candidate outputs kept in build-oracle/work/runs/cand/")
+
+
+def print_summary(run, diverged, elapsed):
+    base_rcs = [(c, run.cache[case_key(c)]["rc"]) for c in run.todo]
+    failing_base = sum(1 for c, rc in base_rcs if rc != [0] * len(c["steps"]))
+    print("oracle: %d cases, %d diverged, %.0fs  (baseline %s)"
+          % (len(run.todo), diverged, elapsed, run.base_bin.split("/")[-3][:10]))
+    print("        %d cases exit non-zero on the baseline (error paths, compared too)"
+          % failing_base)
+    print_timeouts([c for c, rc in base_rcs if "timeout" in rc])
+
+
+def print_timeouts(slow):
+    if not slow:  # a timeout compares nothing and costs TIMEOUT seconds per run
+        return
+    print("  CATALOGUE BUG: %d cases time out on the baseline; fix them in cases.py:" % len(slow))
+    for c in slow[:10]:
+        print("    %s  %s" % (c["id"], c["label"]))
+
+
+def divergence(c, b, k, manifest):
+    """The last-report.json entry for a case whose results b and k differ."""
+    return {"id": c["id"], "label": c["label"], "why": explain(b, k),
+            "steps": [" ".join(expand(s, manifest)) for s in c["steps"]],
+            "base_err": b["err_text"], "cand_err": k["err_text"]}
+
+
+def print_divergences(detail, show):
+    for e in detail[:show]:
+        print_divergence(e)
+    if len(detail) > show:
+        print("\n  ... %d more" % (len(detail) - show))
+
+
+def print_divergence(e):
+    print("\n  DIVERGED %s  %s" % (e["id"], e["label"]))
+    for s in e["steps"]:
+        print("    $ magick %s" % s)
+    for w in e["why"]:
+        print("    - %s" % w)
+
+
+def print_pixel_deltas(run, failures):
+    # Re-run the baseline for the first failures so pixel deltas can be shown.
+    for c, b, k in failures:
+        run_case(run.base_bin, "base", c, run.manifest)
+        for n in differing_images(b, k):
+            bf, kf = os.path.join(case_dir("base", c), n), os.path.join(case_dir("cand", c), n)
+            if os.path.exists(bf):
+                print("  %s %s: %s" % (c["id"], n, pixel_delta(run.cand_bin, bf, kf)))
+
+
+def differing_images(b, k):
+    """The MIFF files the candidate wrote that differ from the baseline's."""
+    return [n for n in sorted(k["files"])
+            if n.endswith(".miff") and b["files"].get(n) != k["files"].get(n)]
 
 
 def cmd_selfcheck(args):
@@ -550,16 +689,27 @@ def cmd_selfcheck(args):
     # and passed. --repeat 4 would have caught it three times in four.
     runs = [parallel(lambda c: run_case(base_bin, "self%d" % n, c, manifest), todo, args.jobs,
                      "run %d" % n) for n in range(1, args.repeat + 1)]
-    flaky = [c for c in todo if any(not same(runs[0][c["id"]], r[c["id"]]) for r in runs[1:])]
+    flaky = [c for c in todo if disagreement(runs, c["id"]) is not None]
     print("selfcheck: %d cases, %d runs each, %d nondeterministic"
           % (len(todo), args.repeat, len(flaky)))
     for c in flaky:
-        other = next(r[c["id"]] for r in runs[1:] if not same(runs[0][c["id"]], r[c["id"]]))
+        other = disagreement(runs, c["id"])
         print("  %s  %s: %s" % (c["id"], c["label"], "; ".join(explain(runs[0][c["id"]], other))))
     if not flaky:
-        for n in range(1, args.repeat + 1):
-            shutil.rmtree(os.path.join(WORK, "runs", "self%d" % n), ignore_errors=True)
+        remove_self_runs(args.repeat)
     return 1 if flaky else 0
+
+
+def disagreement(runs, cid):
+    """The first later run whose result for case cid differs from the first
+    run's, or None when they all agree."""
+    first = runs[0][cid]
+    return next((r[cid] for r in runs[1:] if not same(first, r[cid])), None)
+
+
+def remove_self_runs(repeat):
+    for n in range(1, repeat + 1):
+        shutil.rmtree(os.path.join(WORK, "runs", "self%d" % n), ignore_errors=True)
 
 
 def cmd_exec(args):
@@ -588,34 +738,60 @@ def cmd_list(args):
     return 0
 
 
-def main():
-    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    sub = p.add_subparsers(dest="cmd", required=True)
-    for name in ("run", "selfcheck", "exec", "list"):
-        s = sub.add_parser(name)
-        s.add_argument("--base", default="origin/main", help="baseline git ref")
-        s.add_argument("--base-bin", help="use this baseline binary instead of building")
-        s.add_argument("--filter", help="regex on case id or label")
-        s.add_argument("--function", action="append",
-                       help="only cases executing this function (casemap.json); repeatable")
-        s.add_argument("-j", "--jobs", type=int, default=os.cpu_count())
-        if name == "run":
-            s.add_argument("--cand-bin", help="use this candidate binary instead of building")
-            s.add_argument("--no-cache", action="store_true")
-            s.add_argument("--show", type=int, default=20, help="divergences to print")
-            s.add_argument("--explain", action="store_true", help="pixel deltas for divergences")
-        if name == "selfcheck":
-            s.add_argument("--repeat", type=int, default=2,
-                           help="runs per case; 4 or more after changing the catalogue")
-        if name == "exec":
-            s.add_argument("--bin", required=True)
-        if name == "list":
-            s.add_argument("-v", "--verbose", action="store_true")
-    args = p.parse_args()
+def add_common_arguments(s):
+    s.add_argument("--base", default="origin/main", help="baseline git ref")
+    s.add_argument("--base-bin", help="use this baseline binary instead of building")
+    s.add_argument("--filter", help="regex on case id or label")
+    s.add_argument("--function", action="append",
+                   help="only cases executing this function (casemap.json); repeatable")
+    s.add_argument("-j", "--jobs", type=int, default=os.cpu_count())
+
+
+def add_run_arguments(s):
+    s.add_argument("--cand-bin", help="use this candidate binary instead of building")
+    s.add_argument("--no-cache", action="store_true")
+    s.add_argument("--show", type=int, default=20, help="divergences to print")
+    s.add_argument("--explain", action="store_true", help="pixel deltas for divergences")
+
+
+def add_selfcheck_arguments(s):
+    s.add_argument("--repeat", type=int, default=2,
+                   help="runs per case; 4 or more after changing the catalogue")
+
+
+def add_exec_arguments(s):
+    s.add_argument("--bin", required=True)
+
+
+def add_list_arguments(s):
+    s.add_argument("-v", "--verbose", action="store_true")
+
+
+# Each subcommand: its function and the options it adds to the common ones.
+COMMANDS = {
+    "run": (cmd_run, add_run_arguments),
+    "selfcheck": (cmd_selfcheck, add_selfcheck_arguments),
+    "exec": (cmd_exec, add_exec_arguments),
+    "list": (cmd_list, add_list_arguments),
+}
+
+
+def absolute_binaries(args):
     for attr in ("bin", "base_bin", "cand_bin"):  # cases run in their own directories
         if getattr(args, attr, None):
             setattr(args, attr, os.path.abspath(getattr(args, attr)))
-    return {"run": cmd_run, "selfcheck": cmd_selfcheck, "exec": cmd_exec, "list": cmd_list}[args.cmd](args)
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = p.add_subparsers(dest="cmd", required=True)
+    for name, (_, add_arguments) in COMMANDS.items():
+        s = sub.add_parser(name)
+        add_common_arguments(s)
+        add_arguments(s)
+    args = p.parse_args()
+    absolute_binaries(args)
+    return COMMANDS[args.cmd][0](args)
 
 
 if __name__ == "__main__":
