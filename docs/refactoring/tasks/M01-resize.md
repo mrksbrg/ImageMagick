@@ -41,11 +41,11 @@ The score must read 1.39. If it does not, this file changed after the task was w
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | 1 | `ScaleImage` | 4114 | 98 | 7 | 23 | public | - | 55 | 171 of 208 |
-| 2 | `AcquireResizeFilter` | 804 | 69 | - | 11 | public | 1 | 984 | 60 of 73 |
+| 2 | `AcquireResizeFilter` | 804 | 69 | - | 11 | public | 1 | 992 | 60 of 73 |
 | 3 | `MagnifyImage` | 2886 | 35 | 4 | 5 | public | 2 | 49 | 45 of 47 |
 | 4 | `SampleImage` | 3925 | 26 | 4 | 5 | public | 1 | 103 | 32 of 34 |
-| 5 | `HorizontalFilter` | 3337 | - | 5 | 5 | static | 2 | 646 | 83 of 86 |
-| 6 | `VerticalFilter` | 3553 | - | 5 | 5 | static | 2 | 646 | 73 of 77 |
+| 5 | `HorizontalFilter` | 3337 | - | 5 | 5 | static | 2 | 650 | 83 of 86 |
+| 6 | `VerticalFilter` | 3553 | - | 5 | 5 | static | 2 | 650 | 73 of 77 |
 | 7 | `InterpolativeResizeImage` | 1750 | - | 4 | 3 | public | 2 | 44 | 23 of 28 |
 | 8 | `ThumbnailImage` | 4599 | 19 | - | 3 | public | - | 113 | 20 of 26 |
 | 9 | `Scale3X` | 2797 | 24 | - | 2 | static | - | 4 | 2 of 3 |
@@ -68,12 +68,12 @@ Work **one function at a time, in the order above**, and run the verification in
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Public function: its name and signature must not change.
 - The oracle missed 15 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 4249, `le_to_lt`: `if (GetPixelWriteMask(image,p) <= (QuantumRange/2))`
-  - line 4278, `lt_to_le`: `(number_rows < (ssize_t) image->rows))`
-  - line 4292, `le_to_lt`: `if (GetPixelWriteMask(image,p) <= (QuantumRange/2))`
-  - line 4314, `post_inc_to_post_dec`: `number_rows++;`
-  - line 4324, `lt_to_le`: `if ((next_row != MagickFalse) && (number_rows < (ssize_t) image->rows))`
-  - line 4338, `le_to_lt`: `if (GetPixelWriteMask(image,p) <= (QuantumRange/2))`
+  - base line 4249, `le_to_lt`: `if (GetPixelWriteMask(image,p) <= (QuantumRange/2))`
+  - base line 4278, `lt_to_le`: `(number_rows < (ssize_t) image->rows))`
+  - base line 4292, `le_to_lt`: `if (GetPixelWriteMask(image,p) <= (QuantumRange/2))`
+  - base line 4314, `post_inc_to_post_dec`: `number_rows++;`
+  - base line 4324, `lt_to_le`: `if ((next_row != MagickFalse) && (number_rows < (ssize_t) image->rows))`
+  - base line 4338, `le_to_lt`: `if (GetPixelWriteMask(image,p) <= (QuantumRange/2))`
   - and 9 more (`tools/oracle/mutate.py --function ScaleImage`)
 - 22 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
@@ -86,12 +86,12 @@ Commit message: `refactor(MagickCore/resize.c): simplify ScaleImage`
 - Contains 1 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - The oracle missed 12 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 1032, `lt_to_le`: `if ((UndefinedFilter < option) && (option < SentinelFilter))`
-  - line 1032, `lt_to_le`: `if ((UndefinedFilter < option) && (option < SentinelFilter))`
-  - line 1099, `mul_to_div`: `resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);`
-  - line 1099, `mul_to_div`: `resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);`
-  - line 1101, `gt_to_ge`: `if ( value > 0.5 )`
-  - line 1101, `gt_to_le`: `if ( value > 0.5 )`
+  - base line 1032, `lt_to_le`: `if ((UndefinedFilter < option) && (option < SentinelFilter))`
+  - base line 1032, `lt_to_le`: `if ((UndefinedFilter < option) && (option < SentinelFilter))`
+  - base line 1099, `mul_to_div`: `resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);`
+  - base line 1099, `mul_to_div`: `resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);`
+  - base line 1101, `gt_to_ge`: `if ( value > 0.5 )`
+  - base line 1101, `gt_to_le`: `if ( value > 0.5 )`
   - and 6 more (`tools/oracle/mutate.py --function AcquireResizeFilter`)
 - 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
@@ -116,7 +116,7 @@ Commit message: `refactor(MagickCore/resize.c): simplify MagnifyImage`
 - Contains 1 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 4031, `le_to_lt`: `if (GetPixelWriteMask(sample_image,q) <= (QuantumRange/2))`
+  - base line 4031, `le_to_lt`: `if (GetPixelWriteMask(sample_image,q) <= (QuantumRange/2))`
 - 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/resize.c): simplify SampleImage`
@@ -130,7 +130,7 @@ Commit message: `refactor(MagickCore/resize.c): simplify SampleImage`
 - **Recipe A (parameter object)** - 7 arguments; the function is `static`, so check that its address is never taken.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 3373, `lt_to_le`: `if (support < 0.5)`
+  - base line 3373, `lt_to_le`: `if (support < 0.5)`
 - 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/resize.c): simplify HorizontalFilter`
@@ -142,9 +142,9 @@ Commit message: `refactor(MagickCore/resize.c): simplify HorizontalFilter`
 - **Recipe A (parameter object)** - 7 arguments; the function is `static`, so check that its address is never taken.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 3587, `lt_to_le`: `if (support < 0.5)`
-  - line 3663, `sub_to_add`: `image->columns,(size_t) (contribution[n-1].pixel-contribution[0].pixel+1),`
-  - line 3733, `mul_to_div`: `alpha=contribution[j].weight*QuantumScale*(double)`
+  - base line 3587, `lt_to_le`: `if (support < 0.5)`
+  - base line 3663, `sub_to_add`: `image->columns,(size_t) (contribution[n-1].pixel-contribution[0].pixel+1),`
+  - base line 3733, `mul_to_div`: `alpha=contribution[j].weight*QuantumScale*(double)`
 - 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/resize.c): simplify VerticalFilter`
@@ -157,7 +157,7 @@ Commit message: `refactor(MagickCore/resize.c): simplify VerticalFilter`
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 1847, `eq_to_ne`: `if (status == MagickFalse)`
+  - base line 1847, `eq_to_ne`: `if (status == MagickFalse)`
 - 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/resize.c): simplify InterpolativeResizeImage`
@@ -168,11 +168,11 @@ Commit message: `refactor(MagickCore/resize.c): simplify InterpolativeResizeImag
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Public function: its name and signature must not change.
 - The oracle missed 5 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 4635, `mul_to_div`: `x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double)`
-  - line 4638, `gt_to_ge`: `if ((x_factor > 4) && (y_factor > 4))`
-  - line 4638, `gt_to_ge`: `if ((x_factor > 4) && (y_factor > 4))`
-  - line 4647, `gt_to_ge`: `if ((x_factor > 2) && (y_factor > 2))`
-  - line 4692, `ne_to_eq`: `if (mime_type != (const char *) NULL)`
+  - base line 4635, `mul_to_div`: `x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double)`
+  - base line 4638, `gt_to_ge`: `if ((x_factor > 4) && (y_factor > 4))`
+  - base line 4638, `gt_to_ge`: `if ((x_factor > 4) && (y_factor > 4))`
+  - base line 4647, `gt_to_ge`: `if ((x_factor > 2) && (y_factor > 2))`
+  - base line 4692, `ne_to_eq`: `if (mime_type != (const char *) NULL)`
 - 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/resize.c): simplify ThumbnailImage`
@@ -193,9 +193,9 @@ Commit message: `refactor(MagickCore/resize.c): simplify Scale3X`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Only 4 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
 - The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 2495, `gt_to_ge`: `CopyPixels(pixels,(ssize_t) (intensities[0] > intensities[1] ? 0 : 1),result,`
-  - line 2530, `gt_to_ge`: `if (ae && (!bd || intensities[1] > intensities[0]))`
-  - line 2535, `gt_to_ge`: `if (bd && (!ae || intensities[0] > intensities[1]))`
+  - base line 2495, `gt_to_ge`: `CopyPixels(pixels,(ssize_t) (intensities[0] > intensities[1] ? 0 : 1),result,`
+  - base line 2530, `gt_to_ge`: `if (ae && (!bd || intensities[1] > intensities[0]))`
+  - base line 2535, `gt_to_ge`: `if (bd && (!ae || intensities[0] > intensities[1]))`
 - 1 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/resize.c): simplify Fish2X`
@@ -205,12 +205,12 @@ Commit message: `refactor(MagickCore/resize.c): simplify Fish2X`
 - **Recipe E (extract function)** - 2 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - The oracle missed 9 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 257, `lt_to_le`: `if (x < 1.0)`
-  - line 259, `lt_to_le`: `if (x < 2.0)`
-  - line 268, `lt_to_le`: `if (x < 1.0)`
-  - line 270, `lt_to_le`: `if (x < 2.0)`
-  - line 272, `lt_to_le`: `if (x < 3.0)`
-  - line 279, `lt_to_le`: `if (x < 1.0)`
+  - base line 257, `lt_to_le`: `if (x < 1.0)`
+  - base line 259, `lt_to_le`: `if (x < 2.0)`
+  - base line 268, `lt_to_le`: `if (x < 1.0)`
+  - base line 270, `lt_to_le`: `if (x < 2.0)`
+  - base line 272, `lt_to_le`: `if (x < 3.0)`
+  - base line 279, `lt_to_le`: `if (x < 1.0)`
   - and 3 more (`tools/oracle/mutate.py --function CubicSpline`)
 
 Commit message: `refactor(MagickCore/resize.c): simplify CubicSpline`

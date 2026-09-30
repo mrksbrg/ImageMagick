@@ -54,8 +54,8 @@ Work **one function at a time, in the order above**, and run the verification in
 - Contains 6 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 659, `le_to_lt`: `if ((image->columns <= (raise_info->width << 1)) ||`
-  - line 660, `le_to_lt`: `(image->rows <= (raise_info->height << 1)))`
+  - base line 659, `le_to_lt`: `if ((image->columns <= (raise_info->width << 1)) ||`
+  - base line 660, `le_to_lt`: `(image->rows <= (raise_info->height << 1)))`
 - 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/decorate.c): simplify RaiseImage`
@@ -68,12 +68,12 @@ Commit message: `refactor(MagickCore/decorate.c): simplify RaiseImage`
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
 - The oracle missed 11 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 214, `sub_to_add`: `x_offset=(ssize_t) frame_info->width-frame_info->x-(ssize_t) bevel_width;`
-  - line 214, `sub_to_add`: `x_offset=(ssize_t) frame_info->width-frame_info->x-(ssize_t) bevel_width;`
-  - line 215, `sub_to_add`: `y_offset=(ssize_t) frame_info->height-frame_info->y-(ssize_t) bevel_width;`
-  - line 215, `sub_to_add`: `y_offset=(ssize_t) frame_info->height-frame_info->y-(ssize_t) bevel_width;`
-  - line 235, `eq_to_ne`: `(frame_image->alpha_trait == UndefinedPixelTrait))`
-  - line 257, `sub_to_add`: `accentuate.black=(QuantumScale*(((double) QuantumRange-(double)`
+  - base line 214, `sub_to_add`: `x_offset=(ssize_t) frame_info->width-frame_info->x-(ssize_t) bevel_width;`
+  - base line 214, `sub_to_add`: `x_offset=(ssize_t) frame_info->width-frame_info->x-(ssize_t) bevel_width;`
+  - base line 215, `sub_to_add`: `y_offset=(ssize_t) frame_info->height-frame_info->y-(ssize_t) bevel_width;`
+  - base line 215, `sub_to_add`: `y_offset=(ssize_t) frame_info->height-frame_info->y-(ssize_t) bevel_width;`
+  - base line 235, `eq_to_ne`: `(frame_image->alpha_trait == UndefinedPixelTrait))`
+  - base line 257, `sub_to_add`: `accentuate.black=(QuantumScale*(((double) QuantumRange-(double)`
   - and 5 more (`tools/oracle/mutate.py --function FrameImage`)
 - 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 

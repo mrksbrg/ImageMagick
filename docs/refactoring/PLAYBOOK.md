@@ -410,9 +410,54 @@ report the case, with the review before and after, and the project owner decides
 
 ## Known plateaus
 
-None recorded yet. When a file stops improving and no recipe in this catalogue applies,
-record it here: the file, its score, the smells left, and which 3SX recipe might reach
-them.
+None recorded on this branch. When a file stops improving and no recipe in this
+catalogue applies, record it here: the file, its score, the smells left, and which 3SX
+recipe might reach them.
+
+A refactoring pilot, run by Claude on 2026-09-29/30 before the campaign's conditions
+were settled, is kept on the branch `night1-refactoring`: 41 commits on eight
+MagickCore files, 0 divergences across the catalogue. Its playbook records the
+plateaus it met and the patterns that worked. The points below are what it taught
+about the harness and the recipes themselves.
+
+### Practical points
+
+- **Put a helper directly before the function it came from**, not before the
+  function's comment banner: ImageMagick often defines static helpers (`url_encode`,
+  the `Modulate*` family) between the banner and the function, and a helper placed
+  above them fails to compile.
+- **Macros defined inside a function** (`LevelizeValue`, `ScaledSig`, `Colorize`) are
+  file-scope from their `#define` onwards; the preprocessor ignores function scope.
+  To extract code that expands one, move the `#define` above the helper and give the
+  helper parameters of the names the macro reads. Say so in the commit.
+- **CodeScene's start line** for a function often includes the comment block above it
+  (it reported `AcquireImageColormap` at line 40, not 105). Use the compiler's view of
+  where a function starts; `tools/make_task.py` does.
+- **A score can fall when two extractions resemble each other.** Extracting
+  `ContrastStretchImage`'s histogram pass made it resemble `EqualizeImage`'s, and the
+  duplication finding cost more than the complexity saved (1.61 -> 1.60); leaving
+  that block in place gave 1.65. The pre-commit gate is what catches this.
+- `refactor_guard.py --calls` fails on a renamed function until the rename is declared
+  (`--renamed OLD=NEW`); that is legal only for a file-local static, and in practice
+  only for a helper this campaign created.
+
+### Proposed amendment: moving a complete parallel region (needs the owner's decision)
+
+The OpenMP rule forbids moving a `#pragma omp` line, even together with the whole loop
+it governs. That blocks the two largest functions in MagickCore (`colorspace.c`, cc 142
+and 151), whose `switch` arms each hold a complete parallel region, and several Brain
+Methods. A narrower rule would still guarantee that nothing a thread shares changes:
+
+> A complete parallel region - the pragma, its clauses unchanged, and the loop it
+> governs - may be moved into a `static` helper, provided every variable named in its
+> clauses (`shared`, `private`, `reduction`, ...) is either declared inside the helper
+> or passed to it by pointer exactly as the region used it, and the helper returns any
+> value the region left in a caller variable (typically `status`).
+
+Not applied. The oracle cannot check threading, so this rule's safety rests on reading
+alone; an OpenMP-enabled build with `-fsanitize=thread` on the moved functions would be
+the check to add first.
+
 
 ---
 

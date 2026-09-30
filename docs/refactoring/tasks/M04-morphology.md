@@ -40,16 +40,16 @@ The score must read 1.53. If it does not, this file changed after the task was w
 
 | # | Function | Line | Cyclomatic | Nesting | Bumps | Linkage | OpenMP | Cases | Mutants killed |
 | --- | --- | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |
-| 1 | `AcquireKernelBuiltIn` | 962 | 294 | 5 | 25 | public | - | 2290 | 28 of 34 |
+| 1 | `AcquireKernelBuiltIn` | 962 | 294 | 5 | 25 | public | - | 2294 | 28 of 34 |
 | 2 | `MorphologyPrimitiveDirect` | 3216 | 75 | 8 | 14 | static | 2 | 84 | 8 of 10 |
-| 3 | `MorphologyPrimitive` | 2540 | - | 9 | 17 | static | 4 | 2279 | 10 of 11 |
-| 4 | `RotateKernelInfo` | 4232 | 45 | 4 | 5 | static | - | 1378 | 3 of 6 |
-| 5 | `MorphologyApply` | 3608 | - | 6 | 10 | public | - | 2363 | 8 of 9 |
+| 3 | `MorphologyPrimitive` | 2540 | - | 9 | 17 | static | 4 | 2283 | 10 of 11 |
+| 4 | `RotateKernelInfo` | 4232 | 45 | 4 | 5 | static | - | 1380 | 3 of 6 |
+| 5 | `MorphologyApply` | 3608 | - | 6 | 10 | public | - | 2367 | 8 of 9 |
 | 6 | `ParseKernelArray` | 219 | 38 | - | 5 | static | - | 1053 | 1 of 1 |
-| 7 | `ParseKernelName` | 380 | 39 | - | 2 | static | - | 2290 | 2 of 2 |
-| 8 | `MorphologyImage` | 4103 | - | 4 | 4 | public | - | 2363 | 2 of 3 |
-| 9 | `AcquireKernelInfo` | 497 | 12 | - | 3 | public | - | 2415 | 1 of 1 |
-| 10 | `ScaleKernelInfo` | 4545 | 13 | - | 2 | public | - | 568 | 0 of 2 |
+| 7 | `ParseKernelName` | 380 | 39 | - | 2 | static | - | 2294 | 2 of 2 |
+| 8 | `MorphologyImage` | 4103 | - | 4 | 4 | public | - | 2367 | 2 of 3 |
+| 9 | `AcquireKernelInfo` | 497 | 12 | - | 3 | public | - | 2419 | 1 of 1 |
+| 10 | `ScaleKernelInfo` | 4545 | 13 | - | 2 | public | - | 570 | 0 of 2 |
 | 11 | `SameKernelInfo` | 2370 | 11 | - | - | static | - | 336 | 1 of 1 |
 | 12 | `ShowKernelInfo` | 4632 | 9 | 4 | 2 | public | - | 0 | - |
 
@@ -68,10 +68,10 @@ Work **one function at a time, in the order above**, and run the verification in
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Public function: its name and signature must not change.
 - The oracle missed 4 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 1067, `ne_to_eq`: `else if ( (type != DoGKernel) || (sigma >= sigma2) )`
-  - line 1582, `lt_to_le`: `if ( args->rho < 1.0 || args->sigma < 1.0 )`
-  - line 1606, `lt_to_le`: `if (args->rho < 1.0)`
-  - line 1705, `mul_to_div`: `kernel->width = CastDoubleToSizeT(args->rho)*2+1;`
+  - base line 1067, `ne_to_eq`: `else if ( (type != DoGKernel) || (sigma >= sigma2) )`
+  - base line 1582, `lt_to_le`: `if ( args->rho < 1.0 || args->sigma < 1.0 )`
+  - base line 1606, `lt_to_le`: `if (args->rho < 1.0)`
+  - base line 1705, `mul_to_div`: `kernel->width = CastDoubleToSizeT(args->rho)*2+1;`
 - 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/morphology.c): simplify AcquireKernelBuiltIn`
@@ -83,8 +83,8 @@ Commit message: `refactor(MagickCore/morphology.c): simplify AcquireKernelBuiltI
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 3530, `lt_to_le`: `if (((double) pixels[i]+(*k)) < pixel)`
-  - line 3571, `sub_to_add`: `if (fabs(pixel-(double) q[i]) > MagickEpsilon)`
+  - base line 3530, `lt_to_le`: `if (((double) pixels[i]+(*k)) < pixel)`
+  - base line 3571, `sub_to_add`: `if (fabs(pixel-(double) q[i]) > MagickEpsilon)`
 
 Commit message: `refactor(MagickCore/morphology.c): simplify MorphologyPrimitiveDirect`
 
@@ -95,7 +95,7 @@ Commit message: `refactor(MagickCore/morphology.c): simplify MorphologyPrimitive
 - **Recipe A (parameter object)** - 6 arguments; the function is `static`, so check that its address is never taken.
 - Contains 4 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 3036, `lt_to_le`: `if ((double) pixels[i] < minimum)`
+  - base line 3036, `lt_to_le`: `if ((double) pixels[i] < minimum)`
 
 Commit message: `refactor(MagickCore/morphology.c): simplify MorphologyPrimitive`
 
@@ -105,9 +105,9 @@ Commit message: `refactor(MagickCore/morphology.c): simplify MorphologyPrimitive
 - **Recipe E (extract function)** - 5 nested blocks; each bump is a missing function.
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 4245, `lt_to_le`: `if ( angle < 0 )`
-  - line 4276, `le_to_lt`: `if ( 135.0 < angle && angle <= 225.0 )`
-  - line 4286, `le_to_lt`: `if ( 22.5 < fmod(angle,90.0) && fmod(angle,90.0) <= 67.5 )`
+  - base line 4245, `lt_to_le`: `if ( angle < 0 )`
+  - base line 4276, `le_to_lt`: `if ( 135.0 < angle && angle <= 225.0 )`
+  - base line 4286, `le_to_lt`: `if ( 22.5 < fmod(angle,90.0) && fmod(angle,90.0) <= 67.5 )`
 
 Commit message: `refactor(MagickCore/morphology.c): simplify RotateKernelInfo`
 
@@ -144,7 +144,7 @@ Commit message: `refactor(MagickCore/morphology.c): simplify ParseKernelName`
 - Recipe A does not apply: this function is public, and its signature is the API.
 - Public function: its name and signature must not change.
 - The oracle missed 1 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 4184, `lt_to_le`: `if ( parse < 0 )`
+  - base line 4184, `lt_to_le`: `if ( parse < 0 )`
 
 Commit message: `refactor(MagickCore/morphology.c): simplify MorphologyImage`
 
@@ -164,8 +164,8 @@ Commit message: `refactor(MagickCore/morphology.c): simplify AcquireKernelInfo`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Public function: its name and signature must not change.
 - The oracle missed 2 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 4592, `ge_to_lt`: `kernel->minimum *= (kernel->minimum >= 0.0) ? pos_scale : neg_scale;`
-  - line 4595, `lt_to_ge`: `if ( scaling_factor < MagickEpsilon ) {`
+  - base line 4592, `ge_to_lt`: `kernel->minimum *= (kernel->minimum >= 0.0) ? pos_scale : neg_scale;`
+  - base line 4595, `lt_to_ge`: `if ( scaling_factor < MagickEpsilon ) {`
 
 Commit message: `refactor(MagickCore/morphology.c): simplify ScaleKernelInfo`
 

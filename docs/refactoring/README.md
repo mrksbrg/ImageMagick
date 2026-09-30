@@ -71,6 +71,9 @@ protection first and by Code Health second.
 **Phase 0 - the safety net** *(done)*. The oracle, mutation testing of it across every
 compiled MagickCore file, the guard and CodeScene tools, the baseline.
 
+**A preliminary pilot** is kept on the branch `night1-refactoring` (see the
+playbook's *Known plateaus*); it is not part of the campaign's record.
+
 **Phase 1 - pilot on ready MagickCore files.** Start with `resize.c`, then the other
 ready image-processing files in [`BACKLOG.md`](BACKLOG.md). This phase tests whether the
 recipes and the verification loop work for ImageMagick, on files where a mistake is

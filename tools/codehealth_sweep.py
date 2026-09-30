@@ -191,6 +191,18 @@ def check_the_sweep_is_whole(output: str, scores: dict, unscorable: list, failed
             print("  " + rel + ": " + text, file=sys.stderr)
         sys.exit("%d files came back with an error; refusing to write %s" % (len(failed), output))
 
+    # A file the committed baseline scored has functions; silence from it is
+    # a request the server dropped (seen with the largest files under load),
+    # not a data table.
+    baseline = REPO / "docs" / "refactoring" / "codehealth-baseline.json"
+    if baseline.is_file() and Path(output).resolve() != baseline.resolve():
+        known = {r["path"] for r in json.loads(baseline.read_text()).get("scores", [])}
+        dropped = sorted(set(unscorable) & known)
+        if dropped:
+            sys.exit("%d files the baseline scored came back without a score (%s); "
+                     "refusing to write %s. Run again when the machine is idle."
+                     % (len(dropped), ", ".join(dropped[:5]), output))
+
     previous = Path(output)
     if not previous.is_file():
         return

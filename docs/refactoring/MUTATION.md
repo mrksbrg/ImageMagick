@@ -352,6 +352,48 @@ output are normalised. The catalogue is now 9,702 cases, 0 nondeterministic
 in `selfcheck --repeat 4` under full load. The mutation effect on those files
 has not been measured yet.
 
+### Cases for the infrastructure paths
+
+A third round added 49 `infra` cases aimed at the paths the oracle missed: disk
+and memory-mapped pixel caches, gzip and bzip2 streams, stdout and stdin, the
+mpr registry, inline data, frame/crop/size filename syntax, `@` lists, scene
+numbering, filename escapes, properties and options. Cases can now feed a file
+on stdin. `selfcheck --repeat 4`: 9,751 cases, 0 nondeterministic.
+
+Rerunning the old survivors against the new cases only (`mutate.py --cases`):
+
+| Survivors rerun | Killed by the new cases | Survived | Not reached by them |
+| --- | ---: | ---: | ---: |
+| sweep 1: blob, cache, image, property, option, string (350) | 15 | 168 | 167 |
+| sweep 2: infrastructure and hardly exercised files (573), against `infra`, `cipher`, `info` and `encode` | 143 | 232 | 198 |
+
+The sweep-2 files gained most: the cipher round trips, the `-list` printers and
+the PostScript and PDF compression cases reach code nothing reached before. The
+sweep-1 infrastructure files gained little: their survivors mostly sit in paths
+that small corpus images do not drive whatever the I/O route - cache growth,
+threading, resource limits - and several are the harmless kinds.
+
+### Full runs for the Phase 1 files
+
+Every mutant, not a sample, for the files the task files cover, so that each
+task lists its survivors function by function:
+
+| File | Mutants | Killed | Survived | No coverage |
+| --- | ---: | ---: | ---: | ---: |
+| `compare.c` | 672 | 505 | 145 | 22 |
+| `colormap.c` | 46 | 41 | 5 | 0 |
+| `decorate.c` | 368 | 338 | 30 | 0 |
+| `shear.c` | 511 | 333 | 103 | 75 |
+| `segment.c` | 443 | 303 | 59 | 81 |
+| `threshold.c` | 557 | 410 | 139 | 8 |
+| `statistic.c` | 906 | 711 | 192 | 3 |
+| `visual-effects.c` | 840 | 568 | 182 | 90 |
+| `enhance.c` | 983 | 677 | 208 | 98 |
+
+`colorspace.c` and `morphology.c` were still running when this was written;
+`build-oracle/night2.log` records them as they finish. 37 of `statistic.c`'s
+survivors hit the 300-case cap.
+
 ## Sweep 2: the remaining 58 MagickCore files
 
 A second build covered every other MagickCore file the oracle build compiles

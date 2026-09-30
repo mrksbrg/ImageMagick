@@ -69,9 +69,9 @@ Work **one function at a time, in the order above**, and run the verification in
 - Public function: its name and signature must not change.
 - Only 7 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
 - The oracle missed 3 sampled mutant(s) here that are not of a known harmless kind. Take extra care on these lines, and consider closing the gap first:
-  - line 227, `ne_to_eq`: `(images->next->next->next != (Image *) NULL))`
-  - line 314, `add_to_sub`: `cr=MagickSafeReciprocal(br*br+bi*bi+snr)*(ar*br+ai*bi);`
-  - line 332, `sub_to_add`: `cr=ar*cos(2.0*MagickPI*(ai-0.5));`
+  - base line 227, `ne_to_eq`: `(images->next->next->next != (Image *) NULL))`
+  - base line 314, `add_to_sub`: `cr=MagickSafeReciprocal(br*br+bi*bi+snr)*(ar*br+ai*bi);`
+  - base line 332, `sub_to_add`: `cr=ar*cos(2.0*MagickPI*(ai-0.5));`
 - 2 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/fourier.c): simplify ComplexImages`
