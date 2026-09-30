@@ -1447,6 +1447,102 @@ GAP_COMMANDS += [
     "{C}/rose.miff -filter Gaussian -define filter:sigma=0.8 -define filter:verbose=1 -resize 50%",
     "{C}/rose.miff -filter Cubic -define filter:b=0.3 -define filter:verbose=1 -resize 50%",
 ]
+# annotate.c: every gravity with two lines and with a rotation, decorations, no
+# antialiasing, undercolor, kerning, wrapping captions, font encodings
+GAP_COMMANDS += [
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity NorthWest -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity NorthWest -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity North -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity North -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity West -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity West -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity Center -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity Center -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity East -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity East -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity SouthWest -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity SouthWest -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity South -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity South -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity SouthEast -annotate +2+2 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity SouthEast -annotate 15x0+3+4 'Tilt'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -draw \"decorate underline text 5,20 'Deco'\"",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -draw \"decorate overline text 5,20 'Deco'\"",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -draw \"decorate line-through text 5,20 'Deco'\"",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 +antialias -annotate +5+20 Mono",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -undercolor navy -fill white -annotate +5+20 'Under'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -kerning 2 -interword-spacing 6 -annotate +2+20 'a b c'",
+    "-size 40x -font {C}/Generic.ttf -pointsize 11 caption:'a bb ccc dddd eeeee'",
+    "-size 30x -font {C}/Generic.ttf -pointsize 11 caption:'nospacesinthislongword'",
+    "-size 60x40 -font {C}/Generic.ttf -pointsize 11 caption:'line one\\nline two'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -encoding Unicode -annotate +5+20 'Enc'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -encoding None -annotate +5+20 'Enc'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -encoding AppleRoman -annotate +5+20 'Enc'",
+]
+# vision.c: a few distinct blobs through every connected-components define, and
+# -integral
+GAP_COMMANDS += [
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -connected-components 4",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:area-threshold=10-200 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:angle-threshold=10-80 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:circularity-threshold=0.3-0.9 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:eccentricity-threshold=0.1-0.9 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:major-axis-threshold=5-30 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:minor-axis-threshold=2-12 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:perimeter-threshold=10-60 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:mean-color=true -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep=1,2 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:remove=2 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep-colors=white -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:remove-colors=gray -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep-top=2 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:sort=area -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:sort-order=decreasing -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:exclude-header=true -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:background-id=0 -connected-components 8",
+    "{C}/rose.miff -define connected-components:verbose=true -define connected-components:sort=circularity -define connected-components:area-threshold=20 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:diameter-threshold=5-20 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep-ids=9,11 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:remove-ids=58 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:exclude-ids=0 -connected-components 8",
+    "{C}/rose.miff -integral",
+    "{C}/gray16.miff -integral",
+    "{C}/rose_alpha.miff -integral",
+]
+# profile.c: an EXIF block (every byte below 128, so it can be case text), XMP as
+# attributes and as elements, the ICC profile of the one JPEG that carries one,
+# and PSD round trips whose 8BIM holds resolution and ICC resources. Each entry:
+# label, steps (the last writes out.miff), files written into the case first.
+EXIF_BLOCK = "Exif\u0000\u0000II*\u0000\b\u0000\u0000\u0000\u0004\u0000\u0012\u0001\u0003\u0000\u0001\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u001a\u0001\u0005\u0000\u0001\u0000\u0000\u0000>\u0000\u0000\u0000\u001b\u0001\u0005\u0000\u0001\u0000\u0000\u0000F\u0000\u0000\u0000(\u0001\u0003\u0000\u0001\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000H\u0000\u0000\u0000\u0001\u0000\u0000\u0000H\u0000\u0000\u0000\u0001\u0000\u0000\u0000"
+XMP_ATTRIBUTES = "<?xpacket begin=\"\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n<rdf:Description rdf:about=\"\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"\n tiff:XResolution=\"72/1\" tiff:YResolution=\"72/1\" tiff:ResolutionUnit=\"2\" tiff:Orientation=\"1\"/>\n</rdf:RDF></x:xmpmeta>\n<?xpacket end=\"w\"?>"
+XMP_ELEMENTS = "<?xpacket begin=\"\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n<rdf:Description rdf:about=\"\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"\n><tiff:XResolution>72/1</tiff:XResolution><tiff:YResolution>72/1</tiff:YResolution><tiff:ResolutionUnit>2</tiff:ResolutionUnit><tiff:Orientation>1</tiff:Orientation></rdf:Description>\n</rdf:RDF></x:xmpmeta>\n<?xpacket end=\"w\"?>"
+_UHDR_JPG = "{C}/files/tests/cli-uhdr-iptc.jpg"
+GAP_STEP_CASES = [
+    ("rose exif profile, density and orientation",
+     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient", "BottomLeft",
+       "out.miff"]], {"exif.bin": EXIF_BLOCK}),
+    ("rose xmp attributes, density and orientation",
+     [["{C}/rose.miff", "-profile", "meta.xmp", "-density", "300", "-orient", "BottomLeft",
+       "out.miff"]], {"meta.xmp": XMP_ATTRIBUTES}),
+    ("rose xmp elements, density and orientation",
+     [["{C}/rose.miff", "-profile", "meta.xmp", "-density", "300", "-orient", "BottomLeft",
+       "out.miff"]], {"meta.xmp": XMP_ELEMENTS}),
+    ("rose icc applied twice",
+     [[_UHDR_JPG, "icc.icc"], ["{C}/rose.miff", "-profile", "icc.icc", "-profile", "icc.icc",
+                                "out.miff"]], {}),
+    ("psd 8bim resolution rewritten",
+     [["{C}/rose.miff", "-density", "150", "-units", "PixelsPerInch", "r.psd"],
+      ["r.psd", "-density", "300", "-units", "PixelsPerInch", "out.miff"]], {}),
+    ("psd 8bim with icc, icc removed",
+     [[_UHDR_JPG, "icc.icc"],
+      ["{C}/rose.miff", "-profile", "icc.icc", "-density", "150", "-units", "PixelsPerInch", "r.psd"],
+      ["r.psd", "+profile", "icc", "out.miff"]], {}),
+    ("psd 8bim with icc, xmp added",
+     [[_UHDR_JPG, "icc.icc"],
+      ["{C}/rose.miff", "-profile", "icc.icc", "-density", "150", "-units", "PixelsPerInch", "r.psd"],
+      ["r.psd", "-profile", "meta.xmp", "out.miff"]], {"meta.xmp": XMP_ELEMENTS}),
+]
 # compare.c: every metric with a read mask of exactly QuantumRange/2 on one image
 # only (the utility masks both, and the test ORs the two masks)
 GAP_COMMANDS += [
@@ -1482,6 +1578,7 @@ def _gap_cases():
     yield from _gap_cdl_cases()
     yield from _gap_command_cases()
     yield from _gap_convert_cases()
+    yield from _gap_step_cases()
 
 
 def _gap_image_cases(entries):
@@ -1507,6 +1604,11 @@ def _gap_command_cases():
             yield _case("gaps", label, [_fmt(command)], [])
         else:
             yield _op("gaps", label, [], _fmt(command))
+
+
+def _gap_step_cases():
+    for label, steps, files in GAP_STEP_CASES:
+        yield _with_inputs(_case("gaps", label, steps, ["out.miff"]), files=files or None)
 
 
 def _gap_convert_cases():
