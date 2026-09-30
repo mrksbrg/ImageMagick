@@ -1066,10 +1066,39 @@ def _quantum_index_cases():
 
 
 def _quantum_meta_cases():
-    # A meta channel makes the image multispectral: its own import and export.
-    steps = [[img("rose"), "-channel-fx", "red=>meta", "miff:enc.miff"],
-             ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
-    yield _case("quantum", "rose red=>meta -> miff", steps, ["enc.miff", "dec.miff"])
+    # A meta channel makes the image multispectral: its own import and export,
+    # whose floating-point branch needs a floating-point MIFF.
+    for extra in ([], ["-depth", "16"]) + tuple(["-depth", d] + _FLOAT for d in ("16", "32", "64")):
+        steps = [[img("rose"), "-channel-fx", "red=>meta"] + extra + ["miff:enc.miff"],
+                 ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantum", "rose red=>meta %s -> miff" % " ".join(extra), steps,
+                    ["enc.miff", "dec.miff"])
+
+
+# The second round: branches the first left unreached. Palette indexes as
+# floating point, and at depth 1, which needs a two-colour palette; opacity
+# and alpha as floating point; gray little-endian at more depths.
+QUANTUM_INDEX_VARIANTS = [
+    ("bilevel", ["-type", "Palette", "-depth", "1"]),
+    ("bilevel", ["-type", "PaletteBilevelAlpha", "-depth", "1"]),
+    ("palette", ["-depth", "16"] + _FLOAT), ("palette", ["-depth", "32"] + _FLOAT),
+    ("rose_alpha", ["-colors", "8", "-type", "PaletteAlpha", "-depth", "32"] + _FLOAT),
+]
+QUANTUM_ROUND2 = [
+    (f, depth, extra) for f in ("o", "a")
+    for depth, extra in (("16", _FLOAT), ("32", _FLOAT), ("64", _FLOAT))
+] + [("gray", depth, ["-endian", "LSB"] + x)
+     for depth, x in (("32", []), ("64", _FLOAT), ("32", _FLOAT), ("24", []), ("8", []))]
+
+
+def _quantum_round2_cases(writable_formats):
+    for name, args in QUANTUM_INDEX_VARIANTS:
+        steps = [[img(name)] + args + ["miff:enc.miff"], ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantum", "%s %s -> miff" % (name, " ".join(args)), steps,
+                    ["enc.miff", "dec.miff"])
+    for (f, depth, extra), name in itertools.product(QUANTUM_ROUND2, ("rose_alpha", "hdri")):
+        if f in writable_formats:
+            yield _quantum_round_trip(f, depth, extra, name)
 
 
 def _quantum_cases(writable_formats):
@@ -1077,6 +1106,7 @@ def _quantum_cases(writable_formats):
     yield from _quantum_yuv_cases()
     yield from _quantum_index_cases()
     yield from _quantum_meta_cases()
+    yield from _quantum_round2_cases(writable_formats)
 
 
 # ---- decoders over the frozen reader corpus

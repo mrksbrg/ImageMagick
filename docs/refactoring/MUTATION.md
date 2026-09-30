@@ -962,6 +962,15 @@ upstream issues*). `selfcheck --repeat 8` over the family: 0 nondeterministic.
 
 Neither file is trusted yet: the survivors left are still mostly unreached.
 
+A second round (31 cases: palette indexes as floating point and at depth 1, the meta
+channel as floating point, opacity and alpha as floating point, gray little-endian at
+more depths) reached more of both files, unreached survivors 296 to 267 and 148 to 134,
+but killed nothing more: the mutants in those branches moved from unreached to unmatched.
+One likely reason is that floating-point palette indexes are rounded back to integers,
+which hides a small arithmetic change. Those survivors are the next to read. After both
+rounds: `quantum-import.c` adjusted 58%, `quantum-export.c` 66%; `selfcheck --repeat 8`,
+274 cases: 0 nondeterministic.
+
 ## Which mutation operators (Windows, 2026-09-30)
 
 Every figure so far comes from **Mull's default operators**: `mull.yml` names only the
