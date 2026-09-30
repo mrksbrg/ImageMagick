@@ -6,12 +6,15 @@ is specific to Claude Code.
 
 ## Claude Code specifics
 
-**CodeScene.** The CodeScene MCP server (`cs-mcp`) exposes `code_health_review`,
-`code_health_score` and `pre_commit_code_health_safeguard`. If those tools are present,
-use them. If they are not, the server is not configured for your profile - that is not a
-reason to skip measurement: `python3 tools/ch.py` drives the same `cs-mcp` binary over
-stdio and gives the same scores and findings. `CS_ACCESS_TOKEN` must be set in the
-environment.
+**CodeScene.** Use the CodeScene MCP server (`cs-mcp`): `code_health_review`,
+`code_health_score` and `pre_commit_code_health_safeguard`. It is configured in
+[`.mcp.json`](.mcp.json) at the repository root, which reads `CS_ACCESS_TOKEN` from the
+environment; the file has a machine-specific path and is kept out of git through
+`.git/info/exclude`. If the tools are missing, the server did not start: restart Claude
+Code rather than working around it. **Do not call the `cs` command-line tool** for
+measurement - the project owner wants the usage recorded through the MCP server.
+`tools/ch.py` and `tools/codehealth_sweep.py` also talk to `cs-mcp`, for batches and
+sweeps.
 
 **Record the tool versions.** Scores move between CodeScene versions. The committed
 baseline records `cs-mcp` and `cs` versions; a score you compare against it should come
