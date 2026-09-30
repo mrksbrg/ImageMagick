@@ -42,12 +42,16 @@ ROW = "  %-28s %7s %6s %12s %9s %9s %6s  %s"
 
 
 def merged(reports):
-    """The results of all reports, a later report winning for the same mutant."""
+    """The results of all reports, a later report winning for the same mutant.
+
+    Except over "no-coverage": a rerun limited with --cases reports that for
+    any mutant its cases do not reach, which says nothing about the rest."""
     by_id = {}
     for path in reports:
         with open(path) as f:
             for result in json.load(f):
-                by_id[result["id"]] = result
+                if result["status"] != "no-coverage" or result["id"] not in by_id:
+                    by_id[result["id"]] = result
     return list(by_id.values())
 
 

@@ -611,6 +611,27 @@ and the gated results `gate-colorspace.json`.
 - `ShowKernelInfo` prints the kernel with `-define morphology:showKernel=1`; no case
   asks for it.
 
+### After adding the cases the gate pointed at
+
+The gaps above became 109 cases (commit `7e32a77c3`): palette images in every colorspace,
+explicit and invalid illuminants, kernels with arguments and rotations, Voronoi on a seed
+image, seven `convolve:scale` forms and `showKernel`. `selfcheck --repeat 4` over the two
+families: 2,463 cases, 0 nondeterministic. Every survivor and every mutant without
+coverage was rerun against the new cases only (`mutate.py --cases`), and the reports merged
+with `tools/oracle/gate.py`:
+
+| File | Killed before | Killed after | Gate before | Gate after |
+| --- | ---: | ---: | ---: | ---: |
+| `colorspace.c` | 439 | 472 | 82% | **88%** |
+| `morphology.c` | 838 | 953 | 70% | **77%** |
+
+Functions that moved: `AcquireKernelBuiltIn` 67% to 76% and `MorphologyPrimitiveDirect`
+(Voronoi) 56% to 85%, both from not ready to careful; `TransformsRGBImage` 77% to 86% and
+`sRGBTransformImage` 83% to 89%; `ShowKernelInfo` and `UnityAddKernelInfo` are reached for
+the first time. The `convolve:scale` cases killed nothing in `ScaleKernelInfo` (58%) and
+the rotations only four more in `RotateKernelInfo` (61%): their survivors need reading, not
+more cases of the same kind.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
