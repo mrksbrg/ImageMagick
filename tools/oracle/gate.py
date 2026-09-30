@@ -14,7 +14,8 @@ Each survivor is sorted by classify.py. The gate is, per function,
     killed / (killed + unmatched + unreached)
 
 Survivors of the unobservable kinds (logging, progress, loop and channel
-bounds, free guards, allocation sizes, threads and resources) are left out:
+bounds, strict tests against MagickEpsilon, free guards, allocation sizes,
+threads and resources) are left out:
 no output-comparing test can kill them. Survivors on lines no case executes
 count against the function, since a refactoring there is unprotected. See
 docs/refactoring/VERIFICATION.md for the thresholds:
@@ -34,8 +35,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import classify  # noqa: E402
 
-UNOBSERVABLE = {"logging", "progress", "free-guard", "channel-bound", "loop-bound",
-                "memory-size", "threads-resources"}
+UNOBSERVABLE = {"logging", "progress", "free-guard", "channel-bound", "epsilon-bound",
+                "loop-bound", "memory-size", "threads-resources"}
 READY, CAREFUL = 0.90, 0.75
 COLUMNS = ("mutants", "killed", "unobservable", "unmatched", "unreached")
 ROW = "  %-28s %7s %6s %12s %9s %9s %6s  %s"

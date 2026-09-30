@@ -632,6 +632,35 @@ the first time. The `convolve:scale` cases killed nothing in `ScaleKernelInfo` (
 the rotations only four more in `RotateKernelInfo` (61%): their survivors need reading, not
 more cases of the same kind.
 
+### A second round: asymmetric kernels, mixed-sign scaling
+
+Reading the survivors of `RotateKernelInfo` and `ScaleKernelInfo` showed why the first
+round barely moved them. Every kernel tested was symmetric, so a rotation by 90 degrees
+and one by 270 give the same kernel; and every scaled kernel was all-positive, so the
+separate scaling of positive and negative values never showed. 13 cases fix that:
+`Comet` rotated by 90, 180 and 270 degrees, user-defined 3x3 kernels with an off-centre
+origin expanded through 45-degree steps (`3x3+2+2@:...`), 1-D user kernels expanded
+through 90 degrees, and `DoG` and `Laplacian` under four scaling flags, all printed with
+`showKernel` so that the kernel values are compared as well as the image.
+
+Many of the rest are boundary mutants: `>=` against `MagickEpsilon` made `>`, which
+differs only at exactly 1e-12. `classify.py` now names them `epsilon-bound`, one of the
+kinds the gate leaves out. That reclassified 18 survivors in `morphology.c` and 2 in
+`colorspace.c`; the new cases killed 26.
+
+| Function | Gate after round 1 | After round 2 |
+| --- | ---: | ---: |
+| `RotateKernelInfo` | 61% | **80%** (every line now reached) |
+| `ScaleKernelInfo` | 58% | **82%** |
+| `ShowKernelInfo` | 59% | 77% |
+| `ConvertRGBToHSL` (colorspace.c) | 88% | **96%**, ready (reclassification only) |
+| **morphology.c** | 77% | **81%** |
+| colorspace.c | 88% | 88% |
+
+`selfcheck --repeat 4` over the morphology family, 1,982 cases: 0 nondeterministic. The
+catalogue now has 9,867 cases. Survivors in the angle comparisons of `RotateKernelInfo`
+(`angle <= 22.5`, `135.0 < angle`, ...) remain counted: an exact angle is testable.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:

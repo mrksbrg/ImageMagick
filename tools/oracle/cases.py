@@ -753,6 +753,18 @@ MORPHOLOGY_KERNEL_ARGS = [
     "Gaussian:0x1,30", "Sobel:45", "Sobel:135",
 ]
 CONVOLVE_SCALES = ["!", "^", "50%", "0.5,2", "1.5!", "-1^", "0,1"]
+# Rotating a symmetric kernel (Blur) by 90 or 270 degrees gives the same
+# kernel, so a wrong rotation passes unseen; these are asymmetric, some with
+# an off-centre origin, and "@" or ">" expands them through 45 or 90 degrees.
+ROTATED_KERNELS = [
+    "Comet:0x2,90", "Comet:0x2,180", "Comet:0x2,270",
+    "3x3+2+2@:1,2,3,4,5,6,7,8,9", "3x3+0+1@:1,2,3,4,5,6,7,8,9",
+    "3x3+1+0@:1,-2,3,4,5,-6,7,8,9", "5x1+0+0>:1,2,3,4,5", "1x5+0+2>:1,2,3,4,5",
+]
+# Scaling treats positive and negative kernel values apart only when a kernel
+# has both, which Blur does not.
+MIXED_SIGN_SCALES = [("DoG:0x1,2", "^"), ("DoG:0x1,2", "!"), ("DoG:0x1,2", "50%!"),
+                     ("DoG:0x1,2", "0.5^"), ("Laplacian:3", "^")]
 # Voronoi fills transparent pixels from the nearest opaque seed: it needs an
 # image that is mostly transparent.
 VORONOI_SEEDS = ["-size", "60x40", "xc:none", "-fill", "red", "-draw", "point 10,10",
@@ -777,6 +789,20 @@ def _morphology_arg_cases():
     yield _op("morphology", "rose showKernel Laplacian:3", [img("rose")],
               ["-define", "morphology:showKernel=1", "-morphology", "Convolve",
                "Laplacian:3"])
+    yield from _shown_kernel_cases()
+
+
+def _shown_kernel_cases():
+    """Rotated and scaled kernels, printed with showKernel so that the kernel
+    values are compared as well as the image they produce."""
+    show = ["-define", "morphology:showKernel=1"]
+    for k in ROTATED_KERNELS:
+        yield _op("morphology", "rose showKernel rotated %s" % k, [img("rose")],
+                  show + ["-morphology", "Convolve", k])
+    for k, s in MIXED_SIGN_SCALES:
+        yield _op("morphology", "rose showKernel convolve:scale=%s %s" % (s, k),
+                  [img("rose")],
+                  show + ["-define", "convolve:scale=" + s, "-morphology", "Convolve", k])
 
 
 def _evaluate_cases(lists):
