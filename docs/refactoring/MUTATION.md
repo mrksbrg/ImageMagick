@@ -777,14 +777,14 @@ out-of-gamut values). All 47 are the `gaps` family in `cases.py`; `selfcheck --r
 | `enhance.c` lines executed | 66.5% (lcov of 2026-09-28) | 83.5% |
 | Killed | 677 of 983 (69%) | 823 of 983 (84%) |
 | Functions with no case | 9 | 0 |
-| Gate, whole file | 76% | **93%** |
-| Functions ready | 15 of 40 | 35 of 40 |
-| Functions not ready | 14 | 0 |
-| Functions careful | 11 | 5: `EqualizeImage`, `CLAHEImage`, `SigmoidalContrastImage`, `ContrastImage`, `LevelizeImage` (89-86%) |
+| Gate, whole file (`gate.py`) | 85% | **93%** |
+| Functions ready / careful / not ready / no cases | 15 / 11 / 5 / 9 | 35 / 5 / 0 / 0 |
 
-The gate is killed / (killed + gaps + unresolved + unmatched + unreached + no coverage),
-leaving out the harmless kinds and the hand verdicts equivalent and unobservable; the
-"before" column already uses today's verdicts, so the change is the new cases' doing.
+Gate figures here and below are `tools/oracle/gate.py`'s: killed / (killed + unmatched +
+unreached), where gap and unresolved verdicts count as unmatched, equivalent and
+unobservable ones are left out with the harmless kinds, and mutants in functions no case
+reaches ("no cases") are not in the total. The "before" column already uses today's
+verdicts, so the change is the new cases' doing.
 What is left against the file is 13 unresolved survivors (the colormap alpha branches,
 and two boundaries at exactly half a hald-clut step) and 45 on lines still unreached,
 almost all progress-monitor and error paths.
@@ -803,16 +803,17 @@ in `verdicts.json`; every gap verdict was confirmed by rerunning its mutant thro
 
 | File | Mutants | Killed | Gate | Ready / careful / not ready | Still open |
 | --- | ---: | ---: | ---: | --- | --- |
-| `threshold.c` | 557 | 410 → 443 | 85% → **91%** | 7/10/3 → 15/4/1 | 5 unresolved |
+| `threshold.c` | 557 | 410 → 443 | see the next section | | 5 unresolved |
 | `decorate.c` | 368 | 338 → 351 | 94% → **98%** | 3/0/0 → 3/0/0 | none |
 | `colormap.c` | 46 | 41 → 41 | 98% → **98%** | 3/0/1 → 3/0/1 | 1 unresolved |
-| `segment.c` | 443 | 303 → 306 | 75% → **76%** | 13/2/1 → 14/1/1 | 6 unresolved |
-| `shear.c` | 511 | 333 → 388 | 73% → **85%** | 3/5/2 → 7/2/1 | 5 unresolved |
-| `compare.c` | 672 | 505 → 537 | 81% → **88%** | 10/8/5 → 18/2/3 | 4 unresolved |
+| `segment.c` | 443 | 303 → 306 | 94% → **95%** | 12/2/0 → 13/1/0 | 6 unresolved |
+| `shear.c` | 511 | 333 → 388 | 88% → **94%** | 3/5/0 → 7/2/0 | 5 unresolved |
+| `compare.c` | 672 | 505 → 537 | 84% → **91%** | 10/8/4 → 17/2/2 | 4 unresolved |
 
-What keeps `segment.c`, `shear.c` and `compare.c` low is code the command line cannot
-reach, not weak cases: `GetImageDynamicThreshold` (81 mutants), `ShearRotateImage` (45)
-and `IsImagesEqual` (22) have no caller in MagickCore, MagickWand or the coders. They are
+Ready / careful / not ready as `gate.py` counts them. Functions no case reaches are left
+out of both counts and of the gate; three of them no case can reach from the command
+line at all: `GetImageDynamicThreshold` (81 mutants), `ShearRotateImage` (45) and
+`IsImagesEqual` (22) have no caller in MagickCore, MagickWand or the coders. They are
 the "public API only" group of `VERIFICATION.md`.
 
 **What the gaps had in common**, beyond `enhance.c`'s:
@@ -868,9 +869,9 @@ unresolved), and the `gaps` family 173 cases.
 
 | File | Mutants | Killed | Gate | Ready / careful / not ready | Still open |
 | --- | ---: | ---: | ---: | --- | --- |
-| `visual-effects.c` | 840 | 568 → 662 | 78% → **92%** | 13/5/5 → 18/4/1 | 6 unresolved |
-| `statistic.c` | 906 | 711 → 748 | 91% → **95%** | 23/6/4 → 27/4/2 | 14 unresolved |
-| `threshold.c` (again) | 557 | 443 → 449 | 91% → **93%** | 15/4/1 → 16/4/0 | 5 unresolved |
+| `visual-effects.c` | 840 | 568 → 662 | 89% → **92%** | 13/5/2 → 18/4/1 | 6 unresolved |
+| `statistic.c` | 906 | 711 → 748 | 91% → **96%** | 22/6/3 → 26/4/1 | 14 unresolved |
+| `threshold.c` (all rounds) | 557 | 410 → 449 | 86% → **93%** | 6/10/1 → 15/4/0 | 5 unresolved |
 
 What the gaps had in common, beyond the earlier files':
 

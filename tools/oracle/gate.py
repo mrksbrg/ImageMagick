@@ -16,7 +16,9 @@ Each survivor is sorted by classify.py. The gate is, per function,
 Survivors of the unobservable kinds (logging, progress, loop and channel
 bounds, strict tests against MagickEpsilon, free guards, allocation sizes,
 threads and resources) are left out:
-no output-comparing test can kill them. Survivors on lines no case executes
+no output-comparing test can kill them. So are those read by hand and found
+equivalent or unobservable (tools/oracle/verdicts.json); those read and found
+to be gaps, or left unresolved, count as unmatched. Survivors on lines no case executes
 count against the function, since a refactoring there is unprotected. See
 docs/refactoring/VERIFICATION.md for the thresholds:
 
@@ -36,7 +38,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import classify  # noqa: E402
 
 UNOBSERVABLE = {"logging", "progress", "free-guard", "channel-bound", "epsilon-bound",
-                "loop-bound", "memory-size", "threads-resources"}
+                "loop-bound", "memory-size", "threads-resources",
+                "equivalent", "unobservable"}  # the last two: hand verdicts
+OPEN = ("unmatched", "gap", "unresolved")  # a gap is open until its case is in
 READY, CAREFUL = 0.90, 0.75
 COLUMNS = ("mutants", "killed", "unobservable", "unmatched", "unreached")
 ROW = "  %-28s %7s %6s %12s %9s %9s %6s  %s"
@@ -65,7 +69,7 @@ def tally(results):
     kinds = collections.Counter(r["kind"] for r in results)
     return {"mutants": len(results), "killed": kinds["killed"],
             "unobservable": sum(kinds[k] for k in UNOBSERVABLE),
-            "unmatched": kinds["unmatched"], "unreached": kinds["unreached"]}
+            "unmatched": sum(kinds[k] for k in OPEN), "unreached": kinds["unreached"]}
 
 
 def gate_value(counts):
