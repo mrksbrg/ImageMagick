@@ -76,16 +76,25 @@ Never, in any commit:
 
 ### Before you start on a function
 
-The oracle only protects code its cases reach. Check, then decide:
+The oracle only protects code its cases reach and check. Find out which level of evidence
+the function is at, then decide:
 
 ```bash
 python3 tools/oracle/casemap.py <Function>     # which cases execute it
+python3 tools/oracle/mutate.py --file <file> --function <Function> --max-cases 0
+python3 tools/oracle/gate.py build-oracle/work/mutation-<name>.json --file <file>.c
 ```
 
-A function no case executes cannot be refactored safely. Report it, with the function
-name, so cases can be added. For how well the reaching cases check the function, see the
-mutation results in [`docs/refactoring/MUTATION.md`](docs/refactoring/MUTATION.md) and
-the readiness column in the backlog.
+- **ready** or **careful**: oracle-verified; the whole playbook applies.
+- **not ready**, or no case executes it: guard-verified; only recipes E, G, P, R and X,
+  with `refactor_guard.py --calls` reporting `OK`, and every argument of every call you
+  add checked against its parameter by reading.
+
+The rules are in the playbook, *Two levels of evidence*; the reasoning and the measured
+results are in [`docs/refactoring/VERIFICATION.md`](docs/refactoring/VERIFICATION.md).
+Say in the commit message which level verified the step. When a function is not ready
+and a few cases would change that, report the gap: adding cases beats refactoring on the
+guard alone.
 
 ### After every commit
 

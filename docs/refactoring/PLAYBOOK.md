@@ -78,6 +78,44 @@ OpenCL, Windows, a delegate library that is not installed - cannot be compiled, 
 measured here. Do not change it, even when the change looks identical to one you made in
 a compiled branch. When a recipe would need to, skip the function and report it.
 
+This stands until `tools/oracle/build.sh` can build the X11, OpenCL and Windows code in
+one command ([`VERIFICATION.md`](VERIFICATION.md), step 5). Then that code becomes
+guard-verified, below, in the build that compiles it.
+
+---
+
+## Two levels of evidence
+
+The oracle only proves what its cases reach and check. Before starting on a function,
+find out which level it is at, and say in the commit message which one verified it
+(`Verified: oracle` or `Verified: guard`).
+
+**Oracle-verified.** The function passes the readiness gate:
+
+```bash
+python3 tools/oracle/casemap.py <Function>              # some case executes it
+python3 tools/oracle/mutate.py --file <file> --function <Function> --max-cases 0
+python3 tools/oracle/gate.py build-oracle/work/mutation-<name>.json --file <file>.c
+```
+
+A verdict of **ready** (90% or more of the killable mutants killed) allows every recipe
+in this catalogue. **Careful** (75-90%) allows them too, but read the unmatched and
+unreached survivors of the function first (`classify.py ... --kind unmatched`) and keep
+clear of the lines they sit on, or add a case that kills them.
+
+**Guard-verified.** The function is **not ready**, or no case executes it. It may still
+be refactored, as 3SX refactored a program with no tests at all, but only with the
+recipes whose guard fingerprint is exact: **E, G, P, R and X**. The proof is the build
+and `refactor_guard.py` reporting `OK` with `--calls`; a `WARN` stops the commit.
+Recipes D, C, A and S fold code together or move it, the guard cannot follow them, and
+they need the oracle.
+
+The guard has two blind spots: reordered statements, which the prohibitions already
+forbid, and **transposed arguments**. For every call the step adds, check by reading
+that each argument is passed in the position of the parameter it fills. Where the
+machine-code comparison applies (`VERIFICATION.md`, step 3), identical optimised code is
+a proof that covers both.
+
 ---
 
 ## Recipe E - Extract Function
@@ -466,8 +504,10 @@ the check to add first.
 After every commit, as [`AGENTS.md`](../../AGENTS.md) sets out:
 
 1. `tools/oracle/build.sh cand`
-2. `python3 tools/refactor_guard.py <file>` (with `--calls` after Recipe E, C, X or S)
-3. `python3 tools/oracle/oracle.py run --function <Function>`
+2. `python3 tools/refactor_guard.py <file>` (with `--calls` after Recipe E, C, X or S;
+   always with `--calls` at the guard-verified level)
+3. `python3 tools/oracle/oracle.py run --function <Function>` (at the guard-verified
+   level too: it cannot prove the step, but it can still catch one)
 4. `python3 tools/ch.py --review <file>`
 
 Before pushing a branch: `python3 tools/oracle/oracle.py run`, the whole catalogue.

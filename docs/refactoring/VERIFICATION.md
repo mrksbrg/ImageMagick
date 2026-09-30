@@ -7,8 +7,8 @@ and six of the reddest files are not even compiled by the oracle build. This pla
 which evidence each file and function gets, and what has to be built to raise it.
 
 Measured on 2026-09-30 on the Windows desktop: WSL2 Ubuntu 24.04 with clang 18, and MSYS2
-UCRT64 with gcc. Nothing here is merged into [`PLAYBOOK.md`](PLAYBOOK.md) or
-[`../../AGENTS.md`](../../AGENTS.md) yet; step 1 below does that.
+UCRT64 with gcc. The levels and the gate are in [`PLAYBOOK.md`](PLAYBOOK.md) (*Two levels of
+evidence*) and [`../../AGENTS.md`](../../AGENTS.md) since step 1.
 
 ---
 
@@ -158,7 +158,7 @@ The share of each group over all 441 functions is not measured yet (step 2).
 
 | # | Step | Status |
 | --- | --- | --- |
-| 1 | Write the three levels and the readiness gate into `PLAYBOOK.md` and `AGENTS.md`; extend the backlog with a verification-level column | open |
+| 1 | Write the three levels and the readiness gate into `PLAYBOOK.md` and `AGENTS.md`; extend the backlog with a verification-level column | done in the playbook (*Two levels of evidence*) and `AGENTS.md`, with `tools/oracle/gate.py`; the backlog column is still to do, file by file as the gate is run |
 | 2 | Classify all 441 never-called functions into the groups above; list the cases to add for the first group, ordered by the code each would reach | open |
 | 3 | Prototype the machine-code comparison on the refactorings in `night1-refactoring`; report how often it matches | prototype done: 18 of 42 identical, 16 of 16 planted slips caught (above). Next: a tool in `tools/`, run by `verify_step.sh` |
 | 4 | Run `oracle.py` on Windows, base against candidate as `magick.exe` builds, so that `nt-base.c` becomes oracle-verified | open |
