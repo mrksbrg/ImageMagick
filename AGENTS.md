@@ -149,9 +149,11 @@ harness has one, or through `tools/ch.py`, which talks to the same server. Do no
   `refactor(MagickCore/resize.c): simplify ScaleImage`.
 - Never squash several functions into one commit. The campaign relies on being able to
   revert a single step.
-- `python3 tools/codescene_precommit.py` checks what is staged: no file may lose Code
-  Health, and a new file must score 10.0. Install it as a hook if you like:
-  `ln -s ../../tools/codescene_precommit.py .git/hooks/pre-commit`.
+- The CodeScene gate, `tools/codescene_precommit.py`, checks what is staged: no library
+  file may lose Code Health, and a new one must score 10.0. `.githooks/pre-commit` runs
+  it on every commit once the clone is set up with `git config core.hooksPath .githooks`.
+  It needs `cs-mcp` on the `PATH` (or `CS_MCP_BINARY_PATH`) and `CS_ACCESS_TOKEN`. Do not
+  bypass it with `--no-verify`; when it refuses, stop and report, as the playbook says.
 
 ## Git remotes and pull requests
 
