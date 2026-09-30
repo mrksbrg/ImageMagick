@@ -971,6 +971,64 @@ which hides a small arithmetic change. Those survivors are the next to read. Aft
 rounds: `quantum-import.c` adjusted 58%, `quantum-export.c` 66%; `selfcheck --repeat 8`,
 274 cases: 0 nondeterministic.
 
+## Full runs of the Windows files, night of 2026-09-30 (Windows)
+
+Every mutant of each file (default operators), capped survivors rerun uncapped, gated with
+`gate.py`; `build-oracle/harness-file.sh` on WSL. Plain is killed / mutants, reach the
+share of mutants in functions some case executes, adjusted counts unreached code as gaps.
+
+| File | Mutants | Plain | Reach | Adjusted | What is left |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `constitute.c` | 238 | 92% | 100% | 94% | ping over a scene range; MIME types of inline data |
+| `blob.c` | 576 | 69% | 83% | 71% | 97 never called, 39 unreached, 26 unmatched |
+| `pixel.c` | 2,357 | 42% | 64% | 42% | 860 in the typed Import/Export routines |
+| `color.c` | 389 | 77% | 82% | 78% | |
+| `cache.c` | 860 | 77% | 84% | 78% | |
+| `xml-tree.c` | 620 | 77% | 77% | 77% | |
+| `token.c` | 184 | 57% | 85% | 57% | GlobExpression unreached; after 14 glob cases **77%** (below) |
+| `splay-tree.c` | 204 | 54% | 55% | 54% | much of it API only |
+| `linked-list.c` | 81 | 40% | 40% | 40% | much of it API only |
+| `cache-view.c` | 29 | 34% | 38% | 36% | much of it API only |
+
+### constitute.c: trusted
+
+Ten cases (family `constitute`): identify -ping over a range of scenes through a filename
+pattern, and inline data URIs with a plain MIME type, an `x-` prefix, a `+suffix` and three
+malformed ones, whose errors are compared too. Adjusted 94% to **98%**, reach 100%, no
+survivor unreached: **trusted**. The four open survivors:
+
+- `ConstituteImage`, `for (i=0; i < (ssize_t) length; i++)`, `<` to `>=`: an API function
+  (the map string of `ConstituteImage()`); no command reaches the loop with a longer map.
+- `PingImage`, `if (image != (Image *) NULL)`, flipped: needs a ping that fails after the
+  reader returns.
+- `GetImplicitDataImageType`, `(slash+1) >= p` and `offset >= MagickPathExtent`, `>=` to
+  `>`: boundary mutants, one byte from the end of the type and a type of exactly
+  `MagickPathExtent` characters.
+
+### token.c: wildcards in filenames
+
+Nearly all of `token.c`'s unreached code was `GlobExpression_`, the matcher for `*`, `?`,
+`[a-z]`, `[!x]`, `{a,b}` and backslash escapes. ImageMagick expands wildcards in input
+filenames itself, so 14 cases (family `token`) write six frames and read them back through
+a pattern. Some match surprisingly (`frame[!0].miff` gives `frame0.miff` only,
+`frame[0-].miff` every frame, `frame{1,}.miff` only `frame1.miff`); that is kept, not
+judged. Unreached survivors in `GlobExpression_` 43 to 1, adjusted **57% to 77%**. Left:
+`Tokenizer` and `StoreToken` (27 mutants), which nothing on the command line calls, and 14
+unmatched. `selfcheck --repeat 8`: 0 nondeterministic.
+
+### pixel.c: not trusted, API only
+
+`ImportImagePixels` and `ExportImagePixels` are called from the command line only by the
+JXL coder (and by `ConstituteImage`, itself API), which picks the storage type by depth
+(char, short, float) and the map by channels (RGB, RGBA, I, IA). `magick stream` has its
+own conversion in `stream.c`. Twelve JXL cases (family `pixel`: 8 and 16 bits and floating
+point, RGB, RGBA, gray, gray with alpha) raised the plain score from 42% to **50%**; the
+860 mutants in the double, long, long-long and quantum routines, and in the other maps,
+are reached only through MagickWand (`MagickImportImagePixels`,
+`MagickExportImagePixels`). **Not trusted: API only.** A small C driver calling those
+functions would reach them; that is a new kind of harness, for the project owner to
+decide.
+
 ## Which mutation operators (Windows, 2026-09-30)
 
 Every figure so far comes from **Mull's default operators**: `mull.yml` names only the

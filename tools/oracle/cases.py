@@ -15,6 +15,7 @@ Placeholders in argv:
   {FONT}     a TrueType font shipped in the corpus
 """
 
+import base64
 import hashlib
 import itertools
 import json
@@ -1101,6 +1102,65 @@ def _quantum_round2_cases(writable_formats):
             yield _quantum_round_trip(f, depth, extra, name)
 
 
+# pixel.c: the typed Import/Export*Pixel routines are called from the command
+# line only through the JXL coder, which picks the storage type by depth (8 bits
+# char, 16 short, floating point float) and the map by channels (RGB, RGBA, I,
+# IA). The double, long, long-long and quantum routines are API only.
+_GRAY_ALPHA = ["-alpha", "set", "-channel", "A", "-evaluate", "set", "60%", "+channel"]
+PIXEL_JXL_INPUTS = [
+    ("rose", []), ("rose_alpha", []), ("gray16", []), ("gray16", _GRAY_ALPHA),
+]
+PIXEL_JXL_DEPTHS = [["-depth", "8"], ["-depth", "16"], ["-depth", "32"] + _FLOAT]
+
+
+def _pixel_jxl_cases(writable_formats):
+    if "jxl" not in writable_formats:
+        return
+    for (name, pre), depth in itertools.product(PIXEL_JXL_INPUTS, PIXEL_JXL_DEPTHS):
+        args = [img(name)] + pre + depth + ["-quality", "100", "enc.jxl"]
+        steps = [args, ["enc.jxl"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("pixel", "%s %s -> jxl" % (name, " ".join(pre + depth)), steps,
+                    ["enc.jxl", "dec.miff"])
+
+
+# constitute.c: pinging a range of scenes through a filename pattern, and the
+# MIME types of inline data URIs (GetImplicitDataImageType): a plain type, an
+# "x-" prefix, a "+suffix", and malformed ones, whose errors are compared too.
+_PPM_2X1 = "P3\n2 1\n255\n255 0 0 0 0 255\n"
+_SVG_4X3 = ('<svg xmlns="http://www.w3.org/2000/svg" width="4" height="3">'
+            '<rect width="4" height="3" fill="red"/></svg>')
+DATA_URI_TYPES = [("image/ppm", _PPM_2X1), ("image/x-portable-pixmap", _PPM_2X1),
+                  ("image/svg+xml", _SVG_4X3), ("image/x-svg", _SVG_4X3),
+                  ("noslash", _PPM_2X1), ("image/", _PPM_2X1), ("image/x-", _PPM_2X1)]
+PING_SCENES = ["frame%d.miff[0-2]", "frame%d.miff[1]", "frame%d.miff[0-1]"]
+
+
+def _constitute_cases():
+    for mime, text in DATA_URI_TYPES:
+        uri = "inline:data:%s;base64,%s" % (mime, base64.b64encode(text.encode()).decode())
+        yield _op_to("constitute", "inline data %s" % mime, [uri] + FLOAT_OUT, "out.miff")
+    for pattern in PING_SCENES:
+        steps = [[img("anim"), "+adjoin", "frame%d.miff"], ["identify", "-ping", pattern]]
+        yield _case("constitute", "identify -ping %s" % pattern, steps, [])
+
+
+# token.c: GlobExpression, reached through wildcards in input filenames,
+# which ImageMagick expands itself. Some patterns match surprisingly
+# (`frame[!0]` gives frame0 only, `frame[0-]` every frame); that is what the
+# oracle keeps.
+GLOB_PATTERNS = ["frame*.miff", "frame?.miff", "frame[0-1].miff", "frame[!0].miff",
+                 "frame[^0].miff", "frame{0,2}.miff", "fr*me?.miff", "frame[12]*",
+                 "fram\\e1.miff", "frame\\*.miff", "*[2].miff", "frame[0-].miff",
+                 "frame{1,}.miff", "**.miff"]
+
+
+def _glob_cases():
+    for pattern in GLOB_PATTERNS:
+        steps = [[img("anim"), "+adjoin", "frame%d.miff"],
+                 [pattern, "-format", "%f %wx%h\\n", "info:"]]
+        yield _case("token", "glob %s" % pattern, steps, [])
+
+
 def _quantum_cases(writable_formats):
     yield from _quantum_layout_cases(writable_formats)
     yield from _quantum_yuv_cases()
@@ -1648,7 +1708,8 @@ def generate(lists, writable_formats):
         _type_cases(lists), _preview_cases(lists),
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
-        _quantum_cases(writable_formats),
+        _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
+        _constitute_cases(), _glob_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
