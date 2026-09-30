@@ -31,6 +31,7 @@ import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
+from typing import NamedTuple
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -175,17 +176,9 @@ def calls(src: str, fnptrs: frozenset = frozenset()) -> Counter:
     balance afterwards - the check keeps its strength.
     """
     cleaned = strip_preprocessor_lines(strip_comments(src))
-    out = Counter()
-    for m in CALL_RE.finditer(cleaned):
-        name = m.group(1)
-        if name in NOT_CALLS:
-            continue
-        out[name] += 1
+    out = Counter(name for name in CALL_RE.findall(cleaned) if name not in NOT_CALLS)
     if fnptrs:
-        for m in BARE_NAME_RE.finditer(cleaned):
-            name = m.group(1)
-            if name in fnptrs:
-                out[name] += 1
+        out.update(name for name in BARE_NAME_RE.findall(cleaned) if name in fnptrs)
     return out
 
 
@@ -209,26 +202,33 @@ def report_call_changes(rel: str, before: Counter, after: Counter, strict: bool)
 
     vanished = [name for name in removed if after[name] == 0]
     if vanished:
-        print("FAIL  " + rel + "  - a call vanished from the file")
-        for name in sorted(vanished):
-            print("        gone      " + name + " (was called " + str(before[name]) + "x)")
-        if any(after[name] == 0 for name in vanished) and (after - before):
-            print("        if one of these was renamed - legal for a file-local static, never")
-            print("        for a function another file can see - declare it and run again:")
-            print("          --renamed OLD=NEW")
+        report_vanished_calls(rel, vanished, before, after)
         return False
+    report_moved_calls(rel, before, after, strict)
+    return not strict
 
+
+def report_vanished_calls(rel: str, vanished: list, before: Counter, after: Counter) -> None:
+    print("FAIL  " + rel + "  - a call vanished from the file")
+    for name in sorted(vanished):
+        print("        gone      " + name + " (was called " + str(before[name]) + "x)")
+    if any(after[name] == 0 for name in vanished) and (after - before):
+        print("        if one of these was renamed - legal for a file-local static, never")
+        print("        for a function another file can see - declare it and run again:")
+        print("          --renamed OLD=NEW")
+
+
+def report_moved_calls(rel: str, before: Counter, after: Counter, strict: bool) -> None:
     label = "FAIL " if strict else "WARN "
     print(label + " " + rel + "  - call counts moved")
-    for name, count in sorted(removed.items()):
+    for name, count in sorted((before - after).items()):
         print("        -" + str(count) + "  " + name)
-    for name, count in sorted(added.items()):
+    for name, count in sorted((after - before).items()):
         tag = "  <-- new name" if before[name] == 0 else ""
         print("        +" + str(count) + "  " + name + tag)
     print("        expected: extract removes nothing and adds each helper twice (its")
     print("        definition and its call); deduplicate drops the shared callees by the")
     print("        copies removed. Anything else wants explaining.")
-    return not strict
 
 
 def apply_renames(counts: Counter, renames: dict) -> Counter:
@@ -246,8 +246,15 @@ def apply_renames(counts: Counter, renames: dict) -> Counter:
     return out
 
 
-def check_calls(rel: str, base: str, strict: bool = False, renames: dict | None = None,
-                fnptrs: frozenset = frozenset()) -> bool:
+class Declared(NamedTuple):
+    """What the agent declared about the change: --renamed and --fnptr."""
+
+    renames: dict | None = None
+    fnptrs: frozenset = frozenset()
+
+
+def check_calls(rel: str, base: str, strict: bool = False,
+                declared: Declared = Declared()) -> bool:
     """Compare the call fingerprint of one file against `base`."""
     before = git_show(base, rel)
     if before is None:
@@ -260,8 +267,8 @@ def check_calls(rel: str, base: str, strict: bool = False, renames: dict | None 
         return False
 
     after = path.read_text(encoding="utf-8", errors="replace")
-    return report_call_changes(rel, apply_renames(calls(before), renames or {}),
-                               calls(after, fnptrs), strict)
+    return report_call_changes(rel, apply_renames(calls(before), declared.renames or {}),
+                               calls(after, declared.fnptrs), strict)
 
 
 def strip_include_lines(src: str) -> str:
@@ -327,11 +334,20 @@ def is_extract_to_predicate(before: Counter, removed: Counter, added: Counter) -
     return all(before[literal] > 0 for literal in added)
 
 
+def is_substitution(before: Counter, removed: Counter, added: Counter, vanished: list) -> bool:
+    """True when a count dropped while a value appeared that no extract explains."""
+    if not added:
+        return False
+    if vanished:
+        return True
+    return not is_extract_to_predicate(before, removed, added)
+
+
 def report_removed_literals(rel: str, before: Counter, after: Counter, strict: bool) -> bool:
     removed = before - after
     added = after - before
     vanished = [literal for literal in removed if after[literal] == 0]
-    if added and not (is_extract_to_predicate(before, removed, added) and not vanished):
+    if is_substitution(before, removed, added, vanished):
         print("FAIL  " + rel + "  - a constant was substituted")
         dump_changes(before, after, removed, added)
         return False
@@ -479,8 +495,8 @@ def check_combined(rels: list[str], base: str, strict: bool) -> bool:
     return report_combined_changes(*counts, strict)
 
 
-def check_calls_combined(rels: list[str], base: str, strict: bool, renames: dict,
-                         fnptrs: frozenset = frozenset()) -> bool:
+def check_calls_combined(rels: list[str], base: str, strict: bool,
+                         declared: Declared) -> bool:
     """Compare the call fingerprint of a group of files as one.
 
     This is the check Recipe S needs. A split moves whole functions into a new
@@ -499,9 +515,63 @@ def check_calls_combined(rels: list[str], base: str, strict: bool, renames: dict
         if not path.is_file():
             print("NOTE  " + rel + "  (removed by this change; its half of the group is empty)")
             continue
-        after += calls(path.read_text(encoding="utf-8", errors="replace"), fnptrs)
+        after += calls(path.read_text(encoding="utf-8", errors="replace"), declared.fnptrs)
 
-    return report_call_changes("combined group", apply_renames(before, renames), after, strict)
+    return report_call_changes("combined group", apply_renames(before, declared.renames),
+                               after, strict)
+
+
+def parse_renames(ap: argparse.ArgumentParser, pairs: list[str]) -> dict:
+    """{old: new} from the --renamed OLD=NEW pairs; a malformed pair is a usage error."""
+    renames = {}
+    for pair in pairs:
+        if "=" not in pair:
+            ap.error("--renamed wants OLD=NEW, got: " + pair)
+        old_name, new_name = pair.split("=", 1)
+        renames[old_name.strip()] = new_name.strip()
+    return renames
+
+
+def print_pass(use_calls: bool) -> None:
+    print("PASS - no call was dropped or duplicated." if use_calls
+          else "PASS - no constant was removed or altered.")
+
+
+def run_combined(targets: list[str], args: argparse.Namespace, declared: Declared) -> int:
+    """Check the targets as one group (--combined); the exit code."""
+    group = [p.replace("\\", "/") for p in targets]
+    if args.calls:
+        passed = check_calls_combined(group, args.base, args.strict, declared)
+    else:
+        passed = check_combined(group, args.base, args.strict)
+    print()
+    if not passed:
+        print("BLOCKED - this is not a legal campaign refactor.")
+        return 1
+    print_pass(args.calls)
+    return 0
+
+
+def check_one(rel: str, args: argparse.Namespace, declared: Declared) -> bool:
+    if args.calls:
+        return check_calls(rel, args.base, args.strict, declared)
+    return check(rel, args.base, args.strict)
+
+
+def run_each(targets: list[str], args: argparse.Namespace, declared: Declared) -> int:
+    """Check the targets one by one; the exit code."""
+    ok = True
+    for rel in targets:
+        if not check_one(rel.replace("\\", "/"), args, declared):
+            ok = False
+
+    print()
+    if ok:
+        print_pass(args.calls)
+        return 0
+    print("BLOCKED - this is not a legal campaign refactor.")
+    print("Revert with:  git checkout -- <file>")
+    return 1
 
 
 def main() -> int:
@@ -529,13 +599,7 @@ def main() -> int:
     args = ap.parse_args()
 
     fnptrs = frozenset(name.strip() for name in args.fnptr)
-
-    renames = {}
-    for pair in args.renamed:
-        if "=" not in pair:
-            ap.error("--renamed wants OLD=NEW, got: " + pair)
-        old_name, new_name = pair.split("=", 1)
-        renames[old_name.strip()] = new_name.strip()
+    declared = Declared(parse_renames(ap, args.renamed), fnptrs)
 
     targets = changed_files(args.base) if args.all else args.files
     if not targets:
@@ -543,40 +607,8 @@ def main() -> int:
         return 0
 
     if args.combined:
-        group = [p.replace("\\", "/") for p in targets]
-        if args.calls:
-            passed = check_calls_combined(group, args.base, args.strict, renames, fnptrs)
-        else:
-            passed = check_combined(group, args.base, args.strict)
-        if not passed:
-            print()
-            print("BLOCKED - this is not a legal campaign refactor.")
-            return 1
-        print()
-        print("PASS - no call was dropped or duplicated." if args.calls
-              else "PASS - no constant was removed or altered.")
-        return 0
-
-    ok = True
-    for rel in targets:
-        rel = rel.replace("\\", "/")
-        if args.calls:
-            passed = check_calls(rel, args.base, args.strict, renames, fnptrs)
-        else:
-            passed = check(rel, args.base, args.strict)
-        if not passed:
-            ok = False
-
-    print()
-    if ok:
-        if args.calls:
-            print("PASS - no call was dropped or duplicated.")
-            return 0
-        print("PASS - no constant was removed or altered.")
-        return 0
-    print("BLOCKED - this is not a legal campaign refactor.")
-    print("Revert with:  git checkout -- <file>")
-    return 1
+        return run_combined(targets, args, declared)
+    return run_each(targets, args, declared)
 
 
 if __name__ == "__main__":
