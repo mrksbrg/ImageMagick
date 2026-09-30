@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+# CodeScene gate: refuse a commit whose staged library code loses Code Health,
+# or adds a file that does not score 10.0. Enable it once per clone with
+#   git config core.hooksPath .githooks
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel)
+
+# The first Python 3.8+ found. On Windows `python3` can be the Microsoft Store
+# stub and `python` an older install, so the `py` launcher is tried in between.
+for py in python3 "py -3" python; do
+  if $py -c 'import sys; sys.exit(sys.version_info < (3, 8))' > /dev/null 2>&1; then
+    exec $py "$repo_root/tools/codescene_precommit.py"
+  fi
+done
+echo "pre-commit: no Python 3.8 or later found for tools/codescene_precommit.py" >&2
+exit 1

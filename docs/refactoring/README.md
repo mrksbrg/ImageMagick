@@ -165,6 +165,6 @@ and [`../../CLAUDE.md`](../../CLAUDE.md) (Claude Code).
 | `tools/oracle/mutate.py` | Would the oracle notice a change here? |
 | `tools/refactor_guard.py <file>` | Did any literal change? |
 | `tools/ch.py [--review] <file>` | What is the Code Health, and which smells remain? |
-| `tools/codescene_precommit.py` | Does the staged change lower any file's Code Health? |
+| `tools/codescene_precommit.py` | Does the staged change lower any file's Code Health? Runs on every commit through `.githooks/pre-commit` after `git config core.hooksPath .githooks` |
 | `tools/codehealth_sweep.py` | Where does the whole codebase stand? |
 | `tools/make_task.py ID file` | Writes a task file: smells, targets, cases and mutants per function |
