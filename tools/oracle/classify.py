@@ -65,9 +65,13 @@ def kind_of(result, line, after=""):
         return "unreached"
     for kind, mutators, rx, _ in COMPILED:
         text = line + "\n" + after if kind == "free-guard" else line
-        if (mutators is None or result["mutator"] in mutators) and rx.search(text):
+        if applies_to(mutators, result["mutator"]) and rx.search(text):
             return kind
     return "unmatched"
+
+
+def applies_to(mutators, mutator):
+    return mutators is None or mutator in mutators
 
 
 def main():
@@ -79,44 +83,81 @@ def main():
     p.add_argument("--json", help="write every result with its kind to this file")
     args = p.parse_args()
 
-    results, sources = [], {}
-    for path in args.reports:
-        with open(path) as f:
-            results.extend(json.load(f))
-    if args.file:
-        results = [r for r in results if os.path.basename(r["file"]) == args.file]
-    for r in results:
-        if r["file"] not in sources:
-            with open(r["file"], errors="replace") as f:
-                sources[r["file"]] = f.read().split("\n")  # not splitlines(): form feeds
-        r["src"] = sources[r["file"]][r["line"] - 1].strip()
-        after = " ".join(sources[r["file"]][r["line"]:r["line"] + 2])
-        r["kind"] = kind_of(r, r["src"], after)
+    results = load_results(args.reports, args.file)
+    classify(results)
 
     if args.kind:
-        for r in (r for r in results if r["kind"] == args.kind):
-            fn = re.split(r"[;:]", r["function"] or "?")[-1]
-            print("%s %s:%d %-15s %-24s %s" % ("c" if r.get("capped") else " ",
-                                               os.path.basename(r["file"]), r["line"],
-                                               r["mutator"][4:], fn[:24], r["src"][:90]))
+        print_kind(results, args.kind)
         return 0
 
-    survivors = [r for r in results if r["status"] == "survived"]
-    counts = collections.Counter(r["kind"] for r in survivors)
-    why = {k: w for k, _, _, w in RULES}
-    why["unreached"] = "no case executes the line: needs a new input"
-    why["unmatched"] = "read these: equivalent, or a gap in the catalogue"
-    print("%d mutants, %d survivors\n" % (len(results), len(survivors)))
-    print("  %-18s %6s %7s  %s" % ("kind", "count", "capped", ""))
-    order = ["unreached"] + [k for k, _, _, _ in RULES] + ["unmatched"]
-    for k in order:
-        if counts[k]:
-            capped = sum(1 for r in survivors if r["kind"] == k and r.get("capped"))
-            print("  %-18s %6d %7d  %s" % (k, counts[k], capped, why[k]))
+    print_summary(results)
     if args.json:
         with open(args.json, "w") as f:
             json.dump(results, f, indent=1)
     return 0
+
+
+def load_results(reports, file=None):
+    """Every result in these reports, or only those in source file `file`."""
+    results = []
+    for path in reports:
+        with open(path) as f:
+            results.extend(json.load(f))
+    if file:
+        results = [r for r in results if os.path.basename(r["file"]) == file]
+    return results
+
+
+def classify(results):
+    """Add each result's source line ("src") and kind."""
+    sources = {}
+    for r in results:
+        lines = source_lines(r["file"], sources)
+        r["src"] = lines[r["line"] - 1].strip()
+        after = " ".join(lines[r["line"]:r["line"] + 2])
+        r["kind"] = kind_of(r, r["src"], after)
+
+
+def source_lines(path, sources):
+    """The lines of a source file, read once and kept in `sources`."""
+    if path not in sources:
+        with open(path, errors="replace") as f:
+            sources[path] = f.read().split("\n")  # not splitlines(): form feeds
+    return sources[path]
+
+
+def print_kind(results, kind):
+    for r in (r for r in results if r["kind"] == kind):
+        fn = re.split(r"[;:]", r["function"] or "?")[-1]
+        print("%s %s:%d %-15s %-24s %s" % ("c" if r.get("capped") else " ",
+                                           os.path.basename(r["file"]), r["line"],
+                                           r["mutator"][4:], fn[:24], r["src"][:90]))
+
+
+def print_summary(results):
+    survivors = [r for r in results if r["status"] == "survived"]
+    counts = collections.Counter(r["kind"] for r in survivors)
+    why = explanations()
+    print("%d mutants, %d survivors\n" % (len(results), len(survivors)))
+    print("  %-18s %6s %7s  %s" % ("kind", "count", "capped", ""))
+    for k in (k for k in kind_order() if counts[k]):
+        print("  %-18s %6d %7d  %s" % (k, counts[k], capped_count(survivors, k), why[k]))
+
+
+def explanations():
+    """What each kind of survivor most likely is, by kind."""
+    why = {k: w for k, _, _, w in RULES}
+    why["unreached"] = "no case executes the line: needs a new input"
+    why["unmatched"] = "read these: equivalent, or a gap in the catalogue"
+    return why
+
+
+def kind_order():
+    return ["unreached"] + [k for k, _, _, _ in RULES] + ["unmatched"]
+
+
+def capped_count(survivors, kind):
+    return sum(1 for r in survivors if r["kind"] == kind and r.get("capped"))
 
 
 if __name__ == "__main__":
