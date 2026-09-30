@@ -316,7 +316,6 @@ def main() -> int:
         # Scores move between CodeScene versions, so a sweep says which it used.
         "date": time.strftime("%Y-%m-%d"),
         "cs_mcp_version": tool_version([exe, "--version"]),
-        "cs_version": tool_version(["cs", "version"]),
         "commit": subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO,
                                  capture_output=True, text=True).stdout.strip(),
         "only": args.only,
