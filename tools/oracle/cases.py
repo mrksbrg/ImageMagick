@@ -651,12 +651,17 @@ def _generator_cases():
 
 # ---- enumerated families
 def _colorspace_cases(lists):
-    for name, cs in itertools.product(FAMILY_INPUTS + ["hdri", "cmyk"],
+    # palette: a PseudoClass image converts through its colormap, a separate
+    # branch in TransformsRGBImage and sRGBTransformImage.
+    for name, cs in itertools.product(FAMILY_INPUTS + ["hdri", "cmyk", "palette"],
                                       _each(lists, "Colorspace")):
         yield _op("colorspace", "%s -> %s" % (name, cs), [img(name)],
                   ["-colorspace", cs])
         yield _op("colorspace", "%s -> %s -> sRGB" % (name, cs), [img(name)],
                   ["-colorspace", cs, "-colorspace", "sRGB"])
+    for illuminant in ("A", "nosuch"):
+        yield _op("colorspace", "rose illuminant %s -> Lab" % illuminant, [img("rose")],
+                  ["-define", "colorspace:illuminant=" + illuminant, "-colorspace", "Lab"])
 
 
 def _compose_cases(lists):
@@ -737,6 +742,41 @@ def _morphology_cases(lists):
                                         ("rose", "bilevel")):
         yield _op("morphology", "%s -morphology %s %s" % (name, m, k),
                   [img(name)], ["-morphology", m, k])
+
+
+# Kernel names alone take their default arguments, which leave LoG and Comet
+# degenerate and never rotate a kernel; a ",angle" rotates it, by 45 degrees
+# only if it is 3x3 (other sizes warn, and the warning is compared too).
+MORPHOLOGY_KERNEL_ARGS = [
+    "LoG:0x1", "LoG:5x1.5", "DoG:0x1,2", "Comet:0x2", "Comet:5x2+2,30",
+    "Comet:1x1,45", "Blur:0x1,90", "Blur:0x2,45", "Blur:1x0.5,45", "Blur:0x1,135",
+    "Gaussian:0x1,30", "Sobel:45", "Sobel:135",
+]
+CONVOLVE_SCALES = ["!", "^", "50%", "0.5,2", "1.5!", "-1^", "0,1"]
+# Voronoi fills transparent pixels from the nearest opaque seed: it needs an
+# image that is mostly transparent.
+VORONOI_SEEDS = ["-size", "60x40", "xc:none", "-fill", "red", "-draw", "point 10,10",
+                 "-fill", "blue", "-draw", "point 45,30", "-fill", "lime",
+                 "-draw", "point 30,5"]
+
+
+def _morphology_arg_cases():
+    for k in MORPHOLOGY_KERNEL_ARGS:
+        yield _op("morphology", "rose -morphology Convolve %s" % k, [img("rose")],
+                  ["-morphology", "Convolve", k])
+    for k in ("Euclidean:4", "Manhattan", "Chebyshev:2"):
+        yield _op("morphology", "seeds -morphology Voronoi %s" % k, VORONOI_SEEDS,
+                  ["-morphology", "Voronoi", k])
+    yield _op("morphology", "rose_alpha thresholded alpha -morphology Voronoi",
+              [img("rose_alpha")],
+              ["-channel", "A", "-threshold", "50%", "+channel",
+               "-morphology", "Voronoi", "Euclidean:2"])
+    for s in CONVOLVE_SCALES:
+        yield _op("morphology", "rose convolve:scale=%s Blur:0x1" % s, [img("rose")],
+                  ["-define", "convolve:scale=" + s, "-morphology", "Convolve", "Blur:0x1"])
+    yield _op("morphology", "rose showKernel Laplacian:3", [img("rose")],
+              ["-define", "morphology:showKernel=1", "-morphology", "Convolve",
+               "Laplacian:3"])
 
 
 def _evaluate_cases(lists):
@@ -1081,7 +1121,8 @@ def generate(lists, writable_formats):
         # enumerated families
         _colorspace_cases(lists), _compose_cases(lists), _distort_cases(lists),
         _filter_cases(lists), _interpolate_cases(lists), _virtual_pixel_cases(lists),
-        _morphology_cases(lists), _evaluate_cases(lists), _statistic_cases(lists),
+        _morphology_cases(lists), _morphology_arg_cases(), _evaluate_cases(lists),
+        _statistic_cases(lists),
         _noise_cases(lists), _dither_cases(lists), _layers_cases(lists),
         _complex_cases(lists), _intensity_cases(lists), _sparse_color_cases(lists),
         _type_cases(lists), _preview_cases(lists),
