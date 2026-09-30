@@ -157,9 +157,13 @@ The same on both machines, so the results can be compared:
 6. Rerun the survivors against the new cases only (`--cases`), gate again, and record the
    before and after in `MUTATION.md`, in a section headed with the file and the machine.
 
-A file is done when its gate is **90% or more**, or when what is left is written down as
-out of reach, with the reason: no CLI path, an external program, X11 without a display,
-OpenCL without a working runtime.
+A file is done when its **adjusted score** is **90% or more** (`gate.py` prints it on the
+file's `ALL` row, with the plain score and the reach), or when what is left is written
+down as out of reach, with the reason: no CLI path, an external program, X11 without a
+display, OpenCL without a working runtime. The adjusted score counts functions no case
+executes as gaps: every function is to be refactored in the end, and an unreached one is
+the least protected of all. So low reach calls for new inputs or new ways to drive the
+code, and high reach with a low adjusted score for sharper comparisons.
 
 ## Working in the same repository
 

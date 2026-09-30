@@ -9,9 +9,19 @@ Reports are mutate.py's mutation-*.json, merged in the order given: a later
 report replaces the earlier result of the same mutant, so pass the full run
 first and its reruns after it (uncapped, or against new cases only).
 
-Each survivor is sorted by classify.py. The gate is, per function,
+Each survivor is sorted by classify.py. Three figures are printed for every
+function and file:
 
-    killed / (killed + unmatched + unreached)
+    plain      killed / mutants: the ordinary mutation score
+    reach      the share of mutants in functions some case executes
+    adjusted   killed / (killed + unmatched + unreached + no coverage):
+               the plain score without the survivors no test can kill
+
+The adjusted score is the headline figure: a function no case executes is a
+gap like any other, since refactoring it is unprotected. Within one function
+it equals the gate, killed / (killed + unmatched + unreached), which decides
+the verdict; over a file the gate (gate_value) leaves out the functions no
+case reaches, the adjusted score does not.
 
 Survivors of the unobservable kinds (logging, progress, loop and channel
 bounds, strict tests against MagickEpsilon, free guards, allocation sizes,
@@ -42,8 +52,8 @@ UNOBSERVABLE = {"logging", "progress", "free-guard", "channel-bound", "epsilon-b
                 "equivalent", "unobservable"}  # the last two: hand verdicts
 OPEN = ("unmatched", "gap", "unresolved")  # a gap is open until its case is in
 READY, CAREFUL = 0.90, 0.75
-COLUMNS = ("mutants", "killed", "unobservable", "unmatched", "unreached")
-ROW = "  %-28s %7s %6s %12s %9s %9s %6s  %s"
+COLUMNS = ("mutants", "killed", "unobservable", "unmatched", "unreached", "no-coverage")
+ROW = "  %-28s %7s %6s %12s %9s %9s %11s %6s %6s %8s  %s"
 
 
 def merged(reports):
@@ -69,13 +79,35 @@ def tally(results):
     kinds = collections.Counter(r["kind"] for r in results)
     return {"mutants": len(results), "killed": kinds["killed"],
             "unobservable": sum(kinds[k] for k in UNOBSERVABLE),
-            "unmatched": sum(kinds[k] for k in OPEN), "unreached": kinds["unreached"]}
+            "unmatched": sum(kinds[k] for k in OPEN), "unreached": kinds["unreached"],
+            "no-coverage": kinds["no-coverage"]}
+
+
+def ratio(numerator, denominator):
+    return numerator / denominator if denominator else None
 
 
 def gate_value(counts):
     """The gate as a fraction, or None when no mutant counts towards it."""
-    denominator = counts["killed"] + counts["unmatched"] + counts["unreached"]
-    return counts["killed"] / denominator if denominator else None
+    return ratio(counts["killed"], counts["killed"] + counts["unmatched"] + counts["unreached"])
+
+
+def plain_score(counts):
+    return ratio(counts["killed"], counts["mutants"])
+
+
+def reach(counts):
+    return ratio(counts["mutants"] - counts["no-coverage"], counts["mutants"])
+
+
+def adjusted_score(counts):
+    """The gate with the mutants no case reaches counted as gaps."""
+    return ratio(counts["killed"], counts["killed"] + counts["unmatched"]
+                 + counts["unreached"] + counts["no-coverage"])
+
+
+def percent(value):
+    return "-" if value is None else "%.0f%%" % (100 * value)
 
 
 def verdict(value):
@@ -87,15 +119,15 @@ def verdict(value):
 
 
 def print_row(name, counts, show_verdict=True):
-    value = gate_value(counts)
-    shown = "-" if value is None else "%.0f%%" % (100 * value)
+    figures = (plain_score(counts), reach(counts), adjusted_score(counts))
     print(ROW % ((name[:28],) + tuple(counts[c] for c in COLUMNS)
-                 + (shown, verdict(value) if show_verdict else "")))
+                 + tuple(percent(f) for f in figures)
+                 + (verdict(gate_value(counts)) if show_verdict else "",)))
 
 
 def print_file(path, results):
     print("\n== %s: %d mutants" % (os.path.basename(path), len(results)))
-    print(ROW % (("function",) + COLUMNS + ("gate", "verdict")))
+    print(ROW % (("function",) + COLUMNS + ("plain", "reach", "adjusted", "verdict")))
     groups = collections.defaultdict(list)
     for r in results:
         groups[function_name(r)].append(r)
