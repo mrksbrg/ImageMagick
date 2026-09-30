@@ -703,9 +703,24 @@ Files by the strict figure (reach and gate folded together):
   `effect.c`, `resize.c`, `decorate.c`, `statistic.c`, `morphology.c`, `feature.c`,
   `colormap.c`, `threshold.c`, `transform.c`, `identify.c` and `gem.c` at 90% or more.
 
-The capped survivors cluster in the infrastructure files (`composite.c` 31, `constitute.c`
-30, `blob.c` 20, `color.c` 19, `cache.c` and `channel.c` 18): rerun those uncapped before
-reading them as gaps.
+The capped survivors clustered in the infrastructure files (`composite.c` 31,
+`constitute.c` 30, `blob.c` 20, `color.c` 19, `cache.c` and `channel.c` 18). Rerun
+uncapped (`build-oracle/capped-sweep.sh`, 258 s), **175 of the 190 were killed**: nearly
+all were missed kills, not gaps. `composite.c` went from 29 to 60 of 60 killed,
+`constitute.c` 26 to 56, `channel.c` 32 to 50, `cache.c` 28 to 46, `color.c` 23 to 42,
+`blob.c` 20 to 38. The weak-file groups above were drawn before this rerun; the capped
+infrastructure files among them are better protected than they show.
+
+| MagickCore, after the capped rerun | |
+| --- | ---: |
+| killed, of all mutants | **73.8%** |
+| killed, of mutants on executed lines | **92.3%** |
+| gate over the reached functions | **89.7%** |
+| strict | **75.6%** |
+
+So in this sweep a capped survivor was a gap about one time in thirteen. The cap of 300
+cases is a sampling device, not a verdict: rerun capped survivors uncapped before reading
+any file's figure.
 
 ## Reading survivors by hand: enhance.c (Mac)
 
