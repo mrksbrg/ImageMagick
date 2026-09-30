@@ -1,0 +1,1264 @@
+{
+ "date": "2026-09-29",
+ "cs_mcp_version": "1.5.6",
+ "cs_version": "cs version 1.0.46 (3c5dc7a5273e66de39db29c8560d2d7f28f2e09b)",
+ "commit": "e8ad8ca02",
+ "only": null,
+ "total_candidates": 296,
+ "scored": 295,
+ "unscorable": 1,
+ "bands": {
+  "red": 102,
+  "yellow": 132,
+  "green": 38,
+  "optimal": 23
+ },
+ "mean": 5.87,
+ "subsystems": {
+  "Magick++/lib/": {
+   "files": 19,
+   "mean": 8.89,
+   "bands": {
+    "red": 0,
+    "yellow": 9,
+    "green": 0,
+    "optimal": 10
+   }
+  },
+  "MagickCore/": {
+   "files": 95,
+   "mean": 4.36,
+   "bands": {
+    "red": 51,
+    "yellow": 35,
+    "green": 6,
+    "optimal": 3
+   }
+  },
+  "MagickWand/": {
+   "files": 34,
+   "mean": 6.59,
+   "bands": {
+    "red": 11,
+    "yellow": 10,
+    "green": 8,
+    "optimal": 5
+   }
+  },
+  "coders/": {
+   "files": 145,
+   "mean": 6.26,
+   "bands": {
+    "red": 40,
+    "yellow": 77,
+    "green": 23,
+    "optimal": 5
+   }
+  },
+  "filters/": {
+   "files": 1,
+   "mean": 8.14,
+   "bands": {
+    "red": 0,
+    "yellow": 1,
+    "green": 0,
+    "optimal": 0
+   }
+  },
+  "utilities/": {
+   "files": 1,
+   "mean": 9.0,
+   "bands": {
+    "red": 0,
+    "yellow": 0,
+    "green": 1,
+    "optimal": 0
+   }
+  }
+ },
+ "scores": [
+  {
+   "path": "MagickCore/display.c",
+   "score": 1.0175375268249036
+  },
+  {
+   "path": "MagickCore/pixel.c",
+   "score": 1.0805795068583364
+  },
+  {
+   "path": "MagickCore/xwindow.c",
+   "score": 1.0953107086787766
+  },
+  {
+   "path": "MagickWand/mogrify.c",
+   "score": 1.13
+  },
+  {
+   "path": "MagickCore/fx.c",
+   "score": 1.14
+  },
+  {
+   "path": "MagickCore/quantum-import.c",
+   "score": 1.15
+  },
+  {
+   "path": "MagickCore/widget.c",
+   "score": 1.19
+  },
+  {
+   "path": "MagickCore/quantum-export.c",
+   "score": 1.24
+  },
+  {
+   "path": "MagickCore/draw.c",
+   "score": 1.28
+  },
+  {
+   "path": "coders/psd.c",
+   "score": 1.29
+  },
+  {
+   "path": "MagickCore/composite.c",
+   "score": 1.33
+  },
+  {
+   "path": "coders/uhdr.c",
+   "score": 1.34
+  },
+  {
+   "path": "MagickWand/operation.c",
+   "score": 1.37
+  },
+  {
+   "path": "MagickCore/effect.c",
+   "score": 1.38
+  },
+  {
+   "path": "MagickCore/resize.c",
+   "score": 1.39
+  },
+  {
+   "path": "coders/tiff.c",
+   "score": 1.39
+  },
+  {
+   "path": "coders/dds.c",
+   "score": 1.44
+  },
+  {
+   "path": "MagickCore/cache.c",
+   "score": 1.45
+  },
+  {
+   "path": "MagickCore/compare.c",
+   "score": 1.46
+  },
+  {
+   "path": "MagickCore/property.c",
+   "score": 1.48
+  },
+  {
+   "path": "MagickCore/enhance.c",
+   "score": 1.53
+  },
+  {
+   "path": "MagickCore/morphology.c",
+   "score": 1.53
+  },
+  {
+   "path": "MagickCore/visual-effects.c",
+   "score": 1.55
+  },
+  {
+   "path": "MagickCore/feature.c",
+   "score": 1.6
+  },
+  {
+   "path": "MagickCore/xml-tree.c",
+   "score": 1.61
+  },
+  {
+   "path": "MagickCore/vision.c",
+   "score": 1.62
+  },
+  {
+   "path": "MagickCore/image.c",
+   "score": 1.66
+  },
+  {
+   "path": "coders/bmp.c",
+   "score": 1.68
+  },
+  {
+   "path": "coders/svg.c",
+   "score": 1.71
+  },
+  {
+   "path": "MagickCore/geometry.c",
+   "score": 1.73
+  },
+  {
+   "path": "MagickCore/distort.c",
+   "score": 1.74
+  },
+  {
+   "path": "coders/msl.c",
+   "score": 1.74
+  },
+  {
+   "path": "MagickCore/animate.c",
+   "score": 1.77
+  },
+  {
+   "path": "coders/pnm.c",
+   "score": 1.81
+  },
+  {
+   "path": "MagickCore/quantize.c",
+   "score": 1.82
+  },
+  {
+   "path": "coders/pict.c",
+   "score": 1.83
+  },
+  {
+   "path": "MagickCore/blob.c",
+   "score": 1.85
+  },
+  {
+   "path": "coders/pdf.c",
+   "score": 1.87
+  },
+  {
+   "path": "MagickCore/threshold.c",
+   "score": 1.89
+  },
+  {
+   "path": "MagickCore/statistic.c",
+   "score": 1.92
+  },
+  {
+   "path": "MagickCore/transform.c",
+   "score": 1.99
+  },
+  {
+   "path": "MagickCore/shear.c",
+   "score": 2.05
+  },
+  {
+   "path": "MagickCore/accelerate.c",
+   "score": 2.06
+  },
+  {
+   "path": "MagickCore/annotate.c",
+   "score": 2.06
+  },
+  {
+   "path": "coders/dcm.c",
+   "score": 2.11
+  },
+  {
+   "path": "MagickCore/profile.c",
+   "score": 2.12
+  },
+  {
+   "path": "coders/ps.c",
+   "score": 2.13
+  },
+  {
+   "path": "coders/jpeg.c",
+   "score": 2.14
+  },
+  {
+   "path": "coders/json.c",
+   "score": 2.14
+  },
+  {
+   "path": "MagickCore/delegate.c",
+   "score": 2.15
+  },
+  {
+   "path": "MagickCore/identify.c",
+   "score": 2.16
+  },
+  {
+   "path": "coders/miff.c",
+   "score": 2.2
+  },
+  {
+   "path": "coders/heic.c",
+   "score": 2.22
+  },
+  {
+   "path": "coders/wbinfo.c",
+   "score": 2.23
+  },
+  {
+   "path": "coders/yaml.c",
+   "score": 2.23
+  },
+  {
+   "path": "MagickCore/color.c",
+   "score": 2.25
+  },
+  {
+   "path": "MagickCore/segment.c",
+   "score": 2.3
+  },
+  {
+   "path": "coders/meta.c",
+   "score": 2.33
+  },
+  {
+   "path": "coders/mat.c",
+   "score": 2.42
+  },
+  {
+   "path": "MagickCore/stream.c",
+   "score": 2.45
+  },
+  {
+   "path": "coders/sixel.c",
+   "score": 2.5
+  },
+  {
+   "path": "coders/wpg.c",
+   "score": 2.5
+  },
+  {
+   "path": "MagickCore/colorspace.c",
+   "score": 2.57
+  },
+  {
+   "path": "MagickCore/attribute.c",
+   "score": 2.58
+  },
+  {
+   "path": "MagickWand/composite.c",
+   "score": 2.72
+  },
+  {
+   "path": "MagickWand/deprecate.c",
+   "score": 2.75
+  },
+  {
+   "path": "coders/pcx.c",
+   "score": 2.76
+  },
+  {
+   "path": "MagickWand/magick-cli.c",
+   "score": 2.84
+  },
+  {
+   "path": "MagickCore/opencl.c",
+   "score": 2.85
+  },
+  {
+   "path": "MagickWand/compare.c",
+   "score": 2.91
+  },
+  {
+   "path": "MagickWand/drawing-wand.c",
+   "score": 2.95
+  },
+  {
+   "path": "MagickWand/montage.c",
+   "score": 2.99
+  },
+  {
+   "path": "coders/dib.c",
+   "score": 3.02
+  },
+  {
+   "path": "coders/icon.c",
+   "score": 3.03
+  },
+  {
+   "path": "MagickCore/layer.c",
+   "score": 3.04
+  },
+  {
+   "path": "coders/dpx.c",
+   "score": 3.04
+  },
+  {
+   "path": "MagickCore/paint.c",
+   "score": 3.06
+  },
+  {
+   "path": "coders/ps3.c",
+   "score": 3.06
+  },
+  {
+   "path": "MagickCore/fourier.c",
+   "score": 3.08
+  },
+  {
+   "path": "coders/xcf.c",
+   "score": 3.09
+  },
+  {
+   "path": "coders/wmf.c",
+   "score": 3.11
+  },
+  {
+   "path": "coders/rgb.c",
+   "score": 3.15
+  },
+  {
+   "path": "MagickWand/display.c",
+   "score": 3.23
+  },
+  {
+   "path": "MagickCore/utility.c",
+   "score": 3.26
+  },
+  {
+   "path": "MagickCore/channel.c",
+   "score": 3.28
+  },
+  {
+   "path": "coders/mpc.c",
+   "score": 3.28
+  },
+  {
+   "path": "coders/cmyk.c",
+   "score": 3.31
+  },
+  {
+   "path": "MagickCore/log.c",
+   "score": 3.32
+  },
+  {
+   "path": "coders/sgi.c",
+   "score": 3.32
+  },
+  {
+   "path": "MagickCore/constitute.c",
+   "score": 3.33
+  },
+  {
+   "path": "coders/tga.c",
+   "score": 3.36
+  },
+  {
+   "path": "MagickWand/animate.c",
+   "score": 3.45
+  },
+  {
+   "path": "MagickCore/string.c",
+   "score": 3.49
+  },
+  {
+   "path": "coders/gif.c",
+   "score": 3.52
+  },
+  {
+   "path": "coders/ase.c",
+   "score": 3.53
+  },
+  {
+   "path": "MagickCore/policy.c",
+   "score": 3.56
+  },
+  {
+   "path": "coders/bgr.c",
+   "score": 3.58
+  },
+  {
+   "path": "MagickCore/type.c",
+   "score": 3.6
+  },
+  {
+   "path": "coders/ycbcr.c",
+   "score": 3.62
+  },
+  {
+   "path": "MagickWand/import.c",
+   "score": 3.68
+  },
+  {
+   "path": "coders/ftxt.c",
+   "score": 3.87
+  },
+  {
+   "path": "coders/jp2.c",
+   "score": 3.88
+  },
+  {
+   "path": "MagickCore/option.c",
+   "score": 4.0
+  },
+  {
+   "path": "coders/viff.c",
+   "score": 4.04
+  },
+  {
+   "path": "MagickCore/resample.c",
+   "score": 4.09
+  },
+  {
+   "path": "coders/jxl.c",
+   "score": 4.1
+  },
+  {
+   "path": "MagickCore/nt-base.c",
+   "score": 4.12
+  },
+  {
+   "path": "coders/xpm.c",
+   "score": 4.12
+  },
+  {
+   "path": "coders/fits.c",
+   "score": 4.16
+  },
+  {
+   "path": "MagickWand/identify.c",
+   "score": 4.21
+  },
+  {
+   "path": "coders/exr.c",
+   "score": 4.25
+  },
+  {
+   "path": "coders/pcd.c",
+   "score": 4.26
+  },
+  {
+   "path": "MagickCore/resource.c",
+   "score": 4.27
+  },
+  {
+   "path": "MagickCore/splay-tree.c",
+   "score": 4.32
+  },
+  {
+   "path": "MagickCore/locale.c",
+   "score": 4.38
+  },
+  {
+   "path": "coders/webp.c",
+   "score": 4.45
+  },
+  {
+   "path": "coders/palm.c",
+   "score": 4.52
+  },
+  {
+   "path": "MagickCore/token.c",
+   "score": 4.58
+  },
+  {
+   "path": "coders/pcl.c",
+   "score": 4.72
+  },
+  {
+   "path": "coders/gray.c",
+   "score": 4.74
+  },
+  {
+   "path": "coders/xwd.c",
+   "score": 4.74
+  },
+  {
+   "path": "coders/sun.c",
+   "score": 4.75
+  },
+  {
+   "path": "MagickWand/stream.c",
+   "score": 4.92
+  },
+  {
+   "path": "MagickCore/compress.c",
+   "score": 4.94
+  },
+  {
+   "path": "coders/ps2.c",
+   "score": 4.95
+  },
+  {
+   "path": "coders/cut.c",
+   "score": 4.99
+  },
+  {
+   "path": "MagickCore/distribute-cache.c",
+   "score": 5.01
+  },
+  {
+   "path": "MagickCore/configure.c",
+   "score": 5.03
+  },
+  {
+   "path": "MagickCore/mime.c",
+   "score": 5.1
+  },
+  {
+   "path": "coders/yuv.c",
+   "score": 5.1
+  },
+  {
+   "path": "coders/tim2.c",
+   "score": 5.11
+  },
+  {
+   "path": "coders/hdr.c",
+   "score": 5.36
+  },
+  {
+   "path": "coders/pdb.c",
+   "score": 5.41
+  },
+  {
+   "path": "coders/vips.c",
+   "score": 5.43
+  },
+  {
+   "path": "MagickWand/magick-property.c",
+   "score": 5.52
+  },
+  {
+   "path": "coders/fpx.c",
+   "score": 5.62
+  },
+  {
+   "path": "MagickCore/decorate.c",
+   "score": 5.78
+  },
+  {
+   "path": "coders/djvu.c",
+   "score": 5.81
+  },
+  {
+   "path": "coders/emf.c",
+   "score": 5.87
+  },
+  {
+   "path": "MagickCore/exception.c",
+   "score": 5.88
+  },
+  {
+   "path": "coders/cin.c",
+   "score": 5.88
+  },
+  {
+   "path": "coders/ashlar.c",
+   "score": 5.89
+  },
+  {
+   "path": "MagickWand/wand-view.c",
+   "score": 5.91
+  },
+  {
+   "path": "Magick++/lib/Exception.cpp",
+   "score": 5.92
+  },
+  {
+   "path": "MagickCore/matrix.c",
+   "score": 5.92
+  },
+  {
+   "path": "coders/rle.c",
+   "score": 5.93
+  },
+  {
+   "path": "MagickCore/histogram.c",
+   "score": 5.97
+  },
+  {
+   "path": "MagickCore/montage.c",
+   "score": 6.01
+  },
+  {
+   "path": "coders/qoi.c",
+   "score": 6.05
+  },
+  {
+   "path": "MagickCore/list.c",
+   "score": 6.23
+  },
+  {
+   "path": "MagickCore/image-view.c",
+   "score": 6.24
+  },
+  {
+   "path": "MagickCore/cipher.c",
+   "score": 6.28
+  },
+  {
+   "path": "coders/txt.c",
+   "score": 6.4
+  },
+  {
+   "path": "coders/video.c",
+   "score": 6.44
+  },
+  {
+   "path": "MagickCore/module.c",
+   "score": 6.46
+  },
+  {
+   "path": "coders/xbm.c",
+   "score": 6.73
+  },
+  {
+   "path": "MagickCore/memory.c",
+   "score": 6.87
+  },
+  {
+   "path": "MagickWand/magick-image.c",
+   "score": 6.87
+  },
+  {
+   "path": "Magick++/lib/Image.cpp",
+   "score": 6.89
+  },
+  {
+   "path": "coders/label.c",
+   "score": 6.93
+  },
+  {
+   "path": "MagickCore/magick.c",
+   "score": 6.96
+  },
+  {
+   "path": "coders/ipl.c",
+   "score": 7.0
+  },
+  {
+   "path": "MagickCore/signature.c",
+   "score": 7.08
+  },
+  {
+   "path": "Magick++/lib/Drawable.cpp",
+   "score": 7.1
+  },
+  {
+   "path": "coders/dng.c",
+   "score": 7.17
+  },
+  {
+   "path": "coders/sct.c",
+   "score": 7.23
+  },
+  {
+   "path": "coders/sf3.c",
+   "score": 7.25
+  },
+  {
+   "path": "coders/raw.c",
+   "score": 7.26
+  },
+  {
+   "path": "coders/caption.c",
+   "score": 7.27
+  },
+  {
+   "path": "coders/vicar.c",
+   "score": 7.34
+  },
+  {
+   "path": "coders/tim.c",
+   "score": 7.41
+  },
+  {
+   "path": "coders/dps.c",
+   "score": 7.45
+  },
+  {
+   "path": "coders/jbig.c",
+   "score": 7.51
+  },
+  {
+   "path": "coders/cals.c",
+   "score": 7.52
+  },
+  {
+   "path": "Magick++/lib/STL.cpp",
+   "score": 7.55
+  },
+  {
+   "path": "MagickCore/quantum.c",
+   "score": 7.56
+  },
+  {
+   "path": "MagickCore/linked-list.c",
+   "score": 7.59
+  },
+  {
+   "path": "MagickCore/random.c",
+   "score": 7.68
+  },
+  {
+   "path": "coders/cube.c",
+   "score": 7.73
+  },
+  {
+   "path": "MagickWand/script-token.c",
+   "score": 7.77
+  },
+  {
+   "path": "MagickCore/cache-view.c",
+   "score": 7.78
+  },
+  {
+   "path": "MagickWand/pixel-iterator.c",
+   "score": 7.78
+  },
+  {
+   "path": "coders/rla.c",
+   "score": 7.78
+  },
+  {
+   "path": "coders/html.c",
+   "score": 7.83
+  },
+  {
+   "path": "MagickWand/conjure.c",
+   "score": 7.86
+  },
+  {
+   "path": "MagickCore/magic.c",
+   "score": 7.88
+  },
+  {
+   "path": "coders/aai.c",
+   "score": 7.89
+  },
+  {
+   "path": "Magick++/lib/Color.cpp",
+   "score": 7.9
+  },
+  {
+   "path": "coders/pix.c",
+   "score": 7.9
+  },
+  {
+   "path": "coders/avs.c",
+   "score": 7.95
+  },
+  {
+   "path": "coders/flif.c",
+   "score": 7.96
+  },
+  {
+   "path": "coders/pango.c",
+   "score": 8.02
+  },
+  {
+   "path": "Magick++/lib/Pixels.cpp",
+   "score": 8.03
+  },
+  {
+   "path": "MagickWand/pixel-wand.c",
+   "score": 8.03
+  },
+  {
+   "path": "coders/mtv.c",
+   "score": 8.03
+  },
+  {
+   "path": "coders/dmr.c",
+   "score": 8.13
+  },
+  {
+   "path": "filters/analyze.c",
+   "score": 8.14
+  },
+  {
+   "path": "coders/uil.c",
+   "score": 8.18
+  },
+  {
+   "path": "coders/mac.c",
+   "score": 8.19
+  },
+  {
+   "path": "MagickCore/coder.c",
+   "score": 8.22
+  },
+  {
+   "path": "coders/otb.c",
+   "score": 8.23
+  },
+  {
+   "path": "coders/xps.c",
+   "score": 8.26
+  },
+  {
+   "path": "MagickWand/magick-wand.c",
+   "score": 8.28
+  },
+  {
+   "path": "coders/wbmp.c",
+   "score": 8.28
+  },
+  {
+   "path": "coders/fl32.c",
+   "score": 8.31
+  },
+  {
+   "path": "coders/mono.c",
+   "score": 8.35
+  },
+  {
+   "path": "Magick++/lib/Geometry.cpp",
+   "score": 8.4
+  },
+  {
+   "path": "coders/map.c",
+   "score": 8.4
+  },
+  {
+   "path": "coders/braille.c",
+   "score": 8.42
+  },
+  {
+   "path": "coders/histogram.c",
+   "score": 8.45
+  },
+  {
+   "path": "coders/scr.c",
+   "score": 8.48
+  },
+  {
+   "path": "coders/stegano.c",
+   "score": 8.52
+  },
+  {
+   "path": "coders/ttf.c",
+   "score": 8.52
+  },
+  {
+   "path": "Magick++/lib/Options.cpp",
+   "score": 8.54
+  },
+  {
+   "path": "Magick++/lib/Statistic.cpp",
+   "score": 8.54
+  },
+  {
+   "path": "MagickCore/registry.c",
+   "score": 8.55
+  },
+  {
+   "path": "MagickCore/nt-feature.c",
+   "score": 8.57
+  },
+  {
+   "path": "coders/pes.c",
+   "score": 8.58
+  },
+  {
+   "path": "MagickCore/deprecate.c",
+   "score": 8.63
+  },
+  {
+   "path": "coders/cip.c",
+   "score": 8.66
+  },
+  {
+   "path": "coders/ept.c",
+   "score": 8.66
+  },
+  {
+   "path": "coders/hald.c",
+   "score": 8.69
+  },
+  {
+   "path": "coders/sfw.c",
+   "score": 8.73
+  },
+  {
+   "path": "coders/pgx.c",
+   "score": 8.74
+  },
+  {
+   "path": "MagickCore/semaphore.c",
+   "score": 8.81
+  },
+  {
+   "path": "MagickCore/timer.c",
+   "score": 8.81
+  },
+  {
+   "path": "coders/debug.c",
+   "score": 8.83
+  },
+  {
+   "path": "coders/magick.c",
+   "score": 8.86
+  },
+  {
+   "path": "MagickCore/colormap.c",
+   "score": 8.88
+  },
+  {
+   "path": "coders/pwp.c",
+   "score": 8.89
+  },
+  {
+   "path": "coders/rgf.c",
+   "score": 8.9
+  },
+  {
+   "path": "coders/jnx.c",
+   "score": 8.94
+  },
+  {
+   "path": "coders/screenshot.c",
+   "score": 8.95
+  },
+  {
+   "path": "coders/gradient.c",
+   "score": 8.98
+  },
+  {
+   "path": "utilities/magick.c",
+   "score": 9.0
+  },
+  {
+   "path": "MagickCore/artifact.c",
+   "score": 9.09
+  },
+  {
+   "path": "MagickCore/static.c",
+   "score": 9.09
+  },
+  {
+   "path": "coders/fax.c",
+   "score": 9.09
+  },
+  {
+   "path": "MagickCore/gem.c",
+   "score": 9.12
+  },
+  {
+   "path": "coders/mask.c",
+   "score": 9.12
+  },
+  {
+   "path": "coders/plasma.c",
+   "score": 9.12
+  },
+  {
+   "path": "coders/uyvy.c",
+   "score": 9.13
+  },
+  {
+   "path": "coders/art.c",
+   "score": 9.19
+  },
+  {
+   "path": "coders/inline.c",
+   "score": 9.19
+  },
+  {
+   "path": "coders/ora.c",
+   "score": 9.23
+  },
+  {
+   "path": "coders/clipboard.c",
+   "score": 9.25
+  },
+  {
+   "path": "coders/farbfeld.c",
+   "score": 9.25
+  },
+  {
+   "path": "coders/hrz.c",
+   "score": 9.25
+  },
+  {
+   "path": "coders/mvg.c",
+   "score": 9.26
+  },
+  {
+   "path": "MagickCore/version.c",
+   "score": 9.28
+  },
+  {
+   "path": "coders/bayer.c",
+   "score": 9.3
+  },
+  {
+   "path": "coders/strimg.c",
+   "score": 9.31
+  },
+  {
+   "path": "coders/vid.c",
+   "score": 9.35
+  },
+  {
+   "path": "coders/xc.c",
+   "score": 9.47
+  },
+  {
+   "path": "coders/url.c",
+   "score": 9.48
+  },
+  {
+   "path": "MagickCore/prepress.c",
+   "score": 9.49
+  },
+  {
+   "path": "coders/info.c",
+   "score": 9.53
+  },
+  {
+   "path": "coders/kernel.c",
+   "score": 9.53
+  },
+  {
+   "path": "coders/c2pa.c",
+   "score": 9.57
+  },
+  {
+   "path": "MagickWand/tests/script-token-test.c",
+   "score": 9.58
+  },
+  {
+   "path": "MagickWand/tests/loop_over_lists.c",
+   "score": 9.59
+  },
+  {
+   "path": "coders/thumbnail.c",
+   "score": 9.59
+  },
+  {
+   "path": "MagickWand/tests/add_first_lists.c",
+   "score": 9.6
+  },
+  {
+   "path": "MagickWand/tests/add_last_lists.c",
+   "score": 9.6
+  },
+  {
+   "path": "MagickWand/tests/add_mixed_lists.c",
+   "score": 9.6
+  },
+  {
+   "path": "MagickWand/tests/add_norm_lists.c",
+   "score": 9.6
+  },
+  {
+   "path": "MagickCore/vms.c",
+   "score": 9.68
+  },
+  {
+   "path": "MagickWand/tests/add_index.c",
+   "score": 9.68
+  },
+  {
+   "path": "MagickWand/tests/add_mixed.c",
+   "score": 9.68
+  },
+  {
+   "path": "coders/matte.c",
+   "score": 9.68
+  },
+  {
+   "path": "coders/null.c",
+   "score": 9.68
+  },
+  {
+   "path": "coders/tile.c",
+   "score": 9.68
+  },
+  {
+   "path": "Magick++/lib/Blob.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/BlobRef.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/CoderInfo.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/Functions.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/ImageRef.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/Montage.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/ResourceLimits.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/SecurityPolicy.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/Thread.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "Magick++/lib/TypeMetric.cpp",
+   "score": 10.0
+  },
+  {
+   "path": "MagickCore/client.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickCore/monitor.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickCore/thread.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickWand/tests/add_first.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickWand/tests/add_last.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickWand/tests/add_norm.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickWand/wand.c",
+   "score": 10.0
+  },
+  {
+   "path": "MagickWand/wandcli.c",
+   "score": 10.0
+  },
+  {
+   "path": "coders/clip.c",
+   "score": 10.0
+  },
+  {
+   "path": "coders/dot.c",
+   "score": 10.0
+  },
+  {
+   "path": "coders/mpr.c",
+   "score": 10.0
+  },
+  {
+   "path": "coders/pattern.c",
+   "score": 10.0
+  },
+  {
+   "path": "coders/x.c",
+   "score": 10.0
+  }
+ ],
+ "unscorable_files": [
+  "coders/png.c"
+ ]
+}
