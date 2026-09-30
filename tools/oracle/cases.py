@@ -312,7 +312,6 @@ TWO_IMAGE_OPS = [
     ("-channel-fx 'red; blue=>green'", ["rose", "rose_blur"]),
     ("-compose multiply -composite", ["rose", "gray8"]),
     ("-set option:distort:viewport 50x30+5+5 -distort SRT 10 -compose over -composite", ["granite", "rose_alpha"]),
-    ("-stereo +3+2", ["rose", "rose_blur"]),
 ]
 
 SEQ_OPS = [
@@ -1266,6 +1265,64 @@ GAP_COMMANDS = [
     "( {C}/rose_blur.miff -crop 20x20+0+0 +repage )",
     "compare -metric RMSE -subimage-search {C}/rose.miff "
     "( {C}/rose_blur.miff -crop 20x20+10+10 +repage )",
+    # visual-effects.c: plasma on images small enough for segments to degenerate,
+    # CMYK and alpha inputs, transparent backgrounds, a matrix above 6x6, a
+    # virtual canvas for -shadow, exact -solarize thresholds, a -tint colour with
+    # green and blue
+    "{C}/cmyk.miff -fill cmyk(20%,40%,60%,30%) -colorize 10,20,30,40,50",
+    "{C}/rose.miff -color-matrix '1 0 0 0 0 0 0, 0 1 0 0 0 0 0, 0 0 0.9 0 0 0 0, 0 0 0 1 0 0 0, 0 0 0 0 1 0 0, 0 0 0 0 0 1 0, 0.1 0 0 0 0 0 1'",
+    "{C}/cmyk.miff -color-matrix '0.9 0 0 0 0.1, 0 1 0 0 0, 0 0 1.1 0 0, 0 0 0 0.8 0, 0 0 0 0 1'",
+    "{C}/rose_alpha.miff -color-matrix '0.9 0 0 0 0.1, 0 1 0 0 0, 0 0 1.1 0 0, 0 0 0 0.8 0, 0 0 0 0 1'",
+    "{C}/rose.miff -background none -implode 0.5",
+    "-seed 1 -size 1x1 plasma:",
+    "-seed 1 -size 2x2 plasma:",
+    "{C}/gray16.miff -shadow 80x3+5+5",
+    "{C}/rose.miff -repage 100x80+5+7 -shadow 80x3+5+5",
+    "-size 1x1 xc:rgb(102,102,102) xc:rgb(10,200,102) xc:rgb(102,30,250) +append -type palette -solarize 26214",
+    "-size 1x1 xc:rgb(102,102,102) xc:rgb(10,200,102) xc:rgb(102,30,250) +append -solarize 26214",
+    "{C}/rose.miff -fill #80c040 -tint 50",
+    "{C}/cmyk.miff -fill cmyk(20%,40%,60%,30%) -tint 10,20,30,40,50",
+    "{C}/rose.miff -background none -wave 5x20",
+]
+# visual-effects.c: -stegano and -stereo exist only in the composite utility (a
+# `magick ... -stereo` case failed on both sides and tested nothing), -polaroid
+GAP_COMMANDS += [
+    "composite -stereo +3+2 {C}/rose_blur.miff {C}/rose.miff",
+    "composite -stereo -2-1 {C}/rose_alpha.miff {C}/rose.miff",
+    "{C}/rose.miff -polaroid 10",
+    "{C}/rose.miff -scale 300x200! -polaroid 10",
+    "composite -stereo 0 {C}/rose.miff {C}/rose_alpha.miff",
+    "{C}/rose.miff -font {C}/Generic.ttf -caption Hi -background white +polaroid",
+]
+# statistic.c: moments of a uniform image, mixed sizes for -evaluate-sequence and
+# ties in its median, each -function with exactly as many parameters as a default
+# test counts, HDRI powers and clamping, -poly with 3 terms, write masks for
+# -statistic, and phash colorspace lists
+GAP_COMMANDS += [
+    "-size 1x1 xc:rgb(30,20,10) xc:rgb(10,20,30) xc:rgb(20,20,20) xc:rgb(20,30,10) -evaluate-sequence median",
+    "{C}/hdri.miff -evaluate pow 2",
+    "{C}/tall.miff {C}/rose.miff -evaluate-sequence mean",
+    "{C}/rose.miff {C}/tall.miff -evaluate-sequence mean",
+    "{C}/rose.miff {C}/gray16.miff -evaluate-sequence mean",
+    "{C}/hdri.miff -define evaluate:clamp=true -evaluate add 50%",
+    "{C}/rose.miff -function Sinusoid 3",
+    "{C}/rose.miff -function Sinusoid 3,-90,0.2",
+    "{C}/rose.miff -function Sinusoid 3,-90,0.2,0.6",
+    "{C}/rose.miff -function ArcSin 2",
+    "{C}/rose.miff -function ArcSin 2,0.4",
+    "{C}/rose.miff -function ArcSin 2,0.4,0.8",
+    "{C}/rose.miff -function ArcSin 2,0.4,0.8,0.3",
+    "{C}/rose.miff -function ArcTan 10",
+    "{C}/rose.miff -function ArcTan 10,.7,0.8",
+    "{C}/rose.miff -function ArcTan 10,.7,0.8,0.3",
+    "identify -verbose -precision 17 -moments {C}/tiny.miff",
+    "identify -verbose -precision 17 -moments -define phash:colorspaces=sRGB,HCLp,Lab,XYZ,HSB,HSV,HSL,LCH {C}/rose.miff",
+    "identify -verbose -precision 17 -moments -define phash:colorspaces=Undefined,sRGB {C}/rose.miff",
+    "{C}/rose.miff {C}/rose_blur.miff {C}/rose.miff -poly '0.5,1 0.3,2 0.2,1'",
+    "{C}/rose.miff -size 70x46 -write-mask gradient: -statistic Median 3",
+    "{C}/rose.miff -size 70x46 -write-mask gradient: -statistic Median 5",
+    "{C}/rose.miff -size 70x46 -read-mask xc:gray(50%) -precision 17 -verbose -write info:",
+    "{C}/rose.miff -size 70x46 -write-mask xc:gray(50%) -statistic Median 3",
 ]
 # compare.c: every metric with a read mask of exactly QuantumRange/2 on one image
 # only (the utility masks both, and the test ORs the two masks)
@@ -1276,22 +1333,60 @@ GAP_COMMANDS += [
                    "PHASE", "PHASH", "PSNR", "RMSE", "SSIM")
     for images in ("{C}/rose.miff -read-mask xc:gray(50%) {C}/rose_blur.miff",
                    "{C}/rose.miff ( {C}/rose_blur.miff -read-mask xc:gray(50%) )")]
+# Commands whose output must not be converted to floating point: -stegano hides
+# the watermark in the low-order bits, which a float output does not keep.
+GAP_PLAIN_COMMANDS = [
+    "composite -stegano 5 {C}/gray8.miff {C}/rose.miff",
+    "composite -stegano 0 {C}/logo.miff {C}/rose.miff",
+]
 # Through mogrify.c, whose -gamma is GammaImage (`magick -gamma` uses EvaluateImage).
 GAP_CONVERT_CASES = [
     ("convert palette -gamma", ["-gamma", "1.6"], "palette"),
+    # `magick -perceptible` fails: the option is missing from MagickCore/option.c
+    ("convert palette -perceptible", ["-perceptible", "0.1"], "palette"),
+    ("convert hdri -perceptible", ["-perceptible", "0.1"], "hdri"),
+    # epsilon is in quantum units: 0.1 changes almost nothing
+    ("convert palette -perceptible 30000", ["-perceptible", "30000"], "palette"),
+    ("convert rose_alpha colors -perceptible 30000",
+     ["-colors", "16", "-channel", "RGBA", "-perceptible", "30000"], "rose_alpha"),
 ]
 
 
 def _gap_cases():
-    for label, args, names in GAP_CASES:
+    yield from _gap_image_cases(GAP_CASES)
+    yield from _gap_plain_cases()
+    yield from _gap_image_cases(REACH_CASES)
+    yield from _gap_cdl_cases()
+    yield from _gap_command_cases()
+    yield from _gap_convert_cases()
+
+
+def _gap_image_cases(entries):
+    for label, args, names in entries:
         yield _op("gaps", label, [img(n) for n in names], args)
-    for label, args, names in REACH_CASES:
-        yield _op("gaps", label, [img(n) for n in names], args)
+
+
+def _gap_plain_cases():
+    for command in GAP_PLAIN_COMMANDS:
+        yield _op_to("gaps", command.replace("{C}/", ""), _fmt(command), "out.miff")
+
+
+def _gap_cdl_cases():
     for name in CDL_INPUTS:
         yield _with_inputs(_op("gaps", name + " -cdl", [img(name)], ["-cdl", "cc.xml"]),
                            files={"cc.xml": CDL})
+
+
+def _gap_command_cases():
     for command in GAP_COMMANDS:
-        yield _op("gaps", command.replace("{C}/", ""), [], _fmt(command))
+        label = command.replace("{C}/", "")
+        if command.startswith("identify "):  # prints, writes nothing
+            yield _case("gaps", label, [_fmt(command)], [])
+        else:
+            yield _op("gaps", label, [], _fmt(command))
+
+
+def _gap_convert_cases():
     for label, args, name in GAP_CONVERT_CASES:
         yield _case("gaps", label, [["convert", img(name)] + args + FLOAT_OUT + ["out.miff"]],
                     ["out.miff"])

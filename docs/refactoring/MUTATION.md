@@ -842,6 +842,63 @@ the "public API only" group of `VERIFICATION.md`.
 - Each file's mutants live in one Mull build (`mull-sweep25` or `mull-sweep60`); a probe
   against the wrong build shows every mutant surviving.
 
+## Reading survivors by hand: visual-effects.c and statistic.c (Mac)
+
+The last two Phase 1 files the Mac could take while the WSL machine ran `morphology.c`.
+`statistic.c`'s 37 capped survivors were rerun against up to 1,500 cases first
+(`GetImageStatistics` is reached by only 327, so none stayed capped); 30 of them were
+still unmatched and were read with the rest. 247 verdicts; every gap confirmed through
+`mutate.py`. `verdicts.json` now holds 531 (219 equivalent, 211 gaps, 45 unobservable, 56
+unresolved), and the `gaps` family 173 cases.
+
+| File | Mutants | Killed | Gate | Ready / careful / not ready | Still open |
+| --- | ---: | ---: | ---: | --- | --- |
+| `visual-effects.c` | 840 | 568 → 662 | 78% → **92%** | 13/5/5 → 18/4/1 | 6 unresolved |
+| `statistic.c` | 906 | 711 → 748 | 91% → **95%** | 23/6/4 → 27/4/2 | 14 unresolved |
+| `threshold.c` (again) | 557 | 443 → 449 | 91% → **93%** | 15/4/1 → 16/4/0 | 5 unresolved |
+
+What the gaps had in common, beyond the earlier files':
+
+- **Options that exist only in another front end.** `-stegano` and `-stereo` are options
+  of the `composite` utility, not of `magick`; the catalogue's `magick rose rose_blur
+  -stereo +3+2` failed on both sides and tested nothing. `SteganoImage`, `PolaroidImage`
+  and `StereoAnaglyphImage` (90 mutants) had no case at all.
+- **Floating-point output hides low-order bits.** `-stegano` writes the watermark into
+  the lowest bits; with the catalogue's float MIFF output the change is gone. The stegano
+  cases write plain MIFF (`GAP_PLAIN_COMMANDS`).
+- **Parameters in units nobody checked.** `-perceptible 0.1` is in quantum units and
+  changes almost nothing; `30000` reaches the code. `-function Sinusoid|ArcSin|ArcTan`
+  used parameter counts for which every "given or default" test agreed.
+- **Fixed-size neighbourhoods.** With a 3x3 `-statistic`, `w*(w/2)` and `w/(w/2)` are
+  both 3; a 5x5 one tells them apart. The centre offset is only read under a write mask.
+- **Dead values.** `M22` in `GetImageMoments`, `color_vector.alpha` in `TintImage`, the
+  alpha blend in `ColorizeImage`, and `sum_cubed`/`sum_fourth_power` in
+  `GetImageStatistics` are computed and never reach the output: their mutants are
+  equivalent or unobservable, and a refactoring may simplify them only if it keeps the
+  public `ChannelStatistics` fields.
+
+**Found on the way, for `ORACLE.md` or upstream:** `magick -perceptible` is rejected
+(`perceptible` is missing from `MagickCore/option.c`; `convert` accepts it). `-tint`
+ignores its alpha arguments; `-colorize` never applies its alpha percentage (channels
+are indexed by offset). `SteganoImage` wraps its position at `columns*columns`, not
+`columns*rows`.
+
+### Cases that test nothing
+
+`tools/oracle/deadcases.py` runs the catalogue on the base build and groups the cases
+that fail by their error. On 2026-09-30, 521 of 9,924 fail. Some failures are the point
+of a case (`compare` exits 1 when images differ, error paths such as `-resize 10%` of a
+1x1 image), but these groups look like cases that only compare two identical error
+messages, and are worth fixing in the catalogue:
+
+| Cases | Error | Example |
+| ---: | --- | --- |
+| ~225 | `color separated image required` | encoding to `r:`, `c:`, `k:`... and `stream -map cmyk` on non-CMYK images |
+| 20 | `Symbol 'v' but fewer than two images` | `-fx 'u*0.5+v*0'` on one image |
+| 17 | `non-conforming drawing primitive definition` | `-draw 'matte 10,10 floodfill'` |
+| 11 | `unrecognized option` | `-perceptible` (9) |
+| 9 | `option deprecated` | `+shade` |
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:

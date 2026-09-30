@@ -45,7 +45,7 @@ The score must read 1.89. If it does not, this file changed after the task was w
 | 2 | `ColorThresholdImage` | 1217 | 27 | 4 | 4 | public | 2 | 13 | 21 of 24 |
 | 3 | `BlackThresholdImage` | 927 | 26 | 4 | 4 | public | 2 | 15 | 26 of 28 |
 | 4 | `WhiteThresholdImage` | 2518 | 26 | 4 | 4 | public | 2 | 15 | 25 of 28 |
-| 5 | `PerceptibleImage` | 2092 | 19 | 4 | 4 | public | 2 | 3 | 12 of 16 |
+| 5 | `PerceptibleImage` | 2092 | 19 | 4 | 4 | public | 2 | 7 | 18 of 23 |
 | 6 | `KapurThreshold` | 392 | 17 | 4 | 4 | static | - | 13 | 38 of 43 |
 | 7 | `ClampImage` | 1087 | 16 | 4 | 4 | public | 2 | 124 | 14 of 19 |
 | 8 | `RandomThresholdImage` | 2231 | 19 | 4 | 3 | public | 2 | 13 | 18 of 23 |
@@ -117,8 +117,8 @@ Commit message: `refactor(MagickCore/threshold.c): simplify WhiteThresholdImage`
 - **Recipe P (named predicate)** - move compound conditions into named `MagickBooleanType` helpers.
 - Contains 2 OpenMP pragma(s): only blocks inside a loop body that write no variable declared outside it may be extracted. Never move or edit a pragma.
 - Public function: its name and signature must not change.
-- Only 3 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
-- 4 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
+- Only 7 oracle case(s) execute this function, so the oracle sees little of it. Consider adding cases before a structural change.
+- 5 further survivor(s) are of kinds the oracle cannot see by design (logging, loop bounds over padding, allocation sizes, or read by hand and found equivalent; see `tools/oracle/classify.py`).
 
 Commit message: `refactor(MagickCore/threshold.c): simplify PerceptibleImage`
 
