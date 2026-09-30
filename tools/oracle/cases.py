@@ -1602,6 +1602,68 @@ GAP_STEP_CASES = [
      [[_UHDR_JPG, "icc.icc"],
       ["{C}/rose.miff", "-profile", "icc.icc", "-density", "150", "-units", "PixelsPerInch", "r.psd"],
       ["r.psd", "-profile", "meta.xmp", "out.miff"]], {"meta.xmp": XMP_ELEMENTS}),
+    # second round: rationals with denominator 2, big-endian longs, XMP values
+    # changing length and unequal x and y density
+    ("rose exif little-endian rationals /2, density and orientation",
+     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient", "BottomLeft", "out.miff"]],
+     {"exif.bin": "Exif\u0000\u0000II*\u0000\b\u0000\u0000\u0000\u0004\u0000\u0012\u0001\u0004\u0000\u0001\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u001a\u0001\u0005\u0000\u0001\u0000\u0000\u0000>\u0000\u0000\u0000\u001b\u0001\u0005\u0000\u0001\u0000\u0000\u0000F\u0000\u0000\u0000(\u0001\u0004\u0000\u0001\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000F\u0000\u0000\u0000\u0002\u0000\u0000\u0000F\u0000\u0000\u0000\u0002\u0000\u0000\u0000"}),
+    ("rose exif big-endian longs, density and orientation",
+     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient", "BottomLeft", "out.miff"]],
+     {"exif.bin": "Exif\u0000\u0000MM\u0000*\u0000\u0000\u0000\b\u0000\u0004\u0001\u0012\u0000\u0004\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0001\u001a\u0000\u0005\u0000\u0000\u0000\u0001\u0000\u0000\u0000>\u0001\u001b\u0000\u0005\u0000\u0000\u0000\u0001\u0000\u0000\u0000F\u0001(\u0000\u0004\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0000F\u0000\u0000\u0000\u0002\u0000\u0000\u0000F\u0000\u0000\u0000\u0002"}),
+    ("rose xmp elements, unequal density",
+     [["{C}/rose.miff", "-profile", "meta.xmp", "-density", "300x150", "out.miff"]],
+     {"meta.xmp": "<?xpacket begin=\"\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n<rdf:Description rdf:about=\"\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"\n><tiff:XResolution>72/1</tiff:XResolution><tiff:YResolution>72/1</tiff:YResolution><tiff:ResolutionUnit>2</tiff:ResolutionUnit><tiff:Orientation>1</tiff:Orientation></rdf:Description>\n</rdf:RDF></x:xmpmeta>\n<?xpacket end=\"w\"?>"}),
+    ("rose xmp elements, shorter value",
+     [["{C}/rose.miff", "-profile", "meta.xmp", "-density", "7", "out.miff"]],
+     {"meta.xmp": "<?xpacket begin=\"\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n<rdf:Description rdf:about=\"\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"\n><tiff:XResolution>72/1</tiff:XResolution><tiff:YResolution>72/1</tiff:YResolution><tiff:ResolutionUnit>2</tiff:ResolutionUnit><tiff:Orientation>1</tiff:Orientation></rdf:Description>\n</rdf:RDF></x:xmpmeta>\n<?xpacket end=\"w\"?>"}),
+]
+# annotate.c, second round: rotated multi-line text for every gravity (a line index
+# times a unit scale hides a * turned into /), a virtual canvas, a gray image, text
+# density, hinting off, UTF-8 text
+GAP_COMMANDS += [
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity None -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity NorthWest -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity North -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity West -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity Center -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity East -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity SouthWest -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity South -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity SouthEast -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -gravity NorthEast -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -affine 1.3,0.2,0.1,0.8,0,0 -annotate +3+10 'one\\ntwo'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -annotate 20x10+3+4 'one\\ntwo\\nthree'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -repage 100x80+5+7 -annotate +3+10 'Page'",
+    "{C}/gray16.miff -font {C}/Generic.ttf -pointsize 11 -fill red -annotate +3+10 'Gray'",
+    "-density 144 -font {C}/Generic.ttf -pointsize 16 label:Hi",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -set type:hinting off -annotate +5+20 'Hint'",
+    "{C}/rose.miff -font {C}/Generic.ttf -pointsize 11 -annotate +5+20 'café ✓'",
+]
+# vision.c, second round: an area range whose ends are object areas, reversed id
+# ranges, ';' in colour lists, sort order with a sort, CMYK mean colours, merging
+# small objects under 4-connectivity
+GAP_COMMANDS += [
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:area-threshold=110-141 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep=11-9 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:sort=area -define connected-components:sort-order=decreasing -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:remove-ids=11-9 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep-colors=white;gray -connected-components 8",
+    "{C}/cmyk.miff -define connected-components:verbose=true -define connected-components:mean-color=true -define connected-components:area-threshold=20 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:area-threshold=10-200 -connected-components 4",
+    "{C}/rose.miff -define connected-components:area-threshold=16 -connected-components 4",
+]
+# utility.c: wildcards in input names, base64 via inline: (GIF: no dates to hide in
+# the base64), paper sizes, a file name starting with ~
+GAP_COMMANDS += [
+    "'{C}/ros*.miff' -append",
+    "'{C}/r?se.miff' -flip",
+    "'{C}/[rt]*.miff' -append",
+    "{C}/tiny.miff -write inline:gif:-",
+    "{C}/rose.miff -resize 5x3 -write inline:gif:-",
+    "{C}/rose.miff -resize 4x4! -write inline:gif:-",
+    "{C}/rose.miff -page A4",
+    "{C}/rose.miff -page Letter+10+10",
+    "{C}/rose.miff -write ~/home.miff",
 ]
 # compare.c: every metric with a read mask of exactly QuantumRange/2 on one image
 # only (the utility masks both, and the test ORs the two masks)
