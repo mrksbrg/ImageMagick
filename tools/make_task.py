@@ -144,6 +144,9 @@ def gather_evidence(rel, base_src):
     _, cases = oracle.load_cases(base_bin)
     fmap = casemap.load_map(cases)
     muts = mutation_results(rel)
+    verdicts = classify.verdict_kinds(muts, lambda m: base_src[m["line"] - 1])
+    for m in muts:
+        m["verdict"] = verdicts.get(m["id"])
     executed = mutate.executed_lines() or {}
     return Evidence(base_src, ranges, fmap, muts, executed)
 
@@ -287,7 +290,8 @@ def survivor_kinds(survived, base_src):
     for m in survived:
         after = " ".join(base_src[m["line"]:m["line"] + 2])
         kinds.setdefault(classify.kind_of(dict(m, line_executed=True),
-                                          base_src[m["line"] - 1].strip(), after), []).append(m)
+                                          base_src[m["line"] - 1].strip(), after,
+                                          m.get("verdict")), []).append(m)
     return kinds
 
 
@@ -307,13 +311,14 @@ def gap_lines(gaps, name, base_src):
 def survivor_lines(r, base_src):
     """What the surviving mutants say about the function."""
     kinds = survivor_kinds(r["survived"], base_src)
-    harmless = sum(len(v) for k, v in kinds.items() if k != "unmatched")
-    gaps = sorted(kinds.get("unmatched", []), key=lambda m: m["line"])
+    open_kinds = ("unmatched", "gap", "unresolved")
+    harmless = sum(len(v) for k, v in kinds.items() if k not in open_kinds)
+    gaps = sorted((m for k in open_kinds for m in kinds.get(k, [])), key=lambda m: m["line"])
     out = gap_lines(gaps, r["name"], base_src) if gaps else []
     if harmless:
         out.append("- %d further survivor(s) are of kinds the oracle cannot see by design "
-                   "(logging, loop bounds over padding, allocation sizes; see "
-                   "`tools/oracle/classify.py`)." % harmless)
+                   "(logging, loop bounds over padding, allocation sizes, or read by hand and "
+                   "found equivalent; see `tools/oracle/classify.py`)." % harmless)
     return out
 
 

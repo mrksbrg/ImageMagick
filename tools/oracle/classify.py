@@ -18,6 +18,21 @@ that decides whether a function is safe to refactor still deserves a look.
 Survivors are also split by where they sit: "unreached" means no case executes
 the line, so the catalogue needs a new input, not a sharper one; "capped" means
 not every case reaching the function was tried (see mutate.py --max-cases).
+
+What a person decides on reading an unmatched survivor is kept in verdicts.json,
+next to this file, and takes precedence over the rules:
+
+  equivalent    no input can tell the mutant from the original
+  unobservable  the change is real but the CLI cannot show it (a status every
+                caller discards, a platform difference)
+  gap           a case could kill it; `killed_by` names one that did
+  unresolved    read and probed, still undecided: counts as a gap
+
+A verdict is keyed by the function, the mutator, the mutated line's text and
+the operator's column within it, not by line number, so it survives edits
+elsewhere in the file and holds on any machine. `nth` tells apart identical
+lines in the same function. A verdict matches only the source it was made on:
+once the line or its function changes, the survivor is unmatched again.
 """
 
 import argparse
@@ -59,13 +74,22 @@ RULES = [
      "threading and resource limits; the oracle runs single-threaded and within limits"),
 ]
 COMPILED = [(k, m, re.compile(rx), why) for k, m, rx, why in RULES]
+VERDICTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "verdicts.json")
+VERDICT_KINDS = {
+    "equivalent": "read by hand: no input can tell it from the original",
+    "unobservable": "read by hand: a real change the CLI cannot show",
+    "gap": "read by hand: a case could kill it (verdicts.json names one)",
+    "unresolved": "read and probed by hand, still undecided; counts as a gap",
+}
 
 
-def kind_of(result, line, after=""):
+def kind_of(result, line, after="", verdict=None):
     if result["status"] != "survived":
         return result["status"]
     if not result.get("line_executed", True):
         return "unreached"
+    if verdict:
+        return verdict
     for kind, mutators, rx, _ in COMPILED:
         text = line + "\n" + after if kind == "free-guard" else line
         if applies_to(mutators, result["mutator"]) and rx.search(text):
@@ -114,11 +138,65 @@ def load_results(reports, file=None):
 def classify(results):
     """Add each result's source line ("src") and kind."""
     sources = {}
+
+    def raw_line(r):
+        return source_lines(r["file"], sources)[r["line"] - 1]
+
+    verdicts = verdict_kinds(results, raw_line)
     for r in results:
         lines = source_lines(r["file"], sources)
-        r["src"] = lines[r["line"] - 1].strip()
+        r["src"] = raw_line(r).strip()
         after = " ".join(lines[r["line"]:r["line"] + 2])
-        r["kind"] = kind_of(r, r["src"], after)
+        r["kind"] = kind_of(r, r["src"], after, verdicts.get(r["id"]))
+
+
+def verdict_kinds(results, raw_line):
+    """{mutant id: verdict} for the results verdicts.json names. `results` should
+    be every mutant of the file, not only survivors, so that identical lines
+    are counted (`nth`) as they were when the verdict was made; `raw_line(r)`
+    is the source line the result points at."""
+    keyed = []
+    for r in results:
+        line = raw_line(r)
+        keyed.append(dict(r, src=line.strip(), at=r["col"] - 1 - (len(line) - len(line.lstrip()))))
+    nth = occurrences(keyed)
+    verdicts = load_verdicts()
+    found = {}
+    for r in keyed:
+        v = verdicts.get(verdict_key(r, nth[r["id"]]))
+        if v:
+            found[r["id"]] = v["verdict"]
+    return found
+
+
+def short_function(r):
+    return re.split(r"[;:]", r["function"] or "?")[-1]
+
+
+def occurrences(results):
+    """Each result's index among the results with the same function, mutator,
+    source text and column, in line order: tells identical lines apart."""
+    seen = collections.Counter()
+    nth = {}
+    for r in sorted(results, key=lambda r: (r["file"], r["line"])):
+        k = (os.path.basename(r["file"]), short_function(r), r["mutator"], r["src"], r["at"])
+        nth[r["id"]] = seen[k]
+        seen[k] += 1
+    return nth
+
+
+def verdict_key(r, nth):
+    return (os.path.basename(r["file"]), short_function(r), r["mutator"], r["src"], r["at"], nth)
+
+
+def load_verdicts():
+    """verdicts.json, by verdict key."""
+    if not os.path.exists(VERDICTS):
+        return {}
+    with open(VERDICTS) as f:
+        entries = json.load(f)["verdicts"]
+    return {(os.path.basename(e["file"]), e["function"], e["mutator"], e["src"], e["at"],
+             e.get("nth", 0)): e for e in entries}
 
 
 def source_lines(path, sources):
@@ -131,7 +209,7 @@ def source_lines(path, sources):
 
 def print_kind(results, kind):
     for r in (r for r in results if r["kind"] == kind):
-        fn = re.split(r"[;:]", r["function"] or "?")[-1]
+        fn = short_function(r)
         print("%s %s:%d %-15s %-24s %s" % ("c" if r.get("capped") else " ",
                                            os.path.basename(r["file"]), r["line"],
                                            r["mutator"][4:], fn[:24], r["src"][:90]))
@@ -152,11 +230,12 @@ def explanations():
     why = {k: w for k, _, _, w in RULES}
     why["unreached"] = "no case executes the line: needs a new input"
     why["unmatched"] = "read these: equivalent, or a gap in the catalogue"
+    why.update(VERDICT_KINDS)
     return why
 
 
 def kind_order():
-    return ["unreached"] + [k for k, _, _, _ in RULES] + ["unmatched"]
+    return ["unreached"] + [k for k, _, _, _ in RULES] + list(VERDICT_KINDS) + ["unmatched"]
 
 
 def capped_count(survivors, kind):
