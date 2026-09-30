@@ -16,6 +16,7 @@ Placeholders in argv:
 """
 
 import hashlib
+import itertools
 import json
 
 # Written as floating point at 32 bits so no HDRI precision is lost on output:
@@ -453,460 +454,645 @@ def _split(opstr):
     return shlex.split(opstr)
 
 
-def _case(family, label, steps, outputs, stdout=True, files=None, stdin=None):
-    """`files` maps a name to text written into the case directory first;
-    `stdin` names a file (corpus paths as `{C}/...`) fed to every step."""
+def _fmt(opstr):
+    """Split an option string, pointing {FONT} at the corpus font."""
+    return _split(opstr.replace("{FONT}", "{C}/" + FONT))
+
+
+def _each(lists, listname):
+    """The values of an enumeration (`magick -list <listname>`), less Undefined."""
+    return [v for v in lists.get(listname, []) if v.lower() != "undefined"]
+
+
+def _case_id(family, steps, files=None, stdin=None):
     key = steps if not files else [steps, sorted(files.items())]
     if stdin:
         key = [key, "stdin", stdin]
     ident = hashlib.sha1(json.dumps(key).encode()).hexdigest()[:10]
-    c = {"id": "%s/%s" % (family, ident), "family": family, "label": label,
-         "steps": steps, "outputs": outputs, "stdout": stdout}
+    return "%s/%s" % (family, ident)
+
+
+def _case(family, label, steps, outputs):
+    return {"id": _case_id(family, steps), "family": family, "label": label,
+            "steps": steps, "outputs": outputs, "stdout": True}
+
+
+def _with_inputs(case, files=None, stdin=None):
+    """`files` maps a name to text written into the case directory first;
+    `stdin` names a file (corpus paths as `{C}/...`) fed to every step.
+    Both are part of the case's id."""
+    case["id"] = _case_id(case["family"], case["steps"], files, stdin)
     if files:
-        c["files"] = files
+        case["files"] = files
     if stdin:
-        c["stdin"] = stdin
-    return c
+        case["stdin"] = stdin
+    return case
 
 
-def _op(family, label, pre, args, post=None, out="out.miff"):
-    post = FLOAT_OUT if post is None else post
-    return _case(family, label, [pre + args + post + [out]], [out])
+def _op_to(family, label, argv, out):
+    return _case(family, label, [argv + [out]], [out])
+
+
+def _op(family, label, pre, args):
+    return _op_to(family, label, pre + args + FLOAT_OUT, "out.miff")
+
+
+# ---- unary operators over the full single-frame input set
+def _unary_cases():
+    for name, op in itertools.product(UNARY_INPUTS, UNARY_OPS):
+        yield _op("unary", "%s %s" % (name, op), [img(name)], _fmt(op))
+
+
+# ---- the same operators through the legacy front end. `magick <args>`
+# parses with MagickWand/operation.c; `convert` and `mogrify` go through
+# MagickWand/mogrify.c, a separate implementation of every option.
+def _convert_cases():
+    for name, op in itertools.product(("rose", "rose_alpha"), UNARY_OPS):
+        yield _case("convert", "convert %s %s" % (name, op),
+                    [["convert", img(name)] + _fmt(op) + FLOAT_OUT + ["out.miff"]],
+                    ["out.miff"])
+
+
+def _mogrify_cases():
+    for op in filter(None, UNARY_OPS):
+        yield _case("mogrify", "mogrify rose %s" % op,
+                    [[img("rose"), "work.miff"],
+                     ["mogrify"] + _fmt(op) + FLOAT_OUT + ["work.miff"]], ["work.miff"])
+
+
+# ---- stream: pixel export by map and storage type (stream.c, pixel.c)
+def _stream_cases():
+    for name in ("rose", "rose_alpha", "cmyk", "hdri"):
+        for m, t in itertools.product(("rgb", "rgba", "bgr", "i", "cmyk", "rgbp", "a"),
+                                      ("char", "short", "long", "longlong", "float",
+                                       "double", "quantum")):
+            yield _case("stream", "stream %s -map %s -storage-type %s" % (name, m, t),
+                        [["stream", "-map", m, "-storage-type", t, img(name),
+                          "out.raw"]], ["out.raw"])
+        yield _case("stream", "stream %s -extract" % name,
+                    [["stream", "-map", "rgb", "-storage-type", "char", "-extract",
+                      "20x10+5+5", img(name), "out.raw"]], ["out.raw"])
+
+
+# ---- resize.c paths that the generated families miss, found by mutation
+# testing (docs/refactoring/MUTATION.md): magnify methods, one-dimensional
+# scaling, write masks, progress monitoring, exact thumbnail factors, and
+# the filter:* defines.
+def _magnify_cases():
+    for method, name in itertools.product(
+            ("eagle2x", "eagle3x", "eagle3xb", "epbx2x", "fish2x", "hq2x",
+             "scale2x", "scale3x", "xbr2x"),
+            ("rose", "palette", "rose_alpha", "tiny")):
+        yield _op("resize", "%s magnify %s" % (name, method), [img(name)],
+                  ["-define", "magnify:method=" + method, "-magnify"])
+
+
+# Support exactly 0.5 (Box and Point, enlarging): decides the storage class,
+# which only shows on a palette image.
+def _palette_filter_cases():
+    for f, geo in itertools.product(("Box", "Point", "Triangle"),
+                                    ("150%", "150x100%", "100x150%", "60%")):
+        yield _op("resize", "palette -filter %s -resize %s" % (f, geo),
+                  [img("palette")], ["-filter", f, "-resize", geo])
+        yield _case("resize", "palette -filter %s -resize %s class" % (f, geo),
+                    [[img("palette"), "-filter", f, "-resize", geo, "-format",
+                      "%r %k\\n", "info:"]], [])
+
+
+def _msl_cases():
+    for name in ("rose", "rose_alpha", "tiny"):  # no CLI option; MSL reaches MinifyImage
+        yield _with_inputs(
+            _case("resize", "%s msl minify" % name, [["conjure", "msl:minify.msl"]], ["out.miff"]),
+            files={"minify.msl": MSL_TEMPLATE % (img(name), "<minify />")})
+    for op in MSL_OPS:
+        yield _with_inputs(
+            _case("msl", op, [["conjure", "msl:script.msl"]], ["out.miff"]),
+            files={"script.msl": MSL_TEMPLATE % (img("rose"), op)})
+
+
+def _one_dimension_cases():
+    for how, geo, name in itertools.product(
+            ("-scale", "-sample", "-resize", "-adaptive-resize", "-interpolative-resize"),
+            ("150x100%", "100x60%", "70x13!", "9x46!", "100%"),
+            ("rose", "rose_alpha")):
+        yield _op("resize", "%s %s %s" % (name, how, geo), [img(name)], [how, geo])
+
+
+def _write_mask_cases():
+    for how in ("-scale 150%", "-sample 60%", "-resize 150%", "-resize 40%", "-scale 50%",
+                "-scale 150x100%"):
+        if how not in WRITE_MASK_UNSTABLE:
+            yield _op("resize", "rose write-mask %s" % how, [img("rose")],
+                      ["-write-mask", img("bilevel")] + how.split() + ["+write-mask"])
+        # A mask of exactly one half: `<= QuantumRange/2` against `<` differs only there.
+        yield _case("resize", "rose half write-mask %s" % how,
+                    [["-size", "70x46", "xc:gray(50%)", "mask.miff"],
+                     [img("rose"), "-write-mask", "mask.miff"] + how.split()
+                     + ["+write-mask"] + FLOAT_OUT + ["out.miff"]], ["out.miff"])
+        yield _op("resize", "rose -monitor %s" % how, [img("rose")],
+                  ["-monitor"] + how.split())
+
+
+# x/y factors of exactly 4 and 2, alone and with the other factor above:
+# each mutant flips one comparison of `x_factor > 4 && y_factor > 4`.
+def _thumbnail_cases():
+    for geo in ("17x11", "17x9", "14x11", "35x23", "35x15", "23x23", "18x12", "8x6", "69x45"):
+        yield _op("resize", "rose -thumbnail %s" % geo, [img("rose")], ["-thumbnail", geo])
+    for name in ("azAZ09", "rose"):  # Thumb::URI is url-encoded from the path
+        yield _case("resize", "%s -thumbnail to png" % name,
+                    [[img("rose"), name + ".miff"],
+                     [name + ".miff", "-thumbnail", "30x", "thumb.png"]], ["thumb.png"])
+
+
+def _filter_curve_cases(lists):
+    for f, extra in itertools.product(
+            _each(lists, "Filter"),
+            ([], ["-define", "filter:lobes=3"], ["-define", "filter:lobes=4"],
+             ["-define", "filter:support=1.5"], ["-define", "filter:blur=0.7"])):
+        yield _case("filter-curve", "%s %s" % (f, " ".join(extra)),
+                    [["rose:", "-filter", f] + extra
+                     + ["-define", "filter:verbose=1", "-resize", "150%", "null:"]], [])
+
+
+def _filter_define_cases():
+    for defs, how in itertools.product(
+            (["filter:filter=Sinc", "filter:window=Jinc"], ["filter:filter=Jinc"],
+             ["filter:window=Kaiser", "filter:kaiser-beta=4.5"],
+             ["filter:window=Kaiser", "filter:kaiser-alpha=3"],
+             ["filter:b=0.2", "filter:c=0.4"], ["filter:sigma=0.8"],
+             ["filter:win-support=3"], ["filter:alpha=2.5"], ["filter:support=0"],
+             ["filter:blur=0"], ["filter:lobes=0"], ["filter:support=20"]),
+            (["-resize", "140%"], ["+distort", "SRT", "0.7,10"])):
+        argv = [a for d in defs for a in ("-define", d)]
+        yield _op("resize", "rose %s %s" % (" ".join(defs), " ".join(how)),
+                  [img("rose")], argv + how)
+        yield _case("filter-curve", "%s %s" % (" ".join(defs), " ".join(how)),
+                    [["rose:"] + argv + ["-define", "filter:verbose=1"] + how
+                     + ["null:"]], [])
+
+
+# ---- draw primitives under several stroke/fill settings
+def _draw_cases():
+    for s, d in itertools.product(DRAW_SETTINGS, DRAW):
+        yield _op("draw", "%s -draw %s" % (s, d), [img("rose")],
+                  _fmt(s) + ["-font", "{C}/" + FONT, "-draw", d])
+
+
+def _text_cases():
+    for op, name in itertools.product(TEXT_OPS, ("rose", "rose_alpha")):
+        yield _op("text", "%s %s" % (name, op), [img(name)], _fmt(op))
+
+
+# ---- generators (no input image)
+def _generator_cases():
+    for g in GENERATORS:
+        yield _op("gen", g, [], _fmt(g))
+
+
+# ---- enumerated families
+def _colorspace_cases(lists):
+    for name, cs in itertools.product(FAMILY_INPUTS + ["hdri", "cmyk"],
+                                      _each(lists, "Colorspace")):
+        yield _op("colorspace", "%s -> %s" % (name, cs), [img(name)],
+                  ["-colorspace", cs])
+        yield _op("colorspace", "%s -> %s -> sRGB" % (name, cs), [img(name)],
+                  ["-colorspace", cs, "-colorspace", "sRGB"])
+
+
+def _compose_cases(lists):
+    for c in _each(lists, "Compose"):
+        yield from _compose_pair_cases(c)
+        for define in ("compose:sync=false", "compose:clamp=false"):
+            yield _op("compose", "rose_alpha %s %s hdri" % (c, define),
+                      [img("rose_alpha"), img("hdri")],
+                      ["-define", define, "-gravity", "center", "-compose", c,
+                       "-composite"])
+
+
+def _compose_pair_cases(c):
+    # HDRI on both sides: some operators clamp only the source, some only
+    # the destination.
+    for a, b in (("rose", "rose_alpha"), ("rose_alpha", "granite"), ("hdri", "gray16"),
+                 ("gray16", "hdri"), ("rose_alpha", "hdri")):
+        if c in DEST_WIDER_UNSTABLE and (a, b) == ("hdri", "gray16"):
+            continue
+        yield _op("compose", "%s %s %s" % (a, c, b), [img(a), img(b)],
+                  ["-gravity", "center", "-compose", c, "-composite"])
+
+
+_DISTORT_ARGS = {
+    "Affine": "0,0 5,5  60,0 55,10  0,40 10,45",
+    "AffineProjection": "1,0.2,0.1,1,3,4",
+    "ScaleRotateTranslate": "0.9 20",
+    "SRT": "0.9 20",
+    "Perspective": "0,0 3,4  69,0 60,5  0,45 8,40  69,45 66,42",
+    "PerspectiveProjection": "1.1,0.1,2,0.05,1,3,0.0005,0.001",
+    "BilinearForward": "0,0 3,4  69,0 60,5  0,45 8,40  69,45 66,42",
+    "BilinearReverse": "0,0 3,4  69,0 60,5  0,45 8,40  69,45 66,42",
+    "Polynomial": "2  0,0 1,1  69,0 65,4  0,45 3,41  69,45 60,40  35,23 33,22  10,30 12,28",
+    "Arc": "60", "Polar": "0", "DePolar": "0",
+    "Barrel": "0.0 0.0 -0.2 1.1", "BarrelInverse": "0.0 0.0 -0.1 1.0",
+    "Shepards": "10,10 15,12  50,30 45,25  30,40 30,40",
+    "Resize": "50x30", "Cylinder2Plane": "60", "Plane2Cylinder": "60",
+    "RigidAffine": "0,0 2,3  60,0 61,5  30,40 28,42",
+}
+
+
+def _distort_cases(lists):
+    for m, name, sign in itertools.product(_each(lists, "Distort"), ("rose", "rose_alpha"),
+                                           ("-", "+")):
+        yield _op("distort", "%s %sdistort %s" % (name, sign, m), [img(name)],
+                  [sign + "distort", m, _DISTORT_ARGS.get(m, "0.9 20")])
+
+
+def _filter_cases(lists):
+    for f, name, how in itertools.product(
+            _each(lists, "Filter"), ("rose", "gray16"),
+            (["-resize", "60%"], ["-resize", "150%"],
+             ["+distort", "SRT", "0.8,15"], ["-distort", "Resize", "140%"])):
+        yield _op("filter", "%s -filter %s %s" % (name, f, " ".join(how)),
+                  [img(name)], ["-filter", f] + how)
+
+
+def _interpolate_cases(lists):
+    for m, how in itertools.product(
+            _each(lists, "Interpolate"),
+            (["-filter", "point", "-distort", "SRT", "1.3,20"],
+             ["-interpolative-resize", "170%"], ["-fx", "p{i*0.7,j*0.6}"])):
+        yield _op("interpolate", "rose -interpolate %s %s" % (m, " ".join(how)),
+                  [img("rose")], ["-interpolate", m] + how)
+
+
+def _virtual_pixel_cases(lists):
+    for v, how in itertools.product(
+            _each(lists, "VirtualPixel"),
+            (["-distort", "SRT", "0.6,30"], ["-blur", "0x3"],
+             ["-define", "distort:viewport=100x80-15-15", "-distort", "SRT", "0"])):
+        yield _op("virtual-pixel", "rose_alpha -virtual-pixel %s %s" % (v, " ".join(how)),
+                  [img("rose_alpha")], ["-virtual-pixel", v] + how)
+
+
+def _morphology_cases(lists):
+    for m, k, name in itertools.product(_each(lists, "Morphology"), _each(lists, "Kernel"),
+                                        ("rose", "bilevel")):
+        yield _op("morphology", "%s -morphology %s %s" % (name, m, k),
+                  [img(name)], ["-morphology", m, k])
+
+
+def _evaluate_cases(lists):
+    for e in _each(lists, "Evaluate"):
+        yield from _evaluate_method_cases(e)
+
+
+def _evaluate_method_cases(e):
+    for v, name in itertools.product(("1.5", "30%"), ("rose", "hdri")):
+        yield _op("evaluate", "%s -evaluate %s %s" % (name, e, v), [img(name)],
+                  ["-evaluate", e, v])
+    if e not in ("LeftShift", "RightShift"):  # shift by pixel value: minutes per image
+        yield _op("evaluate-sequence", "seq -evaluate-sequence %s" % e, [img("seq")],
+                  ["-evaluate-sequence", e])
+
+
+def _statistic_cases(lists):
+    for s, g, name in itertools.product(_each(lists, "Statistic"), ("3x3", "5x2"),
+                                        ("rose", "gray16")):
+        yield _op("statistic", "%s -statistic %s %s" % (name, s, g), [img(name)],
+                  ["-statistic", s, g])
+
+
+def _noise_cases(lists):
+    for n, name in itertools.product(_each(lists, "Noise"), ("rose", "gray16")):
+        yield _op("noise", "%s +noise %s" % (name, n), [img(name)],
+                  ["-seed", "3", "-attenuate", "0.7", "+noise", n])
+
+
+def _dither_cases(lists):
+    for d, name in itertools.product(_each(lists, "Dither"), ("rose", "granite")):
+        yield _op("dither", "%s -dither %s -colors 8" % (name, d), [img(name)],
+                  ["-dither", d, "-colors", "8"])
+        yield _op("dither", "%s -dither %s -remap netscape:" % (name, d), [img(name)],
+                  ["-dither", d, "-remap", "netscape:"])
+
+
+def _layers_cases(lists):
+    for l, name in itertools.product(_each(lists, "Layers"), ("seq", "anim")):
+        yield _op("layers", "%s -layers %s" % (name, l), [img(name)], ["-layers", l])
+
+
+def _complex_cases(lists):
+    for c in _each(lists, "Complex"):
+        yield _op("complex", "rose rose_blur -complex %s" % c,
+                  [img("rose"), img("rose_blur")], ["-complex", c])
+
+
+def _intensity_cases(lists):
+    for i, name in itertools.product(_each(lists, "Intensity"), ("rose", "hdri")):
+        yield _op("intensity", "%s -grayscale %s" % (name, i), [img(name)],
+                  ["-grayscale", i])
+
+
+def _sparse_color_cases(lists):
+    for s in _each(lists, "SparseColor"):
+        yield _op("sparse-color", "rose -sparse-color %s" % s, [img("rose")],
+                  ["-sparse-color", s, "5,5 red  60,10 blue  30,40 green  10,40 yellow"])
+
+
+def _type_cases(lists):
+    for t, name in itertools.product(_each(lists, "Type"), ("rose", "rose_alpha")):
+        yield _op("type", "%s -type %s" % (name, t), [img(name)], ["-type", t])
+
+
+def _preview_cases(lists):
+    for p in _each(lists, "Preview"):
+        # a 9-frame montage; 8 bits keeps it small
+        yield _op_to("preview", "rose -preview %s" % p,
+                     [img("rose"), "-preview", p, "-font", "{C}/" + FONT, "-depth", "8"],
+                     "preview:out.miff")
+
+
+# ---- two-image and sequence operators
+def _multi_cases():
+    for op, names in TWO_IMAGE_OPS:
+        yield _op("multi", "%s %s" % (" ".join(names), op),
+                  [img(n) for n in names], _fmt(op))
+
+
+def _sequence_cases():
+    for op, name in itertools.product(SEQ_OPS, ("seq", "anim")):
+        yield _op("sequence", "%s %s" % (name, op), [img(name)], _fmt(op))
+
+
+# ---- compare, all metrics
+def _compare_cases(lists):
+    for m, (a, b, extra) in itertools.product(
+            _each(lists, "Metric"),
+            (("rose", "rose_blur", []), ("rose", "rose", []),
+             ("rose", "rose_blur", ["-fuzz", "5%"]),
+             ("rose_alpha", "rose", ["-highlight-color", "blue"]))):
+        steps = [["compare", "-metric", m] + extra + [img(a), img(b)] + FLOAT_OUT
+                 + ["diff.miff"]]
+        yield _case("compare", "%s %s %s %s" % (m, a, b, " ".join(extra)),
+                    steps, ["diff.miff"])
+        # Without -verbose only the combined metric is printed, so a
+        # change to one channel's value goes unseen; at default precision
+        # so does a change in the last digits.
+        steps = [["compare", "-verbose", "-precision", "17", "-metric", m] + extra
+                 + [img(a), img(b)] + FLOAT_OUT + ["diff.miff"]]
+        yield _case("compare", "verbose %s %s %s %s" % (m, a, b, " ".join(extra)),
+                    steps, ["diff.miff"])
+    yield _case("compare", "subimage-search",
+                [["compare", "-metric", "RMSE", "-subimage-search",
+                  img("rose"), "{C}/rose_patch.miff"] + FLOAT_OUT + ["diff.miff"]],
+                ["diff-0.miff", "diff-1.miff"])
+
+
+# ---- text output: -format escapes and identify
+def _text_output_cases():
+    for name in ("rose", "rose_alpha", "gray16", "cmyk", "palette", "hdri", "seq"):
+        yield from _text_output_image_cases(name)
+
+
+def _text_output_image_cases(name):
+    for f in TEXT_OUTPUTS:
+        yield _case("format", "%s %s" % (name, f),
+                    [[img(name), "-format", f + "\\n", "info:"]], [])
+        # Default precision prints 6 significant digits, which hides
+        # last-bit differences in every computed statistic.
+        yield _case("format", "%s -precision 17 %s" % (name, f),
+                    [[img(name), "-precision", "17", "-format", f + "\\n",
+                      "info:"]], [])
+    for f in FX_PRINT:
+        yield _case("fx-print", "%s %s" % (name, f),
+                    [[img(name), "-precision", "17", "-format", f + "\\n",
+                      "info:"]], [])
+    for argv in INFO_OPS:
+        yield _case("identify", "%s %s" % (name, " ".join(argv)),
+                    [argv + [img(name)]], [])
+
+
+# ---- montage
+def _montage_cases():
+    for op in MONTAGE_OPS:
+        yield _case("montage", op,
+                    [["montage"] + [img(n) for n in ("rose", "gray16", "palette", "granite")]
+                     + _fmt(op) + ["out.miff"]], ["out.miff"])
+
+
+# ---- encoders, with a decode of what was written
+def _encode_cases(writable_formats):
+    for f, variants in sorted(ENCODE_VARIANTS.items()):
+        if f in writable_formats:
+            yield from _encode_format_cases(f, variants)
+
+
+def _encode_format_cases(f, variants):
+    inputs = list(ENCODE_INPUTS) + (["seq"] if f in ENCODE_SEQ_FORMATS else [])
+    for v, name in itertools.product(variants, inputs):
+        yield _encode_case(f, v, name)
+
+
+def _encode_case(f, v, name):
+    enc = "enc.%s" % f
+    steps = [[img(name)] + v + ["%s:%s" % (f, enc)]]
+    outputs = [enc]
+    if f not in ENCODE_ONLY:
+        raw = ["-size", "{W:%s}x{H:%s}" % (name, name), "-depth",
+               "{D:%s}" % name] if f in RAW_ENCODE else []
+        steps.append(raw + ["%s:%s" % (f, enc)] + FLOAT_OUT + ["dec.miff"])
+        outputs.append("dec.miff")
+    return _case("encode", "%s %s -> %s" % (name, " ".join(v), f), steps, outputs)
+
+
+# ---- raw formats at every depth and as floating point (quantum-export.c,
+# quantum-import.c)
+def _raw_cases(writable_formats):
+    for f in ("rgb", "rgba", "gray", "cmyk", "cmyka", "bgr", "bgra", "rgbo", "ycbcr", "a",
+              "r", "g", "b", "k", "o", "c", "m", "y"):
+        if f in writable_formats:
+            yield from _raw_format_cases(f)
+
+
+def _raw_format_cases(f):
+    for (depth, extra), name in itertools.product(
+            (("1", []), ("4", []), ("12", []), ("16", []), ("32", []),
+             ("16", ["-define", "quantum:format=floating-point"]),
+             ("32", ["-define", "quantum:format=floating-point"]),
+             ("64", ["-define", "quantum:format=floating-point"]),
+             ("16", ["-endian", "MSB"]), ("8", ["-interlace", "plane"]),
+             ("8", ["-interlace", "line"])),
+            ("rose_alpha", "hdri")):
+        enc = "enc.%s" % f
+        steps = [[img(name), "-depth", depth] + extra + ["%s:%s" % (f, enc)],
+                 ["-size", "{W:%s}x{H:%s}" % (name, name), "-depth", depth] + extra
+                 + ["%s:%s" % (f, enc)] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("raw", "%s -depth %s %s -> %s" % (name, depth, " ".join(extra), f),
+                    steps, [enc, "dec.miff"])
+
+
+# ---- decoders over the frozen reader corpus
+# Raw decode files, read with an explicit format prefix.
+_RAW_DECODE_SUFFIXES = (".cmyk", ".gray", ".rgba", ".rgb", ".uyvy", ".yuv")
+
+
+def _decode_cases(lists):
+    for fname in lists.get("__decode_files__", []):
+        base = fname.rsplit("/", 1)[-1]
+        if not base.lower().endswith(EXTERNAL_DECODE):
+            yield from _decode_file_cases(fname, base)
+
+
+def _decode_file_cases(fname, base):
+    pre = RAW_DECODE.get(base, [])
+    spec = "{C}/files/" + fname
+    if base.endswith(_RAW_DECODE_SUFFIXES):
+        spec = base.rsplit(".", 1)[1] + ":" + spec
+    yield _case("decode", fname, [pre + [spec] + FLOAT_OUT + ["dec.miff"]], ["dec.miff"])
+    yield _case("decode", "identify -verbose " + fname,
+                [["identify", "-verbose"] + pre + [spec]], [])
+
+
+# ---- infrastructure: how the work is done rather than what it computes.
+# Mutation testing found blob.c, cache.c, image.c, property.c and option.c
+# the least protected code the oracle reaches (docs/refactoring/MUTATION.md):
+# small images read from plain files never take their other paths.
+# The pixel cache on disk, and memory-mapped.
+def _infra_cache_cases():
+    for tag, limits in (("disk", ["-limit", "memory", "0", "-limit", "map", "0"]),
+                        ("map", ["-limit", "memory", "0"])):
+        for op in ("-resize 150%", "-blur 0x1", "-rotate 30", "-flop", "-colorspace Lab",
+                   "-distort SRT 20", "-morphology Dilate Disk:1", "-crop 30x20+10+10 +repage"):
+            yield _op("infra", "%s cache rose %s" % (tag, op), limits + [img("rose")],
+                      op.split())
+        yield _op("infra", "%s cache seq -append" % tag, limits + [img("seq")],
+                  ["-append"])
+        yield _op("infra", "%s cache rose clone composite" % tag,
+                  limits + [img("rose")], ["(", "+clone", "-negate", ")", "-composite"])
+
+
+# Compressed streams and in-memory blobs (blob.c, registry.c).
+def _infra_blob_cases():
+    for ext in ("gz", "bz2"):
+        yield _case("infra", "blob %s round trip" % ext,
+                    [[img("rose"), "out.miff." + ext],
+                     ["out.miff." + ext] + FLOAT_OUT + ["dec.miff"]],
+                    ["out.miff." + ext, "dec.miff"])
+    for fmt in ("png", "miff", "ppm", "gif", "tiff"):
+        yield _case("infra", "stdout " + fmt, [[img("rose"), fmt + ":-"]], [])
+    for fmt in ("", "miff:", "ppm:"):
+        src = "{C}/rose.miff" if fmt != "ppm:" else "{C}/files/PerlMagick/t/MasterImage_70x46.ppm"
+        yield _with_inputs(_case("infra", "stdin %s-" % fmt,
+                                 [[fmt + "-"] + FLOAT_OUT + ["out.miff"]], ["out.miff"]),
+                           stdin=src)
+    yield _op("infra", "mpr registry", [img("rose")],
+              ["-write", "mpr:a", "+delete", "mpr:a", "-negate", "mpr:a", "-append"])
+    yield _case("infra", "write mid-pipeline",
+                [[img("rose"), "-write", "mid.miff", "-negate"] + FLOAT_OUT + ["out.miff"]],
+                ["mid.miff", "out.miff"])
+    yield _op("infra", "inline data URI",
+              ["inline:data:image/gif;base64,"
+               "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"], [])
+
+
+# Filename syntax (image.c, option.c): frames, crops and sizes on read,
+# explicit formats, lists, scene numbering, filename escapes.
+def _infra_filename_cases():
+    for spec in ("seq.miff[0]", "seq.miff[1-2]", "seq.miff[2,0]", "seq.miff[-1]",
+                 "rose.miff[20x20+5+5]", "rose.miff[50%]", "rose.miff[30x20]", "rose.miff[1]",
+                 "anim.miff[0--1]"):
+        yield _op("infra", "read " + spec, ["{C}/" + spec], [])
+    yield _op_to("infra", "explicit format prefix", ["miff:{C}/rose.miff"] + FLOAT_OUT,
+                 "png:out.dat")
+    yield _with_inputs(_case("infra", "@list of files",
+                             [["@list.txt", "-append"] + FLOAT_OUT + ["out.miff"]],
+                             ["out.miff"]),
+                       files={"list.txt": "{C}/rose.miff\n{C}/granite.miff\n"})
+    yield _case("infra", "+adjoin scene numbering",
+                [[img("seq"), "-scene", "5", "+adjoin", "out-%02d.miff"]], [])
+    yield _case("infra", "filename escape",
+                [[img("rose"), "-set", "filename:dims", "%wx%h",
+                  "out-%[filename:dims].miff"]], [])
+
+
+# Properties, options and artifacts (property.c, option.c).
+def _infra_property_cases():
+    yield _case("infra", "set and read properties",
+                [[img("rose"), "-set", "label", "Hello", "-set", "comment", "World",
+                  "-set", "Title", "A title", "-define", "myopt=1",
+                  "-set", "option:myopt2", "x", "-format",
+                  "%[label]|%[comment]|%[Title]|%[property:Title]|%[option:myopt]|"
+                  "%[myopt]|%[option:myopt2]|%l|%c\n", "info:"]], [])
+    yield _case("infra", "list every property",
+                [[img("rose"), "-set", "comment", "x", "-format", "%[*]\n", "info:"]], [])
+    yield _case("infra", "comment and label settings",
+                [["-comment", "%wx%h %m", "-label", "%f", img("rose"), "-format",
+                  "%c|%l\n", "info:"]], [])
+
+
+# ---- cipher.c: -encipher then -decipher, a round trip
+def _cipher_cases():
+    for name in ("rose", "rose_alpha", "gray16"):
+        yield _with_inputs(
+            _case("cipher", "encipher " + name,
+                  [[img(name), "-encipher", "pass.txt", "enc.miff"],
+                   ["enc.miff", "-decipher", "pass.txt"] + FLOAT_OUT + ["dec.miff"]],
+                  ["enc.miff", "dec.miff"]),
+            files={"pass.txt": "A refactoring changes no behaviour.\n"})
+
+
+# ---- version.c and the -list printers of the infrastructure files
+def _info_cases():
+    yield _case("info", "version", [["-version"]], [])
+    for name in ("configure", "mime", "policy", "log", "locale", "type", "font", "delegate",
+                 "coder", "magic", "resource", "format"):
+        yield _case("info", "list " + name, [["-list", name]], [])
+
+
+# ---- MVG and SVG through the internal renderer
+def _mvg_cases():
+    for mvg in ("draw.mvg",):
+        yield _case("mvg", mvg, [["mvg:{C}/" + mvg] + FLOAT_OUT + ["out.miff"]],
+                    ["out.miff"])
+        yield _case("mvg", "svg-out " + mvg,
+                    [["{C}/%s" % mvg.replace(".mvg", ".svg")] + FLOAT_OUT + ["out.miff"]],
+                    ["out.miff"])
+
+
+def _unique(cases):
+    """Identical argv from different families: keep the first."""
+    seen, unique = set(), []
+    for c in cases:
+        if c["id"] not in seen:
+            seen.add(c["id"])
+            unique.append(c)
+    return unique
 
 
 def generate(lists, writable_formats):
     """All cases. `lists` maps an option list name to its values
     (`magick -list <name>`); `writable_formats` is the set of lowercase
     format names this build can write."""
-    cases = []
-    fmt = lambda s: _split(s.replace("{FONT}", "{C}/" + FONT))
-
-    # ---- unary operators over the full single-frame input set
-    for name in UNARY_INPUTS:
-        for op in UNARY_OPS:
-            cases.append(_op("unary", "%s %s" % (name, op), [img(name)], fmt(op)))
-
-    # ---- the same operators through the legacy front end. `magick <args>`
-    # parses with MagickWand/operation.c; `convert` and `mogrify` go through
-    # MagickWand/mogrify.c, a separate implementation of every option.
-    for name in ("rose", "rose_alpha"):
-        for op in UNARY_OPS:
-            cases.append(_case("convert", "convert %s %s" % (name, op),
-                               [["convert", img(name)] + fmt(op) + FLOAT_OUT + ["out.miff"]],
-                               ["out.miff"]))
-    for op in UNARY_OPS:
-        if not op:
-            continue
-        cases.append(_case("mogrify", "mogrify rose %s" % op,
-                           [[img("rose"), "work.miff"],
-                            ["mogrify"] + fmt(op) + FLOAT_OUT + ["work.miff"]], ["work.miff"]))
-
-    # ---- stream: pixel export by map and storage type (stream.c, pixel.c)
-    for name in ("rose", "rose_alpha", "cmyk", "hdri"):
-        for m in ("rgb", "rgba", "bgr", "i", "cmyk", "rgbp", "a"):
-            for t in ("char", "short", "long", "longlong", "float", "double", "quantum"):
-                cases.append(_case("stream", "stream %s -map %s -storage-type %s" % (name, m, t),
-                                   [["stream", "-map", m, "-storage-type", t, img(name),
-                                     "out.raw"]], ["out.raw"]))
-        cases.append(_case("stream", "stream %s -extract" % name,
-                           [["stream", "-map", "rgb", "-storage-type", "char", "-extract",
-                             "20x10+5+5", img(name), "out.raw"]], ["out.raw"]))
-
-    # ---- resize.c paths that the generated families miss, found by mutation
-    # testing (docs/refactoring/MUTATION.md): magnify methods, one-dimensional
-    # scaling, write masks, progress monitoring, exact thumbnail factors, and
-    # the filter:* defines.
-    for method in ("eagle2x", "eagle3x", "eagle3xb", "epbx2x", "fish2x", "hq2x",
-                   "scale2x", "scale3x", "xbr2x"):
-        for name in ("rose", "palette", "rose_alpha", "tiny"):
-            cases.append(_op("resize", "%s magnify %s" % (name, method), [img(name)],
-                             ["-define", "magnify:method=" + method, "-magnify"]))
-    # Support exactly 0.5 (Box and Point, enlarging): decides the storage class,
-    # which only shows on a palette image.
-    for f in ("Box", "Point", "Triangle"):
-        for geo in ("150%", "150x100%", "100x150%", "60%"):
-            cases.append(_op("resize", "palette -filter %s -resize %s" % (f, geo),
-                             [img("palette")], ["-filter", f, "-resize", geo]))
-            cases.append(_case("resize", "palette -filter %s -resize %s class" % (f, geo),
-                               [[img("palette"), "-filter", f, "-resize", geo, "-format",
-                                 "%r %k\\n", "info:"]], []))
-    for name in ("rose", "rose_alpha", "tiny"):  # no CLI option; MSL reaches MinifyImage
-        cases.append(_case("resize", "%s msl minify" % name, [["conjure", "msl:minify.msl"]], ["out.miff"],
-                           files={"minify.msl": MSL_TEMPLATE % (img(name), "<minify />")}))
-    for op in MSL_OPS:
-        cases.append(_case("msl", op, [["conjure", "msl:script.msl"]], ["out.miff"],
-                           files={"script.msl": MSL_TEMPLATE % (img("rose"), op)}))
-    for how in ("-scale", "-sample", "-resize", "-adaptive-resize", "-interpolative-resize"):
-        for geo in ("150x100%", "100x60%", "70x13!", "9x46!", "100%"):
-            for name in ("rose", "rose_alpha"):
-                cases.append(_op("resize", "%s %s %s" % (name, how, geo), [img(name)],
-                                 [how, geo]))
-    for how in ("-scale 150%", "-sample 60%", "-resize 150%", "-resize 40%", "-scale 50%",
-                "-scale 150x100%"):
-        if how not in WRITE_MASK_UNSTABLE:
-            cases.append(_op("resize", "rose write-mask %s" % how, [img("rose")],
-                             ["-write-mask", img("bilevel")] + how.split() + ["+write-mask"]))
-        # A mask of exactly one half: `<= QuantumRange/2` against `<` differs only there.
-        cases.append(_case("resize", "rose half write-mask %s" % how,
-                           [["-size", "70x46", "xc:gray(50%)", "mask.miff"],
-                            [img("rose"), "-write-mask", "mask.miff"] + how.split()
-                            + ["+write-mask"] + FLOAT_OUT + ["out.miff"]], ["out.miff"]))
-        cases.append(_op("resize", "rose -monitor %s" % how, [img("rose")],
-                         ["-monitor"] + how.split()))
-    # x/y factors of exactly 4 and 2, alone and with the other factor above:
-    # each mutant flips one comparison of `x_factor > 4 && y_factor > 4`.
-    for geo in ("17x11", "17x9", "14x11", "35x23", "35x15", "23x23", "18x12", "8x6", "69x45"):
-        cases.append(_op("resize", "rose -thumbnail %s" % geo, [img("rose")], ["-thumbnail", geo]))
-    for name in ("azAZ09", "rose"):  # Thumb::URI is url-encoded from the path
-        cases.append(_case("resize", "%s -thumbnail to png" % name,
-                           [[img("rose"), name + ".miff"],
-                            [name + ".miff", "-thumbnail", "30x", "thumb.png"]], ["thumb.png"]))
-    for f in [v for v in lists.get("Filter", []) if v.lower() != "undefined"]:
-        for extra in ([], ["-define", "filter:lobes=3"], ["-define", "filter:lobes=4"],
-                      ["-define", "filter:support=1.5"], ["-define", "filter:blur=0.7"]):
-            cases.append(_case("filter-curve", "%s %s" % (f, " ".join(extra)),
-                               [["rose:", "-filter", f] + extra
-                                + ["-define", "filter:verbose=1", "-resize", "150%", "null:"]], []))
-    for defs in (["filter:filter=Sinc", "filter:window=Jinc"], ["filter:filter=Jinc"],
-                 ["filter:window=Kaiser", "filter:kaiser-beta=4.5"],
-                 ["filter:window=Kaiser", "filter:kaiser-alpha=3"],
-                 ["filter:b=0.2", "filter:c=0.4"], ["filter:sigma=0.8"],
-                 ["filter:win-support=3"], ["filter:alpha=2.5"], ["filter:support=0"],
-                 ["filter:blur=0"], ["filter:lobes=0"], ["filter:support=20"]):
-        argv = []
-        for d in defs:
-            argv += ["-define", d]
-        for how in (["-resize", "140%"], ["+distort", "SRT", "0.7,10"]):
-            cases.append(_op("resize", "rose %s %s" % (" ".join(defs), " ".join(how)),
-                             [img("rose")], argv + how))
-            cases.append(_case("filter-curve", "%s %s" % (" ".join(defs), " ".join(how)),
-                               [["rose:"] + argv + ["-define", "filter:verbose=1"] + how
-                                + ["null:"]], []))
-
-    # ---- draw primitives under several stroke/fill settings
-    for s in DRAW_SETTINGS:
-        for d in DRAW:
-            cases.append(_op("draw", "%s -draw %s" % (s, d), [img("rose")],
-                             fmt(s) + ["-font", "{C}/" + FONT, "-draw", d]))
-    for op in TEXT_OPS:
-        for name in ("rose", "rose_alpha"):
-            cases.append(_op("text", "%s %s" % (name, op), [img(name)], fmt(op)))
-
-    # ---- generators (no input image)
-    for g in GENERATORS:
-        cases.append(_op("gen", g, [], fmt(g)))
-
-    # ---- enumerated families
-    def each(listname):
-        return [v for v in lists.get(listname, []) if v.lower() != "undefined"]
-
-    for name in FAMILY_INPUTS + ["hdri", "cmyk"]:
-        for cs in each("Colorspace"):
-            cases.append(_op("colorspace", "%s -> %s" % (name, cs), [img(name)],
-                             ["-colorspace", cs]))
-            cases.append(_op("colorspace", "%s -> %s -> sRGB" % (name, cs), [img(name)],
-                             ["-colorspace", cs, "-colorspace", "sRGB"]))
-    for c in each("Compose"):
-        # HDRI on both sides: some operators clamp only the source, some only
-        # the destination.
-        for a, b in (("rose", "rose_alpha"), ("rose_alpha", "granite"), ("hdri", "gray16"),
-                     ("gray16", "hdri"), ("rose_alpha", "hdri")):
-            if c in DEST_WIDER_UNSTABLE and (a, b) == ("hdri", "gray16"):
-                continue
-            cases.append(_op("compose", "%s %s %s" % (a, c, b), [img(a), img(b)],
-                             ["-gravity", "center", "-compose", c, "-composite"]))
-        for define in ("compose:sync=false", "compose:clamp=false"):
-            cases.append(_op("compose", "rose_alpha %s %s hdri" % (c, define),
-                             [img("rose_alpha"), img("hdri")],
-                             ["-define", define, "-gravity", "center", "-compose", c,
-                              "-composite"]))
-    distort_args = {
-        "Affine": "0,0 5,5  60,0 55,10  0,40 10,45",
-        "AffineProjection": "1,0.2,0.1,1,3,4",
-        "ScaleRotateTranslate": "0.9 20",
-        "SRT": "0.9 20",
-        "Perspective": "0,0 3,4  69,0 60,5  0,45 8,40  69,45 66,42",
-        "PerspectiveProjection": "1.1,0.1,2,0.05,1,3,0.0005,0.001",
-        "BilinearForward": "0,0 3,4  69,0 60,5  0,45 8,40  69,45 66,42",
-        "BilinearReverse": "0,0 3,4  69,0 60,5  0,45 8,40  69,45 66,42",
-        "Polynomial": "2  0,0 1,1  69,0 65,4  0,45 3,41  69,45 60,40  35,23 33,22  10,30 12,28",
-        "Arc": "60", "Polar": "0", "DePolar": "0",
-        "Barrel": "0.0 0.0 -0.2 1.1", "BarrelInverse": "0.0 0.0 -0.1 1.0",
-        "Shepards": "10,10 15,12  50,30 45,25  30,40 30,40",
-        "Resize": "50x30", "Cylinder2Plane": "60", "Plane2Cylinder": "60",
-        "RigidAffine": "0,0 2,3  60,0 61,5  30,40 28,42",
-    }
-    for m in each("Distort"):
-        args = distort_args.get(m, "0.9 20")
-        for name in ("rose", "rose_alpha"):
-            for sign in ("-", "+"):
-                cases.append(_op("distort", "%s %sdistort %s" % (name, sign, m), [img(name)],
-                                 [sign + "distort", m, args]))
-    for f in each("Filter"):
-        for name in ("rose", "gray16"):
-            for how in (["-resize", "60%"], ["-resize", "150%"],
-                        ["+distort", "SRT", "0.8,15"], ["-distort", "Resize", "140%"]):
-                cases.append(_op("filter", "%s -filter %s %s" % (name, f, " ".join(how)),
-                                 [img(name)], ["-filter", f] + how))
-    for m in each("Interpolate"):
-        for how in (["-filter", "point", "-distort", "SRT", "1.3,20"],
-                    ["-interpolative-resize", "170%"], ["-fx", "p{i*0.7,j*0.6}"]):
-            cases.append(_op("interpolate", "rose -interpolate %s %s" % (m, " ".join(how)),
-                             [img("rose")], ["-interpolate", m] + how))
-    for v in each("VirtualPixel"):
-        for how in (["-distort", "SRT", "0.6,30"], ["-blur", "0x3"],
-                    ["-define", "distort:viewport=100x80-15-15", "-distort", "SRT", "0"]):
-            cases.append(_op("virtual-pixel", "rose_alpha -virtual-pixel %s %s" % (v, " ".join(how)),
-                             [img("rose_alpha")], ["-virtual-pixel", v] + how))
-    kernels = each("Kernel")
-    for m in each("Morphology"):
-        for k in kernels:
-            for name in ("rose", "bilevel"):
-                cases.append(_op("morphology", "%s -morphology %s %s" % (name, m, k),
-                                 [img(name)], ["-morphology", m, k]))
-    for e in each("Evaluate"):
-        for v in ("1.5", "30%"):
-            for name in ("rose", "hdri"):
-                cases.append(_op("evaluate", "%s -evaluate %s %s" % (name, e, v), [img(name)],
-                                 ["-evaluate", e, v]))
-        if e not in ("LeftShift", "RightShift"):  # shift by pixel value: minutes per image
-            cases.append(_op("evaluate-sequence", "seq -evaluate-sequence %s" % e, [img("seq")],
-                             ["-evaluate-sequence", e]))
-    for s in each("Statistic"):
-        for g in ("3x3", "5x2"):
-            for name in ("rose", "gray16"):
-                cases.append(_op("statistic", "%s -statistic %s %s" % (name, s, g), [img(name)],
-                                 ["-statistic", s, g]))
-    for n in each("Noise"):
-        for name in ("rose", "gray16"):
-            cases.append(_op("noise", "%s +noise %s" % (name, n), [img(name)],
-                             ["-seed", "3", "-attenuate", "0.7", "+noise", n]))
-    for d in each("Dither"):
-        for name in ("rose", "granite"):
-            cases.append(_op("dither", "%s -dither %s -colors 8" % (name, d), [img(name)],
-                             ["-dither", d, "-colors", "8"]))
-            cases.append(_op("dither", "%s -dither %s -remap netscape:" % (name, d), [img(name)],
-                             ["-dither", d, "-remap", "netscape:"]))
-    for l in each("Layers"):
-        for name in ("seq", "anim"):
-            cases.append(_op("layers", "%s -layers %s" % (name, l), [img(name)],
-                             ["-layers", l]))
-    for c in each("Complex"):
-        cases.append(_op("complex", "rose rose_blur -complex %s" % c,
-                         [img("rose"), img("rose_blur")], ["-complex", c]))
-    for i in each("Intensity"):
-        for name in ("rose", "hdri"):
-            cases.append(_op("intensity", "%s -grayscale %s" % (name, i), [img(name)],
-                             ["-grayscale", i]))
-    for s in each("SparseColor"):
-        cases.append(_op("sparse-color", "rose -sparse-color %s" % s, [img("rose")],
-                         ["-sparse-color", s, "5,5 red  60,10 blue  30,40 green  10,40 yellow"]))
-    for t in each("Type"):
-        for name in ("rose", "rose_alpha"):
-            cases.append(_op("type", "%s -type %s" % (name, t), [img(name)], ["-type", t]))
-    for p in each("Preview"):
-        cases.append(_op("preview", "rose -preview %s" % p, [img("rose")],
-                         ["-preview", p, "-font", "{C}/" + FONT], post=["-depth", "8"],
-                         out="preview:out.miff"))  # a 9-frame montage; 8 bits keeps it small
-
-    # ---- two-image and sequence operators
-    for op, names in TWO_IMAGE_OPS:
-        cases.append(_op("multi", "%s %s" % (" ".join(names), op),
-                         [img(n) for n in names], fmt(op)))
-    for op in SEQ_OPS:
-        for name in ("seq", "anim"):
-            cases.append(_op("sequence", "%s %s" % (name, op), [img(name)], fmt(op)))
-
-    # ---- compare, all metrics
-    for m in each("Metric"):
-        for a, b, extra in (("rose", "rose_blur", []), ("rose", "rose", []),
-                            ("rose", "rose_blur", ["-fuzz", "5%"]),
-                            ("rose_alpha", "rose", ["-highlight-color", "blue"])):
-            steps = [["compare", "-metric", m] + extra + [img(a), img(b)] + FLOAT_OUT
-                     + ["diff.miff"]]
-            cases.append(_case("compare", "%s %s %s %s" % (m, a, b, " ".join(extra)),
-                               steps, ["diff.miff"]))
-            # Without -verbose only the combined metric is printed, so a
-            # change to one channel's value goes unseen; at default precision
-            # so does a change in the last digits.
-            steps = [["compare", "-verbose", "-precision", "17", "-metric", m] + extra
-                     + [img(a), img(b)] + FLOAT_OUT + ["diff.miff"]]
-            cases.append(_case("compare", "verbose %s %s %s %s" % (m, a, b, " ".join(extra)),
-                               steps, ["diff.miff"]))
-    cases.append(_case("compare", "subimage-search",
-                       [["compare", "-metric", "RMSE", "-subimage-search",
-                         img("rose"), "{C}/rose_patch.miff"] + FLOAT_OUT + ["diff.miff"]],
-                       ["diff-0.miff", "diff-1.miff"]))
-
-    # ---- text output: -format escapes and identify
-    for name in ("rose", "rose_alpha", "gray16", "cmyk", "palette", "hdri", "seq"):
-        for f in TEXT_OUTPUTS:
-            cases.append(_case("format", "%s %s" % (name, f),
-                               [[img(name), "-format", f + "\\n", "info:"]], []))
-            # Default precision prints 6 significant digits, which hides
-            # last-bit differences in every computed statistic.
-            cases.append(_case("format", "%s -precision 17 %s" % (name, f),
-                               [[img(name), "-precision", "17", "-format", f + "\\n",
-                                 "info:"]], []))
-        for f in FX_PRINT:
-            cases.append(_case("fx-print", "%s %s" % (name, f),
-                               [[img(name), "-precision", "17", "-format", f + "\\n",
-                                 "info:"]], []))
-        for argv in INFO_OPS:
-            cases.append(_case("identify", "%s %s" % (name, " ".join(argv)),
-                               [argv + [img(name)]], []))
-
-    # ---- montage
-    for op in MONTAGE_OPS:
-        cases.append(_case("montage", op,
-                           [["montage"] + [img(n) for n in ("rose", "gray16", "palette", "granite")]
-                            + fmt(op) + ["out.miff"]], ["out.miff"]))
-
-    # ---- encoders, with a decode of what was written
-    for f, variants in sorted(ENCODE_VARIANTS.items()):
-        if f not in writable_formats:
-            continue
-        inputs = list(ENCODE_INPUTS) + (["seq"] if f in ENCODE_SEQ_FORMATS else [])
-        for v in variants:
-            for name in inputs:
-                enc = "enc.%s" % f
-                steps = [[img(name)] + v + ["%s:%s" % (f, enc)]]
-                outputs = [enc]
-                if f not in ENCODE_ONLY:
-                    raw = ["-size", "{W:%s}x{H:%s}" % (name, name), "-depth",
-                           "{D:%s}" % name] if f in RAW_ENCODE else []
-                    steps.append(raw + ["%s:%s" % (f, enc)] + FLOAT_OUT + ["dec.miff"])
-                    outputs.append("dec.miff")
-                cases.append(_case("encode", "%s %s -> %s" % (name, " ".join(v), f),
-                                   steps, outputs))
-
-    # ---- raw formats at every depth and as floating point (quantum-export.c,
-    # quantum-import.c)
-    for f in ("rgb", "rgba", "gray", "cmyk", "cmyka", "bgr", "bgra", "rgbo", "ycbcr", "a",
-              "r", "g", "b", "k", "o", "c", "m", "y"):
-        if f not in writable_formats:
-            continue
-        for depth, extra in (("1", []), ("4", []), ("12", []), ("16", []), ("32", []),
-                             ("16", ["-define", "quantum:format=floating-point"]),
-                             ("32", ["-define", "quantum:format=floating-point"]),
-                             ("64", ["-define", "quantum:format=floating-point"]),
-                             ("16", ["-endian", "MSB"]), ("8", ["-interlace", "plane"]),
-                             ("8", ["-interlace", "line"])):
-            for name in ("rose_alpha", "hdri"):
-                enc = "enc.%s" % f
-                steps = [[img(name), "-depth", depth] + extra + ["%s:%s" % (f, enc)],
-                         ["-size", "{W:%s}x{H:%s}" % (name, name), "-depth", depth] + extra
-                         + ["%s:%s" % (f, enc)] + FLOAT_OUT + ["dec.miff"]]
-                cases.append(_case("raw", "%s -depth %s %s -> %s" % (name, depth, " ".join(extra), f),
-                                   steps, [enc, "dec.miff"]))
-
-    # ---- decoders over the frozen reader corpus
-    for fname in lists.get("__decode_files__", []):
-        base = fname.rsplit("/", 1)[-1]
-        if base.lower().endswith(EXTERNAL_DECODE):
-            continue
-        pre = RAW_DECODE.get(base, [])
-        spec = "{C}/files/" + fname
-        if base.endswith(".cmyk") or base.endswith(".gray") or base.endswith(".rgba") \
-                or base.endswith(".rgb") or base.endswith(".uyvy") or base.endswith(".yuv"):
-            spec = base.rsplit(".", 1)[1] + ":" + spec
-        cases.append(_case("decode", fname, [pre + [spec] + FLOAT_OUT + ["dec.miff"]],
-                           ["dec.miff"]))
-        cases.append(_case("decode", "identify -verbose " + fname,
-                           [["identify", "-verbose"] + pre + [spec]], []))
-
-    # ---- infrastructure: how the work is done rather than what it computes.
-    # Mutation testing found blob.c, cache.c, image.c, property.c and option.c
-    # the least protected code the oracle reaches (docs/refactoring/MUTATION.md):
-    # small images read from plain files never take their other paths.
-    # The pixel cache on disk, and memory-mapped.
-    for tag, limits in (("disk", ["-limit", "memory", "0", "-limit", "map", "0"]),
-                        ("map", ["-limit", "memory", "0"])):
-        for op in ("-resize 150%", "-blur 0x1", "-rotate 30", "-flop", "-colorspace Lab",
-                   "-distort SRT 20", "-morphology Dilate Disk:1", "-crop 30x20+10+10 +repage"):
-            cases.append(_op("infra", "%s cache rose %s" % (tag, op), limits + [img("rose")],
-                             op.split()))
-        cases.append(_op("infra", "%s cache seq -append" % tag, limits + [img("seq")],
-                         ["-append"]))
-        cases.append(_op("infra", "%s cache rose clone composite" % tag,
-                         limits + [img("rose")], ["(", "+clone", "-negate", ")", "-composite"]))
-    # Compressed streams and in-memory blobs (blob.c, registry.c).
-    for ext in ("gz", "bz2"):
-        cases.append(_case("infra", "blob %s round trip" % ext,
-                           [[img("rose"), "out.miff." + ext],
-                            ["out.miff." + ext] + FLOAT_OUT + ["dec.miff"]],
-                           ["out.miff." + ext, "dec.miff"]))
-    for fmt in ("png", "miff", "ppm", "gif", "tiff"):
-        cases.append(_case("infra", "stdout " + fmt, [[img("rose"), fmt + ":-"]], []))
-    for fmt in ("", "miff:", "ppm:"):
-        src = "{C}/rose.miff" if fmt != "ppm:" else "{C}/files/PerlMagick/t/MasterImage_70x46.ppm"
-        cases.append(_case("infra", "stdin %s-" % fmt, [[fmt + "-"] + FLOAT_OUT + ["out.miff"]],
-                           ["out.miff"], stdin=src))
-    cases.append(_op("infra", "mpr registry", [img("rose")],
-                     ["-write", "mpr:a", "+delete", "mpr:a", "-negate", "mpr:a", "-append"]))
-    cases.append(_case("infra", "write mid-pipeline",
-                       [[img("rose"), "-write", "mid.miff", "-negate"] + FLOAT_OUT + ["out.miff"]],
-                       ["mid.miff", "out.miff"]))
-    cases.append(_op("infra", "inline data URI",
-                     ["inline:data:image/gif;base64,"
-                      "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"], []))
-    # Filename syntax (image.c, option.c): frames, crops and sizes on read,
-    # explicit formats, lists, scene numbering, filename escapes.
-    for spec in ("seq.miff[0]", "seq.miff[1-2]", "seq.miff[2,0]", "seq.miff[-1]",
-                 "rose.miff[20x20+5+5]", "rose.miff[50%]", "rose.miff[30x20]", "rose.miff[1]",
-                 "anim.miff[0--1]"):
-        cases.append(_op("infra", "read " + spec, ["{C}/" + spec], []))
-    cases.append(_op("infra", "explicit format prefix", ["miff:{C}/rose.miff"], [],
-                     out="png:out.dat"))
-    cases.append(_case("infra", "@list of files", [["@list.txt", "-append"] + FLOAT_OUT
-                                                     + ["out.miff"]], ["out.miff"],
-                       files={"list.txt": "{C}/rose.miff\n{C}/granite.miff\n"}))
-    cases.append(_case("infra", "+adjoin scene numbering",
-                       [[img("seq"), "-scene", "5", "+adjoin", "out-%02d.miff"]], []))
-    cases.append(_case("infra", "filename escape",
-                       [[img("rose"), "-set", "filename:dims", "%wx%h",
-                         "out-%[filename:dims].miff"]], []))
-    # Properties, options and artifacts (property.c, option.c).
-    cases.append(_case("infra", "set and read properties",
-                       [[img("rose"), "-set", "label", "Hello", "-set", "comment", "World",
-                         "-set", "Title", "A title", "-define", "myopt=1",
-                         "-set", "option:myopt2", "x", "-format",
-                         "%[label]|%[comment]|%[Title]|%[property:Title]|%[option:myopt]|"
-                         "%[myopt]|%[option:myopt2]|%l|%c\n", "info:"]], []))
-    cases.append(_case("infra", "list every property",
-                       [[img("rose"), "-set", "comment", "x", "-format", "%[*]\n", "info:"]], []))
-    cases.append(_case("infra", "comment and label settings",
-                       [["-comment", "%wx%h %m", "-label", "%f", img("rose"), "-format",
-                         "%c|%l\n", "info:"]], []))
-
-    # ---- cipher.c: -encipher then -decipher, a round trip
-    for name in ("rose", "rose_alpha", "gray16"):
-        cases.append(_case("cipher", "encipher " + name,
-                           [[img(name), "-encipher", "pass.txt", "enc.miff"],
-                            ["enc.miff", "-decipher", "pass.txt"] + FLOAT_OUT + ["dec.miff"]],
-                           ["enc.miff", "dec.miff"],
-                           files={"pass.txt": "A refactoring changes no behaviour.\n"}))
-
-    # ---- version.c and the -list printers of the infrastructure files
-    cases.append(_case("info", "version", [["-version"]], []))
-    for name in ("configure", "mime", "policy", "log", "locale", "type", "font", "delegate",
-                 "coder", "magic", "resource", "format"):
-        cases.append(_case("info", "list " + name, [["-list", name]], []))
-
-    # ---- MVG and SVG through the internal renderer
-    for mvg in ("draw.mvg",):
-        cases.append(_case("mvg", mvg, [["mvg:{C}/" + mvg] + FLOAT_OUT + ["out.miff"]],
-                           ["out.miff"]))
-        cases.append(_case("mvg", "svg-out " + mvg,
-                           [["{C}/%s" % mvg.replace(".mvg", ".svg")] + FLOAT_OUT + ["out.miff"]],
-                           ["out.miff"]))
-
-    seen, unique = set(), []
-    for c in cases:  # identical argv from different families: keep the first
-        if c["id"] not in seen:
-            seen.add(c["id"])
-            unique.append(c)
-    return unique
+    families = (
+        _unary_cases(), _convert_cases(), _mogrify_cases(), _stream_cases(),
+        # resize.c
+        _magnify_cases(), _palette_filter_cases(), _msl_cases(), _one_dimension_cases(),
+        _write_mask_cases(), _thumbnail_cases(), _filter_curve_cases(lists),
+        _filter_define_cases(),
+        _draw_cases(), _text_cases(), _generator_cases(),
+        # enumerated families
+        _colorspace_cases(lists), _compose_cases(lists), _distort_cases(lists),
+        _filter_cases(lists), _interpolate_cases(lists), _virtual_pixel_cases(lists),
+        _morphology_cases(lists), _evaluate_cases(lists), _statistic_cases(lists),
+        _noise_cases(lists), _dither_cases(lists), _layers_cases(lists),
+        _complex_cases(lists), _intensity_cases(lists), _sparse_color_cases(lists),
+        _type_cases(lists), _preview_cases(lists),
+        _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
+        _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
+        _decode_cases(lists),
+        _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
+        _infra_property_cases(),
+        _cipher_cases(), _info_cases(), _mvg_cases(),
+    )
+    return _unique(c for family in families for c in family)
 
 
 MSL_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
