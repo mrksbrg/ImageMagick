@@ -1330,6 +1330,47 @@ not trusted until they are listed or explained. Below the bar elsewhere:
 - **`distribute-cache.c`:** the distributed pixel cache server (`-distribute-cache <port>`)
   and its clients, which talk over TCP; no case starts a server. Out of reach for now.
 
+## Reading survivors by hand: effect.c, fourier.c, list.c (Mac, measured on ERDC)
+
+Measured on ERDC, 2026-10-01: a full run, the capped survivors at 1,500 cases (only
+`list.c` had any), then the survivors rerun against the gaps family after each round of
+cases (`conf1` after `07d5e5564`, `conf2` after `b8cdb780b`). Survivors read on the Mac;
+the three probe kills of the second round were checked on the Mac's `mull-sweep60` build
+first, and ERDC's `conf2` killed the same three. All three files are **trusted**.
+
+| File | Mutants | Killed | Adjusted | Lowest function |
+| --- | ---: | ---: | ---: | --- |
+| `effect.c` | 1,154 | 974 | **90%** | `AdaptiveBlurImage` 82% |
+| `fourier.c` | 63 | 56 | 93% → **100%** | every reached function at 100% |
+| `list.c` | 159 | 120 | 85% → **89%** | `SyncNextImageInList` 80% |
+
+- **`fourier.c`: the oracle builds without FFTW.** `-fft` only warns, so it never makes
+  the magnitude and phase pair, and `-ift` after it never ran on two images:
+  `InverseFourierTransformImage` was never reached. `-ift` on two read images reaches it
+  and its FFTW stub. The forward and inverse transforms themselves are compiled out.
+- **`list.c`.** Two cases: `-delete 0-0` (a range ending at 0, which a mutant counts from
+  the end and so deletes every frame) and `-insert 0`, the only command-line path to
+  `PrependImageToList`. Read and excused: a leak in `DestroyImageList`, a write one past
+  the end of `delete_list` in `DeleteImages`, the clean-up after a failed `CloneImage`,
+  and `CloneImages`' `step > 0`, which `>=` cannot change since step is never 0. Out of
+  reach: `SyncImageList` and `SpliceImageIntoList` (14 mutants), which nothing calls.
+  Open: `SyncNextImageInList`'s blob test, since every reader shares the blob with the
+  next frame.
+- **`effect.c`: 106 open (55 unmatched, 51 unreached), listed by group.** 21 are the
+  progress monitor (`progress++` and the `proceed` test) on lines no case reaches without
+  `-monitor`, in eleven functions; 6 are the clean-up after a failed allocation
+  (`DespeckleImage`, `RotationalBlurImage`, `ShadeImage`); the other 79 are kernel and
+  pixel arithmetic, most in `AdaptiveBlurImage`, `AdaptiveSharpenImage`,
+  `BilateralBlurImage` and `SelectiveBlurImage` (55 together), then `PreviewImage`,
+  `SharpenImage`, `UnsharpMaskImage`, `GetMotionBlurKernel`, `EmbossImage`, `Hull` and
+  `LocalContrastImage`. Among them, the kernel normalisation fallbacks
+  (`kernel[w][(k-1)/2]=1.0`, lines 235 and 554), the copy-only channels (`p[center+i]`,
+  lines 338, 3629, 3688) and `SelectiveBlurImage`'s second kernel loop (3500, 3505) are
+  never reached.
+- **For `classify.py` (not changed).** A progress-monitor line no case reaches counts as
+  unreached, though the same line, reached, is excused as `progress`. Letting the rule
+  apply to unreached lines would move every file's figures on both machines.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
