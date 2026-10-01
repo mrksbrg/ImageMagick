@@ -3565,6 +3565,426 @@
    "why": "readers give the next frame its predecessor's blob (AcquireNextImage), so the blobs are always equal, and destroying and re-referencing a shared blob changes no reference count; a frame with a blob of its own would tell, and no command makes one"
   },
   {
+   "at": 35,
+   "file": "MagickCore/magic.c",
+   "function": "CompareMagic",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "remaining=(MagickOffsetType) length-magic_info->offset;",
+   "verdict": "unresolved",
+   "why": "overstates the bytes left after a signature's offset, so a signature that runs past the end of a short file could match the zeroed buffer; no signature in the table ends in the bytes the buffer holds there"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/magic.c",
+   "function": "CompareMagickInfoExtent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)",
+   "verdict": "equivalent",
+   "why": "inside the branch for unequal offsets, so > and >= pick the same larger offset"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/magic.c",
+   "function": "CompareMagickInfoExtent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "return(delta > INT_MAX ? 0 : (int) delta);",
+   "verdict": "equivalent",
+   "why": "delta is a difference of offsets of at most 2048 or of short lengths, never INT_MAX"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/magic.c",
+   "function": "CompareMagickInfoExtent",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)",
+   "verdict": "equivalent",
+   "why": "no signature in the table sits at offset 10 (offsets are 0, 1, 4, 6, 8, 9, 21, 40, 60, 128, 2048), so the larger offset is never exactly 10"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/magic.c",
+   "function": "CompareMagickInfoExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "delta=ma->offset-mb->offset;",
+   "verdict": "unresolved",
+   "why": "changes the sort order of signatures with an offset past 10; a file matching GIF8 at 0 and DICM at 128 did not tell"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/magic.c",
+   "function": "GetMagicInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magic != (const unsigned char *) NULL)",
+   "verdict": "unresolved",
+   "why": "skips the cache of signatures matched before; it differs only when a later input matches two signatures and the cache holds the one the list would not pick first, which needs several reads in one command"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/magic.c",
+   "function": "GetMagicPatternExtent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (max_offset > (MagickOffsetType) (MAGICK_SSIZE_MAX/2))",
+   "verdict": "equivalent",
+   "why": "the largest signature extent is 2052 bytes, far from MAGICK_SSIZE_MAX/2"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/magic.c",
+   "function": "GetMagicPatternExtent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (offset > max_offset)",
+   "verdict": "equivalent",
+   "why": "a running maximum: >= replaces it with an equal value"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireAlignedMemory",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(size > GetMaxMemoryRequest()))",
+   "verdict": "unresolved",
+   "why": "a request of exactly max-memory-request bytes is the only one that tells > from >=; no case can aim an allocation at an exact size"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireAlignedMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (memory_methods.acquire_aligned_memory_handler != (AcquireAlignedMemoryHandler) NULL)",
+   "verdict": "unresolved",
+   "why": "the aligned-memory handler is NULL by default, so this mutant should call a NULL pointer, yet every case survives it; not understood"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireQuantumMemory",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(size > GetMaxMemoryRequest()))",
+   "verdict": "unresolved",
+   "why": "a request of exactly max-memory-request bytes is the only one that tells > from >=; no case can aim an allocation at an exact size"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(write(file,\"\",1) == 1))",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((offset == (MagickOffsetType) (size-1)) &&",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (memory_info->blob == NULL)",
+   "verdict": "unobservable",
+   "why": "a second, unaligned block replaces the aligned one: a leak, the same pixels"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (size <= GetMaxMemoryRequest())",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if ((virtual_anonymous_memory == 1) && (size <= GetMaxMemoryRequest()))",
+   "verdict": "unresolved",
+   "why": "a request of exactly max-memory-request bytes is the only one that tells > from >=; no case can aim an allocation at an exact size"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (size <= GetMaxMemoryRequest())",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file != -1)",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (memory_info->blob != NULL)",
+   "verdict": "unobservable",
+   "why": "the aligned block is kept but its type not set, so it is released through the unaligned path; free() accepts aligned memory, and the pixels are the same"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (memory_info->blob != NULL)",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (memory_info->blob != NULL)",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (memory_info->blob != NULL)",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((offset == (MagickOffsetType) (size-1)) &&",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/memory.c",
+   "function": "AcquireVirtualMemory",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "offset=(MagickOffsetType) lseek(file,(off_t) (size-1),SEEK_SET);",
+   "verdict": "unobservable",
+   "why": "where a scratch buffer lives (an anonymous map, a mapped temporary file, the heap) changes no pixel; reached by -despeckle under max-memory-request=64KiB, and the output matches a run without the limit"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/memory.c",
+   "function": "RelinquishAlignedMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (memory == (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "a NULL guard before a free: freeing NULL is a no-op"
+  },
+  {
+   "at": 53,
+   "file": "MagickCore/memory.c",
+   "function": "RelinquishAlignedMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (memory_methods.relinquish_aligned_memory_handler != (RelinquishAlignedMemoryHandler) NULL)",
+   "verdict": "unresolved",
+   "why": "the aligned-memory handler is NULL by default, so this mutant should call a NULL pointer, yet every case survives it; not understood"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/memory.c",
+   "function": "RelinquishMagickMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (memory == (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "a NULL guard before a free: freeing NULL is a no-op"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/memory.c",
+   "function": "RelinquishVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*memory_info->filename != '\\0')",
+   "verdict": "unobservable",
+   "why": "the mapped temporary file is left in the case directory, which the oracle does not compare"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/memory.c",
+   "function": "RelinquishVirtualMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (memory_info->blob != (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "virtual memory not released: a leak; with a NULL blob every branch ignores it"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/memory.c",
+   "function": "ResetMagickMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (n-- != 0)",
+   "verdict": "unobservable",
+   "why": "ResetMagickMemory only wipes secrets before a function returns (cipher keys, the SHA scratch block); nothing reads them again"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/memory.c",
+   "function": "ResizeQuantumMemory",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(size > GetMaxMemoryRequest()))",
+   "verdict": "unresolved",
+   "why": "a request of exactly max-memory-request bytes is the only one that tells > from >=; no case can aim an allocation at an exact size"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((memory == NULL) || (length == 0))",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((memory == NULL) || (length == 0))",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (passes == -1)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (passes == 0)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < passes; i++)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j=0; j < length; j+=quantum)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (j < length)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "return(i < passes ? MagickFalse : MagickTrue);",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (j < length)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "return(i < passes ? MagickFalse : MagickTrue);",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/memory.c",
+   "function": "ShredMagickMemory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (i != 0)",
+   "verdict": "unobservable",
+   "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
+  },
+  {
    "at": 7,
    "file": "MagickCore/mime.c",
    "function": "LoadMimeCache",
@@ -3703,6 +4123,176 @@
    "src": "mime_info->length++;",
    "verdict": "unobservable",
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/policy.c",
+   "function": "IsRightsAuthorizedByName",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "\"  authorized: %s\",status == MagickFalse ? \"false\" : \"true\");",
+   "verdict": "unobservable",
+   "why": "a -debug Policy logging guard (GetLogEventMask, which the logging rule does not match); the oracle's log format carries timestamps, and a case cannot supply its own log.xml (only the first one found is read)"
+  },
+  {
+   "at": 5,
+   "file": "MagickCore/policy.c",
+   "function": "IsRightsAuthorizedByName",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "name == (const char *) NULL ? \"undefined\" : name,",
+   "verdict": "unobservable",
+   "why": "a -debug Policy logging guard (GetLogEventMask, which the logging rule does not match); the oracle's log format carries timestamps, and a case cannot supply its own log.xml (only the first one found is read)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/policy.c",
+   "function": "IsRightsAuthorizedByName",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "pattern == (const char *) NULL ? \"undefined\" : pattern);",
+   "verdict": "unobservable",
+   "why": "a -debug Policy logging guard (GetLogEventMask, which the logging rule does not match); the oracle's log format carries timestamps, and a case cannot supply its own log.xml (only the first one found is read)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/policy.c",
+   "function": "IsRightsAuthorizedByName",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetLogEventMask() & PolicyEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "a -debug Policy logging guard (GetLogEventMask, which the logging rule does not match); the oracle's log format carries timestamps, and a case cannot supply its own log.xml (only the first one found is read)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/policy.c",
+   "function": "IsRightsAuthorizedByName",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if ((GetLogEventMask() & PolicyEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "a -debug Policy logging guard (GetLogEventMask, which the logging rule does not match); the oracle's log format carries timestamps, and a case cannot supply its own log.xml (only the first one found is read)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/policy.c",
+   "function": "IsRightsAuthorizedByName",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if ((GetLogEventMask() & PolicyEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "a -debug Policy logging guard (GetLogEventMask, which the logging rule does not match); the oracle's log format carries timestamps, and a case cannot supply its own log.xml (only the first one found is read)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "path,depth+1,exception);",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/policy.c",
+   "function": "LoadPolicyCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
   },
   {
    "at": 11,
