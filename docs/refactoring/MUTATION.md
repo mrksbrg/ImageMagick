@@ -1195,6 +1195,63 @@ it is open.
   `memset` through the pointer, treats it as non-null and keeps the allocation; under
   another compiler the mutant would crash. Unresolved.
 
+## Batch 3: composite, distort, fx (Windows, 2026-10-01)
+
+Full runs (default operators), then the capped survivors rerun against up to 1,500 cases
+(HARNESS-SPLIT.md, step 2), gated with `gate.py`; `build-oracle/harness-file.sh` on WSL,
+6 to 10 jobs. The reruns were capped at 1,500, but only `CompositeImage` has more reaching
+cases than that (1,443 ran for most of its survivors): in `distort.c` (361-368 reaching
+cases) and `fx.c` (370-511) every survivor met every case that reaches it, and none of the
+extra cases killed anything.
+
+| File | Mutants | Plain | Reach | Adjusted | Rerun killed | Functions at 80% adjusted |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `composite.c` | 1,289 | 74% | 100% | 76% | 330 of 627 | 9 of 13 |
+| `distort.c` | 1,052 | 54% | 100% | 56% | 0 of 281 | 3 of 13 |
+| `fx.c` | 927 | 50% | 83% | 50% | 0 of 260 | 19 of 64 |
+
+None of them is trusted. What holds them back:
+
+- **`composite.c`:** `CompositeImage` (972 mutants, adjusted 73%: 117 unmatched, 133 on
+  lines no case executes), `TextureImage` 73%, `SeamlessBlendImage` 52%,
+  `CompositeOverImage` 78%. The unreached lines are compose operators and argument forms
+  the catalogue does not use.
+- **`distort.c`:** the polynomial distortion is nearly untested (`poly_basis_fn` 6%,
+  `poly_basis_dx` 0%: 74 mutants on unreached lines, so higher orders and the derivative
+  never run), `DistortImage` 58%, `GenerateCoefficients` 64%, `SparseColorImage` 52%.
+- **`fx.c`:** 156 mutants in functions no case calls: `ImageStat` (33), `DumpRPN` and
+  `DumpTables` (62, the `fx:debug` dump), `OprStr`, `GetProperty`, `GetHexColour`
+  (hexadecimal colours in an expression). The evaluator itself (`ExecuteRPN`,
+  `GetFunction`, `GetOperand`) is at 59-64%.
+
+Next for these files: survivor reading and cases, starting with the polynomial distortion,
+`fx.c`'s unreached functions, and `CompositeImage`'s unreached compose operators.
+
+### blob.c: second round
+
+Five cases (family `blob`): `-write inline:svg:-`, which `ImageToBlob` writes through a
+temporary file since SVG has no blob support (`png:exclude-chunk=date,time` keeps dates out
+of the embedded PNG); the 1.5 MB hald image on stdin, which `ImageToFile` copies in two
+1 MiB chunks; and raw gray header offsets inside, at and past the end of the file, so
+`DiscardBlobBytes` meets EOF. Together with the first round's seven `ReadBlobString` cases
+(CRLF, no final newline): 8 killed, 402 to **408** of 576 killed, adjusted 72% to **73%**.
+`selfcheck --repeat 8` over the family: 0 nondeterministic. **Not trusted.** Out of reach
+from the command line: `SetBlobExtent` (26 of its 31 mutants are in the file-stream and
+mapped branches, but its only callers write to a memory blob) and `SyncBlobStream` (a
+borrowed blob is promoted only in `ImagesToBlob`, an API function), with 97 no-coverage
+mutants in other API functions (`ImagesToBlob`, `CustomStreamToImage`, `FileToImage`,
+`BlobToFile`, `PingBlob`, ...). Still open on reachable code: `ReadBlobString` 53% (7
+unmatched in the end-of-line handling), `ImageToFile` 71%, `ImageToBlob` 64%.
+
+### constitute.c: trusted again under the per-function bar
+
+Under the new rule (every function at adjusted 80%), `PingImage` at 75% made `constitute.c`
+untrusted: its open mutant flips the check on the image the reader returned, which only a
+ping that fails exposes. Three cases (family `constitute`): `identify -ping` of a corrupt
+MIFF, a PPM of size zero and a missing file. `PingImage` is now at 100% adjusted (4 killed, 1 unobservable); every function is
+at 86% or more (`ConstituteImage` 86%, `GetImplicitDataImageType` 89%), adjusted 98% to
+**99%**: **trusted**. `selfcheck --repeat 8`: 0 nondeterministic.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
