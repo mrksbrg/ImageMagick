@@ -1158,6 +1158,43 @@ the five other `*Threshold` functions 90 to 96%, `IntegralImage` 94%,
   object's keep/remove decision; 2 in the angle's quadrant correction, which needs
   `M20 == M02`; 7 not killed by any of the 27 defines and connectivities tried.
 
+## Reading survivors by hand: layer, transform, attribute, compress, utility, type (Mac)
+
+Measured on the MacBook, 2026-10-01, `mull-sweep60`, no cap. After the reach cases of
+`0801cdef0` and a second round of 55 probed cases (`c3c5c9285`), the survivors were rerun
+against the gaps family. None is trusted yet. Under the time budget the project's goal
+sets, the open survivors below were read by group, not one by one; each group says why
+it is open.
+
+| File | Mutants | Killed | Adjusted | Functions under 80% |
+| --- | ---: | ---: | ---: | --- |
+| `compress.c` | 224 | 181 | 85% → **87%** | `HuffmanDecodeImage` 75%, `Ascii85Initialize` (1 mutant) |
+| `attribute.c` | 513 | 378 | 78% → **80%** | `GetImageBoundingBox` 71%, `FloydSteinbergImageDepth` 69%, `GetImageDepth` 73%, `IsImageOpaque` 62%, the two edge-colour functions 78 to 79%, `GetImageQuantumDepth` 78% |
+| `transform.c` | 594 | 411 | 64% → **74%** | `CropImage` 72%, `CropImageToTiles` 56%, `TrimImage` 65%, `TransformImage` 43%; `ExcerptImage` and `ConsolidateCMYKImages` have no command-line caller |
+| `layer.c` | 396 | 274 | 61% → **73%** | `OptimizeLayerFrames` 72%, `MergeImageLayers` 66%, `CoalesceImages` 58%, `OptimizeImageTransparency` 57%, `DisposeImages` 29%, `ComparePixels` 77%, `CompositeCanvas` 50% |
+| `utility.c` | 337 | 186 | **58%** | most; see below |
+| `type.c` | 221 | 118 | **57%** | `LoadTypeCache` 13%, `GetTypeInfoByFamily` 60% |
+
+- **Upstream: `-layers dispose` repeats the first frame.** `DisposeImages` loops with
+  `for (next=image; image != NULL; image=GetNextImageInList(image))`: it advances `image`
+  and composes `next`, which never moves. Red, blue and green frames come out red, red,
+  red (`-layers coalesce` gives red, blue, green). A refactoring has to keep that output;
+  fixing it is a behaviour change. Its clipping mutants can be killed only through the
+  first frame's offsets; 10 probed cases that do are queued for the next case update.
+- **Out of reach with text-only case files.** `HuffmanDecodeImage`'s error paths need a
+  corrupt fax stream; a case file cannot hold the bytes.
+- **Out of reach with the oracle's configuration.** `ShredFile` (utility.c) runs only when
+  `policy.xml` sets a shred count, and shreds a file that is then deleted, so no output
+  shows it. `LoadTypeCache` (type.c) parses `type.xml`, of which the build's is fixed;
+  no case supplies its own. `AcquireUniqueSymbolicLink`'s copy fallback runs only when
+  `symlink()` fails. `ExpandFilename`'s `~user` branch depends on the machine's users.
+- **Open in attribute.c.** The edge-colour mutants that read one pixel past the right or
+  bottom edge (`columns-1` to `columns+1`) survive `-virtual-pixel Black` too; not settled.
+- **`Ascii85Initialize`'s one survivor** (`== NULL` to `!= NULL`) skips the allocation and
+  then writes through the pointer, yet no case fails. Likely the compiler, seeing the
+  `memset` through the pointer, treats it as non-null and keeps the allocation; under
+  another compiler the mutant would crash. Unresolved.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
