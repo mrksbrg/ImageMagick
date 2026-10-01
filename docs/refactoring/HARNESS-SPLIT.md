@@ -19,6 +19,17 @@ Two machines share the work, each owning half of MagickCore's 95 `.c` files:
 - **Windows**: the Windows desktop, working in WSL2 (Ubuntu 24.04), with the `wide`
   (X11, OpenCL) and `win` (MSYS2) builds that only it can make.
 
+A third machine computes for the Mac (2026-10-01): **ERDC**, a JupyterHub container
+with 30 AMD EPYC cores and Ubuntu 24.04, no root and no mounts. Its toolchain is unpacked
+from the Ubuntu .debs into `~/sysroot` (clang 18, Mull 0.34.1 for LLVM 18, the delegate
+libraries; `build.sh` takes it through `SYSROOT`), and mutants run under `landlock.py`
+instead of bubblewrap, which the container cannot start. `selfcheck --repeat 4`: 10,525
+cases, 0 nondeterministic. It runs whole files of the Mac's list, full run and capped
+rerun on one build, and the reports come back to the Mac as `mutation-erdc-*.json`;
+the Mac reads the survivors and writes the verdicts. A file's figures come from one
+machine only: a run there is never merged with a run on the Mac. About 3.5 times the
+Mac's speed (`draw.c`, 2,493 mutants, in 21 minutes).
+
 Only the owner of a file runs its mutation analysis, reads its survivors, writes its
 verdicts and adds cases for it. The split was balanced on the remaining work, a file's
 mutants times the share not yet killed or explained (strict figure, from the Linux sweep
