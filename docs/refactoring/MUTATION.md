@@ -1371,6 +1371,55 @@ first, and ERDC's `conf2` killed the same three. All three files are **trusted**
   unreached, though the same line, reached, is excused as `progress`. Letting the rule
   apply to unreached lines would move every file's figures on both machines.
 
+## Configuration of the case's own: magic, policy, memory, random, geometry, image, type, utility (Mac)
+
+Survivors read on the Mac, 2026-10-01 night, from ERDC's full runs (uncapped reruns of the
+capped survivors) for `magic`, `policy`, `memory`, `random`, `geometry` and `image`, and
+from the Mac's own runs for `type` and `utility`. The new cases (`fe32da125`, `483fdf1d2`)
+were probed on the Mac (`mull-sweep60`; `mull-imagec` for `image.c`) against the new cases
+only. **The figures below are previews**: for ERDC's files they merge a Mac probe and
+become the file's figures only after ERDC's `conf` rerun.
+
+**A case can now bring its own configuration.** The oracle sets `HOME` to the case
+directory, and ImageMagick searches `$HOME/.config/ImageMagick/` too. Case files may now
+sit in subdirectories (`oracle.py`, `966a1a639`). It works for **`policy.xml` and
+`type.xml`**, which merge every file found; it does not for `locale.xml` and `log.xml`
+(only the first file found is read, the build's), and a `policy.xml`'s `<include>` parses
+but never loads (a `type.xml` include does). This opens code that earlier sections called
+out of reach: `LoadTypeCache`, shredding (`ShredMagickMemory`, `ShredFile`), the
+file-backed virtual memory, rights by path, directory and pattern, symlink protection.
+
+| File | Adjusted before | Preview | Status |
+| --- | ---: | ---: | --- |
+| `random.c` | 24% | **60%** | every reached function at 100%: trusted on ERDC's figures, with the caveat below |
+| `magic.c` | 72% | **84%** | every reached function at 82% or more: trusted once ERDC confirms |
+| `type.c` | 57% | 71% | not trusted: `LoadTypeCache` 62%, `GetTypeInfoByFamily` 60% |
+| `geometry.c` | 60% | 70% | not trusted: `ParseGeometry` 59%, `ParseGravityGeometry` 60%, `ParseMetaGeometry` 71% |
+| `memory.c` | 34% | 63% | not trusted: the exact `max-memory-request` boundaries and the NULL-handler test, in functions of 2 to 4 mutants |
+| `utility.c` | 58% | 62% | not trusted: `ShredFile` is reached now, `AcquireUniqueSymbolicLink`, `ExpandFilename` |
+| `image.c` | 59% | 61% | not trusted: new cases reach 21 of 33 unreached mutants but kill 14 of 242 |
+| `policy.c` | 30% | 55% | not trusted: `IsPathContainsSymlink` (paths with real symlinks), rights matching by canonical path |
+
+- **`random.c`: unobservable by design.** The oracle seeds every command (`-seed 1`), so
+  the generator's seed comes from the secret key; the entropy reservoir, the nonce and
+  the keyed generator feed only temporary names and shredding. 30 of its 45 mutants are
+  excused on that ground, so a mistake in the keyed generator would not be seen: refactor
+  it with the guard, not the oracle. `ReadRandom` runs only if `/dev/urandom` opens
+  (under Landlock on ERDC it does not); `GetRandomValue` has no caller.
+- **`magic.c`.** Extensionless files: `PCD_` at 2048 (the farthest signature, which
+  sets how much is read), a file exactly a signature long, SVG with spaces after `<` (the
+  only entries that skip spaces). Five survivors are equivalent from the table itself (no
+  signature at offset 10, a running maximum, an extent of 2052 bytes).
+- **`memory.c`.** `-despeckle` under `max-memory-request=64KiB` sends its scratch buffers
+  to a mapped temporary file; the output matches a run without the limit, as it should,
+  so the 11 mutants there are unobservable. Open: 4 boundary mutants at exactly the
+  maximum request, and `AcquireAlignedMemory`/`RelinquishAlignedMemory`'s handler test,
+  which should call a NULL pointer and does not fail any case (not understood).
+- **`policy.c`.** Six `GetLogEventMask() & PolicyEvent` guards are logging the `logging`
+  rule does not match (it looks for `IsEventLogging`).
+- **For the next round.** `image.c` needs reading by hand (129 survivors on reached
+  lines); `geometry.c` (69 unmatched) and `type.c` (42) are the next largest.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
