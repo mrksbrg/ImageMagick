@@ -366,6 +366,7 @@ class _Run:
             base.update(oracle.parallel(
                 lambda c: oracle.run_case(self.binary, side, c, self.manifest),
                 todo, self.jobs, "baseline"))
+            os.makedirs(os.path.dirname(cache_file), exist_ok=True)  # new machine: no cache yet
             with open(cache_file, "w") as f:
                 json.dump(base, f)
         base = {i: base[i] for i in needed}
