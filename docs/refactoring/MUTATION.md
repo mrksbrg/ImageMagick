@@ -1294,6 +1294,42 @@ None is trusted under the per-function bar. The functions furthest below it:
 - **`timer.c`**, **`registry.c`:** `StopTimer`, `ContinueTimer`, `FormatMagickTime`;
   `DefineImageRegistry`, `RemoveImageRegistry` (API).
 
+## Batch 5: feature, montage, histogram, resample and six small files (Windows, 2026-10-01)
+
+As batches 3 and 4 (WSL, 4 to 6 jobs, catalogue of 10,612 cases). Every rerun of capped
+survivors killed nothing; `monitor.c` (6) and `quantum.c` (2) still have survivors capped
+at 1,500, reached by more cases than that.
+
+| File | Mutants | Plain | Reach | Adjusted | Rerun killed | Functions at 80% adjusted |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `feature.c` | 842 | 73% | 100% | 77% | - | 6 of 8 |
+| `resample.c` | 228 | 68% | 100% | 71% | 0 of 72 | 3 of 8 (2 with no score) |
+| `montage.c` | 224 | 75% | 100% | 78% | - | 2 of 6 (1 with no score) |
+| `histogram.c` | 165 | 79% | 100% | 88% | - | 12 of 18 (2 with no score) |
+| `gem.c` | 114 | 76% | 100% | 89% | 0 of 8 | **4 of 4** |
+| `quantum.c` | 88 | 86% | 95% | 89% | 0 of 3 | 11 of 15 (2 with no score) |
+| `exception.c` | 69 | 94% | 96% | 96% | - | 16 of 19 (1 with no score) |
+| `semaphore.c` | 20 | 100% | 100% | 100% | - | **7 of 7** |
+| `prepress.c` | 17 | 76% | 100% | 87% | - | **1 of 1** |
+| `monitor.c` | 9 | 33% | 100% | 38% | 0 of 6 | 2 of 3 |
+| `distribute-cache.c` | 176 | 0% | 0% | 0% | - | 0 (no case reaches it) |
+
+**`semaphore.c` is trusted:** every mutant killed. `gem.c` and `prepress.c` meet the
+per-function bar too, but their unmatched survivors (9 and 2) are not yet read, so they are
+not trusted until they are listed or explained. Below the bar elsewhere:
+
+- **`feature.c`:** `GetImageFeatures` 72% (509 mutants, the Haralick texture features of
+  `-features`), `RenderHoughLines` 69%.
+- **`resample.c`:** `ResamplePixelColor` 62% (139, the elliptical weighted average behind
+  `-distort`), `SetResampleFilter` 64%.
+- **`montage.c`:** `GetMontageGeometry` 75%, `CloneMontageInfo` 0%.
+- **`histogram.c`:** `MinMaxStretchImage` 60%, `IsPaletteImage` 67%.
+- **`quantum.c`:** `SetQuantumMetaChannel` and `SetQuantumPad` at 0% (API).
+- **`exception.c`:** `InheritException`, `SetErrorHandler` at 0% (API).
+- **`monitor.c`:** `SetImageProgress` 17% (7 mutants); its survivors are not yet read.
+- **`distribute-cache.c`:** the distributed pixel cache server (`-distribute-cache <port>`)
+  and its clients, which talk over TCP; no case starts a server. Out of reach for now.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
