@@ -26,7 +26,13 @@ libraries; `build.sh` takes it through `SYSROOT`), and mutants run under `landlo
 instead of bubblewrap, which the container cannot start. `selfcheck --repeat 4`: 10,525
 cases, 0 nondeterministic. It runs whole files of the Mac's list, full run and capped
 rerun on one build, and the reports come back to the Mac as `mutation-erdc-*.json`;
-the Mac reads the survivors and writes the verdicts. A file's figures come from one
+the Mac reads the survivors and writes the verdicts. ERDC pushes them, with its logs and
+scripts, to the branch `erdc-results` with `tools/oracle/erdc/push-results.sh` (kept in
+`~/imagemagick-mutation/setup/` there), from a repository of its own; its token can write
+only to the fork. That branch holds nothing else, and ERDC never commits to
+`refactoring-setup`. Each commit records the ImageMagick commit it measured
+(`MEASURED_AT`). On the Mac, `tools/oracle/erdc/fetch-results.sh` copies the reports into
+`build-oracle/work`, rewriting ERDC's paths to the Mac's, and lists what is new. A file's figures come from one
 machine only: a run there is never merged with a run on the Mac. About 3.5 times the
 Mac's speed (`draw.c`, 2,493 mutants, in 21 minutes).
 
