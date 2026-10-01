@@ -1905,6 +1905,15 @@ GAP_COMMANDS += [
     "{C}/seq.miff -swap -1,-5 -append",
     "{C}/seq.miff -define frames:step=2 ( -clone 0-4 ) -append",
 ]
+# fourier.c, list.c (ERDC's runs): -ift on two images, which reaches the FFTW stub of
+# InverseFourierTransformImage (the oracle builds without FFTW, so -fft never makes
+# the pair); -delete of a range ending at 0; -insert at index 0 (PrependImageToList)
+GAP_COMMANDS += [
+    "{C}/rose.miff {C}/rose_blur.miff -ift",
+    "{C}/seq.miff -delete 0-0 -append",
+    "{C}/seq.miff -delete 2-0 -append",
+    "{C}/seq.miff {C}/rose.miff -insert 0 -append",
+]
 # channel.c: the -alpha methods the catalogue lacked (activate, associate, disassociate, discrete, off-if-opaque, on) on images with and without alpha
 GAP_COMMANDS += [
     "{C}/rose.miff -alpha activate",

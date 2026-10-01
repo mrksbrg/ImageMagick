@@ -3422,6 +3422,26 @@
    "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only"
   },
   {
+   "at": 12,
+   "file": "MagickCore/fourier.c",
+   "function": "ComplexImages",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (proceed == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "the progress monitor's answer, run only with a progress monitor; it changes -monitor callbacks, not the output"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/fourier.c",
+   "function": "ComplexImages",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "progress++;",
+   "verdict": "unobservable",
+   "why": "the progress count, run only with a progress monitor; it changes -monitor callbacks, not the output"
+  },
+  {
    "at": 26,
    "file": "MagickCore/fourier.c",
    "function": "ComplexImages",
@@ -3442,6 +3462,27 @@
    "why": "cos and sin have period 2*pi: 2*pi*(ai+0.5) and 2*pi*(ai-0.5) differ by exactly 2*pi"
   },
   {
+   "at": 16,
+   "file": "MagickCore/fourier.c",
+   "function": "InverseFourierTransformImage",
+   "killed_by": "{C}/rose.miff {C}/rose_blur.miff -ift",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (phase_image == (Image *) NULL)",
+   "verdict": "gap",
+   "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/list.c",
+   "function": "CloneImageList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "the clean-up after CloneImage fails, which only memory exhaustion causes; no case can make the clone fail"
+  },
+  {
    "at": 10,
    "file": "MagickCore/list.c",
    "function": "CloneImages",
@@ -3460,6 +3501,68 @@
    "src": "if (last > (ssize_t) length)",
    "verdict": "equivalent",
    "why": "a clamp at its own bound: at equality both branches set the same value (length)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/list.c",
+   "function": "CloneImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "step=(ssize_t) (first > last ? -step : step);",
+   "verdict": "equivalent",
+   "why": "step is never 0: frames:step=0 is replaced by 1 and the sign flip keeps it non-zero, so step > 0 and step >= 0 agree"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/list.c",
+   "function": "DeleteImages",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((i >= 0) && (i < (ssize_t) length))",
+   "verdict": "unobservable",
+   "why": "a range past the end of the list marks delete_list[length], one element past the allocation, which is freed unread; only a memory checker would see it"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/list.c",
+   "function": "DeleteImages",
+   "killed_by": "{C}/seq.miff -delete 0-0 -append",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (last < 0)",
+   "verdict": "gap",
+   "why": "a range ending at 0: the mutant counts a last index of 0 from the end of the list and deletes every frame; no case deleted a range ending at 0"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/list.c",
+   "function": "DestroyImageList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (images != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "the list is not freed: a leak, with the same return value (NULL); no output changes"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/list.c",
+   "function": "PrependImageToList",
+   "killed_by": "{C}/seq.miff {C}/rose.miff -insert 0 -append",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*images == (Image *) NULL)",
+   "verdict": "gap",
+   "why": "-insert 0 is the only command-line path to PrependImageToList; no case inserted at index 0"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/list.c",
+   "function": "SyncNextImageInList",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (images->next->compression == UndefinedCompression)",
+   "verdict": "unresolved",
+   "why": "readers give the next frame its predecessor's blob (AcquireNextImage), so the blobs are always equal, and destroying and re-referencing a shared blob changes no reference count; a frame with a blob of its own would tell, and no command makes one"
   },
   {
    "at": 7,
