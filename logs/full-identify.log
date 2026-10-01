@@ -1,0 +1,131 @@
+mutate: 368 mutants in MagickCore/identify\.c$, 6 functions
+mutate: baseline over 229 cases in 0s
+  mutants: 25/368 (0s)
+  mutants: 50/368 (0s)
+  mutants: 75/368 (0s)
+  mutants: 100/368 (1s)
+  mutants: 125/368 (16s)
+  mutants: 150/368 (41s)
+  mutants: 175/368 (44s)
+  mutants: 200/368 (47s)
+  mutants: 225/368 (72s)
+  mutants: 250/368 (75s)
+  mutants: 275/368 (77s)
+  mutants: 300/368 (106s)
+  mutants: 325/368 (120s)
+  mutants: 350/368 (144s)
+  mutants: 368/368 (248s)
+
+mutate: 368 mutants, 248s
+  killed 230, survived 97 (0 capped), no coverage 41, errors 0
+  mutation score on reached code: 70.3%   overall: 62.5%
+
+  function                           total killed survived no-cov
+  IdentifyImage                        290    193       97      0
+  GetLocationStatistics                 22      0        0     22
+  PrintChannelPerceptualHash            21     21        0      0
+  PrintChannelLocations                 19      0        0     19
+  PrintChannelStatistics                10     10        0      0
+  PrintChannelMoments                    6      6        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  identify.c:543:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       identify.c:567:17 cxx_ne_to_eq               if (limit != (const char *) NULL)
+       identify.c:570:30 cxx_eq_to_ne               if (channel_statistics == (ChannelStatistics *) NULL)
+       identify.c:578:61 cxx_ne_to_eq               if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:581:63 cxx_ne_to_eq               if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:584:62 cxx_ne_to_eq               if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:591:62 cxx_ne_to_eq               if ((GetPixelCyanTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:594:65 cxx_ne_to_eq               if ((GetPixelMagentaTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:597:64 cxx_ne_to_eq               if ((GetPixelYellowTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:600:63 cxx_ne_to_eq               if ((GetPixelBlackTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:608:62 cxx_ne_to_eq               if ((GetPixelGrayTraits(image) & UpdatePixelTrait) != 0)
+       identify.c:615:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:615:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:615:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:619:45 cxx_ne_to_eq               if ((traits & UpdatePixelTrait) != 0)
+       identify.c:626:30 cxx_ne_to_eq               if (image->alpha_trait != UndefinedPixelTrait)
+       identify.c:631:27 cxx_ne_to_eq               return(ferror(file) != 0 ? MagickFalse : MagickTrue);
+    x  identify.c:652:34 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:652:63 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:681:33 cxx_le_to_lt               if (image->total_colors <= image->colors)
+    x  identify.c:699:38 cxx_div_to_mul             (unsigned long) (elapsed_time/60.0),(unsigned long) floor(fmod(
+    x  identify.c:700:52 cxx_mul_to_div             elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-
+    x  identify.c:700:66 cxx_sub_to_add             elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-
+    x  identify.c:704:27 cxx_ne_to_eq               return(ferror(file) != 0 ? MagickFalse : MagickTrue);
+    x  identify.c:771:30 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:771:59 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:878:39 cxx_ne_to_eq               if (image->number_meta_channels != 0)
+       identify.c:879:21 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->number_meta_channels; i++)
+       identify.c:879:21 cxx_lt_to_le               for (i=0; i < (ssize_t) image->number_meta_channels; i++)
+       identify.c:879:63 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) image->number_meta_channels; i++)
+       identify.c:882:56 cxx_add_to_sub             channel = (PixelChannel) (MetaPixelChannels+i);
+    x  identify.c:888:24 cxx_le_to_lt               if (image->depth <= MAGICKCORE_QUANTUM_DEPTH)
+    x  identify.c:959:26 cxx_div_to_mul             "Read mask",1.0/scale,channel_statistics);
+       identify.c:962:27 cxx_div_to_mul             "Write mask",1.0/scale,channel_statistics);
+       identify.c:965:31 cxx_div_to_mul             "Composite mask",1.0/scale,channel_statistics);
+    x  identify.c:966:39 cxx_ne_to_eq               if (image->number_meta_channels != 0)
+       identify.c:967:21 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->number_meta_channels; i++)
+       identify.c:967:21 cxx_lt_to_le               for (i=0; i < (ssize_t) image->number_meta_channels; i++)
+       identify.c:967:63 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) image->number_meta_channels; i++)
+       identify.c:973:56 cxx_add_to_sub             channel = (PixelChannel) (MetaPixelChannels+i);
+       identify.c:977:63 cxx_div_to_mul             (void) PrintChannelStatistics(file,channel,label,1.0/scale,
+       identify.c:1035:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1035:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1035:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1042:45 cxx_ne_to_eq               if ((traits & UpdatePixelTrait) != 0)
+       identify.c:1116:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1116:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1116:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1123:45 cxx_ne_to_eq               if ((traits & UpdatePixelTrait) != 0)
+    x  identify.c:1153:23 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  identify.c:1207:25 cxx_le_to_lt               if (image->colors <= 1024)
+    x  identify.c:1313:26 cxx_ne_to_eq               if ((image->page.width != 0) || (image->page.height != 0) ||
+    x  identify.c:1313:55 cxx_ne_to_eq               if ((image->page.width != 0) || (image->page.height != 0) ||
+    x  identify.c:1314:22 cxx_ne_to_eq               (image->page.x != 0) || (image->page.y != 0))
+    x  identify.c:1314:46 cxx_ne_to_eq               (image->page.x != 0) || (image->page.y != 0))
+       identify.c:1367:35 cxx_ne_to_eq               for (d=image->directory; *d != '\0'; d++)
+       identify.c:1370:20 cxx_ne_to_eq               while ((*q != '\xff') && (*q != '\0') &&
+       identify.c:1370:38 cxx_ne_to_eq               while ((*q != '\xff') && (*q != '\0') &&
+       identify.c:1371:28 cxx_sub_to_add             ((size_t) (q-d+1) < sizeof(image_info->filename)))
+       identify.c:1371:30 cxx_add_to_sub             ((size_t) (q-d+1) < sizeof(image_info->filename)))
+       identify.c:1371:34 cxx_lt_to_ge               ((size_t) (q-d+1) < sizeof(image_info->filename)))
+       identify.c:1371:34 cxx_lt_to_le               ((size_t) (q-d+1) < sizeof(image_info->filename)))
+       identify.c:1373:67 cxx_sub_to_add             (void) CopyMagickString(image_info->filename,d,(size_t) (q-d+1));
+       identify.c:1373:69 cxx_add_to_sub             (void) CopyMagickString(image_info->filename,d,(size_t) (q-d+1));
+       identify.c:1379:18 cxx_eq_to_ne               if (tile == (Image *) NULL)
+       identify.c:1389:25 cxx_ne_to_eq               while (property != (const char *) NULL)
+       identify.c:1393:21 cxx_ne_to_eq               if (value != (const char *) NULL)
+       identify.c:1409:25 cxx_gt_to_ge               if (strlen(value) > 80)
+       identify.c:1409:25 cxx_gt_to_le               if (strlen(value) > 80)
+       identify.c:1433:23 cxx_ne_to_eq               if (convex_hull != (PointInfo *) NULL)
+       identify.c:1436:23 cxx_lt_to_ge               for (n=0; n < (ssize_t) number_points; n++)
+       identify.c:1436:23 cxx_lt_to_le               for (n=0; n < (ssize_t) number_points; n++)
+       identify.c:1436:51 cxx_post_inc_to_post_dec   for (n=0; n < (ssize_t) number_points; n++)
+       identify.c:1448:24 cxx_ne_to_eq               if (bounding_box != (PointInfo *) NULL)
+       identify.c:1451:23 cxx_lt_to_ge               for (n=0; n < (ssize_t) number_points; n++)
+       identify.c:1451:23 cxx_lt_to_le               for (n=0; n < (ssize_t) number_points; n++)
+       identify.c:1451:51 cxx_post_inc_to_post_dec   for (n=0; n < (ssize_t) number_points; n++)
+    x  identify.c:1503:25 cxx_lt_to_le               for (i=0; i < (ssize_t) profile_length-5; i+=(ssize_t) length)
+    x  identify.c:1503:51 cxx_sub_to_add             for (i=0; i < (ssize_t) profile_length-5; i+=(ssize_t) length)
+    x  identify.c:1574:27 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
+    x  identify.c:1661:22 cxx_gt_to_ge               if (strlen(buffer) > 1)
+    x  identify.c:1668:20 cxx_gt_to_ge               if (elapsed_time > MagickEpsilon)
+    x  identify.c:1670:72 cxx_mul_to_div             (void) FormatMagickSize((MagickSizeType) ((double) image->columns*
+    x  identify.c:1671:20 cxx_div_to_mul             image->rows/elapsed_time+0.5),MagickFalse,"P",MagickPathExtent,buffer);
+    x  identify.c:1671:33 cxx_add_to_sub             image->rows/elapsed_time+0.5),MagickFalse,"P",MagickPathExtent,buffer);
+       identify.c:1689:19 cxx_eq_to_ne               if (seconds == 0)
+       identify.c:1692:31 cxx_div_to_mul             ceil((double) (seconds/(3600*24))),
+       identify.c:1693:33 cxx_rem_to_div             ceil((double) ((seconds % (24*3600))/3600)),
+       identify.c:1693:45 cxx_div_to_mul             ceil((double) ((seconds % (24*3600))/3600)),
+       identify.c:1694:33 cxx_rem_to_div             ceil((double) ((seconds % 3600)/60)),
+       identify.c:1694:40 cxx_div_to_mul             ceil((double) ((seconds % 3600)/60)),
+       identify.c:1695:33 cxx_rem_to_div             ceil((double) ((seconds % 3600) % 60)),expired,iso8601);
+       identify.c:1695:41 cxx_rem_to_div             ceil((double) ((seconds % 3600) % 60)),expired,iso8601);
+    x  identify.c:1699:34 cxx_div_to_mul             (unsigned long) (elapsed_time/60.0),(unsigned long) ceil(fmod(elapsed_time,
+    x  identify.c:1700:35 cxx_mul_to_div             60.0)),(unsigned long) (1000.0*(elapsed_time-floor(elapsed_time))));
+    x  identify.c:1700:49 cxx_sub_to_add             60.0)),(unsigned long) (1000.0*(elapsed_time-floor(elapsed_time))));
+    x  identify.c:1704:23 cxx_ne_to_eq               return(ferror(file) != 0 ? MagickFalse : MagickTrue);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-identify.json

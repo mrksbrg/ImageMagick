@@ -1,0 +1,123 @@
+mutate: 225 mutants in MagickCore/channel\.c$, 8 functions
+mutate: baseline over 1029 cases in 0s
+  mutants: 25/225 (0s)
+  mutants: 50/225 (2s)
+  mutants: 75/225 (3s)
+  mutants: 100/225 (3s)
+  mutants: 125/225 (4s)
+  mutants: 150/225 (102s)
+  mutants: 175/225 (211s)
+  mutants: 200/225 (261s)
+  mutants: 225/225 (419s)
+
+mutate: 225 mutants, 419s
+  killed 130, survived 93 (62 capped), no coverage 2, errors 0
+  mutation score on reached code: 58.3%   overall: 57.8%
+
+  function                           total killed survived no-cov
+  SetImageAlphaChannel                  87     25       62      0
+  CombineImages                         43     27       16      0
+  ChannelFxImage                        35     29        6      0
+  SeparateImage                         22     18        4      0
+  FlattenPixelInfo                      15     11        4      0
+  ChannelImage                          13     13        0      0
+  SeparateImages                         8      7        1      0
+  GetImageAlphaChannel                   2      0        0      2
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  channel.c:234:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       channel.c:273:46 cxx_ne_to_eq               if (GetNextImageInList(source_image) != (Image *) NULL)
+    x  channel.c:355:19 cxx_lt_to_le               if (i < 0)
+    x  channel.c:438:17 cxx_post_inc_to_post_dec   channels++;
+    x  channel.c:446:64 cxx_add_to_sub             destination_channel=(PixelChannel) (destination_channel+1);
+    x  channel.c:452:61 cxx_sub_to_add             status=SetImageProgress(source_image,ChannelFxImageTag,p-expression,
+    x  channel.c:526:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       channel.c:541:26 cxx_sub_to_add             if (fabs(image->gamma-1.0) <= MagickEpsilon)
+       channel.c:541:32 cxx_le_to_gt               if (fabs(image->gamma-1.0) <= MagickEpsilon)
+       channel.c:541:32 cxx_le_to_lt               if (fabs(image->gamma-1.0) <= MagickEpsilon)
+    x  channel.c:553:27 cxx_gt_to_ge               if (number_channels > 4)
+       channel.c:554:59 cxx_sub_to_add             SetPixelMetaChannels(combine_image,number_channels-4,exception);
+    x  channel.c:562:27 cxx_gt_to_ge               if (number_channels > 2)
+       channel.c:563:59 cxx_sub_to_add             SetPixelMetaChannels(combine_image,number_channels-2,exception);
+    x  channel.c:570:27 cxx_gt_to_ge               if (number_channels > 5)
+       channel.c:571:59 cxx_sub_to_add             SetPixelMetaChannels(combine_image,number_channels-5,exception);
+    x  channel.c:615:17 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(combine_image); i++)
+    x  channel.c:631:19 cxx_lt_to_le               for (x=0; x < (ssize_t) combine_image->columns; x++)
+    x  channel.c:633:15 cxx_lt_to_le               if (x < (ssize_t) next->columns)
+    x  channel.c:645:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       channel.c:653:17 cxx_post_inc_to_post_dec   progress++;
+       channel.c:656:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  channel.c:756:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:823:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       channel.c:831:17 cxx_post_inc_to_post_dec   progress++;
+       channel.c:833:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  channel.c:881:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       channel.c:979:42 cxx_mul_to_div             composite[i]=ClampToQuantum(gamma*MagickOver_((double) q[i],beta,
+    x  channel.c:985:58 cxx_mul_to_div             composite[i]=ClampToQuantum((double) QuantumRange*(Sa*(-Da)+Sa+Da));
+    x  channel.c:985:64 cxx_minus_to_noop          composite[i]=ClampToQuantum((double) QuantumRange*(Sa*(-Da)+Sa+Da));
+    x  channel.c:985:71 cxx_add_to_sub             composite[i]=ClampToQuantum((double) QuantumRange*(Sa*(-Da)+Sa+Da));
+    xc channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc channel.c:1015:50 cxx_ne_to_eq               if ((image->alpha_trait & BlendPixelTrait) != 0)
+     c channel.c:1026:18 cxx_eq_to_ne               if (status == MagickFalse)
+     c channel.c:1033:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1033:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1033:45 cxx_post_inc_to_post_dec   for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1041:20 cxx_eq_to_ne               if (status == MagickFalse)
+     c channel.c:1045:15 cxx_eq_to_ne               if (q == (Quantum *) NULL)
+     c channel.c:1050:21 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1050:21 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1050:50 cxx_post_inc_to_post_dec   for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1058:29 cxx_mul_to_div             gamma=QuantumScale*(double) GetPixelAlpha(image,q);
+     c channel.c:1059:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+     c channel.c:1059:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+     c channel.c:1059:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+     c channel.c:1063:25 cxx_eq_to_ne               if (channel == AlphaPixelChannel)
+     c channel.c:1065:45 cxx_eq_to_ne               if ((traits & UpdatePixelTrait) == 0)
+     c channel.c:1067:38 cxx_mul_to_div             q[i]=ClampToQuantum(gamma*(double) q[i]);
+     c channel.c:1071:64 cxx_eq_to_ne               if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
+    xc channel.c:1083:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+    xc channel.c:1086:18 cxx_eq_to_ne               if (status == MagickFalse)
+    xc channel.c:1093:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    xc channel.c:1093:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    xc channel.c:1093:45 cxx_post_inc_to_post_dec   for (y=0; y < (ssize_t) image->rows; y++)
+    xc channel.c:1101:20 cxx_eq_to_ne               if (status == MagickFalse)
+    xc channel.c:1105:15 cxx_eq_to_ne               if (q == (Quantum *) NULL)
+    xc channel.c:1110:21 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+    xc channel.c:1110:21 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    xc channel.c:1110:50 cxx_post_inc_to_post_dec   for (x=0; x < (ssize_t) image->columns; x++)
+    xc channel.c:1112:38 cxx_eq_to_ne               if (GetPixelAlpha(image,q) == TransparentAlpha)
+    xc channel.c:1119:64 cxx_eq_to_ne               if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
+     c channel.c:1145:18 cxx_eq_to_ne               if (status == MagickFalse)
+     c channel.c:1153:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1153:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1153:45 cxx_post_inc_to_post_dec   for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1161:20 cxx_eq_to_ne               if (status == MagickFalse)
+     c channel.c:1165:15 cxx_eq_to_ne               if (q == (Quantum *) NULL)
+     c channel.c:1170:21 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1170:21 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1170:50 cxx_post_inc_to_post_dec   for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1179:26 cxx_mul_to_div             Sa=QuantumScale*(double) GetPixelAlpha(image,q);
+     c channel.c:1181:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+     c channel.c:1181:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+     c channel.c:1181:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+     c channel.c:1185:25 cxx_eq_to_ne               if (channel == AlphaPixelChannel)
+     c channel.c:1187:45 cxx_eq_to_ne               if ((traits & UpdatePixelTrait) == 0)
+     c channel.c:1189:38 cxx_mul_to_div             q[i]=ClampToQuantum(gamma*(double) q[i]);
+     c channel.c:1193:64 cxx_eq_to_ne               if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)
+     c channel.c:1202:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+     c channel.c:1229:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+     c channel.c:1236:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1236:45 cxx_post_inc_to_post_dec   for (y=0; y < (ssize_t) image->rows; y++)
+     c channel.c:1244:21 cxx_eq_to_ne               if ((status == MagickFalse) || (opaque == MagickFalse))
+     c channel.c:1244:48 cxx_eq_to_ne               if ((status == MagickFalse) || (opaque == MagickFalse))
+     c channel.c:1247:15 cxx_eq_to_ne               if (p == (const Quantum *) NULL)
+     c channel.c:1252:21 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1252:21 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1252:50 cxx_post_inc_to_post_dec   for (x=0; x < (ssize_t) image->columns; x++)
+     c channel.c:1254:38 cxx_ne_to_eq               if (GetPixelAlpha(image,p) != OpaqueAlpha)
+     c channel.c:1263:18 cxx_ne_to_eq               if (opaque != MagickFalse)
+    xc channel.c:1269:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-channel.json

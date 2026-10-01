@@ -1,0 +1,32 @@
+mutate: 49 mutants in MagickCore/coder\.c$, 10 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 25/49 (0s)
+  mutants: 49/49 (131s)
+
+mutate: 49 mutants, 131s
+  killed 34, survived 7 (6 capped), no coverage 8, errors 0
+  mutation score on reached code: 82.9%   overall: 69.4%
+
+  function                           total killed survived no-cov
+  ListCoderInfo                         13     13        0      0
+  GetCoderInfoList                       8      7        1      0
+  GetCoderList                           8      0        0      8
+  AcquireCoderCache                      5      5        0      0
+  DestroyCoderNode                       4      1        3      0
+  IsCoderTreeInstantiated                4      3        1      0
+  GetCoderInfo                           3      3        0      0
+  CoderComponentTerminus                 2      1        1      0
+  CoderComponentGenesis                  1      0        1      0
+  CoderInfoCompare                       1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c coder.c:131:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
+     c coder.c:133:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
+     c coder.c:135:21 cxx_ne_to_eq               if (p->magick != (char *) NULL)
+    xc coder.c:209:23 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
+    xc coder.c:234:23 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
+    x  coder.c:336:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc coder.c:479:27 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-coder.json

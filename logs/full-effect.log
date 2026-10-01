@@ -1,0 +1,318 @@
+mutate: 1154 mutants in MagickCore/effect\.c$, 25 functions
+mutate: baseline over 401 cases in 0s
+  mutants: 25/1154 (0s)
+  mutants: 50/1154 (0s)
+  mutants: 75/1154 (1s)
+  mutants: 100/1154 (1s)
+  mutants: 125/1154 (2s)
+  mutants: 150/1154 (2s)
+  mutants: 175/1154 (2s)
+  mutants: 200/1154 (3s)
+  mutants: 225/1154 (3s)
+  mutants: 250/1154 (4s)
+  mutants: 275/1154 (4s)
+  mutants: 300/1154 (4s)
+  mutants: 325/1154 (5s)
+  mutants: 350/1154 (5s)
+  mutants: 375/1154 (5s)
+  mutants: 400/1154 (5s)
+  mutants: 425/1154 (6s)
+  mutants: 450/1154 (6s)
+  mutants: 475/1154 (9s)
+  mutants: 500/1154 (9s)
+  mutants: 525/1154 (9s)
+  mutants: 550/1154 (10s)
+  mutants: 575/1154 (10s)
+  mutants: 600/1154 (11s)
+  mutants: 625/1154 (12s)
+  mutants: 650/1154 (12s)
+  mutants: 675/1154 (12s)
+  mutants: 700/1154 (13s)
+  mutants: 725/1154 (14s)
+  mutants: 750/1154 (23s)
+  mutants: 775/1154 (108s)
+  mutants: 800/1154 (149s)
+  mutants: 825/1154 (185s)
+  mutants: 850/1154 (199s)
+  mutants: 875/1154 (204s)
+  mutants: 900/1154 (208s)
+  mutants: 925/1154 (210s)
+  mutants: 950/1154 (212s)
+  mutants: 975/1154 (215s)
+  mutants: 1000/1154 (216s)
+  mutants: 1025/1154 (216s)
+  mutants: 1050/1154 (217s)
+  mutants: 1075/1154 (217s)
+  mutants: 1100/1154 (219s)
+  mutants: 1125/1154 (221s)
+  mutants: 1150/1154 (340s)
+  mutants: 1154/1154 (349s)
+
+mutate: 1154 mutants, 349s
+  killed 921, survived 233 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 79.8%   overall: 79.8%
+
+  function                           total killed survived no-cov
+  AdaptiveSharpenImage                 111     77       34      0
+  AdaptiveBlurImage                    110     84       26      0
+  SelectiveBlurImage                   110     89       21      0
+  BilateralBlurImage                   105     87       18      0
+  LocalContrastImage                    95     48       47      0
+  PreviewImage                          83     73       10      0
+  Hull                                  65     56        9      0
+  RotationalBlurImage                   64     58        6      0
+  ShadeImage                            62     52       10      0
+  KuwaharaImage                         59     51        8      0
+  DespeckleImage                        56     49        7      0
+  MotionBlurImage                       52     46        6      0
+  EmbossImage                           41     37        4      0
+  SharpenImage                          37     31        6      0
+  UnsharpMaskImage                      27     21        6      0
+  SpreadImage                           19     15        4      0
+  GetMotionBlurKernel                   15     12        3      0
+  EdgeImage                             12     11        1      0
+  AcquireBilateralTLS                    9      7        2      0
+  BlurGaussian                           8      8        0      0
+  BlurDistance                           5      5        0      0
+  DestroyBilateralTLS                    4      1        3      0
+  BlurImage                              2      1        1      0
+  GaussianBlurImage                      2      1        1      0
+  GetMeanLuma                            1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  effect.c:166:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:171:19 cxx_lt_to_le               if (fabs(sigma) < MagickEpsilon)
+    x  effect.c:207:40 cxx_mul_to_div             (void) memset(kernel,0,(size_t) width*sizeof(*kernel));
+    x  effect.c:208:15 cxx_lt_to_le               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:234:15 cxx_lt_to_le               if (sigma < MagickEpsilon)
+       effect.c:235:19 cxx_sub_to_add             kernel[w][(k-1)/2]=1.0;
+       effect.c:235:22 cxx_div_to_mul             kernel[w][(k-1)/2]=1.0;
+    x  effect.c:237:9 cxx_lt_to_le               if (w < (ssize_t) width)
+       effect.c:239:20 cxx_ge_to_gt               for (w-=2; w >= 0; w-=2)
+       effect.c:239:20 cxx_ge_to_lt               for (w-=2; w >= 0; w-=2)
+    x  effect.c:293:13 cxx_lt_to_le               if (j < 0)
+    x  effect.c:296:15 cxx_gt_to_ge               if (j > (ssize_t) width)
+    x  effect.c:301:54 cxx_sub_to_add             ((ssize_t) width-j)/2L,width-(size_t) j,width-(size_t) j,exception);
+    x  effect.c:304:48 cxx_mul_to_div             center=(ssize_t) (GetPixelChannels(image)*(width-(size_t) j)*
+    x  effect.c:304:55 cxx_sub_to_add             center=(ssize_t) (GetPixelChannels(image)*(width-(size_t) j)*
+    x  effect.c:305:16 cxx_sub_to_add             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:305:28 cxx_div_to_mul             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:305:32 cxx_add_to_sub             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:305:64 cxx_sub_to_add             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:305:76 cxx_div_to_mul             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+       effect.c:338:56 cxx_add_to_sub             SetPixelChannel(blur_image,channel,p[center+i],q);
+    x  effect.c:386:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:394:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:397:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:406:15 cxx_lt_to_ge               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:406:15 cxx_lt_to_le               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:485:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:490:19 cxx_lt_to_le               if (fabs(sigma) < MagickEpsilon)
+    x  effect.c:526:40 cxx_mul_to_div             (void) memset(kernel,0,(size_t) width*sizeof(*kernel));
+    x  effect.c:527:15 cxx_lt_to_le               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:546:32 cxx_minus_to_noop          kernel[w][k]=(double) (-exp(-((double) u*u+v*v)/(2.0*MagickSigma*
+    x  effect.c:546:61 cxx_mul_to_div             kernel[w][k]=(double) (-exp(-((double) u*u+v*v)/(2.0*MagickSigma*
+    x  effect.c:546:73 cxx_mul_to_div             kernel[w][k]=(double) (-exp(-((double) u*u+v*v)/(2.0*MagickSigma*
+    x  effect.c:547:24 cxx_div_to_mul             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:547:38 cxx_mul_to_div             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:547:50 cxx_mul_to_div             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:553:15 cxx_lt_to_le               if (sigma < MagickEpsilon)
+       effect.c:554:19 cxx_sub_to_add             kernel[w][(k-1)/2]=1.0;
+       effect.c:554:22 cxx_div_to_mul             kernel[w][(k-1)/2]=1.0;
+    x  effect.c:556:9 cxx_lt_to_le               if (w < (ssize_t) width)
+       effect.c:558:20 cxx_ge_to_gt               for (w-=2; w >= 0; w-=2)
+       effect.c:558:20 cxx_ge_to_lt               for (w-=2; w >= 0; w-=2)
+    x  effect.c:612:13 cxx_lt_to_le               if (j < 0)
+    x  effect.c:615:15 cxx_gt_to_ge               if (j > (ssize_t) width)
+    x  effect.c:620:56 cxx_sub_to_add             (((ssize_t) width-j)/2L),width-(size_t) j,width-(size_t) j,exception);
+    x  effect.c:623:48 cxx_mul_to_div             center=(ssize_t) (GetPixelChannels(image)*(width-(size_t) j)*
+    x  effect.c:623:55 cxx_sub_to_add             center=(ssize_t) (GetPixelChannels(image)*(width-(size_t) j)*
+    x  effect.c:624:15 cxx_sub_to_add             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:624:27 cxx_div_to_mul             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:624:31 cxx_add_to_sub             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:624:63 cxx_sub_to_add             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+    x  effect.c:624:75 cxx_div_to_mul             ((width-(size_t) j)/2L)+GetPixelChannels(image)*((width-(size_t) j)/2));
+       effect.c:657:57 cxx_add_to_sub             SetPixelChannel(sharp_image,channel,p[center+i],q);
+    x  effect.c:686:21 cxx_lt_to_le               for (v=0; v < ((ssize_t) width-j); v++)
+    x  effect.c:688:23 cxx_lt_to_le               for (u=0; u < ((ssize_t) width-j); u++)
+    x  effect.c:705:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:713:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:716:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:725:15 cxx_lt_to_ge               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:725:15 cxx_lt_to_le               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:782:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:866:15 cxx_le_to_gt               for (i=0; i <= (ssize_t) number_threads; i++)
+    x  effect.c:866:15 cxx_le_to_lt               for (i=0; i <= (ssize_t) number_threads; i++)
+    x  effect.c:867:20 cxx_ne_to_eq               if (weights[i] != (double *) NULL)
+    x  effect.c:890:42 cxx_add_to_sub             (void) memset(weights,0,(number_threads+1)*sizeof(*weights));
+    x  effect.c:890:45 cxx_mul_to_div             (void) memset(weights,0,(number_threads+1)*sizeof(*weights));
+    x  effect.c:939:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:957:29 cxx_le_to_lt               for (w=(-MaxIntensity); w <= MaxIntensity; w++)
+    x  effect.c:1032:65 cxx_mul_to_div             p+=(ptrdiff_t) (GetPixelChannels(image)*MagickMax(width,1)*(size_t) mid.y+
+    x  effect.c:1033:32 cxx_mul_to_div             GetPixelChannels(image)*(size_t) mid.x);
+    x  effect.c:1047:26 cxx_ge_to_gt               if ((intensity >= -MaxIntensity) && (intensity <= MaxIntensity))
+    x  effect.c:1047:26 cxx_ge_to_lt               if ((intensity >= -MaxIntensity) && (intensity <= MaxIntensity))
+    x  effect.c:1047:58 cxx_le_to_gt               if ((intensity >= -MaxIntensity) && (intensity <= MaxIntensity))
+    x  effect.c:1047:58 cxx_le_to_lt               if ((intensity >= -MaxIntensity) && (intensity <= MaxIntensity))
+       effect.c:1051:67 cxx_mul_to_div             weights[id][n]=BlurGaussian(intensity,intensity_sigma)*
+       effect.c:1052:46 cxx_add_to_sub             BlurGaussian(BlurDistance(x,y,x+u-mid.x,y+v-mid.y),spatial_sigma);
+       effect.c:1052:48 cxx_sub_to_add             BlurGaussian(BlurDistance(x,y,x+u-mid.x,y+v-mid.y),spatial_sigma);
+       effect.c:1052:56 cxx_add_to_sub             BlurGaussian(BlurDistance(x,y,x+u-mid.x,y+v-mid.y),spatial_sigma);
+       effect.c:1052:58 cxx_sub_to_add             BlurGaussian(BlurDistance(x,y,x+u-mid.x,y+v-mid.y),spatial_sigma);
+    x  effect.c:1084:25 cxx_lt_to_le               for (v=0; v < (ssize_t) MagickMax(height,1); v++)
+    x  effect.c:1103:21 cxx_lt_to_le               for (v=0; v < (ssize_t) MagickMax(height,1); v++)
+    x  effect.c:1127:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:1135:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:1138:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:1237:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1246:15 cxx_lt_to_le               for (y=0; y < (ssize_t) rows; y++)
+    x  effect.c:1256:18 cxx_gt_to_ge               if (polarity > 0)
+    x  effect.c:1257:19 cxx_lt_to_le               for (x=0; x < (ssize_t) columns; x++)
+    x  effect.c:1266:19 cxx_lt_to_le               for (x=0; x < (ssize_t) columns; x++)
+    x  effect.c:1283:15 cxx_lt_to_le               for (y=0; y < (ssize_t) rows; y++)
+    x  effect.c:1293:18 cxx_gt_to_ge               if (polarity > 0)
+    x  effect.c:1294:19 cxx_lt_to_le               for (x=0; x < (ssize_t) columns; x++)
+    x  effect.c:1304:19 cxx_lt_to_le               for (x=0; x < (ssize_t) columns; x++)
+    x  effect.c:1355:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1374:23 cxx_gt_to_ge               if ((image->columns > (MAGICK_SIZE_MAX-2)) ||
+    x  effect.c:1375:20 cxx_gt_to_ge               (image->rows > (MAGICK_SIZE_MAX-2)))
+       effect.c:1386:23 cxx_ne_to_eq               if (buffer_info != (MemoryInfo *) NULL)
+       effect.c:1388:22 cxx_ne_to_eq               if (pixel_info != (MemoryInfo *) NULL)
+    x  effect.c:1484:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:1491:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:1553:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1643:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1670:22 cxx_mul_to_div             (2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:1670:34 cxx_mul_to_div             (2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:1678:15 cxx_lt_to_le               for (i=0; i < (ssize_t) (kernel_info->width*kernel_info->height); i++)
+    x  effect.c:1739:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1821:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1886:19 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  effect.c:1929:21 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(gaussian_image); j++)
+    x  effect.c:1934:23 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(gaussian_image); j++)
+    x  effect.c:1938:21 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(gaussian_image); j++)
+    x  effect.c:1972:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:1980:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:1982:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:2064:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:2082:38 cxx_mul_to_div             width=(ssize_t) (scanLineSize*0.002*fabs(radius));
+    x  effect.c:2097:67 cxx_add_to_sub             interImage_info=AcquireVirtualMemory(image->rows*(image->columns+(size_t)
+    x  effect.c:2108:30 cxx_add_to_sub             totalWeight=(float) ((width+1)*(width+1));
+    x  effect.c:2108:33 cxx_mul_to_div             totalWeight=(float) ((width+1)*(width+1));
+    x  effect.c:2108:40 cxx_add_to_sub             totalWeight=(float) ((width+1)*(width+1));
+    x  effect.c:2121:17 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+    x  effect.c:2140:18 cxx_eq_to_ne               if (status == MagickFalse)
+    x  effect.c:2143:17 cxx_mul_to_div             pixels+=id*scanLineSize;
+    x  effect.c:2145:48 cxx_minus_to_noop          p=GetCacheViewVirtualPixels(image_view,x,-(ssize_t) width,1,
+    x  effect.c:2146:20 cxx_add_to_sub             image->rows+(size_t) (2*width),exception);
+    x  effect.c:2152:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows+(2*width); y++)
+    x  effect.c:2152:42 cxx_add_to_sub             for (y=0; y < (ssize_t) image->rows+(2*width); y++)
+    x  effect.c:2158:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    x  effect.c:2167:21 cxx_lt_to_ge               for (i=0; i < width; i++)
+    x  effect.c:2167:21 cxx_lt_to_le               for (i=0; i < width; i++)
+    x  effect.c:2167:31 cxx_post_inc_to_post_dec   for (i=0; i < width; i++)
+    x  effect.c:2172:21 cxx_add_to_sub             for (i=width+1; i < (2*width); i++)
+    x  effect.c:2172:27 cxx_lt_to_le               for (i=width+1; i < (2*width); i++)
+    x  effect.c:2172:41 cxx_post_inc_to_post_dec   for (i=width+1; i < (2*width); i++)
+    x  effect.c:2178:26 cxx_div_to_mul             *out=(float) (sum/totalWeight);
+    x  effect.c:2180:16 cxx_le_to_lt               if ((x <= width) && (x != 0))
+    x  effect.c:2180:32 cxx_ne_to_eq               if ((x <= width) && (x != 0))
+       effect.c:2181:16 cxx_sub_to_add             *(out-(x*2))=*out;
+       effect.c:2181:19 cxx_mul_to_div             *(out-(x*2))=*out;
+    x  effect.c:2182:42 cxx_sub_to_add             if ((x > (ssize_t) image->columns-width-2) &&
+    x  effect.c:2182:48 cxx_sub_to_add             if ((x > (ssize_t) image->columns-width-2) &&
+    x  effect.c:2183:16 cxx_ne_to_eq               (x != (ssize_t) image->columns-1))
+    x  effect.c:2183:43 cxx_sub_to_add             (x != (ssize_t) image->columns-1))
+       effect.c:2184:33 cxx_sub_to_add             *(out+((image->columns-(size_t) x-1)*2))=*out;
+       effect.c:2184:44 cxx_sub_to_add             *(out+((image->columns-(size_t) x-1)*2))=*out;
+       effect.c:2184:47 cxx_mul_to_div             *(out+((image->columns-(size_t) x-1)*2))=*out;
+    x  effect.c:2185:28 cxx_add_to_sub             out+=image->columns+(size_t) (width*2);
+    x  effect.c:2185:44 cxx_mul_to_div             out+=image->columns+(size_t) (width*2);
+    x  effect.c:2222:17 cxx_mul_to_div             pixels+=id*scanLineSize;
+    x  effect.c:2231:43 cxx_mul_to_div             memcpy(pixels,interImage+((size_t) y*(image->columns+(size_t) (2*width))),
+    x  effect.c:2231:59 cxx_add_to_sub             memcpy(pixels,interImage+((size_t) y*(image->columns+(size_t) (2*width))),
+    x  effect.c:2232:24 cxx_add_to_sub             (image->columns+(size_t) (2*width))*sizeof(float));
+    x  effect.c:2232:44 cxx_mul_to_div             (image->columns+(size_t) (2*width))*sizeof(float));
+    x  effect.c:2247:21 cxx_lt_to_ge               for (i=0; i < width; i++)
+    x  effect.c:2247:21 cxx_lt_to_le               for (i=0; i < width; i++)
+    x  effect.c:2247:31 cxx_post_inc_to_post_dec   for (i=0; i < width; i++)
+    x  effect.c:2252:21 cxx_add_to_sub             for (i=width+1; i < (2*width); i++)
+    x  effect.c:2252:27 cxx_lt_to_le               for (i=width+1; i < (2*width); i++)
+    x  effect.c:2252:41 cxx_post_inc_to_post_dec   for (i=width+1; i < (2*width); i++)
+    x  effect.c:2261:21 cxx_sub_to_add             mult=(srcVal-(sum/totalWeight))*(strength/100.0);
+    x  effect.c:2261:26 cxx_div_to_mul             mult=(srcVal-(sum/totalWeight))*(strength/100.0);
+    x  effect.c:2343:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:2353:21 cxx_div_to_mul             MagickSigma)))/(MagickSQ2PI*MagickSigma));
+    x  effect.c:2353:34 cxx_mul_to_div             MagickSigma)))/(MagickSQ2PI*MagickSigma));
+    x  effect.c:2400:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:2520:25 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
+    x  effect.c:2535:21 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
+    x  effect.c:2557:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:2565:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:2567:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:2664:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:2897:59 cxx_mul_to_div             (void) BilevelImage(thumbnail,(double) (percentage*((double)
+    x  effect.c:2898:29 cxx_div_to_mul             QuantumRange+1.0))/100.0,exception);
+    x  effect.c:3026:18 cxx_ne_to_eq               if (file != -1)
+    x  effect.c:3027:32 cxx_sub_to_add             file=close_utf8(file)-1;
+    x  effect.c:3046:47 cxx_ge_to_gt               if ((GetBlobSize(preview_image)/1024) >= 1024)
+       effect.c:3048:76 cxx_div_to_mul             factor,(double) ((MagickOffsetType) GetBlobSize(preview_image))/
+       effect.c:3049:19 cxx_div_to_mul             1024.0/1024.0);
+    x  effect.c:3051:42 cxx_ge_to_gt               if (GetBlobSize(preview_image) >= 1024)
+    x  effect.c:3104:28 cxx_ne_to_eq               if (image->directory != (char *) NULL)
+    x  effect.c:3184:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       effect.c:3208:21 cxx_ne_to_eq               if (cos_theta != (double *) NULL)
+       effect.c:3210:21 cxx_ne_to_eq               if (sin_theta != (double *) NULL)
+    x  effect.c:3361:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:3369:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:3371:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:3457:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:3479:24 cxx_div_to_mul             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:3479:38 cxx_mul_to_div             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:3479:50 cxx_mul_to_div             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:3482:20 cxx_ne_to_eq               if (image->debug != MagickFalse)
+       effect.c:3500:19 cxx_lt_to_ge               for (v=0; v < (ssize_t) width; v++)
+       effect.c:3500:19 cxx_lt_to_le               for (v=0; v < (ssize_t) width; v++)
+       effect.c:3500:39 cxx_post_inc_to_post_dec   for (v=0; v < (ssize_t) width; v++)
+       effect.c:3505:21 cxx_lt_to_ge               for (u=0; u < (ssize_t) width; u++)
+       effect.c:3505:21 cxx_lt_to_le               for (u=0; u < (ssize_t) width; u++)
+       effect.c:3505:41 cxx_post_inc_to_post_dec   for (u=0; u < (ssize_t) width; u++)
+       effect.c:3629:56 cxx_add_to_sub             SetPixelChannel(blur_image,channel,p[center+i],q);
+    x  effect.c:3645:36 cxx_lt_to_le               if (fabs(contrast) < threshold)
+    x  effect.c:3658:38 cxx_lt_to_le               if (fabs((double) gamma) < MagickEpsilon)
+    x  effect.c:3672:32 cxx_lt_to_le               if (fabs(contrast) < threshold)
+    x  effect.c:3683:74 cxx_mul_to_div             luminance_pixels+=(ptrdiff_t) GetPixelChannels(luminance_image)*
+    x  effect.c:3686:34 cxx_lt_to_le               if (fabs((double) gamma) < MagickEpsilon)
+       effect.c:3688:56 cxx_add_to_sub             SetPixelChannel(blur_image,channel,p[center+i],q);
+    x  effect.c:3701:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:3709:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:3712:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:3793:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       effect.c:3799:24 cxx_ne_to_eq               if (linear_image != (Image *) NULL)
+       effect.c:3801:23 cxx_ne_to_eq               if (shade_image != (Image *) NULL)
+    x  effect.c:3892:27 cxx_le_to_lt               if ((fabs(normal.x) <= MagickEpsilon) &&
+    x  effect.c:3893:27 cxx_le_to_lt               (fabs(normal.y) <= MagickEpsilon))
+    x  effect.c:3899:24 cxx_gt_to_ge               if (distance > MagickEpsilon)
+    x  effect.c:3903:35 cxx_gt_to_ge               if (normal_distance > (MagickEpsilon*MagickEpsilon))
+    x  effect.c:3945:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:3953:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:3955:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:4033:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:4060:48 cxx_minus_to_noop          kernel_info->values[i]=(MagickRealType) (-exp(-((double) u*u+v*v)/(2.0*
+    x  effect.c:4061:34 cxx_div_to_mul             MagickSigma*MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:4061:48 cxx_mul_to_div             MagickSigma*MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:4061:60 cxx_mul_to_div             MagickSigma*MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:4068:15 cxx_lt_to_le               for (i=0; i < (ssize_t) (kernel_info->width*kernel_info->height); i++)
+    x  effect.c:4149:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:4209:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:4217:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:4219:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:4299:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:4312:42 cxx_mul_to_div             quantum_threshold=(double) QuantumRange*threshold;
+    x  effect.c:4374:29 cxx_lt_to_le               if (fabs(2.0*pixel) < quantum_threshold)
+    x  effect.c:4385:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:4393:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:4395:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-effect.json

@@ -1,0 +1,31 @@
+mutate: 25 mutants in MagickCore/artifact\.c$, 9 functions
+mutate: baseline over 10524 cases in 0s
+  mutants: 25/25 (23s)
+
+mutate: 25 mutants, 23s
+  killed 12, survived 8 (6 capped), no coverage 5, errors 0
+  mutation score on reached code: 60.0%   overall: 48.0%
+
+  function                           total killed survived no-cov
+  GetImageArtifact                       6      5        1      0
+  CloneImageArtifacts                    3      1        2      0
+  DefineImageArtifact                    3      0        0      3
+  SetImageArtifact                       3      2        1      0
+  DeleteImageArtifact                    2      1        1      0
+  DestroyImageArtifacts                  2      1        1      0
+  GetNextImageArtifact                   2      1        1      0
+  RemoveImageArtifact                    2      0        0      2
+  ResetImageArtifactIterator             2      1        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc artifact.c:124:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:132:28 cxx_ne_to_eq               if (image->artifacts != (void *) NULL)
+    xc artifact.c:219:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:253:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:297:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  artifact.c:343:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  artifact.c:426:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:472:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-artifact.json

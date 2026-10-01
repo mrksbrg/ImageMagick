@@ -1,0 +1,178 @@
+mutate: 235 mutants in MagickCore/policy\.c$, 19 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 25/235 (116s)
+  mutants: 50/235 (116s)
+  mutants: 75/235 (116s)
+  mutants: 100/235 (243s)
+  mutants: 125/235 (362s)
+  mutants: 150/235 (366s)
+  mutants: 175/235 (488s)
+  mutants: 200/235 (492s)
+  mutants: 225/235 (582s)
+  mutants: 235/235 (587s)
+
+mutate: 235 mutants, 587s
+  killed 37, survived 136 (131 capped), no coverage 62, errors 0
+  mutation score on reached code: 21.4%   overall: 15.7%
+
+  function                           total killed survived no-cov
+  IsRightsAuthorizedByName              45      1       44      0
+  LoadPolicyCache                       45      2       43      0
+  IsPathContainsSymlink                 29      0        0     29
+  ListPolicyInfo                        19     16        3      0
+  SetMagickSecurityPolicyValue          15      0        0     15
+  GetPolicyInfo                         14      1       13      0
+  AcquirePolicyCache                     9      3        6      0
+  GetPolicyInfoList                      9      7        2      0
+  GetPolicyList                          9      0        0      9
+  AcquirePolicyString                    8      3        5      0
+  IsPathAuthorized                       8      1        7      0
+  SetMagickSecurityPolicy                7      0        0      7
+  DestroyPolicyElement                   5      1        4      0
+  GetPolicyValue                         4      1        3      0
+  IsPolicyCacheInstantiated              4      1        3      0
+  PolicyComponentTerminus                2      0        2      0
+  IsPolicyPathSeparator                  1      0        0      1
+  PolicyComponentGenesis                 1      0        1      0
+  ValidateSecurityPolicy                 1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc policy.c:206:19 cxx_ne_to_eq               while (option != (const StringInfo *) NULL)
+    xc policy.c:210:18 cxx_eq_to_ne               if (status == MagickFalse)
+    xc policy.c:220:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) (sizeof(PolicyMap)/sizeof(*PolicyMap)); i++)
+    xc policy.c:220:15 cxx_lt_to_le               for (i=0; i < (ssize_t) (sizeof(PolicyMap)/sizeof(*PolicyMap)); i++)
+     c policy.c:234:19 cxx_eq_to_ne               p->name == (char *) NULL ? "" : p->name);
+     c policy.c:252:19 cxx_eq_to_ne               p->name == (char *) NULL ? "" : p->name);
+    xc policy.c:300:44 cxx_eq_to_ne               if (IsPolicyCacheInstantiated(exception) == MagickFalse)
+    xc policy.c:306:12 cxx_ne_to_eq               if (name != (const char *) NULL)
+    xc policy.c:308:25 cxx_ne_to_eq               for (q=policyname; *q != '\0'; q++)
+    xc policy.c:310:45 cxx_eq_to_ne               if (isspace((int) ((unsigned char) *q)) == 0)
+    xc policy.c:319:25 cxx_ne_to_eq               for (q=policyname; *q != '\0'; q++)
+    xc policy.c:321:12 cxx_ne_to_eq               if (*q != ':')
+    xc policy.c:336:13 cxx_eq_to_ne               if ((name == (const char *) NULL) || (LocaleCompare(name,"*") == 0))
+    xc policy.c:336:65 cxx_eq_to_ne               if ((name == (const char *) NULL) || (LocaleCompare(name,"*") == 0))
+     c policy.c:339:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+    xc policy.c:343:12 cxx_ne_to_eq               while (p != (ElementInfo *) NULL)
+    xc policy.c:346:17 cxx_eq_to_ne               if ((domain == UndefinedPolicyDomain) || (policy->domain == domain))
+    xc policy.c:346:62 cxx_eq_to_ne               if ((domain == UndefinedPolicyDomain) || (policy->domain == domain))
+    xc policy.c:347:50 cxx_eq_to_ne               if (LocaleCompare(policyname,policy->name) == 0)
+    x  policy.c:400:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  policy.c:406:50 cxx_add_to_sub             GetNumberOfElementsInLinkedList(policy_cache)+1UL,sizeof(*policies));
+    xc policy.c:468:14 cxx_ne_to_eq               if (source != (char *) NULL)
+    xc policy.c:472:15 cxx_ge_to_gt               if (~length >= pad)
+    xc policy.c:473:58 cxx_mul_to_div             destination=(char *) AcquireMagickMemory((length+pad)*sizeof(*destination));
+    xc policy.c:476:14 cxx_ne_to_eq               if (source != (char *) NULL)
+    xc policy.c:477:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    xc policy.c:561:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+     c policy.c:569:14 cxx_eq_to_ne               if ((value == (const char *) NULL) || (*value == '\0'))
+     c policy.c:569:49 cxx_eq_to_ne               if ((value == (const char *) NULL) || (*value == '\0'))
+    xc policy.c:702:30 cxx_ne_to_eq               ((symlink_follow_allowed != MagickFalse) ||
+    xc policy.c:703:29 cxx_eq_to_ne               (is_symlink_utf8(path) == MagickFalse))) ? MagickTrue : MagickFalse;
+    xc policy.c:704:15 cxx_ne_to_eq               if ((status != MagickFalse) && (symlink_follow_allowed == MagickFalse))
+    xc policy.c:704:58 cxx_eq_to_ne               if ((status != MagickFalse) && (symlink_follow_allowed == MagickFalse))
+     c policy.c:706:34 cxx_ne_to_eq               if ((is_symlink_utf8(path) != MagickFalse) ||
+     c policy.c:707:40 cxx_ne_to_eq               (IsPathContainsSymlink(path) != MagickFalse))
+    xc policy.c:710:14 cxx_ne_to_eq               if (status != MagickFalse)
+    xc policy.c:740:20 cxx_eq_to_ne               if (policy_cache == (LinkedListInfo *) NULL)
+    xc policy.c:746:24 cxx_eq_to_ne               if (policy_cache == (LinkedListInfo *) NULL)
+    xc policy.c:750:23 cxx_ne_to_eq               return(policy_cache != (LinkedListInfo *) NULL ? MagickTrue : MagickFalse);
+    xc policy.c:817:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+     c policy.c:821:12 cxx_eq_to_ne               name == (const char *) NULL ? "undefined" : name,
+     c policy.c:823:15 cxx_eq_to_ne               pattern == (const char *) NULL ? "undefined" : pattern);
+    xc policy.c:827:14 cxx_eq_to_ne               if (status == MagickFalse)
+     c policy.c:829:45 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+    xc policy.c:841:13 cxx_ne_to_eq               for ( ; p != (ElementInfo *) NULL; p=p->next)
+     c policy.c:852:15 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
+     c policy.c:852:70 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
+     c policy.c:855:24 cxx_eq_to_ne               if (policy->domain == PathPolicyDomain)
+     c policy.c:857:31 cxx_eq_to_ne               if (paths_provisioned == MagickFalse)
+     c policy.c:866:38 cxx_ne_to_eq               if ((canonical_directory != (char *) NULL) && (*filename != '\0'))
+     c policy.c:866:70 cxx_ne_to_eq               if ((canonical_directory != (char *) NULL) && (*filename != '\0'))
+     c policy.c:871:51 cxx_add_to_sub             length=strlen(canonical_directory)+strlen(filename)+2;
+     c policy.c:871:68 cxx_add_to_sub             length=strlen(canonical_directory)+strlen(filename)+2;
+     c policy.c:872:74 cxx_mul_to_div             canonical_candidate=(char *) AcquireCriticalMemory(length*
+     c policy.c:874:41 cxx_ne_to_eq               if (canonical_candidate != (char *) NULL)
+     c policy.c:883:34 cxx_ne_to_eq               if ((canonical_directory != (char *) NULL) && (match == MagickFalse))
+     c policy.c:883:62 cxx_eq_to_ne               if ((canonical_directory != (char *) NULL) && (match == MagickFalse))
+     c policy.c:885:34 cxx_ne_to_eq               if ((canonical_candidate != (char *) NULL) && (match == MagickFalse))
+     c policy.c:885:62 cxx_eq_to_ne               if ((canonical_candidate != (char *) NULL) && (match == MagickFalse))
+     c policy.c:887:29 cxx_ne_to_eq               if ((canonical_path != (char *) NULL) && (match == MagickFalse))
+     c policy.c:887:57 cxx_eq_to_ne               if ((canonical_path != (char *) NULL) && (match == MagickFalse))
+     c policy.c:889:29 cxx_ne_to_eq               if ((canonical_path != (char *) NULL) &&
+     c policy.c:890:73 cxx_ne_to_eq               (GlobExpression(canonical_path,policy->pattern,MagickFalse) != MagickFalse))
+     c policy.c:893:36 cxx_ne_to_eq               if ((canonical_candidate != (char *) NULL) &&
+     c policy.c:894:80 cxx_ne_to_eq               (GlobExpression(canonical_candidate,policy->pattern,MagickFalse) != MagickFalse))
+     c policy.c:897:37 cxx_ne_to_eq               if ((canonical_directory != (char *) NULL) &&
+     c policy.c:898:81 cxx_ne_to_eq               (GlobExpression(canonical_directory,policy->pattern,MagickFalse) != MagickFalse))
+     c policy.c:901:15 cxx_eq_to_ne               if (match == MagickFalse)
+     c policy.c:905:27 cxx_ne_to_eq               if (matched_canonical != MagickFalse)
+    xc policy.c:915:27 cxx_ne_to_eq               if (canonical_directory != (char *) NULL)
+    xc policy.c:917:27 cxx_ne_to_eq               if (canonical_candidate != (char *) NULL)
+    xc policy.c:919:22 cxx_ne_to_eq               if (canonical_path != (char *) NULL)
+    xc policy.c:925:19 cxx_ne_to_eq               if (matched_any != MagickFalse)
+     c policy.c:927:40 cxx_ne_to_eq               if (((rights & ReadPolicyRights) != 0) &&
+     c policy.c:928:50 cxx_eq_to_ne               ((effective_rights & ReadPolicyRights) == 0))
+     c policy.c:930:41 cxx_ne_to_eq               if (((rights & WritePolicyRights) != 0) &&
+     c policy.c:931:51 cxx_eq_to_ne               ((effective_rights & WritePolicyRights) == 0))
+     c policy.c:933:43 cxx_ne_to_eq               if (((rights & ExecutePolicyRights) != 0) &&
+     c policy.c:934:53 cxx_eq_to_ne               ((effective_rights & ExecutePolicyRights) == 0))
+    xc policy.c:940:29 cxx_ne_to_eq               if (canonical_matched_any != MagickFalse)
+     c policy.c:944:44 cxx_ne_to_eq               if ((canonical_denied_mask & rights) != 0)
+    xc policy.c:947:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+     c policy.c:949:33 cxx_eq_to_ne               "  authorized: %s",status == MagickFalse ? "false" : "true");
+    x  policy.c:1012:16 cxx_eq_to_ne               if (((path == (const char *) NULL) ||
+       policy.c:1024:34 cxx_ne_to_eq               if (policy_info[i]->name != (char *) NULL)
+       policy.c:1026:35 cxx_ne_to_eq               if (policy_info[i]->value != (char *) NULL)
+    xc policy.c:1091:20 cxx_ne_to_eq               if (p->value != (char *) NULL)
+    xc policy.c:1093:22 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
+    xc policy.c:1095:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
+    xc policy.c:1097:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    xc policy.c:1129:14 cxx_eq_to_ne               if (policy == (char *) NULL)
+    xc policy.c:1134:23 cxx_add_to_sub             extent=strlen(token)+MagickPathExtent;
+    xc policy.c:1135:21 cxx_ne_to_eq               for (q=policy; *q != '\0'; )
+    xc policy.c:1141:16 cxx_eq_to_ne               if (*token == '\0')
+    xc policy.c:1144:47 cxx_eq_to_ne               if (LocaleNCompare(keyword,"<!DOCTYPE",9) == 0)
+    xc policy.c:1153:20 cxx_ne_to_eq               for ( ; *q != '\0'; q++)
+    xc policy.c:1155:21 cxx_ne_to_eq               if (quote != 0)
+    xc policy.c:1157:22 cxx_eq_to_ne               if (*q == quote)
+    xc policy.c:1162:23 cxx_eq_to_ne               if ((*q == '"') || (*q == '\''))
+    xc policy.c:1162:38 cxx_eq_to_ne               if ((*q == '"') || (*q == '\''))
+    xc policy.c:1165:24 cxx_eq_to_ne               if (*q == '[')
+    xc policy.c:1166:32 cxx_post_inc_to_post_dec   bracket_depth++;
+    xc policy.c:1168:26 cxx_eq_to_ne               if (*q == ']')
+    xc policy.c:1170:41 cxx_gt_to_ge               if (bracket_depth > 0)
+    xc policy.c:1170:41 cxx_gt_to_le               if (bracket_depth > 0)
+    xc policy.c:1174:29 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
+    xc policy.c:1174:55 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
+    xc policy.c:1183:42 cxx_eq_to_ne               if (LocaleNCompare(keyword,"<!--",4) == 0)
+    xc policy.c:1192:43 cxx_eq_to_ne               if (LocaleCompare(keyword,"<include") == 0)
+     c policy.c:1197:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+     c policy.c:1197:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+     c policy.c:1197:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+     c policy.c:1201:22 cxx_ne_to_eq               if (*token != '=')
+     c policy.c:1204:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+     c policy.c:1206:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+     c policy.c:1206:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+     c policy.c:1216:29 cxx_ne_to_eq               if (*path != '\0')
+     c policy.c:1219:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+     c policy.c:1224:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+     c policy.c:1227:35 cxx_add_to_sub             path,depth+1,exception);
+    xc policy.c:1235:42 cxx_eq_to_ne               if (LocaleCompare(keyword,"<policy") == 0)
+    xc policy.c:1247:21 cxx_eq_to_ne               if (policy_info == (PolicyInfo *) NULL)
+    xc policy.c:1249:38 cxx_eq_to_ne               if ((LocaleCompare(keyword,"/>") == 0) ||
+    xc policy.c:1250:45 cxx_eq_to_ne               (LocaleCompare(keyword,"</policy>") == 0))
+    xc policy.c:1253:20 cxx_eq_to_ne               if (status == MagickFalse)
+    xc policy.c:1261:16 cxx_ne_to_eq               if (*token != '=')
+    xc policy.c:1270:54 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"domain") == 0)
+     c policy.c:1281:52 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"name") == 0)
+     c policy.c:1291:55 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"pattern") == 0)
+    xc policy.c:1301:54 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"rights") == 0)
+     c policy.c:1312:55 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"stealth") == 0)
+     c policy.c:1322:53 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"value") == 0)
+    xc policy.c:1334:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    xc policy.c:1357:24 cxx_eq_to_ne               if (policy_semaphore == (SemaphoreInfo *) NULL)
+    xc policy.c:1382:24 cxx_eq_to_ne               if (policy_semaphore == (SemaphoreInfo *) NULL)
+    xc policy.c:1385:20 cxx_ne_to_eq               if (policy_cache != (LinkedListInfo *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-policy.json

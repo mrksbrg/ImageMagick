@@ -1,0 +1,80 @@
+mutate: 50 mutants in MagickCore/locale\.c$, 15 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 25/50 (201s)
+  mutants: 50/50 (305s)
+
+mutate: 50 mutants, 305s
+  killed 0, survived 50 (12 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  LoadLocaleCache                       24      0       24      0
+  IsLocaleTreeInstantiated               7      0        7      0
+  FormatLocaleStringList                 4      0        4      0
+  DestroyLocaleNode                      3      0        3      0
+  InterpretLocaleValue                   2      0        2      0
+  AcquireCLocale                         1      0        1      0
+  AcquireLocaleSplayTree                 1      0        1      0
+  DestroyCLocale                         1      0        1      0
+  DestroyLocaleOptions                   1      0        1      0
+  FormatLocaleFileList                   1      0        1      0
+  GetLocaleOptions                       1      0        1      0
+  ChopLocaleComponents                   1      0        1      0
+  LocaleNCompare                         1      0        1      0
+  LocaleComponentGenesis                 1      0        1      0
+  LocaleComponentTerminus                1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc locale.c:138:16 cxx_eq_to_ne               if (c_locale == (locale_t) NULL)
+    x  locale.c:183:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  locale.c:185:14 cxx_ne_to_eq               if (p->tag != (char *) NULL)
+    x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
+    x  locale.c:210:19 cxx_ne_to_eq               while (option != (const StringInfo *) NULL)
+    xc locale.c:263:16 cxx_ne_to_eq               if (c_locale != (locale_t) NULL)
+    x  locale.c:305:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    xc locale.c:463:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    xc locale.c:475:9 cxx_lt_to_ge               if (n < 0)
+    xc locale.c:475:9 cxx_lt_to_le               if (n < 0)
+     c locale.c:476:18 cxx_sub_to_add             string[length-1]='\0';
+    x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  locale.c:926:28 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+    x  locale.c:939:17 cxx_ne_to_eq               if (p != (const char *) NULL)
+    x  locale.c:941:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    x  locale.c:943:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    x  locale.c:945:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    x  locale.c:947:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    x  locale.c:949:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    xc locale.c:997:16 cxx_eq_to_ne               if ((*string == '0') && ((string[1] | 0x20)=='x'))
+    xc locale.c:1006:18 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    x  locale.c:1139:54 cxx_gt_to_ge               for (count=0; (count < (ssize_t) components) && (p > path); p--)
+    x  locale.c:1210:23 cxx_add_to_sub             extent=strlen(token)+MagickPathExtent;
+    x  locale.c:1233:22 cxx_eq_to_ne               if (*q == quote)
+    x  locale.c:1246:41 cxx_gt_to_ge               if (bracket_depth > 0)
+       locale.c:1264:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+       locale.c:1264:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+       locale.c:1267:54 cxx_ne_to_eq               while (isspace((int) ((unsigned char) *q)) != 0)
+    x  locale.c:1277:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  locale.c:1277:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  locale.c:1277:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  locale.c:1281:22 cxx_ne_to_eq               if (*token != '=')
+    x  locale.c:1284:47 cxx_eq_to_ne               if (LocaleCompare(keyword,"locale") == 0)
+    x  locale.c:1286:47 cxx_ne_to_eq               if (LocaleCompare(locale,token) != 0)
+    x  locale.c:1290:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+    x  locale.c:1292:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  locale.c:1303:29 cxx_ne_to_eq               if (*path != '\0')
+    x  locale.c:1306:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+    x  locale.c:1311:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       locale.c:1314:42 cxx_add_to_sub             path,locale,depth+1,exception);
+    x  locale.c:1327:24 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
+    x  locale.c:1327:39 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
+    x  locale.c:1331:22 cxx_ne_to_eq               if (*token != '=')
+    x  locale.c:1369:65 cxx_gt_to_ge               while ((isspace((int) ((unsigned char) *q)) != 0) && (q > p))
+    x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
+    x  locale.c:1421:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+     c locale.c:1576:13 cxx_eq_to_ne               if (q == (char *) NULL)
+    xc locale.c:1678:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+    xc locale.c:1706:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-cap1500-locale.json

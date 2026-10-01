@@ -1,0 +1,52 @@
+mutate: 30 mutants in MagickCore/random\.c$, 7 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 25/30 (134s)
+  mutants: 30/30 (141s)
+
+mutate: 30 mutants, 141s
+  killed 0, survived 30 (2 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GenerateEntropicChaos                 12      0       12      0
+  SetRandomKey                           8      0        8      0
+  DestroyRandomInfo                      4      0        4      0
+  AcquireRandomInfo                      2      0        2      0
+  IncrementRandomNonce                   2      0        2      0
+  RandomComponentGenesis                 1      0        1      0
+  RandomComponentTerminus                1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  random.c:210:33 cxx_add_to_sub             random_info->signature_info)+1)/2);
+    x  random.c:210:36 cxx_div_to_mul             random_info->signature_info)+1)/2);
+    x  random.c:282:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  random.c:285:30 cxx_ne_to_eq               if (random_info->reservoir != (StringInfo *) NULL)
+    x  random.c:287:26 cxx_ne_to_eq               if (random_info->nonce != (StringInfo *) NULL)
+    x  random.c:289:35 cxx_ne_to_eq               if (random_info->signature_info != (SignatureInfo *) NULL)
+    x  random.c:395:16 cxx_eq_to_ne               if (status == 0)
+       random.c:431:39 cxx_eq_to_ne               if (getrusage(RUSAGE_SELF,&usage) == 0)
+       random.c:445:55 cxx_eq_to_ne               if (gettimeofday(&timer,(struct timezone *) NULL) == 0)
+       random.c:448:25 cxx_mul_to_div             nanoseconds=1000*timer.tv_usec;
+       random.c:480:32 cxx_add_to_sub             nanoseconds=timer.tms_utime+timer.tms_stime;
+       random.c:531:17 cxx_ne_to_eq               if (environ != (char **) NULL)
+       random.c:539:30 cxx_ne_to_eq               for (i=0; environ[i] != (char *) NULL; i++)
+       random.c:539:49 cxx_post_inc_to_post_dec   for (i=0; environ[i] != (char *) NULL; i++)
+       random.c:551:14 cxx_ne_to_eq               if (file != -1)
+       random.c:559:28 cxx_ne_to_eq               if (gather_true_random != MagickFalse)
+       random.c:569:18 cxx_eq_to_ne               if (file == -1)
+       random.c:576:18 cxx_ne_to_eq               if (file != -1)
+    xc random.c:806:24 cxx_eq_to_ne               if (random_semaphore == (SemaphoreInfo *) NULL)
+    xc random.c:831:24 cxx_eq_to_ne               if (random_semaphore == (SemaphoreInfo *) NULL)
+    x  random.c:873:47 cxx_sub_to_add             for (i=(ssize_t) (GetStringInfoLength(nonce)-1); i != 0; i--)
+    x  random.c:875:13 cxx_post_inc_to_post_dec   datum[i]++;
+    x  random.c:898:14 cxx_eq_to_ne               if (length == 0)
+    x  random.c:909:18 cxx_ne_to_eq               for (p=key; (i != 0) && (random_info->i != 0); i--)
+    x  random.c:909:43 cxx_ne_to_eq               for (p=key; (i != 0) && (random_info->i != 0); i--)
+    x  random.c:912:19 cxx_post_inc_to_post_dec   random_info->i++;
+    x  random.c:913:24 cxx_eq_to_ne               if (random_info->i == GetSignatureDigestsize(signature_info))
+    x  random.c:916:12 cxx_ge_to_gt               while (i >= GetSignatureDigestsize(signature_info))
+    x  random.c:927:9 cxx_ne_to_eq               if (i != 0)
+    x  random.c:936:18 cxx_ne_to_eq               while (i-- != 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-cap1500-random.json

@@ -1,0 +1,29 @@
+mutate: 63 mutants in MagickCore/fourier\.c$, 2 functions
+mutate: baseline over 7 cases in 0s
+  mutants: 25/63 (0s)
+  mutants: 50/63 (0s)
+  mutants: 63/63 (130s)
+
+mutate: 63 mutants, 130s
+  killed 50, survived 11 (0 capped), no coverage 2, errors 0
+  mutation score on reached code: 82.0%   overall: 79.4%
+
+  function                           total killed survived no-cov
+  ComplexImages                         61     50       11      0
+  InverseFourierTransformImage           2      0        0      2
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  fourier.c:183:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  fourier.c:227:33 cxx_ne_to_eq               (images->next->next->next != (Image *) NULL))
+    x  fourier.c:287:19 cxx_lt_to_le               for (i=0; i < (ssize_t) number_channels; i++)
+    x  fourier.c:314:48 cxx_add_to_sub             cr=MagickSafeReciprocal(br*br+bi*bi+snr)*(ar*br+ai*bi);
+    x  fourier.c:315:45 cxx_mul_to_div             ci=MagickSafeReciprocal(br*br+bi*bi+snr)*(ai*br-ar*bi);
+    x  fourier.c:315:48 cxx_add_to_sub             ci=MagickSafeReciprocal(br*br+bi*bi+snr)*(ai*br-ar*bi);
+    x  fourier.c:332:39 cxx_sub_to_add             cr=ar*cos(2.0*MagickPI*(ai-0.5));
+    x  fourier.c:333:39 cxx_sub_to_add             ci=ar*sin(2.0*MagickPI*(ai-0.5));
+    x  fourier.c:357:34 cxx_ne_to_eq               if (images->progress_monitor != (MagickProgressMonitor) NULL)
+       fourier.c:365:17 cxx_post_inc_to_post_dec   progress++;
+       fourier.c:367:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-fourier.json

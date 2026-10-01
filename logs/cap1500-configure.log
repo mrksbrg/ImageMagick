@@ -1,0 +1,25 @@
+mutate: 7 mutants in MagickCore/configure\.c$, 4 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 7/7 (107s)
+
+mutate: 7 mutants, 107s
+  killed 0, survived 7 (7 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetConfigurePaths                      4      0        4      0
+  ConfigureComponentGenesis              1      0        1      0
+  ConfigureComponentTerminus             1      0        1      0
+  GetConfigureOptions                    1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc configure.c:234:27 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+    xc configure.c:279:27 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+    xc configure.c:679:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc configure.c:765:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc configure.c:790:18 cxx_ge_to_gt               if ((q >= path) && (*q != *DirectorySeparator))
+    xc configure.c:906:14 cxx_ne_to_eq               if (home != (char *) NULL)
+    xc configure.c:917:14 cxx_ne_to_eq               if (home != (char *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-cap1500-configure.json

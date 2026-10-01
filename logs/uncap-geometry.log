@@ -1,0 +1,83 @@
+mutate: 63 mutants in MagickCore/geometry\.c$, 6 functions
+mutate: baseline over 10511 cases in 0s
+  mutants: 25/63 (1215s)
+  mutants: 50/63 (2342s)
+  mutants: 63/63 (2844s)
+
+mutate: 63 mutants, 2844s
+  killed 2, survived 61 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 3.2%   overall: 3.2%
+
+  function                           total killed survived no-cov
+  ParseGeometry                         41      2       39      0
+  GetGeometry                           15      0       15      0
+  IsSceneGeometry                        3      0        3      0
+  GetPageGeometry                        2      0        2      0
+  SetGeometry                            1      0        1      0
+  SetGeometryInfo                        1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  geometry.c:225:24 cxx_ge_to_gt               if (strlen(geometry) >= (MagickPathExtent-1))
+    x  geometry.c:343:14 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
+    x  geometry.c:343:44 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
+    x  geometry.c:343:59 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
+    x  geometry.c:364:14 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
+    x  geometry.c:364:44 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
+    x  geometry.c:364:59 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
+    x  geometry.c:424:37 cxx_eq_to_ne               if (((flags & SeparatorValue) == 0) && ((flags & HeightValue) == 0))
+    x  geometry.c:424:69 cxx_eq_to_ne               if (((flags & SeparatorValue) == 0) && ((flags & HeightValue) == 0))
+    x  geometry.c:426:23 cxx_ne_to_eq               if ((height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:426:53 cxx_ne_to_eq               if ((height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:430:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
+    x  geometry.c:430:68 cxx_eq_to_ne               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
+    x  geometry.c:431:19 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:431:49 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:482:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:508:36 cxx_eq_to_ne               if ((flags & GreaterValue) == 0)
+    x  geometry.c:684:13 cxx_gt_to_ge               if (value > (double) MAGICK_SSIZE_MAX)
+    x  geometry.c:686:13 cxx_lt_to_le               if (value < (double) MAGICK_SSIZE_MIN)
+    x  geometry.c:692:58 cxx_ne_to_eq               if ((pedantic != MagickFalse) && (strchr(geometry,',') != (char *) NULL))
+    x  geometry.c:950:24 cxx_ge_to_gt               if (strlen(geometry) >= (MagickPathExtent-1))
+       geometry.c:1021:20 cxx_eq_to_ne               if (*(p+1) == ')')
+    x  geometry.c:1115:15 cxx_ne_to_eq               if (((c != 215) && (*q != 'x') && (*q != 'X') && (*q != ':')) ||
+    x  geometry.c:1115:30 cxx_ne_to_eq               if (((c != 215) && (*q != 'x') && (*q != 'X') && (*q != ':')) ||
+    x  geometry.c:1115:45 cxx_ne_to_eq               if (((c != 215) && (*q != 'x') && (*q != 'X') && (*q != ':')) ||
+    x  geometry.c:1115:60 cxx_ne_to_eq               if (((c != 215) && (*q != 'x') && (*q != 'X') && (*q != ':')) ||
+    x  geometry.c:1129:71 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1153:30 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1153:45 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1153:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1154:15 cxx_eq_to_ne               (*p == ':'))
+    x  geometry.c:1159:19 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1159:34 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1159:49 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1161:22 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+    x  geometry.c:1173:24 cxx_minus_to_noop          value=(-value);
+    x  geometry.c:1177:50 cxx_ne_to_eq               while (isspace((int) ((unsigned char) *p)) != 0)
+    x  geometry.c:1179:15 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1179:30 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1179:45 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1179:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1180:15 cxx_eq_to_ne               (*p == ':'))
+       geometry.c:1185:19 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+       geometry.c:1185:34 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+       geometry.c:1185:49 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+       geometry.c:1187:22 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+       geometry.c:1187:37 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+       geometry.c:1189:20 cxx_eq_to_ne               if (*p == '-')
+       geometry.c:1195:17 cxx_ne_to_eq               if (p != q)
+       geometry.c:1198:41 cxx_ne_to_eq               if ((flags & ChiNegative) != 0)
+       geometry.c:1199:24 cxx_minus_to_noop          value=(-value);
+    x  geometry.c:1212:30 cxx_ne_to_eq               if (((flags & XiValue) != 0) && (geometry_info->xi == 0.0))
+    x  geometry.c:1215:27 cxx_ne_to_eq               if (((flags & RhoValue) != 0) && ((flags & SigmaValue) == 0) &&
+    x  geometry.c:1216:26 cxx_ne_to_eq               ((flags & XiValue) != 0) && ((flags & XiNegative) != 0))
+    x  geometry.c:1216:57 cxx_ne_to_eq               ((flags & XiValue) != 0) && ((flags & XiNegative) != 0))
+       geometry.c:1218:30 cxx_eq_to_ne               if ((flags & PsiValue) == 0)
+       geometry.c:1229:32 cxx_eq_to_ne               if ((flags & ChiValue) == 0)
+    x  geometry.c:1256:37 cxx_eq_to_ne               if (((flags & SeparatorValue) == 0) && ((flags & SigmaValue) == 0))
+    x  geometry.c:1258:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & RhoValue) == 0))
+    x  geometry.c:1795:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:1828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap-geometry.json

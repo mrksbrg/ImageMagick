@@ -1,0 +1,95 @@
+mutate: 215 mutants in MagickCore/log\.c$, 22 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 25/215 (0s)
+  mutants: 50/215 (114s)
+  mutants: 75/215 (208s)
+  mutants: 100/215 (232s)
+  mutants: 125/215 (233s)
+  mutants: 150/215 (233s)
+  mutants: 175/215 (234s)
+  mutants: 200/215 (341s)
+  mutants: 215/215 (369s)
+
+mutate: 215 mutants, 369s
+  killed 66, survived 51 (46 capped), no coverage 98, errors 0
+  mutation score on reached code: 56.4%   overall: 30.7%
+
+  function                           total killed survived no-cov
+  LoadLogCache                          52     26       26      0
+  TranslateEvent                        49      0        0     49
+  LogMagickEventList                    24      0        0     24
+  ListLogInfo                           18     16        2      0
+  GetLogInfoList                         9      7        2      0
+  GetLogList                             9      0        0      9
+  ParseLogHandlers                       8      6        2      0
+  GetLogInfo                             7      0        7      0
+  AcquireLogCache                        6      5        1      0
+  DestroyLogElement                      5      2        3      0
+  FormatLogFilename                      5      0        0      5
+  CloseMagickLog                         4      0        0      4
+  IsLogCacheInstantiated                 4      3        1      0
+  CheckEventLogging                      3      1        2      0
+  LogComponentTerminus                   2      0        2      0
+  SetLogEventMask                        2      0        0      2
+  SetLogFormat                           2      0        0      2
+  SetLogName                             2      0        0      2
+  GetLogEventMask                        1      0        1      0
+  LogInfoCompare                         1      0        1      0
+  LogComponentGenesis                    1      0        1      0
+  SetLogMethod                           1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc log.c:334:16 cxx_eq_to_ne               if (status == MagickFalse)
+    xc log.c:413:16 cxx_eq_to_ne               if (log_info == (const LogInfo *) NULL)
+    xc log.c:452:41 cxx_eq_to_ne               if (IsLogCacheInstantiated(exception) == MagickFalse)
+    xc log.c:460:13 cxx_eq_to_ne               if ((name == (const char *) NULL) || (LocaleCompare(name,"*") == 0))
+    xc log.c:460:65 cxx_eq_to_ne               if ((name == (const char *) NULL) || (LocaleCompare(name,"*") == 0))
+    xc log.c:462:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+     c log.c:467:12 cxx_ne_to_eq               while (p != (ElementInfo *) NULL)
+     c log.c:470:44 cxx_eq_to_ne               if (LocaleCompare(name,log_info->name) == 0)
+     c log.c:474:9 cxx_eq_to_ne               if (p == (ElementInfo *) NULL)
+    x  log.c:521:44 cxx_eq_to_ne               if (LocaleCompare((*p)->path,(*q)->path) == 0)
+    x  log.c:544:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  log.c:550:47 cxx_add_to_sub             GetNumberOfElementsInLinkedList(log_cache)+1UL,sizeof(*preferences));
+    xc log.c:725:36 cxx_ne_to_eq               if (IsLinkedListEmpty(log_cache) != MagickFalse)
+    xc log.c:733:24 cxx_ne_to_eq               event_logging=(p != (ElementInfo *) NULL) &&
+    xc log.c:743:25 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
+    x  log.c:837:15 cxx_eq_to_ne               if ((path == (const char *) NULL) ||
+    x  log.c:843:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (8*sizeof(LogHandlerType)); j++)
+    xc log.c:956:20 cxx_ne_to_eq               for ( ; *q != '\0'; q++)
+     c log.c:960:22 cxx_eq_to_ne               if (*q == quote)
+    xc log.c:973:41 cxx_gt_to_ge               if (bracket_depth > 0)
+    xc log.c:977:29 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
+    xc log.c:977:55 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
+    xc log.c:991:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+    xc log.c:991:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+     c log.c:1000:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+     c log.c:1000:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+     c log.c:1000:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+     c log.c:1004:22 cxx_ne_to_eq               if (*token != '=')
+     c log.c:1007:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+     c log.c:1009:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+     c log.c:1009:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+     c log.c:1019:29 cxx_ne_to_eq               if (*path != '\0')
+     c log.c:1022:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+     c log.c:1027:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+     c log.c:1030:35 cxx_add_to_sub             path,depth+1,exception);
+    xc log.c:1055:20 cxx_eq_to_ne               if (status == MagickFalse)
+    xc log.c:1071:54 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"events") == 0)
+    xc log.c:1084:36 cxx_ne_to_eq               if (log_info->filename != (char *) NULL)
+    xc log.c:1092:34 cxx_ne_to_eq               if (log_info->format != (char *) NULL)
+    xc log.c:1126:33 cxx_lt_to_le               if (log_info->limit < 1024)
+     c log.c:1127:40 cxx_mul_to_div             log_info->limit=1024*1024*StringToUnsignedLong(token);
+    xc log.c:1148:13 cxx_eq_to_ne               if (cache == (LinkedListInfo *) NULL)
+    xc log.c:1150:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    xc log.c:1177:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
+    xc log.c:1216:17 cxx_ne_to_eq               if (p->format != (char *) NULL)
+    xc log.c:1218:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    xc log.c:1220:19 cxx_ne_to_eq               if (p->filename != (char *) NULL)
+    xc log.c:1230:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
+    xc log.c:1233:17 cxx_ne_to_eq               if (log_cache != (LinkedListInfo *) NULL)
+    xc log.c:1787:16 cxx_ne_to_eq               while ((*p != '\0') && ((isspace((int) ((unsigned char) *p)) != 0) ||
+    xc log.c:1790:46 cxx_post_inc_to_post_dec   for (i=0; *LogHandlers[i].name != '\0'; i++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-log.json

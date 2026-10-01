@@ -1,0 +1,33 @@
+mutate: 12 mutants in MagickCore/locale\.c$, 8 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 12/12 (623s)
+
+mutate: 12 mutants, 623s
+  killed 1, survived 11 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 8.3%   overall: 8.3%
+
+  function                           total killed survived no-cov
+  FormatLocaleStringList                 4      1        3      0
+  InterpretLocaleValue                   2      0        2      0
+  AcquireCLocale                         1      0        1      0
+  DestroyCLocale                         1      0        1      0
+  FormatLocaleFileList                   1      0        1      0
+  LocaleNCompare                         1      0        1      0
+  LocaleComponentGenesis                 1      0        1      0
+  LocaleComponentTerminus                1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  locale.c:138:16 cxx_eq_to_ne               if (c_locale == (locale_t) NULL)
+    x  locale.c:263:16 cxx_ne_to_eq               if (c_locale != (locale_t) NULL)
+    x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    x  locale.c:463:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    x  locale.c:475:9 cxx_lt_to_le               if (n < 0)
+       locale.c:476:18 cxx_sub_to_add             string[length-1]='\0';
+    x  locale.c:997:16 cxx_eq_to_ne               if ((*string == '0') && ((string[1] | 0x20)=='x'))
+    x  locale.c:1006:18 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+       locale.c:1576:13 cxx_eq_to_ne               if (q == (char *) NULL)
+    x  locale.c:1678:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+    x  locale.c:1706:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap-locale.json

@@ -1,0 +1,17 @@
+mutate: 2 mutants in MagickCore/static\.c$, 1 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 2/2 (100s)
+
+mutate: 2 mutants, 100s
+  killed 0, survived 2 (2 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  UnregisterStaticModules                2      0        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc static.c:371:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) extent; i++)
+    xc static.c:373:37 cxx_ne_to_eq               if (MagickModules[i].registered != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-cap1500-static.json

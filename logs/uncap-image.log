@@ -1,0 +1,171 @@
+mutate: 139 mutants in MagickCore/image\.c$, 20 functions
+mutate: baseline over 10525 cases in 0s
+  mutants: 25/139 (1190s)
+  mutants: 50/139 (2366s)
+  mutants: 75/139 (3580s)
+  mutants: 100/139 (4777s)
+  mutants: 125/139 (5642s)
+  mutants: 139/139 (5754s)
+
+mutate: 139 mutants, 5754s
+  killed 7, survived 132 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 5.0%   overall: 5.0%
+
+  function                           total killed survived no-cov
+  SetImageInfo                          26      5       21      0
+  AcquireImage                          21      0       21      0
+  InterpretImageFilename                18      0       18      0
+  SyncImageSettings                     18      1       17      0
+  DestroyImageInfo                      10      0       10      0
+  DestroyImage                           7      0        7      0
+  SetImageInfoFromExtension              7      1        6      0
+  CloneImage                             6      0        6      0
+  ResetImagePixels                       6      0        6      0
+  CloneImageInfo                         5      0        5      0
+  GetImageInfo                           3      0        3      0
+  ReferenceImage                         2      0        2      0
+  SetImageBackgroundColor                2      0        2      0
+  SetImageExtent                         2      0        2      0
+  DisassociateImageStream                1      0        1      0
+  GetImageVirtualPixelMethod             1      0        1      0
+  SetImageStorageClass                   1      0        1      0
+  SetImageInfoBlob                       1      0        1      0
+  SetImageInfoFile                       1      0        1      0
+  SyncImagesSettings                     1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  image.c:153:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       image.c:197:32 cxx_add_to_sub             image->ttl=image->timestamp+(time_t) time_limit;
+    x  image.c:208:40 cxx_ne_to_eq               SetBlobExempt(image,image_info->file != (FILE *) NULL ? MagickTrue :
+    x  image.c:224:27 cxx_ne_to_eq               if (image_info->extract != (char *) NULL)
+    x  image.c:231:29 cxx_ne_to_eq               if (((flags & XValue) != 0) || ((flags & YValue) != 0))
+    x  image.c:231:56 cxx_ne_to_eq               if (((flags & XValue) != 0) || ((flags & YValue) != 0))
+    x  image.c:243:27 cxx_ne_to_eq               if (image_info->density != (char *) NULL)
+    x  image.c:249:30 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+    x  image.c:252:32 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+    x  image.c:285:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+    x  image.c:291:34 cxx_ne_to_eq               if ((flags & GreaterValue) != 0)
+       image.c:293:37 cxx_gt_to_ge               if ((double) image->delay > floor(geometry_info.rho+0.5))
+       image.c:293:37 cxx_gt_to_le               if ((double) image->delay > floor(geometry_info.rho+0.5))
+       image.c:293:62 cxx_add_to_sub             if ((double) image->delay > floor(geometry_info.rho+0.5))
+       image.c:294:77 cxx_add_to_sub             image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+
+       image.c:300:39 cxx_lt_to_ge               if ((double) image->delay < floor(geometry_info.rho+0.5))
+       image.c:300:39 cxx_lt_to_le               if ((double) image->delay < floor(geometry_info.rho+0.5))
+       image.c:300:64 cxx_add_to_sub             if ((double) image->delay < floor(geometry_info.rho+0.5))
+       image.c:302:36 cxx_add_to_sub             geometry_info.sigma+0.5));
+    x  image.c:305:75 cxx_add_to_sub             image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+
+       image.c:308:77 cxx_add_to_sub             image->ticks_per_second=CastDoubleToSsizeT(floor(geometry_info.sigma+
+    x  image.c:820:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:847:22 cxx_ne_to_eq               if (image->ascii85 != (void *) NULL)
+    x  image.c:898:26 cxx_ne_to_eq               if (image->montage != (char *) NULL)
+    x  image.c:900:28 cxx_ne_to_eq               if (image->directory != (char *) NULL)
+    x  image.c:915:44 cxx_lt_to_ge               if (MagickAbsoluteValue(scale_x-scale_y) < 2.0)
+    x  image.c:915:44 cxx_lt_to_le               if (MagickAbsoluteValue(scale_x-scale_y) < 2.0)
+    x  image.c:974:26 cxx_ne_to_eq               if (image_info->scenes != (char *) NULL)
+    x  image.c:976:24 cxx_ne_to_eq               if (image_info->page != (char *) NULL)
+    x  image.c:982:35 cxx_ne_to_eq               if (image_info->sampling_factor != (char *) NULL)
+    x  image.c:985:31 cxx_ne_to_eq               if (image_info->server_name != (char *) NULL)
+    x  image.c:989:27 cxx_ne_to_eq               if (image_info->texture != (char *) NULL)
+    x  image.c:1207:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:1222:22 cxx_ne_to_eq               if (image->montage != (char *) NULL)
+    x  image.c:1224:24 cxx_ne_to_eq               if (image->directory != (char *) NULL)
+    x  image.c:1226:23 cxx_ne_to_eq               if (image->colormap != (PixelInfo *) NULL)
+    x  image.c:1228:23 cxx_ne_to_eq               if (image->geometry != (char *) NULL)
+    x  image.c:1233:22 cxx_ne_to_eq               if (image->ascii85 != (Ascii85Info *) NULL)
+    x  image.c:1238:24 cxx_ne_to_eq               if (image->semaphore != (SemaphoreInfo *) NULL)
+    x  image.c:1272:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:1275:24 cxx_ne_to_eq               if (image_info->size != (char *) NULL)
+    x  image.c:1277:27 cxx_ne_to_eq               if (image_info->extract != (char *) NULL)
+    x  image.c:1279:26 cxx_ne_to_eq               if (image_info->scenes != (char *) NULL)
+    x  image.c:1281:24 cxx_ne_to_eq               if (image_info->page != (char *) NULL)
+    x  image.c:1283:35 cxx_ne_to_eq               if (image_info->sampling_factor != (char *) NULL)
+    x  image.c:1286:31 cxx_ne_to_eq               if (image_info->server_name != (char *) NULL)
+    x  image.c:1289:24 cxx_ne_to_eq               if (image_info->font != (char *) NULL)
+    x  image.c:1291:27 cxx_ne_to_eq               if (image_info->texture != (char *) NULL)
+    x  image.c:1293:27 cxx_ne_to_eq               if (image_info->density != (char *) NULL)
+    x  image.c:1334:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:1370:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:1381:19 cxx_ne_to_eq               if (synchronize != (const char *) NULL)
+    x  image.c:1391:54 cxx_ne_to_eq               image_info->debug=(GetLogEventMask() & ImageEvent) != 0 ? MagickTrue :
+    x  image.c:1624:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       image.c:1718:19 cxx_ne_to_eq               if (literal != (char *) NULL)
+    x  image.c:1723:15 cxx_ne_to_eq               if (literal != (char *) NULL)
+    x  image.c:1725:45 cxx_lt_to_le               while ((*cursor != '\0') && ((p-filename) < ((ssize_t) MagickPathExtent-1)))
+    x  image.c:1768:24 cxx_le_to_lt               if ((count <= 0) || ((size_t) count != pattern_length))
+    x  image.c:1770:28 cxx_add_to_sub             if ((p-filename+(ssize_t) pattern_length) >= MagickPathExtent)
+    x  image.c:1770:55 cxx_ge_to_gt               if ((p-filename+(ssize_t) pattern_length) >= MagickPathExtent)
+    x  image.c:1772:73 cxx_sub_to_add             (void) CopyMagickString(p,pattern,(size_t) (MagickPathExtent-
+    x  image.c:1773:17 cxx_sub_to_add             (p-filename)));
+    x  image.c:1801:20 cxx_ge_to_gt               if (extent >= sizeof(pattern))
+    x  image.c:1812:25 cxx_ne_to_eq               (image_info != (ImageInfo *) NULL))
+    x  image.c:1817:24 cxx_add_to_sub             if ((p-filename+(ssize_t) option_length) >= MagickPathExtent)
+    x  image.c:1817:50 cxx_ge_to_gt               if ((p-filename+(ssize_t) option_length) >= MagickPathExtent)
+    x  image.c:1819:68 cxx_sub_to_add             (void) CopyMagickString(p,option,(size_t) (MagickPathExtent-
+    x  image.c:1820:13 cxx_sub_to_add             (p-filename)));
+    x  image.c:1829:11 cxx_sub_to_add             if ((p-filename+1) >= MagickPathExtent)
+    x  image.c:1829:20 cxx_add_to_sub             if ((p-filename+1) >= MagickPathExtent)
+    x  image.c:1829:24 cxx_ge_to_gt               if ((p-filename+1) >= MagickPathExtent)
+    x  image.c:1829:24 cxx_ge_to_lt               if ((p-filename+1) >= MagickPathExtent)
+    x  image.c:2195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2198:25 cxx_post_inc_to_post_dec   image->reference_count++;
+    x  image.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2321:14 cxx_ne_to_eq               if (pixels != (void *) NULL)
+    x  image.c:2338:15 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    x  image.c:2346:16 cxx_eq_to_ne               if (status == MagickFalse)
+    x  image.c:2354:17 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+    x  image.c:2356:48 cxx_mul_to_div             (void) memset(q,0,GetPixelChannels(image)*sizeof(Quantum));
+    x  image.c:2497:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2502:47 cxx_eq_to_ne               ((image->alpha_trait & BlendPixelTrait) == 0))
+    x  image.c:2691:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2731:16 cxx_gt_to_ge               if ((columns > (size_t) MAGICK_SSIZE_MAX) ||
+    x  image.c:2732:13 cxx_gt_to_ge               (rows > (size_t) MAGICK_SSIZE_MAX))
+    x  image.c:2831:33 cxx_ne_to_eq               (magick_info->format_type != UndefinedFormatType))
+    x  image.c:2834:23 cxx_eq_to_ne               while ((format_type == UndefinedFormatType) &&
+    x  image.c:2835:34 cxx_ne_to_eq               (format_type_formats[i] != (char *) NULL))
+    x  image.c:2837:17 cxx_eq_to_ne               if ((*magic == *format_type_formats[i]) &&
+    x  image.c:2845:21 cxx_eq_to_ne               if (format_type == ExplicitFormatType)
+    x  image.c:2850:34 cxx_eq_to_ne               if (LocaleCompare(magic,"RGB") == 0)
+    x  image.c:2890:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2895:18 cxx_eq_to_ne               if (*component == '\0')
+    x  image.c:2931:23 cxx_gt_to_ge               if (first > last)
+    x  image.c:2933:23 cxx_lt_to_ge               if (first < image_info->scene)
+    x  image.c:2933:23 cxx_lt_to_le               if (first < image_info->scene)
+    x  image.c:2935:22 cxx_gt_to_ge               if (last > image_info->number_scenes)
+    x  image.c:2990:29 cxx_eq_to_ne               if (delegate_info == (const DelegateInfo *) NULL)
+    x  image.c:2992:30 cxx_eq_to_ne               if ((delegate_info == (const DelegateInfo *) NULL) &&
+    x  image.c:2993:59 cxx_eq_to_ne               ((*component != '\0') && (IsGlob(component) == MagickFalse)))
+    x  image.c:3011:37 cxx_ne_to_eq               if (IsStringTrue(literal) != MagickFalse)
+    x  image.c:3015:23 cxx_ne_to_eq               if (literal != (char *) NULL)
+    x  image.c:3023:27 cxx_ne_to_eq               if ((image_info->adjoin != MagickFalse) && (frames > 1))
+    x  image.c:3023:54 cxx_gt_to_ge               if ((image_info->adjoin != MagickFalse) && (frames > 1))
+    x  image.c:3023:54 cxx_gt_to_le               if ((image_info->adjoin != MagickFalse) && (frames > 1))
+    x  image.c:3031:34 cxx_eq_to_ne               (strchr(component,'%') == (char *) NULL))
+    x  image.c:3034:27 cxx_ne_to_eq               if ((image_info->adjoin != MagickFalse) && (frames > 0))
+    x  image.c:3034:54 cxx_gt_to_ge               if ((image_info->adjoin != MagickFalse) && (frames > 0))
+    x  image.c:3034:54 cxx_gt_to_le               if ((image_info->adjoin != MagickFalse) && (frames > 0))
+    x  image.c:3109:29 cxx_minus_to_noop          (void) SeekBlob(image,-((MagickOffsetType) count),SEEK_CUR);
+    x  image.c:3137:52 cxx_eq_to_ne               (GetMagickEndianSupport(magick_info) == MagickFalse))
+    x  image.c:3144:48 cxx_eq_to_ne               (GetMagickEndianSupport(magick_info) == MagickFalse))
+    x  image.c:3183:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:3254:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:4110:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:4141:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:4148:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+       image.c:4155:30 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+       image.c:4158:32 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+       image.c:4211:30 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+       image.c:4214:32 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+       image.c:4261:30 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+       image.c:4264:32 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+    x  image.c:4301:24 cxx_ne_to_eq               if (image->units != units)
+       image.c:4306:23 cxx_eq_to_ne               if (units == PixelsPerCentimeterResolution)
+       image.c:4315:23 cxx_eq_to_ne               if (units == PixelsPerInchResolution)
+       image.c:4318:44 cxx_div_to_mul             image->resolution.x+0.5))/100.0;
+       image.c:4320:44 cxx_div_to_mul             image->resolution.y+0.5))/100.0;
+    x  image.c:4329:18 cxx_ne_to_eq               if (option != (const char *) NULL)
+    x  image.c:4332:34 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+       image.c:4348:30 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+       image.c:4351:32 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap-image.json

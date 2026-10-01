@@ -1,0 +1,76 @@
+mutate: 233 mutants in MagickCore/effect\.c$, 22 functions
+  baseline: 5/5 (0s)
+mutate: baseline over 15 cases in 0s
+  mutants: 25/233 (0s)
+  mutants: 50/233 (0s)
+  mutants: 75/233 (0s)
+  mutants: 100/233 (0s)
+  mutants: 125/233 (0s)
+  mutants: 150/233 (1s)
+  mutants: 175/233 (1s)
+  mutants: 200/233 (1s)
+  mutants: 225/233 (1s)
+  mutants: 233/233 (1s)
+
+mutate: 233 mutants, 1s
+  killed 53, survived 30 (0 capped), no coverage 150, errors 0
+  mutation score on reached code: 63.9%   overall: 22.7%
+
+  function                           total killed survived no-cov
+  LocalContrastImage                    47     43        4      0
+  AdaptiveSharpenImage                  34     10       24      0
+  AdaptiveBlurImage                     26      0        0     26
+  SelectiveBlurImage                    21      0        0     21
+  BilateralBlurImage                    18      0        0     18
+  PreviewImage                          10      0        0     10
+  ShadeImage                            10      0        0     10
+  Hull                                   9      0        0      9
+  KuwaharaImage                          8      0        0      8
+  DespeckleImage                         7      0        0      7
+  MotionBlurImage                        6      0        0      6
+  RotationalBlurImage                    6      0        0      6
+  SharpenImage                           6      0        0      6
+  UnsharpMaskImage                       6      0        0      6
+  EmbossImage                            4      0        0      4
+  SpreadImage                            4      0        0      4
+  DestroyBilateralTLS                    3      0        0      3
+  GetMotionBlurKernel                    3      0        0      3
+  AcquireBilateralTLS                    2      0        0      2
+  BlurImage                              1      0        1      0
+  EdgeImage                              1      0        1      0
+  GaussianBlurImage                      1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  effect.c:485:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:490:19 cxx_lt_to_le               if (fabs(sigma) < MagickEpsilon)
+    x  effect.c:526:40 cxx_mul_to_div             (void) memset(kernel,0,(size_t) width*sizeof(*kernel));
+    x  effect.c:527:15 cxx_lt_to_le               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:546:32 cxx_minus_to_noop          kernel[w][k]=(double) (-exp(-((double) u*u+v*v)/(2.0*MagickSigma*
+    x  effect.c:547:24 cxx_div_to_mul             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:547:38 cxx_mul_to_div             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:547:50 cxx_mul_to_div             MagickSigma))/(2.0*MagickPI*MagickSigma*MagickSigma));
+    x  effect.c:553:15 cxx_lt_to_le               if (sigma < MagickEpsilon)
+       effect.c:554:19 cxx_sub_to_add             kernel[w][(k-1)/2]=1.0;
+       effect.c:554:22 cxx_div_to_mul             kernel[w][(k-1)/2]=1.0;
+    x  effect.c:556:9 cxx_lt_to_le               if (w < (ssize_t) width)
+       effect.c:558:20 cxx_ge_to_gt               for (w-=2; w >= 0; w-=2)
+       effect.c:558:20 cxx_ge_to_lt               for (w-=2; w >= 0; w-=2)
+    x  effect.c:612:13 cxx_lt_to_le               if (j < 0)
+    x  effect.c:615:15 cxx_gt_to_ge               if (j > (ssize_t) width)
+    x  effect.c:620:56 cxx_sub_to_add             (((ssize_t) width-j)/2L),width-(size_t) j,width-(size_t) j,exception);
+    x  effect.c:686:21 cxx_lt_to_le               for (v=0; v < ((ssize_t) width-j); v++)
+    x  effect.c:688:23 cxx_lt_to_le               for (u=0; u < ((ssize_t) width-j); u++)
+    x  effect.c:705:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       effect.c:713:17 cxx_post_inc_to_post_dec   progress++;
+       effect.c:716:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  effect.c:725:15 cxx_lt_to_ge               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:725:15 cxx_lt_to_le               for (w=0; w < (ssize_t) width; w+=2)
+    x  effect.c:782:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:1553:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:2064:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  effect.c:2143:17 cxx_mul_to_div             pixels+=id*scanLineSize;
+    x  effect.c:2183:43 cxx_sub_to_add             (x != (ssize_t) image->columns-1))
+    x  effect.c:2222:17 cxx_mul_to_div             pixels+=id*scanLineSize;
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-conf1-effect.json

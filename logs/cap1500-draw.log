@@ -1,0 +1,57 @@
+mutate: 39 mutants in MagickCore/draw\.c$, 4 functions
+mutate: baseline over 10517 cases in 0s
+  mutants: 25/39 (286s)
+  mutants: 39/39 (427s)
+
+mutate: 39 mutants, 427s
+  killed 1, survived 38 (38 capped), no coverage 0, errors 0
+  mutation score on reached code: 2.6%   overall: 2.6%
+
+  function                           total killed survived no-cov
+  DestroyDrawInfo                       14      0       14      0
+  GetDrawInfo                           13      1       12      0
+  CloneDrawInfo                         11      0       11      0
+  GetAffineMatrix                        1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc draw.c:286:21 cxx_ne_to_eq               if (draw_info->id != (char *) NULL)
+    xc draw.c:288:28 cxx_ne_to_eq               if (draw_info->primitive != (char *) NULL)
+    xc draw.c:318:26 cxx_ne_to_eq               if (draw_info->metrics != (char *) NULL)
+    xc draw.c:320:25 cxx_ne_to_eq               if (draw_info->family != (char *) NULL)
+    xc draw.c:325:27 cxx_ne_to_eq               if (draw_info->encoding != (char *) NULL)
+    xc draw.c:333:26 cxx_ne_to_eq               if (draw_info->density != (char *) NULL)
+    xc draw.c:338:30 cxx_ne_to_eq               if (draw_info->server_name != (char *) NULL)
+    xc draw.c:345:50 cxx_ge_to_gt               for (x=0; fabs(draw_info->dash_pattern[x]) >= MagickEpsilon; x++) ;
+     c draw.c:365:38 cxx_eq_to_ne               if (clone_info->gradient.stops == (StopInfo *) NULL)
+     c draw.c:369:30 cxx_mul_to_div             (size_t) number_stops*sizeof(*clone_info->gradient.stops));
+    xc draw.c:377:28 cxx_ne_to_eq               if (draw_info->clip_mask != (char *) NULL)
+    xc draw.c:975:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc draw.c:977:21 cxx_ne_to_eq               if (draw_info->id != (char *) NULL)
+    xc draw.c:979:28 cxx_ne_to_eq               if (draw_info->primitive != (char *) NULL)
+    xc draw.c:981:23 cxx_ne_to_eq               if (draw_info->text != (char *) NULL)
+    xc draw.c:983:27 cxx_ne_to_eq               if (draw_info->geometry != (char *) NULL)
+    xc draw.c:989:23 cxx_ne_to_eq               if (draw_info->font != (char *) NULL)
+    xc draw.c:991:26 cxx_ne_to_eq               if (draw_info->metrics != (char *) NULL)
+    xc draw.c:993:25 cxx_ne_to_eq               if (draw_info->family != (char *) NULL)
+    xc draw.c:995:27 cxx_ne_to_eq               if (draw_info->encoding != (char *) NULL)
+    xc draw.c:997:26 cxx_ne_to_eq               if (draw_info->density != (char *) NULL)
+    xc draw.c:999:30 cxx_ne_to_eq               if (draw_info->server_name != (char *) NULL)
+    xc draw.c:1002:31 cxx_ne_to_eq               if (draw_info->dash_pattern != (double *) NULL)
+    xc draw.c:1005:33 cxx_ne_to_eq               if (draw_info->gradient.stops != (StopInfo *) NULL)
+    xc draw.c:1008:28 cxx_ne_to_eq               if (draw_info->clip_mask != (char *) NULL)
+    xc draw.c:6130:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc draw.c:6177:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc draw.c:6202:70 cxx_ne_to_eq               draw_info->debug=(GetLogEventMask() & (DrawEvent | AnnotateEvent)) != 0 ?
+    xc draw.c:6207:38 cxx_ne_to_eq               if (draw_info->image_info->density != (char *) NULL)
+    xc draw.c:6210:46 cxx_ge_to_gt               if (fabs(draw_info->image_info->pointsize) >= MagickEpsilon)
+    xc draw.c:6213:42 cxx_ne_to_eq               if (draw_info->image_info->server_name != (char *) NULL)
+    xc draw.c:6216:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+    xc draw.c:6222:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+    xc draw.c:6225:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+    xc draw.c:6252:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+    xc draw.c:6260:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+     c draw.c:6266:18 cxx_eq_to_ne               if (weight == -1)
+    xc draw.c:6271:14 cxx_ne_to_eq               if (option != (const char *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-cap1500-draw.json
