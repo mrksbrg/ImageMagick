@@ -2644,6 +2644,26 @@
    "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
   },
   {
+   "at": 10,
+   "file": "MagickCore/effect.c",
+   "function": "LocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "pixels+=id*scanLineSize;",
+   "verdict": "unobservable",
+   "why": "id*scanLineSize and id/scanLineSize are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/effect.c",
+   "function": "LocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "pixels+=id*scanLineSize;",
+   "verdict": "unobservable",
+   "why": "id*scanLineSize and id/scanLineSize are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
    "at": 14,
    "file": "MagickCore/enhance.c",
    "function": "AutoGammaImage",
@@ -3400,6 +3420,46 @@
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unobservable",
    "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/fourier.c",
+   "function": "ComplexImages",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "ci=ar*sin(2.0*MagickPI*(ai-0.5));",
+   "verdict": "equivalent",
+   "why": "cos and sin have period 2*pi: 2*pi*(ai+0.5) and 2*pi*(ai-0.5) differ by exactly 2*pi"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/fourier.c",
+   "function": "ComplexImages",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "cr=ar*cos(2.0*MagickPI*(ai-0.5));",
+   "verdict": "equivalent",
+   "why": "cos and sin have period 2*pi: 2*pi*(ai+0.5) and 2*pi*(ai-0.5) differ by exactly 2*pi"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/list.c",
+   "function": "CloneImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (first > (ssize_t) length)",
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches set the same value (length)"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/list.c",
+   "function": "CloneImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (last > (ssize_t) length)",
+   "verdict": "equivalent",
+   "why": "a clamp at its own bound: at equality both branches set the same value (length)"
   },
   {
    "at": 7,

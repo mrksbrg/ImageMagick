@@ -1857,6 +1857,28 @@ GAP_COMMANDS += [
 GAP_COMMANDS += [
     "-size 3000x6 xc:white -fill black -draw \"point 2900,1\" -draw \"line 0,3 1900,3\" -draw \"point 5,5\" -write fax:-",
 ]
+# effect.c: -local-contrast on images large enough that its window is wider than one pixel, and -adaptive-sharpen on one channel, a gray image and a larger sigma
+GAP_COMMANDS += [
+    "{C}/rose.miff -adaptive-sharpen 5x2",
+    "{C}/rose.miff -channel R -adaptive-sharpen 3x1",
+    "{C}/gray16.miff -adaptive-sharpen 5x2",
+    "{C}/rose.miff -resize 400x260! -local-contrast 20x40",
+    "{C}/rose.miff -resize 120x500! -local-contrast 100x30",
+]
+# fourier.c: -complex over four images (two complex numbers) with and without complex:snr, and -fft -ift with and without the phase image
+GAP_COMMANDS += [
+    "{C}/rose.miff {C}/rose_blur.miff ( {C}/gray16.miff -resize 70x46! ) ( {C}/rose_patch.miff -resize 70x46! ) -complex add",
+    "{C}/rose.miff {C}/rose_blur.miff ( {C}/gray16.miff -resize 70x46! ) ( {C}/rose_patch.miff -resize 70x46! ) -complex divide",
+    "{C}/rose.miff {C}/rose_blur.miff ( {C}/gray16.miff -resize 70x46! ) ( {C}/rose_patch.miff -resize 70x46! ) -define complex:snr=0.25 -complex divide",
+    "{C}/rose.miff -fft -ift",
+    "{C}/rose.miff -fft +delete -ift",
+]
+# list.c: reversed clone ranges, frames:step, and a swap with negative indexes
+GAP_COMMANDS += [
+    "{C}/seq.miff ( -clone -1-0 ) -append",
+    "{C}/seq.miff -swap -1,-5 -append",
+    "{C}/seq.miff -define frames:step=2 ( -clone 0-4 ) -append",
+]
 # Commands whose output must not be converted to floating point: -stegano hides
 # the watermark in the low-order bits, which a float output does not keep.
 GAP_PLAIN_COMMANDS = [
