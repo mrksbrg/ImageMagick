@@ -1,0 +1,26 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/artifact.c:133:9:133:37",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/artifact.c",
+  "line": 133,
+  "col": 9,
+  "function": "CloneImageArtifacts",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/artifact.c:430:3:430:61",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/artifact.c",
+  "line": 430,
+  "col": 3,
+  "function": "ResetImageArtifactIterator",
+  "status": "killed",
+  "cases": 1,
+  "killer": "decode/9eccd56c11",
+  "why": "stdout differs"
+ }
+]

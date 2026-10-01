@@ -1,0 +1,82 @@
+mutate: 69 mutants in MagickCore/random\.c$, 7 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/69 (165s)
+  mutants: 50/69 (316s)
+  mutants: 69/69 (360s)
+
+mutate: 69 mutants, 360s
+  killed 9, survived 59 (2 capped), no coverage 1, errors 0
+  mutation score on reached code: 13.2%   overall: 13.0%
+
+  function                           total killed survived no-cov
+  GenerateEntropicChaos                 37      2       35      0
+  AcquireRandomInfo                     14      3       11      0
+  SetRandomKey                          11      2        9      0
+  DestroyRandomInfo                      3      2        1      0
+  RandomComponentTerminus                2      0        2      0
+  GetRandomKey                           1      0        1      0
+  GetRandomValue                         1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  random.c:185:3 cxx_remove_void_call       ResetStringInfo(random_info->nonce);
+    x  random.c:188:3 cxx_remove_void_call       ResetStringInfo(random_info->reservoir);
+    x  random.c:206:3 cxx_remove_void_call       InitializeSignature(random_info->signature_info);
+    x  random.c:207:3 cxx_remove_void_call       UpdateSignature(random_info->signature_info,nonce);
+    x  random.c:208:3 cxx_remove_void_call       FinalizeSignature(random_info->signature_info);
+    x  random.c:209:3 cxx_remove_void_call       SetStringInfoLength(nonce,(GetSignatureDigestsize(
+    x  random.c:211:3 cxx_remove_void_call       SetStringInfo(nonce,GetSignatureDigest(random_info->signature_info));
+    x  random.c:212:3 cxx_remove_void_call       SetStringInfo(random_info->nonce,nonce);
+    x  random.c:220:3 cxx_remove_void_call       UpdateSignature(random_info->signature_info,entropy);
+    x  random.c:221:3 cxx_remove_void_call       FinalizeSignature(random_info->signature_info);
+    x  random.c:222:3 cxx_remove_void_call       SetStringInfo(random_info->reservoir,GetSignatureDigest(
+    x  random.c:295:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&random_info->semaphore);
+    x  random.c:393:5 cxx_remove_void_call       SetStringInfoLength(entropy,MaxEntropyExtent);
+       random.c:403:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &entropy);
+       random.c:404:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:405:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) entropy);
+       random.c:406:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:408:3 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(pid));
+       random.c:409:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &pid);
+       random.c:410:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:412:3 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(tid));
+       random.c:413:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &tid);
+       random.c:414:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:421:5 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(pages));
+       random.c:422:5 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &pages);
+       random.c:423:5 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:433:9 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(usage));
+       random.c:434:9 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &usage);
+       random.c:464:3 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(seconds));
+       random.c:465:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &seconds);
+       random.c:466:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:467:3 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(nanoseconds));
+       random.c:468:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &nanoseconds);
+       random.c:469:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:483:3 cxx_remove_void_call       SetStringInfoLength(chaos,sizeof(nanoseconds));
+       random.c:484:3 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) &nanoseconds);
+       random.c:485:3 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:541:11 cxx_remove_void_call       SetStringInfoLength(chaos,strlen(environ[i]));
+       random.c:542:11 cxx_remove_void_call       SetStringInfoDatum(chaos,(unsigned char *) environ[i]);
+       random.c:543:11 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:553:9 cxx_remove_void_call       SetStringInfoLength(chaos,MaxEntropyExtent);
+       random.c:556:9 cxx_remove_void_call       SetStringInfoLength(chaos,(size_t) count);
+       random.c:557:9 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:578:13 cxx_remove_void_call       SetStringInfoLength(chaos,MaxEntropyExtent);
+       random.c:581:13 cxx_remove_void_call       SetStringInfoLength(chaos,(size_t) count);
+       random.c:582:13 cxx_remove_void_call       ConcatenateStringInfo(entropy,chaos);
+       random.c:588:3 cxx_remove_void_call       UnlockSemaphoreInfo(random_info->semaphore);
+    x  random.c:722:3 cxx_remove_void_call       SetRandomKey(random_info,length,GetStringInfoDatum(key));
+     c random.c:832:5 cxx_remove_void_call       ActivateSemaphoreInfo(&random_semaphore);
+    xc random.c:833:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&random_semaphore);
+    x  random.c:918:5 cxx_remove_void_call       InitializeSignature(signature_info);
+    x  random.c:919:5 cxx_remove_void_call       UpdateSignature(signature_info,random_info->nonce);
+    x  random.c:920:5 cxx_remove_void_call       FinalizeSignature(signature_info);
+    x  random.c:921:5 cxx_remove_void_call       IncrementRandomNonce(random_info->nonce);
+    x  random.c:929:7 cxx_remove_void_call       InitializeSignature(signature_info);
+    x  random.c:930:7 cxx_remove_void_call       UpdateSignature(signature_info,random_info->nonce);
+    x  random.c:931:7 cxx_remove_void_call       FinalizeSignature(signature_info);
+    x  random.c:932:7 cxx_remove_void_call       IncrementRandomNonce(random_info->nonce);
+    x  random.c:933:7 cxx_remove_void_call       SetStringInfo(random_info->reservoir,GetSignatureDigest(signature_info));
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-random.json
