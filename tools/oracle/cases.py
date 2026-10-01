@@ -1187,6 +1187,26 @@ def _read_blob_string_cases():
         yield _with_inputs(case, files={"lut.cube": _text_file(_CUBE_LINES, eol, final)})
 
 
+# blob.c: the paths through a temporary file and past the end of a file.
+# ImageToBlob writes formats without blob support (SVG) to a temporary file and
+# reads it back; the PNG that SVG embeds would carry dates without the define.
+# ImageToFile copies a non-seekable stdin to a temporary file in 1 MiB chunks,
+# and the hald image (1.5 MB) takes two. A raw header offset past the end of
+# the file makes DiscardBlobBytes reach EOF.
+def _blob_path_cases():
+    yield _case("blob", "inline svg through a temporary file",
+                [[img("rose"), "-resize", "4x4", "-define", "png:exclude-chunk=date,time",
+                  "-write", "inline:svg:-", "null:"]], [])
+    yield _with_inputs(_case("blob", "stdin miff over 1 MiB",
+                             [["miff:-", "-scale", "16x16"] + FLOAT_OUT + ["out.miff"]],
+                             ["out.miff"]), stdin=img("hald"))
+    raw = [img("rose"), "-depth", "8", "gray:raw.gray"]
+    for offset in ("70", "3220", "100000"):
+        yield _case("blob", "raw header offset %s" % offset,
+                    [raw, ["-size", "70x45+" + offset, "-depth", "8", "gray:raw.gray",
+                           "-format", "%[fx:mean]\\n", "info:"]], [])
+
+
 def _quantum_cases(writable_formats):
     yield from _quantum_layout_cases(writable_formats)
     yield from _quantum_yuv_cases()
@@ -1996,7 +2016,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
