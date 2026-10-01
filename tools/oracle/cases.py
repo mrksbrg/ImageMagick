@@ -1879,6 +1879,26 @@ GAP_COMMANDS += [
     "{C}/seq.miff -swap -1,-5 -append",
     "{C}/seq.miff -define frames:step=2 ( -clone 0-4 ) -append",
 ]
+# channel.c: the -alpha methods the catalogue lacked (activate, associate, disassociate, discrete, off-if-opaque, on) on images with and without alpha
+GAP_COMMANDS += [
+    "{C}/rose.miff -alpha activate",
+    "{C}/rose_alpha.miff -alpha associate",
+    "{C}/rose_alpha.miff -alpha disassociate",
+    "{C}/rose_alpha.miff -alpha discrete",
+    "{C}/rose_alpha.miff -alpha off-if-opaque",
+    "{C}/rose_alpha.miff -alpha on",
+    "{C}/rose.miff -alpha set -alpha off-if-opaque",
+]
+# magic.c: format detection of a file with no extension, written by -format and info: and read back: SVG with spaces after the <, and one that ends where the pattern does
+GAP_COMMANDS += [
+    "-size 1x1 xc:red -format \"<  svg width='4' height='4'/>\" -write info:t.dat +delete t.dat",
+    "-size 1x1 xc:red -format \"<svg\" -write info:t.dat +delete t.dat",
+]
+# compress.c, third round: fax and Group 4 written and read back in one command
+GAP_COMMANDS += [
+    "-size 3000x6 xc:white -fill black -draw \"point 2900,1\" -draw \"line 0,3 1900,3\" -draw \"point 5,5\" -write fax:t.fax +delete fax:t.fax",
+    "-size 100x6 xc:white -fill black -draw \"line 0,1 99,1\" -draw \"line 50,3 99,3\" -draw \"point 99,5\" -write fax:t.fax +delete fax:t.fax",
+]
 # Commands whose output must not be converted to floating point: -stegano hides
 # the watermark in the low-order bits, which a float output does not keep.
 GAP_PLAIN_COMMANDS = [
