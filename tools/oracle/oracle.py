@@ -357,7 +357,9 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
 
 def write_case_files(d, case):
     for name, text in case.get("files", {}).items():  # e.g. an MSL script
-        with open(os.path.join(d, name), "w") as f:
+        path = os.path.join(d, name)  # a name may hold directories (.config/...)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
             f.write(text.replace("{C}", CORPUS_REL))
 
 
