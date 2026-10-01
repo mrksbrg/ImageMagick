@@ -1,0 +1,41 @@
+mutate: 116 mutants in MagickCore/resize\.c$, 18 functions
+mutate: baseline over 842 cases in 0s
+  mutants: 25/116 (1s)
+  mutants: 50/116 (1s)
+  mutants: 75/116 (1s)
+  mutants: 100/116 (1s)
+  mutants: 116/116 (69s)
+
+mutate: 116 mutants, 69s
+  killed 107, survived 5 (0 capped), no coverage 4, errors 0
+  mutation score on reached code: 95.5%   overall: 92.2%
+
+  function                           total killed survived no-cov
+  Hq2XHelper                            18     16        2      0
+  Scale3X                               18     18        0      0
+  Eagle3X                               13     13        0      0
+  Scale2X                                9      9        0      0
+  Eagle3XB                               9      9        0      0
+  Xbr2X                                  8      8        0      0
+  Fish2X                                 7      7        0      0
+  Eagle2X                                5      5        0      0
+  Epbx2X                                 5      5        0      0
+  LiquidRescaleImage                     4      0        0      4
+  Hq2X                                   4      4        0      0
+  ScaleImage                             4      4        0      0
+  HorizontalFilter                       3      3        0      0
+  VerticalFilter                         3      3        0      0
+  ThumbnailImage                         3      1        2      0
+  Mix2Pixels                             1      1        0      0
+  ResizeImage                            1      0        1      0
+  SampleImage                            1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       resize.c:2218:7 cxx_remove_void_call       CopyPixels(source,e,destination,destination_offset,channels);
+       resize.c:2236:7 cxx_remove_void_call       MixPixels(source,offsets,16,destination,destination_offset,channels);
+    x  resize.c:3888:5 cxx_remove_void_call       AppendImageProfileProperty(resize_image,"hdrgm","hdrgm:Transform",
+    x  resize.c:4669:3 cxx_remove_void_call       ResetImageProfileIterator(thumbnail_image);
+       resize.c:4675:8 cxx_remove_void_call       ResetImageProfileIterator(thumbnail_image);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-resize.json

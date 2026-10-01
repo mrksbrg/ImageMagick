@@ -1,0 +1,35 @@
+mutate: 27 mutants in MagickCore/annotate\.c$, 6 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/27 (78s)
+  mutants: 27/27 (176s)
+
+mutate: 27 mutants, 176s
+  killed 4, survived 14 (2 capped), no coverage 9, errors 0
+  mutation score on reached code: 22.2%   overall: 14.8%
+
+  function                           total killed survived no-cov
+  RenderFreetype                        12      3        9      0
+  RenderPostscript                       6      0        0      6
+  RenderX11                              3      0        0      3
+  AnnotateComponentTerminus              2      0        2      0
+  AnnotateImage                          2      0        2      0
+  FreetypeInit                           2      1        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c annotate.c:199:5 cxx_remove_void_call       ActivateSemaphoreInfo(&annotate_semaphore);
+    xc annotate.c:200:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&annotate_semaphore);
+    x  annotate.c:314:3 cxx_remove_void_call       SetGeometry(image,&geometry);
+    x  annotate.c:315:3 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+    x  annotate.c:1513:7 cxx_remove_void_call       FT_Set_Default_Properties(*alibrary);
+       annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1758:11 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+       annotate.c:1790:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1829:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1928:9 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
+    x  annotate.c:2068:17 cxx_remove_void_call       GetPixelInfo(image,&fill_color);
+       annotate.c:2084:17 cxx_remove_void_call       SetPixelAlpha(image,(const Quantum) fill_opacity,q);
+    x  annotate.c:2138:7 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
+    x  annotate.c:2156:3 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-annotate.json

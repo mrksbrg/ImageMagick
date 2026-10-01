@@ -1,0 +1,38 @@
+mutate: 39 mutants in MagickCore/effect\.c$, 12 functions
+mutate: baseline over 194 cases in 0s
+  mutants: 25/39 (1s)
+  mutants: 39/39 (4s)
+
+mutate: 39 mutants, 4s
+  killed 28, survived 11 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 71.8%   overall: 71.8%
+
+  function                           total killed survived no-cov
+  DespeckleImage                         5      5        0      0
+  SelectiveBlurImage                     5      2        3      0
+  PreviewImage                           4      4        0      0
+  ShadeImage                             4      2        2      0
+  AdaptiveBlurImage                      3      2        1      0
+  AdaptiveSharpenImage                   3      2        1      0
+  BilateralBlurImage                     3      2        1      0
+  LocalContrastImage                     3      3        0      0
+  MotionBlurImage                        3      2        1      0
+  RotationalBlurImage                    3      2        1      0
+  UnsharpMaskImage                       2      1        1      0
+  KuwaharaImage                          1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       effect.c:338:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[center+i],q);
+    x  effect.c:657:13 cxx_remove_void_call       SetPixelChannel(sharp_image,channel,p[center+i],q);
+       effect.c:1073:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+       effect.c:2513:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+       effect.c:3309:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+       effect.c:3629:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[center+i],q);
+    x  effect.c:3660:17 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[center+i],q);
+       effect.c:3688:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[center+i],q);
+       effect.c:3924:13 cxx_remove_void_call       SetPixelChannel(shade_image,channel,center[i],q);
+       effect.c:3929:13 cxx_remove_void_call       SetPixelChannel(shade_image,channel,center[i],q);
+       effect.c:4370:13 cxx_remove_void_call       SetPixelChannel(unsharp_image,channel,p[i],q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-effect.json

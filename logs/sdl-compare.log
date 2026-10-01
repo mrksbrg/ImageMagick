@@ -1,0 +1,31 @@
+mutate: 22 mutants in MagickCore/compare\.c$, 15 functions
+mutate: baseline over 156 cases in 0s
+  mutants: 22/22 (1s)
+
+mutate: 22 mutants, 1s
+  killed 19, survived 2 (0 capped), no coverage 1, errors 0
+  mutation score on reached code: 90.5%   overall: 86.4%
+
+  function                           total killed survived no-cov
+  CompareImages                          5      5        0      0
+  SimilarityImage                        4      2        2      0
+  GetAESimilarity                        1      1        0      0
+  GetDPCSimilarity                       1      1        0      0
+  GetFUZZSimilarity                      1      1        0      0
+  GetMAESimilarity                       1      1        0      0
+  GetMEPPSimilarity                      1      1        0      0
+  GetMSESimilarity                       1      1        0      0
+  GetNCCSimilarity                       1      1        0      0
+  GetPASimilarity                        1      1        0      0
+  GetPDCSimilarity                       1      1        0      0
+  GetPHASESimilarity                     1      1        0      0
+  GetSSIMSimularity                      1      1        0      0
+  IsImagesEqual                          1      0        0      1
+  GetSimilarityMetric                    1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  compare.c:4757:3 cxx_remove_void_call       SetGeometry(reconstruct,offset);
+       compare.c:4917:13 cxx_remove_void_call       SetPixelChannel(similarity_image,channel,ClampToQuantum((double)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-compare.json

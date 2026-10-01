@@ -1,0 +1,71 @@
+mutate: 51 mutants in MagickCore/draw\.c$, 10 functions
+  baseline: 500/10605 (2s)
+  baseline: 1000/10605 (3s)
+  baseline: 1500/10605 (5s)
+  baseline: 2000/10605 (6s)
+  baseline: 2500/10605 (8s)
+  baseline: 3000/10605 (11s)
+  baseline: 3500/10605 (13s)
+  baseline: 4000/10605 (14s)
+  baseline: 4500/10605 (16s)
+  baseline: 5000/10605 (18s)
+  baseline: 5500/10605 (19s)
+  baseline: 6000/10605 (21s)
+  baseline: 6500/10605 (22s)
+  baseline: 7000/10605 (24s)
+  baseline: 7500/10605 (32s)
+  baseline: 8000/10605 (35s)
+  baseline: 8500/10605 (36s)
+  baseline: 9000/10605 (38s)
+  baseline: 9500/10605 (39s)
+  baseline: 10000/10605 (41s)
+  baseline: 10500/10605 (42s)
+  baseline: 10605/10605 (42s)
+mutate: baseline over 10605 cases in 43s
+  mutants: 25/51 (1s)
+  mutants: 50/51 (23s)
+  mutants: 51/51 (23s)
+
+mutate: 51 mutants, 23s
+  killed 24, survived 23 (0 capped), no coverage 4, errors 0
+  mutation score on reached code: 51.1%   overall: 47.1%
+
+  function                           total killed survived no-cov
+  DrawPrimitive                         21      9       12      0
+  DrawGradientImage                      8      3        5      0
+  DrawPolygonPrimitive                   7      4        3      0
+  ConvertPathToPolygon                   5      4        1      0
+  DrawAffineImage                        4      0        0      4
+  RenderMVGContent                       2      1        1      0
+  AcquireDrawInfo                        1      1        0      0
+  CloneDrawInfo                          1      1        0      0
+  ConvertPrimitiveToPath                 1      0        1      0
+  GetDrawInfo                            1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       draw.c:790:5 cxx_remove_void_call       LogPolygonInfo(polygon_info);
+       draw.c:943:5 cxx_remove_void_call       LogPathInfo(path_info);
+    x  draw.c:2056:3 cxx_remove_void_call       qsort(gradient->stops,gradient->number_stops,sizeof(StopInfo),
+    x  draw.c:2064:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  draw.c:2109:7 cxx_remove_void_call       GetPixelInfoPixel(image,q,&pixel);
+       draw.c:2170:17 cxx_remove_void_call       CompositePixelInfoBlend(&gradient->stops[i].color,1.0-alpha,
+       draw.c:2235:17 cxx_remove_void_call       CompositePixelInfoBlend(&gradient->stops[i].color,1.0-alpha,
+       draw.c:2908:17 cxx_remove_void_call       GetAffineMatrix(&current);
+       draw.c:5263:9 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+       draw.c:5269:15 cxx_remove_void_call       GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,
+       draw.c:5271:15 cxx_remove_void_call       SetPixelViaPixelInfo(image,&pixel,q);
+       draw.c:5546:11 cxx_remove_void_call       GetFillColor(draw_info,x,y,&pixel,exception);
+       draw.c:5547:11 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(pixel.alpha),q);
+       draw.c:5560:11 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+       draw.c:5572:15 cxx_remove_void_call       GetPixelInfoPixel(image,q,&pixel);
+       draw.c:5578:15 cxx_remove_void_call       GetFillColor(draw_info,x,y,&pixel,exception);
+       draw.c:5579:15 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(pixel.alpha),q);
+       draw.c:5629:15 cxx_remove_void_call       GetFillColor(draw_info,x,y,&pixel,exception);
+       draw.c:5630:15 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(pixel.alpha),q);
+    x  draw.c:5659:11 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  draw.c:5726:11 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+       draw.c:5830:7 cxx_remove_void_call       SetGeometry(image,&geometry);
+       draw.c:5903:9 cxx_remove_void_call       LogPrimitiveInfo(primitive_info);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-draw.json

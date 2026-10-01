@@ -1,0 +1,39 @@
+mutate: 36 mutants in MagickCore/visual-effects\.c$, 13 functions
+mutate: baseline over 224 cases in 0s
+  mutants: 25/36 (0s)
+  mutants: 36/36 (2s)
+
+mutate: 36 mutants, 2s
+  killed 25, survived 11 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 69.4%   overall: 69.4%
+
+  function                           total killed survived no-cov
+  SepiaToneImage                         6      5        1      0
+  MorphImages                            5      3        2      0
+  StereoAnaglyphImage                    4      3        1      0
+  BlueShiftImage                         3      3        0      0
+  ColorMatrixImage                       3      2        1      0
+  SteganoImage                           3      3        0      0
+  TintImage                              3      1        2      0
+  AddNoiseImage                          2      1        1      0
+  ColorizeImage                          2      1        1      0
+  WaveletDenoiseImage                    2      2        0      0
+  ImplodeImage                           1      0        1      0
+  ShadowImage                            1      1        0      0
+  SwirlImage                             1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       visual-effects.c:239:13 cxx_remove_void_call       SetPixelChannel(noise_image,channel,p[i],q);
+    x  visual-effects.c:586:3 cxx_remove_void_call       GetPixelInfo(colorize_image,&blend_percentage);
+    x  visual-effects.c:837:5 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  visual-effects.c:1071:11 cxx_remove_void_call       SetPixelChannel(implode_image,channel,p[i],q);
+       visual-effects.c:1209:9 cxx_remove_void_call       AppendImageToList(&morph_images,morph_image);
+       visual-effects.c:1308:17 cxx_remove_void_call       SetPixelChannel(morph_image,channel,p[i],q);
+    x  visual-effects.c:1961:7 cxx_remove_void_call       SetPixelAlpha(sepia_image,GetPixelAlpha(image,p),q);
+       visual-effects.c:2729:9 cxx_remove_void_call       SetPixelAlpha(stereo_image,(GetPixelAlpha(left_image,p)+
+    x  visual-effects.c:2916:13 cxx_remove_void_call       SetPixelChannel(swirl_image,channel,p[i],q);
+    x  visual-effects.c:3057:3 cxx_remove_void_call       GetPixelInfo(image,&color_vector);
+    x  visual-effects.c:3123:7 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-visual-effects.json

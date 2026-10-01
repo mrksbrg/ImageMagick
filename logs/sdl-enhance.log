@@ -1,0 +1,47 @@
+mutate: 74 mutants in MagickCore/enhance\.c$, 19 functions
+mutate: baseline over 174 cases in 0s
+  mutants: 25/74 (0s)
+  mutants: 50/74 (0s)
+  mutants: 74/74 (6s)
+
+mutate: 74 mutants, 6s
+  killed 62, survived 12 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 83.8%   overall: 83.8%
+
+  function                           total killed survived no-cov
+  ModulateImage                         21     13        8      0
+  HaldClutImage                          9      8        1      0
+  CLAHE                                  5      5        0      0
+  ContrastImage                          5      5        0      0
+  ClutImage                              4      2        2      0
+  EnhanceImage                           4      3        1      0
+  ColorDecisionListImage                 3      3        0      0
+  Contrast                               2      2        0      0
+  ModulateHCL                            2      2        0      0
+  ModulateHCLp                           2      2        0      0
+  ModulateHSB                            2      2        0      0
+  ModulateHSI                            2      2        0      0
+  ModulateHSL                            2      2        0      0
+  ModulateHSV                            2      2        0      0
+  ModulateHWB                            2      2        0      0
+  ModulateLCHab                          2      2        0      0
+  ModulateLCHuv                          2      2        0      0
+  WhiteBalanceImage                      2      2        0      0
+  GrayscaleImage                         1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  enhance.c:887:5 cxx_remove_void_call       GetPixelInfo(clut_image,clut_map+i);
+    x  enhance.c:919:5 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  enhance.c:1961:5 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  enhance.c:2759:3 cxx_remove_void_call       GetPixelInfo(hald_image,&zero);
+       enhance.c:3741:11 cxx_remove_void_call       ModulateHCL(percent_hue,percent_saturation,percent_brightness,
+       enhance.c:3747:11 cxx_remove_void_call       ModulateHCLp(percent_hue,percent_saturation,percent_brightness,
+       enhance.c:3753:11 cxx_remove_void_call       ModulateHSB(percent_hue,percent_saturation,percent_brightness,
+       enhance.c:3759:11 cxx_remove_void_call       ModulateHSI(percent_hue,percent_saturation,percent_brightness,
+       enhance.c:3772:11 cxx_remove_void_call       ModulateHSV(percent_hue,percent_saturation,percent_brightness,
+       enhance.c:3778:11 cxx_remove_void_call       ModulateHWB(percent_hue,percent_saturation,percent_brightness,
+       enhance.c:3785:11 cxx_remove_void_call       ModulateLCHab(percent_brightness,percent_saturation,percent_hue,
+       enhance.c:3791:11 cxx_remove_void_call       ModulateLCHuv(percent_brightness,percent_saturation,percent_hue,
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-enhance.json

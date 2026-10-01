@@ -1,0 +1,80 @@
+mutate: 78 mutants in MagickCore/image\.c$, 29 functions
+  baseline: 9/9 (0s)
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/78 (2s)
+  mutants: 50/78 (11s)
+  mutants: 75/78 (221s)
+  mutants: 78/78 (222s)
+
+mutate: 78 mutants, 222s
+  killed 33, survived 33 (18 capped), no coverage 12, errors 0
+  mutation score on reached code: 50.0%   overall: 42.3%
+
+  function                           total killed survived no-cov
+  SetImageInfo                          11      8        3      0
+  DestroyImage                           8      2        6      0
+  AcquireImage                           7      2        5      0
+  AppendImages                           5      3        2      0
+  GetImageInfo                           4      4        0      0
+  SmushXGap                              4      0        4      0
+  SmushYGap                              4      0        4      0
+  GetImageMask                           3      0        0      3
+  SetImageMask                           3      2        1      0
+  SetImageRegionMask                     3      0        0      3
+  CloneImage                             2      1        1      0
+  CloneImageInfo                         2      1        1      0
+  GetImageReferenceCount                 2      0        0      2
+  ModifyImage                            2      0        0      2
+  ReferenceImage                         2      2        0      0
+  SetImageBackgroundColor                2      2        0      0
+  SmushImages                            2      1        1      0
+  AcquireImageInfo                       1      1        0      0
+  AcquireNextImage                       1      0        1      0
+  CatchImageException                    1      0        1      0
+  CopyImagePixels                        1      1        0      0
+  DestroyImageInfo                       1      0        1      0
+  DisassociateImageStream                1      0        1      0
+  NewMagickImage                         1      0        0      1
+  SetImageAlpha                          1      1        0      0
+  SetImageColor                          1      0        0      1
+  SetImageInfoFromExtension              1      1        0      0
+  StripImage                             1      0        1      0
+  SyncImage                              1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc image.c:181:3 cxx_remove_void_call       GetPixelInfoRGBA(BackgroundColorRGBA,&image->background_color);
+    xc image.c:182:3 cxx_remove_void_call       GetPixelInfoRGBA(BorderColorRGBA,&image->border_color);
+    xc image.c:183:3 cxx_remove_void_call       GetPixelInfoRGBA(MatteColorRGBA,&image->matte_color);
+    xc image.c:184:3 cxx_remove_void_call       GetPixelInfoRGBA(TransparentColorRGBA,&image->transparent_color);
+    xc image.c:208:3 cxx_remove_void_call       SetBlobExempt(image,image_info->file != (FILE *) NULL ? MagickTrue :
+    x  image.c:395:3 cxx_remove_void_call       DestroyBlob(GetNextImageInList(image));
+    x  image.c:548:5 cxx_remove_void_call       GravityAdjustGeometry(next->columns,next->rows,next->gravity,&geometry);
+    x  image.c:585:7 cxx_remove_void_call       GetPixelInfo(next,&pixel);
+    x  image.c:656:3 cxx_remove_void_call       CatchException(exception);
+    xc image.c:848:5 cxx_remove_void_call       Ascii85Initialize(clone_image);
+    xc image.c:1014:3 cxx_remove_void_call       SetImageInfoFile(clone_info,image_info->file);
+    xc image.c:1220:3 cxx_remove_void_call       DestroyImagePixels(image);
+    xc image.c:1230:3 cxx_remove_void_call       DestroyImageProfiles(image);
+    xc image.c:1231:3 cxx_remove_void_call       DestroyImageProperties(image);
+    xc image.c:1232:3 cxx_remove_void_call       DestroyImageArtifacts(image);
+    xc image.c:1237:3 cxx_remove_void_call       DestroyBlob(image);
+    xc image.c:1239:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&image->semaphore);
+    xc image.c:1300:3 cxx_remove_void_call       DestroyImageOptions(image_info);
+    xc image.c:1336:3 cxx_remove_void_call       DisassociateBlob(image);
+    xc image.c:2951:7 cxx_remove_void_call       GetPathComponent(path,ExtensionPath,component);
+     c image.c:3012:13 cxx_remove_void_call       GetPathComponent(image_info->filename,SubcanonicalPath,component);
+    xc image.c:3087:11 cxx_remove_void_call       SetImageInfoFile(image_info,(FILE *) NULL);
+       image.c:3405:11 cxx_remove_void_call       SetPixelCompositeMask(image,ClampToQuantum(intensity),q);
+    x  image.c:3680:3 cxx_remove_void_call       SetGeometry(smush_image,&right_geometry);
+    x  image.c:3681:3 cxx_remove_void_call       GravityAdjustGeometry(right_image->columns,right_image->rows,
+    x  image.c:3684:3 cxx_remove_void_call       SetGeometry(smush_image,&left_geometry);
+    x  image.c:3685:3 cxx_remove_void_call       GravityAdjustGeometry(left_image->columns,left_image->rows,
+    x  image.c:3751:3 cxx_remove_void_call       SetGeometry(smush_image,&bottom_geometry);
+    x  image.c:3752:3 cxx_remove_void_call       GravityAdjustGeometry(bottom_image->columns,bottom_image->rows,
+    x  image.c:3755:3 cxx_remove_void_call       SetGeometry(smush_image,&top_geometry);
+    x  image.c:3756:3 cxx_remove_void_call       GravityAdjustGeometry(top_image->columns,top_image->rows,top_image->gravity,
+    x  image.c:3881:5 cxx_remove_void_call       GravityAdjustGeometry(image->columns,image->rows,image->gravity,&geometry);
+    x  image.c:3952:3 cxx_remove_void_call       DestroyImageProfiles(image);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-image.json
