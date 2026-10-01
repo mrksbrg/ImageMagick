@@ -7882,6 +7882,16 @@
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
    "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "equivalent",
+   "why": "inside `if (fabs(M11) < 0.0)`, which is never true (an absolute value is never negative): dead code, so no input reaches it and its mutants cannot change the output"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_ge_to_gt",
    "nth": 1,
    "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
    "verdict": "unresolved",
@@ -7892,10 +7902,31 @@
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
    "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "equivalent",
+   "why": "inside `if (fabs(M11) < 0.0)`, which is never true (an absolute value is never negative): dead code, so no input reaches it and its mutants cannot change the output"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
+   "mutator": "cxx_ge_to_lt",
    "nth": 1,
    "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "equivalent",
+   "why": "inside `if (fabs(M11) < 0.0)`, which is never true (an absolute value is never negative): dead code, so no input reaches it and its mutants cannot change the output"
   },
   {
    "at": 14,
@@ -7912,19 +7943,31 @@
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
    "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "equivalent",
+   "why": "inside `if (fabs(M11) < 0.0)`, which is never true (an absolute value is never negative): dead code, so no input reaches it and its mutants cannot change the output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
+   "mutator": "cxx_lt_to_le",
    "nth": 1,
    "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
   },
   {
    "at": 8,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (M11 < 0.0)",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
   },
   {
@@ -7941,61 +7984,77 @@
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M02+=(y-centroid.y)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M02+=(y-centroid.y)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M11+=(x-centroid.x)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M11+=(x-centroid.x)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M20+=(x-centroid.x)*(x-centroid.x);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M20+=(x-centroid.x)*(x-centroid.x);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "equivalent",
+   "why": "inside `if (fabs(M11) < 0.0)`, which is never true (an absolute value is never negative): dead code, so no input reaches it and its mutants cannot change the output"
   },
   {
    "at": 13,
@@ -8004,17 +8063,28 @@
    "mutator": "cxx_sub_to_add",
    "nth": 1,
    "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
-   "verdict": "unresolved",
-   "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
+   "verdict": "equivalent",
+   "why": "fabs(M20+M02) >= 0 is as always true as fabs(M20-M02) >= 0"
   },
   {
    "at": 35,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
    "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
+   "verdict": "equivalent",
+   "why": "inside `if (fabs(M11) < 0.0)`, which is never true (an absolute value is never negative): dead code, so no input reaches it and its mutants cannot change the output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/vision.c",
+   "function": "AngleThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
+   "mutator": "cxx_sub_to_add",
    "nth": 1,
    "src": "if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
   },
   {
@@ -8450,20 +8520,22 @@
    "at": 26,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:major-axis-threshold=0-1000 -connected-components 8 (gaps/dafa8bcbe0)",
    "mutator": "cxx_lt_to_le",
    "nth": 3,
    "src": "if (((object[i].metric[n] < min_threshold) ||",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
   },
   {
    "at": 26,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:minor-axis-threshold=0-1000 -connected-components 8 (gaps/b1aaee9895)",
    "mutator": "cxx_lt_to_le",
    "nth": 4,
    "src": "if (((object[i].metric[n] < min_threshold) ||",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
   },
   {
@@ -8480,10 +8552,11 @@
    "at": 26,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8 (gaps/f20515fb0c)",
    "mutator": "cxx_lt_to_le",
    "nth": 6,
    "src": "if (((object[i].metric[n] < min_threshold) ||",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "a real-valued shape metric exactly equal to a threshold; no case pins one"
   },
   {
@@ -8591,10 +8664,11 @@
    "at": 19,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:sort=y -connected-components 8 (gaps/3f150ea489)",
    "mutator": "cxx_mul_to_div",
    "nth": 0,
    "src": "object[i].key=order*key;",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "not killed by the connected-components cases tried (27 defines and connectivities)"
   },
   {
@@ -8632,20 +8706,22 @@
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "EccentricityThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:eccentricity-threshold=0-1000 -connected-components 8 (gaps/bc93bd86ac)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M02+=(y-centroid.y)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "EccentricityThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:eccentricity-threshold=0-1000 -connected-components 8 (gaps/bc93bd86ac)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M02+=(y-centroid.y)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
@@ -8672,20 +8748,22 @@
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "EccentricityThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:eccentricity-threshold=0-1000 -connected-components 8 (gaps/bc93bd86ac)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M20+=(x-centroid.x)*(x-centroid.x);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "EccentricityThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:eccentricity-threshold=0-1000 -connected-components 8 (gaps/bc93bd86ac)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M20+=(x-centroid.x)*(x-centroid.x);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
@@ -8732,40 +8810,44 @@
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "MajorAxisThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:major-axis-threshold=0-1000 -connected-components 8 (gaps/dafa8bcbe0)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M20+=(x-centroid.x)*(x-centroid.x);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "MajorAxisThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:major-axis-threshold=0-1000 -connected-components 8 (gaps/dafa8bcbe0)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M20+=(x-centroid.x)*(x-centroid.x);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "MinorAxisThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:minor-axis-threshold=0-1000 -connected-components 8 (gaps/b1aaee9895)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M02+=(y-centroid.y)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "MinorAxisThreshold",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:minor-axis-threshold=0-1000 -connected-components 8 (gaps/b1aaee9895)",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "M02+=(y-centroid.y)*(y-centroid.y);",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "moment arithmetic that reaches the output only through an object's keep/remove decision; the threshold ranges tried leave every object's decision unchanged"
   },
   {
