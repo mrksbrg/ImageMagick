@@ -1616,6 +1616,13 @@ GAP_STEP_CASES = [
     ("rose xmp elements, shorter value",
      [["{C}/rose.miff", "-profile", "meta.xmp", "-density", "7", "out.miff"]],
      {"meta.xmp": "<?xpacket begin=\"\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n<rdf:Description rdf:about=\"\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"\n><tiff:XResolution>72/1</tiff:XResolution><tiff:YResolution>72/1</tiff:YResolution><tiff:ResolutionUnit>2</tiff:ResolutionUnit><tiff:Orientation>1</tiff:Orientation></rdf:Description>\n</rdf:RDF></x:xmpmeta>\n<?xpacket end=\"w\"?>"}),
+    # compress.c: fax decoding (HuffmanDecodeImage) of a file the case writes first
+    ("fax written and read back",
+     [["{C}/bilevel.miff", "b.fax"], ["fax:b.fax", "out.miff"]],
+     {}),
+    ("fax of a dithered photo read back",
+     [["{C}/rose.miff", "-monochrome", "b.fax"], ["fax:b.fax", "out.miff"]],
+     {}),
 ]
 # annotate.c, second round: rotated multi-line text for every gravity (a line index
 # times a unit scale hides a * turned into /), a virtual canvas, a gray image, text
@@ -1653,7 +1660,7 @@ GAP_COMMANDS += [
     "{C}/rose.miff -define connected-components:area-threshold=16 -connected-components 4",
 ]
 # utility.c: wildcards in input names, base64 via inline: (GIF: no dates to hide in
-# the base64), paper sizes, a file name starting with ~
+# the base64), paper sizes
 GAP_COMMANDS += [
     "'{C}/ros*.miff' -append",
     "'{C}/r?se.miff' -flip",
@@ -1663,7 +1670,87 @@ GAP_COMMANDS += [
     "{C}/rose.miff -resize 4x4! -write inline:gif:-",
     "{C}/rose.miff -page A4",
     "{C}/rose.miff -page Letter+10+10",
-    "{C}/rose.miff -write ~/home.miff",
+]
+# vision.c, third round: every shape metric over a range that keeps every object, printed at 17 digits, and each sort key
+GAP_COMMANDS += [
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:major-axis-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:minor-axis-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:eccentricity-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:circularity-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:perimeter-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:diameter-threshold=0-1000 -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:sort=area -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:sort=width -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:sort=height -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:sort=x -connected-components 8",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -define connected-components:verbose=true -define connected-components:sort=y -connected-components 8",
+]
+# layer.c: a five-frame animation with offsets, a duplicate, partial transparency and a zero delay, through every -layers method under each dispose method
+GAP_COMMANDS += [
+    "-dispose None -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce",
+    "-dispose None -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers dispose",
+    "-dispose None -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers optimize",
+    "-dispose None -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce -layers optimize-plus",
+    "-dispose Background -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce",
+    "-dispose Background -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers dispose",
+    "-dispose Background -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers optimize",
+    "-dispose Background -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce -layers optimize-plus",
+    "-dispose Previous -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce",
+    "-dispose Previous -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers dispose",
+    "-dispose Previous -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers optimize",
+    "-dispose Previous -size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce -layers optimize-plus",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers optimize-transparency",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers remove-dups",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers remove-zero",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers compare-any",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers compare-clear",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers compare-overlay",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers merge",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers flatten",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers mosaic",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers trim-bounds",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) -layers coalesce -layers optimize-frame",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) null: ( -size 4x4 xc:white ) -gravity center -layers composite",
+    "-size 20x16 xc:red -delay 10 ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 8x8 xc:blue -repage 20x16+3+2 ) ( -size 6x6 xc:#00ff0080 -repage 20x16+9+7 ) -delay 0 ( -size 4x4 xc:yellow -repage 20x16+1+10 ) null: ( -size 4x4 xc:white -repage +2+2 ) -compose multiply -layers composite",
+]
+# compress.c: fax encoding (HuffmanEncodeImage) to stdout
+GAP_COMMANDS += [
+    "{C}/bilevel.miff -write fax:-",
+    "{C}/rose.miff -monochrome -write fax:-",
+]
+# attribute.c: Floyd-Steinberg depth reduction, and the minimum-bounding-box properties with each orientation
+GAP_COMMANDS += [
+    "{C}/rose.miff -define dither=FloydSteinberg -depth 4",
+    "{C}/rose_alpha.miff -define dither=FloydSteinberg -depth 2",
+    "{C}/gray16.miff -define dither=FloydSteinberg -depth 3",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:area] %[minimum-bounding-box:width] %[minimum-bounding-box:height] %[minimum-bounding-box:angle] %[minimum-bounding-box:unrotate]\\n' -write info:",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define minimum-bounding-box:orientation=landscape -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:area] %[minimum-bounding-box:width] %[minimum-bounding-box:height] %[minimum-bounding-box:angle] %[minimum-bounding-box:unrotate]\\n' -write info:",
+    "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define minimum-bounding-box:orientation=portrait -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:area] %[minimum-bounding-box:width] %[minimum-bounding-box:height] %[minimum-bounding-box:angle] %[minimum-bounding-box:unrotate]\\n' -write info:",
+    "{C}/rose.miff -fuzz 20% -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:area] %[minimum-bounding-box:width] %[minimum-bounding-box:height] %[minimum-bounding-box:angle] %[minimum-bounding-box:unrotate]\\n' -write info:",
+]
+# type.c: font lookup by family, weight, style and stretch (the result depends on the machine's fonts, the same on both sides of one run)
+GAP_COMMANDS += [
+    "{C}/rose.miff -family Helvetica -pointsize 12 -annotate +5+20 Fam",
+    "{C}/rose.miff -family Helvetica -weight Bold -pointsize 12 -annotate +5+20 Fam",
+    "{C}/rose.miff -family Helvetica -style Italic -pointsize 12 -annotate +5+20 Fam",
+    "{C}/rose.miff -family 'Nonexistent Family' -pointsize 12 -annotate +5+20 Fam",
+    "{C}/rose.miff -family 'Times,Courier' -pointsize 12 -annotate +5+20 Fam",
+]
+# transform.c: tile crops (@) with overlap, offset and gravity, and trims of bordered images with -fuzz and the trim: defines
+GAP_COMMANDS += [
+    "{C}/rose.miff -crop 3x2@ +repage",
+    "{C}/rose.miff -crop 2x2@",
+    "{C}/rose.miff -gravity center -crop 3x3@ +repage",
+    "{C}/rose.miff -crop 3x2-2-2@ +repage",
+    "{C}/rose.miff -crop 3x2+3+2@ +repage",
+    "{C}/rose.miff -crop 25x20 +repage",
+    "{C}/rose.miff -crop 50%x40%",
+    "{C}/rose.miff -bordercolor white -border 5 -trim",
+    "{C}/rose.miff -bordercolor white -border 5 -fuzz 15% -trim +repage",
+    "{C}/rose.miff -bordercolor white -border 3x6 -define trim:percent-background=50% -trim",
+    "{C}/rose.miff -bordercolor white -border 5 -define trim:edges=north,east -trim",
+    "{C}/rose_alpha.miff -bordercolor none -border 4 -trim",
 ]
 # compare.c: every metric with a read mask of exactly QuantumRange/2 on one image
 # only (the utility masks both, and the test ORs the two masks)
