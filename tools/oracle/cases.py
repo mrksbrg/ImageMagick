@@ -1161,6 +1161,32 @@ def _glob_cases():
         yield _case("token", "glob %s" % pattern, steps, [])
 
 
+# blob.c: ReadBlobString, which the text coders read lines with. Every text
+# file the catalogue read ended in a newline, and the parsers ignore trailing
+# whitespace, so the end-of-line and end-of-file handling was never tested:
+# these end without a newline, or with CRLF.
+_TXT_HEADER = "# ImageMagick pixel enumeration: 2,1,255,srgb"
+_TXT_LINES = [_TXT_HEADER, "0,0: (255,0,0)", "1,0: (0,0,255)"]
+_CUBE_LINES = ["LUT_3D_SIZE 2", "0 0 0", "1 0 0", "0 1 0", "1 1 0", "0 0 1", "1 0 1",
+               "0 1 1", "1 1 1"]
+LINE_ENDINGS = [("lf", "\n", "\n"), ("lf, no final newline", "\n", ""),
+                ("crlf", "\r\n", "\r\n"), ("crlf, no final newline", "\r\n", "")]
+
+
+def _text_file(lines, eol, final):
+    return eol.join(lines) + final
+
+
+def _read_blob_string_cases():
+    for label, eol, final in LINE_ENDINGS:
+        case = _op_to("blob", "txt %s" % label, ["txt:in.txt"] + FLOAT_OUT, "out.miff")
+        yield _with_inputs(case, files={"in.txt": _text_file(_TXT_LINES, eol, final)})
+    for label, eol, final in LINE_ENDINGS[1:]:
+        case = _case("blob", "cube %s" % label,
+                     [["cube:lut.cube", "-format", "%wx%h %[fx:mean]\\n", "info:"]], [])
+        yield _with_inputs(case, files={"lut.cube": _text_file(_CUBE_LINES, eol, final)})
+
+
 def _quantum_cases(writable_formats):
     yield from _quantum_layout_cases(writable_formats)
     yield from _quantum_yuv_cases()
@@ -1858,7 +1884,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
