@@ -1115,6 +1115,21 @@ resource written by hand (`0x03ED`), and a second ICC profile. Letting a case ca
 binary file (base64 in `cases.py`, decoded by `write_case_files`) would open all three; it
 is a change to a shared tool, for the owner to decide.
 
+## Reading survivors by hand: mime.c and cipher.c (Mac)
+
+Measured on the MacBook, 2026-10-01; same procedure as above. Neither needed new cases;
+reading the survivors settled both.
+
+| File | Mutants | Killed | Adjusted | Status |
+| --- | ---: | ---: | ---: | --- |
+| `mime.c` | 128 | 42 | 36% → **40%** | not trusted: `GetMimeInfo`, `GetMimeType`, `GetMimeDescription`, `GetMimeList` and `MagickToMime` (55 mutants) have no command-line caller (only the drawing-wand API calls `MagickToMime`), and the parser's magic-number fields are read only by `GetMimeInfo`; `<include>` handling needs a `mime.xml` the build does not ship |
+| `cipher.c` | 155 | 90 | 67% → **85%** | not trusted (below 90%): 10 survivors unresolved, the key-size selection and the counter-mode loop over a partial last block |
+
+**cipher.c: the decryption key schedule is dead code.** `-encipher` and `-decipher` both
+run `EncipherAESBlock` in counter mode, so `SetAESKey` computes `decipher_key` (with
+`InverseAddRoundKey` and `ByteMultiply`) and nothing ever reads it. Its 31 surviving
+mutants are equivalent; a refactoring may delete that code without changing any output.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
