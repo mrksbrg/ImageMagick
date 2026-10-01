@@ -218,6 +218,11 @@ most: a statement lost in an extraction (statement deletion, `cxx_remove_void_ca
 condition rebuilt wrongly (logical connectors, `&&` and `||`). A trial on `colorspace.c` and
 `quantum-import.c` measures what adding them costs and finds. Until it is decided, full
 runs use the defaults; a file trusted on them may need a rerun with the extra operators.
+To inform the decision, ERDC measures statement deletion on all 48 Mac files
+(`tools/oracle/erdc/night.sh`, 2026-10-01): one build with `MULL_MUTATORS="cxx_default
+cxx_remove_void_call"` (`build.sh`), then only the new mutants, capped at 1,500 cases, in
+reports named `mutation-sdl-<file>.json`. They are kept apart from the default-operator
+figures and do not count towards a file's trust until the owner decides.
 
 ## Working in the same repository
 

@@ -6,7 +6,8 @@
 #   tools/oracle/build.sh cov              candidate with clang source-based coverage
 #   tools/oracle/build.sh mull <regex> [name]
 #                                          candidate with Mull mutants in matching
-#                                          files, in build-oracle/mull-<name>
+#                                          files, in build-oracle/mull-<name>;
+#                                          MULL_MUTATORS="..." picks the operators
 #   tools/oracle/build.sh wide             candidate with X11 and OpenCL as well:
 #                                          a compile check for display.c,
 #                                          xwindow.c, widget.c, animate.c,
@@ -104,7 +105,13 @@ case "${1:-}" in
     # mull-ir-frontend reads mull.yml from the compiler's working directory
     # upwards; every object is compiled somewhere under $bld.
     # Single-quoted YAML: a regex's backslashes are not escapes there.
+    # MULL_MUTATORS (space-separated, e.g. "cxx_default cxx_remove_void_call")
+    # replaces Mull's default operator group; unset, the defaults apply.
     printf "includePaths:\n  - '%s'\n" "$regex" > "$bld/mull.yml"
+    if [ -n "${MULL_MUTATORS:-}" ]; then
+      printf "mutators:\n" >> "$bld/mull.yml"
+      for m in $MULL_MUTATORS; do printf "  - %s\n" "$m" >> "$bld/mull.yml"; done
+    fi
     if [ "$(uname)" = Darwin ]; then
       llvm=/opt/homebrew/opt/llvm@21/bin
       plugin="$OUT/mull/lib/mull-ir-frontend-21"
