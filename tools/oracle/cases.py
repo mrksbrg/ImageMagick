@@ -1787,6 +1787,76 @@ GAP_COMMANDS += [
                    "PHASE", "PHASH", "PSNR", "RMSE", "SSIM")
     for images in ("{C}/rose.miff -read-mask xc:gray(50%) {C}/rose_blur.miff",
                    "{C}/rose.miff ( {C}/rose_blur.miff -read-mask xc:gray(50%) )")]
+# vision.c, fourth round: lines of both slopes and a tall rectangle, so every angle quadrant of the ellipse fit is taken
+GAP_COMMANDS += [
+    "-size 44x30 xc:black -fill white -stroke white -strokewidth 2 -draw 'line 2,2 15,12' -draw 'line 26,12 40,2' -stroke none -draw 'rectangle 18,14 21,28' -draw 'rectangle 26,20 40,23' -draw 'line 4,26 12,18' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 8",
+    "-size 44x30 xc:black -fill white -stroke white -strokewidth 2 -draw 'line 2,2 15,12' -draw 'line 26,12 40,2' -stroke none -draw 'rectangle 18,14 21,28' -draw 'rectangle 26,20 40,23' -draw 'line 4,26 12,18' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 4",
+    "-size 44x30 xc:black -fill white -stroke white -strokewidth 2 -draw 'line 2,2 15,12' -draw 'line 26,12 40,2' -stroke none -draw 'rectangle 18,14 21,28' -draw 'rectangle 26,20 40,23' -draw 'line 4,26 12,18' -precision 17 -define connected-components:verbose=true -define connected-components:sort=y -define connected-components:sort-order=decreasing -connected-components 8",
+]
+# layer.c, second round: frames at negative and oversized page offsets under each dispose method, -layers merge, mosaic and flatten with offsets, webp:mux-blend, and -layers composite with null: in each position
+GAP_COMMANDS += [
+    "-size 20x16 xc:none ( +clone -fill blue -draw \"rectangle 2,2 8,8\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 10,6 16,12\" ) ( -size 20x16 xc:none -fill red -draw \"rectangle 1,9 5,14\" ) ( -size 20x16 xc:none -fill red -draw \"rectangle 1,9 5,14\" -fill green -draw \"rectangle 12,1 18,4\" ) ( -size 20x16 xc:none ) -delete 0 -layers optimize-plus",
+    "-size 20x16 xc:none ( +clone -fill blue -draw \"rectangle 2,2 8,8\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 10,6 16,12\" ) ( -size 20x16 xc:none -fill red -draw \"rectangle 1,9 5,14\" ) ( -size 20x16 xc:none -fill red -draw \"rectangle 1,9 5,14\" -fill green -draw \"rectangle 12,1 18,4\" ) ( -size 20x16 xc:none ) -delete 0 -layers optimize-plus -layers coalesce",
+    "-size 20x16 xc:none ( +clone -fill blue -draw \"rectangle 12,8 18,14\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 1,1 6,5\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 0,0 19,15\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 0,0 3,3\" ) -delete 0 -layers optimize-plus",
+    "-size 20x16 xc:none ( +clone -fill blue -draw \"rectangle 12,8 18,14\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 1,1 6,5\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 0,0 19,15\" ) ( -size 20x16 xc:none -fill blue -draw \"rectangle 0,0 3,3\" ) -delete 0 -layers remove-dups",
+    "-dispose None -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) ( -size 8x8 xc:#0000ff80 -repage 20x16+15+12 ) ( -size 30x30 xc:green -repage 20x16-5-5 ) -layers merge",
+    "-dispose None -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) ( -size 8x8 xc:#0000ff80 -repage 20x16+15+12 ) ( -size 30x30 xc:green -repage 20x16-5-5 ) -layers mosaic",
+    "-dispose None -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) ( -size 8x8 xc:#0000ff80 -repage 20x16+15+12 ) ( -size 30x30 xc:green -repage 20x16-5-5 ) -layers trim-bounds",
+    "-dispose Background -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) ( -size 8x8 xc:#0000ff80 -repage 20x16+15+12 ) ( -size 30x30 xc:green -repage 20x16-5-5 ) -layers coalesce",
+    "-dispose Background -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) ( -size 8x8 xc:#0000ff80 -repage 20x16+15+12 ) ( -size 30x30 xc:green -repage 20x16-5-5 ) -layers optimize-transparency",
+    "-size 8x6 xc:red -set webp:mux-blend AtopBackgroundAlphaBlend ( -size 4x4 xc:#0000ff80 -set webp:mux-blend AtopBackgroundAlphaBlend -repage +1+1 ) -coalesce",
+    "-size 8x6 xc:red -repage +3+2 ( -size 6x4 xc:blue -repage +5+4 ) ( -size 3x3 xc:green -repage +1+7 ) -layers merge",
+    "-size 10x8 xc:red null: ( -size 4x4 xc:#ffff0080 -repage +2+2 ) ( -size 3x3 xc:white -repage +5+1 ) -layers composite",
+    "-size 10x8 xc:red ( -size 10x8 xc:blue ) null: ( -size 4x4 xc:#ffff0080 -repage +2+2 ) ( -size 3x3 xc:white -repage +5+1 ) ( -size 2x2 xc:black -repage +1+5 ) -layers composite",
+]
+# transform.c, second round: trim:minSize under each gravity, chop, crop and shave at the edges and beyond, splice under each gravity, flip and transverse of a page offset
+GAP_COMMANDS += [
+    "{C}/rose.miff -bordercolor white -border 8 -repage +4+3 -define trim:minSize=200x200 -trim",
+    "{C}/rose.miff -bordercolor white -border 8 -repage +4+3 -define trim:minSize=20x60 -gravity East -trim",
+    "{C}/rose.miff -chop 10x5+70+46",
+    "{C}/rose.miff -chop 30x20-5-3",
+    "{C}/rose.miff -chop 20x10-20-10",
+    "{C}/rose.miff -repage 100x80+10+5 -crop 40x30+50+40",
+    "{C}/rose.miff -crop 3x2-2-3@ +repage -append",
+    "{C}/rose.miff -crop 30x0 +repage -append",
+    "{C}/rose.miff -crop 0x20 +repage -append",
+    "{C}/rose.miff -repage 90x60+3+2 -flip",
+    "{C}/rose.miff -repage 90x60+3+2 -transverse",
+    "{C}/rose.miff -repage +3+2 -shave 5x4",
+    "{C}/rose.miff -shave 35x10",
+    "{C}/rose.miff -shave 10x23",
+    "{C}/rose.miff -background blue -gravity NorthWest -splice 10x6",
+    "{C}/rose.miff -background blue -gravity North -splice 10x6",
+    "{C}/rose.miff -background blue -gravity West -splice 10x6",
+    "{C}/rose.miff -background blue -gravity Center -splice 10x6",
+    "{C}/rose.miff -background blue -gravity East -splice 10x6",
+    "{C}/rose.miff -background blue -gravity South -splice 10x6",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 25,15 32,22\" -gravity NorthWest -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 25,15 32,22\" -gravity North -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 50,30 57,37\" -gravity North -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 25,15 32,22\" -gravity West -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 50,30 57,37\" -gravity West -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 25,15 32,22\" -gravity Center -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 25,15 32,22\" -gravity East -define trim:minSize=21x15 -trim",
+    "-size 60x40 xc:white -fill red -draw \"rectangle 25,15 32,22\" -gravity South -define trim:minSize=21x15 -trim",
+    "{C}/rose.miff -repage 120x90+30+20 -crop 50x40+80+50",
+    "{C}/rose.miff -crop 3x2+0-3@ +repage -append",
+    "{C}/rose.miff -crop 25x20-3-2 -append",
+]
+# attribute.c, second round: trim:edges, Floyd-Steinberg depth on the alpha channel, -type on CMYK and palette images
+GAP_COMMANDS += [
+    "-size 30x20 xc:white -fill black -draw 'rectangle 0,0 4,19' -draw 'rectangle 25,0 29,19' -draw 'rectangle 0,0 29,3' -draw 'rectangle 0,16 29,19' -fill red -draw 'rectangle 12,8 16,11' -define trim:edges=north -trim",
+    "{C}/rose_alpha.miff -define dither=FloydSteinberg -channel A -depth 2",
+    "{C}/rose.miff -colorspace CMYK -type TrueColor",
+    "{C}/rose.miff -colorspace CMYK -type TrueColorAlpha",
+    "{C}/rose.miff -colors 16 -type TrueColor",
+    "{C}/rose.miff -colors 16 -type TrueColorAlpha",
+    "{C}/rose.miff -define dither=None -type PaletteBilevelAlpha",
+]
+# compress.c, second round: fax runs of 1792 pixels and more, which need an image wider than that
+GAP_COMMANDS += [
+    "-size 3000x6 xc:white -fill black -draw \"point 2900,1\" -draw \"line 0,3 1900,3\" -draw \"point 5,5\" -write fax:-",
+]
 # Commands whose output must not be converted to floating point: -stegano hides
 # the watermark in the low-order bits, which a float output does not keep.
 GAP_PLAIN_COMMANDS = [
