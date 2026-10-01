@@ -7932,10 +7932,11 @@
    "at": 14,
    "file": "MagickCore/vision.c",
    "function": "AngleThreshold",
+   "killed_by": "-size 44x30 xc:black -fill white -stroke white -strokewidth 2 -draw 'line 2,2 15,12' -draw 'line 26,12 40,2' -stroke none -draw 'rectangle 18,14 21,28' -draw 'rectangle 26,20 40,23' -draw 'line 4,26 12,18' -precision 17 -define connected-components:verbose=true -define connected-components:angle-threshold=0-1000 -connected-components 4 (gaps/c84d0b4691)",
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
    "src": "if (fabs(M11) < 0.0)",
-   "verdict": "unresolved",
+   "verdict": "gap",
    "why": "the quadrant correction of an object's angle; needs an object with M11 of a given sign and M20 == M02"
   },
   {

@@ -1130,6 +1130,32 @@ run `EncipherAESBlock` in counter mode, so `SetAESKey` computes `decipher_key` (
 `InverseAddRoundKey` and `ByteMultiply`) and nothing ever reads it. Its 31 surviving
 mutants are equivalent; a refactoring may delete that code without changing any output.
 
+## Reading survivors by hand: vision.c (Mac)
+
+Measured on the MacBook, 2026-10-01, `mull-sweep60`. Every mutant ran against every case
+that reaches it (no cap), then the survivors were rerun after each round of new cases:
+four rounds, 101 cases in the gaps family. **Trusted**: every function is at 80% adjusted
+or more, the threshold `HARNESS-SPLIT.md` sets.
+
+| Run | Killed | Survived | No coverage |
+| --- | ---: | ---: | ---: |
+| full run | 161 | 241 | 333 |
+| reach cases (`-connected-components` with every `connected-components:` define) | +409 | 165 | 0 |
+| rounds 2 to 4 (every metric at `-precision 17`, each sort key, lines of both slopes) | +47 | 118 | 0 |
+
+735 mutants: 617 killed, 58 excused (equivalent or unobservable), 50 open, 10 unreached;
+**91% adjusted**. Per function: `ConnectedComponentsImage` 90%, `AngleThreshold` 92%,
+the five other `*Threshold` functions 90 to 96%, `IntegralImage` 94%,
+`CCObjectInfoCompare` 86%.
+
+- **Dead code in `AngleThreshold`.** The block under `if (fabs(M11) < 0.0)` can never run:
+  an absolute value is never negative. Its six mutants are recorded as equivalent; this is
+  the first verdict on an unreached line (`classify.py` lets a verdict take precedence
+  over "unreached" for that reason). A refactoring may delete the block.
+- **Open: 46 unresolved.** Mostly boundary mutants (`<` to `<=`) on floating-point
+  comparisons of moments and areas that no image puts exactly on the boundary, and
+  `connected-components:mean-color` rounding that changes no 16-bit value.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
