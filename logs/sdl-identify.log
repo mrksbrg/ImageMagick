@@ -1,0 +1,22 @@
+mutate: 19 mutants in MagickCore/identify\.c$, 1 functions
+mutate: baseline over 229 cases in 0s
+  mutants: 19/19 (21s)
+
+mutate: 19 mutants, 21s
+  killed 12, survived 7 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 63.2%   overall: 63.2%
+
+  function                           total killed survived no-cov
+  IdentifyImage                         19     12        7      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  identify.c:635:3 cxx_remove_void_call       GetTimerInfo(&image->timer);
+    x  identify.c:1178:15 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  identify.c:1219:11 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+       identify.c:1236:17 cxx_remove_void_call       ConcatenateColorComponent(&pixel,BlackPixelChannel,
+       identify.c:1387:9 cxx_remove_void_call       ResetImagePropertyIterator(tile);
+       identify.c:1599:11 cxx_remove_void_call       PrintStringInfo(file,name,profile);
+       identify.c:1685:14 cxx_remove_void_call       (void) GetMagickUTCTime(&image->ttl,&timestamp);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-identify.json

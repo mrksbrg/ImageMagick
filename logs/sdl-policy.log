@@ -1,0 +1,38 @@
+mutate: 34 mutants in MagickCore/policy\.c$, 11 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/34 (163s)
+  mutants: 34/34 (164s)
+
+mutate: 34 mutants, 164s
+  killed 11, survived 12 (12 capped), no coverage 11, errors 0
+  mutation score on reached code: 47.8%   overall: 32.4%
+
+  function                           total killed survived no-cov
+  GetPolicyInfo                          5      2        3      0
+  IsRightsAuthorizedByName               5      2        3      0
+  SetMagickSecurityPolicyValue           5      0        0      5
+  PolicyComponentTerminus                4      2        2      0
+  AcquirePolicyCache                     3      0        3      0
+  IsPolicyCacheInstantiated              3      3        0      0
+  SetMagickSecurityPolicy                3      0        0      3
+  GetPolicyInfoList                      2      2        0      0
+  GetPolicyList                          2      0        0      2
+  LoadPolicyCache                        1      0        1      0
+  ValidateSecurityPolicy                 1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+     c policy.c:211:9 cxx_remove_void_call       CatchException(exception);
+     c policy.c:235:9 cxx_remove_void_call       CatchException(exception);
+     c policy.c:253:9 cxx_remove_void_call       CatchException(exception);
+    xc policy.c:334:3 cxx_remove_void_call       ResetLinkedListIterator(policy_cache);
+     c policy.c:338:7 cxx_remove_void_call       UnlockSemaphoreInfo(policy_semaphore);
+     c policy.c:354:12 cxx_remove_void_call       (void) SetHeadElementInLinkedList(policy_cache,p);
+    xc policy.c:839:3 cxx_remove_void_call       ResetLinkedListIterator(policy_cache);
+     c policy.c:863:13 cxx_remove_void_call       GetPathComponent(pattern,HeadPath,directory);
+     c policy.c:864:13 cxx_remove_void_call       GetPathComponent(pattern,TailPath,filename);
+     c policy.c:1215:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+     c policy.c:1383:5 cxx_remove_void_call       ActivateSemaphoreInfo(&policy_semaphore);
+    xc policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-policy.json

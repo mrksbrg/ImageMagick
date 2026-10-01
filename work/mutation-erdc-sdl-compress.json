@@ -1,0 +1,86 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:287:7:287:58",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 287,
+  "col": 7,
+  "function": "Ascii85Flush",
+  "status": "killed",
+  "cases": 2,
+  "killer": "encode/09423ea97a",
+  "why": "enc.ps3 differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:318:5:318:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 318,
+  "col": 5,
+  "function": "Ascii85Encode",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/b7ef358ba8",
+  "why": "enc.ps3 differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:615:7:615:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 615,
+  "col": 7,
+  "function": "HuffmanDecodeImage",
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/b1b7141fcb",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:616:7:616:68",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 616,
+  "col": 7,
+  "function": "HuffmanDecodeImage",
+  "status": "survived",
+  "cases": 4,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:767:5:767:29",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 767,
+  "col": 5,
+  "function": "HuffmanEncodeImage",
+  "status": "survived",
+  "cases": 7,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:871:9:871:34",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 871,
+  "col": 9,
+  "function": "HuffmanEncodeImage",
+  "status": "survived",
+  "cases": 7,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:874:5:874:24",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c",
+  "line": 874,
+  "col": 5,
+  "function": "HuffmanEncodeImage",
+  "status": "survived",
+  "cases": 7,
+  "capped": false,
+  "line_executed": false
+ }
+]

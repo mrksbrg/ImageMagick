@@ -1,0 +1,29 @@
+mutate: 15 mutants in MagickCore/utility\.c$, 6 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 15/15 (137s)
+
+mutate: 15 mutants, 137s
+  killed 5, survived 9 (5 capped), no coverage 1, errors 0
+  mutation score on reached code: 35.7%   overall: 33.3%
+
+  function                           total killed survived no-cov
+  ExpandFilenames                        6      3        3      0
+  AppendImageFormat                      4      1        3      0
+  GetPathComponent                       2      0        2      0
+  ChopPathComponents                     1      0        0      1
+  ListFiles                              1      1        0      0
+  ShredFile                              1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  utility.c:311:3 cxx_remove_void_call       GetPathComponent(filename,ExtensionPath,extension);
+       utility.c:318:7 cxx_remove_void_call       GetPathComponent(filename,RootPath,root);
+       utility.c:320:7 cxx_remove_void_call       GetPathComponent(filename,RootPath,root);
+    xc utility.c:847:5 cxx_remove_void_call       GetPathComponent(option,MagickPath,magick);
+    xc utility.c:863:9 cxx_remove_void_call       GetPathComponent(option,SubimagePath,subimage);
+    xc utility.c:864:9 cxx_remove_void_call       ExpandFilename(path);
+    xc utility.c:1420:7 cxx_remove_void_call       GetPathComponent(path,ExtensionPath,extension);
+    xc utility.c:1426:9 cxx_remove_void_call       GetPathComponent(path,BasePath,component);
+       utility.c:2074:9 cxx_remove_void_call       SetRandomKey(random_info,quantum,GetStringInfoDatum(key));
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-utility.json

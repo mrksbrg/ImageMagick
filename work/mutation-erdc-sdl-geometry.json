@@ -1,0 +1,98 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:831:3:831:33",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 831,
+  "col": 3,
+  "function": "ParseAffineGeometry",
+  "status": "survived",
+  "cases": 1,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1327:3:1327:33",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1327,
+  "col": 3,
+  "function": "ParseGravityGeometry",
+  "status": "killed",
+  "cases": 4,
+  "killer": "convert/d3e4503b1c",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1410:3:1410:79",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1410,
+  "col": 3,
+  "function": "ParseGravityGeometry",
+  "status": "killed",
+  "cases": 5,
+  "killer": "gaps/56278feb85",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1415:9:1415:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1415,
+  "col": 9,
+  "function": "ParseGravityGeometry",
+  "status": "survived",
+  "cases": 369,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1422:9:1422:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1422,
+  "col": 9,
+  "function": "ParseGravityGeometry",
+  "status": "survived",
+  "cases": 369,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1502:3:1502:34",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1502,
+  "col": 3,
+  "function": "ParseMetaGeometry",
+  "status": "survived",
+  "cases": 1223,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1689:3:1689:33",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1689,
+  "col": 3,
+  "function": "ParsePageGeometry",
+  "status": "survived",
+  "cases": 247,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c:1758:3:1758:33",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/geometry.c",
+  "line": 1758,
+  "col": 3,
+  "function": "ParseRegionGeometry",
+  "status": "killed",
+  "cases": 1,
+  "killer": "filter/3e3266dbdd",
+  "why": "stderr differs; out.miff differs"
+ }
+]

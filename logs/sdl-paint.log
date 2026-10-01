@@ -1,0 +1,25 @@
+mutate: 29 mutants in MagickCore/paint\.c$, 5 functions
+mutate: baseline over 92 cases in 0s
+  mutants: 25/29 (1s)
+  mutants: 29/29 (2s)
+
+mutate: 29 mutants, 2s
+  killed 21, survived 5 (0 capped), no coverage 3, errors 0
+  mutation score on reached code: 80.8%   overall: 72.4%
+
+  function                           total killed survived no-cov
+  FloodfillPaintImage                   12     10        2      0
+  OpaquePaintImage                       9      8        1      0
+  TransparentPaintImage                  3      2        1      0
+  TransparentPaintImageChroma            3      0        0      3
+  OilPaintImage                          2      1        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  paint.c:216:3 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  paint.c:316:13 cxx_remove_void_call       GetPixelInfoPixel(image,p,&pixel);
+       paint.c:853:13 cxx_remove_void_call       SetPixelChannel(paint_image,channel,p[center+i],q);
+    x  paint.c:965:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  paint.c:1112:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-paint.json

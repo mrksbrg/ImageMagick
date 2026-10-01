@@ -1,0 +1,22 @@
+mutate: 7 mutants in MagickCore/compress\.c$, 4 functions
+mutate: baseline over 27 cases in 0s
+  mutants: 7/7 (1s)
+
+mutate: 7 mutants, 1s
+  killed 3, survived 4 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 42.9%   overall: 42.9%
+
+  function                           total killed survived no-cov
+  HuffmanEncodeImage                     3      0        3      0
+  HuffmanDecodeImage                     2      1        1      0
+  Ascii85Flush                           1      1        0      0
+  Ascii85Encode                          1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  compress.c:616:7 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t) index,q);
+       compress.c:767:5 cxx_remove_void_call       Ascii85Initialize(image);
+       compress.c:871:9 cxx_remove_void_call       Ascii85Encode(image,byte);
+       compress.c:874:5 cxx_remove_void_call       Ascii85Flush(image);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-compress.json

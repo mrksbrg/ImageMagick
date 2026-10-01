@@ -1,0 +1,39 @@
+mutate: 40 mutants in MagickCore/log\.c$, 13 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/40 (0s)
+  mutants: 40/40 (153s)
+
+mutate: 40 mutants, 153s
+  killed 8, survived 11 (10 capped), no coverage 21, errors 0
+  mutation score on reached code: 42.1%   overall: 20.0%
+
+  function                           total killed survived no-cov
+  LogMagickEventList                     9      0        0      9
+  GetLogInfo                             4      2        2      0
+  IsLogCacheInstantiated                 4      2        2      0
+  LogComponentTerminus                   4      2        2      0
+  GetLogInfoList                         3      2        1      0
+  GetLogList                             3      0        0      3
+  SetLogEventMask                        3      0        0      3
+  CloseMagickLog                         2      0        0      2
+  LoadLogCache                           2      0        2      0
+  SetLogFormat                           2      0        0      2
+  SetLogMethod                           2      0        0      2
+  AcquireLogCache                        1      0        1      0
+  DestroyLogElement                      1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc log.c:327:5 cxx_remove_void_call       GetTimerInfo((TimerInfo *) &log_info->timer);
+     c log.c:477:5 cxx_remove_void_call       SetHeadElementInLinkedList(log_cache,p);
+     c log.c:478:3 cxx_remove_void_call       UnlockSemaphoreInfo(log_semaphore);
+    x  log.c:571:7 cxx_remove_void_call       qsort((void *) preferences,(size_t) i,sizeof(*preferences),LogInfoCompare);
+     c log.c:744:9 cxx_remove_void_call       ActivateSemaphoreInfo(&log_semaphore);
+    xc log.c:749:11 cxx_remove_void_call       CheckEventLogging();
+     c log.c:1018:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+    xc log.c:1046:9 cxx_remove_void_call       GetTimerInfo((TimerInfo *) &log_info->timer);
+     c log.c:1223:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->event_semaphore);
+     c log.c:1231:5 cxx_remove_void_call       ActivateSemaphoreInfo(&log_semaphore);
+    xc log.c:1237:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&log_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-log.json

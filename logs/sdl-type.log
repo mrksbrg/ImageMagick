@@ -1,0 +1,35 @@
+mutate: 29 mutants in MagickCore/type\.c$, 8 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/29 (131s)
+  mutants: 29/29 (166s)
+
+mutate: 29 mutants, 166s
+  killed 13, survived 12 (2 capped), no coverage 4, errors 0
+  mutation score on reached code: 52.0%   overall: 44.8%
+
+  function                           total killed survived no-cov
+  GetTypeInfoByFamily                    6      4        2      0
+  LoadFontConfigFonts                    6      0        6      0
+  GetTypeInfoList                        4      4        0      0
+  GetTypeList                            4      0        0      4
+  TypeComponentTerminus                  4      2        2      0
+  IsTypeTreeInstantiated                 3      2        1      0
+  SetTypeNodePath                        1      0        1      0
+  LoadTypeCache                          1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  type.c:366:3 cxx_remove_void_call       ResetSplayTreeIterator(type_cache);
+    x  type.c:418:3 cxx_remove_void_call       ResetSplayTreeIterator(type_cache);
+    x  type.c:782:11 cxx_remove_void_call       FcPatternDestroy(pattern);
+    x  type.c:784:7 cxx_remove_void_call       FcObjectSetDestroy(object_set);
+       type.c:788:7 cxx_remove_void_call       FcConfigDestroy(font_config);
+    x  type.c:800:5 cxx_remove_void_call       GetPathComponent((const char *) file,ExtensionPath,extension);
+    x  type.c:881:3 cxx_remove_void_call       FcFontSetDestroy(font_set);
+    x  type.c:882:3 cxx_remove_void_call       FcConfigDestroy(font_config);
+       type.c:892:9 cxx_remove_void_call       ActivateSemaphoreInfo(&type_semaphore);
+    x  type.c:1051:7 cxx_remove_void_call       GetPathComponent(filename,HeadPath,font_path);
+     c type.c:1412:5 cxx_remove_void_call       ActivateSemaphoreInfo(&type_semaphore);
+    xc type.c:1417:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&type_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-type.json

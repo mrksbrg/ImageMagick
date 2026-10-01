@@ -1,0 +1,21 @@
+mutate: 11 mutants in MagickCore/channel\.c$, 5 functions
+mutate: baseline over 1058 cases in 0s
+  mutants: 11/11 (15s)
+
+mutate: 11 mutants, 15s
+  killed 9, survived 2 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 81.8%   overall: 81.8%
+
+  function                           total killed survived no-cov
+  SetImageAlphaChannel                   5      5        0      0
+  ChannelImage                           2      1        1      0
+  SeparateImage                          2      1        1      0
+  ChannelFxImage                         1      1        0      0
+  SeparateImages                         1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       channel.c:181:9 cxx_remove_void_call       SetPixelChannel(destination_image,destination_channel,pixel,q);
+    x  channel.c:808:7 cxx_remove_void_call       SetPixelChannel(separate_image,GrayPixelChannel,(Quantum) 0,q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-channel.json

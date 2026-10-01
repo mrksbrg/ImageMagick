@@ -1,0 +1,38 @@
+mutate: 26 mutants in MagickCore/delegate\.c$, 10 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/26 (137s)
+  mutants: 26/26 (138s)
+
+mutate: 26 mutants, 138s
+  killed 10, survived 13 (2 capped), no coverage 3, errors 0
+  mutation score on reached code: 43.5%   overall: 38.5%
+
+  function                           total killed survived no-cov
+  DelegateComponentTerminus              4      2        2      0
+  GetMagickPropertyLetter                4      0        4      0
+  GetDelegateInfo                        4      2        2      0
+  GetDelegateInfoList                    3      3        0      0
+  GetDelegateList                        3      0        0      3
+  IsDelegateCacheInstantiated            3      2        1      0
+  InvokeDelegate                         2      0        2      0
+  DestroyDelegate                        1      0        1      0
+  ExternalDelegateCommand                1      1        0      0
+  LoadDelegateCache                      1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       delegate.c:308:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->semaphore);
+     c delegate.c:316:5 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
+    xc delegate.c:321:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&delegate_semaphore);
+       delegate.c:663:7 cxx_remove_void_call       GetPathComponent(image->magick_filename,HeadPath,value);
+       delegate.c:669:7 cxx_remove_void_call       GetPathComponent(image->magick_filename,ExtensionPath,value);
+       delegate.c:675:7 cxx_remove_void_call       GetPathComponent(image->magick_filename,TailPath,value);
+       delegate.c:756:7 cxx_remove_void_call       GetPathComponent(image->magick_filename,BasePath,value);
+       delegate.c:1284:7 cxx_remove_void_call       UnlockSemaphoreInfo(delegate_semaphore);
+    x  delegate.c:1320:5 cxx_remove_void_call       SetHeadElementInLinkedList(delegate_cache,p);
+       delegate.c:1629:9 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
+    x  delegate.c:1846:7 cxx_remove_void_call       LocaleUpper(magick);
+       delegate.c:1938:22 cxx_remove_void_call       (void) MagickDelay(100);  /* sleep 0.1 seconds */
+       delegate.c:2217:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-delegate.json
