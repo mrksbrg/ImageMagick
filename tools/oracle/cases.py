@@ -1676,6 +1676,94 @@ GAP_STEP_CASES = [
      [["{C}/rose.miff", "-monochrome", "b.fax"], ["fax:b.fax", "out.miff"]],
      {}),
 ]
+# magic.c (ERDC's runs): files with no extension, so only the signature table decides:
+# PCD_ at 2048 (the farthest signature, which sets how much is read), a file exactly as
+# long as a signature, SVG with and without spaces after the '<' (the only entries
+# that skip spaces), and a file matching two signatures at different offsets
+GAP_STEP_CASES += [
+    ("signature at offset 2048 (pcd)", [["pcdsig", "out.miff"]],
+     {"pcdsig": "A" * 2048 + "PCD_" + "A" * 60}),
+    ("file exactly a signature long (gif)", [["gifsig", "out.miff"]], {"gifsig": "GIF8"}),
+    ("svg signature without extension", [["plainsvg", "out.miff"]],
+     {"plainsvg": "<svg xmlns='http://www.w3.org/2000/svg' width='4' height='3'>"
+                  "<rect width='4' height='3' fill='red'/></svg>\n"}),
+    ("svg signature after spaces", [["spacesvg", "out.miff"]],
+     {"spacesvg": "<  svg xmlns='http://www.w3.org/2000/svg' width='4' height='3'>"
+                  "<rect width='4' height='3' fill='red'/></svg>\n"}),
+    ("gif and dicom signatures in one file", [["gifdcm", "out.miff"]],
+     {"gifdcm": "GIF8" + "A" * 124 + "DICM" + "A" * 60}),
+]
+# policy.c, memory.c (ERDC's runs): a policy.xml of the case's own. The oracle sets HOME
+# to the case directory, and ImageMagick reads every policy.xml on its configure path,
+# $HOME/.config/ImageMagick/ among them, on top of the build's
+_POLICY = ".config/ImageMagick/policy.xml"
+
+
+def _policy(*lines):
+    return "<policymap>\n%s\n</policymap>\n" % "\n".join("  " + x for x in lines)
+
+
+GAP_STEP_CASES += [
+    ("policy denies a coder", [["{C}/rose.miff", "x.gif"], ["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="coder" rights="none" pattern="GIF" />')}),
+    ("policy denies a path pattern",
+     [["{C}/rose.miff", "secret-1.miff"], ["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="none" pattern="*secret*" />')}),
+    ("policy denies writing into a directory",
+     [["{C}/rose.miff", "sub/x.miff"], ["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="read" pattern="*/sub" />'),
+      "sub/keep.txt": "kept\n"}),
+    ("policy allows reading only",
+     [["{C}/rose.miff", "x.png"], ["x.png", "out.miff"], ["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="read" pattern="*.png" />')}),
+    ("policy names, values and stealth, listed", [["-list", "policy"]],
+     {_POLICY: _policy('<policy domain="resource" name="width" value="10KP"/>',
+                       '<policy domain="system" name="precision" value="6"/>',
+                       '<policy domain="cache" name="shared-secret" value="x" stealth="True"/>',
+                       '<policy domain="delegate" rights="none" pattern="HTTPS" />')}),
+    ("policy included from another file",
+     [["{C}/rose.miff", "x.gif"], ["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<include file="extra.xml"/>'),
+      ".config/ImageMagick/extra.xml": _policy(
+          '<policy domain="coder" rights="none" pattern="GIF" />')}),
+    ("policy forbids following symlinks", [["{C}/rose.miff", "-resize", "50%", "out.miff"]],
+     {_POLICY: _policy('<policy domain="system" name="symlink" rights="none" pattern="follow" />')}),
+    ("policy max-memory-request, pixels in a mapped file",
+     [["{C}/rose.miff", "-resize", "300%", "out.miff"]],
+     {_POLICY: _policy('<policy domain="system" name="max-memory-request" value="256KiB"/>')}),
+    ("policy shreds memory and temporary files",
+     [["-limit", "memory", "0", "-limit", "map", "0", "{C}/rose.miff", "-resize", "300%",
+       "out.miff"]],
+     {_POLICY: _policy('<policy domain="system" name="shred" value="2"/>')}),
+]
+# type.c (Mac): a type.xml of the case's own, found the same way. Glyph paths relative to
+# the case directory and to type.xml's own directory (both reach the corpus font), one
+# that does not exist (the entry is dropped), a stealth entry and an include
+_TYPE_XML = """<typemap>
+  <type name="Case-Sans" fullname="Case Sans" family="CaseFamily" foundry="Case" style="Italic"
+    stretch="Condensed" weight="Bold" format="truetype" encoding="AppleRoman" face="0"
+    glyphs="{C}/Generic.ttf" metrics="{C}/Generic.ttf"/>
+  <type name="Case-Light" family="CaseFamily" weight="300" glyphs="../../{C}/Generic.ttf"/>
+  <type name="Case-Missing" family="CaseFamily" glyphs="nowhere.ttf"/>
+  <type name="Case-Hidden" stealth="True" glyphs="{C}/Generic.ttf"/>
+  <include file="more.xml"/>
+</typemap>
+"""
+_TYPE_FILES = {".config/ImageMagick/type.xml": _TYPE_XML,
+               ".config/ImageMagick/more.xml":
+                   '<typemap>\n  <type name="Case-More" family="MoreFamily" '
+                   'glyphs="../../{C}/Generic.ttf"/>\n</typemap>\n'}
+GAP_STEP_CASES += [
+    ("type.xml of the case's own, listed", [["-list", "font"]], _TYPE_FILES),
+    ("type.xml fonts by name, family and weight, and from an include",
+     [["-font", "Case-Sans", "-pointsize", "12", "label:Ab", "a.miff"],
+      ["-family", "CaseFamily", "-weight", "300", "-pointsize", "12", "label:Ab", "b.miff"],
+      ["-family", "CaseFamily", "-style", "Italic", "-stretch", "Condensed", "-pointsize", "12",
+       "label:Ab", "c.miff"],
+      ["-family", "MoreFamily", "-pointsize", "12", "label:Ab", "d.miff"],
+      ["-font", "Case-Missing", "-pointsize", "12", "label:Ab", "e.miff"],
+      ["a.miff", "b.miff", "c.miff", "d.miff", "e.miff", "-append", "out.miff"]], _TYPE_FILES),
+]
 # annotate.c, second round: rotated multi-line text for every gravity (a line index
 # times a unit scale hides a * turned into /), a virtual canvas, a gray image, text
 # density, hinting off, UTF-8 text
@@ -1913,6 +2001,87 @@ GAP_COMMANDS += [
     "{C}/seq.miff -delete 0-0 -append",
     "{C}/seq.miff -delete 2-0 -append",
     "{C}/seq.miff {C}/rose.miff -insert 0 -append",
+]
+# geometry.c (ERDC's runs): the separators x, X, the multiplication sign and ':'
+# (aspect ratios, also under -gravity), the resize flags ^ < @ with one side only,
+# five values with spaces and negative signs (cmyka colours, -colorize in CMYK),
+# page sizes with % and >, scene lists, -affine with seven values, and geometries of
+# exactly MagickPathExtent-1 characters, which both parsers reject
+GAP_COMMANDS += [
+    "{C}/rose.miff -resize 30×20",
+    "{C}/rose.miff -resize 30X20",
+    "{C}/rose.miff -gravity center -crop 16:9 +repage",
+    "{C}/rose.miff -gravity center -crop 1:2 +repage",
+    "{C}/rose.miff -gravity center -crop 16:9^ +repage",
+    "{C}/rose.miff -gravity center -extent 1:1",
+    "{C}/rose.miff -resize 2:1",
+    "{C}/rose.miff -resize 1:3",
+    "{C}/rose.miff -resize 40^",
+    "{C}/rose.miff -resize x40^",
+    "{C}/rose.miff -resize 200x200<",
+    "{C}/rose.miff -resize 120x20<",
+    "{C}/rose.miff -resize 500@",
+    "{C}/rose.miff -resize 50000@",
+    "-size 4x3 xc:cmyka(10%,20%,30%,40%,0.5)",
+    "-size 4x3 xc:cmyka(10%,20%,30%,40%,-0.25)",
+    "-size 4x3 'xc:cmyka( 10% , 20% , 30% , 40% , 0.5 )'",
+    "-size 4x3 xc:cmyka(10%,20%,30%,-40%,0.5)",
+    "{C}/rose.miff -colorspace cmyk -fill red -colorize 10,20,30,40,50",
+    "{C}/rose.miff -page 50%",
+    "{C}/rose.miff -page 300x200>",
+    "{C}/seq.miff[0,2] -append",
+    "{C}/seq.miff[99999999999999999999] -append",
+    "-size 30x20 xc:white -affine 1,0.3,0,1,0,0 -draw 'rectangle 2,2 10,8'",
+    "-size 30x20 xc:white -affine 1,0.3,0,1,2,3,4 -draw 'rectangle 2,2 10,8'",
+    "{C}/rose.miff -resize " + "0" * 4093 + "10",
+    "{C}/rose.miff -blur " + "0" * 4093 + "x2",
+]
+# image.c (ERDC's runs): settings given before a read (-extract, -density with two values,
+# -delay with > < and x), chromaticity and unit settings synced before an operator,
+# -repage with offsets, appends of images that differ in depth, type and colorspace
+# (bilevel too), +smush over transparent columns, scene ranges, raw RGB by extension
+GAP_COMMANDS += [
+    "-extract 30x20+5+3 {C}/rose.miff",
+    "-extract 30x20 {C}/rose.miff",
+    "-density 150x75 {C}/rose.miff",
+    "-density 150 {C}/rose.miff",
+    "-delay 5> {C}/seq.miff",
+    "-delay 500< {C}/seq.miff",
+    "-delay 20x50 {C}/seq.miff",
+    "{C}/rose.miff -blue-primary 0.15,0.06 -green-primary 0.3,0.6 -red-primary 0.64,0.33 "
+    "-white-point 0.3127,0.329 -resize 50%",
+    "{C}/rose.miff -blue-primary 0.15 -green-primary 0.3 -red-primary 0.64 -white-point 0.31 "
+    "-resize 50%",
+    "{C}/rose.miff -density 300 -units PixelsPerInch -resize 50% -units PixelsPerCentimeter "
+    "-resize 50%",
+    "{C}/rose.miff -density 100 -units PixelsPerCentimeter -resize 50% -units PixelsPerInch "
+    "-resize 50%",
+    "{C}/rose.miff -repage +5+3",
+    "{C}/rose.miff -repage 100x80-4+6",
+    "{C}/rose.miff {C}/gray16.miff -append",
+    "{C}/rose.miff ( {C}/rose.miff -colorspace cmyk ) -append",
+    "{C}/bilevel.miff {C}/bilevel.miff -append",
+    "{C}/rose.miff {C}/gray16.miff +append",
+    "{C}/rose_alpha.miff {C}/rose_alpha.miff +smush 3",
+    "{C}/rose_alpha.miff {C}/rose_alpha.miff +smush -5",
+    "{C}/seq.miff[3-1] -append",
+    "{C}/seq.miff[1-99] -append",
+]
+GAP_STEP_CASES += [
+    ("filename patterns %d %03d %x %o %% %5d and malformed ones, written and read back",
+     [["{C}/seq.miff", "-scene", "9", "a%d.miff"], ["{C}/seq.miff", "-scene", "9", "b%03d.miff"],
+      ["{C}/seq.miff", "-scene", "9", "c%x.miff"], ["{C}/seq.miff", "-scene", "9", "d%o.miff"],
+      ["{C}/seq.miff", "-scene", "9", "e%%d.miff"], ["{C}/seq.miff", "-scene", "9", "h%5d.miff"],
+      ["{C}/seq.miff", "-scene", "9", "k%00d.miff"], ["{C}/seq.miff", "-scene", "9", "m%q.miff"],
+      ["{C}/seq.miff", "-set", "filename:t", "z", "g%[filename:t].miff"],
+      ["-define", "filename:literal=true", "e%d.miff", "k%00d-9.miff", "m%q-9.miff", "+append",
+       "lit.miff"],
+      ["a9.miff", "b013.miff", "cd.miff", "d11.miff", "h   12.miff", "gz.miff", "lit.miff",
+       "-append", "out.miff"]], {}),
+    ("raw rgb chosen by extension", [["{C}/rose.miff", "-depth", "8", "x.rgb"],
+                                     ["-size", "70x46", "-depth", "8", "x.rgb", "out.miff"]], {}),
+    ("jpeg sampling factor through a cloned image_info",
+     [["-sampling-factor", "2x1", "{C}/rose.miff", "x.jpg"], ["x.jpg", "out.miff"]], {}),
 ]
 # channel.c: the -alpha methods the catalogue lacked (activate, associate, disassociate, discrete, off-if-opaque, on) on images with and without alpha
 GAP_COMMANDS += [

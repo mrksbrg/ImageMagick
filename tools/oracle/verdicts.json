@@ -4562,6 +4562,236 @@
    "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
   },
   {
+   "at": 28,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "random_info->signature_info)+1)/2);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "random_info->signature_info)+1)/2);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "nanoseconds=timer.tms_utime+timer.tms_stime;",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (file == -1)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (getrusage(RUSAGE_SELF,&usage) == 0)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (gettimeofday(&timer,(struct timezone *) NULL) == 0)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (status == 0)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "nanoseconds=1000*timer.tv_usec;",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (i=0; environ[i] != (char *) NULL; i++)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (environ != (char **) NULL)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file != -1)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (file != -1)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (gather_true_random != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; environ[i] != (char *) NULL; i++)",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/random.c",
+   "function": "IncrementRandomNonce",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "datum[i]++;",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/random.c",
+   "function": "IncrementRandomNonce",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "for (i=(ssize_t) (GetStringInfoLength(nonce)-1); i != 0; i--)",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (length == 0)",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (random_info->i == GetSignatureDigestsize(signature_info))",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (p=key; (i != 0) && (random_info->i != 0); i--)",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (p=key; (i != 0) && (random_info->i != 0); i--)",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (i != 0)",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (i-- != 0)",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "random_info->i++;",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
    "at": 9,
    "file": "MagickCore/resize.c",
    "function": "AcquireResizeFilter",
