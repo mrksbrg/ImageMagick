@@ -1420,6 +1420,53 @@ file-backed virtual memory, rights by path, directory and pattern, symlink prote
 - **For the next round.** `image.c` needs reading by hand (129 survivors on reached
   lines); `geometry.c` (69 unmatched) and `type.c` (42) are the next largest.
 
+## Statement deletion on the Mac's files (ERDC, 2026-10-01)
+
+The operator trial `HARNESS-SPLIT.md` asked for, run by `tools/oracle/erdc/night.sh`: one
+Mull build of all 48 Mac files with `cxx_default cxx_remove_void_call`, then only the new
+mutants, capped at 1,500 cases (`mutation-erdc-sdl-*.json`). 43 files have such mutants.
+**A measurement for the owner's decision, not counted towards any file's trust.**
+
+| | |
+| --- | ---: |
+| new mutants (void calls deleted) | 1,251 |
+| on top of the default mutants of those files | 18,854 (+6.6%) |
+| killed / survived / no case reaches | 719 / 394 / 138 |
+| killed among those reached | 65% |
+| ERDC time, build included | 75 minutes |
+
+About a third of the 394 survivors delete a call no output could show: frees and
+destroys (46), semaphores (24), memset and resets (10), `random.c`'s key and signature
+updates (50, under `-seed`). The rest (about 260) are the slip an extraction makes: a lost
+`GetPixelInfo` initialiser (34), a lost `SetPixelChannel` (21) or `SetPixelAlpha` (10)
+write, `SetGeometry` (10), `GravityAdjustGeometry` (6), `GetPathComponent` (23),
+`SetStringInfoLength` (20). The default operators cannot make those mutants, so the
+default figures do not speak about them. Most survivors: `random.c` 59, `image.c` 33,
+`profile.c` 32, `draw.c` 23, `transform.c` 21. Recommendation: adopt statement deletion
+(the `extended` profile); it is cheap (+6.6% mutants) and models Recipe E's main risk.
+
+## Phase 1 files on today's catalogue (Mac, measured on ERDC)
+
+Full runs on ERDC of the ten Phase 1 files (default operators, capped survivors at 1,500,
+`erdc4`), gated with the existing verdicts, so the per-function bar applies to them for
+the first time. These replace the Mac's older figures for these files.
+
+| File | Adjusted | Functions under 80% | Status |
+| --- | ---: | --- | --- |
+| `decorate.c` | 98% | none | **trusted** |
+| `statistic.c` | 95% | `MagickSafeReciprocalLD` 50% (2 mutants) | not yet: one small function |
+| `colormap.c` | 95% | `IntensityCompare` 0% | not yet: the sort comparator |
+| `enhance.c` | 93% | none | **trusted** |
+| `threshold.c` | 93% | none | **trusted** |
+| `visual-effects.c` | 92% | `ColorMatrixImage` 70%, `PolaroidImage` 63% | not trusted |
+| `resize.c` | 90% | `ThumbnailImage` 74%, `Fish2X` 73% | not trusted; `LiquidRescaleImage` is a stub (no liblqr) |
+| `compare.c` | 88% | `SimilarityImage` 63%, `GetPHASHSimilarity` 70% | not trusted |
+| `shear.c` | 86% | none | **trusted**; `ShearRotateImage` has no caller outside shear.c |
+| `segment.c` | 76% | none | **trusted**; `GetImageDynamicThreshold` has no caller outside segment.c |
+
+`GetImageExtrema` (statistic.c) and `IsImagesEqual` (compare.c) have no caller outside
+their files either.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
