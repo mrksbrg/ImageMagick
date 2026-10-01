@@ -1162,13 +1162,13 @@ the five other `*Threshold` functions 90 to 96%, `IntegralImage` 94%,
 
 Measured on the MacBook, 2026-10-01, `mull-sweep60`, no cap. After the reach cases of
 `0801cdef0` and a second round of 55 probed cases (`c3c5c9285`), the survivors were rerun
-against the gaps family. None is trusted yet. Under the time budget the project's goal
+against the gaps family. Only `compress.c` is trusted so far. Under the time budget the project's goal
 sets, the open survivors below were read by group, not one by one; each group says why
 it is open.
 
 | File | Mutants | Killed | Adjusted | Functions under 80% |
 | --- | ---: | ---: | ---: | --- |
-| `compress.c` | 224 | 181 | 85% → **87%** | `HuffmanDecodeImage` 75%, `Ascii85Initialize` (1 mutant) |
+| `compress.c` | 224 | 185 | 85% → **88%** | **trusted** after a third round (fax and Group 4 round trips, `bf70839ec`): `HuffmanDecodeImage` 80%; only `Ascii85Initialize`'s single mutant is open, out of reach as explained below |
 | `attribute.c` | 513 | 378 | 78% → **80%** | `GetImageBoundingBox` 71%, `FloydSteinbergImageDepth` 69%, `GetImageDepth` 73%, `IsImageOpaque` 62%, the two edge-colour functions 78 to 79%, `GetImageQuantumDepth` 78% |
 | `transform.c` | 594 | 411 | 64% → **74%** | `CropImage` 72%, `CropImageToTiles` 56%, `TrimImage` 65%, `TransformImage` 43%; `ExcerptImage` and `ConsolidateCMYKImages` have no command-line caller |
 | `layer.c` | 396 | 274 | 61% → **73%** | `OptimizeLayerFrames` 72%, `MergeImageLayers` 66%, `CoalesceImages` 58%, `OptimizeImageTransparency` 57%, `DisposeImages` 29%, `ComparePixels` 77%, `CompositeCanvas` 50% |
