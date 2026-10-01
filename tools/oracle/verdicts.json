@@ -2,6 +2,776 @@
  "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
  "verdicts": [
   {
+   "at": 55,
+   "file": "MagickCore/annotate.c",
+   "function": "AnnotateImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "annotate_info->affine.ty-=(draw_info->affine.sy*(height+",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/annotate.c",
+   "function": "AnnotateImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "geometry.height/2.0+i*annotate_info->affine.sy*height-",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/annotate.c",
+   "function": "AnnotateImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height;",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/annotate.c",
+   "function": "ComplexTextLayout",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*grapheme)[i-1].x_advance+=(FT_Pos) ((draw_info->direction ==",
+   "verdict": "unresolved",
+   "why": "kerning in the text layout; not killed with -kerning 2 and the corpus font (which may have no kerning table)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/annotate.c",
+   "function": "ComplexTextLayout",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (ft_status == 0)",
+   "verdict": "unresolved",
+   "why": "kerning in the text layout; not killed with -kerning 2 and the corpus font (which may have no kerning table)"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/annotate.c",
+   "function": "ComplexTextLayout",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((*grapheme)[i].index != 0) && (last_glyph != 0))",
+   "verdict": "unresolved",
+   "why": "kerning in the text layout; not killed with -kerning 2 and the corpus font (which may have no kerning table)"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/annotate.c",
+   "function": "ComplexTextLayout",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((*grapheme)[i].index != 0) && (last_glyph != 0))",
+   "verdict": "unresolved",
+   "why": "kerning in the text layout; not killed with -kerning 2 and the corpus font (which may have no kerning table)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/annotate.c",
+   "function": "ComplexTextLayout",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(*grapheme)[i-1].x_advance+=(FT_Pos) ((draw_info->direction ==",
+   "verdict": "unresolved",
+   "why": "kerning in the text layout; not killed with -kerning 2 and the corpus font (which may have no kerning table)"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(void) ConcatenateMagickString(target,\"\\n\",strlen(*caption)+1);",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "width=CastDoubleToSizeT(metrics->width+draw_info->stroke_width+0.5);",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 62,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "width=CastDoubleToSizeT(metrics->width+draw_info->stroke_width+0.5);",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((n > 0) && ((*caption)[n-1] != '\\n'))",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((split != MagickFalse) || (GetUTFOctets(p) > 2))",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (width > image->columns)",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/annotate.c",
+   "function": "FormatMagickCaption",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((n > 0) && ((*caption)[n-1] != '\\n'))",
+   "verdict": "unresolved",
+   "why": "caption wrapping at a boundary; not killed by captions that wrap on spaces, without spaces and on newlines"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/annotate.c",
+   "function": "FreetypeAlloc",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (extent <= 0)",
+   "verdict": "equivalent",
+   "why": "FreeType's memory and stream callbacks; FreeType never asks for 0 bytes or reads past the stream here"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/annotate.c",
+   "function": "FreetypeCloseStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file != (FILE *) NULL)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/annotate.c",
+   "function": "FreetypeReadStream",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (offset > stream->size)",
+   "verdict": "equivalent",
+   "why": "FreeType's memory and stream callbacks; FreeType never asks for 0 bytes or reads past the stream here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/annotate.c",
+   "function": "FreetypeRealloc",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (extent <= 0)",
+   "verdict": "equivalent",
+   "why": "FreeType's memory and stream callbacks; FreeType never asks for 0 bytes or reads past the stream here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/annotate.c",
+   "function": "GetMultilineTypeMetrics",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (status == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "GetMultilineTypeMetrics",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (extent.width > metrics->width)",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "GetMultilineTypeMetrics",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (extent.width > metrics->width)",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/annotate.c",
+   "function": "GetMultilineTypeMetrics",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) count; i++)",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/annotate.c",
+   "function": "GetMultilineTypeMetrics",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "0.5)+(count-1)*draw_info->interline_spacing);",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/annotate.c",
+   "function": "IsEmptyOutline",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "return((outline.n_points == 0) || (outline.n_contours <= 0) ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "metrics->bounds.x2=metrics->ascent+metrics->descent;",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "metrics->bounds.y2=metrics->ascent+metrics->descent;",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "annotate_info->affine.ty=(-glyph.origin.y/64.0);",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "metrics->height=(double) face->size->metrics.height/64.0;",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "metrics->max_advance=(double) face->size->metrics.max_advance/64.0;",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(IsEmptyOutline(outline) == MagickFalse))",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 71,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(IsRightsAuthorized(PathPolicyDomain,ReadPolicyRights,draw_info->font) == MagickFalse))",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(draw_info->fill_pattern == (Image *) NULL) &&",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(draw_info->stroke_pattern == (Image *) NULL)) ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((draw_info->font != (char *) NULL) && (*draw_info->font == '@') &&",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(encoding,\"AdobeCustom\") == 0)",
+   "verdict": "unresolved",
+   "why": "the encoding-name chain; only -encoding reaches it, and the corpus font maps few encodings"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(encoding,\"AdobeExpert\") == 0)",
+   "verdict": "unresolved",
+   "why": "the encoding-name chain; only -encoding reaches it, and the corpus font maps few encodings"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(encoding,\"AdobeStandard\") == 0)",
+   "verdict": "unresolved",
+   "why": "the encoding-name chain; only -encoding reaches it, and the corpus font maps few encodings"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(encoding,\"AppleRoman\") == 0)",
+   "verdict": "unresolved",
+   "why": "the encoding-name chain; only -encoding reaches it, and the corpus font maps few encodings"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (active == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (draw_info->render == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "fill_opacity=fill_opacity >= 0.5 ? 1.0 : 0.0;",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((x_offset < 0) || (x_offset >= (ssize_t) image->columns))",
+   "verdict": "unresolved",
+   "why": "clipping a glyph's bitmap at the image edge; not killed by text crossing each edge"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "stream->size=attributes.st_size >= 0 ? (unsigned long)",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.yMax > metrics->bounds.y2) && (bounds.yMax != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (metrics->origin.x > metrics->width)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (strlen(annotate_info->primitive) > 7)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (face->size->metrics.max_advance > MagickEpsilon)",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((x_offset < 0) || (x_offset >= (ssize_t) image->columns))",
+   "verdict": "unresolved",
+   "why": "clipping a glyph's bitmap at the image edge; not killed by text crossing each edge"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (GetUTFCode(p) < 0)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_minus_to_noop",
+   "nth": 0,
+   "src": "annotate_info->affine.ty=(-glyph.origin.y/64.0);",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(IsPathAccessible(draw_info->metrics) != MagickFalse))",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(draw_info->stroke_pattern != (Image *) NULL)) &&",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "(draw_info->stroke_pattern != (Image *) NULL)) &&",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "active=q != (Quantum *) NULL ? MagickTrue : MagickFalse;",
+   "verdict": "unresolved",
+   "why": "clipping a glyph's bitmap at the image edge; not killed by text crossing each edge"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))",
+   "verdict": "unresolved",
+   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((draw_info->font != (char *) NULL) && (*draw_info->font == '@') &&",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((draw_info->metrics != (char *) NULL) &&",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((ft_status != 0) && (face->num_charmaps != 0))",
+   "verdict": "unresolved",
+   "why": "the encoding-name chain; only -encoding reaches it, and the corpus font maps few encodings"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((ft_status != 0) && (face->num_charmaps != 0))",
+   "verdict": "unresolved",
+   "why": "the encoding-name chain; only -encoding reaches it, and the corpus font maps few encodings"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((geometry_flags & SigmaValue) != 0)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (glyph.image != (FT_Glyph) NULL)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (glyph.image != (FT_Glyph) NULL)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image->storage_class != DirectClass)",
+   "verdict": "unresolved",
+   "why": "not killed by the 45 annotate and text cases tried"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (q != (Quantum *) NULL)",
+   "verdict": "unresolved",
+   "why": "clipping a glyph's bitmap at the image edge; not killed by text crossing each edge"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderType",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((type_info == (const TypeInfo *) NULL) &&",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderType",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*draw_info->font == '@')",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderType",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (font != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderType",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (type_info->metrics != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+  },
+  {
    "at": 67,
    "file": "MagickCore/colormap.c",
    "function": "IntensityCompare",
@@ -2555,11 +3325,12 @@
    "at": 15,
    "file": "MagickCore/profile.c",
    "function": "ReplaceXMPValue",
+   "killed_by": "rose xmp elements, shorter value (gaps/ee9b5df572)",
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
    "src": "if (new_length < length)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 15,
@@ -2725,41 +3496,45 @@
    "at": 17,
    "file": "MagickCore/profile.c",
    "function": "SyncExifProfile",
+   "killed_by": "rose exif big-endian longs, density and orientation (gaps/80e510114d)",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (number_bytes == 4)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 17,
    "file": "MagickCore/profile.c",
    "function": "SyncExifProfile",
+   "killed_by": "rose exif big-endian longs, density and orientation (gaps/80e510114d)",
    "mutator": "cxx_eq_to_ne",
    "nth": 1,
    "src": "if (number_bytes == 4)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 17,
    "file": "MagickCore/profile.c",
    "function": "SyncExifProfile",
+   "killed_by": "rose exif little-endian rationals /2, density and orientation (gaps/f6b5f76906)",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (number_bytes == 8)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 17,
    "file": "MagickCore/profile.c",
    "function": "SyncExifProfile",
+   "killed_by": "rose exif little-endian rationals /2, density and orientation (gaps/f6b5f76906)",
    "mutator": "cxx_eq_to_ne",
    "nth": 1,
    "src": "if (number_bytes == 8)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 32,
@@ -2815,11 +3590,12 @@
    "at": 17,
    "file": "MagickCore/profile.c",
    "function": "SyncExifProfile",
+   "killed_by": "rose exif little-endian rationals /2, density and orientation (gaps/f6b5f76906)",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "if (number_bytes <= 4)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 15,
@@ -2975,11 +3751,12 @@
    "at": 51,
    "file": "MagickCore/profile.c",
    "function": "SyncXMPProfile",
+   "killed_by": "rose xmp elements, unequal density (gaps/040e1e98d0)",
    "mutator": "cxx_gt_to_le",
    "nth": 0,
    "src": "if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (exif2/exif3 blocks, unequal or shorter XMP density) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 29,
@@ -6734,11 +7511,12 @@
    "at": 7,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep-colors=white;gray -connected-components 8 (gaps/02cd79a439)",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (*q == ';')",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 7,
@@ -6754,31 +7532,34 @@
    "at": 41,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:sort=area -define connected-components:sort-order=decreasing -connected-components 8 (gaps/10541525ab)",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (LocaleCompare(artifact,\"decreasing\") == 0)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "cmyk.miff -define connected-components:verbose=true -define connected-components:mean-color=true -define connected-components:area-threshold=20 -connected-components 8 (gaps/0768086071)",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (image->colorspace == CMYKColorspace)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "cmyk.miff -define connected-components:verbose=true -define connected-components:mean-color=true -define connected-components:area-threshold=20 -connected-components 8 (gaps/0768086071)",
    "mutator": "cxx_eq_to_ne",
    "nth": 1,
    "src": "if (image->colorspace == CMYKColorspace)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 24,
@@ -6794,11 +7575,12 @@
    "at": 16,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:area-threshold=110-141 -connected-components 8 (gaps/060950e63a)",
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "(object[i].area >= max_threshold)) && (i != background_id))",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 21,
@@ -6944,21 +7726,23 @@
    "at": 16,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "rose.miff -define connected-components:area-threshold=16 -connected-components 4 (gaps/cb2bae0cfe)",
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "dx=connectivity > 4 ? connect8[k][1] : connect4[k][1];",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 16,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "rose.miff -define connected-components:area-threshold=16 -connected-components 4 (gaps/cb2bae0cfe)",
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "dy=connectivity > 4 ? connect8[k][0] : connect4[k][0];",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 6,
@@ -7034,21 +7818,23 @@
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:keep=11-9 -connected-components 8 (gaps/5a4782900d)",
    "mutator": "cxx_gt_to_le",
    "nth": 0,
    "src": "step=(ssize_t) (first > last ? -1 : 1);",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 22,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:remove-ids=11-9 -connected-components 8 (gaps/2dd5f0be9e)",
    "mutator": "cxx_gt_to_le",
    "nth": 1,
    "src": "step=(ssize_t) (first > last ? -1 : 1);",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 12,
@@ -7274,11 +8060,12 @@
    "at": 36,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "cmyk.miff -define connected-components:verbose=true -define connected-components:mean-color=true -define connected-components:area-threshold=20 -connected-components 8 (gaps/0768086071)",
    "mutator": "cxx_mul_to_div",
    "nth": 0,
    "src": "object[i].color.black/=(QuantumScale*object[i].area);",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 19,
@@ -7314,11 +8101,12 @@
    "at": 13,
    "file": "MagickCore/vision.c",
    "function": "ConnectedComponentsImage",
+   "killed_by": "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define connected-components:verbose=true -define connected-components:sort=area -define connected-components:sort-order=decreasing -connected-components 8 (gaps/10541525ab)",
    "mutator": "cxx_ne_to_eq",
    "nth": 14,
    "src": "if (artifact != (const char *) NULL)",
-   "verdict": "unresolved",
-   "why": "pending: killed by a probed case (vision_cmds2) not yet in cases.py"
+   "verdict": "gap",
+   "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
    "at": 7,

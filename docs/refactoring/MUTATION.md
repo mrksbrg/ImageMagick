@@ -1076,6 +1076,45 @@ the defaults with statement deletion and scalar-call replacement); `literature`,
 sufficient set as far as Mull can express it (AOR, ROR, SDL for void calls, UOI in part;
 no LCR, no ABS). The project owner decides.
 
+## Reading survivors by hand: profile.c, annotate.c, delegate.c (Mac)
+
+Measured on the MacBook, 2026-09-30 and 10-01, following `HARNESS-SPLIT.md`: a full run of
+every mutant, the capped survivors rerun uncapped, then reach cases for the code no case
+ran, a confirmation rerun, and a verdict on every survivor left. Scores are `gate.py`'s
+adjusted figure (functions no case reaches count as gaps). None of the three is trusted;
+the reasons are below.
+
+| File | Mutants | Killed | Adjusted | Not trusted because |
+| --- | ---: | ---: | ---: | --- |
+| `profile.c` | 470 | 34 → 189 | 7% → **42%** | the colour-management transform needs a second, different ICC profile; parser checks need malformed profiles; nested EXIF directories need binary case files |
+| `annotate.c` | 578 | 231 → 347 | 41% → **62%** | `RenderPostscript` and its Bézier tracers (94 mutants) run Ghostscript, which the oracle excludes; font metrics that no output shows |
+| `delegate.c` | 297 | 111 → 116 | 53% → **54%** | building and running external commands: the sandbox blocks every launch, and the command is not printed even with `-verbose` |
+
+**profile.c.** Two-thirds of the file sat in functions no case called, because the corpus
+has one image with profiles (`tests/cli-uhdr-iptc.jpg`: 8BIM, ICC, IPTC). The new cases
+build the rest from case text: an EXIF block written with bytes below 128 only (little and
+big endian, rationals with denominator 1 and 2, shorts and longs), XMP in attribute and
+element form (only the element form is ever rewritten: `GetXMPOffsets` looks for `<name`),
+the one ICC profile extracted from the JPEG, and PSD round trips, whose 8BIM carries a
+resolution resource and, with an ICC profile, an ICC resource. `-density` and `-orient`
+before the write make `SyncImageProfiles` rewrite them.
+
+**annotate.c.** No case drew multi-line text that was also rotated: with a unit scale,
+`i*sy*height` and `i/sy*height` agree for the first line and the second, so 30 survivors
+in the gravity placements needed `-annotate 20x10+3+4 'one\ntwo\nthree'` under each
+gravity. The other gaps: text `-density`, `type:hinting` (a property, set with `-set`),
+UTF-8 text, decorations, wrapping captions.
+
+**delegate.c.** Only the `delegates.xml` parsing and `-list delegate` can be observed.
+
+**Found on the way.** `magick ... -define connected-components:verbose=true` prints the
+mean colour's alpha as values like `91.02` and `465.79`, not 0 to 1: a display slip, it seems.
+**A harness limitation:** case files are written as text, so no case can carry bytes above
+127. That rules out EXIF sub-directories (tags `0x8769`, `0xa005`), an 8BIM resolution
+resource written by hand (`0x03ED`), and a second ICC profile. Letting a case carry a
+binary file (base64 in `cases.py`, decoded by `write_case_files`) would open all three; it
+is a change to a shared tool, for the owner to decide.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
