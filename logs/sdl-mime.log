@@ -1,0 +1,25 @@
+mutate: 20 mutants in MagickCore/mime\.c$, 7 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 20/20 (130s)
+
+mutate: 20 mutants, 130s
+  killed 7, survived 4 (2 capped), no coverage 9, errors 0
+  mutation score on reached code: 63.6%   overall: 35.0%
+
+  function                           total killed survived no-cov
+  GetMimeInfo                            4      0        0      4
+  MimeComponentTerminus                  4      2        2      0
+  GetMimeInfoList                        3      3        0      0
+  GetMimeList                            3      0        0      3
+  IsMimeCacheInstantiated                3      2        1      0
+  MagickToMime                           2      0        0      2
+  LoadMimeCache                          1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+       mime.c:849:13 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+     c mime.c:1101:5 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+    xc mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-mime.json

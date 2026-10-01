@@ -1,0 +1,34 @@
+mutate: 27 mutants in MagickCore/locale\.c$, 9 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/27 (130s)
+  mutants: 27/27 (131s)
+
+mutate: 27 mutants, 131s
+  killed 13, survived 10 (4 capped), no coverage 4, errors 0
+  mutation score on reached code: 56.5%   overall: 48.1%
+
+  function                           total killed survived no-cov
+  LocaleComponentTerminus                5      2        3      0
+  GetLocaleInfo_                         4      4        0      0
+  GetLocaleInfoList                      4      3        1      0
+  LoadLocaleCache                        4      2        2      0
+  GetLocaleList                          3      0        0      3
+  IsLocaleTreeInstantiated               3      2        1      0
+  GetLocaleOptions                       2      0        2      0
+  DestroyCLocale                         1      0        1      0
+  LocaleFatalErrorHandler                1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc locale.c:267:5 cxx_remove_void_call       freelocale(c_locale);
+    x  locale.c:635:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleInfoCompare);
+    x  locale.c:832:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
+    x  locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
+       locale.c:927:9 cxx_remove_void_call       ActivateSemaphoreInfo(&locale_semaphore);
+    x  locale.c:1302:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+    x  locale.c:1339:9 cxx_remove_void_call       ChopLocaleComponents(tag,1);
+     c locale.c:1707:5 cxx_remove_void_call       ActivateSemaphoreInfo(&locale_semaphore);
+    xc locale.c:1712:3 cxx_remove_void_call       DestroyCLocale();
+    xc locale.c:1715:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&locale_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-locale.json

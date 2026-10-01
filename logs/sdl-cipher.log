@@ -1,0 +1,21 @@
+mutate: 22 mutants in MagickCore/cipher\.c$, 4 functions
+mutate: baseline over 3 cases in 0s
+  mutants: 22/22 (0s)
+
+mutate: 22 mutants, 0s
+  killed 19, survived 3 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 86.4%   overall: 86.4%
+
+  function                           total killed survived no-cov
+  PasskeyDecipherImage                   9      8        1      0
+  PasskeyEncipherImage                   9      8        1      0
+  EncipherAESBlock                       3      3        0      0
+  SetAESKey                              1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  cipher.c:690:5 cxx_remove_void_call       EncipherAESBlock(aes_info,output_block,output_block);
+    x  cipher.c:910:5 cxx_remove_void_call       EncipherAESBlock(aes_info,output_block,output_block);
+    x  cipher.c:1071:5 cxx_remove_void_call       InverseAddRoundKey(aes_info->encipher_key+i,aes_info->decipher_key+i);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-cipher.json

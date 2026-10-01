@@ -1,0 +1,19 @@
+mutate: 6 mutants in MagickCore/colormap\.c$, 3 functions
+mutate: baseline over 2615 cases in 0s
+  mutants: 6/6 (1s)
+
+mutate: 6 mutants, 1s
+  killed 4, survived 2 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 66.7%   overall: 66.7%
+
+  function                           total killed survived no-cov
+  SortColormapByIntensity                3      2        1      0
+  CycleColormapImage                     2      1        1      0
+  AcquireImageColormap                   1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  colormap.c:238:7 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t) index,q);
+    x  colormap.c:379:7 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t) index,q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-colormap.json

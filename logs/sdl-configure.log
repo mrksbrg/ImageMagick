@@ -1,0 +1,29 @@
+mutate: 26 mutants in MagickCore/configure\.c$, 8 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/26 (130s)
+  mutants: 26/26 (130s)
+
+mutate: 26 mutants, 130s
+  killed 13, survived 6 (4 capped), no coverage 7, errors 0
+  mutation score on reached code: 68.4%   overall: 50.0%
+
+  function                           total killed survived no-cov
+  AcquireConfigureCache                  6      6        0      0
+  ConfigureComponentTerminus             4      2        2      0
+  GetConfigureInfo                       4      0        0      4
+  GetConfigureInfoList                   3      3        0      0
+  GetConfigureList                       3      0        0      3
+  IsConfigureCacheInstantiated           3      2        1      0
+  GetConfigureOptions                    2      0        2      0
+  LoadConfigureCache                     1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c configure.c:280:5 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
+    xc configure.c:286:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&configure_semaphore);
+    xc configure.c:689:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
+    xc configure.c:724:3 cxx_remove_void_call       ResetLinkedListIterator(options);
+       configure.c:1032:9 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
+       configure.c:1267:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-configure.json

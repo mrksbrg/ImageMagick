@@ -1,0 +1,21 @@
+mutate: 4 mutants in MagickCore/memory\.c$, 3 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 4/4 (132s)
+
+mutate: 4 mutants, 132s
+  killed 0, survived 4 (4 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  AcquireCriticalMemory                  2      0        2      0
+  RelinquishAlignedMemory                1      0        1      0
+  ShredMagickMemory                      1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c memory.c:625:3 cxx_remove_void_call       MagickCoreTerminus();
+     c memory.c:626:3 cxx_remove_void_call       _exit(EXIT_FAILURE);
+    xc memory.c:1177:3 cxx_remove_void_call       free(memory);
+     c memory.c:1702:9 cxx_remove_void_call       SetRandomKey(random_info,quantum,GetStringInfoDatum(key));
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-memory.json

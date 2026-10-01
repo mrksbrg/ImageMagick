@@ -1,0 +1,27 @@
+mutate: 29 mutants in MagickCore/magic\.c$, 7 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 25/29 (133s)
+  mutants: 29/29 (137s)
+
+mutate: 29 mutants, 137s
+  killed 21, survived 5 (5 capped), no coverage 3, errors 0
+  mutation score on reached code: 80.8%   overall: 72.4%
+
+  function                           total killed survived no-cov
+  MagicComponentTerminus                 8      5        3      0
+  GetMagicInfo                           7      6        1      0
+  IsMagicCacheInstantiated               3      3        0      0
+  GetMagicInfoList                       3      3        0      0
+  GetMagicList                           3      0        0      3
+  IsMagicListInstantiated                3      2        1      0
+  GetMagicPatternExtent                  2      2        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c magic.c:343:7 cxx_remove_void_call       UnlockSemaphoreInfo(magic_list_semaphore);
+     c magic.c:678:9 cxx_remove_void_call       ActivateSemaphoreInfo(&magic_list_semaphore);
+     c magic.c:810:5 cxx_remove_void_call       ActivateSemaphoreInfo(&magic_list_semaphore);
+    xc magic.c:815:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&magic_list_semaphore);
+    xc magic.c:822:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&magic_cache_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-magic.json

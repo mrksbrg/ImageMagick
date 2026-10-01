@@ -1,0 +1,23 @@
+mutate: 11 mutants in MagickCore/list\.c$, 8 functions
+mutate: baseline over 10610 cases in 0s
+  mutants: 11/11 (130s)
+
+mutate: 11 mutants, 130s
+  killed 7, survived 1 (0 capped), no coverage 3, errors 0
+  mutation score on reached code: 87.5%   overall: 63.6%
+
+  function                           total killed survived no-cov
+  SpliceImageIntoList                    3      0        0      3
+  InsertImageInList                      2      2        0      0
+  CloneImages                            1      1        0      0
+  DeleteImages                           1      1        0      0
+  DestroyImageList                       1      1        0      0
+  DuplicateImages                        1      1        0      0
+  PrependImageToList                     1      1        0      0
+  SyncNextImageInList                    1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  list.c:1496:7 cxx_remove_void_call       DestroyBlob(images->next);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-list.json

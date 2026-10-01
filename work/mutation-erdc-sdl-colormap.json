@@ -1,0 +1,74 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:144:5:144:42",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c",
+  "line": 144,
+  "col": 5,
+  "function": "AcquireImageColormap",
+  "status": "killed",
+  "cases": 6,
+  "killer": "decode/108d33ad83",
+  "why": "stdout differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:237:7:237:45",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c",
+  "line": 237,
+  "col": 7,
+  "function": "CycleColormapImage",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/6c65332300",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:238:7:238:68",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c",
+  "line": 238,
+  "col": 7,
+  "function": "CycleColormapImage",
+  "status": "survived",
+  "cases": 12,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:339:3:340:47",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c",
+  "line": 339,
+  "col": 3,
+  "function": "SortColormapByIntensity",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/06d13aba6d",
+  "why": "dec.miff differs; enc.palm differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:378:7:378:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c",
+  "line": 378,
+  "col": 7,
+  "function": "SortColormapByIntensity",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/06d13aba6d",
+  "why": "dec.miff differs; enc.palm differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:379:7:379:68",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c",
+  "line": 379,
+  "col": 7,
+  "function": "SortColormapByIntensity",
+  "status": "survived",
+  "cases": 1,
+  "capped": false,
+  "line_executed": true
+ }
+]

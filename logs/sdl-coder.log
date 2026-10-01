@@ -1,0 +1,21 @@
+mutate: 15 mutants in MagickCore/coder\.c$, 4 functions
+mutate: baseline over 10616 cases in 0s
+  mutants: 15/15 (130s)
+
+mutate: 15 mutants, 130s
+  killed 8, survived 3 (3 capped), no coverage 4, errors 0
+  mutation score on reached code: 72.7%   overall: 53.3%
+
+  function                           total killed survived no-cov
+  CoderComponentTerminus                 4      2        2      0
+  GetCoderInfoList                       4      4        0      0
+  GetCoderList                           4      0        0      4
+  IsCoderTreeInstantiated                3      2        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c coder.c:235:5 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
+    xc coder.c:240:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&coder_semaphore);
+     c coder.c:480:9 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-coder.json

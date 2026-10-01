@@ -1,0 +1,128 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:290:13:290:51",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 290,
+  "col": 13,
+  "function": "CloneImages",
+  "status": "killed",
+  "cases": 1,
+  "killer": "infra/e689a9cc0f",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:458:7:458:34",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 458,
+  "col": 7,
+  "function": "DeleteImages",
+  "status": "killed",
+  "cases": 1,
+  "killer": "sequence/b24f47b718",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:494:5:494:33",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 494,
+  "col": 5,
+  "function": "DestroyImageList",
+  "status": "killed",
+  "cases": 1,
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> ['timeout']"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:558:5:558:54",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 558,
+  "col": 5,
+  "function": "DuplicateImages",
+  "status": "killed",
+  "cases": 1,
+  "killer": "sequence/8efcbf4641",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:940:3:940:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 940,
+  "col": 3,
+  "function": "InsertImageInList",
+  "status": "killed",
+  "cases": 1,
+  "killer": "sequence/f07d884438",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:941:3:941:34",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 941,
+  "col": 3,
+  "function": "InsertImageInList",
+  "status": "killed",
+  "cases": 1,
+  "killer": "sequence/f07d884438",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:998:3:998:38",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 998,
+  "col": 3,
+  "function": "PrependImageToList",
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/64017fef13",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:1378:3:1378:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 1378,
+  "col": 3,
+  "function": "SpliceImageIntoList",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:1381:5:1381:58",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 1381,
+  "col": 5,
+  "function": "SpliceImageIntoList",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:1382:3:1382:34",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 1382,
+  "col": 3,
+  "function": "SpliceImageIntoList",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:1496:7:1496:32",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c",
+  "line": 1496,
+  "col": 7,
+  "function": "SyncNextImageInList",
+  "status": "survived",
+  "cases": 520,
+  "capped": false,
+  "line_executed": true
+ }
+]
