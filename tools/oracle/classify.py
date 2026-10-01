@@ -31,7 +31,8 @@ next to this file, and takes precedence over the rules:
 A verdict is keyed by the function, the mutator, the mutated line's text and
 the operator's column within it, not by line number, so it survives edits
 elsewhere in the file and holds on any machine. `nth` tells apart identical
-lines in the same function. A verdict matches only the source it was made on:
+lines in the same function. A verdict also applies on a line no case executes, for code provably dead
+(no input can reach it). A verdict matches only the source it was made on:
 once the line or its function changes, the survivor is unmatched again.
 """
 
@@ -86,10 +87,10 @@ VERDICT_KINDS = {
 def kind_of(result, line, after="", verdict=None):
     if result["status"] != "survived":
         return result["status"]
+    if verdict:  # before "unreached": a line in provably dead code has no input to reach it
+        return verdict
     if not result.get("line_executed", True):
         return "unreached"
-    if verdict:
-        return verdict
     for kind, mutators, rx, _ in COMPILED:
         text = line + "\n" + after if kind == "free-guard" else line
         if applies_to(mutators, result["mutator"]) and rx.search(text):
