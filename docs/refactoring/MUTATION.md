@@ -1152,9 +1152,11 @@ the five other `*Threshold` functions 90 to 96%, `IntegralImage` 94%,
   an absolute value is never negative. Its six mutants are recorded as equivalent; this is
   the first verdict on an unreached line (`classify.py` lets a verdict take precedence
   over "unreached" for that reason). A refactoring may delete the block.
-- **Open: 46 unresolved.** Mostly boundary mutants (`<` to `<=`) on floating-point
-  comparisons of moments and areas that no image puts exactly on the boundary, and
-  `connected-components:mean-color` rounding that changes no 16-bit value.
+- **Open: 46 unresolved.** 16 at the edges of the keep/remove list parsing (ranges,
+  reversed ranges and `;` tried); 11 where a real-valued shape metric would have to equal
+  a threshold exactly; 10 in moment arithmetic that reaches the output only through an
+  object's keep/remove decision; 2 in the angle's quadrant correction, which needs
+  `M20 == M02`; 7 not killed by any of the 27 defines and connectivities tried.
 
 ## How to use this in the campaign
 
