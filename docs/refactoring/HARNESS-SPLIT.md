@@ -1,5 +1,11 @@
 # The harness phase: who does which file
 
+**Why the harness exists.** The project asks whether healthy code is cheaper for agents to
+work with. Its deliverable is a version of the codebase at Code Health 10; the harness is
+the evidence that the refactored code still does the same, argued from the oracle's
+mutation score. Size the harness work by what that argument needs, not by perfection per
+file (decided by the project owner, 2026-10-01).
+
 **This phase is only about the test harness.** The goal is a mutation score that can be
 trusted for every MagickCore file: cases for the gaps, verdicts on the survivors, and the
 readiness gate ([`VERIFICATION.md`](VERIFICATION.md)) run per file. **No refactoring of
@@ -145,10 +151,14 @@ containers (`splay-tree.c`, `linked-list.c`, `xml-tree.c`, `token.c`).
 The same on both machines, so the results can be compared:
 
 1. Pull. Rebuild the indexes if the catalogue changed: `casemap.py`, then `linecov.py`.
-2. Full mutation run of the file, then its capped survivors uncapped:
-   `mutate.py --file 'MagickCore/<file>\.c$' --name full-<file>`, then
-   `--ids <capped> --max-cases 0 --name uncap-<file>`.
-3. Gate it: `gate.py mutation-full-<file>.json mutation-uncap-<file>.json`.
+2. Full mutation run of the file, then its capped survivors rerun against up to 1,500
+   cases: `mutate.py --file 'MagickCore/<file>\.c$' --name full-<file>`, then
+   `--ids <capped> --max-cases 1500 --name cap1500-<file>`. Not uncapped: in functions
+   nearly every case reaches, an uncapped survivor costs up to ~10,000 case runs (a file
+   took 5 hours on the Mac), and the figure barely moves; the Linux sweep found 175 of 190
+   capped survivors were simply killed by a later case. Say in the file's section that the
+   rerun was capped at 1,500.
+3. Gate it: `gate.py mutation-full-<file>.json mutation-cap1500-<file>.json`.
 4. Read every unmatched survivor. Record a verdict in `verdicts.json` (`equivalent`,
    `unobservable`, `gap` with `killed_by`, or `unresolved`). A `gap` verdict is recorded
    only after the mutant has been run against the proposed case and killed.
@@ -159,24 +169,33 @@ The same on both machines, so the results can be compared:
 
 ### When a file is trusted
 
-The aim of this phase is test cases we can trust for every file. A file is **trusted**
-when all of these hold:
+The aim of this phase is test cases we can trust for every file. Every function will be
+refactored sooner or later, so the measure is per function: a file's pooled score can hide
+a weak function behind strong ones. A file is **trusted** when all of these hold:
 
 - a **full run**: every mutant Mull generates for the file, not a sample;
-- every capped survivor **rerun uncapped**;
-- an **adjusted score of 90% or more** (`gate.py`, the file's `ALL` row). It counts the
-  mutants in functions no case executes as gaps, so unreached code lowers it: a file cannot
-  be trusted for code its cases never run;
+- every capped survivor **rerun against up to 1,500 cases** (step 2);
+- **every function at an adjusted score of 80% or more** (`gate.py`, the function's row),
+  or written down as out of reach, with the reason (below). The adjusted score counts the
+  mutants in functions no case executes as gaps, so unreached code lowers it. 80% on this
+  measure is strict: unresolved survivors count against it, and only named reasons excuse
+  one. The file's `ALL` row is reported as a summary;
 - every excused survivor **named with its reason**, by a `classify.py` rule or a hand
   verdict in `verdicts.json`; a `gap` verdict only once its case is in and has killed it;
 - every survivor still open **listed** in the file's section of `MUTATION.md`.
+
+The refactoring phase keeps the gate's bands per function: **ready** at 90% or more,
+**careful** at 75-90% (extra review, or a case added first). So a function that passes the
+harness at 82% is refactored with care.
 
 Otherwise the file is **not trusted**, and its section says why: API functions no command
 reaches, X11 without a display, OpenCL without a working runtime, an external program.
 Writing the reason down does not make a file trusted. It tells the later refactoring phase
 that the file can only be guard-verified.
 
-**Open: the operator set.** Mull runs its default operators (equality, relational,
+**Open, and next in priority: the operator set.** The equivalence argument is that the
+oracle would catch a refactoring mistake, so the operators should model the mistakes
+refactoring makes. Mull runs its default operators (equality, relational,
 arithmetic, increment, unary minus). They do not model the two slips refactoring makes
 most: a statement lost in an extraction (statement deletion, `cxx_remove_void_call`) and a
 condition rebuilt wrongly (logical connectors, `&&` and `||`). A trial on `colorspace.c` and
