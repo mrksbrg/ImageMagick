@@ -1,0 +1,91 @@
+mutate: 62 mutants in MagickCore/string\.c$, 13 functions
+mutate: baseline over 10612 cases in 0s
+  mutants: 25/62 (272s)
+  mutants: 50/62 (540s)
+  mutants: 62/62 (636s)
+
+mutate: 62 mutants, 636s
+  killed 0, survived 62 (53 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  ConfigureFileToStringInfo             13      0       13      0
+  CopyMagickString                      11      0       11      0
+  InterpretSiPrefixValue                 6      0        6      0
+  ConcatenateMagickString                5      0        5      0
+  IsStringFalse                          5      0        5      0
+  SubstituteString                       5      0        5      0
+  CloneString                            4      0        4      0
+  DestroyStringInfo                      3      0        3      0
+  AcquireString                          2      0        2      0
+  AcquireStringInfo                      2      0        2      0
+  ConcatenateString                      2      0        2      0
+  ConstantString                         2      0        2      0
+  SetStringInfoLength                    2      0        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc string.c:107:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    xc string.c:114:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    x  string.c:160:28 cxx_ge_to_gt               if (~string_info->length >= (MagickPathExtent-1))
+    x  string.c:165:63 cxx_mul_to_div             (void) memset(string_info->datum,0,(length+MagickPathExtent)*
+    xc string.c:260:24 cxx_ne_to_eq               if (*destination != (char *) NULL)
+    xc string.c:264:20 cxx_eq_to_ne               if (*destination == (char *) NULL)
+    xc string.c:270:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    xc string.c:277:45 cxx_mul_to_div             (void) memcpy(*destination,source,length*sizeof(**destination));
+    xc string.c:415:20 cxx_sub_to_add             count=(size_t) (q-destination);
+    xc string.c:416:11 cxx_sub_to_add             i=length-count;
+     c string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
+    xc string.c:429:15 cxx_add_to_sub             return(count+(size_t) (p-source));
+    xc string.c:429:27 cxx_sub_to_add             return(count+(size_t) (p-source));
+    xc string.c:477:15 cxx_lt_to_le               if (~length < source_length)
+    xc string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    xc string.c:596:15 cxx_lt_to_le               if ((offset < 0) || (offset != (MagickOffsetType) ((ssize_t) offset)))
+     c string.c:598:28 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:603:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
+     c string.c:608:28 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:612:11 cxx_ne_to_eq               if (map != (void *) NULL)
+     c string.c:626:19 cxx_lt_to_ge               for (i=0; i < length; i+=(size_t) count)
+     c string.c:626:19 cxx_lt_to_le               for (i=0; i < length; i+=(size_t) count)
+     c string.c:630:19 cxx_le_to_gt               if (count <= 0)
+     c string.c:630:19 cxx_le_to_lt               if (count <= 0)
+     c string.c:633:13 cxx_lt_to_ge               if (i < length)
+     c string.c:633:13 cxx_lt_to_le               if (i < length)
+     c string.c:635:32 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:641:24 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:687:15 cxx_ge_to_gt               if (~length >= 1UL)
+    xc string.c:692:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    xc string.c:745:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:745:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:747:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:747:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:749:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:749:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:751:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:751:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:757:29 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:757:36 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:760:21 cxx_sub_to_add             return((size_t) (p-source));
+    xc string.c:816:26 cxx_ne_to_eq               if (string_info->datum != (unsigned char *) NULL)
+    xc string.c:819:25 cxx_ne_to_eq               if (string_info->name != (char *) NULL)
+    xc string.c:821:25 cxx_ne_to_eq               if (string_info->path != (char *) NULL)
+    xc string.c:1321:15 cxx_ge_to_gt               if ((*q >= 'E') && (*q <= 'z'))
+    xc string.c:1321:30 cxx_le_to_lt               if ((*q >= 'E') && (*q <= 'z'))
+    xc string.c:1354:17 cxx_ge_to_gt               if (e >= MagickEpsilon)
+    xc string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
+    xc string.c:1368:30 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
+    xc string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
+    xc string.c:1445:13 cxx_eq_to_ne               if (value == (const char *) NULL)
+     c string.c:1447:36 cxx_eq_to_ne               if (LocaleCompare(value,"false") == 0)
+     c string.c:1449:34 cxx_eq_to_ne               if (LocaleCompare(value,"off") == 0)
+     c string.c:1451:33 cxx_eq_to_ne               if (LocaleCompare(value,"no") == 0)
+     c string.c:1453:32 cxx_eq_to_ne               if (LocaleCompare(value,"0") == 0)
+    x  string.c:1733:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+       string.c:1737:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
+    x  string.c:2660:24 cxx_gt_to_ge               if (replace_extent > search_extent)
+    x  string.c:2660:24 cxx_gt_to_le               if (replace_extent > search_extent)
+    x  string.c:2666:31 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
+    x  string.c:2666:46 cxx_sub_to_add             extent=strlen(*string)+replace_extent-search_extent+1;
+    x  string.c:2666:60 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-cap1500-string.json
