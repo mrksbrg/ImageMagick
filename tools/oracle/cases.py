@@ -1142,6 +1142,12 @@ def _constitute_cases():
     for pattern in PING_SCENES:
         steps = [[img("anim"), "+adjoin", "frame%d.miff"], ["identify", "-ping", pattern]]
         yield _case("constitute", "identify -ping %s" % pattern, steps, [])
+    # Pings that fail: PingImage must not touch the image the reader did not return.
+    for name, text in (("bad.miff", "garbage"), ("zero.ppm", "P6\n0 0\n255\n")):
+        yield _with_inputs(_case("constitute", "identify -ping failing %s" % name,
+                                 [["identify", "-ping", name]], []), files={name: text})
+    yield _case("constitute", "identify -ping missing file",
+                [["identify", "-ping", "missing.miff"]], [])
 
 
 # token.c: GlobExpression, reached through wildcards in input filenames,
