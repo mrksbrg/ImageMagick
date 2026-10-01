@@ -30,7 +30,7 @@ ERROR = re.compile(r"(?m)^\S*: (.*?)(?: `| '| @|$)")
 def failing(cases, manifest, binary):
     """{case id: result} for the cases whose steps do not all exit 0."""
     results = oracle.parallel(lambda c: oracle.run_case(binary, "dead", c, manifest),
-                              cases, os.cpu_count(), "dead")
+                              cases, oracle.default_jobs(), "dead")
     shutil.rmtree(os.path.join(oracle.WORK, "runs", "dead"), ignore_errors=True)
     return {i: r for i, r in results.items() if any(rc != 0 for rc in r["rc"])}
 

@@ -56,6 +56,13 @@ LISTS = ["Colorspace", "Compose", "Distort", "Filter", "Interpolate",
 MACOS = sys.platform == "darwin"
 
 
+def default_jobs():
+    """Parallel processes when no -j is given: ORACLE_JOBS if set, else one per
+    CPU. On a machine short of memory, ORACLE_JOBS=4 bounds every tool at once,
+    casemap.py and linecov.py too, which take no -j of their own."""
+    return int(os.environ.get("ORACLE_JOBS") or os.cpu_count())
+
+
 def llvm_tool(name):
     """llvm-profdata, llvm-cov, ... from the LLVM that builds with `clang`.
 
@@ -747,7 +754,7 @@ def add_common_arguments(s):
     s.add_argument("--filter", help="regex on case id or label")
     s.add_argument("--function", action="append",
                    help="only cases executing this function (casemap.json); repeatable")
-    s.add_argument("-j", "--jobs", type=int, default=os.cpu_count())
+    s.add_argument("-j", "--jobs", type=int, default=default_jobs())
 
 
 def add_run_arguments(s):

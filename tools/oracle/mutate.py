@@ -252,7 +252,7 @@ def _parse_args():
     p.add_argument("--max-cases", type=int, default=300,
                    help="cases tried per mutant, spread over case families (0: all)")
     p.add_argument("--seed", type=int, default=1)
-    p.add_argument("-j", "--jobs", type=int, default=os.cpu_count())
+    p.add_argument("-j", "--jobs", type=int, default=oracle.default_jobs())
     return p.parse_args()
 
 

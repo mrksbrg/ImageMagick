@@ -70,7 +70,7 @@ def build_map():
         shutil.rmtree(oracle.case_dir("casemap", case), ignore_errors=True)
         return functions_of(case["id"])
 
-    per_case = oracle.parallel(one, cases, os.cpu_count(), "casemap")
+    per_case = oracle.parallel(one, cases, oracle.default_jobs(), "casemap")
     by_function, unmapped = {}, sorted(c for c, n in per_case.items() if n is None)
     for cid, names in per_case.items():
         for n in names or []:
