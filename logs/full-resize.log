@@ -1,0 +1,247 @@
+mutate: 1020 mutants in MagickCore/resize\.c$, 50 functions
+  baseline: 500/1236 (2s)
+  baseline: 1000/1236 (9s)
+  baseline: 1236/1236 (10s)
+mutate: baseline over 1236 cases in 10s
+  mutants: 25/1020 (1s)
+  mutants: 50/1020 (1s)
+  mutants: 75/1020 (1s)
+  mutants: 100/1020 (1s)
+  mutants: 125/1020 (2s)
+  mutants: 150/1020 (117s)
+  mutants: 175/1020 (201s)
+  mutants: 200/1020 (212s)
+  mutants: 225/1020 (230s)
+  mutants: 250/1020 (248s)
+  mutants: 275/1020 (268s)
+  mutants: 300/1020 (273s)
+  mutants: 325/1020 (273s)
+  mutants: 350/1020 (275s)
+  mutants: 375/1020 (277s)
+  mutants: 400/1020 (278s)
+  mutants: 425/1020 (278s)
+  mutants: 450/1020 (280s)
+  mutants: 475/1020 (280s)
+  mutants: 500/1020 (281s)
+  mutants: 525/1020 (283s)
+  mutants: 550/1020 (297s)
+  mutants: 575/1020 (350s)
+  mutants: 600/1020 (389s)
+  mutants: 625/1020 (401s)
+  mutants: 650/1020 (434s)
+  mutants: 675/1020 (469s)
+  mutants: 700/1020 (499s)
+  mutants: 725/1020 (541s)
+  mutants: 750/1020 (553s)
+  mutants: 775/1020 (563s)
+  mutants: 800/1020 (567s)
+  mutants: 825/1020 (570s)
+  mutants: 850/1020 (571s)
+  mutants: 875/1020 (573s)
+  mutants: 900/1020 (575s)
+  mutants: 925/1020 (577s)
+  mutants: 950/1020 (578s)
+  mutants: 975/1020 (580s)
+  mutants: 1000/1020 (583s)
+  mutants: 1020/1020 (712s)
+
+mutate: 1020 mutants, 712s
+  killed 844, survived 140 (41 capped), no coverage 36, errors 0
+  mutation score on reached code: 85.8%   overall: 82.7%
+
+  function                           total killed survived no-cov
+  ScaleImage                           213    177       36      0
+  HorizontalFilter                      86     82        4      0
+  AcquireResizeFilter                   83     63       20      0
+  VerticalFilter                        77     71        6      0
+  Xbr2X                                 56     56        0      0
+  MagnifyImage                          49     45        4      0
+  CubicSpline                           47     38        9      0
+  SampleImage                           39     32        7      0
+  LiquidRescaleImage                    36      0        0     36
+  InterpolativeResizeImage              30     24        6      0
+  ThumbnailImage                        28     20        8      0
+  MagicKernelSharp2021                  27     22        5      0
+  ResizeImage                           25     23        2      0
+  BesselOrderOne                        22     17        5      0
+  MagicKernelSharp2013                  16     13        3      0
+  url_encode                            14     14        0      0
+  SincFast                              13     10        3      0
+  Lagrange                              12     11        1      0
+  Fish2X                                12      8        4      0
+  MixPixels                             11     11        0      0
+  ResampleImage                         10      9        1      0
+  P1                                     9      9        0      0
+  Q1                                     9      9        0      0
+  Quadratic                              8      6        2      0
+  I0                                     7      6        1      0
+  CopyPixels                             7      7        0      0
+  GetResizeFilterWeight                  6      5        1      0
+  PixelsEqual                            6      6        0      0
+  AcquireContributionTLS                 6      4        2      0
+  CubicBC                                5      4        1      0
+  J1                                     5      5        0      0
+  DestroyContributionTLS                 4      2        2      0
+  Bohman                                 3      3        0      0
+  Gaussian                               3      3        0      0
+  Jinc                                   3      3        0      0
+  Sinc                                   3      3        0      0
+  Triangle                               3      2        1      0
+  Eagle2X                                3      2        1      0
+  Hq2XPatternToNumber                    3      3        0      0
+  Scale2X                                3      2        1      0
+  Epbx2X                                 3      2        1      0
+  Scale3X                                3      2        1      0
+  MinifyImage                            3      2        1      0
+  Kaiser                                 2      2        0      0
+  Welch                                  2      1        1      0
+  Blackman                               1      1        0      0
+  Cosine                                 1      1        0      0
+  Hann                                   1      1        0      0
+  Hamming                                1      1        0      0
+  GetResizeFilterSupport                 1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc resize.c:244:9 cxx_lt_to_le               if (x < 2.0)
+    x  resize.c:257:13 cxx_lt_to_le               if (x < 1.0)
+    x  resize.c:259:13 cxx_lt_to_le               if (x < 2.0)
+    x  resize.c:268:13 cxx_lt_to_le               if (x < 1.0)
+    x  resize.c:270:13 cxx_lt_to_le               if (x < 2.0)
+    x  resize.c:272:13 cxx_lt_to_le               if (x < 3.0)
+    x  resize.c:279:9 cxx_lt_to_le               if (x < 1.0)
+    x  resize.c:281:9 cxx_lt_to_le               if (x < 2.0)
+    x  resize.c:283:9 cxx_lt_to_le               if (x < 3.0)
+    x  resize.c:285:9 cxx_lt_to_le               if (x < 4.0)
+    x  resize.c:407:9 cxx_gt_to_ge               if (x > resize_filter->support)
+    x  resize.c:429:9 cxx_lt_to_le               if (x < 0.5)
+    x  resize.c:431:9 cxx_lt_to_le               if (x < 1.5)
+    x  resize.c:433:9 cxx_lt_to_le               if (x < 2.5)
+    x  resize.c:449:9 cxx_lt_to_le               if (x < 0.5)
+    x  resize.c:451:9 cxx_lt_to_le               if (x < 1.5)
+    x  resize.c:453:9 cxx_lt_to_le               if (x < 2.5)
+    x  resize.c:455:9 cxx_lt_to_le               if (x < 3.5)
+    x  resize.c:457:9 cxx_lt_to_le               if (x < 4.5)
+    x  resize.c:470:9 cxx_lt_to_le               if (x < 0.5)
+    x  resize.c:472:9 cxx_lt_to_le               if (x < 1.5)
+    xc resize.c:523:9 cxx_gt_to_ge               if (x > 4.0)
+     c resize.c:525:44 cxx_mul_to_div             const double alpha=(double) (MagickPI*x);
+     c resize.c:526:33 cxx_div_to_mul             return(sin((double) alpha)/alpha);
+    x  resize.c:600:9 cxx_lt_to_le               if (x < 1.0)
+    x  resize.c:613:9 cxx_lt_to_le               if (x < 1.0)
+    xc resize.c:984:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+     c resize.c:1008:28 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1008:28 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1008:49 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1008:49 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1015:20 cxx_ne_to_eq               if (artifact != (const char *) NULL)
+     c resize.c:1018:32 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1018:32 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1018:53 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+     c resize.c:1018:53 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+    xc resize.c:1032:53 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+    xc resize.c:1091:30 cxx_eq_to_ne               (resize_filter->window == Gaussian) ) {
+    xc resize.c:1099:65 cxx_mul_to_div             resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
+    xc resize.c:1099:71 cxx_mul_to_div             resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
+    xc resize.c:1101:16 cxx_gt_to_ge               if ( value > 0.5 )
+    xc resize.c:1132:17 cxx_lt_to_le               if (lobes < 1)
+    xc resize.c:1141:34 cxx_gt_to_ge               if (resize_filter->support > 16)
+    xc resize.c:1149:59 cxx_div_to_mul             resize_filter->blur*=floor(resize_filter->support)/
+    xc resize.c:1158:27 cxx_lt_to_le               if (resize_filter->blur < MagickEpsilon)
+    xc resize.c:1287:21 cxx_le_to_lt               for (x=0.0; x <= support; x+=0.01)
+    x  resize.c:1402:15 cxx_gt_to_ge               for (i=2; t > MagickEpsilon; i++)
+    x  resize.c:1545:9 cxx_lt_to_le               if (x < 0.0)
+       resize.c:1546:8 cxx_minus_to_noop          x=(-x);
+    x  resize.c:1547:9 cxx_lt_to_le               if (x < 8.0)
+    x  resize.c:1551:9 cxx_lt_to_le               if (p < 0.0)
+       resize.c:1552:8 cxx_minus_to_noop          q=(-q);
+    xc resize.c:1705:38 cxx_lt_to_le               if ((resize_filter->window_support < MagickEpsilon) ||
+    x  resize.c:1782:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  resize.c:1829:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:1847:20 cxx_eq_to_ne               if (status == MagickFalse)
+    x  resize.c:1854:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       resize.c:1862:17 cxx_post_inc_to_post_dec   progress++;
+       resize.c:1865:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  resize.c:2174:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  resize.c:2491:15 cxx_lt_to_le               for (i=0; i < 9; i++)
+    x  resize.c:2495:47 cxx_gt_to_ge               CopyPixels(pixels,(ssize_t) (intensities[0] > intensities[1] ? 0 : 1),result,
+    x  resize.c:2530:36 cxx_gt_to_ge               if (ae && (!bd || intensities[1] > intensities[0]))
+    x  resize.c:2535:36 cxx_gt_to_ge               if (bd && (!ae || intensities[0] > intensities[1]))
+    x  resize.c:2648:19 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  resize.c:2687:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  resize.c:2881:19 cxx_lt_to_le               for (i=0; i < 9; i++)
+    x  resize.c:2931:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  resize.c:3116:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       resize.c:3124:17 cxx_post_inc_to_post_dec   progress++;
+       resize.c:3126:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  resize.c:3172:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  resize.c:3232:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc resize.c:3302:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetMagickResourceLimit(ThreadResource); i++)
+    xc resize.c:3303:25 cxx_ne_to_eq               if (contribution[i] != (ContributionInfo *) NULL)
+    xc resize.c:3326:46 cxx_mul_to_div             (void) memset(contribution,0,number_threads*sizeof(*contribution));
+    xc resize.c:3327:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    xc resize.c:3373:15 cxx_lt_to_le               if (support < 0.5)
+    xc resize.c:3445:21 cxx_lt_to_le               for (i=0; i < n; i++)
+    xc resize.c:3487:48 cxx_le_to_lt               (GetPixelWriteMask(resize_image,q) <= (QuantumRange/2)))
+    xc resize.c:3491:16 cxx_mul_to_div             k=y*(contribution[n-1].pixel-contribution[0].pixel+1)+
+    xc resize.c:3587:15 cxx_lt_to_le               if (support < 0.5)
+    xc resize.c:3659:21 cxx_lt_to_le               for (i=0; i < n; i++)
+    xc resize.c:3663:55 cxx_sub_to_add             image->columns,(size_t) (contribution[n-1].pixel-contribution[0].pixel+1),
+    xc resize.c:3702:48 cxx_le_to_lt               (GetPixelWriteMask(resize_image,q) <= (QuantumRange/2)))
+    xc resize.c:3706:77 cxx_mul_to_div             k=(ssize_t) ((contribution[j-start].pixel-contribution[0].pixel)*
+    xc resize.c:3733:39 cxx_mul_to_div             alpha=contribution[j].weight*QuantumScale*(double)
+    xc resize.c:3798:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc resize.c:3803:15 cxx_eq_to_ne               (filter == UndefinedFilter))
+    x  resize.c:3956:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       resize.c:3985:58 cxx_div_to_mul             sample_offset.x=sample_offset.y=geometry_info.rho/100.0-MagickEpsilon;
+       resize.c:3985:64 cxx_sub_to_add             sample_offset.x=sample_offset.y=geometry_info.rho/100.0-MagickEpsilon;
+       resize.c:3986:34 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+       resize.c:3987:46 cxx_div_to_mul             sample_offset.y=geometry_info.sigma/100.0-MagickEpsilon;
+       resize.c:3987:52 cxx_sub_to_add             sample_offset.y=geometry_info.sigma/100.0-MagickEpsilon;
+    x  resize.c:4031:45 cxx_le_to_lt               if (GetPixelWriteMask(sample_image,q) <= (QuantumRange/2))
+    x  resize.c:4160:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       resize.c:4190:24 cxx_ne_to_eq               if ((image->rows != scale_image->rows) && (scanline != (double *) NULL))
+       resize.c:4190:59 cxx_ne_to_eq               if ((image->rows != scale_image->rows) && (scanline != (double *) NULL))
+       resize.c:4192:26 cxx_ne_to_eq               if (scale_scanline != (double *) NULL)
+       resize.c:4194:20 cxx_ne_to_eq               if (x_vector != (double *) NULL)
+       resize.c:4196:20 cxx_ne_to_eq               if (y_vector != (double *) NULL)
+    x  resize.c:4247:21 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  resize.c:4249:42 cxx_le_to_lt               if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
+    x  resize.c:4256:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4278:28 cxx_lt_to_le               (number_rows < (ssize_t) image->rows))
+    x  resize.c:4290:27 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  resize.c:4292:48 cxx_le_to_lt               if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
+    x  resize.c:4299:29 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4314:26 cxx_post_inc_to_post_dec   number_rows++;
+    x  resize.c:4316:23 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  resize.c:4324:55 cxx_lt_to_le               if ((next_row != MagickFalse) && (number_rows < (ssize_t) image->rows))
+    x  resize.c:4336:25 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  resize.c:4338:46 cxx_le_to_lt               if (GetPixelWriteMask(image,p) <= (QuantumRange/2))
+    x  resize.c:4345:27 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4360:24 cxx_post_inc_to_post_dec   number_rows++;
+    x  resize.c:4363:21 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  resize.c:4388:48 cxx_le_to_lt               if (GetPixelWriteMask(scale_image,q) <= (QuantumRange/2))
+    x  resize.c:4427:21 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4439:29 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4443:25 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4460:31 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4465:27 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4471:18 cxx_gt_to_ge               if (span.x > 0)
+    x  resize.c:4471:18 cxx_gt_to_le               if (span.x > 0)
+    x  resize.c:4473:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4473:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4475:29 cxx_mul_to_div             scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];
+    x  resize.c:4475:63 cxx_add_to_sub             scanline[(x-1)*(ssize_t) GetPixelChannels(image)+i];
+    x  resize.c:4477:46 cxx_lt_to_le               if ((next_column == MagickFalse) && (t < (ssize_t) scale_image->columns))
+    x  resize.c:4478:21 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:4485:46 cxx_le_to_lt               if (GetPixelWriteMask(scale_image,q) <= (QuantumRange/2))
+    x  resize.c:4621:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  resize.c:4635:41 cxx_mul_to_div             x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double)
+    x  resize.c:4638:21 cxx_gt_to_ge               if ((x_factor > 4) && (y_factor > 4))
+    x  resize.c:4638:39 cxx_gt_to_ge               if ((x_factor > 4) && (y_factor > 4))
+    x  resize.c:4647:21 cxx_gt_to_ge               if ((x_factor > 2) && (y_factor > 2))
+       resize.c:4672:36 cxx_ne_to_eq               if ((LocaleCompare(name,"icc") != 0) && (LocaleCompare(name,"icm") != 0))
+       resize.c:4672:72 cxx_ne_to_eq               if ((LocaleCompare(name,"icc") != 0) && (LocaleCompare(name,"icm") != 0))
+    x  resize.c:4692:17 cxx_ne_to_eq               if (mime_type != (const char *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-resize.json

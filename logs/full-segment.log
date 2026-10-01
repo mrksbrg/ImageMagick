@@ -1,0 +1,96 @@
+mutate: 443 mutants in MagickCore/segment\.c$, 16 functions
+  baseline: 28/28 (1s)
+mutate: baseline over 29 cases in 1s
+  mutants: 25/443 (0s)
+  mutants: 50/443 (1s)
+  mutants: 75/443 (1s)
+  mutants: 100/443 (2s)
+  mutants: 125/443 (3s)
+  mutants: 150/443 (3s)
+  mutants: 175/443 (6s)
+  mutants: 200/443 (6s)
+  mutants: 225/443 (6s)
+  mutants: 250/443 (6s)
+  mutants: 275/443 (7s)
+  mutants: 300/443 (8s)
+  mutants: 325/443 (9s)
+  mutants: 350/443 (12s)
+  mutants: 375/443 (14s)
+  mutants: 400/443 (17s)
+  mutants: 425/443 (19s)
+  mutants: 443/443 (138s)
+
+mutate: 443 mutants, 138s
+  killed 314, survived 48 (0 capped), no coverage 81, errors 0
+  mutation score on reached code: 86.7%   overall: 70.9%
+
+  function                           total killed survived no-cov
+  Classify                             121    106       15      0
+  GetImageDynamicThreshold              81      0        0     81
+  ConsolidateCrossings                  59     52        7      0
+  OptimalTau                            55     38       17      0
+  ScaleSpace                            22     20        2      0
+  InitializeIntervalTree                19     19        0      0
+  ZeroCrossHistogram                    19     19        0      0
+  SegmentImage                          14     10        4      0
+  DefineRegion                          13     11        2      0
+  InitializeHistogram                   13     13        0      0
+  DerivativeHistogram                   11     11        0      0
+  MeanStability                          5      5        0      0
+  ActiveNodes                            4      4        0      0
+  InitializeList                         3      3        0      0
+  Stability                              3      3        0      0
+  FreeNodes                              1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  segment.c:402:18 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:411:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       segment.c:419:17 cxx_post_inc_to_post_dec   progress++;
+       segment.c:420:66 cxx_mul_to_div             proceed=SetImageProgress(image,SegmentImageTag,progress,2*image->rows);
+       segment.c:421:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+       segment.c:477:34 cxx_ne_to_eq               for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+       segment.c:486:34 cxx_ne_to_eq               for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+       segment.c:502:34 cxx_ne_to_eq               for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+    x  segment.c:512:23 cxx_gt_to_ge               if (number_clusters > 256)
+    x  segment.c:522:20 cxx_le_to_lt               for (i=(-255); i <= 255; i++)
+    x  segment.c:629:30 cxx_div_to_mul             ratio=numerator/distance_squared;
+    x  segment.c:646:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       segment.c:654:17 cxx_post_inc_to_post_dec   progress++;
+       segment.c:655:66 cxx_mul_to_div             proceed=SetImageProgress(image,SegmentImageTag,progress,2*image->rows);
+       segment.c:656:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  segment.c:732:21 cxx_gt_to_ge               for (k=j-1; k > 0; k--)
+    x  segment.c:737:21 cxx_lt_to_le               for (k=j+1; k < 255; k++)
+    x  segment.c:744:21 cxx_gt_to_ge               for (k=j-1; k > 0; k--)
+    x  segment.c:747:13 cxx_lt_to_le               if (k < 0)
+    x  segment.c:758:20 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:770:20 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:782:20 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:834:22 cxx_gt_to_ge               if (extents->index > 255)
+    x  segment.c:841:33 cxx_lt_to_le               if (extrema[extents->index] < 0)
+    x  segment.c:1502:12 cxx_eq_to_ne               if (node == (IntervalTree *) NULL)
+    x  segment.c:1555:27 cxx_sub_to_add             count=(size_t) ((max_tau-min_tau)/delta_tau)+2;
+    x  segment.c:1563:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) count; i++)
+    x  segment.c:1572:25 cxx_ge_to_gt               for (tau=max_tau; tau >= min_tau; tau-=delta_tau)
+    x  segment.c:1604:17 cxx_lt_to_ge               for (j=0; j < 255; j++)
+    x  segment.c:1604:17 cxx_lt_to_le               for (j=0; j < 255; j++)
+    x  segment.c:1604:25 cxx_post_inc_to_post_dec   for (j=0; j < 255; j++)
+    x  segment.c:1605:41 cxx_ne_to_eq               if (zero_crossing[i].crossings[j] != 0)
+    x  segment.c:1607:36 cxx_minus_to_noop          zero_crossing[i].crossings[0]=(-zero_crossing[i].crossings[j]);
+    x  segment.c:1608:19 cxx_gt_to_ge               for (j=255; j > 0; j--)
+    x  segment.c:1632:15 cxx_le_to_lt               for (i=0; i <= 255; i++)
+    x  segment.c:1651:26 cxx_le_to_gt               for (x=node->left; x <= node->right; x++)
+    x  segment.c:1651:26 cxx_le_to_lt               for (x=node->left; x <= node->right; x++)
+    x  segment.c:1653:16 cxx_ne_to_eq               if (peak != MagickFalse)
+    x  segment.c:1655:45 cxx_gt_to_ge               if (zero_crossing[k].histogram[x] > value)
+    x  segment.c:1655:45 cxx_gt_to_le               if (zero_crossing[k].histogram[x] > value)
+    x  segment.c:1662:43 cxx_lt_to_ge               if (zero_crossing[k].histogram[x] < value)
+    x  segment.c:1662:43 cxx_lt_to_le               if (zero_crossing[k].histogram[x] < value)
+    x  segment.c:1738:15 cxx_le_to_lt               for (x=0; x <= 255; x++)
+    x  segment.c:1741:18 cxx_lt_to_le               if (gamma[x] < MagickEpsilon)
+    x  segment.c:1821:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       segment.c:1829:22 cxx_ge_to_gt               for (i-- ; i >= 0; i--)
+       segment.c:1829:22 cxx_ge_to_lt               for (i-- ; i >= 0; i--)
+    x  segment.c:1859:15 cxx_lt_to_ge               for (i=0; i < MaxDimension; i++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-segment.json

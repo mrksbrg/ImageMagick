@@ -1,0 +1,157 @@
+mutate: 557 mutants in MagickCore/threshold\.c$, 20 functions
+  baseline: 238/238 (1s)
+mutate: baseline over 463 cases in 1s
+  mutants: 25/557 (0s)
+  mutants: 50/557 (0s)
+  mutants: 75/557 (0s)
+  mutants: 100/557 (1s)
+  mutants: 125/557 (1s)
+  mutants: 150/557 (2s)
+  mutants: 175/557 (2s)
+  mutants: 200/557 (2s)
+  mutants: 225/557 (3s)
+  mutants: 250/557 (3s)
+  mutants: 275/557 (4s)
+  mutants: 300/557 (5s)
+  mutants: 325/557 (8s)
+  mutants: 350/557 (9s)
+  mutants: 375/557 (12s)
+  mutants: 400/557 (14s)
+  mutants: 425/557 (14s)
+  mutants: 450/557 (15s)
+  mutants: 475/557 (16s)
+  mutants: 500/557 (17s)
+  mutants: 525/557 (18s)
+  mutants: 550/557 (142s)
+  mutants: 557/557 (148s)
+
+mutate: 557 mutants, 148s
+  killed 457, survived 100 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 82.0%   overall: 82.0%
+
+  function                           total killed survived no-cov
+  OrderedDitherImage                    69     59       10      0
+  AdaptiveThresholdImage                67     61        6      0
+  TriangleThreshold                     48     35       13      0
+  KapurThreshold                        46     38        8      0
+  RangeThresholdImage                   44     33       11      0
+  GetThresholdMapFile                   31     27        4      0
+  BlackThresholdImage                   30     26        4      0
+  WhiteThresholdImage                   30     26        4      0
+  OTSUThreshold                         29     24        5      0
+  ColorThresholdImage                   26     21        5      0
+  PerceptibleImage                      25     19        6      0
+  RandomThresholdImage                  25     20        5      0
+  AutoThresholdImage                    23     21        2      0
+  BilevelImage                          23     18        5      0
+  ClampImage                            21     15        6      0
+  PerceptibleThreshold                   6      5        1      0
+  ListThresholdMapFile                   5      5        0      0
+  DestroyThresholdMap                    3      0        3      0
+  GetThresholdMap                        3      2        1      0
+  ListThresholdMaps                      3      2        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  threshold.c:214:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       threshold.c:284:59 cxx_add_to_sub             SetPixelChannel(threshold_image,channel,p[center+i],q);
+       threshold.c:318:61 cxx_add_to_sub             SetPixelChannel(threshold_image,channel,p[center+i],q);
+    x  threshold.c:340:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:348:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:351:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+       threshold.c:424:25 cxx_ne_to_eq               if (white_entropy != (double *) NULL)
+       threshold.c:426:25 cxx_ne_to_eq               if (black_entropy != (double *) NULL)
+       threshold.c:428:32 cxx_ne_to_eq               if (cumulative_histogram != (double *) NULL)
+    x  threshold.c:448:34 cxx_gt_to_ge               if (cumulative_histogram[j] > epsilon)
+    x  threshold.c:452:29 cxx_gt_to_ge               if (histogram[i] > epsilon)
+    x  threshold.c:461:14 cxx_sub_to_add             if ((1.0-cumulative_histogram[j]) > epsilon)
+    x  threshold.c:461:40 cxx_gt_to_ge               if ((1.0-cumulative_histogram[j]) > epsilon)
+    x  threshold.c:465:29 cxx_gt_to_ge               if (histogram[i] > epsilon)
+       threshold.c:516:17 cxx_ne_to_eq               if (sigma != (double *) NULL)
+       threshold.c:518:23 cxx_ne_to_eq               if (probability != (double *) NULL)
+       threshold.c:520:17 cxx_ne_to_eq               if (omega != (double *) NULL)
+       threshold.c:522:15 cxx_ne_to_eq               if (myu != (double *) NULL)
+    x  threshold.c:548:15 cxx_lt_to_le               for (i=0; i < (ssize_t) MaxIntensity; i++)
+    x  threshold.c:599:15 cxx_le_to_lt               for (i=0; i <= (ssize_t) MaxIntensity; i++)
+    x  threshold.c:606:36 cxx_ge_to_gt               for (i=(ssize_t) MaxIntensity; i >= 0; i--)
+    x  threshold.c:629:7 cxx_sub_to_add             a=y1-y2;
+    x  threshold.c:631:19 cxx_mul_to_div             c=(-1.0)*(a*x1+b*y1);
+    x  threshold.c:632:20 cxx_div_to_mul             inverse_ratio=1.0/sqrt(a*a+b*b+c*c);
+    x  threshold.c:632:31 cxx_mul_to_div             inverse_ratio=1.0/sqrt(a*a+b*b+c*c);
+    x  threshold.c:636:21 cxx_lt_to_le               for (i=start; i < max; i++)
+    x  threshold.c:638:48 cxx_add_to_sub             segment=inverse_ratio*(a*i+b*histogram[i]+c);
+    x  threshold.c:640:21 cxx_gt_to_ge               if ((distance > max_distance) && (segment > 0.0))
+    x  threshold.c:640:49 cxx_gt_to_ge               if ((distance > max_distance) && (segment > 0.0))
+    x  threshold.c:647:19 cxx_gt_to_ge               for (i=end; i > max; i--)
+    x  threshold.c:651:21 cxx_gt_to_ge               if ((distance > max_distance) && (segment < 0.0))
+    x  threshold.c:651:49 cxx_lt_to_le               if ((distance > max_distance) && (segment < 0.0))
+    x  threshold.c:689:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:713:63 cxx_post_inc_to_post_dec   histogram[ScaleQuantumToChar(ClampToQuantum(intensity))]++;
+    x  threshold.c:824:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:879:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:887:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:888:66 cxx_post_inc_to_post_dec   proceed=SetImageProgress(image,ThresholdImageTag,progress++,
+       threshold.c:890:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:955:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:1041:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:1049:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:1052:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:1105:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:1116:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  threshold.c:1157:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  threshold.c:1169:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:1177:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:1179:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:1250:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:1359:17 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  threshold.c:1382:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:1390:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:1393:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:1427:19 cxx_ne_to_eq               if (map->map_id != (char *) NULL)
+    x  threshold.c:1429:24 cxx_ne_to_eq               if (map->description != (char *) NULL)
+    x  threshold.c:1431:19 cxx_ne_to_eq               if (map->levels != (ssize_t *) NULL)
+    x  threshold.c:1486:15 cxx_ne_to_eq               if (map != (ThresholdMap *) NULL)
+    x  threshold.c:1594:17 cxx_ne_to_eq               if (attribute != (char *) NULL)
+    x  threshold.c:1597:15 cxx_ne_to_eq               if (content != (char *) NULL)
+    x  threshold.c:1677:25 cxx_lt_to_le               if ((map->levels[i] < 0) || (map->levels[i] > map->divisor))
+    x  threshold.c:1677:49 cxx_gt_to_ge               if ((map->levels[i] < 0) || (map->levels[i] > map->divisor))
+    x  threshold.c:1843:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    x  threshold.c:1927:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:1939:27 cxx_ge_to_gt               if ((p-threshold_map) >= (MagickPathExtent-1))
+    x  threshold.c:1952:15 cxx_lt_to_le               for (i=0; i < MaxPixelChannels; i++)
+    x  threshold.c:1958:20 cxx_lt_to_le               for (i=0; (i < MaxPixelChannels); i++)
+    x  threshold.c:1960:36 cxx_lt_to_le               for (i=0; (*p != '\0') && (i < MaxPixelChannels); i++)
+    x  threshold.c:1968:15 cxx_lt_to_le               for (i=0; i < MaxPixelChannels; i++)
+    x  threshold.c:2013:29 cxx_lt_to_le               if (fabs(levels[n]) < MagickEpsilon)
+    x  threshold.c:2031:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:2039:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:2041:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:2087:31 cxx_ge_to_gt               if ((sign*(double) quantum) >= epsilon)
+    x  threshold.c:2111:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:2122:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  threshold.c:2171:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  threshold.c:2182:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:2190:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:2193:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:2260:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:2317:28 cxx_le_to_lt               q[i]=(double) q[i] <= threshold ? 0 : QuantumRange;
+    x  threshold.c:2323:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:2331:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:2334:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:2397:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:2446:19 cxx_lt_to_le               if (pixel < low_black)
+    x  threshold.c:2449:22 cxx_ge_to_gt               if ((pixel >= low_black) && (pixel < low_white))
+    x  threshold.c:2449:46 cxx_lt_to_le               if ((pixel >= low_black) && (pixel < low_white))
+    x  threshold.c:2456:26 cxx_gt_to_ge               if ((pixel > high_white) && (pixel <= high_black))
+    x  threshold.c:2456:50 cxx_le_to_lt               if ((pixel > high_white) && (pixel <= high_black))
+    x  threshold.c:2461:27 cxx_gt_to_ge               if (pixel > high_black)
+    x  threshold.c:2461:27 cxx_gt_to_le               if (pixel > high_black)
+    x  threshold.c:2470:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:2478:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:2481:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:2546:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:2632:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:2640:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:2642:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-threshold.json

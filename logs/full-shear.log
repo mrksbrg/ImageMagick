@@ -1,0 +1,119 @@
+mutate: 511 mutants in MagickCore/shear\.c$, 10 functions
+  baseline: 78/78 (0s)
+mutate: baseline over 108 cases in 0s
+  mutants: 25/511 (0s)
+  mutants: 50/511 (0s)
+  mutants: 75/511 (1s)
+  mutants: 100/511 (1s)
+  mutants: 125/511 (2s)
+  mutants: 150/511 (3s)
+  mutants: 175/511 (3s)
+  mutants: 200/511 (3s)
+  mutants: 225/511 (5s)
+  mutants: 250/511 (6s)
+  mutants: 275/511 (9s)
+  mutants: 300/511 (13s)
+  mutants: 325/511 (15s)
+  mutants: 350/511 (18s)
+  mutants: 375/511 (21s)
+  mutants: 400/511 (23s)
+  mutants: 425/511 (27s)
+  mutants: 450/511 (27s)
+  mutants: 475/511 (27s)
+  mutants: 500/511 (131s)
+  mutants: 511/511 (152s)
+
+mutate: 511 mutants, 152s
+  killed 392, survived 74 (0 capped), no coverage 45, errors 0
+  mutation score on reached code: 84.1%   overall: 76.7%
+
+  function                           total killed survived no-cov
+  IntegralRotateImage                  123     95       28      0
+  RadonProjection                       75     69        6      0
+  RadonTransform                        53     46        7      0
+  XShearImage                           48     35       13      0
+  YShearImage                           48     38       10      0
+  ShearRotateImage                      45      0        0     45
+  CropToFitImage                        35     31        4      0
+  GetImageBackgroundColor               30     30        0      0
+  DeskewImage                           27     24        3      0
+  ShearImage                            27     24        3      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  shear.c:158:15 cxx_gt_to_ge               if (min.x > extent[i].x)
+    x  shear.c:160:15 cxx_gt_to_ge               if (min.y > extent[i].y)
+    x  shear.c:162:15 cxx_lt_to_le               if (max.x < extent[i].x)
+    x  shear.c:164:15 cxx_lt_to_le               if (max.y < extent[i].y)
+    x  shear.c:259:55 cxx_eq_to_ne               if (SetMatrixElement(q,x+2*i+1,y,&neighbor) == MagickFalse)
+    x  shear.c:271:54 cxx_eq_to_ne               if (SetMatrixElement(q,x+2*i+1,y,&element) == MagickFalse)
+    x  shear.c:274:19 cxx_lt_to_le               for ( ; y < (ssize_t) GetMatrixRows(p); y++)
+    x  shear.c:280:54 cxx_eq_to_ne               if (SetMatrixElement(q,x+2*i+1,y,&element) == MagickFalse)
+    x  shear.c:302:17 cxx_lt_to_le               for (y=0; y < (ssize_t) (GetMatrixRows(p)-1); y++)
+    x  shear.c:302:46 cxx_sub_to_add             for (y=0; y < (ssize_t) (GetMatrixRows(p)-1); y++)
+       shear.c:357:32 cxx_ne_to_eq               if (destination_matrices != (MatrixInfo *) NULL)
+       shear.c:359:27 cxx_ne_to_eq               if (source_matrices != (MatrixInfo *) NULL)
+    x  shear.c:369:15 cxx_lt_to_le               for (j=0; j < 256; j++)
+    x  shear.c:382:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  shear.c:426:13 cxx_ne_to_eq               if (bit != 0)
+    x  shear.c:439:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  shear.c:487:50 cxx_post_inc_to_post_dec   (void) SetMatrixElement(source_matrices,i++,y,&value);
+    x  shear.c:595:63 cxx_sub_to_add             projection=(size_t *) AcquireQuantumMemory((size_t) (2*width-1),
+    x  shear.c:617:20 cxx_ne_to_eq               if (image->debug != MagickFalse)
+    x  shear.c:665:20 cxx_ne_to_eq               if (image->debug != MagickFalse)
+    x  shear.c:781:29 cxx_lt_to_le               for (tile_y=0; tile_y < (ssize_t) image->rows; tile_y+=(ssize_t) tile_height)
+    x  shear.c:808:26 cxx_add_to_sub             if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:808:44 cxx_gt_to_ge               if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:808:44 cxx_gt_to_le               if ((tile_width+(size_t) tile_x) > image->columns)
+       shear.c:809:49 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:809:57 cxx_add_to_sub             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:809:78 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+    x  shear.c:812:45 cxx_gt_to_ge               if ((tile_height+(size_t) tile_y) > image->rows)
+    x  shear.c:833:64 cxx_add_to_sub             rotate_image->columns-(tile_y+(ssize_t) height),y+tile_x,height,
+    x  shear.c:866:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:873:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:878:20 cxx_sub_to_add             image->rows-1,image->rows);
+    x  shear.c:944:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:949:67 cxx_post_inc_to_post_dec   proceed=SetImageProgress(image,RotateImageTag,progress++,
+       shear.c:951:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:956:20 cxx_sub_to_add             image->rows-1,image->rows);
+    x  shear.c:981:29 cxx_lt_to_le               for (tile_y=0; tile_y < (ssize_t) image->rows; tile_y+=(ssize_t) tile_height)
+    x  shear.c:1008:26 cxx_add_to_sub             if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:1008:44 cxx_gt_to_ge               if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:1008:44 cxx_gt_to_le               if ((tile_width+(size_t) tile_x) > image->columns)
+       shear.c:1009:49 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:1009:57 cxx_add_to_sub             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:1009:78 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+    x  shear.c:1012:45 cxx_gt_to_ge               if ((tile_height+(size_t) tile_y) > image->rows)
+    x  shear.c:1068:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:1075:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:1080:20 cxx_sub_to_add             image->rows-1,image->rows);
+    x  shear.c:1094:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  shear.c:1178:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  shear.c:1188:15 cxx_lt_to_le               for (y=0; y < (ssize_t) height; y++)
+    x  shear.c:1223:22 cxx_gt_to_ge               if (displacement > 0.0)
+    x  shear.c:1243:18 cxx_gt_to_ge               if (step > x_offset)
+    x  shear.c:1248:28 cxx_lt_to_le               if ((x_offset+i) < step)
+    x  shear.c:1267:21 cxx_lt_to_le               for (i=0; i < (step-1); i++)
+    x  shear.c:1267:28 cxx_sub_to_add             for (i=0; i < (step-1); i++)
+    x  shear.c:1285:49 cxx_add_to_sub             if ((size_t) (x_offset+(ssize_t) width+step-i) > image->columns)
+    x  shear.c:1297:21 cxx_lt_to_le               for (i=0; i < (step-1); i++)
+    x  shear.c:1297:28 cxx_sub_to_add             for (i=0; i < (step-1); i++)
+    x  shear.c:1307:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:1315:17 cxx_post_inc_to_post_dec   progress++;
+       shear.c:1317:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:1393:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  shear.c:1438:22 cxx_gt_to_ge               if (displacement > 0.0)
+    x  shear.c:1483:21 cxx_lt_to_le               for (i=0; i < (step-1); i++)
+    x  shear.c:1501:50 cxx_add_to_sub             if ((size_t) (y_offset+(ssize_t) height+step-i) > image->rows)
+    x  shear.c:1501:59 cxx_gt_to_ge               if ((size_t) (y_offset+(ssize_t) height+step-i) > image->rows)
+    x  shear.c:1514:21 cxx_lt_to_le               for (i=0; i < (step-1); i++)
+    x  shear.c:1514:28 cxx_sub_to_add             for (i=0; i < (step-1); i++)
+    x  shear.c:1524:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:1532:17 cxx_post_inc_to_post_dec   progress++;
+       shear.c:1534:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:1602:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  shear.c:1631:37 cxx_sub_to_add             image->rows)-image->columns)/2.0-0.5));
+    x  shear.c:1633:35 cxx_sub_to_add             bounds.width)-image->rows)/2.0-0.5));
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-shear.json

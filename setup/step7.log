@@ -120,3 +120,18 @@ indexes rebuilt 21:10
 22:26 sdl module: no statement-deletion mutants
 22:26 sdl client: no statement-deletion mutants
 22:26 sdl image-view: no statement-deletion mutants
+22:26 pushed
+== night Thu Oct  1 22:26:40 UTC 2026: step 3, Phase 1 files on today's catalogue
+== mull build erdc4 Thu Oct  1 22:26:40 UTC 2026: MagickCore/(resize|compare|enhance|visual-effects|statistic|threshold|shear|segment|decorate|colormap)\.c$
+/home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/mull-erdc4/utilities/magick
+22:45 resize:   killed 844, survived 140 (41 capped), no coverage 36, errors 0 | cap1500:   killed 4, survived 37 (0 capped), no coverage 0, errors 0
+22:48 compare:   killed 543, survived 107 (0 capped), no coverage 22, errors 0 | cap1500: 
+22:52 enhance:   killed 829, survived 154 (0 capped), no coverage 0, errors 0 | cap1500: 
+22:57 visual-effects:   killed 668, survived 173 (0 capped), no coverage 0, errors 0 | cap1500: 
+23:03 statistic:   killed 757, survived 146 (34 capped), no coverage 3, errors 0 | cap1500:   killed 0, survived 34 (0 capped), no coverage 0, errors 0
+23:06 threshold:   killed 457, survived 100 (0 capped), no coverage 0, errors 0 | cap1500: 
+23:09 shear:   killed 392, survived 74 (0 capped), no coverage 45, errors 0 | cap1500: 
+23:11 segment:   killed 314, survived 48 (0 capped), no coverage 81, errors 0 | cap1500: 
+23:14 decorate:   killed 352, survived 16 (0 capped), no coverage 0, errors 0 | cap1500: 
+23:17 colormap:   killed 38, survived 8 (3 capped), no coverage 0, errors 0 | cap1500:   killed 0, survived 3 (3 capped), no coverage 0, errors 0
+== done erdc4 Thu Oct  1 23:17:56 UTC 2026

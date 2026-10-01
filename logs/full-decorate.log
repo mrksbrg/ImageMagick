@@ -1,0 +1,48 @@
+mutate: 368 mutants in MagickCore/decorate\.c$, 3 functions
+  baseline: 65/65 (0s)
+mutate: baseline over 129 cases in 0s
+  mutants: 25/368 (1s)
+  mutants: 50/368 (3s)
+  mutants: 75/368 (4s)
+  mutants: 100/368 (5s)
+  mutants: 125/368 (6s)
+  mutants: 150/368 (6s)
+  mutants: 175/368 (8s)
+  mutants: 200/368 (9s)
+  mutants: 225/368 (10s)
+  mutants: 250/368 (11s)
+  mutants: 275/368 (12s)
+  mutants: 300/368 (12s)
+  mutants: 325/368 (16s)
+  mutants: 350/368 (28s)
+  mutants: 368/368 (148s)
+
+mutate: 368 mutants, 148s
+  killed 352, survived 16 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 95.7%   overall: 95.7%
+
+  function                           total killed survived no-cov
+  FrameImage                           239    234        5      0
+  RaiseImage                           124    114       10      0
+  BorderImage                            5      4        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  decorate.c:117:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  decorate.c:209:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  decorate.c:349:23 cxx_lt_to_le               for (y=0; y < (ssize_t) frame_info->inner_bevel; y++)
+    x  decorate.c:463:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       decorate.c:471:17 cxx_post_inc_to_post_dec   progress++;
+       decorate.c:473:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  decorate.c:657:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  decorate.c:742:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       decorate.c:750:17 cxx_post_inc_to_post_dec   progress++;
+       decorate.c:752:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  decorate.c:808:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       decorate.c:816:17 cxx_post_inc_to_post_dec   progress++;
+       decorate.c:818:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  decorate.c:885:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       decorate.c:893:17 cxx_post_inc_to_post_dec   progress++;
+       decorate.c:895:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-full-decorate.json
