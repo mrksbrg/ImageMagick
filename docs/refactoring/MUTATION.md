@@ -1252,6 +1252,48 @@ MIFF, a PPM of size zero and a missing file. `PingImage` is now at 100% adjusted
 at 86% or more (`ConstituteImage` 86%, `GetImplicitDataImageType` 89%), adjusted 98% to
 **99%**: **trusted**. `selfcheck --repeat 8`: 0 nondeterministic.
 
+## Batch 4: quantize, stream, matrix, option and five small files (Windows, 2026-10-01)
+
+As batch 3: full runs, capped survivors rerun against up to 1,500 cases, `gate.py`; WSL,
+6 jobs, catalogue of 10,612 cases. Few survivors were capped: these files' functions are
+reached by fewer than the default 300 cases, except `option.c` (14), `signature.c` (22) and
+`registry.c` (1, still capped at 1,500: it is reached by more).
+
+| File | Mutants | Plain | Reach | Adjusted | Rerun killed | Functions at 80% adjusted |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| `quantize.c` | 868 | 71% | 95% | 74% | - | 30 of 47 |
+| `stream.c` | 492 | 64% | 92% | 69% | - | 6 of 21 |
+| `matrix.c` | 214 | 46% | 75% | 47% | - | 2 of 15 |
+| `resource.c` | 179 | 79% | 89% | 81% | - | 8 of 13 |
+| `option.c` | 149 | 74% | 90% | 74% | 1 of 14 | 12 of 20 |
+| `magick.c` | 120 | 80% | 82% | 81% | - | 29 of 32 |
+| `signature.c` | 71 | 58% | 99% | 69% | 0 of 22 | 2 of 10 (4 with no score) |
+| `timer.c` | 35 | 63% | 89% | 63% | - | 7 of 11 |
+| `registry.c` | 31 | 58% | 84% | 69% | 0 of 1 | 6 of 9 |
+
+None is trusted under the per-function bar. The functions furthest below it:
+
+- **`quantize.c`:** `FloydSteinbergDither` 68% (111 mutants), `KmeansImage` 62% (91),
+  `PosterizeImage` 49%, `AssignImageColors` 68%, `GetImageQuantizeError` 0% (27; called
+  only when `measure_error` is set, which `-verbose` does), `RemapImages` 20%.
+- **`stream.c`:** `StreamImagePixels` 79% (367); most of the rest is the stream pixel cache's
+  accessors (`GetVirtualPixelStream`, `GetOneVirtualPixelFromStream`, ...), at 0%: no case
+  calls them.
+- **`matrix.c`:** `MatrixToImage` (32) at 0%, called only by `HoughLineImage` when
+  the `hough-lines:accumulator` define is set; `SetMatrixExtent`, `ReadMatrixElements` and
+  `WriteMatrixElements` at 0%, the matrix kept in a file when it cannot be kept in memory;
+  `GaussJordanElimination` 75%.
+- **`option.c`:** `GetCommandOptionFlags` 61% (33), the channel parsers 44-57%, and the
+  option iterators (API) at 0%.
+- **`magick.c`:** `MagickSignalHandler`, `GetMagickList`, `GetImageMagick` at 0%, every
+  other function at 80% or more.
+- **`signature.c`:** `SignatureImage` 76%, `TransformSignature` 73%, `FinalizeSignature`
+  40%: nearly every line is reached (99%), but the survivors are not yet read.
+- **`resource.c`:** `AcquireUniqueFileResource` 48%, `FormatTimeToLive` 0% (18; `-list
+  resource` prints it only when a time limit is set).
+- **`timer.c`**, **`registry.c`:** `StopTimer`, `ContinueTimer`, `FormatMagickTime`;
+  `DefineImageRegistry`, `RemoveImageRegistry` (API).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
