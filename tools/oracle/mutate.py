@@ -163,7 +163,8 @@ def plain(name):
 
 def sandbox(binary):
     """A prefix that lets a mutant run magick and write under build-oracle/,
-    and nothing else: sandbox-exec on macOS, bubblewrap on Linux.
+    and nothing else: sandbox-exec on macOS, bubblewrap on Linux (Landlock
+    where bwrap is not installed).
 
     delegate.c runs the commands in delegates.xml: lpr, `open -a Preview`,
     curl, gimp, `... ; /bin/rm`. The case catalogue never asks for those, but
@@ -173,7 +174,7 @@ def sandbox(binary):
     """
     out = os.path.realpath(oracle.OUT)
     if not oracle.MACOS:
-        return bwrap_sandbox(out)
+        return bwrap_sandbox(out) if shutil.which("bwrap") else landlock_sandbox(out)
     profile = ("(version 1)(allow default)"
                "(deny process-exec)(allow process-exec (literal \"%s\"))"
                "(deny network*)"
@@ -199,6 +200,15 @@ def bwrap_sandbox(out):
         args += ["--ro-bind", "/var/cache/fontconfig", "/var/cache/fontconfig"]
     return args + ["--dev", "/dev", "--proc", "/proc", "--tmpfs", "/tmp",
                    "--ro-bind", root, root, "--bind", out, out, "--"]
+
+
+def landlock_sandbox(out):
+    """Where bwrap cannot run (a container that forbids mounts): a fresh
+    network namespace for no network, and landlock.py for writes only under
+    build-oracle/ and no program but magick. See landlock.py."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    return ["/usr/bin/unshare", "--user", "--map-current-user", "--net",
+            sys.executable, os.path.join(here, "landlock.py"), out]
 
 
 def _is_case_kill(r):
