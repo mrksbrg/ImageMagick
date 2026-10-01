@@ -1,0 +1,14 @@
+mutate: 5 mutants in MagickCore/string\.c$, 3 functions
+mutate: baseline over 3 cases in 0s
+  mutants: 5/5 (0s)
+
+mutate: 5 mutants, 0s
+  killed 2, survived 0 (0 capped), no coverage 3, errors 0
+  mutation score on reached code: 100.0%   overall: 40.0%
+
+  function                           total killed survived no-cov
+  SplitStringInfo                        2      2        0      0
+  StringInfoToDigest                     2      0        0      2
+  StringToStringInfo                     1      0        0      1
+
+  full results: build-oracle/work/mutation-sdl-string.json

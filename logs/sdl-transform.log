@@ -1,0 +1,49 @@
+mutate: 45 mutants in MagickCore/transform\.c$, 13 functions
+mutate: baseline over 658 cases in 0s
+  mutants: 25/45 (2s)
+  mutants: 45/45 (19s)
+
+mutate: 45 mutants, 19s
+  killed 18, survived 21 (0 capped), no coverage 6, errors 0
+  mutation score on reached code: 46.2%   overall: 40.0%
+
+  function                           total killed survived no-cov
+  SpliceImage                           20      6       14      0
+  ConsolidateCMYKImages                  5      0        0      5
+  CropImageToTiles                       3      2        1      0
+  ChopImage                              2      2        0      0
+  CropImage                              2      1        1      0
+  ExtentImage                            2      1        1      0
+  FlipImage                              2      1        1      0
+  FlopImage                              2      1        1      0
+  TransposeImage                         2      1        1      0
+  TransverseImage                        2      1        1      0
+  ExcerptImage                           1      0        0      1
+  CopyImageRegion                        1      1        0      0
+  ShaveImage                             1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  transform.c:754:7 cxx_remove_void_call       AppendImageProfileProperty(crop_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:904:7 cxx_remove_void_call       ClearMagickException(exception);
+    x  transform.c:1174:5 cxx_remove_void_call       Update8BIMClipPath(extent_image,image->columns,image->rows,geometry);
+    x  transform.c:1315:7 cxx_remove_void_call       AppendImageProfileProperty(flip_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:1461:7 cxx_remove_void_call       AppendImageProfileProperty(flop_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:1885:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:1886:7 cxx_remove_void_call       SetPixelGreen(splice_image,GetPixelGreen(image,p),q);
+    x  transform.c:1887:7 cxx_remove_void_call       SetPixelBlue(splice_image,GetPixelBlue(image,p),q);
+    x  transform.c:1888:7 cxx_remove_void_call       SetPixelAlpha(splice_image,GetPixelAlpha(image,p),q);
+    x  transform.c:1909:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:1910:7 cxx_remove_void_call       SetPixelGreen(splice_image,GetPixelGreen(image,p),q);
+    x  transform.c:1911:7 cxx_remove_void_call       SetPixelBlue(splice_image,GetPixelBlue(image,p),q);
+    x  transform.c:1912:7 cxx_remove_void_call       SetPixelAlpha(splice_image,GetPixelAlpha(image,p),q);
+    x  transform.c:1976:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:1977:7 cxx_remove_void_call       SetPixelGreen(splice_image,GetPixelGreen(image,p),q);
+    x  transform.c:1978:7 cxx_remove_void_call       SetPixelBlue(splice_image,GetPixelBlue(image,p),q);
+    x  transform.c:1979:7 cxx_remove_void_call       SetPixelAlpha(splice_image,GetPixelAlpha(image,p),q);
+    x  transform.c:2000:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:2003:7 cxx_remove_void_call       SetPixelAlpha(splice_image,GetPixelAlpha(image,p),q);
+    x  transform.c:2274:7 cxx_remove_void_call       AppendImageProfileProperty(transpose_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:2431:7 cxx_remove_void_call       AppendImageProfileProperty(transverse_image,"hdrgm","hdrgm:Transform",
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-transform.json

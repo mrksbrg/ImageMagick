@@ -1,0 +1,31 @@
+mutate: 32 mutants in MagickCore/segment\.c$, 10 functions
+mutate: baseline over 29 cases in 0s
+  mutants: 25/32 (0s)
+  mutants: 32/32 (4s)
+
+mutate: 32 mutants, 4s
+  killed 24, survived 6 (0 capped), no coverage 2, errors 0
+  mutation score on reached code: 80.0%   overall: 75.0%
+
+  function                           total killed survived no-cov
+  OptimalTau                            10      9        1      0
+  InitializeIntervalTree                 5      3        2      0
+  Classify                               3      2        1      0
+  ActiveNodes                            3      3        0      0
+  GetImageDynamicThreshold               2      0        0      2
+  InitializeList                         2      2        0      0
+  MeanStability                          2      2        0      0
+  Stability                              2      2        0      0
+  FreeNodes                              2      0        2      0
+  SegmentImage                           1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  segment.c:576:7 cxx_remove_void_call       SetPixelIndex(image,(Quantum) 0,q);
+       segment.c:1414:17 cxx_remove_void_call       FreeNodes(root);
+       segment.c:1433:15 cxx_remove_void_call       FreeNodes(root);
+    x  segment.c:1504:3 cxx_remove_void_call       FreeNodes(node->sibling);
+    x  segment.c:1505:3 cxx_remove_void_call       FreeNodes(node->child);
+    x  segment.c:1688:3 cxx_remove_void_call       FreeNodes(root);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-segment.json

@@ -1,0 +1,70 @@
+mutate: 79 mutants in MagickCore/profile\.c$, 21 functions
+mutate: baseline over 10306 cases in 0s
+  mutants: 25/79 (1s)
+  mutants: 50/79 (1s)
+  mutants: 75/79 (14s)
+  mutants: 79/79 (112s)
+
+mutate: 79 mutants, 112s
+  killed 28, survived 32 (1 capped), no coverage 19, errors 0
+  mutation score on reached code: 46.7%   overall: 35.4%
+
+  function                           total killed survived no-cov
+  ProfileImage                          16      2       14      0
+  SyncExifProfile                       10      8        2      0
+  Sync8BimProfile                        7      2        5      0
+  TransformDoublePixels                  6      0        0      6
+  TransformQuantumPixels                 6      0        0      6
+  SyncXMPProfile                         6      6        0      0
+  PatchCorruptProfile                    5      0        5      0
+  SetImageProfileInternal                4      2        2      0
+  WriteProfileDimension                  3      0        0      3
+  SyncImageProfiles                      3      3        0      0
+  ReplaceXMPValue                        2      2        0      0
+  UpdateClipPath                         2      0        0      2
+  CloneImageProfiles                     1      0        1      0
+  DeleteImageProfile                     1      1        0      0
+  DestroyTransformTLS                    1      0        0      1
+  RemoveImageProfile                     1      0        0      1
+  ResetImageProfileIterator              1      1        0      0
+  WriteTo8BimProfile                     1      0        1      0
+  ValidateXMPProfile                     1      0        1      0
+  AcquireProfileStringInfo               1      1        0      0
+  Update8BIMClipPath                     1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c profile.c:236:9 cxx_remove_void_call       DestroyImageProfiles(image);
+    x  profile.c:1046:13 cxx_remove_void_call       ResetImageProfileIterator(image);
+    x  profile.c:1077:13 cxx_remove_void_call       SetsRGBImageProfile(image,exception);
+    x  profile.c:1080:13 cxx_remove_void_call       SetsRGBImageProfile(image,exception);
+    x  profile.c:1117:9 cxx_remove_void_call       cmsSetLogErrorHandlerTHR(cms_context,CMSExceptionHandler);
+       profile.c:1124:13 cxx_remove_void_call       cmsDeleteContext(cms_context);
+       profile.c:1176:13 cxx_remove_void_call       SetLCMSInfoScale(&source_info,1.0);
+       profile.c:1177:13 cxx_remove_void_call       SetLCMSInfoTranslate(&source_info,0.0);
+       profile.c:1189:21 cxx_remove_void_call       SetLCMSInfoScale(&source_info,100.0);
+       profile.c:1273:13 cxx_remove_void_call       SetLCMSInfoScale(&target_info,1.0);
+       profile.c:1274:13 cxx_remove_void_call       SetLCMSInfoTranslate(&target_info,0.0);
+       profile.c:1285:21 cxx_remove_void_call       SetLCMSInfoScale(&target_info,0.01);
+       profile.c:1460:17 cxx_remove_void_call       TransformDoublePixels(id,image,&source_info,&target_info,
+       profile.c:1463:17 cxx_remove_void_call       TransformQuantumPixels(id,image,&source_info,&target_info,
+    x  profile.c:1520:9 cxx_remove_void_call       cmsDeleteContext(cms_context);
+       profile.c:1773:13 cxx_remove_void_call       WriteResourceLong(extract_profile->datum+offset-4,(unsigned int)
+       profile.c:1959:15 cxx_remove_void_call       SetStringInfoLength(profile,length);
+       profile.c:1983:15 cxx_remove_void_call       SetStringInfoDatum(exif_profile,profile_start);
+       profile.c:1984:15 cxx_remove_void_call       ConcatenateStringInfo(exif_profile,profile);
+       profile.c:1985:15 cxx_remove_void_call       SetStringInfoLength(profile,GetStringInfoLength(exif_profile));
+       profile.c:1986:15 cxx_remove_void_call       SetStringInfo(profile,exif_profile);
+       profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
+    x  profile.c:2055:3 cxx_remove_void_call       PatchCorruptProfile(name,profile);
+    x  profile.c:2086:11 cxx_remove_void_call       WriteTo8BimProfile(image,key,profile);
+       profile.c:2495:13 cxx_remove_void_call       WriteProfileDimension(endian,tag_value == TAG_IMAGE_WIDTH ?
+       profile.c:2503:13 cxx_remove_void_call       WriteProfileDimension(endian,tag_value == TAG_PIXEL_X_DIMENSION ?
+       profile.c:2632:11 cxx_remove_void_call       WriteProfileLong(MSBEndian,(unsigned int) CastDoubleToSsizeT(
+    x  profile.c:2637:9 cxx_remove_void_call       WriteProfileShort(MSBEndian,(unsigned short) image->units,p+4);
+       profile.c:2639:11 cxx_remove_void_call       WriteProfileLong(MSBEndian,(unsigned int) CastDoubleToSsizeT(
+    x  profile.c:2644:9 cxx_remove_void_call       WriteProfileShort(MSBEndian,(unsigned short) image->units,p+12);
+       profile.c:2647:7 cxx_remove_void_call       SyncExifProfile(image,p,(size_t) count);
+       profile.c:2992:7 cxx_remove_void_call       UpdateClipPath(info,(size_t) count,old_columns,old_rows,new_geometry);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-profile.json

@@ -1,0 +1,28 @@
+mutate: 44 mutants in MagickCore/shear\.c$, 6 functions
+mutate: baseline over 108 cases in 0s
+  mutants: 25/44 (0s)
+  mutants: 44/44 (130s)
+
+mutate: 44 mutants, 130s
+  killed 37, survived 7 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.1%   overall: 84.1%
+
+  function                           total killed survived no-cov
+  XShearImage                           17     14        3      0
+  YShearImage                           17     14        3      0
+  IntegralRotateImage                    6      5        1      0
+  RadonTransform                         2      2        0      0
+  GetImageBackgroundColor                1      1        0      0
+  DeskewImage                            1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  shear.c:1102:7 cxx_remove_void_call       AppendImageProfileProperty(rotate_image,"hdrgm","hdrgm:Transform",
+    x  shear.c:1234:5 cxx_remove_void_call       GetPixelInfo(image,&source);
+    x  shear.c:1235:5 cxx_remove_void_call       GetPixelInfo(image,&destination);
+       shear.c:1251:15 cxx_remove_void_call       GetPixelInfoPixel(image,p,&pixel);
+    x  shear.c:1449:5 cxx_remove_void_call       GetPixelInfo(image,&source);
+    x  shear.c:1450:5 cxx_remove_void_call       GetPixelInfo(image,&destination);
+       shear.c:1466:15 cxx_remove_void_call       GetPixelInfoPixel(image,p,&pixel);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-shear.json

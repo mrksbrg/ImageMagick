@@ -1,0 +1,24 @@
+mutate: 19 mutants in MagickCore/attribute\.c$, 5 functions
+mutate: baseline over 103 cases in 0s
+  mutants: 19/19 (5s)
+
+mutate: 19 mutants, 5s
+  killed 14, survived 5 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 73.7%   overall: 73.7%
+
+  function                           total killed survived no-cov
+  GetImageBoundingBox                   10      5        5      0
+  GetEdgeBackgroundCensus                3      3        0      0
+  GetEdgeBackgroundColor                 3      3        0      0
+  GetImageConvexHull                     2      2        0      0
+  GetEdgeBoundingBox                     1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  attribute.c:457:3 cxx_remove_void_call       GetPixelInfo(image,&target[0]);
+    x  attribute.c:466:3 cxx_remove_void_call       GetPixelInfo(image,&target[1]);
+    x  attribute.c:471:3 cxx_remove_void_call       GetPixelInfo(image,&target[2]);
+    x  attribute.c:476:3 cxx_remove_void_call       GetPixelInfo(image,&target[3]);
+    x  attribute.c:482:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-attribute.json

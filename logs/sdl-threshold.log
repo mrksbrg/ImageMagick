@@ -1,0 +1,33 @@
+mutate: 18 mutants in MagickCore/threshold\.c$, 4 functions
+mutate: baseline over 55 cases in 0s
+  mutants: 18/18 (1s)
+
+mutate: 18 mutants, 1s
+  killed 3, survived 15 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 16.7%   overall: 16.7%
+
+  function                           total killed survived no-cov
+  ColorThresholdImage                   13      2       11      0
+  AdaptiveThresholdImage                 3      1        2      0
+  BlackThresholdImage                    1      0        1      0
+  WhiteThresholdImage                    1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       threshold.c:284:11 cxx_remove_void_call       SetPixelChannel(threshold_image,channel,p[center+i],q);
+       threshold.c:318:13 cxx_remove_void_call       SetPixelChannel(threshold_image,channel,p[center+i],q);
+    x  threshold.c:963:3 cxx_remove_void_call       GetPixelInfo(image,&threshold);
+       threshold.c:1274:7 cxx_remove_void_call       ConvertRGBToHCL(start_color->red,start_color->green,start_color->blue,
+       threshold.c:1276:7 cxx_remove_void_call       ConvertRGBToHCL(stop_color->red,stop_color->green,stop_color->blue,
+       threshold.c:1282:7 cxx_remove_void_call       ConvertRGBToHSB(start_color->red,start_color->green,start_color->blue,
+       threshold.c:1284:7 cxx_remove_void_call       ConvertRGBToHSB(stop_color->red,stop_color->green,stop_color->blue,
+       threshold.c:1290:7 cxx_remove_void_call       ConvertRGBToHSL(start_color->red,start_color->green,start_color->blue,
+       threshold.c:1292:7 cxx_remove_void_call       ConvertRGBToHSL(stop_color->red,stop_color->green,stop_color->blue,
+       threshold.c:1298:7 cxx_remove_void_call       ConvertRGBToHSV(start_color->red,start_color->green,start_color->blue,
+       threshold.c:1300:7 cxx_remove_void_call       ConvertRGBToHSV(stop_color->red,stop_color->green,stop_color->blue,
+       threshold.c:1306:7 cxx_remove_void_call       ConvertRGBToHWB(start_color->red,start_color->green,start_color->blue,
+       threshold.c:1308:7 cxx_remove_void_call       ConvertRGBToHWB(stop_color->red,stop_color->green,stop_color->blue,
+    x  threshold.c:1314:7 cxx_remove_void_call       ConvertRGBToLab(start_color->red,start_color->green,start_color->blue,
+    x  threshold.c:2554:3 cxx_remove_void_call       GetPixelInfo(image,&threshold);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-threshold.json
