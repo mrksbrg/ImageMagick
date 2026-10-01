@@ -47,6 +47,11 @@ OPT_CFLAGS="-O2 -g"
 # ImageMagick stays without OpenMP, and the oracle sets OMP_NUM_THREADS=1.
 LINK_FLAGS=""
 [ "$(uname)" = Linux ] && LINK_FLAGS="-fopenmp=libgomp"
+# SYSROOT: a toolchain and libraries unpacked from .debs without root (a
+# container with no sudo). Its libraries are found at run time through an
+# rpath, since the oracle runs magick with a clean environment.
+SYSROOT=${SYSROOT:-}
+[ -n "$SYSROOT" ] && LINK_FLAGS="$LINK_FLAGS -Wl,-rpath,$SYSROOT/usr/lib/x86_64-linux-gnu"
 
 CC_NAME=clang CXX_NAME=clang++ EXE=""
 
@@ -109,8 +114,8 @@ case "${1:-}" in
     else
       # The system clang's LLVM, and the Mull .deb built for that version.
       major=$(clang -dumpversion | cut -d. -f1)
-      llvm=/usr/lib/llvm-$major/bin
-      plugin=/usr/lib/mull-ir-frontend-$major
+      llvm=$SYSROOT/usr/lib/llvm-$major/bin
+      plugin=$SYSROOT/usr/lib/mull-ir-frontend-$major
       ldflags="$LINK_FLAGS"
     fi
     [ -x "$llvm/clang" ] && [ -f "$plugin" ] || { echo "$llvm/clang or $plugin missing" >&2; exit 1; }
