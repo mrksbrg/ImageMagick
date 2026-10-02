@@ -5043,6 +5043,56 @@
    "why": "this branch is reached only with addr_query unset and addr_colon set, which never happens (GetOperator sets addr_colon only after addr_query; both are reset together)"
   },
   {
+   "at": 38,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "pel = &pfx->Elements[pfx->usedElements-1];",
+   "verdict": "equivalent",
+   "why": "the rCopyFrom element AddAddressingElement just added already has do_push set (AddElement sets it; only goto elements clear it), and the mutant sets it on the spare slot past the end, which the next AddElement sets the same way"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "pel = &pfx->Elements[pfx->usedElements-1];",
+   "verdict": "equivalent",
+   "why": "the rCopyFrom element AddAddressingElement just added already has do_push set (AddElement sets it; only goto elements clear it), and the mutant sets it on the spare slot past the end, which the next AddElement sets the same way"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "StartEleNdx = pfx->usedElements-1;",
+   "verdict": "equivalent",
+   "why": "StartEleNdx is assigned here and never read"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (StartEleNdx < 0) StartEleNdx = 0;",
+   "verdict": "equivalent",
+   "why": "StartEleNdx is assigned here and never read"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (StartEleNdx < 0) StartEleNdx = 0;",
+   "verdict": "equivalent",
+   "why": "StartEleNdx is assigned here and never read"
+  },
+  {
    "at": 7,
    "file": "MagickCore/fx.c",
    "function": "TypeOfOpr",

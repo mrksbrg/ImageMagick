@@ -2368,7 +2368,10 @@ def _blob_gap_cases():
 def _fx_gap12_cases():
     for e in ("zz=0; while(zz<300, zz=zz+1); zz/600", "zz=0; do(zz<300, zz=zz+1); zz/600",
               "zz=0; for(ii=0, ii<300, ii=ii+1, zz=zz+2); zz/1000",
-              "zz=0; while(zz<3, zz=zz+1, zz=zz+0.5); zz/8"):
+              "zz=0; while(zz<3, zz=zz+1, zz=zz+0.5); zz/8",
+              # an in-place operator on the second user symbol, which the
+              # element must name (TranslateExpression; hand-run: killed)
+              "aa=0.1; bb=0.2; bb+=0.3; bb", "aa=0.1; bb=0.2; bb*=2; aa+bb"):
         yield _case("fxgap12", "%%[fx:%s]" % e, [["-size", "2x2", "xc:gray", "-format", "%%[fx:%s]\\n" % e, "info:"]], [])
 
 
