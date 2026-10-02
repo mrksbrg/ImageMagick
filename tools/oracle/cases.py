@@ -1441,6 +1441,23 @@ def _auto_level_gap_cases():
               ["-size", "8x6", "gradient:#406080-#40a0ff"], ["-channel", "RGB", "-auto-level"])
 
 
+# matrix.c: MatrixToImage runs only for hough-lines:accumulator, and the matrix
+# is kept in a file (SetMatrixExtent, Read/WriteMatrixElements) only when memory
+# and map are exhausted, which -limit memory 0 -limit map 0 forces.
+_HOUGH_INPUT = ["-size", "40x30", "xc:#000000", "-fill", "#ffffff", "-draw", "line 2,3 37,25",
+                "-draw", "line 5,27 35,4"]
+_NO_MEMORY = ["-limit", "memory", "0", "-limit", "map", "0"]
+
+
+def _matrix_gap_cases():
+    for label, pre in (("accumulator", ["-define", "hough-lines:accumulator=true"]),
+                       ("accumulator, matrix on disk",
+                        _NO_MEMORY + ["-define", "hough-lines:accumulator=true"]),
+                       ("matrix on disk", _NO_MEMORY)):
+        yield _op("matrix", "-hough-lines %s" % label, _HOUGH_INPUT,
+                  pre + ["-hough-lines", "9x9+10"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -2948,7 +2965,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
