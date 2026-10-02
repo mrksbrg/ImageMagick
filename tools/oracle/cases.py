@@ -2114,6 +2114,35 @@ def _quantize_gap10_cases():
                     [[img("rose")] + dither + ["-monitor", "-posterize", "4", "null:"]], [])
 
 
+# cache.c: MaskPixelCacheNexus and ApplyPixelCompositeMask run under a composite
+# mask, which MVG sets for `mask "id"` only when the mask is a quoted, named
+# macro (GetMVGMacros skips `push mask m1`, so cachegap's MVG never reached
+# them; reach.py: now reached), with greys in the mask, on opaque and alpha
+# images and under SVG compliance (draw.c sets the mask per primitive).
+# ClonePixelCacheOnDisk runs when a cache on disk is cloned to another on disk:
+# +clone under -limit memory 0 -limit map 0.
+def _mvg_named_mask(compliance=""):
+    return ("viewbox 0 0 40 30\npush defs\npush mask \"m1\"\nfill white\ncircle 20,15 20,4\n"
+            "fill gray50\nrectangle 0,0 10,30\npop mask\npop defs\npush graphic-context\n%s"
+            "mask \"m1\"\nfill #ff0000\nrectangle 0,0 40,30\npop graphic-context\n" % compliance)
+
+
+def _cache_gap2_cases():
+    for label, src in (("blue", ["-size", "40x30", "xc:#0000ff"]),
+                       ("rose_alpha", [img("rose_alpha"), "-resize", "40x30!"])):
+        for compliance in ("", "compliance SVG\n"):
+            yield _with_inputs(_op_to("cachegap2", "named MVG mask on %s%s" % (
+                label, ", SVG compliance" if compliance else ""),
+                src + ["-draw", "@m.mvg"] + FLOAT_OUT, "out.miff"),
+                files={"m.mvg": _mvg_named_mask(compliance)})
+    for name in ("rose", "rose_alpha", "cmyk"):
+        yield _op("cachegap2", "%s on disk, a negated clone composed over it" % name,
+                  _NO_MEMORY + [img(name)], ["(", "+clone", "-negate", ")", "-compose", "over",
+                                             "-composite"])
+    yield _op("cachegap2", "rose on disk, resized and flipped",
+              _NO_MEMORY + [img("rose")], ["-resize", "50%", "-flip"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3899,7 +3928,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
