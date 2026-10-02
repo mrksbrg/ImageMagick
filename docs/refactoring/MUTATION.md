@@ -2079,6 +2079,58 @@ reach: `ZeroKernelNans` (5), which nothing calls. Open survivors, by line:
 - `MorphologyImage` (1): 4156
 - `ShowKernelInfo` (1): 4660
 
+## quantize.c: trusted (Windows, 2026-10-02, night)
+
+Six rounds, each route checked with `reach.py` or the line probe and each case hand-run
+against its mutants before the round (`~/mutcase.py`, which runs a mutant as `mutate.py`
+compares it):
+
+- `quantizegap5`: MSL `<map image="id"/>`, the one route that gives `RemapImages` a reference
+  image (`+remap` quantizes the list instead). `RemapImages` 20% to 80%.
+- `quantizegap6`: `PruneLevel` runs only once the colour tree passes `MaxQNodes` (266817)
+  nodes, which needs `-treedepth 8` (for 64 colours `QuantizeImage` picks depth 4) and about
+  360,000 distinct colours: 600x600 colour noise, opaque and with noisy alpha. A 300x300 noise
+  palette for `-remap` makes `RemapImage` reduce its reference. `PruneLevel` 0% to 100%.
+- `quantizegap7`: `-quantize gray -colors 2`, undithered. `+dither` has to come *before*
+  `-colors`: a setting applies only to later operators, and several earlier probes written
+  as "undithered" were dithered. A gradient, logo and wizard leave the brighter colormap entry
+  first (`DefineImageColormap` lists a parent that absorbed pruned children after its
+  surviving child), which the monochrome step tests.
+- `quantizegap8`: `-verbose` before `-colors` sets `measure_error`, and `-verbose info:` prints
+  the quantize error (25 kills).
+- `quantizegap9`: `rgb(127.5,63.75,191.25)` is an exact .5 tie for `-posterize 2` and `3` in
+  HDRI (`MagickRound`), `-monitor` over the reduction, `rose_alpha` with `-quantize gray`.
+- `quantizegap10`: dithered `-posterize 1` and `17` (the dither path is for 2 to 16 levels) and
+  `-monitor` over posterize.
+
+`selfcheck --repeat 8` over each family: 0 nondeterministic. 25 verdicts, among them:
+`IntensityCompare` (5, equivalent: the colormap `SetGrayscaleImage` sorts is rebuilt by
+`AssignImageColors`), `QuantizeErrorCompare` (4, equivalent; one of them only because glibc's
+`qsort` is a merge sort that treats 0 and -1 alike), `PosterizeImage`'s colormap block (7,
+`QuantizeImage` rebuilds it from the posterized pixels) and its map's `(r+v)/L` (still a
+permutation of every level combination, checked for 2 to 16 levels and 1 to 5 channels),
+and `DestroyQCubeInfo`'s frees (3, unobservable: leaks only).
+
+The `quantizegap6` round froze WSL: mutants that stop pruning grew the tree until six of them
+filled 8 GB. `mutate.py` now takes `ORACLE_MEM_GB=N` (off unless set), an address-space cap per
+run. A capped mutant fails to allocate and is killed, as it would be at the timeout.
+
+**`quantize.c`: adjusted 85% to 91%, reach 100%, every function at 80% or more, trusted.**
+Open survivors, by line:
+
+- `FloydSteinbergDither` (16): 1589, 1608, 1609, 1610, 1612, 1624, 1625, 1626, 1628, 1631,
+  1632, 1633, 1635, 1680, 1688, 1710
+- `KmeansImage` (15): 2574, 2586, 2628, 2644, 2646, 2753, 2758, 2760, 2794, 2795, 2805, 2832
+- `SetGrayscaleImage` (7): 4010, 4015, 4067, 4075, 4078, 4083, 4089
+- `RiemersmaDither` (5): 1758, 1760, 1762, 1765, 1814
+- `ClassifyImageColors` (4): 818, 930, 1017, 1029
+- `GetImageQuantizeError` (3): 2308, 2314, 2320; `KmeansMetric` (3): 2476, 2498;
+  `QuantizeImage` (3): 3314, 3331, 3351; `QuantizeImages` (3): 3433, 3462, 3483
+- `AssignImageColors` (2): 653 (a one-colour image at luma exactly `QuantumRange/2`; no input
+  found), 658; `DefineImageColormap` (2): 1320; `GetQCubeInfo` (2): 2109, 2111
+- one each: `DestroyPixelTLS` 1457, `DestroyKmeansTLS` 2421, `PruneChild` 3148,
+  `QuantizeErrorFlatten` 3546, `Reduce` 3607, `ReduceImageColors` 3721, `RemapImages` 3878
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
