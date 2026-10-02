@@ -3616,6 +3616,17 @@ GAP_COMMANDS += ["{C}/rose.miff -resize 5000@> -format '%wx%h\\n' -write info:",
                  "-size 30x20 xc:white -affine 1,2,2,4,0,0 -draw 'rectangle 2,2 10,8'",
                  "{C}/rose.miff {C}/rose.miff -delete 9223372036854775807 -format '%s\\n' -write info:",
                  "{C}/rose.miff {C}/rose.miff -delete -9223372036854775808 -format '%s\\n' -write info:"]
+# policy.c: path policies matched against the literal and the canonical path: a symlink policy
+# read through a doubled slash, a path rule naming the corpus file as the case names it, and a
+# read-only rule on the corpus directory itself
+GAP_STEP_CASES += [
+    ("a symlink policy, read through a doubled slash", [["{C}//rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="system" name="symlink" rights="none" pattern="follow"/>')}),
+    ("a path policy on the corpus file as the case names it", [["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="none" pattern="{C}/rose.miff"/>')}),
+    ("a read-only path policy on the corpus directory", [["{C}/rose.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="read" pattern="*/corpus"/>')}),
+]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
