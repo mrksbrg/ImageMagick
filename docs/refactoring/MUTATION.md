@@ -1904,6 +1904,22 @@ line (unmatched, or on unreached lines):
 - `BlendMeanImage` (1): 789
 - `SeamlessBlendImage` (1): 1388
 
+### Late rounds: fx qualifiers, opacity quantums (Windows, 2026-10-02)
+
+- **`fx.c`, family `fxgap4` (7 cases):** an image attribute with a virtual channel
+  (`mean.hue`, `maxima.intensity`, `minima.lightness`) is an error that line coverage showed
+  no case reached; `u[1].mean.saturation` a related one in `GetFunction`. 11 kills;
+  `GetChannelQualifier` 53% to 60%, `fx.c` 76%.
+- **The raw single-channel writers test an error, not a channel.** `WriteRAWImage` picks the
+  channel from the input's format, so from a MIFF every `r:`, `g:`, `b:`, `a:`, `o:`, `k:`
+  write fails (ORACLE.md, Known upstream issues). The catalogue's raw channel cases read
+  MIFF, so `ExportOpacityQuantum` and `ImportOpacityQuantum` were not reached by them.
+  `reach.py` found them reached only through RGBO and BGRO with `-interlace line`.
+- **`quantum-import.c`, `quantum-export.c`, family `quantumgap5` (9 cases):** RGBO and BGRO
+  with `-interlace line` at depths 8, 16, 32 and floating point (BGRO float left out). 32
+  kills: `quantum-import.c` 61% to **63%**, `quantum-export.c` 68% to **70%**;
+  `ImportOpacityQuantum` 13% to 47%, `ExportOpacityQuantum` 12% to 56%.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
