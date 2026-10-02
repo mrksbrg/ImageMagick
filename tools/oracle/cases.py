@@ -3144,6 +3144,32 @@ GAP_STEP_CASES += [("type.xml skipped by hand: %s, listed" % name, [["-list", "f
                        ("a type inside a comment",
                         "<typemap>\n  <!-- %s -->\n%s</typemap>\n" % (_HIDDEN_TYPE % "Comment",
                                                                       _REAL_TYPE % "Comment")))]
+# transform.c: tile crops in the overlap form (@!), with positive, negative and mixed
+# offsets; more tiles than pixels; tiles of an image with a page offset
+GAP_COMMANDS += ["{C}/rose.miff %s-crop %s +repage" % (pre, geo) for pre, geo in (
+    ("", "3x2+2+2@!"), ("", "3x2-2-2@!"), ("", "3x2-3+1@!"), ("", "4x3+1-2@!"),
+    ("", "100x60@"), ("-repage +5+3 ", "3x2@"), ("-repage +5+3 ", "3x2+2+1@!"))]
+# transform.c: CropImage against the virtual canvas: offset and negative pages, crops that
+# overhang it or miss it, a crop of exactly the image, and a zero width or height
+GAP_COMMANDS += ["{C}/rose.miff %s-crop %s" % (pre, geo) for pre, geo in (
+    ("-repage 100x80+10+5 ", "30x20+5+5"), ("-repage 100x80+10+5 ", "40x30+80+60"),
+    ("-repage 100x80-10-5 ", "40x30+0+0"), ("-repage 100x80-10-5 ", "30x20-5-5"),
+    ("", "50x30-10-5"), ("", "30x30+60+40"), ("", "100x100"), ("", "70x46+0+0"),
+    ("", "0x20+0+5"), ("", "20x0+5+0"), ("-repage 100x80+10+5 ", "200x200-20-20"))]
+# transform.c: trim:minSize smaller than, equal to and larger than the trimmed box, and
+# larger than the image, under several gravities
+GAP_COMMANDS += ["{C}/rose.miff -bordercolor white -border 5 %s-define trim:minSize=%s -trim" % (grav, size)
+                 for grav, size in (("", "60x40"), ("", "70x46"), ("", "75x46"), ("", "80x50"),
+                                    ("", "90x70"), ("-gravity center ", "80x52"),
+                                    ("-gravity southeast ", "78x50"), ("-gravity north ", "76x54"),
+                                    ("-gravity west ", "74x50"))]
+# transform.c: ExtentImage moves the 8BIM clip path of a JPEG that has one; SpliceImage
+# copies alpha, under each gravity
+GAP_STEP_CASES += [("-extent %s on a JPEG with an 8BIM clip path" % geo,
+                    [[_UHDR_JPG, "-extent", geo, "-write", "8bim:clip.8bim", "out.miff"]], {})
+                   for geo in ("300x300", "120x80+10+10")]
+GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
+                 for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
 # buckets. The case's own fonts.conf (fontconfig reads $HOME/.config/fontconfig, and HOME is
 # the case directory) adds the corpus directory and, at scan time, gives its font an exact
