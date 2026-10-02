@@ -1536,6 +1536,40 @@ pads, MVG has no spread keyword: `DrawGradientImage` 64 unreached), `ClonePolygo
 (more than one thread), the `-debug` loggers of `draw.c`, `IntensityCompare` (only the
 PALM writer below 8 bits sorts a colormap by intensity).
 
+## Case rounds for distort, fx and composite (Windows, 2026-10-02)
+
+Each file's survivors and no-coverage mutants (full run and 1,500-case rerun) were rerun
+against its new family, then gated with all of its reports; `selfcheck --repeat 8` over
+each family: 0 nondeterministic. For `composite.c` the catalogue refresh (below) is in
+too; it killed nothing more.
+
+| File | Cases | Killed by the round | Adjusted before | After | Functions at 80% |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `distort.c` | 14 (family of 83) | 95 | 56% | **65%** | 3 to 7 of 13 |
+| `fx.c` | 30 | 175 | 50% | **70%** | 19 to 31 of 64 |
+| `composite.c` | 25 | 67 | 76% | **82%** | 9 to 10 of 13 |
+
+- **`distort.c`:** polynomials of every order (1, 1.5, 3, 4, 5) over 25 control points,
+  with `-verbose` printing the fitted terms: `poly_basis_fn`, `poly_basis_dx` and
+  `poly_basis_dy` from 6%, 0% and 0% to **100%**. Still below 80%: `DistortImage` 62%,
+  `GenerateCoefficients` 64%, `SparseColorImage` 52%.
+- **`fx.c`:** per-pixel statistics, hexadecimal colours, `%[...]` properties, `epoch()`,
+  attributes of a second image and the `fx:debug` dump. `DumpRPN` 0% to 87%,
+  `GetProperty` 86%, `GetHexColour` 80%, `ImageStat` 0% to 67%. The evaluator
+  (`ExecuteRPN`, `GetFunction`, `GetOperand`) is the largest gap left.
+- **`composite.c`:** `compose:args` forms (blur angles, displace and distort with
+  percent, aspect and centre, dissolve beyond 0-100%, blend, threshold, the blends'
+  iterations) and the illuminant and colorspace defines. `CompositeImage` 73% to **81%**.
+  Still below: `CompositeOverImage` 78%, `TextureImage` 73%, `SeamlessBlendImage` 52%.
+
+`feature.c` has 12 new cases waiting for their round, and 37 survivors in
+`GetImageFeatures` are now recorded as equivalent: the matrix `Q` it accumulates for the
+maximum correlation coefficient is never read, since the coefficient is set to
+`sqrt(-1.0)`. Its two information measures of correlation print NaN on every catalogue
+image (they sum `p*log2(p)` over all pairs of grey levels, and some pair is always
+missing), so the new cases use noise images of two or three levels, which give finite
+values.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
