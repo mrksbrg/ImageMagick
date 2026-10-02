@@ -14491,6 +14491,26 @@
    "src": "for (i=16; i < 64; i++)",
    "verdict": "unresolved",
    "why": "the schedule loop then writes W[64], one past the array on the stack: undefined behaviour, no difference seen"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/signature.c",
+   "function": "SignatureImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
+   "verdict": "unobservable",
+   "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/signature.c",
+   "function": "SignatureImage",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
+   "verdict": "unobservable",
+   "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
   }
  ]
 }
