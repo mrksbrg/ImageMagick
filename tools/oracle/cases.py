@@ -19,6 +19,7 @@ import base64
 import hashlib
 import itertools
 import json
+import math
 
 # Written as floating point at 32 bits so no HDRI precision is lost on output:
 # under Q16 HDRI, SetImageDepth() leaves pixels untouched for depth >= 16, so
@@ -1199,6 +1200,66 @@ def _read_blob_string_cases():
 # ImageToFile copies a non-seekable stdin to a temporary file in 1 MiB chunks,
 # and the hald image (1.5 MB) takes two. A raw header offset past the end of
 # the file makes DiscardBlobBytes reach EOF.
+def _poly_points():
+    """25 control points on a 5x5 grid over rose, each moved by a smooth wave:
+    enough for a quintic (21 terms), and not a plain affine map."""
+    pts = []
+    for j in range(5):
+        for i in range(5):
+            x, y = i * 17.0, j * 11.0
+            u = x + 2.0 * math.sin(0.09 * x + 0.13 * y)
+            v = y + 1.5 * math.cos(0.11 * x - 0.07 * y)
+            pts.append("%g,%g %.2f,%.2f" % (x, y, u, v))
+    return "  ".join(pts)
+
+
+# distort.c: the catalogue's only polynomial was order 2, so the bilinear
+# order, the cubic to quintic terms (poly_basis_fn/dx/dy) and the order and
+# control-point checks never ran. -verbose prints the fitted terms as an -fx
+# expression; +verbose keeps the timing line of the write out.
+def _distort_poly_cases():
+    pts = _poly_points()
+    for order in ("1", "1.5", "3", "4", "5"):
+        yield _op("distort", "polynomial order %s" % order, [img("rose")],
+                  ["-distort", "Polynomial", "%s %s" % (order, pts)])
+        yield _op("distort", "polynomial order %s verbose" % order, [img("rose")],
+                  ["-verbose", "-distort", "Polynomial", "%s %s" % (order, pts), "+verbose"])
+    yield _op("distort", "polynomial order 3 +distort", [img("rose")],
+              ["+distort", "Polynomial", "3 " + pts])
+    for order in ("0.5", "2.5", "6"):
+        yield _op("distort", "polynomial invalid order %s" % order, [img("rose")],
+                  ["-distort", "Polynomial", "%s %s" % (order, pts)])
+    yield _op("distort", "polynomial too few points", [img("rose")],
+              ["-distort", "Polynomial", "3 0,0 1,1  69,0 65,4  0,45 3,41  69,45 60,40"])
+
+
+# fx.c: image statistics per pixel (ImageStat), hexadecimal colours
+# (GetHexColour), %[...] properties and epoch() (GetProperty), attributes of
+# other images, and the fx:debug dump of the compiled expression (DumpTables,
+# DumpRPN, OprStr), none of which the catalogue's expressions used.
+FX_EXPRESSIONS = [
+    "u.mean", "u.maxima-u.minima", "u.standard_deviation", "u.kurtosis", "u.skewness/10",
+    "u.median", "u.depth/16", "u.mean.r", "mean.g", "u.r.mean",
+    "u.extent/1e5", "u.page.x", "u.resolution.x", "u.printsize.x", "u.quality/100",
+    "#ff8000", "#f80", "#ff800080", "#ff80", "u*0.5+#102030", "#ff8",
+    "%[w]/100", "%[myval]", "epoch(%[mydate])/1e10", "%[nosuch",
+]
+FX_DEBUG_EXPRESSIONS = ["u*0.5+0.1", "xx=u.mean; yy=#ff0000; u*xx+yy*(1-xx)",
+                        "u.mean.r+v.maxima+u[1].minima", "%[w]>50 ? u : 1-u"]
+
+
+def _fx_gap_cases():
+    props = ["-set", "myval", "0.25", "-set", "mydate", "2020-01-02T03:04:05"]
+    for e in FX_EXPRESSIONS:
+        yield _op("fx", "-fx %s" % e, [img("rose")] + props, ["-fx", e])
+    yield _op("fx", "-fx attributes of other images", [img("rose"), img("granite")],
+              ["-fx", "v.mean+u[1].maxima-s.minima"])
+    for e in FX_DEBUG_EXPRESSIONS:
+        yield _case("fx", "fx:debug %s" % e,
+                    [[img("rose"), img("granite"), "-define", "fx:debug=true", "-fx", e,
+                      "null:"]], [])
+
+
 def _blob_path_cases():
     yield _case("blob", "inline svg through a temporary file",
                 [[img("rose"), "-resize", "4x4", "-define", "png:exclude-chunk=date,time",
@@ -2340,7 +2401,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
