@@ -1479,6 +1479,24 @@ def _stream_gap_cases():
                     ["out.raw"])
 
 
+# signature.c: FinalizeSignature pads the message to 56 bytes mod 64, with an
+# extra block when it is already past 56. An image signature hashes 4 bytes per
+# channel and pixel, and the catalogue's images all ended below 56 mod 64. RGB
+# rows of 10 and 5 pixels (120 and 60 bytes) and gray rows of 14 and 15 (56,
+# 60) end past it; with one and three rows.
+SIGNATURE_IMAGES = [("rgb", "10x1"), ("rgb", "5x1"), ("rgb", "10x3"), ("gray", "14x1"),
+                    ("gray", "15x1"), ("gray", "15x3")]
+
+
+def _signature_gap_cases():
+    for kind, size in SIGNATURE_IMAGES:
+        make = ["-size", size, "gradient:#336699-#99ccff"]
+        if kind == "gray":
+            make += ["-colorspace", "gray"]
+        yield _case("signature", "%%# of a %s %s image" % (kind, size),
+                    [make + ["-format", "%# %[channels]\\n", "info:"]], [])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -2987,7 +3005,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
