@@ -10811,6 +10811,266 @@
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
   },
   {
+   "at": 36,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((page.x < 0) && (bounding_box.x >= 0))",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((page.y < 0) && (bounding_box.y >= 0))",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(offset.y > (ssize_t) image->page.height))",
+   "verdict": "equivalent",
+   "why": "offset equals the page size only when the crop starts at 0 and the bounding box is the page, so the branch sets the crop's page to the size it already copied"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((geometry->height != 0) && (page.height > geometry->height))",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((geometry->width != 0) && (page.width > geometry->width))",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((offset.x > (ssize_t) image->page.width) ||",
+   "verdict": "equivalent",
+   "why": "offset equals the page size only when the crop starts at 0 and the bounding box is the page, so the branch sets the crop's page to the size it already copied"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((page.x+(ssize_t) page.width) > (ssize_t) image->columns)",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((page.y+(ssize_t) page.height) > (ssize_t) image->rows)",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((page.x < 0) && (bounding_box.x >= 0))",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((page.y < 0) && (bounding_box.y >= 0))",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (page.x < 0)",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/transform.c",
+   "function": "CropImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (page.y < 0)",
+   "verdict": "equivalent",
+   "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (trim_image->page.x == 0)",
+   "verdict": "equivalent",
+   "why": "CropImage already gives the trimmed image the page offset of the crop, geometry.x (or y) plus the image's own, so setting it again changes nothing"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (trim_image->page.y == 0)",
+   "verdict": "equivalent",
+   "why": "CropImage already gives the trimmed image the page offset of the crop, geometry.x (or y) plus the image's own, so setting it again changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((geometry.x+(ssize_t) geometry.width) > (ssize_t) image->columns)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((geometry.y+(ssize_t) geometry.height) > (ssize_t) image->rows)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (geometry.height > image->rows)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (geometry.width > image->columns)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(geometry.height < minSize.height))",
+   "verdict": "equivalent",
+   "why": "when a dimension equals its minimum the branch computes a difference of 0, so entering it, or not, leaves the geometry as it was"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((geometry.width < minSize.width) ||",
+   "verdict": "equivalent",
+   "why": "when a dimension equals its minimum the branch computes a difference of 0, so entering it, or not, leaves the geometry as it was"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (geometry.height < minSize.height)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (geometry.width < minSize.width)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (geometry.x < 0)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (geometry.y < 0)",
+   "verdict": "equivalent",
+   "why": "at equality the clamp assigns the value the variable already holds"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "minSize.x=(geometry.width < minSize.width) ? (ssize_t)",
+   "verdict": "equivalent",
+   "why": "when a dimension equals its minimum the branch computes a difference of 0, so entering it, or not, leaves the geometry as it was"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/transform.c",
+   "function": "TrimImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "minSize.y=(geometry.height < minSize.height) ? (ssize_t)",
+   "verdict": "equivalent",
+   "why": "when a dimension equals its minimum the branch computes a difference of 0, so entering it, or not, leaves the geometry as it was"
+  },
+  {
    "at": 10,
    "file": "MagickCore/type.c",
    "function": "LoadTypeCache",

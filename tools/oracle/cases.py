@@ -3170,6 +3170,12 @@ GAP_COMMANDS += ["{C}/rose.miff -bordercolor white -border 5 %s-define trim:minS
 GAP_STEP_CASES += [("-extent %s on a JPEG with an 8BIM clip path" % geo,
                     [[_UHDR_JPG, "-extent", geo, "-write", "8bim:clip.8bim", "out.miff"]], {})
                    for geo in ("300x300", "120x80+10+10")]
+# transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
+# image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
+# and pages with a zero width or height, where the crop's page comes from the image size
+GAP_COMMANDS += ["{C}/rose.miff %s -crop %s" % (page, geo) for page, geo in (
+    ("-repage +10+5", "10x10+0+0"), ("-repage +10+5", "80x5+0+0"), ("-repage +10+5", "30x20-5-3"),
+    ("-repage 0x46", "30x20+5+0"), ("-repage 70x0", "30x20+0+5"))]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
