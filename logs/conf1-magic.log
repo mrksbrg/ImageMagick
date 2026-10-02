@@ -1,0 +1,40 @@
+mutate: 28 mutants in MagickCore/magic\.c$, 10 functions
+  baseline: 67/67 (1s)
+mutate: baseline over 491 cases in 2s
+  mutants: 25/28 (17s)
+  mutants: 28/28 (17s)
+
+mutate: 28 mutants, 17s
+  killed 5, survived 14 (14 capped), no coverage 9, errors 0
+  mutation score on reached code: 26.3%   overall: 17.9%
+
+  function                           total killed survived no-cov
+  GetMagicList                           8      0        0      8
+  CompareMagic                           6      4        2      0
+  CompareMagickInfoExtent                4      0        4      0
+  GetMagicPatternExtent                  3      1        2      0
+  GetMagicInfo                           2      0        2      0
+  GetMagicInfoList                       1      0        0      1
+  GetMagicName                           1      0        1      0
+  IsMagicListInstantiated                1      0        1      0
+  MagicComponentGenesis                  1      0        1      0
+  MagicComponentTerminus                 1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc magic.c:180:23 cxx_sub_to_add             delta=ma->offset-mb->offset;
+    xc magic.c:181:23 cxx_gt_to_ge               if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)
+    xc magic.c:181:63 cxx_le_to_lt               if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)
+    xc magic.c:184:16 cxx_gt_to_ge               return(delta > INT_MAX ? 0 : (int) delta);
+    xc magic.c:276:38 cxx_sub_to_add             remaining=(MagickOffsetType) length-magic_info->offset;
+    xc magic.c:278:23 cxx_gt_to_ge               while ((remaining > 0) && (isspace(*q) != 0))
+    xc magic.c:321:13 cxx_ne_to_eq               if (magic != (const unsigned char *) NULL)
+     c magic.c:344:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+    xc magic.c:415:16 cxx_gt_to_ge               if (offset > max_offset)
+    xc magic.c:420:18 cxx_gt_to_ge               if (max_offset > (MagickOffsetType) (MAGICK_SSIZE_MAX/2))
+    xc magic.c:645:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc magic.c:677:32 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
+    xc magic.c:777:28 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
+    xc magic.c:809:28 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-conf1-magic.json
