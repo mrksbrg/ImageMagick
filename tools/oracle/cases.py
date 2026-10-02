@@ -1702,6 +1702,25 @@ def _distort_args_gap_cases():
                    _DISTORT_ARGS["Shepards"]])
 
 
+# fx.c, third round: colour constants in an expression (GetConstantColour,
+# 20%): colour functions srgb, rgb, hsl, cmyk, srgba, gray, device-gray, a
+# named colour, an out-of-range component and a missing ')'; page.width and
+# page.height (MaybeXYWH, 23%); and channel qualifiers on u, v, u[1] and s
+# (GetChannelQualifier, 47%).
+FX_GAP3_EXPRESSIONS = [
+    "srgb(50%,20%,10%)", "rgb(255,0,0)*u", "hsl(120,50%,50%)", "cmyk(0,50%,50%,0)",
+    "srgba(10%,20%,30%,0.5)", "navy", "u*red", "rgb(300,0,0)", "srgb(10%,20%",
+    "gray(50%)", "device-gray(0.5)",
+    "u.page.width/100", "u.page.height/100", "u.page.x+u.page.width/100",
+    "u.r", "v.g", "u[1].b", "s.b",
+]
+
+
+def _fx_gap3_cases():
+    for e in FX_GAP3_EXPRESSIONS:
+        yield _op("fxgap3", "rose granite -fx %s" % e, [img("rose"), img("granite")], ["-fx", e])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3336,7 +3355,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
