@@ -1758,6 +1758,16 @@
    "why": "changes only the status SetImageColorMetric returns, which its one caller (the compare utility) discards"
   },
   {
+   "at": 28,
+   "file": "MagickCore/compare.c",
+   "function": "SimilarityImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (channel_info.similarity >= similarity_threshold)",
+   "verdict": "equivalent",
+   "why": "upstream bug: threshold_trigger is declared inside the row loop, so it is false whenever it is tested at the top of a row, and -similarity-threshold never stops the search (checked: RMSE, NCC and PHASH searches give the same match with and without it); a refactoring must keep this, fixing it is a behaviour change"
+  },
+  {
    "at": 15,
    "file": "MagickCore/compare.c",
    "function": "SimilarityImage",
@@ -1766,6 +1776,26 @@
    "src": "if (similarity >= channel_info.similarity)",
    "verdict": "unresolved",
    "why": "a tie between two offsets' similarity; a checkerboard's repeated matches did not change the result"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/compare.c",
+   "function": "SimilarityImage",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (channel_info.similarity >= similarity_threshold)",
+   "verdict": "equivalent",
+   "why": "upstream bug: threshold_trigger is declared inside the row loop, so it is false whenever it is tested at the top of a row, and -similarity-threshold never stops the search (checked: RMSE, NCC and PHASH searches give the same match with and without it); a refactoring must keep this, fixing it is a behaviour change"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/compare.c",
+   "function": "SimilarityImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (channel_info.similarity < similarity_threshold)",
+   "verdict": "equivalent",
+   "why": "upstream bug: threshold_trigger is declared inside the row loop, so it is false whenever it is tested at the top of a row, and -similarity-threshold never stops the search (checked: RMSE, NCC and PHASH searches give the same match with and without it); a refactoring must keep this, fixing it is a behaviour change"
   },
   {
    "at": 29,
@@ -1811,6 +1841,16 @@
    "why": "a tie between two offsets' similarity; a checkerboard's repeated matches did not change the result"
   },
   {
+   "at": 28,
+   "file": "MagickCore/compare.c",
+   "function": "SimilarityImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (channel_info.similarity < similarity_threshold)",
+   "verdict": "equivalent",
+   "why": "upstream bug: threshold_trigger is declared inside the row loop, so it is false whenever it is tested at the top of a row, and -similarity-threshold never stops the search (checked: RMSE, NCC and PHASH searches give the same match with and without it); a refactoring must keep this, fixing it is a behaviour change"
+  },
+  {
    "at": 29,
    "file": "MagickCore/compare.c",
    "function": "SimilarityImage",
@@ -1825,10 +1865,20 @@
    "file": "MagickCore/compare.c",
    "function": "SimilarityImage",
    "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (similarity_threshold != DefaultSimilarityThreshold)",
+   "verdict": "equivalent",
+   "why": "upstream bug: threshold_trigger is declared inside the row loop, so it is false whenever it is tested at the top of a row, and -similarity-threshold never stops the search (checked: RMSE, NCC and PHASH searches give the same match with and without it); a refactoring must keep this, fixing it is a behaviour change"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/compare.c",
+   "function": "SimilarityImage",
+   "mutator": "cxx_ne_to_eq",
    "nth": 1,
    "src": "if (similarity_threshold != DefaultSimilarityThreshold)",
-   "verdict": "unresolved",
-   "why": "the early exit on -similarity-threshold; setting it (0.05) did not change the result of an inexact search"
+   "verdict": "equivalent",
+   "why": "upstream bug: threshold_trigger is declared inside the row loop, so it is false whenever it is tested at the top of a row, and -similarity-threshold never stops the search (checked: RMSE, NCC and PHASH searches give the same match with and without it); a refactoring must keep this, fixing it is a behaviour change"
   },
   {
    "at": 19,

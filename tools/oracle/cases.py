@@ -2155,6 +2155,13 @@ GAP_COMMANDS += ["identify -verbose -precision 17 -size 4x4 xc:red"]
 # IsStringFalse's false, off, no and 0 through exif:sync-image, on a JPEG whose EXIF block
 # is rewritten with an orientation (read back as Undefined when the define is false)
 GAP_COMMANDS += ["-size 220x60 xc:white -font {C}/Generic.ttf -pointsize 8 -annotate +2+10 'A\x01B'"]
+# compare.c: a PHASH subimage search (GetPHASHSimilarity serves only the search), against an
+# exact patch and a blurred one, whose best match is not perfect
+GAP_COMMANDS += [
+    "compare -metric PHASH -subimage-search {C}/rose.miff ( {C}/rose.miff -crop 20x20+10+10 +repage )",
+    "compare -metric PHASH -subimage-search {C}/rose.miff ( {C}/rose_blur.miff -crop 20x20+30+20 +repage )",
+    "compare -metric RMSE -subimage-search {C}/rose.miff ( {C}/rose_blur.miff -crop 20x20+30+20 +repage )",
+]
 GAP_STEP_CASES += [("exif:sync-image=%s on a JPEG with EXIF" % value,
                     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient",
                       "BottomLeft", "x.jpg"],
