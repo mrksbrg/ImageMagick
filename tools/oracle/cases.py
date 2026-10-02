@@ -2540,6 +2540,31 @@ GAP_COMMANDS += [
 GAP_STEP_CASES += [("format read from a file with CRLF lines",
                     [["identify", "-format", "@fmt.txt", "{C}/rose.miff"]],
                     {"fmt.txt": "%wx%h\r\n%[case:a]\r\n"})]
+# image.c: smush gaps, which count only fully transparent pixels (rose_alpha has none at its
+# edges, so the gap was always 0): transparent margins, and triangles whose margins vary
+# from row to row, so the gap is the minimum over rows, across and down
+GAP_COMMANDS += [
+    "( {C}/rose.miff -bordercolor none -border 6x0 ) ( {C}/rose.miff -bordercolor none -border 4x0 ) +smush 2",
+    "( {C}/rose.miff -bordercolor none -border 0x6 ) ( {C}/rose.miff -bordercolor none -border 0x4 ) -smush 2",
+    "( -size 30x20 xc:none -fill red -draw 'polygon 0,0 24,10 0,19' ) "
+    "( -size 30x20 xc:none -fill blue -draw 'polygon 29,0 5,10 29,19' ) +smush 0",
+    "( -size 20x30 xc:none -fill red -draw 'polygon 0,0 10,24 19,0' ) "
+    "( -size 20x30 xc:none -fill blue -draw 'polygon 0,29 10,5 19,29' ) -smush 0",
+]
+# image.c: AcquireImage's settings and default colours on images no reader overwrites
+# (the MIFF reader sets delay, density and the colours from its header, so the -delay and
+# -density cases on MIFF files could not show them): xc: images with -delay x, > and <,
+# -density with two values, and operators that use the default background, border and
+# matte colours
+GAP_COMMANDS += [
+    "-delay 20x50 -size 8x8 xc:red",
+    "-delay 5> -size 8x8 xc:red",
+    "-delay 500< -size 8x8 xc:red",
+    "-density 150x75 -size 8x8 xc:red",
+    "-size 20x20 xc:red -rotate 30",
+    "-size 20x20 xc:red -border 2",
+    "-size 20x20 xc:red -frame 3",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
