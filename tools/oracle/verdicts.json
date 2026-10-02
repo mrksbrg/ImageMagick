@@ -7032,6 +7032,106 @@
    "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
   },
   {
+   "at": 61,
+   "file": "MagickCore/quantize.c",
+   "function": "IntensityCompare",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "intensity=GetPixelInfoIntensity((const Image *) NULL,color_1)-",
+   "verdict": "equivalent",
+   "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/quantize.c",
+   "function": "IntensityCompare",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (intensity < (double) INT_MIN)",
+   "verdict": "equivalent",
+   "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/quantize.c",
+   "function": "IntensityCompare",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (intensity < (double) INT_MIN)",
+   "verdict": "equivalent",
+   "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/quantize.c",
+   "function": "IntensityCompare",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (intensity > (double) INT_MAX)",
+   "verdict": "equivalent",
+   "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/quantize.c",
+   "function": "IntensityCompare",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (intensity > (double) INT_MAX)",
+   "verdict": "equivalent",
+   "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeErrorCompare",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (*p > *q)",
+   "verdict": "equivalent",
+   "why": "the values sorted are the same: on ties (p == q) the mutant answers 1 for 0, and qsort's result holds the same values in the same order up to equal elements; next_threshold reads a value, not a position of an element"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeErrorCompare",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if (fabs(*q-*p) <= MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "differs only for two errors within MagickEpsilon of each other (here: both within epsilon of zero, the errors being non-negative), which the original already counts as equal, so their order was never fixed; the sorted values, and so next_threshold, are the same to within epsilon"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeErrorCompare",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (fabs(*q-*p) <= MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "differs only for two errors within MagickEpsilon of each other (here: both within epsilon of zero, the errors being non-negative), which the original already counts as equal, so their order was never fixed; the sorted values, and so next_threshold, are the same to within epsilon"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeErrorCompare",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (fabs(*q-*p) <= MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "for p < q the mutant answers 0 instead of -1; glibc's qsort (2.39, as built here) is a merge sort that takes the left element whenever the comparison is <= 0, so 0 and -1 merge alike and the array is sorted as before; hand-run on rose -colors 16 and granite -colors 5, no difference"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/quantize.c",
+   "function": "RemapImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (cube_info->colors > cube_info->maximum_colors)",
+   "verdict": "equivalent",
+   "why": "with exactly MaxColormapSize colours, ReduceImageColors does nothing: its threshold block and its loop both need colors > maximum_colors, and next_threshold, the one field it sets, is read only by Reduce, inside that loop"
+  },
+  {
    "at": 28,
    "file": "MagickCore/quantum.c",
    "function": "SetQuantumPad",
