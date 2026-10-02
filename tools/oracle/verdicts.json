@@ -5395,6 +5395,266 @@
    "why": "the next frame's own blob is not released before it takes its predecessor's: a leaked reference, and every reader shares the blob anyway (AcquireNextImage)"
   },
   {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "path,depth+1,exception);",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '>') && (bracket_depth == 0))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '>') && (bracket_depth == 0))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == quote)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"events\") == 0)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (cache == (LinkedListInfo *) NULL)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (status == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bracket_depth > 0)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (log_info->limit < 1024)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "log_info->limit=1024*1024*StringToUnsignedLong(token);",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for ( ; *q != '\\0'; q++)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPathComponent(filename,HeadPath,path);",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetTimerInfo((TimerInfo *) &log_info->timer);",
+   "verdict": "unresolved",
+   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+  },
+  {
    "at": 35,
    "file": "MagickCore/magic.c",
    "function": "CompareMagic",
