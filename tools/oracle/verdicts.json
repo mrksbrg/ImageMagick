@@ -772,6 +772,16 @@
    "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
   },
   {
+   "at": 0,
+   "file": "MagickCore/artifact.c",
+   "function": "CloneImageArtifacts",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImageArtifacts(image);",
+   "verdict": "unobservable",
+   "why": "the clone's own artifacts are not destroyed before the source's are copied in: a leak"
+  },
+  {
    "at": 44,
    "file": "MagickCore/cipher.c",
    "function": "ByteMultiply",
@@ -1150,6 +1160,66 @@
    "src": "for (i=4; i < (bytes-4); i+=4)",
    "verdict": "equivalent",
    "why": "builds the AES decryption key schedule, which nothing reads: -encipher and -decipher both run EncipherAESBlock (counter mode), so decipher_key is written and never used"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/client.c",
+   "function": "SetClientPath",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((path != (char *) NULL) && (*path != '\\0'))",
+   "verdict": "unobservable",
+   "why": "the client path is only a fallback for finding configuration files, which the oracle names through MAGICK_CONFIGURE_PATH"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/client.c",
+   "function": "SetClientPath",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((path != (char *) NULL) && (*path != '\\0'))",
+   "verdict": "unobservable",
+   "why": "the client path is only a fallback for finding configuration files, which the oracle names through MAGICK_CONFIGURE_PATH"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/coder.c",
+   "function": "CoderComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&coder_semaphore);",
+   "verdict": "unobservable",
+   "why": "runs only when ImageMagick shuts down, after the output is written"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/coder.c",
+   "function": "DestroyCoderNode",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p->magick != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "runs only when ImageMagick shuts down, after the output is written"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/coder.c",
+   "function": "DestroyCoderNode",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p->name != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "runs only when ImageMagick shuts down, after the output is written"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/coder.c",
+   "function": "DestroyCoderNode",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p->path != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "runs only when ImageMagick shuts down, after the output is written"
   },
   {
    "at": 67,
@@ -1749,6 +1819,16 @@
    "src": "if (similarity_threshold != DefaultSimilarityThreshold)",
    "verdict": "unresolved",
    "why": "the early exit on -similarity-threshold; setting it (0.05) did not change the result of an inexact search"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/compress.c",
+   "function": "Ascii85Initialize",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (image->ascii85 == (Ascii85Info *) NULL)",
+   "verdict": "equivalent",
+   "why": "equivalent as compiled: with the test flipped, a NULL ascii85 is passed to memset straight after, which is undefined behaviour, so clang assumes it is never NULL there and keeps the allocation path; the same pattern as GetMagickVersion and AcquireAlignedMemory"
   },
   {
    "at": 12,
@@ -3671,8 +3751,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (memory_methods.acquire_aligned_memory_handler != (AcquireAlignedMemoryHandler) NULL)",
-   "verdict": "unresolved",
-   "why": "the aligned-memory handler is NULL by default, so this mutant should call a NULL pointer, yet every case survives it; not understood"
+   "verdict": "equivalent",
+   "why": "equivalent as compiled: the mutated branch dereferences or calls a pointer the compiler knows to be NULL there, which is undefined behaviour, so clang removes the branch and the mutant runs like the original"
   },
   {
    "at": 6,
@@ -3831,8 +3911,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (memory_methods.relinquish_aligned_memory_handler != (RelinquishAlignedMemoryHandler) NULL)",
-   "verdict": "unresolved",
-   "why": "the aligned-memory handler is NULL by default, so this mutant should call a NULL pointer, yet every case survives it; not understood"
+   "verdict": "equivalent",
+   "why": "equivalent as compiled: the mutated branch dereferences or calls a pointer the compiler knows to be NULL there, which is undefined behaviour, so clang removes the branch and the mutant runs like the original"
   },
   {
    "at": 11,
@@ -7722,6 +7802,26 @@
    "why": "paints two more background pixels, onto the background border ShearImage added before shearing"
   },
   {
+   "at": 12,
+   "file": "MagickCore/static.c",
+   "function": "UnregisterStaticModules",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) extent; i++)",
+   "verdict": "unobservable",
+   "why": "runs only when ImageMagick shuts down, after the output is written"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/static.c",
+   "function": "UnregisterStaticModules",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (MagickModules[i].registered != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "runs only when ImageMagick shuts down, after the output is written"
+  },
+  {
    "at": 15,
    "file": "MagickCore/statistic.c",
    "function": "AcquireImageCanvas",
@@ -8876,6 +8976,16 @@
    "why": "center is read only for pixels under a write mask, and no -statistic case sets one"
   },
   {
+   "at": 38,
+   "file": "MagickCore/thread.c",
+   "function": "SetMagickThreadValue",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return(pthread_setspecific(key,value) == 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "every caller discards the result ((void) SetMagickThreadValue in tiff.c)"
+  },
+  {
    "at": 56,
    "file": "MagickCore/threshold.c",
    "function": "AutoThresholdImage",
@@ -9479,6 +9589,16 @@
    "src": "if ((flags & SigmaValue) != 0)",
    "verdict": "gap",
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/version.c",
+   "function": "GetMagickVersion",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (version != (size_t *) NULL)",
+   "verdict": "equivalent",
+   "why": "equivalent as compiled: the mutated branch dereferences or calls a pointer the compiler knows to be NULL there, which is undefined behaviour, so clang removes the branch and the mutant runs like the original"
   },
   {
    "at": 19,
