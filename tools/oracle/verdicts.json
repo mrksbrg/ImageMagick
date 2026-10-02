@@ -5785,6 +5785,36 @@
    "why": "shredding overwrites memory (or a temporary file) that is released straight after, and callers discard the result; with the case policy shred=2 the loop runs, but nothing it writes is read again"
   },
   {
+   "at": 0,
+   "file": "MagickCore/mime.c",
+   "function": "IsMimeCacheInstantiated",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&mime_semaphore);",
+   "verdict": "unobservable",
+   "why": "runs only when the mime semaphore was never created; MimeComponentGenesis creates it at start-up"
+  },
+  {
+   "at": 5,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "depth+1,exception);",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*attribute == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+  },
+  {
    "at": 7,
    "file": "MagickCore/mime.c",
    "function": "LoadMimeCache",
@@ -5805,6 +5835,26 @@
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
   },
   {
+   "at": 10,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+  },
+  {
    "at": 17,
    "file": "MagickCore/mime.c",
    "function": "LoadMimeCache",
@@ -5813,6 +5863,26 @@
    "src": "for (p=token; *p != '\\0'; )",
    "verdict": "unobservable",
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attribute != (const char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
   },
   {
    "at": 14,
@@ -5863,6 +5933,16 @@
    "src": "if (attribute != (const char *) NULL)",
    "verdict": "unobservable",
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
   },
   {
    "at": 40,
@@ -5923,6 +6003,26 @@
    "src": "mime_info->length++;",
    "verdict": "unobservable",
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/mime.c",
+   "function": "LoadMimeCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPathComponent(filename,HeadPath,path);",
+   "verdict": "unresolved",
+   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/mime.c",
+   "function": "MimeComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&mime_semaphore);",
+   "verdict": "unobservable",
+   "why": "runs only when the mime semaphore was never created; MimeComponentGenesis creates it at start-up"
   },
   {
    "at": 17,
