@@ -12661,6 +12661,26 @@
    "src": "if (value >= 1388.0)",
    "verdict": "equivalent",
    "why": "at value == 1388.0 the mutant falls through to (ssize_t) (1388.5), also 1388"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/histogram.c",
+   "function": "MinMaxStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/histogram.c",
+   "function": "MinMaxStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
   }
  ]
 }

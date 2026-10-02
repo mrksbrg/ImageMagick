@@ -1429,6 +1429,18 @@ def _exception_gap_cases():
                              steps, ["out.miff"]), files=dict([policy]))
 
 
+# histogram.c: MinMaxStretchImage skips LevelImage when the image is flat
+# (minimum equals maximum), overall and per channel; no -auto-level case had a
+# flat image or a flat channel.
+def _auto_level_gap_cases():
+    yield _op("histogram", "flat gray -auto-level", ["-size", "8x6", "xc:#666666"],
+              ["-auto-level"])
+    yield _op("histogram", "flat red channel -channel R -auto-level",
+              ["-size", "8x6", "gradient:#406080-#40a0ff"], ["-channel", "R", "-auto-level"])
+    yield _op("histogram", "gradient -channel RGB -auto-level",
+              ["-size", "8x6", "gradient:#406080-#40a0ff"], ["-channel", "RGB", "-auto-level"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -2874,7 +2886,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
