@@ -1,0 +1,158 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:145:3:145:44",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 145,
+  "col": 3,
+  "function": "matrix.c:WriteMatrixElements",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:148:7:148:50",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 148,
+  "col": 7,
+  "function": "matrix.c:WriteMatrixElements",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:159:3:159:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 159,
+  "col": 3,
+  "function": "matrix.c:WriteMatrixElements",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:243:13:243:73",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 243,
+  "col": 13,
+  "function": "AcquireMatrixInfo",
+  "status": "survived",
+  "cases": 101,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:270:13:270:70",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 270,
+  "col": 13,
+  "function": "AcquireMatrixInfo",
+  "status": "survived",
+  "cases": 101,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:364:3:364:44",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 364,
+  "col": 3,
+  "function": "DestroyMatrixInfo",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/7036289d17",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:376:7:376:67",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 376,
+  "col": 7,
+  "function": "DestroyMatrixInfo",
+  "status": "survived",
+  "cases": 101,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:383:7:383:64",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 383,
+  "col": 7,
+  "function": "DestroyMatrixInfo",
+  "status": "survived",
+  "cases": 101,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:391:7:391:65",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 391,
+  "col": 7,
+  "function": "DestroyMatrixInfo",
+  "status": "survived",
+  "cases": 101,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:397:3:397:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 397,
+  "col": 3,
+  "function": "DestroyMatrixInfo",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/7036289d17",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:398:3:398:51",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 398,
+  "col": 3,
+  "function": "DestroyMatrixInfo",
+  "status": "survived",
+  "cases": 101,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:489:3:489:44",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 489,
+  "col": 3,
+  "function": "matrix.c:ReadMatrixElements",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:492:7:492:50",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 492,
+  "col": 7,
+  "function": "matrix.c:ReadMatrixElements",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c:503:3:503:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/matrix.c",
+  "line": 503,
+  "col": 3,
+  "function": "matrix.c:ReadMatrixElements",
+  "status": "no-coverage",
+  "cases": 0
+ }
+]

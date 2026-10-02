@@ -1,0 +1,33 @@
+mutate: 54 mutants in MagickCore/splay-tree\.c$, 14 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/54 (0s)
+  mutants: 50/54 (131s)
+  mutants: 54/54 (294s)
+
+mutate: 54 mutants, 294s
+  killed 29, survived 3 (3 capped), no coverage 22, errors 0
+  mutation score on reached code: 90.6%   overall: 53.7%
+
+  function                           total killed survived no-cov
+  DeleteNodeByValueFromSplayTree         8      0        0      8
+  RemoveNodeByValueFromSplayTree         7      0        0      7
+  AddValueToSplayTree                    5      4        1      0
+  DeleteNodeFromSplayTree                5      5        0      0
+  RemoveNodeFromSplayTree                5      0        0      5
+  CloneSplayTree                         4      4        0      0
+  GetValueFromSplayTree                  4      4        0      0
+  DestroySplayTree                       3      2        1      0
+  GetNextKeyInSplayTree                  3      3        0      0
+  GetNextValueInSplayTree                3      3        0      0
+  GetRootValueFromSplayTree              2      2        0      0
+  ResetSplayTree                         2      0        0      2
+  ResetSplayTreeIterator                 2      2        0      0
+  SplaySplayTree                         1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c splay-tree.c:192:7 cxx_remove_void_call       UnlockSemaphoreInfo(splay_tree->semaphore);
+    xc splay-tree.c:738:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&splay_tree->semaphore);
+     c splay-tree.c:1624:7 cxx_remove_void_call       BalanceSplayTree(splay_tree);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-splay-tree.json

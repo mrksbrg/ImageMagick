@@ -1,0 +1,17 @@
+mutate: 8 mutants in MagickCore/token\.c$, 2 functions
+mutate: baseline over 42 cases in 0s
+  mutants: 8/8 (4s)
+
+mutate: 8 mutants, 4s
+  killed 0, survived 1 (0 capped), no coverage 7, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  Tokenizer                              7      0        0      7
+  GlobExpression_                        1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  token.c:384:7 cxx_remove_void_call       GetPathComponent(pattern,SubimagePath,path);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-token.json

@@ -1,0 +1,27 @@
+mutate: 29 mutants in MagickCore/quantum-export\.c$, 4 functions
+mutate: baseline over 9525 cases in 0s
+  mutants: 25/29 (331s)
+  mutants: 29/29 (331s)
+
+mutate: 29 mutants, 331s
+  killed 21, survived 8 (7 capped), no coverage 0, errors 0
+  mutation score on reached code: 72.4%   overall: 72.4%
+
+  function                           total killed survived no-cov
+  ExportQuantumPixels                   26     19        7      0
+  ExportAlphaQuantum                     1      1        0      0
+  ExportBlackQuantum                     1      1        0      0
+  ExportMultispectralQuantum             1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       quantum-export.c:2637:7 cxx_remove_void_call       ExportPixelChannel(image,quantum_info,number_pixels,p,q,
+     c quantum-export.c:3756:9 cxx_remove_void_call       SetPixelRed(image,GetPixelGreen(image,r),r);
+     c quantum-export.c:3757:9 cxx_remove_void_call       SetPixelGreen(image,quantum,r);
+     c quantum-export.c:3783:7 cxx_remove_void_call       ExportBGROQuantum(image,quantum_info,number_pixels,p,q);
+     c quantum-export.c:3814:7 cxx_remove_void_call       ExportCMYKOQuantum(image,quantum_info,number_pixels,p,q,exception);
+     c quantum-export.c:3819:7 cxx_remove_void_call       ExportCbYCrYQuantum(image,quantum_info,number_pixels,p,q);
+     c quantum-export.c:3895:9 cxx_remove_void_call       SetPixelRed(image,GetPixelGreen(image,r),r);
+     c quantum-export.c:3896:9 cxx_remove_void_call       SetPixelGreen(image,quantum,r);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-quantum-export.json

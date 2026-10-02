@@ -1,0 +1,67 @@
+mutate: 50 mutants in MagickCore/blob\.c$, 18 functions
+mutate: baseline over 10682 cases in 0s
+  mutants: 25/50 (398s)
+  mutants: 50/50 (517s)
+
+mutate: 50 mutants, 517s
+  killed 14, survived 34 (28 capped), no coverage 2, errors 0
+  mutation score on reached code: 29.2%   overall: 28.0%
+
+  function                           total killed survived no-cov
+  CloseBlob                             14      0       14      0
+  OpenBlob                               5      4        1      0
+  DestroyBlob                            4      2        2      0
+  DisassociateBlob                       4      2        2      0
+  CloneBlobInfo                          3      3        0      0
+  ReadBlob                               3      0        3      0
+  WriteBlob                              3      0        3      0
+  InjectImageBlob                        2      1        1      0
+  ReadBlobString                         2      0        2      0
+  ReferenceBlob                          2      2        0      0
+  DetachBlob                             1      0        1      0
+  ResetDisassociatedBlobStorage          1      0        1      0
+  DuplicateBlob                          1      0        0      1
+  ImageToBlob                            1      0        1      0
+  ImagesToBlob                           1      0        0      1
+  ReadBlobByte                           1      0        1      0
+  SetBlobExtent                          1      0        1      0
+  WriteBlobByte                          1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c blob.c:645:5 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:659:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:662:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:665:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:674:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:684:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:698:17 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:701:17 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:704:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:732:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:741:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:750:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+    xc blob.c:757:7 cxx_remove_void_call       BZ2_bzclose(blob_info->file_info.bzfile);
+     c blob.c:769:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:993:7 cxx_remove_void_call       RelinquishMagickResource(MapResource,blob_info->length);
+    xc blob.c:996:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&blob_info->semaphore);
+    xc blob.c:1070:7 cxx_remove_void_call       RelinquishMagickResource(MapResource,blob_info->length);
+       blob.c:1123:7 cxx_remove_void_call       RelinquishMagickResource(MapResource,blob_info->length);
+    xc blob.c:1158:3 cxx_remove_void_call       ResetDisassociatedBlobStorage(clone_info);
+    xc blob.c:1159:3 cxx_remove_void_call       DestroyBlob(image);
+    x  blob.c:2148:11 cxx_remove_void_call       SyncBlobStream(blob_info,image,image);
+    x  blob.c:2847:3 cxx_remove_void_call       DestroyBlob(byte_image);
+    xc blob.c:3620:23 cxx_remove_void_call       RelinquishMagickResource(MapResource,length);
+     c blob.c:3952:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:4023:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:4054:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:4144:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+       blob.c:5035:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+       blob.c:5050:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+       blob.c:5386:11 cxx_remove_void_call       RelinquishMagickResource(MapResource,blob_info->length);
+     c blob.c:5976:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:6044:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:6072:9 cxx_remove_void_call       ThrowBlobException(blob_info);
+     c blob.c:6170:13 cxx_remove_void_call       ThrowBlobException(blob_info);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-blob.json
