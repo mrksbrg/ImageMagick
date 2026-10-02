@@ -2623,6 +2623,14 @@ GAP_STEP_CASES += [
     ("format prefix with a directory",
      [["{C}/rose.miff", "miff:sub.d/x.y"], ["miff:sub.d/x.y", "out.miff"]], {"sub.d/keep.txt": "kept\n"}),
 ]
+# draw.c: shapes aligned exactly with pixel centres, so GetFillAlpha's real-valued
+# distances come out exactly 0 or 1 at some pixels, where its < and <= differ
+GAP_COMMANDS += ["-size 40x30 xc:white -fill navy -stroke %s -draw '%s'" % (stroke, shape)
+                 for stroke, shape in (
+                     ("none", "rectangle 10.5,10.5 30.5,20.5"), ("none", "rectangle 10,10 30,20"),
+                     ("none", "circle 20,15 20,25"), ("red -strokewidth 1", "line 5.5,5 5.5,25"),
+                     ("red -strokewidth 1", "line 5,5.5 35,5.5"), ("red -strokewidth 2", "rectangle 10.5,10.5 30.5,20.5"),
+                     ("none +antialias", "polygon 10.5,10.5 30.5,10.5 20.5,25.5"))]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
