@@ -1437,6 +1437,11 @@ def _auto_level_gap_cases():
               ["-auto-level"])
     yield _op("histogram", "flat red channel -channel R -auto-level",
               ["-size", "8x6", "gradient:#406080-#40a0ff"], ["-channel", "R", "-auto-level"])
+    # IsPaletteImage's boundary: a PseudoClass image of exactly MaxColormapSize colours.
+    yield _case("histogram", "65536-colour palette, type and colours",
+                [["-size", "256x256", "xc:#000000", "-channel", "R", "-fx", "i/255",
+                  "-channel", "G", "-fx", "j/255", "+channel", "-depth", "16", "+dither",
+                  "-colors", "65536", "-format", "%[type] %k %r\n", "info:"]], [])
     yield _op("histogram", "gradient -channel RGB -auto-level",
               ["-size", "8x6", "gradient:#406080-#40a0ff"], ["-channel", "RGB", "-auto-level"])
 
