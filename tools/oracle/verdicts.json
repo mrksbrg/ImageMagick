@@ -4753,6 +4753,36 @@
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
   },
   {
+   "at": 27,
+   "file": "MagickCore/fx.c",
+   "function": "AddUserSymbol",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (++pfx->usedUserSymbols >= pfx->numUserSymbols) {",
+   "verdict": "equivalent",
+   "why": "extends the table (by 10%, a ResizeMagickMemory that keeps the contents) on nearly every push instead of when full: only the allocated size differs, and the table never runs out"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/fx.c",
+   "function": "AllocFxRt",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "nRnd = 20 + 10 * (int) GetPseudoRandomValue (pfxrt->random_info);",
+   "verdict": "equivalent",
+   "why": "GetPseudoRandomValue is in [0,1), so (int) of it is 0 and nRnd is 20 under the original and the mutant alike"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/fx.c",
+   "function": "AllocFxRt",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (pfxrt->numValStack < MinValStackSize) pfxrt->numValStack = MinValStackSize;",
+   "verdict": "equivalent",
+   "why": "differs only when numValStack is exactly MinValStackSize, and then sets it to MinValStackSize: no change"
+  },
+  {
    "at": 4,
    "file": "MagickCore/fx.c",
    "function": "IsStealth",
@@ -4831,6 +4861,26 @@
    "src": "else if (oprNum <= oNull) str = Operators[oprNum].str;",
    "verdict": "equivalent",
    "why": "equivalent as compiled: for a constant (oNull) the mutant reads Functions[-1].str, which here is Operators' last entry, \"onull\"; hand-run with fx:debug=true (DumpRPN names every element): the dump is the same"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/fx.c",
+   "function": "PushOperatorStack",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (++pfx->usedOprStack >= pfx->numOprStack) {",
+   "verdict": "equivalent",
+   "why": "extends the table (by 10%, a ResizeMagickMemory that keeps the contents) on nearly every push instead of when full: only the allocated size differs, and the table never runs out"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/fx.c",
+   "function": "PushOperatorStack",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (pfx->maxUsedOprStack < pfx->usedOprStack)",
+   "verdict": "equivalent",
+   "why": "when maxUsedOprStack equals usedOprStack, assigns it the same value"
   },
   {
    "at": 7,
