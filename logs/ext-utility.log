@@ -1,0 +1,188 @@
+mutate: 350 mutants in MagickCore/utility\.c$, 20 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/350 (1s)
+  mutants: 50/350 (2s)
+  mutants: 75/350 (2s)
+  mutants: 100/350 (5s)
+  mutants: 125/350 (39s)
+  mutants: 150/350 (64s)
+  mutants: 175/350 (84s)
+  mutants: 200/350 (113s)
+  mutants: 225/350 (123s)
+  mutants: 250/350 (133s)
+  mutants: 275/350 (141s)
+  mutants: 300/350 (143s)
+  mutants: 325/350 (164s)
+  mutants: 350/350 (291s)
+
+mutate: 350 mutants, 291s
+  killed 178, survived 141 (72 capped), no coverage 31, errors 0
+  mutation score on reached code: 55.8%   overall: 50.9%
+
+  function                           total killed survived no-cov
+  ExpandFilenames                       86     44       42      0
+  GetPathComponent                      65     40       25      0
+  Base64Decode                          28     21        7      0
+  Base64Encode                          26     22        4      0
+  ShredFile                             24      1       23      0
+  GetPathComponents                     17      0        0     17
+  ListFiles                             17     13        4      0
+  AcquireUniqueSymbolicLink             16      3       13      0
+  AppendImageFormat                     13      9        4      0
+  ExpandFilename                        11      0       11      0
+  GetPathTemplate                       11      9        2      0
+  IsPathAccessible                       6      5        1      0
+  GetExecutionPath                       5      0        0      5
+  MagickDelay                            5      0        0      5
+  ChopPathComponents                     4      0        0      4
+  GetMagickPageSize                      4      0        4      0
+  IsPathDirectory                        4      4        0      0
+  MultilineCensus                        4      4        0      0
+  AcquireUniqueFilename                  2      1        1      0
+  GetPathAttributes                      2      2        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  utility.c:120:24 cxx_sub_to_add             file=close_utf8(file)-1;
+    x  utility.c:189:16 cxx_eq_to_ne               if (passes == -1)
+    x  utility.c:191:17 cxx_eq_to_ne               if ((passes == 0) && (status != MagickFalse))
+    x  utility.c:191:34 cxx_ne_to_eq               if ((passes == 0) && (status != MagickFalse))
+    x  utility.c:195:21 cxx_eq_to_ne               if (*source == *DirectorySeparator)
+       utility.c:221:24 cxx_eq_to_ne               if (destination_file == -1)
+       utility.c:224:19 cxx_eq_to_ne               if (source_file == -1)
+       utility.c:231:39 cxx_eq_to_ne               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
+       utility.c:231:68 cxx_gt_to_ge               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
+       utility.c:231:68 cxx_gt_to_le               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
+       utility.c:234:14 cxx_eq_to_ne               if (buffer == (unsigned char *) NULL)
+       utility.c:245:15 cxx_le_to_gt               if (count <= 0)
+       utility.c:245:15 cxx_le_to_lt               if (count <= 0)
+       utility.c:249:24 cxx_ne_to_eq               if ((size_t) count != length)
+    x  utility.c:297:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  utility.c:311:3 cxx_remove_void_call       GetPathComponent(filename,ExtensionPath,extension);
+       utility.c:318:7 cxx_remove_void_call       GetPathComponent(filename,RootPath,root);
+       utility.c:320:7 cxx_remove_void_call       GetPathComponent(filename,RootPath,root);
+    x  utility.c:372:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  utility.c:375:67 cxx_div_to_mul             decode=(unsigned char *) AcquireQuantumMemory((strlen(source)+3)/4,
+    x  utility.c:397:37 cxx_sub_to_add             decode[i]=(unsigned char)((q-Base64) << 2);
+    x  utility.c:404:38 cxx_sub_to_add             decode[i]=(unsigned char)(((q-Base64) & 0x0f) << 4);
+    x  utility.c:411:38 cxx_sub_to_add             decode[i]=(unsigned char)(((q-Base64) & 0x03) << 6);
+    x  utility.c:450:22 cxx_ne_to_eq               for ( ; *p != '\0'; p++)
+       utility.c:463:53 cxx_eq_to_ne               if (isspace((int) ((unsigned char) *p)) == 0)
+    x  utility.c:529:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  utility.c:532:51 cxx_div_to_mul             encode=(char *) AcquireQuantumMemory(blob_length/3+4,4*sizeof(*encode));
+    x  utility.c:562:58 cxx_add_to_sub             encode[i++]=Base64[(int) (((code[1] & 0x0f) << 2)+(code[2] >> 6))];
+    x  utility.c:566:11 cxx_post_inc_to_post_dec   encode[i++]='\0';
+    x  utility.c:632:12 cxx_eq_to_ne               if (path == (char *) NULL)
+    x  utility.c:634:13 cxx_ne_to_eq               if (*path != '~')
+       utility.c:637:18 cxx_eq_to_ne               if ((*(path+1) == *DirectorySeparator) || (*(path+1) == '\0'))
+       utility.c:637:56 cxx_eq_to_ne               if ((*(path+1) == *DirectorySeparator) || (*(path+1) == '\0'))
+       utility.c:648:16 cxx_eq_to_ne               if (home == (char *) NULL)
+       utility.c:650:16 cxx_ne_to_eq               if (home != (char *) NULL)
+       utility.c:678:13 cxx_ne_to_eq               if (p != (char *) NULL)
+       utility.c:684:66 cxx_lt_to_ge               if (getpwnam_r(username,&pwd,buffer,sizeof(buffer),&entry) < 0)
+       utility.c:684:66 cxx_lt_to_le               if (getpwnam_r(username,&pwd,buffer,sizeof(buffer),&entry) < 0)
+       utility.c:687:17 cxx_eq_to_ne               if (entry == (struct passwd *) NULL)
+       utility.c:690:13 cxx_ne_to_eq               if (p != (char *) NULL)
+    xc utility.c:796:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc utility.c:829:20 cxx_gt_to_ge               if (parameters > 0)
+    xc utility.c:834:21 cxx_lt_to_ge               for (j=0; j < parameters; j++)
+    xc utility.c:834:21 cxx_lt_to_le               for (j=0; j < parameters; j++)
+    xc utility.c:834:36 cxx_post_inc_to_post_dec   for (j=0; j < parameters; j++)
+    xc utility.c:847:5 cxx_remove_void_call       GetPathComponent(option,MagickPath,magick);
+    xc utility.c:853:55 cxx_ne_to_eq               if ((IsGlob(filename) == MagickFalse) && (*option != '@'))
+    xc utility.c:863:9 cxx_remove_void_call       GetPathComponent(option,SubimagePath,subimage);
+    xc utility.c:864:9 cxx_remove_void_call       ExpandFilename(path);
+    xc utility.c:887:19 cxx_eq_to_ne               if (files == (char *) NULL)
+    xc utility.c:890:22 cxx_eq_to_ne               if (filelist == (char **) NULL)
+    xc utility.c:894:21 cxx_lt_to_ge               for (j=0; j < (ssize_t) (length-1); j++)
+    xc utility.c:894:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (length-1); j++)
+    xc utility.c:894:40 cxx_sub_to_add             for (j=0; j < (ssize_t) (length-1); j++)
+    xc utility.c:894:46 cxx_post_inc_to_post_dec   for (j=0; j < (ssize_t) (length-1); j++)
+    xc utility.c:895:33 cxx_add_to_sub             filelist[j]=filelist[j+1];
+    xc utility.c:896:37 cxx_sub_to_add             number_files=(size_t) length-1;
+    xc utility.c:900:17 cxx_lt_to_ge               for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:900:17 cxx_lt_to_le               for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:900:44 cxx_post_inc_to_post_dec   for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:905:21 cxx_lt_to_ge               for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:905:21 cxx_lt_to_le               for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:905:48 cxx_post_inc_to_post_dec   for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:914:24 cxx_add_to_sub             *number_arguments+count+(ssize_t) number_files+1),sizeof(*vector));
+    xc utility.c:914:53 cxx_add_to_sub             *number_arguments+count+(ssize_t) number_files+1),sizeof(*vector));
+     c utility.c:917:21 cxx_lt_to_ge               for (j=0; j < (ssize_t) number_files; j++)
+     c utility.c:917:21 cxx_lt_to_le               for (j=0; j < (ssize_t) number_files; j++)
+     c utility.c:917:48 cxx_post_inc_to_post_dec   for (j=0; j < (ssize_t) number_files; j++)
+    xc utility.c:926:22 cxx_gt_to_ge               if (parameters > 0)
+     c utility.c:934:23 cxx_post_inc_to_post_dec   vector[count++]=ConstantString(option);
+     c utility.c:935:23 cxx_lt_to_ge               for (k=0; k < parameters; k++)
+     c utility.c:935:23 cxx_lt_to_le               for (k=0; k < parameters; k++)
+     c utility.c:935:38 cxx_post_inc_to_post_dec   for (k=0; k < parameters; k++)
+     c utility.c:937:14 cxx_post_inc_to_post_dec   j++;
+     c utility.c:938:19 cxx_eq_to_ne               if (j == (ssize_t) number_files)
+     c utility.c:941:25 cxx_post_inc_to_post_dec   vector[count++]=ConstantString(option);
+    xc utility.c:952:28 cxx_ge_to_gt               if (strlen(filename) >= (MagickPathExtent-1))
+    xc utility.c:974:33 cxx_ge_to_gt               if (strlen(file_path) >= (MagickPathExtent-1))
+    xc utility.c:988:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+     c utility.c:994:19 cxx_lt_to_ge               for (i=1; i < count; i++)
+     c utility.c:994:19 cxx_lt_to_le               for (i=1; i < count; i++)
+     c utility.c:994:29 cxx_post_inc_to_post_dec   for (i=1; i < count; i++)
+    xc utility.c:1178:17 cxx_gt_to_ge               if (page_size > 0)
+    xc utility.c:1178:17 cxx_gt_to_le               if (page_size > 0)
+    xc utility.c:1185:17 cxx_le_to_gt               if (page_size <= 0)
+    xc utility.c:1185:17 cxx_le_to_lt               if (page_size <= 0)
+    xc utility.c:1278:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc utility.c:1291:30 cxx_gt_to_ge               if ((strlen(component) > 2) && (*p == ']'))
+    xc utility.c:1300:42 cxx_eq_to_ne               if ((IsStringTrue(literal) == MagickFalse) ||
+    xc utility.c:1301:43 cxx_eq_to_ne               (IsPathAccessible(path) == MagickFalse))
+    xc utility.c:1307:57 cxx_eq_to_ne               if ((IsSceneGeometry(q+1,MagickFalse) == MagickFalse) &&
+    xc utility.c:1317:27 cxx_ne_to_eq               if (literal != (char *) NULL)
+    xc utility.c:1328:13 cxx_eq_to_ne               if ((*p == '%') && (*(p+1) == '['))
+    xc utility.c:1328:32 cxx_eq_to_ne               if ((*p == '%') && (*(p+1) == '['))
+    xc utility.c:1333:23 cxx_ne_to_eq               for (p++; (*p != ']') && (*p != '\0'); p++) ;
+    xc utility.c:1333:38 cxx_ne_to_eq               for (p++; (*p != ']') && (*p != '\0'); p++) ;
+    xc utility.c:1334:16 cxx_eq_to_ne               if (*p == '\0')
+    xc utility.c:1337:72 cxx_lt_to_le               if ((p != component) && (*p == ':') && (IsPathDirectory(component) < 0) &&
+    xc utility.c:1373:22 cxx_ne_to_eq               if (*component != '\0')
+    xc utility.c:1375:46 cxx_sub_to_add             for (p=component+(strlen(component)-1); p > component; p--)
+    xc utility.c:1375:53 cxx_gt_to_ge               for (p=component+(strlen(component)-1); p > component; p--)
+    xc utility.c:1375:53 cxx_gt_to_le               for (p=component+(strlen(component)-1); p > component; p--)
+    xc utility.c:1377:41 cxx_ne_to_eq               if (IsBasenameSeparator(*p) != MagickFalse)
+    xc utility.c:1379:20 cxx_eq_to_ne               if (*p == '.')
+    xc utility.c:1382:18 cxx_eq_to_ne               if (*p == '.')
+    xc utility.c:1404:44 cxx_sub_to_add             for (p=component+(strlen(component)-1); p > component; p--)
+    xc utility.c:1404:51 cxx_gt_to_ge               for (p=component+(strlen(component)-1); p > component; p--)
+    xc utility.c:1420:7 cxx_remove_void_call       GetPathComponent(path,ExtensionPath,extension);
+    xc utility.c:1426:9 cxx_remove_void_call       GetPathComponent(path,BasePath,component);
+    xc utility.c:1434:49 cxx_gt_to_ge               for (p=component+strlen(component)-1; p > component; p--)
+    xc utility.c:1445:52 cxx_lt_to_le               if ((subimage_length != 0) && (magick_length < subimage_offset))
+    x  utility.c:1602:25 cxx_gt_to_ge               if (strlen(directory) > (MagickPathExtent-25))
+    x  utility.c:1613:34 cxx_sub_to_add             if (directory[strlen(directory)-1] == *DirectorySeparator)
+    xc utility.c:1673:14 cxx_eq_to_ne               if (status == MagickFalse)
+    x  utility.c:1799:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  utility.c:1839:29 cxx_ge_to_gt               if (*number_entries >= max_entries)
+    x  utility.c:1839:29 cxx_ge_to_lt               if (*number_entries >= max_entries)
+       utility.c:1847:26 cxx_eq_to_ne               if (filelist == (char **) NULL)
+    x  utility.c:2043:13 cxx_eq_to_ne               if ((path == (const char *) NULL) || (*path == '\0'))
+    x  utility.c:2043:47 cxx_eq_to_ne               if ((path == (const char *) NULL) || (*path == '\0'))
+    x  utility.c:2045:14 cxx_eq_to_ne               if (passes == -1)
+    x  utility.c:2047:14 cxx_eq_to_ne               if (passes == 0)
+    x  utility.c:2053:12 cxx_eq_to_ne               if (file == -1)
+    x  utility.c:2056:32 cxx_eq_to_ne               if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))
+    x  utility.c:2056:61 cxx_gt_to_ge               if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))
+    x  utility.c:2056:61 cxx_gt_to_le               if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))
+    x  utility.c:2061:15 cxx_lt_to_ge               for (i=0; i < passes; i++)
+    x  utility.c:2061:15 cxx_lt_to_le               for (i=0; i < passes; i++)
+    x  utility.c:2069:32 cxx_lt_to_ge               if (lseek(file,0,SEEK_SET) < 0)
+    x  utility.c:2069:32 cxx_lt_to_le               if (lseek(file,0,SEEK_SET) < 0)
+    x  utility.c:2071:17 cxx_lt_to_ge               for (j=0; j < (MagickOffsetType) length; j+=count)
+    x  utility.c:2071:17 cxx_lt_to_le               for (j=0; j < (MagickOffsetType) length; j+=count)
+    x  utility.c:2073:13 cxx_ne_to_eq               if (i != 0)
+    x  utility.c:2074:9 cxx_remove_void_call       SetRandomKey(random_info,quantum,GetStringInfoDatum(key));
+    x  utility.c:2077:17 cxx_le_to_gt               if (count <= 0)
+    x  utility.c:2077:17 cxx_le_to_lt               if (count <= 0)
+    x  utility.c:2080:11 cxx_lt_to_ge               if (j < (MagickOffsetType) length)
+    x  utility.c:2080:11 cxx_lt_to_le               if (j < (MagickOffsetType) length)
+    x  utility.c:2086:18 cxx_eq_to_ne               return((status == -1 || i < passes) ? MagickFalse : MagickTrue);
+    x  utility.c:2086:29 cxx_lt_to_ge               return((status == -1 || i < passes) ? MagickFalse : MagickTrue);
+    x  utility.c:2086:29 cxx_lt_to_le               return((status == -1 || i < passes) ? MagickFalse : MagickTrue);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-utility.json
