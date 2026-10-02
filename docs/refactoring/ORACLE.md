@@ -235,3 +235,10 @@ refactoring commit.
   `magick -seed 3 -size 600x600 xc: +noise Random out.miff` gave two different images in
   12 runs (7 and 5) under the oracle's environment; at 48x48 it was the same in 12 of 12,
   so the catalogue's noise images stay small.
+- **The raw single-channel writers switch on the input's format** (Windows,
+  2026-10-02). `WriteRAWImage` (`coders/raw.c`) picks the channel from `*image->magick`,
+  the format the image was read from, not the one being written. From a MIFF (`M...`)
+  every `r:`, `g:`, `b:`, `a:`, `o:`, `k:` write fails with ColorSeparatedImageRequired
+  (the Magenta case); from a PNG, `o:` writes 3,220 bytes through the default case, not
+  opacity. The catalogue's raw single-channel cases read MIFF, so they test this error, and
+  `ExportOpacityQuantum` is reached only through RGBO and BGRO with `-interlace line`.
