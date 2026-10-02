@@ -1978,6 +1978,28 @@ def _morph_gap2_cases():
                   ["-morphology", method, kernel])
 
 
+# morphology.c, AcquireKernelBuiltIn: kernel types and arguments the catalogue
+# never built (FreiChen's numbered kernels, Ridges, Skeleton, Peaks, the shape
+# and distance kernels with sizes and scales); morphology:showKernel prints the
+# values, so any change to the builder shows.
+MORPH_SHOW_KERNELS = [
+    "FreiChen:0", "FreiChen:1", "FreiChen:2", "FreiChen:5", "FreiChen:7", "FreiChen:10",
+    "FreiChen:11", "FreiChen:1,45", "Ridges:1", "Ridges:2", "Skeleton:1", "Skeleton:2",
+    "Skeleton:3", "Peaks:1.5,2.5", "Peaks:2,4", "Binomial:1", "Binomial:2", "Binomial:3",
+    "Diamond:2,3", "Octagon:2,5", "Plus:2,3", "Cross:2,3", "Disk:2.5,3", "Rectangle:3x2+1+1",
+    "Manhattan:2,3", "Octagonal:2,3", "Chebyshev:2,3", "Euclidean:2,3", "Comet:2,3",
+    "Comet:2,3,45", "LoG:0x1", "Blur:0x1,45", "Roberts:45", "Prewitt:90", "Compass:45",
+    "Kirsch:90", "LineEnds:1", "LineJunctions:1", "ThinSE:41", "Diagonals:1",
+]
+
+
+def _morph_gap3_cases():
+    for k in MORPH_SHOW_KERNELS:
+        yield _case("morphgap3", "showKernel %s" % k,
+                    [["-size", "4x4", "xc:#808080", "-define", "morphology:showKernel=1",
+                      "-morphology", "Convolve:1", k, "null:"]], [])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3708,7 +3730,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
