@@ -1,0 +1,18 @@
+mutate: 5 mutants in MagickCore/client\.c$, 2 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 5/5 (19s)
+
+mutate: 5 mutants, 19s
+  killed 3, survived 2 (2 capped), no coverage 0, errors 0
+  mutation score on reached code: 60.0%   overall: 60.0%
+
+  function                           total killed survived no-cov
+  SetClientName                          3      3        0      0
+  SetClientPath                          2      0        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc client.c:157:13 cxx_ne_to_eq               if ((path != (char *) NULL) && (*path != '\0'))
+    xc client.c:157:41 cxx_ne_to_eq               if ((path != (char *) NULL) && (*path != '\0'))
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-client.json
