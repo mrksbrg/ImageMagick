@@ -1,0 +1,42 @@
+mutate: 26 mutants in MagickCore/transform\.c$, 1 functions
+mutate: baseline over 320 cases in 0s
+  mutants: 25/26 (30s)
+  mutants: 26/26 (30s)
+
+mutate: 26 mutants, 30s
+  killed 0, survived 26 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CropImage                             26      0       26      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  transform.c:578:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:591:41 cxx_ge_to_gt               if ((((double) bounding_box.x-page.x) >= (double) page.width) ||
+    x  transform.c:592:41 cxx_ge_to_gt               (((double) bounding_box.y-page.y) >= (double) page.height) ||
+    x  transform.c:616:15 cxx_lt_to_le               if ((page.x < 0) && (bounding_box.x >= 0))
+    x  transform.c:616:39 cxx_ge_to_gt               if ((page.x < 0) && (bounding_box.x >= 0))
+    x  transform.c:618:62 cxx_sub_to_add             page.width=CastDoubleToSizeT((double) page.width+page.x-bounding_box.x);
+    x  transform.c:625:18 cxx_lt_to_le               if (page.x < 0)
+    x  transform.c:628:15 cxx_lt_to_le               if ((page.y < 0) && (bounding_box.y >= 0))
+    x  transform.c:628:39 cxx_ge_to_gt               if ((page.y < 0) && (bounding_box.y >= 0))
+    x  transform.c:630:64 cxx_sub_to_add             page.height=CastDoubleToSizeT((double) page.height+page.y-bounding_box.y);
+    x  transform.c:638:18 cxx_lt_to_le               if (page.y < 0)
+    x  transform.c:641:37 cxx_gt_to_ge               if ((page.x+(ssize_t) page.width) > (ssize_t) image->columns)
+    x  transform.c:643:45 cxx_gt_to_ge               if ((geometry->width != 0) && (page.width > geometry->width))
+    x  transform.c:645:38 cxx_gt_to_ge               if ((page.y+(ssize_t) page.height) > (ssize_t) image->rows)
+    x  transform.c:647:47 cxx_gt_to_ge               if ((geometry->height != 0) && (page.height > geometry->height))
+    x  transform.c:665:26 cxx_add_to_sub             offset.x=bounding_box.x+(ssize_t) bounding_box.width;
+    x  transform.c:666:26 cxx_add_to_sub             offset.y=bounding_box.y+(ssize_t) bounding_box.height;
+    x  transform.c:667:17 cxx_gt_to_ge               if ((offset.x > (ssize_t) image->page.width) ||
+    x  transform.c:667:17 cxx_gt_to_le               if ((offset.x > (ssize_t) image->page.width) ||
+    x  transform.c:668:17 cxx_gt_to_ge               (offset.y > (ssize_t) image->page.height))
+    x  transform.c:668:17 cxx_gt_to_le               (offset.y > (ssize_t) image->page.height))
+    x  transform.c:728:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:736:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:738:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:745:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:754:7 cxx_remove_void_call       AppendImageProfileProperty(crop_image,"hdrgm","hdrgm:Transform",
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-transform.json

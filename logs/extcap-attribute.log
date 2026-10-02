@@ -1,0 +1,32 @@
+mutate: 23 mutants in MagickCore/attribute\.c$, 4 functions
+mutate: baseline over 10449 cases in 0s
+  mutants: 23/23 (268s)
+
+mutate: 23 mutants, 268s
+  killed 9, survived 14 (11 capped), no coverage 0, errors 0
+  mutation score on reached code: 39.1%   overall: 39.1%
+
+  function                           total killed survived no-cov
+  SetImageDepth                         18      9        9      0
+  GetImageQuantumDepth                   2      0        2      0
+  IdentifyImageGray                      2      0        2      0
+  IdentifyImageType                      1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c attribute.c:1478:19 cxx_le_to_gt               if (depth <= 64)
+     c attribute.c:1478:19 cxx_le_to_lt               if (depth <= 64)
+    x  attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1594:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  attribute.c:1752:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:2108:28 cxx_eq_to_ne               if (image->storage_class == PseudoClass)
+    xc attribute.c:2117:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2119:59 cxx_ne_to_eq               if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2122:61 cxx_ne_to_eq               if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2125:60 cxx_ne_to_eq               if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2128:61 cxx_ne_to_eq               if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2238:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-attribute.json

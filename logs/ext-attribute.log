@@ -1,0 +1,192 @@
+mutate: 532 mutants in MagickCore/attribute\.c$, 24 functions
+mutate: baseline over 10449 cases in 0s
+  mutants: 25/532 (0s)
+  mutants: 50/532 (1s)
+  mutants: 75/532 (3s)
+  mutants: 100/532 (7s)
+  mutants: 125/532 (8s)
+  mutants: 150/532 (8s)
+  mutants: 175/532 (8s)
+  mutants: 200/532 (10s)
+  mutants: 225/532 (35s)
+  mutants: 250/532 (36s)
+  mutants: 275/532 (37s)
+  mutants: 300/532 (38s)
+  mutants: 325/532 (39s)
+  mutants: 350/532 (40s)
+  mutants: 375/532 (41s)
+  mutants: 400/532 (45s)
+  mutants: 425/532 (45s)
+  mutants: 450/532 (47s)
+  mutants: 475/532 (96s)
+  mutants: 500/532 (115s)
+  mutants: 525/532 (140s)
+  mutants: 532/532 (221s)
+
+mutate: 532 mutants, 221s
+  killed 391, survived 133 (23 capped), no coverage 8, errors 0
+  mutation score on reached code: 74.6%   overall: 73.5%
+
+  function                           total killed survived no-cov
+  GetImageMinimumBoundingBox            91     72       19      0
+  GetImageBoundingBox                   69     46       23      0
+  FloydSteinbergImageDepth              58     44       14      0
+  GetImageDepth                         49     31       18      0
+  GetEdgeBoundingBox                    27     20        7      0
+  GetEdgeBackgroundColor                27     22        5      0
+  SetImageDepth                         27      9       18      0
+  GetImageConvexHull                    25     21        4      0
+  SetImageType                          25     20        5      0
+  GetEdgeBackgroundCensus               21     17        4      0
+  TraceConvexHull                       21     20        1      0
+  IdentifyImageGray                     17     15        2      0
+  IdentifyImageMonochrome               13     11        2      0
+  IsImageOpaque                         11      5        6      0
+  GetImageQuantumDepth                   9      7        2      0
+  getProjection                          8      7        1      0
+  getFeretDiameter                       8      7        1      0
+  GetImageType                           8      0        0      8
+  IdentifyImageType                      6      5        1      0
+  LexicographicalOrder                   5      5        0      0
+  getDistance                            3      3        0      0
+  getAngle                               2      2        0      0
+  IsImageGray                            1      1        0      0
+  IsImageMonochrome                      1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  attribute.c:181:70 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,0,1,1,
+    x  attribute.c:188:70 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,
+    x  attribute.c:189:30 cxx_sub_to_add             (ssize_t) image->rows-1,1,1,exception);
+    x  attribute.c:195:69 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,0,(ssize_t) image->rows-1,1,1,
+    x  attribute.c:279:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:303:29 cxx_lt_to_le               for ( ; background_census < percent_background;
+    x  attribute.c:308:43 cxx_lt_to_le               if (fabs(edge.left-background_census) < MagickEpsilon)
+    x  attribute.c:326:44 cxx_lt_to_le               if (fabs(edge.right-background_census) < MagickEpsilon)
+    x  attribute.c:344:22 cxx_sub_to_add             if (fabs(edge.top-background_census) < MagickEpsilon)
+    x  attribute.c:344:42 cxx_lt_to_le               if (fabs(edge.top-background_census) < MagickEpsilon)
+    x  attribute.c:362:45 cxx_lt_to_le               if (fabs(edge.bottom-background_census) < MagickEpsilon)
+    x  attribute.c:418:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:457:3 cxx_remove_void_call       GetPixelInfo(image,&target[0]);
+    x  attribute.c:466:3 cxx_remove_void_call       GetPixelInfo(image,&target[1]);
+    x  attribute.c:467:66 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,0,1,1,
+    x  attribute.c:471:3 cxx_remove_void_call       GetPixelInfo(image,&target[2]);
+    x  attribute.c:472:65 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,0,(ssize_t) image->rows-1,1,1,
+    x  attribute.c:476:3 cxx_remove_void_call       GetPixelInfo(image,&target[3]);
+    x  attribute.c:477:66 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,(ssize_t)
+    x  attribute.c:478:16 cxx_sub_to_add             image->rows-1,1,1,exception);
+    x  attribute.c:482:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  attribute.c:517:14 cxx_lt_to_le               if ((x < bounding_box.x) &&
+    x  attribute.c:520:14 cxx_gt_to_ge               if ((x > (ssize_t) bounding_box.width) &&
+    x  attribute.c:523:14 cxx_lt_to_le               if ((y < bounding_box.y) &&
+    x  attribute.c:526:14 cxx_gt_to_ge               if ((y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:526:14 cxx_gt_to_le               if ((y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:529:14 cxx_lt_to_ge               if ((x < (ssize_t) bounding_box.width) &&
+    x  attribute.c:529:14 cxx_lt_to_le               if ((x < (ssize_t) bounding_box.width) &&
+    x  attribute.c:530:14 cxx_gt_to_ge               (y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:530:14 cxx_gt_to_le               (y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:542:26 cxx_lt_to_le               if (bounding_box.x < bounds.x)
+    x  attribute.c:544:26 cxx_lt_to_le               if (bounding_box.y < bounds.y)
+    x  attribute.c:546:30 cxx_gt_to_ge               if (bounding_box.width > bounds.width)
+    x  attribute.c:548:31 cxx_gt_to_ge               if (bounding_box.height > bounds.height)
+    x  attribute.c:624:16 cxx_eq_to_ne               if (artifact == (const char *) NULL)
+    x  attribute.c:659:71 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,0,(ssize_t) image->rows-1,1,1,
+    x  attribute.c:668:72 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,0,1,1,
+    x  attribute.c:685:72 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,
+    x  attribute.c:686:32 cxx_sub_to_add             (ssize_t) image->rows-1,1,1,exception);
+    x  attribute.c:757:11 cxx_add_to_sub             demark=n+1;
+    x  attribute.c:800:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:806:16 cxx_mul_to_div             image->rows*sizeof(*monotone_chain));
+       attribute.c:810:25 cxx_ne_to_eq               if (monotone_info != (MemoryInfo *) NULL)
+       attribute.c:812:25 cxx_ne_to_eq               if (vertices_info != (MemoryInfo *) NULL)
+    x  attribute.c:916:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:924:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    x  attribute.c:927:47 cxx_eq_to_ne               ((image->alpha_trait & BlendPixelTrait) == 0))
+    x  attribute.c:934:34 cxx_lt_to_le               while (current_depth[id] < MAGICKCORE_QUANTUM_DEPTH)
+    x  attribute.c:944:61 cxx_ne_to_eq               if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+    x  attribute.c:947:24 cxx_ne_to_eq               if ((atDepth != MagickFalse) &&
+    x  attribute.c:948:63 cxx_ne_to_eq               (GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+    x  attribute.c:951:24 cxx_ne_to_eq               if ((atDepth != MagickFalse) &&
+    x  attribute.c:952:62 cxx_ne_to_eq               (GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+    x  attribute.c:961:19 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
+    x  attribute.c:961:48 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
+       attribute.c:962:19 cxx_lt_to_ge               if (depth < current_depth[i])
+       attribute.c:962:19 cxx_lt_to_le               if (depth < current_depth[i])
+    x  attribute.c:1055:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  attribute.c:1106:15 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
+    x  attribute.c:1106:44 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
+       attribute.c:1107:15 cxx_lt_to_ge               if (depth < current_depth[i])
+       attribute.c:1107:15 cxx_lt_to_le               if (depth < current_depth[i])
+    x  attribute.c:1185:16 cxx_lt_to_le               if (distance < MagickEpsilon)
+    x  attribute.c:1199:16 cxx_lt_to_le               if (distance < MagickEpsilon)
+    x  attribute.c:1233:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1248:45 cxx_add_to_sub             caliper_info.width=(double) image->columns+image->rows;
+    x  attribute.c:1275:24 cxx_lt_to_le               if (min_diameter < diameter)
+    x  attribute.c:1353:15 cxx_lt_to_le               for (i=1; i < 4; i++)
+    x  attribute.c:1356:11 cxx_lt_to_le               if (d < distance)
+    x  attribute.c:1380:31 cxx_lt_to_le               if (bounding_box[i].x < point.x)
+    x  attribute.c:1382:31 cxx_lt_to_le               if (bounding_box[i].y < point.y)
+    x  attribute.c:1390:19 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  attribute.c:1397:42 cxx_sub_to_add             delta.x=bounding_box[(i+1) % 4].x-bounding_box[i].x;
+    x  attribute.c:1400:34 cxx_add_to_sub             intercept=bounding_box[(i+1) % 4].y-slope*bounding_box[i].x;
+    x  attribute.c:1403:28 cxx_lt_to_le               if ((i == 0) || (d < distance))
+    x  attribute.c:1409:42 cxx_mul_to_div             angle=RadiansToDegrees(atan(point.y*MagickSafeReciprocal(point.x)));
+    x  attribute.c:1411:79 cxx_sub_to_add             p_length=fabs((double) MagickMax(caliper_info.width,caliper_info.height)-
+    x  attribute.c:1417:24 cxx_gt_to_ge               if (p_length > q_length)
+    x  attribute.c:1418:27 cxx_lt_to_le               angle+=(angle < 0.0) ? 90.0 : -90.0;
+    x  attribute.c:1421:48 cxx_eq_to_ne               if (LocaleCompare(artifact,"portrait") == 0)
+    x  attribute.c:1423:26 cxx_lt_to_le               if (p_length < q_length)
+       attribute.c:1424:29 cxx_ge_to_gt               angle+=(angle >= 0.0) ? 90.0 : -90.0;
+       attribute.c:1424:29 cxx_ge_to_lt               angle+=(angle >= 0.0) ? 90.0 : -90.0;
+     c attribute.c:1478:19 cxx_le_to_gt               if (depth <= 64)
+     c attribute.c:1478:19 cxx_le_to_lt               if (depth <= 64)
+    xc attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:1594:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  attribute.c:1671:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1682:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    xc attribute.c:1752:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1882:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1891:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    x  attribute.c:1902:11 cxx_eq_to_ne               if (p == (const Quantum *) NULL)
+    x  attribute.c:1907:17 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  attribute.c:1907:46 cxx_post_inc_to_post_dec   for (x=0; x < (ssize_t) image->columns; x++)
+    x  attribute.c:1909:34 cxx_ne_to_eq               if (GetPixelAlpha(image,p) != OpaqueAlpha)
+    x  attribute.c:1983:31 cxx_mul_to_div             (void) memset(distortion,0,3*image->columns*channels*sizeof(*distortion));
+    x  attribute.c:1983:46 cxx_mul_to_div             (void) memset(distortion,0,3*image->columns*channels*sizeof(*distortion));
+    x  attribute.c:1983:55 cxx_mul_to_div             (void) memset(distortion,0,3*image->columns*channels*sizeof(*distortion));
+    x  attribute.c:2007:40 cxx_mul_to_div             u=(y % 3)*(ssize_t) (image->columns*channels);
+    x  attribute.c:2047:15 cxx_add_to_sub             if ((y+1) < (ssize_t) image->rows)
+    x  attribute.c:2047:19 cxx_lt_to_ge               if ((y+1) < (ssize_t) image->rows)
+    x  attribute.c:2047:19 cxx_lt_to_le               if ((y+1) < (ssize_t) image->rows)
+    x  attribute.c:2053:52 cxx_mul_to_div             distortion[v-(ssize_t) channels]+=3.0*error/16.0;
+    x  attribute.c:2053:58 cxx_div_to_mul             distortion[v-(ssize_t) channels]+=3.0*error/16.0;
+    x  attribute.c:2054:31 cxx_mul_to_div             distortion[v]+=5.0*error/16.0;
+    x  attribute.c:2054:37 cxx_div_to_mul             distortion[v]+=5.0*error/16.0;
+    x  attribute.c:2056:52 cxx_mul_to_div             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
+    x  attribute.c:2056:58 cxx_div_to_mul             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
+    x  attribute.c:2071:14 cxx_ne_to_eq               if (status != MagickFalse)
+    xc attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:2098:13 cxx_ge_to_gt               if (depth >= MAGICKCORE_QUANTUM_DEPTH)
+    xc attribute.c:2104:17 cxx_ne_to_eq               if ((artifact != (const char *) NULL) &&
+    xc attribute.c:2105:49 cxx_eq_to_ne               (LocaleCompare(artifact,"FloydSteinberg") == 0))
+    xc attribute.c:2108:28 cxx_eq_to_ne               if (image->storage_class == PseudoClass)
+    xc attribute.c:2117:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2117:47 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2119:59 cxx_ne_to_eq               if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2122:61 cxx_ne_to_eq               if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2125:60 cxx_ne_to_eq               if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2128:61 cxx_ne_to_eq               if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2217:15 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    xc attribute.c:2225:16 cxx_eq_to_ne               if (status == MagickFalse)
+    xc attribute.c:2233:17 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+    xc attribute.c:2238:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    xc attribute.c:2238:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    xc attribute.c:2248:41 cxx_eq_to_ne               if ((traits & UpdatePixelTrait) == 0)
+    x  attribute.c:2315:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:2374:57 cxx_eq_to_ne               if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)
+    x  attribute.c:2388:57 cxx_eq_to_ne               if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)
+    x  attribute.c:2420:32 cxx_ne_to_eq               if (image->storage_class != DirectClass)
+    x  attribute.c:2429:32 cxx_ne_to_eq               if (image->storage_class != DirectClass)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-attribute.json

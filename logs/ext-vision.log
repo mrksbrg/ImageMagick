@@ -1,0 +1,167 @@
+mutate: 749 mutants in MagickCore/vision\.c$, 9 functions
+mutate: baseline over 62 cases in 0s
+  mutants: 25/749 (0s)
+  mutants: 50/749 (1s)
+  mutants: 75/749 (1s)
+  mutants: 100/749 (1s)
+  mutants: 125/749 (1s)
+  mutants: 150/749 (2s)
+  mutants: 175/749 (2s)
+  mutants: 200/749 (2s)
+  mutants: 225/749 (2s)
+  mutants: 250/749 (3s)
+  mutants: 275/749 (3s)
+  mutants: 300/749 (3s)
+  mutants: 325/749 (5s)
+  mutants: 350/749 (7s)
+  mutants: 375/749 (12s)
+  mutants: 400/749 (16s)
+  mutants: 425/749 (20s)
+  mutants: 450/749 (30s)
+  mutants: 475/749 (42s)
+  mutants: 500/749 (53s)
+  mutants: 525/749 (65s)
+  mutants: 550/749 (76s)
+  mutants: 575/749 (84s)
+  mutants: 600/749 (89s)
+  mutants: 625/749 (92s)
+  mutants: 650/749 (107s)
+  mutants: 675/749 (114s)
+  mutants: 700/749 (127s)
+  mutants: 725/749 (130s)
+  mutants: 749/749 (225s)
+
+mutate: 749 mutants, 225s
+  killed 634, survived 115 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.6%   overall: 84.6%
+
+  function                           total killed survived no-cov
+  ConnectedComponentsImage             416    339       77      0
+  AngleThreshold                        58     46       12      0
+  EccentricityThreshold                 50     47        3      0
+  CircularityThreshold                  47     43        4      0
+  PerimeterThreshold                    44     40        4      0
+  MajorAxisThreshold                    40     37        3      0
+  MinorAxisThreshold                    40     35        5      0
+  IntegralImage                         33     29        4      0
+  CCObjectInfoCompare                   21     18        3      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       vision.c:130:36 cxx_sub_to_add             return((int) (q->bounding_box.x-(ssize_t) p->bounding_box.x));
+       vision.c:132:41 cxx_sub_to_add             return((int) (q->bounding_box.height-p->bounding_box.height));
+       vision.c:134:40 cxx_sub_to_add             return((int) (q->bounding_box.width-p->bounding_box.width));
+    x  vision.c:164:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:185:20 cxx_lt_to_le               for (y=(-1); y < (ssize_t) bounding_box.height; y++)
+    x  vision.c:230:41 cxx_eq_to_ne               if ((ssize_t) pixels[2*v+u] == i)
+       vision.c:241:27 cxx_post_inc_to_post_dec   pattern[0]++;  /* diagonal */
+    x  vision.c:271:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:292:20 cxx_lt_to_le               for (y=(-1); y < (ssize_t) bounding_box.height; y++)
+    x  vision.c:337:41 cxx_eq_to_ne               if ((ssize_t) pixels[2*v+u] == i)
+       vision.c:348:27 cxx_post_inc_to_post_dec   pattern[0]++;  /* diagonal */
+    x  vision.c:380:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:452:20 cxx_sub_to_add             M11+=(x-centroid.x)*(y-centroid.y);
+    x  vision.c:452:35 cxx_sub_to_add             M11+=(x-centroid.x)*(y-centroid.y);
+    x  vision.c:479:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:551:20 cxx_sub_to_add             M11+=(x-centroid.x)*(y-centroid.y);
+    x  vision.c:551:35 cxx_sub_to_add             M11+=(x-centroid.x)*(y-centroid.y);
+    x  vision.c:552:20 cxx_sub_to_add             M20+=(x-centroid.x)*(x-centroid.x);
+    x  vision.c:552:35 cxx_sub_to_add             M20+=(x-centroid.x)*(x-centroid.x);
+    x  vision.c:578:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:651:20 cxx_sub_to_add             M11+=(x-centroid.x)*(y-centroid.y);
+    x  vision.c:651:35 cxx_sub_to_add             M11+=(x-centroid.x)*(y-centroid.y);
+    x  vision.c:682:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:764:19 cxx_lt_to_le               if (fabs(M11) < 0.0)
+       vision.c:766:24 cxx_sub_to_add             if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+       vision.c:766:30 cxx_ge_to_gt               if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+       vision.c:766:30 cxx_ge_to_lt               if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+       vision.c:766:46 cxx_sub_to_add             if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+       vision.c:766:52 cxx_lt_to_ge               if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+       vision.c:766:52 cxx_lt_to_le               if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+    x  vision.c:772:25 cxx_sub_to_add             if (fabs(M20-M02) >= 0.0)
+    x  vision.c:774:25 cxx_sub_to_add             if ((M20-M02) < 0.0)
+    x  vision.c:781:24 cxx_sub_to_add             if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+    x  vision.c:781:30 cxx_ge_to_gt               if ((fabs(M20-M02) >= 0.0) && ((M20-M02) < 0.0))
+    x  vision.c:847:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  vision.c:875:15 cxx_lt_to_le               for (n=0; n < (ssize_t) (image->columns*image->rows); n++)
+    x  vision.c:885:15 cxx_lt_to_le               for (i=0; i < (ssize_t) MaxColormapSize; i++)
+    x  vision.c:898:15 cxx_lt_to_le               for (n=0; n < (ssize_t) (connectivity > 4 ? 4 : 2); n++)
+    x  vision.c:898:41 cxx_gt_to_ge               for (n=0; n < (ssize_t) (connectivity > 4 ? 4 : 2); n++)
+    x  vision.c:940:37 cxx_ge_to_gt               ((y+dy) < 0) || ((y+dy) >= (ssize_t) image->rows))
+    x  vision.c:972:16 cxx_lt_to_le               if (ox < oy)
+    x  vision.c:1041:18 cxx_ge_to_gt               if (id >= (ssize_t) MaxColormapSize)
+    x  vision.c:1045:13 cxx_lt_to_le               if (x < object[id].bounding_box.x)
+    x  vision.c:1047:13 cxx_ge_to_gt               if (x >= (ssize_t) object[id].bounding_box.width)
+    x  vision.c:1049:13 cxx_lt_to_le               if (y < object[id].bounding_box.y)
+    x  vision.c:1051:13 cxx_ge_to_gt               if (y >= (ssize_t) object[id].bounding_box.height)
+    x  vision.c:1067:11 cxx_gt_to_ge               if (n > (ssize_t) MaxColormapSize)
+    x  vision.c:1071:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       vision.c:1076:17 cxx_post_inc_to_post_dec   progress++;
+       vision.c:1079:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  vision.c:1086:9 cxx_gt_to_ge               if (n > (ssize_t) MaxColormapSize)
+    x  vision.c:1096:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1112:24 cxx_gt_to_ge               if (object[i].area > object[background_id].area)
+    x  vision.c:1127:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1141:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1160:21 cxx_lt_to_ge               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1160:21 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1176:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1187:19 cxx_lt_to_le               if (first < 0)
+    x  vision.c:1195:22 cxx_lt_to_le               if (last < 0)
+    x  vision.c:1198:31 cxx_gt_to_ge               step=(ssize_t) (first > last ? -1 : 1);
+    x  vision.c:1200:22 cxx_ge_to_gt               if ((first >= 0) &&
+    x  vision.c:1201:22 cxx_lt_to_le               (first < (ssize_t) component_image->colors))
+    x  vision.c:1218:19 cxx_lt_to_le               if (top_ids < 0)
+    x  vision.c:1220:19 cxx_ge_to_gt               if (top_ids >= (ssize_t) component_image->colors)
+       vision.c:1221:50 cxx_sub_to_add             top_ids=(ssize_t) component_image->colors-1;
+    x  vision.c:1233:27 cxx_lt_to_le               for (i=top_ids+1; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1236:17 cxx_ge_to_gt               if ((id >= 0) && (id < (ssize_t) component_image->colors))
+    x  vision.c:1236:30 cxx_lt_to_le               if ((id >= 0) && (id < (ssize_t) component_image->colors))
+    x  vision.c:1242:16 cxx_ne_to_eq               if (artifact != (const char *) NULL)
+    x  vision.c:1262:18 cxx_eq_to_ne               if (*q == ';')
+    x  vision.c:1267:21 cxx_lt_to_ge               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1267:21 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1291:17 cxx_lt_to_le               if (first < 0)
+    x  vision.c:1299:20 cxx_lt_to_le               if (last < 0)
+    x  vision.c:1302:29 cxx_gt_to_ge               step=(ssize_t) (first > last ? -1 : 1);
+    x  vision.c:1304:20 cxx_ge_to_gt               if ((first >= 0) &&
+    x  vision.c:1305:20 cxx_lt_to_le               (first < (ssize_t) component_image->colors))
+    x  vision.c:1317:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1318:35 cxx_lt_to_le               if (((object[i].metric[n] < min_threshold) ||
+    x  vision.c:1319:35 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1331:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1331:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1332:35 cxx_lt_to_le               if (((object[i].metric[n] < min_threshold) ||
+    x  vision.c:1333:35 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1333:60 cxx_ne_to_eq               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1344:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1347:35 cxx_lt_to_le               if (((object[i].metric[n] < min_threshold) ||
+    x  vision.c:1348:34 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1361:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1363:35 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1375:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1377:35 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1389:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1390:35 cxx_lt_to_le               if (((object[i].metric[n] < min_threshold) ||
+    x  vision.c:1391:35 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1403:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1405:35 cxx_ge_to_gt               (object[i].metric[n] >= max_threshold)) && (i != background_id))
+    x  vision.c:1422:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1460:19 cxx_lt_to_le               for (x=0; x < (ssize_t) bounding_box.width; x++)
+    x  vision.c:1506:26 cxx_lt_to_le               (neighbors[j] < id)))
+    x  vision.c:1547:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1562:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1597:17 cxx_lt_to_le               if (x < object[id].bounding_box.x)
+    x  vision.c:1599:17 cxx_gt_to_ge               if (x > (ssize_t) object[id].bounding_box.width)
+    x  vision.c:1601:17 cxx_lt_to_le               if (y < object[id].bounding_box.y)
+    x  vision.c:1603:17 cxx_gt_to_ge               if (y > (ssize_t) object[id].bounding_box.height)
+    x  vision.c:1611:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1641:19 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1664:23 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
+    x  vision.c:1690:15 cxx_eq_to_ne               if (objects == (CCObjectInfo **) NULL)
+    x  vision.c:1748:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  vision.c:1821:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       vision.c:1826:17 cxx_post_inc_to_post_dec   progress++;
+       vision.c:1829:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-vision.json
