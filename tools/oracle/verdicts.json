@@ -10871,6 +10871,16 @@
    "why": "one more level of a self-including type.xml repeats entries already in the cache, and the IncludeNodeNestedTooDeeply warning from loading the type cache is not reported"
   },
   {
+   "at": 0,
+   "file": "MagickCore/type.c",
+   "function": "TypeComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&type_semaphore);",
+   "verdict": "unobservable",
+   "why": "runs only when the type semaphore was never created; TypeComponentGenesis creates it at start-up, so the line is unreachable"
+  },
+  {
    "at": 29,
    "file": "MagickCore/utility.c",
    "function": "ShredFile",
