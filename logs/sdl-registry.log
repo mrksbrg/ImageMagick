@@ -1,0 +1,21 @@
+mutate: 9 mutants in MagickCore/registry\.c$, 3 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 9/9 (289s)
+
+mutate: 9 mutants, 289s
+  killed 5, survived 4 (2 capped), no coverage 0, errors 0
+  mutation score on reached code: 55.6%   overall: 55.6%
+
+  function                           total killed survived no-cov
+  RegistryComponentTerminus              4      2        2      0
+  SetImageRegistry                       4      2        2      0
+  ResetImageRegistryIterator             1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c registry.c:327:5 cxx_remove_void_call       ActivateSemaphoreInfo(&registry_semaphore);
+    xc registry.c:334:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&registry_semaphore);
+       registry.c:482:9 cxx_remove_void_call       SetMagickDatePrecision((size_t) StringToInteger(string));
+       registry.c:529:9 cxx_remove_void_call       ActivateSemaphoreInfo(&registry_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-registry.json

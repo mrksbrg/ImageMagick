@@ -1,0 +1,110 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:327:5:327:47",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 327,
+  "col": 5,
+  "function": "RegistryComponentTerminus",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:328:3:328:40",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 328,
+  "col": 3,
+  "function": "RegistryComponentTerminus",
+  "status": "killed",
+  "cases": 1,
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:333:3:333:42",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 333,
+  "col": 3,
+  "function": "RegistryComponentTerminus",
+  "status": "killed",
+  "cases": 1,
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:334:3:334:47",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 334,
+  "col": 3,
+  "function": "RegistryComponentTerminus",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:396:3:396:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 396,
+  "col": 3,
+  "function": "ResetImageRegistryIterator",
+  "status": "killed",
+  "cases": 42,
+  "killer": "gaps/855daf7162",
+  "why": "stdout differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:482:9:482:65",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 482,
+  "col": 9,
+  "function": "SetImageRegistry",
+  "status": "survived",
+  "cases": 76,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:529:9:529:51",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 529,
+  "col": 9,
+  "function": "SetImageRegistry",
+  "status": "survived",
+  "cases": 76,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:530:7:530:44",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 530,
+  "col": 7,
+  "function": "SetImageRegistry",
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/90c6cdf8dd",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c:534:7:534:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/registry.c",
+  "line": 534,
+  "col": 7,
+  "function": "SetImageRegistry",
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/90c6cdf8dd",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
+ }
+]

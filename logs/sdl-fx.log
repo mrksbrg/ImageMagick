@@ -1,0 +1,56 @@
+mutate: 30 mutants in MagickCore/fx\.c$, 16 functions
+mutate: baseline over 547 cases in 0s
+  mutants: 25/30 (71s)
+  mutants: 30/30 (71s)
+
+mutate: 30 mutants, 71s
+  killed 3, survived 25 (0 capped), no coverage 2, errors 0
+  mutation score on reached code: 10.7%   overall: 10.0%
+
+  function                           total killed survived no-cov
+  AcquireFxInfoPrivate                   9      0        9      0
+  TranslateExpression                    4      0        4      0
+  GetOperand                             2      0        2      0
+  GetIntensity                           2      1        1      0
+  DestroyFxInfo                          2      0        2      0
+  PeekChar                               1      0        1      0
+  PeekStr                                1      0        0      1
+  GetConstantColour                      1      0        1      0
+  GetHexColour                           1      0        0      1
+  GetOperator                            1      0        1      0
+  TranslateStatement                     1      0        1      0
+  TranslateStatementList                 1      0        1      0
+  GetHslFlt                              1      1        0      0
+  GetHslInt                              1      1        0      0
+  ExecuteRPN                             1      0        1      0
+  FxImage                                1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  fx.c:1366:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:1729:10 cxx_remove_void_call       (void) GetPixelInfo (pfx->image, &colour);
+    x  fx.c:2248:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2288:7 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2608:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2747:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2763:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2769:5 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2849:5 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2942:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:2965:3 cxx_remove_void_call       SkipSpaces (pfx);
+    x  fx.c:3304:10 cxx_remove_void_call       (void) GetPixelInfo (img, &pixelinf);
+    x  fx.c:3355:5 cxx_remove_void_call       ConvertRGBToHSL (
+    x  fx.c:4256:12 cxx_remove_void_call       (void) DestroyRPN (pfx);
+       fx.c:4270:12 cxx_remove_void_call       (void) DestroyRPN (pfx);
+       fx.c:4284:12 cxx_remove_void_call       (void) DestroyRPN (pfx);
+       fx.c:4294:14 cxx_remove_void_call       (void) DestroyRPN (pfx);
+       fx.c:4304:5 cxx_remove_void_call       DumpTables (stderr);
+       fx.c:4305:5 cxx_remove_void_call       DumpUserSymbols (pfx, stderr);
+       fx.c:4319:14 cxx_remove_void_call       (void) DestroyRPN (pfx);
+       fx.c:4335:13 cxx_remove_void_call       DestroyFxRt (&pfx->fxrts[t2]);
+       fx.c:4339:16 cxx_remove_void_call       (void) DestroyRPN (pfx);
+    x  fx.c:4367:5 cxx_remove_void_call       DestroyFxRt (&pfx->fxrts[t]);
+    x  fx.c:4371:3 cxx_remove_void_call       DestroyRPN (pfx);
+    x  fx.c:4482:13 cxx_remove_void_call       SetPixelChannel (fx_image, channel, p[i], q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-fx.json

@@ -1,0 +1,31 @@
+mutate: 30 mutants in MagickCore/distort\.c$, 3 functions
+mutate: baseline over 375 cases in 0s
+  mutants: 25/30 (124s)
+  mutants: 30/30 (124s)
+
+mutate: 30 mutants, 124s
+  killed 17, survived 13 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 56.7%   overall: 56.7%
+
+  function                           total killed survived no-cov
+  GenerateCoefficients                  16     12        4      0
+  DistortImage                          11      4        7      0
+  SparseColorImage                       3      1        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       distort.c:493:7 cxx_remove_void_call       perror("unknown method given"); /* just fail assertion */
+       distort.c:599:13 cxx_remove_void_call       LeastSquaresAddTerms(matrix,vectors,terms,uv2,3UL,2UL);
+       distort.c:603:13 cxx_remove_void_call       LeastSquaresAddTerms(matrix,vectors,terms,
+       distort.c:1522:3 cxx_remove_void_call       perror("no method handler"); /* just fail assertion */
+       distort.c:2101:9 cxx_remove_void_call       InvertAffineCoefficients(coeff, inverse);
+       distort.c:2102:9 cxx_remove_void_call       CoefficientsToAffineArgs(inverse);
+       distort.c:2146:9 cxx_remove_void_call       InvertPerspectiveCoefficients(coeff, inverse);
+    x  distort.c:2459:3 cxx_remove_void_call       ConformPixelInfo(distort_image,&distort_image->matte_color,&invalid,
+       distort.c:2882:11 cxx_remove_void_call       SetPixelViaPixelInfo(distort_image,&invalid,q);
+    x  distort.c:2889:13 cxx_remove_void_call       SetPixelViaPixelInfo(distort_image,&invalid,q);
+       distort.c:2896:17 cxx_remove_void_call       CompositePixelInfoBlend(&pixel,validity,&invalid,(1.0-validity),
+    x  distort.c:3243:7 cxx_remove_void_call       GetPixelInfo(sparse_image,&pixel);
+    x  distort.c:3246:9 cxx_remove_void_call       GetPixelInfoPixel(sparse_image,q,&pixel);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-distort.json

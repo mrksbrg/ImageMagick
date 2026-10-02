@@ -1,0 +1,63 @@
+mutate: 65 mutants in MagickCore/quantize\.c$, 22 functions
+mutate: baseline over 10627 cases in 0s
+  mutants: 25/65 (1s)
+  mutants: 50/65 (9s)
+  mutants: 65/65 (113s)
+
+mutate: 65 mutants, 113s
+  killed 38, survived 25 (0 capped), no coverage 2, errors 0
+  mutation score on reached code: 60.3%   overall: 58.5%
+
+  function                           total killed survived no-cov
+  AssignImageColors                      8      4        4      0
+  ClassifyImageColors                    8      6        2      0
+  FloydSteinbergDither                   8      4        4      0
+  RiemersmaDither                        8      4        4      0
+  KmeansImage                            6      4        2      0
+  SetGrayscaleImage                      3      1        2      0
+  PosterizeImage                         2      1        1      0
+  PruneLevel                             2      0        0      2
+  PruneToCubeDepth                       2      2        0      0
+  QuantizeImage                          2      1        1      0
+  QuantizeImages                         2      0        2      0
+  Reduce                                 2      2        0      0
+  ReduceImageColors                      2      2        0      0
+  RemapImage                             2      0        2      0
+  AcquireQuantizeInfo                    1      1        0      0
+  CloneQuantizeInfo                      1      1        0      0
+  ClosestColor                           1      1        0      0
+  CompressImageColormap                  1      1        0      0
+  DefineImageColormap                    1      1        0      0
+  PruneChild                             1      1        0      0
+  RemapImages                            1      0        1      0
+  SetImageColormap                       1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  quantize.c:614:17 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(
+    x  quantize.c:616:17 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(
+    x  quantize.c:618:17 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(
+    x  quantize.c:621:19 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(
+       quantize.c:823:9 cxx_remove_void_call       PruneLevel(cube_info,cube_info->root);
+       quantize.c:935:9 cxx_remove_void_call       PruneLevel(cube_info,cube_info->root);
+    x  quantize.c:1682:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(image->colormap[index].red),
+    x  quantize.c:1684:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(image->colormap[index].green),
+    x  quantize.c:1686:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(image->colormap[index].blue),
+       quantize.c:1689:13 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(image->colormap[index].alpha),
+    x  quantize.c:1811:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(image->colormap[index].red),q);
+    x  quantize.c:1812:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(image->colormap[index].green),q);
+    x  quantize.c:1813:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(image->colormap[index].blue),q);
+    x  quantize.c:1815:13 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(image->colormap[index].alpha),q);
+    x  quantize.c:2590:7 cxx_remove_void_call       DestroyQCubeInfo(cube_info);
+       quantize.c:2813:7 cxx_remove_void_call       GetColorTuple(image->colormap+n,MagickTrue,tuple);
+       quantize.c:3075:13 cxx_remove_void_call       SetPixelChannel(image,channel,PosterizePixel(q[i],levels),q);
+    x  quantize.c:3355:3 cxx_remove_void_call       DestroyQCubeInfo(cube_info);
+    x  quantize.c:3481:7 cxx_remove_void_call       ReduceImageColors(images,cube_info);
+    x  quantize.c:3499:3 cxx_remove_void_call       DestroyQCubeInfo(cube_info);
+       quantize.c:3795:9 cxx_remove_void_call       ReduceImageColors(image,cube_info);
+    x  quantize.c:3798:3 cxx_remove_void_call       DestroyQCubeInfo(cube_info);
+       quantize.c:3882:3 cxx_remove_void_call       DestroyQCubeInfo(cube_info);
+    x  quantize.c:4038:3 cxx_remove_void_call       qsort((void *) image->colormap,image->colors,sizeof(PixelInfo),
+    x  quantize.c:4085:7 cxx_remove_void_call       SetPixelIndex(image,(Quantum) colormap_index[ScaleQuantumToMap(
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-quantize.json

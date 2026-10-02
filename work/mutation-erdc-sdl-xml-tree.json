@@ -1,0 +1,130 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:356:5:356:57",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 356,
+  "col": 5,
+  "function": "AddPathToXMLTree",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:357:5:357:54",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 357,
+  "col": 5,
+  "function": "AddPathToXMLTree",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:535:3:535:40",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 535,
+  "col": 3,
+  "function": "xml-tree.c:DestroyXMLTree_",
+  "status": "survived",
+  "cases": 88,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:536:3:536:42",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 536,
+  "col": 3,
+  "function": "xml-tree.c:DestroyXMLTree_",
+  "status": "survived",
+  "cases": 88,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:537:3:537:31",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 537,
+  "col": 3,
+  "function": "xml-tree.c:DestroyXMLTree_",
+  "status": "survived",
+  "cases": 88,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:1554:19:1554:71",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 1554,
+  "col": 19,
+  "function": "xml-tree.c:ParseInternalDoctype",
+  "status": "survived",
+  "cases": 66,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:1802:17:1802:50",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 1802,
+  "col": 17,
+  "function": "NewXMLTree",
+  "status": "killed",
+  "cases": 78,
+  "killer": "info/a49474594f",
+  "why": "stdout differs; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:1813:19:1813:52",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 1813,
+  "col": 19,
+  "function": "NewXMLTree",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/f0dfca62c8",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:1888:21:1888:78",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 1888,
+  "col": 21,
+  "function": "NewXMLTree",
+  "status": "survived",
+  "cases": 88,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:1951:19:1951:77",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 1951,
+  "col": 19,
+  "function": "NewXMLTree",
+  "status": "survived",
+  "cases": 88,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c:1974:11:1974:63",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/xml-tree.c",
+  "line": 1974,
+  "col": 11,
+  "function": "NewXMLTree",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/f0dfca62c8",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+ }
+]

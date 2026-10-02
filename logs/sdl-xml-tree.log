@@ -1,0 +1,24 @@
+mutate: 11 mutants in MagickCore/xml-tree\.c$, 4 functions
+mutate: baseline over 88 cases in 0s
+  mutants: 11/11 (6s)
+
+mutate: 11 mutants, 6s
+  killed 3, survived 6 (0 capped), no coverage 2, errors 0
+  mutation score on reached code: 33.3%   overall: 27.3%
+
+  function                           total killed survived no-cov
+  NewXMLTree                             5      3        2      0
+  DestroyXMLTree_                        3      0        3      0
+  AddPathToXMLTree                       2      0        0      2
+  ParseInternalDoctype                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  xml-tree.c:535:3 cxx_remove_void_call       DestroyXMLTreeChild(xml_info,depth+1);
+    x  xml-tree.c:536:3 cxx_remove_void_call       DestroyXMLTreeOrdered(xml_info,depth+1);
+    x  xml-tree.c:537:3 cxx_remove_void_call       DestroyXMLTreeRoot(xml_info);
+       xml-tree.c:1554:19 cxx_remove_void_call       ParseProcessingInstructions(root,c,(size_t) (xml-c));
+       xml-tree.c:1888:21 cxx_remove_void_call       ParseCharacterContent(root,tag+8,(size_t) (p-tag-10),'c');
+    x  xml-tree.c:1951:19 cxx_remove_void_call       ParseProcessingInstructions(root,tag+1,(size_t) (p-tag-2));
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-xml-tree.json
