@@ -2199,6 +2199,21 @@ GAP_STEP_CASES += [
       ["identify", "-format", "%[xmp:load][%[tiff:Orientation]][%[tiff:XResolution]]\\n", "xe.miff",
        "xa.miff"]], {"e.xmp": XMP_ELEMENTS, "a.xmp": XMP_ATTRIBUTES}),
 ]
+# channel.c: +combine at the channel-count boundaries of each target colour space (sRGB
+# with a meta channel, gray with alpha and a meta channel, CMYK with alpha and a meta
+# channel), an undefined target (the gamma test), images of different widths;
+# identify.c: minimum locations on an image with no zero-valued pixel
+GAP_COMMANDS += [
+    "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff -combine",
+    "{C}/gray8.miff {C}/gray8.miff +combine gray",
+    "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff +combine gray",
+    "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff +combine cmyk",
+    "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff {C}/gray8.miff +combine cmyk",
+    "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff +combine undefined",
+    "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff -set gamma 1.0 +combine undefined",
+    "{C}/wide.miff {C}/gray8.miff {C}/gray8.miff -combine",
+    "identify -define identify:locate=minimum {C}/rose.miff",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
