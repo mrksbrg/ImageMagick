@@ -1763,6 +1763,20 @@ def _quantize_gap4_cases():
                     [[img(name), "-colorspace", "gray", "-colors", "8", "-verbose", "info:"]], [])
 
 
+# montage.c: GetMontageGeometry fills in whichever tile count is missing, or
+# both. The montage family has -tile 3x and 2x2 only; rows only (x2, x3), columns
+# only (2x), 1x1 (one image per page) and an offset with no counts.
+MONTAGE_TILES = ["x2", "x3", "2x", "1x1", "+0+0"]
+
+
+def _montage_gap_cases():
+    inputs = [img(n) for n in ("rose", "granite", "logo", "wizard", "tiny")]
+    for t in MONTAGE_TILES:
+        yield _op_to("montagegap", "montage of five -tile %s" % t,
+                     ["montage"] + inputs + ["-tile", t, "-geometry", "20x20+1+1"] + FLOAT_OUT,
+                     "out.miff")
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3422,7 +3436,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
