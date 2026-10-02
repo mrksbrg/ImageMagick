@@ -1965,6 +1965,18 @@ been thrown into the command's exception by `SetImageInfo`'s lookup of the same 
 98%, trusted.** Out of reach: `SetErrorHandler` (1 mutant), called only by the X11 display
 and animate code. No other survivor is open.
 
+## histogram.c: trusted (Windows, 2026-10-02)
+
+`IsPaletteImage`'s boundary at `MaxColormapSize`: line coverage showed that neither `%[type]`
+nor `identify -verbose` calls it (the caller in attribute.c is `GetImageType`, which only
+MagickWand uses). `-colors N` on a palette image of at most N colours does, through
+`CompressImageColormap` (operation.c). One case (family `histogramgap3`): a palette of
+exactly 65,536 colours, quantized to 65,536 again; reproducible, 0.03 s, no tree pruning. The
+boundary mutant, run by hand on the Mull build first, changed the output, and the round
+killed it. **Adjusted 94%, all 15 functions at 80% or more, trusted.** Open survivors:
+`CheckImageColors` 728, 755, 778; `UniqueColorsToImage` 1208 (unreached), 1211, 1212;
+`GetNumberColors` 1115 (unreached), 1122; `ClassifyImageColors` 318.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
