@@ -2964,6 +2964,50 @@ GAP_COMMANDS += [_SERPENT + "-floodfill +0+0 white", _SERPENT + "-floodfill +29+
 # paint.c: OilPaintImage copies the channels the channel mask leaves out from the centre pixel
 GAP_COMMANDS += ["{C}/rose.miff -channel R -paint 2 +channel",
                  "{C}/rose_alpha.miff -channel RGB -paint 3 +channel"]
+# type.c: GetTypeInfoByFamily scores a family's entries by style, weight and stretch. The
+# corpus has one font, so the entries alternate face="0" and face="1" (which this font lacks,
+# so rendering it fails): which entry won shows in the output and in stderr
+_TYPE_SCORE_XML = "<typemap>\n" + "".join(
+    '  <type name="Score-%s" family="ScoreFamily" style="%s" weight="%s" stretch="%s" face="%d" '
+    'glyphs="{C}/Generic.ttf"/>\n' % (name, style, weight, stretch, face)
+    for name, style, weight, stretch, face in (
+        ("A", "Normal", 400, "Normal", 0), ("B", "Italic", 400, "Normal", 1),
+        ("C", "Oblique", 700, "Condensed", 0), ("D", "Normal", 900, "Expanded", 1),
+        ("E", "Normal", 100, "UltraCondensed", 0), ("F", "Italic", 300, "SemiExpanded", 1),
+        ("G", "Normal", 600, "Normal", 1))) + (
+    '  <type name="Score-Helvetica" family="Helvetica" face="1" glyphs="{C}/Generic.ttf"/>\n'
+    "</typemap>\n")
+GAP_STEP_CASES += [("type.xml scoring: -family %s %s" % (family, query),
+                    [["-family", family] + query.split() + ["-pointsize", "12", "label:Ab", "out.miff"]],
+                    {".config/ImageMagick/type.xml": _TYPE_SCORE_XML})
+                   for family, query in (
+                       ("ScoreFamily", "-style Normal -weight 400"), ("ScoreFamily", "-style Italic"),
+                       ("ScoreFamily", "-style Oblique"), ("ScoreFamily", "-style Italic -weight 700"),
+                       ("ScoreFamily", "-style Oblique -weight 300"), ("ScoreFamily", "-style Any -weight 650"),
+                       ("ScoreFamily", "-weight 900"), ("ScoreFamily", "-weight 100"),
+                       ("ScoreFamily", "-weight 550"), ("ScoreFamily", "-stretch Condensed"),
+                       ("ScoreFamily", "-stretch Expanded -weight 800"), ("ScoreFamily", "-stretch UltraCondensed"),
+                       ("ScoreFamily", "-stretch SemiExpanded -style Italic"), ("ScoreFamily", "-stretch Any -weight 350"),
+                       ("Arial", "-weight 400"), ("Helvetica", "-style Italic"))]
+# type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
+# buckets. The case's own fonts.conf (fontconfig reads $HOME/.config/fontconfig, and HOME is
+# the case directory) adds the corpus directory and, at scan time, gives its font an exact
+# bucket boundary: every width and weight threshold the function compares against
+def _fonts_conf(width, weight, style):
+    return ('<?xml version="1.0"?>\n<!DOCTYPE fontconfig SYSTEM "fonts.dtd">\n<fontconfig>\n'
+            '  <dir prefix="relative">../../{C}</dir>\n'
+            '  <match target="scan">\n'
+            '    <test name="file" compare="contains"><string>Generic.ttf</string></test>\n'
+            '    <edit name="width" mode="assign"><int>%d</int></edit>\n'
+            '    <edit name="weight" mode="assign"><int>%d</int></edit>\n'
+            '    <edit name="style" mode="assign"><string>%s</string></edit>\n'
+            '  </match>\n</fontconfig>\n' % (width, weight, style))
+GAP_STEP_CASES += [("fontconfig font at width %d, weight %d, style %s, listed" % (width, weight, style),
+                    [["-list", "font"]], {".config/fontconfig/fonts.conf": _fonts_conf(width, weight, style)})
+                   for width, weight, style in (
+                       (30, 0, "Regular"), (50, 40, "Italic"), (63, 50, "Bold"), (75, 75, "Regular"),
+                       (87, 80, "Oblique"), (100, 100, "Regular"), (113, 180, "Italic"),
+                       (125, 200, "Regular"), (150, 205, "Bold Italic"), (200, 210, "Regular"))]
 # attribute.c: the minimum bounding box's orientation: a rectangle at 30 degrees, axis-aligned
 # rectangles (angle 0) under each orientation and an unknown one, a square (equal lengths) and
 # a diamond (two corners equally near the origin)
