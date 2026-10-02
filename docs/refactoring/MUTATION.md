@@ -1947,6 +1947,14 @@ Open survivors:
 - `UpdateSignature` 791 (unreached: the 64-bit length carry, past 2^29 bytes), 798.
 - `FinalizeSignature` 240 and `TransformSignature` 701, `unresolved` (`verdicts.json`).
 
+## magick.c: trusted (Windows, 2026-10-02)
+
+Every mutant in the functions the command line reaches is killed (adjusted 81%). The 22 left
+are in three functions out of reach, checked with `reach.py` and the callers:
+`MagickSignalHandler` (9; runs only when a signal arrives), `GetMagickList` (8; called only
+by the X11 widget code and MagickWand) and `GetImageMagick` (5; called by nothing).
+**Trusted**, with those three written down as out of reach.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
