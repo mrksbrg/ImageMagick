@@ -3531,6 +3531,23 @@ GAP_COMMANDS += [
     "'{C}/rose.miff' -alpha set -shadow 1:10+3++2x10",
     "'{C}/rose.miff' -resize '(3)x(4)'",
 ]
+# utility.c: ExpandFilename's "~" (HOME is the case directory; magick expands it only in a glob)
+# and "~user", and ExpandFilenames
+# on @lists holding options with arguments, lists of directories only, and globs over files
+# the case wrote, with and without a subimage
+GAP_STEP_CASES += [
+    ("a file read back through a glob under ~/", [["{C}/rose.miff", "f.miff"], ["~/f*.miff", "-negate", "out.miff"]], {}),
+    ("a file under ~root", [["~root/no-such-file.miff", "out.miff"]], {}),
+    ("an @list with options and their arguments", [["@opts.txt", "out.miff"]],
+     {"opts.txt": "-resize 50% {C}/rose.miff -negate\n"}),
+    ("an @list of directories only", [["@dirs.txt", "{C}/rose.miff", "out.miff"]], {"dirs.txt": ". ..\n"}),
+    ("an @list mixing a directory, an option and images", [["@mix.txt", "-append", "out.miff"]],
+     {"mix.txt": ". -flip {C}/rose.miff {C}/granite.miff\n"}),
+    ("a glob over files the case wrote", [["{C}/rose.miff", "a1.miff"], ["{C}/granite.miff", "a2.miff"],
+                                          ["a*.miff", "-append", "out.miff"]], {}),
+    ("a glob with a subimage", [["{C}/rose.miff", "{C}/granite.miff", "b1.miff"], ["{C}/rose.miff", "b2.miff"],
+                                ["b*.miff[0]", "-append", "out.miff"]], {}),
+]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight

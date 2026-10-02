@@ -12091,6 +12091,46 @@
    "why": "runs only when the type semaphore was never created; TypeComponentGenesis creates it at start-up, so the line is unreachable"
   },
   {
+   "at": 21,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueFilename",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "the result of close_utf8 is assigned and never read"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/utility.c",
+   "function": "GetMagickPageSize",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (page_size > 0)",
+   "verdict": "equivalent",
+   "why": "the cached size starts at -1, so >= 0 and > 0 agree until a positive size is cached"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/utility.c",
+   "function": "GetMagickPageSize",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (page_size <= 0)",
+   "verdict": "unobservable",
+   "why": "replaces the system page size with 4096, which only changes memory alignment"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/utility.c",
+   "function": "GetMagickPageSize",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (page_size <= 0)",
+   "verdict": "equivalent",
+   "why": "sysconf returns a positive page size, never exactly 0"
+  },
+  {
    "at": 29,
    "file": "MagickCore/utility.c",
    "function": "ShredFile",
