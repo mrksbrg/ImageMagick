@@ -1152,6 +1152,26 @@
    "why": "the squared distance between hull vertices on the pixel grid is 0 or at least 0.25, never exactly MagickEpsilon"
   },
   {
+   "at": 15,
+   "file": "MagickCore/blob.c",
+   "function": "ReadBlobString",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((string[i] == '\\r') || (string[i] == '\\n'))",
+   "verdict": "equivalent",
+   "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/blob.c",
+   "function": "ReadBlobString",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((string[i] == '\\r') || (string[i] == '\\n'))",
+   "verdict": "equivalent",
+   "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
+  },
+  {
    "at": 12,
    "file": "MagickCore/channel.c",
    "function": "SetImageAlphaChannel",
@@ -3182,6 +3202,36 @@
    "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
    "verdict": "unresolved",
    "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/distort.c",
+   "function": "MagickRound",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((x-floor(x)) < (ceil(x)-x))",
+   "verdict": "unresolved",
+   "why": "differs only on an exact .5 fraction (rounds down instead of up); Arc with rotations 270 and 90, whose start angle normalises to half a turn and none, did not kill it, likely since the angle is wrapped again per pixel"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/distort.c",
+   "function": "RotateImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
+   "verdict": "equivalent",
+   "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/distort.c",
+   "function": "RotateImage",
+   "mutator": "cxx_minus_to_noop",
+   "nth": 0,
+   "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
+   "verdict": "equivalent",
+   "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
   },
   {
    "at": 10,
@@ -10931,6 +10981,176 @@
    "why": "at the boundary both branches give the same page: the offset or size it assigns is the value it already has, or is clamped to 0 right after"
   },
   {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(geometry.x > 0 ? 0 : geometry.x)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(geometry.x > 0 ? geometry.x : 0)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(geometry.y > 0 ? 0 : geometry.y)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(geometry.y > 0 ? geometry.y : 0)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((image->columns > geometry.width) || (image->rows > geometry.height))",
+   "verdict": "equivalent",
+   "why": "a tile exactly the image size makes one tile, the same image the single-region path returns"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((image->columns > geometry.width) || (image->rows > geometry.height))",
+   "verdict": "equivalent",
+   "why": "a tile exactly the image size makes one tile, the same image the single-region path returns"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(geometry.x < 0 ? 0 : geometry.x)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(geometry.x < 0 ? geometry.x : 0)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(geometry.y < 0 ? 0 : geometry.y)));",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "height=(size_t) ((ssize_t) height+(geometry.y < 0 ? -1 : 1)*",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "height=(size_t) ((ssize_t) height-(geometry.y < 0 ? -1 : 1)*",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (delta.x < 1.0)",
+   "verdict": "equivalent",
+   "why": "a delta of exactly 1.0 is set to 1.0"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (delta.y < 1.0)",
+   "verdict": "equivalent",
+   "why": "a delta of exactly 1.0 is set to 1.0"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "width=(size_t) ((ssize_t) width+(geometry.x < 0 ? -1 : 1)*geometry.x);",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/transform.c",
+   "function": "CropImageToTiles",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "width=(size_t) ((ssize_t) width-(geometry.x < 0 ? -1 : 1)*geometry.x);",
+   "verdict": "equivalent",
+   "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/transform.c",
+   "function": "TransformImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(transform_image->rows == geometry.height))",
+   "verdict": "equivalent",
+   "why": "resizing to the size the image already has returns an identical clone"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/transform.c",
+   "function": "TransformImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((transform_image->columns == geometry.width) &&",
+   "verdict": "equivalent",
+   "why": "resizing to the size the image already has returns an identical clone"
+  },
+  {
    "at": 23,
    "file": "MagickCore/transform.c",
    "function": "TrimImage",
@@ -13681,56 +13901,6 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
-  },
-  {
-   "at": 9,
-   "file": "MagickCore/distort.c",
-   "function": "RotateImage",
-   "mutator": "cxx_minus_to_noop",
-   "nth": 0,
-   "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
-   "verdict": "equivalent",
-   "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/distort.c",
-   "function": "RotateImage",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
-   "verdict": "equivalent",
-   "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/distort.c",
-   "function": "MagickRound",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((x-floor(x)) < (ceil(x)-x))",
-   "verdict": "unresolved",
-   "why": "differs only on an exact .5 fraction (rounds down instead of up); Arc with rotations 270 and 90, whose start angle normalises to half a turn and none, did not kill it, likely since the angle is wrapped again per pixel"
-  },
-  {
-   "at": 15,
-   "file": "MagickCore/blob.c",
-   "function": "ReadBlobString",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((string[i] == '\\r') || (string[i] == '\\n'))",
-   "verdict": "equivalent",
-   "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
-  },
-  {
-   "at": 38,
-   "file": "MagickCore/blob.c",
-   "function": "ReadBlobString",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((string[i] == '\\r') || (string[i] == '\\n'))",
-   "verdict": "equivalent",
-   "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
   }
  ]
 }

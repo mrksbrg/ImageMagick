@@ -3195,6 +3195,12 @@ GAP_STEP_CASES += [("-extent %s on a JPEG with an 8BIM clip path" % geo,
 GAP_COMMANDS += ["{C}/rose.miff %s -crop %s" % (page, geo) for page, geo in (
     ("-repage +10+5", "10x10+0+0"), ("-repage +10+5", "80x5+0+0"), ("-repage +10+5", "30x20-5-3"),
     ("-repage 0x46", "30x20+5+0"), ("-repage 70x0", "30x20+0+5"))]
+# transform.c: CropImageToTiles: an overlap tile crop at y offset -1 (the one value its
+# "< -1" test separates), a single crop in the aspect form (!), tiles a full column or row
+# wide, and fixed-size tiles of an image whose page has no width or height
+GAP_COMMANDS += ["{C}/rose.miff %s-crop %s" % (pre, geo) for pre, geo in (
+    ("", "3x2+0-1@!"), ("", "30x20+5+5!"), ("", "70x20"), ("", "30x46"),
+    ("+repage ", "30x20"), ("-repage 0x46 ", "30x20"))]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
