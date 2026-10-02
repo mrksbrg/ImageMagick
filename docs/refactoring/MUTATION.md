@@ -2009,6 +2009,14 @@ outside registry.c uses (`unobservable`).
 
 No other survivor is open in either file.
 
+## monitor.c: trusted (Windows, 2026-10-02)
+
+`SetImageProgress` records its last message (percentage, tag and file) as the artifact
+`monitor:progress`, which `%[monitor:progress]` prints and no case printed. Three cases (family
+`monitorgap`: `-monitor` with `-negate`, `-resize` and `-blur`) killed 5 of its 6 survivors;
+the sixth is the semaphore's lazy initialisation, excused by `classify.py`. **Adjusted 38% to
+100%, trusted**, with no open survivor.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
