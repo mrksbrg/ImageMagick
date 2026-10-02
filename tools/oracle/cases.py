@@ -2091,6 +2091,12 @@ GAP_CASES += [("palette modulate:colorspace=%s" % cs, ["-define", "modulate:colo
               for cs in ("HCL", "HCLp", "HSB", "HSI", "HSV", "HWB", "LCHab", "LCHuv")]
 GAP_COMMANDS += ["{C}/rose.miff -colorspace %s -color-threshold 'sRGB(10,20,30)-sRGB(200,210,220)'"
                  % cs for cs in ("HCL", "HSB", "HSL", "HSV", "HWB", "Lab")]
+# ranges that select pixels in each model: every converted component of the start colour
+# below the stop colour's, so a start colour left unconverted (far above any pixel) shows
+GAP_COMMANDS += ["{C}/rose.miff -colorspace %s -color-threshold '%s'" % cs_range for cs_range in (
+    ("HCL", "sRGB(60,20,20)-sRGB(255,0,200)"), ("HSB", "sRGB(60,20,20)-sRGB(255,0,200)"),
+    ("HSL", "sRGB(60,20,20)-sRGB(255,0,200)"), ("HSV", "sRGB(60,20,20)-sRGB(255,0,200)"),
+    ("Lab", "sRGB(10,40,10)-sRGB(255,140,40)"))]  # no HWB range tried selected any pixel
 # compress.c (statement deletion): a fax read back and resized, so the decoded pixels'
 # colours are read, not only their colormap indexes
 GAP_STEP_CASES += [("fax read back and resized",

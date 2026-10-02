@@ -9050,6 +9050,26 @@
    "why": "no case sets color:illuminant for -color-threshold, and it matters only in a Lab-type colorspace"
   },
   {
+   "at": 0,
+   "file": "MagickCore/threshold.c",
+   "function": "ColorThresholdImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ConvertRGBToHWB(start_color->red,start_color->green,start_color->blue,",
+   "verdict": "unresolved",
+   "why": "no -color-threshold range tried on an HWB image selected any pixel, so a start or stop colour left unconverted shows nothing; how the converted colours and the stored HWB pixels relate is not understood"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/threshold.c",
+   "function": "ColorThresholdImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ConvertRGBToHWB(stop_color->red,stop_color->green,stop_color->blue,",
+   "verdict": "unresolved",
+   "why": "no -color-threshold range tried on an HWB image selected any pixel, so a start or stop colour left unconverted shows nothing; how the converted colours and the stored HWB pixels relate is not understood"
+  },
+  {
    "at": 8,
    "file": "MagickCore/threshold.c",
    "function": "GetThresholdMap",
