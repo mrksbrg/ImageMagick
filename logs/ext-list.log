@@ -1,0 +1,73 @@
+mutate: 170 mutants in MagickCore/list\.c$, 27 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/170 (0s)
+  mutants: 50/170 (1s)
+  mutants: 75/170 (2s)
+  mutants: 100/170 (3s)
+  mutants: 125/170 (6s)
+  mutants: 150/170 (40s)
+  mutants: 170/170 (136s)
+
+mutate: 170 mutants, 136s
+  killed 127, survived 26 (13 capped), no coverage 17, errors 0
+  mutation score on reached code: 83.0%   overall: 74.7%
+
+  function                           total killed survived no-cov
+  CloneImages                           33     28        5      0
+  DeleteImages                          30     28        2      0
+  GetImageFromList                       9      8        1      0
+  SpliceImageIntoList                    9      0        0      9
+  SyncImageList                          8      0        0      8
+  CloneImageList                         6      5        1      0
+  ImageListToArray                       6      5        1      0
+  RemoveImageFromList                    6      5        1      0
+  SyncNextImageInList                    6      4        2      0
+  DuplicateImages                        5      4        1      0
+  RemoveFirstImageFromList               5      4        1      0
+  RemoveLastImageFromList                5      4        1      0
+  DestroyImageList                       4      2        2      0
+  GetImageListLength                     4      3        1      0
+  InsertImageInList                      4      3        1      0
+  ReplaceImageInList                     4      3        1      0
+  ReplaceImageInListReturnLast           4      3        1      0
+  ReverseImageList                       4      3        1      0
+  AppendImageToList                      3      2        1      0
+  GetImageIndexInList                    3      3        0      0
+  GetFirstImageInList                    2      2        0      0
+  GetLastImageInList                     2      2        0      0
+  GetNextImageInList                     2      1        1      0
+  PrependImageToList                     2      2        0      0
+  SplitImageList                         2      2        0      0
+  DeleteImageFromList                    1      0        1      0
+  GetPreviousImageInList                 1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc list.c:90:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+     c list.c:152:19 cxx_ne_to_eq               if (image != (Image *) NULL)
+    x  list.c:237:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:255:17 cxx_gt_to_ge               if (first > (ssize_t) length)
+    x  list.c:267:20 cxx_gt_to_ge               if (last > (ssize_t) length)
+    x  list.c:279:27 cxx_gt_to_ge               step=(ssize_t) (first > last ? -step : step);
+    x  list.c:280:18 cxx_gt_to_ge               for ( ; step > 0 ? (last-first) >= 0 : (last-first) <= 0; first+=step)
+    xc list.c:332:13 cxx_ne_to_eq               if (image != (Image *) NULL)
+    x  list.c:399:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:446:26 cxx_lt_to_le               if ((i >= 0) && (i < (ssize_t) length))
+    xc list.c:491:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:493:17 cxx_ne_to_eq               while (images != (Image *) NULL)
+    x  list.c:552:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:640:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:728:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:800:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:880:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:934:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:1036:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:1095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:1146:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:1195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:1256:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:1317:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:1496:7 cxx_remove_void_call       DestroyBlob(images->next);
+    xc list.c:1499:33 cxx_eq_to_ne               if (images->next->compression == UndefinedCompression)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-list.json
