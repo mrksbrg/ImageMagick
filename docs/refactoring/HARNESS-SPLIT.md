@@ -210,19 +210,32 @@ reaches, X11 without a display, OpenCL without a working runtime, an external pr
 Writing the reason down does not make a file trusted. It tells the later refactoring phase
 that the file can only be guard-verified.
 
-**Open, and next in priority: the operator set.** The equivalence argument is that the
+**Decided (project owner, 2026-10-02): the operators are Mull's defaults plus statement
+deletion, on all three machines** (Mac, Windows, ERDC). The equivalence argument is that the
 oracle would catch a refactoring mistake, so the operators should model the mistakes
-refactoring makes. Mull runs its default operators (equality, relational,
-arithmetic, increment, unary minus). They do not model the two slips refactoring makes
-most: a statement lost in an extraction (statement deletion, `cxx_remove_void_call`) and a
-condition rebuilt wrongly (logical connectors, `&&` and `||`). A trial on `colorspace.c` and
-`quantum-import.c` measures what adding them costs and finds. Until it is decided, full
-runs use the defaults; a file trusted on them may need a rerun with the extra operators.
-To inform the decision, ERDC measures statement deletion on all 48 Mac files
-(`tools/oracle/erdc/night.sh`, 2026-10-01): one build with `MULL_MUTATORS="cxx_default
-cxx_remove_void_call"` (`build.sh`), then only the new mutants, capped at 1,500 cases, in
-reports named `mutation-sdl-<file>.json`. They are kept apart from the default-operator
-figures and do not count towards a file's trust until the owner decides.
+refactoring makes, and the one an extraction makes most is a lost statement. The trial on
+the Mac's 48 files (`MUTATION.md`, *Statement deletion on the Mac's files*) added 6.6% more
+mutants and found about 260 survivors of that kind: lost initialisers, pixel writes and
+geometry calls the defaults cannot model. Logical connectors (`&&`, `||`) cannot be had from
+Mull for this code (the Windows pilot), so they are left out.
+
+- `build.sh mull` builds `cxx_default cxx_remove_void_call` unless `MULL_MUTATORS` says
+  otherwise. **Give every new Mull build a new name**: rebuilding in an existing
+  directory recompiles only changed sources, so an old build would keep its old mutants.
+- **A file's trust now counts its statement-deletion mutants.** A file already fully run
+  on the defaults needs only the new mutants: list the build's `cxx_remove_void_call`
+  mutants of the file (`mutate.list_mutants`), run them with `--ids` capped at 1,500
+  (`night.sh` step 2 shows how), and pass that report to `gate.py` after the others.
+  New full runs include them anyway.
+- **Files trusted on the defaults are trusted again only once their new survivors are
+  read.** On 2026-10-02 that took `list.c`, `enhance.c`, `threshold.c`, `segment.c`,
+  `compress.c` and `random.c` back below the bar; `effect.c`, `fourier.c`, `magic.c`,
+  `decorate.c`, `shear.c` and `vision.c` stay trusted.
+- **ERDC is the main workhorse** (owner, 2026-10-02): it runs the heavy mutation runs for
+  the Mac's files, and its figures replace the Mac's (`string.c` and `property.c`
+  included). It can run the statement-deletion mutants of the Windows files too, except
+  those only Windows builds; their reports come back on `erdc-results` like the Mac's, and
+  Windows, as the owner of those files, reads the survivors and writes the verdicts.
 
 ## Working in the same repository
 
@@ -257,3 +270,19 @@ Both machines commit to `refactoring-setup`. To keep merges clean:
 > harness. Follow the procedure and the rules for shared files in that document; in
 > particular, pull right before every commit, add cases only to the `GAP_*` lists, and
 > keep `verdicts.json` sorted.
+
+## Message for the Windows agent (2026-10-02)
+
+> The project owner has decided the mutation operators: Mull's defaults plus statement
+> deletion (`cxx_remove_void_call`), on all three machines. Pull `refactoring-setup`
+> and read *Decided (project owner, 2026-10-02)* in `docs/refactoring/HARNESS-SPLIT.md`.
+> `build.sh mull` now builds both by default; give every new Mull build a new name. Your
+> files' trust now counts their statement-deletion mutants. ERDC will run those mutants
+> for the Windows files it can build and push the reports to the `erdc-results` branch
+> (`tools/oracle/erdc/fetch-results.sh` copies them into `build-oracle/work` as
+> `mutation-erdc-sdl-<file>.json`); for `display.c`, `xwindow.c`, `widget.c`,
+> `animate.c`, `accelerate.c`, `opencl.c`, `nt-base.c`, `nt-feature.c` and `vms.c`, run
+> them yourself. You still read the survivors and write the verdicts for your files.
+> Also new: case files may sit in subdirectories, so a case can bring its own
+> `.config/ImageMagick/policy.xml` or `type.xml` (`MUTATION.md`, *Configuration of the
+> case's own*).
