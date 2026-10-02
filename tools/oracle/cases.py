@@ -2171,6 +2171,31 @@ def _fx_gap5_cases():
                   ["-define", "fx:debug=true", "-fx", e])
 
 
+# fx.c: lines no case executed: jinc (and jinc(0)), SI and binary number
+# prefixes (1ki is 1024; K is not a prefix), the lightness and intensity
+# qualifiers on u, p, u[1] and v, printsize.x/y, a while loop, gcd with the
+# smaller argument first, -monitor over FxImage, and a constant expression
+# (DumpRPN's CornerOnly) under fx:debug. Two images, so u[1] and v exist.
+_FX_GAP6 = [
+    ("jinc", "jinc(u*2)/2+jinc(0)/4"),
+    ("number prefixes", "1ki/4000+1Mi/8388608+2m*100+1c*10+1h/800+1.5Gi/3e10"),
+    ("lightness and intensity", "u.lightness*0.3+u.intensity*0.3+p[1,1].lightness*0.2+p[1,1].intensity*0.2"),
+    ("lightness and intensity of the second image", "u[1].intensity*0.5+u[1].lightness*0.25+v.p[1,1].lightness*0.25"),
+    ("printsize", "u.printsize.x/10+u.printsize.y/10"),
+    ("while", "zz=0; while(zz<3, zz=zz+1); zz/4"),
+    ("gcd both ways", "gcd(8,12)/8+gcd(12,8)/8"),
+]
+
+
+def _fx_gap6_cases():
+    two = [img("rose"), "-resize", "8x8", img("granite"), "-resize", "8x8", "-density", "72"]
+    for label, e in _FX_GAP6:
+        yield _op("fxgap6", "fx %s" % label, two, ["-fx", e])
+    yield _case("fxgap6", "-monitor -fx", [[img("rose"), "-monitor", "-fx", "u*0.5", "null:"]], [])
+    yield _op("fxgap6", "fx:debug, a constant expression", ["-size", "4x4", "xc:gray"],
+              ["-define", "fx:debug=true", "-fx", "0.25"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3956,7 +3981,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
