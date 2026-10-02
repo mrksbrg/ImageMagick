@@ -3644,6 +3644,8 @@ GAP_COMMANDS += [
 GAP_STEP_CASES += [
     ("a file read back through a glob under ~/", [["{C}/rose.miff", "f.miff"], ["~/f*.miff", "-negate", "out.miff"]], {}),
     ("a file under ~root", [["~root/no-such-file.miff", "out.miff"]], {}),
+    ("a glob under ~root (the user's home is looked up)", [["~root/no-such-*.miff", "out.miff"]], {}),
+    ("a glob under ~ of no such user", [["~no-such-user-x/no-such-*.miff", "out.miff"]], {}),
     ("an @list with options and their arguments", [["@opts.txt", "out.miff"]],
      {"opts.txt": "-resize 50% {C}/rose.miff -negate\n"}),
     ("an @list of directories only", [["@dirs.txt", "{C}/rose.miff", "out.miff"]], {"dirs.txt": ". ..\n"}),
