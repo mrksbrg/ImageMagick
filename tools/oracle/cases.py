@@ -2233,7 +2233,9 @@ def _fx_gap9_cases():
                        files={"e.fx": "u*0.5\n"})
     yield _case("fxgap9", "-fx @ alone", [["-size", "2x2", "xc:gray", "-fx", "@", "null:"]], [])
     # A "?" with no ":" (ResolveTernaryAddresses' error; hand-run: 2 killed).
-    for e in ("u>0.5 ? 1", "zz=u>0.5 ? 1; zz"):
+    # A standalone attribute with a channel qualifier, depth being the first
+    # attribute (GetChannelQualifier's range tests; hand-run: 2 killed).
+    for e in ("u>0.5 ? 1", "zz=u>0.5 ? 1; zz", "depth.r/32", "depth.hue"):
         yield _case("fxgap9", "-fx %s" % e, [["-size", "2x2", "xc:gray", "-fx", e, "null:"]], [])
 
 

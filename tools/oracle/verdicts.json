@@ -4783,6 +4783,26 @@
    "why": "differs only when numValStack is exactly MinValStackSize, and then sets it to MinValStackSize: no change"
   },
   {
+   "at": 44,
+   "file": "MagickCore/fx.c",
+   "function": "GetChannelQualifier",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "op == fS || (op >= (int) FirstImgAttr && op <= aNull)",
+   "verdict": "equivalent",
+   "why": "differs only for op == aNull, and no caller passes it: the attribute call site (GetOperand) runs only for ia != aNull, the others pass functions"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/fx.c",
+   "function": "GetChannelQualifier",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (op >= (int) FirstImgAttr && op <= (int) ((OperatorE)aNull) &&",
+   "verdict": "equivalent",
+   "why": "differs only for op == aNull, and no caller passes it: the attribute call site (GetOperand) runs only for ia != aNull, the others pass functions"
+  },
+  {
    "at": 4,
    "file": "MagickCore/fx.c",
    "function": "IsStealth",
