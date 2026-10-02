@@ -2691,6 +2691,11 @@ GAP_COMMANDS += [cmd + " " + _DEPTH_FORMAT for cmd in (
     "{C}/rose.miff -type Palette", "{C}/rose.miff -colors 8", "{C}/rose.miff -monochrome",
     "{C}/rose.miff -separate", "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff -combine",
     "{C}/rose.miff -type GrayscaleAlpha", "{C}/rose.miff -type TrueColorAlpha")]
+# attribute.c: SetImageDepth's and GetImageDepth's colormap paths, which quantize a palette
+# image's colormap channel by channel under the channel mask
+GAP_COMMANDS += ["{C}/palette.miff " + ops for ops in (
+    "-depth 4", "-channel R -depth 2 +channel", "-channel RG -depth 3 +channel")]
+GAP_COMMANDS += ["identify -verbose -channel R {C}/palette.miff"]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
