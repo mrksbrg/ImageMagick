@@ -14781,6 +14781,46 @@
    "src": "time_info->elapsed.start+MagickEpsilon;",
    "verdict": "unobservable",
    "why": "only changes the elapsed and user times, which the oracle masks in every output"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/timer.c",
+   "function": "FormatMagickTime",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (limit != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "reads MAGICK_DATE_PRECISION only when it is unset: StringToInteger(NULL) is 0 and DestroyString(NULL) is harmless, so the precision is the same 0; it differs only with the variable set, which the oracle never does"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/timer.c",
+   "function": "FormatMagickTime",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((date_precision > 0) && (date_precision < (ssize_t) strlen(timestamp)))",
+   "verdict": "equivalent",
+   "why": "at a precision equal to the timestamp's length (25) the mutant writes '\u0000' where the string already ends: the same text (precisions 25 and 26 give the same CreationDate)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/registry.c",
+   "function": "SetImageRegistry",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((image_info == (const ImageInfo *) NULL) ||",
+   "verdict": "unobservable",
+   "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/registry.c",
+   "function": "SetImageRegistry",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image_info->signature != MagickCoreSignature))",
+   "verdict": "unobservable",
+   "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
   }
  ]
 }

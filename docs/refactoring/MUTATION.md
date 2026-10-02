@@ -1987,16 +1987,27 @@ are `unresolved` (`verdicts.json`). The other functions below 80% are the stream
 virtual-pixel accessors, which only a coder reading virtual pixels while streaming would
 call; none of nine formats probed does. Not trusted.
 
-## timer.c: not yet trusted (Windows, 2026-10-02)
+## timer.c and registry.c: trusted (Windows, 2026-10-02)
 
-An earlier version of this section called `timer.c` trusted, on a wrong reading:
-`FormatMagickTime`'s four survivors were marked `unobservable` because the date precision
-seemed to come only from the environment variable `MAGICK_DATE_PRECISION`. It can also be
-set with `-define registry:date:precision=N` (registry.c calls `SetMagickDatePrecision`), and
-then the PostScript CreationDate is cut to N characters. The four verdicts were removed and
-cases added (family `timergap`). `StopTimer`'s three and `GetUserTime`'s two survivors stay
-`unobservable` (they change only times the oracle masks); `ContinueTimer` is reached only by
-`-bench -duration` and the logger.
+An earlier version of this section called `timer.c` trusted on a wrong reading: that the date
+precision came only from the environment variable `MAGICK_DATE_PRECISION`, so
+`FormatMagickTime`'s four survivors could not show. It can also be set with `-define
+registry:date:precision=N` (registry.c calls `SetMagickDatePrecision`), which cuts the
+PostScript CreationDate to N characters. Those verdicts were removed, and 7 cases added
+(family `timergap`): PostScript under precisions 0, 4, 10, 24, 25 and 26 (the timestamp is 25
+characters), and a registry string defined and removed again. 6 kills over the two files.
+In `verdicts.json`: `FormatMagickTime`'s reading of the variable when it is unset gives the
+same precision 0 (`unobservable`), and its cut at a precision equal to the length is
+`equivalent`; `StopTimer` and `GetUserTime` change only masked times (`unobservable`);
+`SetImageRegistry`'s two mutants are in the `ImageInfoRegistryType` branch, which nothing
+outside registry.c uses (`unobservable`).
+
+- **`timer.c`: adjusted 63% to 86%, trusted.** Out of reach: `ContinueTimer` (4), called only
+  by `-bench -duration`, whose output carries an unmasked rate, and by the logger.
+- **`registry.c`: adjusted 69% to 92%, trusted.** Out of reach: `RemoveImageRegistry` (2),
+  called by nothing outside registry.c.
+
+No other survivor is open in either file.
 
 ## How to use this in the campaign
 
