@@ -1,0 +1,39 @@
+mutate: 19 mutants in MagickCore/semaphore\.c$, 8 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 19/19 (327s)
+
+mutate: 19 mutants, 327s
+  killed 2, survived 17 (17 capped), no coverage 0, errors 0
+  mutation score on reached code: 10.5%   overall: 10.5%
+
+  function                           total killed survived no-cov
+  AcquireSemaphoreInfo                   6      0        6      0
+  RelinquishSemaphoreInfo                4      1        3      0
+  ActivateSemaphoreInfo                  2      1        1      0
+  LockSemaphoreInfo                      2      0        2      0
+  UnlockSemaphoreInfo                    2      0        2      0
+  RelinquishSemaphoreMemory              1      0        1      0
+  SemaphoreComponentGenesis              1      0        1      0
+  SemaphoreComponentTerminus             1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc semaphore.c:103:7 cxx_remove_void_call       LockMagickMutex();
+    xc semaphore.c:183:3 cxx_remove_void_call       free(memory);
+     c semaphore.c:222:9 cxx_remove_void_call       perror("unable to initialize mutex attributes");
+     c semaphore.c:223:9 cxx_remove_void_call       _exit(1);
+     c semaphore.c:240:9 cxx_remove_void_call       perror("unable to initialize mutex");
+     c semaphore.c:241:9 cxx_remove_void_call       _exit(1);
+     c semaphore.c:247:9 cxx_remove_void_call       perror("unable to destroy mutex attributes");
+     c semaphore.c:248:9 cxx_remove_void_call       _exit(1);
+     c semaphore.c:316:9 cxx_remove_void_call       perror("unable to lock mutex");
+     c semaphore.c:317:9 cxx_remove_void_call       _exit(1);
+    xc semaphore.c:356:3 cxx_remove_void_call       LockMagickMutex();
+     c semaphore.c:368:9 cxx_remove_void_call       perror("unable to destroy mutex");
+     c semaphore.c:369:9 cxx_remove_void_call       _exit(1);
+    xc semaphore.c:400:3 cxx_remove_void_call       InitializeMagickMutex();
+    xc semaphore.c:424:3 cxx_remove_void_call       DestroyMagickMutex();
+     c semaphore.c:475:9 cxx_remove_void_call       perror("unable to unlock mutex");
+     c semaphore.c:476:9 cxx_remove_void_call       _exit(1);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-semaphore.json

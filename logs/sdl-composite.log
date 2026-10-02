@@ -1,0 +1,32 @@
+mutate: 34 mutants in MagickCore/composite\.c$, 5 functions
+mutate: baseline over 1473 cases in 0s
+  mutants: 25/34 (312s)
+  mutants: 34/34 (317s)
+
+mutate: 34 mutants, 317s
+  killed 22, survived 12 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 64.7%   overall: 64.7%
+
+  function                           total killed survived no-cov
+  CompositeImage                        29     19       10      0
+  CompositeOverImage                     2      0        2      0
+  SaliencyBlendImage                     1      1        0      0
+  SeamlessBlendImage                     1      1        0      0
+  TextureImage                           1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  composite.c:998:5 cxx_remove_void_call       GetPixelInfo(image,&canvas_pixel);
+    x  composite.c:999:5 cxx_remove_void_call       GetPixelInfo(source_image,&source_pixel);
+    x  composite.c:1525:3 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+       composite.c:1799:7 cxx_remove_void_call       SetResampleFilter(resample_filter,GaussianFilter);
+       composite.c:1803:7 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+       composite.c:1847:11 cxx_remove_void_call       ScaleResampleFilter(resample_filter,
+       composite.c:1854:11 cxx_remove_void_call       SetPixelViaPixelInfo(canvas_image,&pixel,q);
+    x  composite.c:1897:7 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+    x  composite.c:1973:7 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  composite.c:2142:7 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+    x  composite.c:2260:5 cxx_remove_void_call       GetPixelInfo(image,&canvas_pixel);
+    x  composite.c:2261:5 cxx_remove_void_call       GetPixelInfo(source_image,&source_pixel);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-composite.json

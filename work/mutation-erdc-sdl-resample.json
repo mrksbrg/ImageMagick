@@ -1,0 +1,62 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c:231:3:231:51",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c",
+  "line": 231,
+  "col": 3,
+  "function": "AcquireResampleFilter",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/b885443773",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c:472:11:473:45",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c",
+  "line": 472,
+  "col": 11,
+  "function": "ResamplePixelColor",
+  "status": "survived",
+  "cases": 368,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c:493:11:494:47",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c",
+  "line": 493,
+  "col": 11,
+  "function": "ResamplePixelColor",
+  "status": "survived",
+  "cases": 368,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c:1086:3:1087:56",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c",
+  "line": 1086,
+  "col": 3,
+  "function": "ScaleResampleFilter",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/b885443773",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c:1316:3:1316:59",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/resample.c",
+  "line": 1316,
+  "col": 3,
+  "function": "SetResampleFilter",
+  "status": "killed",
+  "cases": 6,
+  "killer": "distort/497657768e",
+  "why": "out.miff differs"
+ }
+]

@@ -1,0 +1,31 @@
+mutate: 25 mutants in MagickCore/histogram\.c$, 9 functions
+mutate: baseline over 247 cases in 0s
+  mutants: 25/25 (34s)
+
+mutate: 25 mutants, 34s
+  killed 17, survived 8 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 68.0%   overall: 68.0%
+
+  function                           total killed survived no-cov
+  GetNumberColors                        8      6        2      0
+  UniqueColorsToImage                    6      6        0      0
+  CheckImageColors                       4      1        3      0
+  ClassifyImageColors                    2      1        1      0
+  DefineImageHistogram                   1      1        0      0
+  DestroyHCubeInfo                       1      0        1      0
+  DestroyColorCube                       1      0        1      0
+  GetImageHistogram                      1      1        0      0
+  UniqueImageColors                      1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  histogram.c:255:3 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  histogram.c:429:3 cxx_remove_void_call       DestroyColorCube(image,cube_info->root);
+    x  histogram.c:480:7 cxx_remove_void_call       DestroyColorCube(image,node_info->child[i]);
+    x  histogram.c:710:3 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  histogram.c:711:3 cxx_remove_void_call       GetPixelInfo(image,&target);
+    x  histogram.c:774:11 cxx_remove_void_call       GetPixelInfo(image,&node_info->list[i]);
+    x  histogram.c:1078:3 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+       histogram.c:1093:9 cxx_remove_void_call       ConcatenateColorComponent(&pixel,BlackPixelChannel,NoCompliance,
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-histogram.json

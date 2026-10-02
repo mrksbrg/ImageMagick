@@ -1,0 +1,86 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:103:5:103:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 103,
+  "col": 5,
+  "function": "MonitorComponentTerminus",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:104:3:104:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 104,
+  "col": 3,
+  "function": "MonitorComponentTerminus",
+  "status": "killed",
+  "cases": 1,
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:105:3:105:41",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 105,
+  "col": 3,
+  "function": "MonitorComponentTerminus",
+  "status": "killed",
+  "cases": 1,
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:106:3:106:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 106,
+  "col": 3,
+  "function": "MonitorComponentTerminus",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:155:5:155:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 155,
+  "col": 5,
+  "function": "SetImageProgress",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:156:3:156:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 156,
+  "col": 3,
+  "function": "SetImageProgress",
+  "status": "killed",
+  "cases": 279,
+  "killer": "resize/4bdd34811a",
+  "why": "exit status [0] -> [1]; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c:162:3:162:41",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/monitor.c",
+  "line": 162,
+  "col": 3,
+  "function": "SetImageProgress",
+  "status": "killed",
+  "cases": 279,
+  "killer": "resize/4bdd34811a",
+  "why": "exit status [0] -> ['timeout']; stderr differs; out.miff missing in candidate"
+ }
+]

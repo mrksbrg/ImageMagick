@@ -1,0 +1,19 @@
+mutate: 7 mutants in MagickCore/monitor\.c$, 2 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 7/7 (286s)
+
+mutate: 7 mutants, 286s
+  killed 4, survived 3 (3 capped), no coverage 0, errors 0
+  mutation score on reached code: 57.1%   overall: 57.1%
+
+  function                           total killed survived no-cov
+  MonitorComponentTerminus               4      2        2      0
+  SetImageProgress                       3      2        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c monitor.c:103:5 cxx_remove_void_call       ActivateSemaphoreInfo(&monitor_semaphore);
+    xc monitor.c:106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&monitor_semaphore);
+     c monitor.c:155:5 cxx_remove_void_call       ActivateSemaphoreInfo(&monitor_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-monitor.json

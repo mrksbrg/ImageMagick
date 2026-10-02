@@ -1,0 +1,20 @@
+mutate: 5 mutants in MagickCore/resample\.c$, 4 functions
+mutate: baseline over 368 cases in 0s
+  mutants: 5/5 (117s)
+
+mutate: 5 mutants, 117s
+  killed 3, survived 2 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 60.0%   overall: 60.0%
+
+  function                           total killed survived no-cov
+  ResamplePixelColor                     2      0        2      0
+  AcquireResampleFilter                  1      1        0      0
+  ScaleResampleFilter                    1      1        0      0
+  SetResampleFilter                      1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       resample.c:472:11 cxx_remove_void_call       GetPixelInfo(resample_filter->image,(PixelInfo *)
+       resample.c:493:11 cxx_remove_void_call       GetPixelInfoPixel(resample_filter->image,pixels,
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-resample.json
