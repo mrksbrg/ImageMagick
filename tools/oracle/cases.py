@@ -2151,10 +2151,10 @@ GAP_COMMANDS += [
 # statistic.c: a single-colour image, whose one histogram bin makes MagickSafeReciprocalLD
 # take 0 (log2 of one bin) when the entropy is computed
 GAP_COMMANDS += ["identify -verbose -precision 17 -size 4x4 xc:red"]
-# string.c: text with a control character, which StringToStrings lays out as a hex dump;
+# string.c: a label with a control character, which StringToStrings lays out as a hex dump;
 # IsStringFalse's false, off, no and 0 through exif:sync-image, on a JPEG whose EXIF block
 # is rewritten with an orientation (read back as Undefined when the define is false)
-GAP_COMMANDS += ["-size 220x60 xc:white -font {C}/Generic.ttf -pointsize 8 -annotate +2+10 'A\x01B'"]
+GAP_COMMANDS += ["-font {C}/Generic.ttf -pointsize 8 label:'A\x01B'"]  # label: measures through StringToStrings
 # compare.c: a PHASH subimage search (GetPHASHSimilarity serves only the search), against an
 # exact patch and a blurred one, whose best match is not perfect
 GAP_COMMANDS += [
