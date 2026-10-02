@@ -3408,6 +3408,10 @@ GAP_COMMANDS += [_OPT_SEQ + "-layers " + m for m in ("optimize", "optimize-plus"
 GAP_COMMANDS += ["-size 12x10 xc:none ( -size 12x10 xc:none -fill blue -draw 'rectangle 1,1 10,8' ) "
                  "( -size 12x10 xc:none -fill blue -draw 'rectangle 4,4 6,6' ) ( -size 12x10 xc:none ) -layers " + m
                  for m in ("optimize-plus", "optimize-frame")]
+# layer.c: OptimizeLayerFrames refuses frames of different sizes and pages not coalesced
+GAP_COMMANDS += ["-size 10x8 xc:red -size 6x4 xc:blue -layers optimize-frame",
+                 "-size 10x8 xc:red ( -size 10x8 xc:blue -repage +1+1 ) -layers optimize-frame",
+                 "-size 10x8 xc:red ( -size 10x8 xc:blue -repage 12x8 ) -layers optimize-plus"]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight

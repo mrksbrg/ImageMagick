@@ -4933,6 +4933,46 @@
    "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
   },
   {
+   "at": 37,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeLayerFrames",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "GetImageListLength(curr),(add_frames != MagickFalse ? 2UL : 1UL)*",
+   "verdict": "unobservable",
+   "why": "the allocation for optimize-plus shrinks to one entry per frame; an overflow when frames are added is silent without ASan, and the other methods only allocate more"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeLayerFrames",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "GetImageListLength(image),(add_frames != MagickFalse ? 2UL : 1UL)*",
+   "verdict": "unobservable",
+   "why": "the allocation for optimize-plus shrinks to one entry per frame; an overflow when frames are added is silent without ASan, and the other methods only allocate more"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeLayerFrames",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ( dup_image != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "inside the branch taken only when cloning a frame fails; the oracle runs within memory"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeLayerFrames",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (bgnd_image != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "bgnd_image is always non-NULL here (cloned above, or the function has returned), so the mutant only leaks it instead of destroying it"
+  },
+  {
    "at": 10,
    "file": "MagickCore/list.c",
    "function": "CloneImageList",
