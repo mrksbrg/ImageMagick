@@ -1830,7 +1830,23 @@ Windows file with it gave the same figures as the merge used above. Each family
   nearly singular system is not ruled out. Adjusted 70% to 71%.
 - **`quantize.c`, family `quantizegap3` (16 cases):** `-dither None -posterize`, gray to two
   and eight colours, `-treedepth 3`, and a 600x600 noise image. No new kills: `PruneLevel`
-  and `IntensityCompare` stay unreached, so the routes in are not these. 85%.
+  and `IntensityCompare` stay unreached, so the routes in are not these. 85%. Its
+  600x600 noise case was removed afterwards: `+noise Random` is not reproducible at that
+  size (ORACLE.md, Known upstream issues).
+- **Routes checked first: `tools/oracle/reach.py`.** Several rounds missed because the route
+  into a function was guessed. `reach.py FUNC -- args` runs one command on the coverage
+  build under the oracle's environment and says whether the functions ran. It showed that
+  `IntensityCompare` is reached (its survivors were "unmatched", misread as unreached)
+  and that `PruneLevel` needs a deep colour tree. That path turned out not to be
+  reproducible: `hald:8 -colors 64` gives two different images (ORACLE.md), so
+  `PruneLevel` stays untested.
+- **`quantize.c`, family `quantizegap4` (6 cases):** gray quantization to eight colours
+  written as palette MIFF and printed with `-verbose`, so the colormap order shows. No
+  kills: `IntensityCompare`'s five mutants survive even so, perhaps because the gray
+  colormap arrives sorted. Open.
+- **`montage.c`, family `montagegap` (5 cases):** `-tile x2`, `x3`, `2x`, `1x1` and `+0+0`
+  (the family had `3x` and `2x2` only). 3 kills: adjusted 78% to **80%**,
+  `GetMontageGeometry` 75% to 100%.
 
 ## How to use this in the campaign
 
