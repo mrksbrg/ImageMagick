@@ -1870,6 +1870,40 @@ lines):
 - `MeanShiftImage` (9): 2261, 2266, 2268, 2279, 2310, 2330, 2332.
 - `RenderHoughLines` 1813, 1814 (unreached); `IsAuthenticPixel` 153; `TraceEdges` 221.
 
+## composite.c: trusted (Windows, 2026-10-02)
+
+Two last rounds, each route checked with line coverage first:
+
+- **`composegap` (8 cases):** `compose:clip-to-self=false` reaches `CompositeOverImage`'s
+  virtual composite, but every earlier case composed an opaque source, which that path leaves
+  unchanged. With a cropped piece of `rose_alpha` as the source it sets the alpha of every
+  uncovered pixel. `CompositeOverImage` 79% to 89%.
+- **`composegap2` (3 cases):** `SeamlessBlendImage`'s residual is 0 from the first iteration
+  on (one iteration and five give the same image; it looks as if the relaxation does
+  nothing, worth reporting upstream). So with any threshold above 0 the loop stops at once.
+  A threshold of 0 runs every iteration, and `-verbose` prints a residual per tick:
+  `SeamlessBlendImage` 77% to 96%.
+
+**`composite.c`: adjusted 76% (this morning) to 84%, all 13 functions at 80% or more,
+trusted.** `selfcheck --repeat 8` over each family: 0 nondeterministic. Open survivors, by
+line (unmatched, or on unreached lines):
+
+- `CompositeImage` (176): 1492, 1499, 1512, 1536, 1538, 1580, 1610, 1623, 1625, 1652, 1661,
+  1683, 1787, 1820, 1830, 1911, 1912, 1921, 1948, 1954, 1959, 1964, 1991, 2025, 2055, 2057,
+  2059, 2063, 2064, 2066, 2100, 2174, 2250, 2345, 2354, 2355, 2458, 2465, 2473, 2478, 2534,
+  2578, 2581, 2583, 2586, 2588, 2591, 2617, 2620, 2630, 2632, 2638, 2646, 2649, 2661, 2664,
+  2674, 2676, 2729, 2799, 2816, 2820, 2919, 2936, 2937, 2938, 2941, 2942, 2943, 2957, 2973,
+  2975, 2995, 3003, 3013, 3020, 3024, 3034, 3035, 3036, 3045, 3051, 3116, 3130, 3141, 3149,
+  3204, 3205, 3208, 3292, 3316, 3319, 3320, 3325, 3327, 3331, 3339, 3342, 3347, 3355, 3369,
+  3371, 3375, 3393, 3394, 3397, 3479, 3499, 3504, 3507, 3511, 3516, 3518, 3524, 3529, 3548,
+  3549, 3550, 3553, 3554, 3563, 3564, 3567, 3570, 3573, 3577, 3596, 3610, 3612
+- `CompositeOverImage` (8): 988, 1042, 1043, 1044, 1060, 1124, 1138, 1140
+- `SaliencyBlendImage` (4): 1227, 1252, 1254
+- `TextureImage` (3): 3720, 3775, 3807
+- `BlendRMSEResidual` (2): 864, 865
+- `BlendMeanImage` (1): 789
+- `SeamlessBlendImage` (1): 1388
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
