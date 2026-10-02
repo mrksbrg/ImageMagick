@@ -2263,10 +2263,12 @@ def _fx_gap10_cases():
 # (pfx->ImgNum is 1 for the second): u with a computed index (a constant 0
 # compiles to u0) and qualifiers, u[1].p relative and absolute, and u, u.r;
 # the HSL symbols alone (each sets NeedHsl itself); nesting exactly at the
-# 600 limit, by parentheses and by unary minus (hand-run: 29 killed).
+# 600 limit, by parentheses and by unary minus (hand-run: 33 killed).
 _FX_GAP11_TWO = ["u[1-1]", "u[1-1].r", "u[1-1].lightness", "u[1-1].intensity", "u[1-1].hue",
                  "u[1].p[1,1].r", "u[1].p{2,2}", "u[1].p[1,1].lightness", "u[1].p[1,1].intensity",
-                 "u", "u.r"]
+                 "u", "u.r",
+                 # GetFunction's qualifier errors, which name the attribute, and if()'s jump
+                 "u.depth.hue", "u.w.r", "u.mean.intensity", "if(u>0.5,0.25,0.75)"]
 
 
 def _fx_gap11_cases():
