@@ -1573,6 +1573,29 @@ def _distort_gap_cases():
                "0,0 0,0  69,0 69,0  0,45 30,6  69,45 39,6"])
 
 
+# fx.c, ExecuteRPN: operators, functions and symbols no expression used (!=,
+# <=, >=, ||, !, jinc, clamp, drc, squish, ++ on a user symbol), the
+# per-channel symbols a b c g k m o r y, channel qualifiers on p{} and p[]
+# lookups, also of the second image (u[1], v, s), the loops, and printsize; on
+# an image with alpha and on CMYK, with granite as the second image.
+FX_GAP2_EXPRESSIONS = [
+    "u!=0.5", "u<=0.5", "u>=0.5", "u||0", "0||u", "!u", "jinc(u)", "jinc(0)",
+    "clamp(u*2-0.5)", "drc(u,0.5)", "squish(u)", "xx=0.1; xx++; xx",
+    "a", "b", "c", "g", "k", "m", "o", "r", "y",
+    "p{1,1}.hue", "p{1,1}.saturation", "p{1,1}.lightness", "p{1,1}.intensity",
+    "p[1,1].hue", "p[1,1].intensity", "u[1].p{2,2}.hue", "v.p{1,1}.intensity",
+    "v.p[1,1].lightness", "s.p{1,1}.saturation",
+    "xx=0; while(xx<3, xx++); xx/3", "xx=0; do(xx++, xx<3); xx/3",
+    "for(xx=0, xx<3, xx++); xx/3", "u.printsize.y/1e14",
+]
+
+
+def _fx_gap2_cases():
+    for name, e in itertools.product(("rose_alpha", "cmyk"), FX_GAP2_EXPRESSIONS):
+        yield _op("fxgap2", "%s granite -fx %s" % (name, e), [img(name), img("granite")],
+                  ["-fx", e])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3147,7 +3170,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
