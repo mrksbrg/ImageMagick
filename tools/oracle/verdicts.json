@@ -4012,6 +4012,26 @@
    "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only"
   },
   {
+   "at": 25,
+   "file": "MagickCore/exception.c",
+   "function": "InheritException",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (relative->exceptions == (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/exception.c",
+   "function": "InheritException",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (p != (const ExceptionInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
+  },
+  {
    "at": 37,
    "file": "MagickCore/feature.c",
    "function": "GetImageFeatures",
@@ -4451,6 +4471,26 @@
    "src": "if (phase_image == (Image *) NULL)",
    "verdict": "gap",
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseGravityGeometry",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (geometry_ratio >= image_ratio)",
+   "verdict": "equivalent",
+   "why": "at a ratio equal to the image's, both arms give the image's own size"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseGravityGeometry",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (geometry_ratio < image_ratio)",
+   "verdict": "equivalent",
+   "why": "at a ratio equal to the image's, both arms give the image's own size"
   },
   {
    "at": 35,
@@ -6820,6 +6860,46 @@
    "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
    "verdict": "unresolved",
    "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
+   "verdict": "unresolved",
+   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
+   "verdict": "unresolved",
+   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
+   "verdict": "unresolved",
+   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "decides whether to log a trace event; logging is off"
   },
   {
    "at": 28,
@@ -9500,6 +9580,76 @@
    "src": "signature_info->message)-extent);",
    "verdict": "unobservable",
    "why": "writes zeros past the 64-byte block: a buffer overrun, but the block's own bytes and so the hash are unchanged"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/signature.c",
+   "function": "SignatureImage",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
+   "verdict": "unobservable",
+   "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/signature.c",
+   "function": "SignatureImage",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
+   "verdict": "unobservable",
+   "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "unobservable",
+   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "unobservable",
+   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "equivalent",
+   "why": "loads one word more, into W[16], which the schedule loop that follows overwrites before it is read"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=16; i < 64; i++)",
+   "verdict": "unresolved",
+   "why": "the schedule loop then writes W[64], one past the array on the stack: undefined behaviour, no difference seen"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "unobservable",
+   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
   },
   {
    "at": 12,
@@ -14481,136 +14631,6 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/signature.c",
-   "function": "TransformSignature",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "for (i=0; i < 16; i++)",
-   "verdict": "unobservable",
-   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/signature.c",
-   "function": "TransformSignature",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "for (i=0; i < 16; i++)",
-   "verdict": "unobservable",
-   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
-  },
-  {
-   "at": 19,
-   "file": "MagickCore/signature.c",
-   "function": "TransformSignature",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "for (i=0; i < 16; i++)",
-   "verdict": "unobservable",
-   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/signature.c",
-   "function": "TransformSignature",
-   "mutator": "cxx_lt_to_le",
-   "nth": 1,
-   "src": "for (i=0; i < 16; i++)",
-   "verdict": "equivalent",
-   "why": "loads one word more, into W[16], which the schedule loop that follows overwrites before it is read"
-  },
-  {
-   "at": 13,
-   "file": "MagickCore/signature.c",
-   "function": "TransformSignature",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "for (i=16; i < 64; i++)",
-   "verdict": "unresolved",
-   "why": "the schedule loop then writes W[64], one past the array on the stack: undefined behaviour, no difference seen"
-  },
-  {
-   "at": 36,
-   "file": "MagickCore/signature.c",
-   "function": "SignatureImage",
-   "mutator": "cxx_ge_to_gt",
-   "nth": 0,
-   "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
-   "verdict": "unobservable",
-   "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
-  },
-  {
-   "at": 36,
-   "file": "MagickCore/signature.c",
-   "function": "SignatureImage",
-   "mutator": "cxx_ge_to_lt",
-   "nth": 0,
-   "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
-   "verdict": "unobservable",
-   "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
-  },
-  {
-   "at": 25,
-   "file": "MagickCore/exception.c",
-   "function": "InheritException",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (relative->exceptions == (void *) NULL)",
-   "verdict": "unobservable",
-   "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
-  },
-  {
-   "at": 9,
-   "file": "MagickCore/exception.c",
-   "function": "InheritException",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while (p != (const ExceptionInfo *) NULL)",
-   "verdict": "unobservable",
-   "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/quantum.c",
-   "function": "SetQuantumPad",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (IsEventLogging() != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "decides whether to log a trace event; logging is off"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/quantum.c",
-   "function": "SetQuantumPad",
-   "mutator": "cxx_ge_to_gt",
-   "nth": 0,
-   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
-   "verdict": "unresolved",
-   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/quantum.c",
-   "function": "SetQuantumPad",
-   "mutator": "cxx_ge_to_lt",
-   "nth": 0,
-   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
-   "verdict": "unresolved",
-   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
-  },
-  {
-   "at": 28,
-   "file": "MagickCore/quantum.c",
-   "function": "SetQuantumPad",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
-   "verdict": "unresolved",
-   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
   }
  ]
 }

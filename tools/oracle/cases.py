@@ -3442,6 +3442,32 @@ GAP_COMMANDS += ["-size 12x10 xc:none ( -size 12x10 xc:none -fill blue -draw 're
 GAP_COMMANDS += ["-size 10x8 xc:red -size 6x4 xc:blue -layers optimize-frame",
                  "-size 10x8 xc:red ( -size 10x8 xc:blue -repage +1+1 ) -layers optimize-frame",
                  "-size 10x8 xc:red ( -size 10x8 xc:blue -repage 12x8 ) -layers optimize-plus"]
+# geometry.c: ParseGravityGeometry's aspect ratios with '#' (the larger of the two fits), its
+# '<' and '>' tests on sizes and ratios either side of the image, and offset-only geometries on
+# a page with a size, where the region takes the page size
+GAP_COMMANDS += ["{C}/rose.miff %s %s -format '%%wx%%h%%O\\n' -write info:" % (op, geo)
+                 for geo in ("16:9#", "9:16#", "70:46#", "9:16<", "30x20<", "30x80<", "100x80>", "100x30>")
+                 for op in ("-crop", "-extent")]
+GAP_COMMANDS += ["{C}/rose.miff -repage 100x80 %s+5+5 -format '%%wx%%h%%O %%g\\n' -write info:" % op
+                 for op in ("-extent ", "-gravity center -crop ")]
+# geometry.c: ParseGeometry's separators, signs and spacing in up to six values, through
+# operators that use each value (-colorize and the thresholds read all five as channels; the
+# -alpha set ones make the fifth visible); chosen from 500 random strings as the smallest
+# set that kills what any of them killed
+GAP_COMMANDS += [
+    "'{C}/rose.miff' -fill blue -colorize 25x-10:10X5x+10 -depth 16",
+    "'{C}/rose.miff' -fill blue -colorize '2,+2,0.5x+2+2+-40 ' -depth 16",
+    "'{C}/rose.miff' -fill blue -colorize -25x-2,2-+10 -depth 16",
+    "'{C}/rose.miff' -fill blue -colorize ' 40-+10+-5' -depth 16",
+    "'{C}/rose.miff' -fill blue -colorize -5x-0+-2 -depth 16",
+    "'{C}/rose.miff' -fill blue -colorize '+0 10:0.5' -depth 16",
+    "'{C}/rose.miff' -alpha set -fill 'rgba(0,0,255,0.5)' -black-threshold -0-+2-+25++80+60% -depth 16",
+    "'{C}/rose.miff' -alpha set -fill 'rgba(0,0,255,0.5)' -white-threshold +2x-10-+60x+80X40% -depth 16",
+    "'{C}/rose.miff' -alpha set -bilateral-blur '10/2+40 3-+5%'",
+    "'{C}/rose.miff' -alpha set -bilateral-blur 5:10%",
+    "'{C}/rose.miff' -alpha set -shadow 1:10+3++2x10",
+    "'{C}/rose.miff' -resize '(3)x(4)'",
+]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
