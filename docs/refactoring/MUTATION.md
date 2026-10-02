@@ -1848,6 +1848,28 @@ Windows file with it gave the same figures as the merge used above. Each family
   (the family had `3x` and `2x2` only). 3 kills: adjusted 78% to **80%**,
   `GetMontageGeometry` 75% to 100%.
 
+## feature.c: trusted (Windows, 2026-10-02)
+
+Line coverage (the coverage build, `llvm-cov show` on one function) showed why
+`RenderHoughLines`' resolution scaling never ran: `HoughLineImage`, its only caller, passes a
+fresh `AcquireImageInfo()` with no density, so the resolution is always 0 and the division
+cannot run, even under `-density`. Its two mutants are `equivalent` (`verdicts.json`).
+
+**`feature.c`: adjusted 88%, every function at 80% or more, trusted.** Merged over the full
+run, the rounds `feature` and `matrix`, and the refresh. With 37 `equivalent` in the dead `Q`
+block and 2 in `RenderHoughLines`. Open survivors, by line (unmatched, or on unreached
+lines):
+
+- `GetImageFeatures` (53): 669, 769, 771, 773, 774, 776, 777, 796-806 (allocation-failure
+  cleanup), 844-848, 987, 1181, 1187, 1313, 1314, 1382, 1396, 1399, 1413-1416, 1503,
+  1506, 1515, 1518, 1552-1583 (the information measures' alpha and black channels),
+  1700, 1706.
+- `HoughLineImage` (18): 1885, 1923, 1953, 1955, 1977-1987, 2025, 2033, 2070, 2083, 2089,
+  2092.
+- `CannyEdgeImage` (13): 378, 379, 391, 393, 396, 403, 406, 505, 507, 520, 521, 563, 565.
+- `MeanShiftImage` (9): 2261, 2266, 2268, 2279, 2310, 2330, 2332.
+- `RenderHoughLines` 1813, 1814 (unreached); `IsAuthenticPixel` 153; `TraceEdges` 221.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
