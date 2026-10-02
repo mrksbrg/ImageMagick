@@ -14631,6 +14631,106 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->storage_class != cache_info->storage_class) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->colorspace != cache_info->colorspace) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->alpha_trait != cache_info->alpha_trait) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->channels != cache_info->channels) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->columns != cache_info->columns) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->rows != cache_info->rows) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->number_channels != cache_info->number_channels) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(memcmp(p,q,image->number_channels*sizeof(*p)) != 0) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->metacontent_extent != cache_info->metacontent_extent) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(cache_info->nexus_info == (NexusInfo **) NULL))",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
   }
  ]
 }

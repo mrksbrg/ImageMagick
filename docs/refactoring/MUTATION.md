@@ -1977,6 +1977,16 @@ killed it. **Adjusted 94%, all 15 functions at 80% or more, trusted.** Open surv
 `CheckImageColors` 728, 755, 778; `UniqueColorsToImage` 1208 (unreached), 1211, 1212;
 `GetNumberColors` 1115 (unreached), 1122; `ClassifyImageColors` 318.
 
+### stream.c, second round (Windows, 2026-10-02)
+
+Family `streamgap2` (5 cases): `magick stream` from PNG and TIFF (which reach
+`GetAuthenticPixelsStream`; every earlier case read MIFF), and a GIF of two frame sizes. 2
+kills; 85%. `ValidatePixelCacheMorphology`'s 10 mutants, run by hand over four two-frame
+sequences (growing, shrinking, gaining alpha, changing colorspace), never differed, so they
+are `unresolved` (`verdicts.json`). The other functions below 80% are the stream cache's
+virtual-pixel accessors, which only a coder reading virtual pixels while streaming would
+call; none of nine formats probed does. Not trusted.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
