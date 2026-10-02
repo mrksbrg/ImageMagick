@@ -2406,6 +2406,56 @@ GAP_STEP_CASES += [
     ("palm at 4 bits, the file itself", [["{C}/palette.miff", "-colors", "12", "palm:out.miff"]], {}),
     ("palm at 2 bits, the file itself", [["{C}/gray8.miff", "-colors", "4", "palm:out.miff"]], {}),
 ]
+# draw.c: an MVG file with every keyword no case used: named classes and macros
+# (push class "x", push graphic-context "x", class, use), a named mask, a symbol, scale,
+# the clip, compliance, density and encoding settings, the antialias switches, and the
+# font and text settings (stretch, style, weight, direction, spacings, kerning, align, anchor)
+_MVG_ALL_KEYWORDS = """viewbox 0 0 120 80
+push defs
+  push class "warm"
+    fill orange stroke brown stroke-width 2
+  pop class
+  push graphic-context "blob"
+    circle 10,10 10,16
+  pop graphic-context
+  push mask "m1"
+    fill white rectangle 0,0 60,80
+  pop mask
+pop defs
+push symbol
+  rectangle 0,0 5,5
+pop symbol
+push graphic-context
+  border-color red
+  clip-rule evenodd
+  clip-units userSpaceOnUse
+  compliance SVG
+  density 72
+  encoding UTF-8
+  stroke-antialias false
+  text-antialias false
+  scale 1.1,0.9
+  class "warm"
+  rectangle 5,5 40,30
+  use "blob"
+  font '{C}/Generic.ttf'
+  font-stretch condensed
+  font-style italic
+  font-weight bold
+  direction right-to-left
+  interline-spacing 2
+  interword-spacing 3
+  kerning 1
+  letter-spacing 1
+  text-align center
+  text-anchor middle
+  fill navy
+  text 60,60 'Ab cd'
+pop graphic-context
+"""
+GAP_STEP_CASES += [("mvg with every keyword no case used",
+                    [["-size", "120x80", "xc:white", "-draw", "@all.mvg", "out.miff"]],
+                    {"all.mvg": _MVG_ALL_KEYWORDS})]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
