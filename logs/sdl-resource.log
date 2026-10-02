@@ -1,0 +1,38 @@
+mutate: 35 mutants in MagickCore/resource\.c$, 11 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/35 (130s)
+  mutants: 35/35 (294s)
+
+mutate: 35 mutants, 294s
+  killed 22, survived 12 (5 capped), no coverage 1, errors 0
+  mutation score on reached code: 64.7%   overall: 62.9%
+
+  function                           total killed survived no-cov
+  AcquireUniqueFileResource              6      4        2      0
+  ListMagickResourceInfo                 4      2        2      0
+  RelinquishUniqueFileResource           4      2        2      0
+  AcquireMagickResource                  3      2        1      0
+  GetMagickResource                      3      2        1      0
+  GetMagickResourceLimit                 3      2        1      0
+  RelinquishMagickResource               3      2        1      0
+  ResourceComponentTerminus              3      2        1      0
+  SetMagickResourceLimit                 3      2        1      0
+  IsFileResourceIdentityValid            2      2        0      0
+  AsynchronousResourceComponentTermi     1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+     c resource.c:217:9 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[type]);
+       resource.c:498:9 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[FileResource]);
+       resource.c:555:5 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[FileResource]);
+       resource.c:610:9 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[type]);
+     c resource.c:789:5 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[type]);
+       resource.c:927:5 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[FileResource]);
+       resource.c:949:5 cxx_remove_void_call       FormatTimeToLive(resource_info.time_limit,time_limit);
+     c resource.c:1017:9 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[type]);
+       resource.c:1142:5 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[FileResource]);
+    x  resource.c:1148:3 cxx_remove_void_call       AppendImageFormat("cache",cache_path);
+    xc resource.c:1401:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&resource_semaphore[i]);
+     c resource.c:1449:9 cxx_remove_void_call       ActivateSemaphoreInfo(&resource_semaphore[type]);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-resource.json

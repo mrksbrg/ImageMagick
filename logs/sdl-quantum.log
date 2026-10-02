@@ -1,0 +1,24 @@
+mutate: 6 mutants in MagickCore/quantum\.c$, 5 functions
+mutate: baseline over 10591 cases in 0s
+  mutants: 6/6 (303s)
+
+mutate: 6 mutants, 303s
+  killed 1, survived 5 (5 capped), no coverage 0, errors 0
+  mutation score on reached code: 16.7%   overall: 16.7%
+
+  function                           total killed survived no-cov
+  DestroyQuantumInfo                     2      0        2      0
+  AcquireQuantumInfo                     1      1        0      0
+  AcquireQuantumPixels                   1      0        1      0
+  GetQuantumInfo                         1      0        1      0
+  SetQuantumExtent                       1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c quantum.c:180:9 cxx_remove_void_call       DestroyQuantumPixels(quantum_info);
+    xc quantum.c:218:5 cxx_remove_void_call       DestroyQuantumPixels(quantum_info);
+    xc quantum.c:220:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&quantum_info->semaphore);
+    xc quantum.c:468:3 cxx_remove_void_call       ResetQuantumState(quantum_info);
+    xc quantum.c:787:7 cxx_remove_void_call       DestroyQuantumPixels(quantum_info);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-quantum.json

@@ -1,0 +1,132 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:140:3:140:38",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 140,
+  "col": 3,
+  "function": "AcquireSignatureInfo",
+  "status": "killed",
+  "cases": 47,
+  "killer": "gaps/9961ced834",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:247:7:247:41",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 247,
+  "col": 7,
+  "function": "FinalizeSignature",
+  "status": "survived",
+  "cases": 1380,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:259:3:259:37",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 259,
+  "col": 3,
+  "function": "FinalizeSignature",
+  "status": "killed",
+  "cases": 47,
+  "killer": "gaps/9961ced834",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:442:3:442:47",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 442,
+  "col": 3,
+  "function": "SetSignatureDigest",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:521:5:522:21",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 521,
+  "col": 5,
+  "function": "SignatureImage",
+  "status": "survived",
+  "cases": 167,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:554:5:554:55",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 554,
+  "col": 5,
+  "function": "SignatureImage",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/0fc907c83a",
+  "why": "enc.json differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:555:5:555:46",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 555,
+  "col": 5,
+  "function": "SignatureImage",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/0fc907c83a",
+  "why": "enc.json differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:558:3:558:36",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 558,
+  "col": 3,
+  "function": "SignatureImage",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/0fc907c83a",
+  "why": "enc.json differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:807:7:807:41",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 807,
+  "col": 7,
+  "function": "UpdateSignature",
+  "status": "killed",
+  "cases": 64,
+  "killer": "encode/0fc907c83a",
+  "why": "enc.json differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:811:5:811:50",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 811,
+  "col": 5,
+  "function": "UpdateSignature",
+  "status": "killed",
+  "cases": 64,
+  "killer": "encode/0fc907c83a",
+  "why": "enc.json differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c:814:5:814:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/signature.c",
+  "line": 814,
+  "col": 5,
+  "function": "UpdateSignature",
+  "status": "killed",
+  "cases": 64,
+  "killer": "encode/0fc907c83a",
+  "why": "enc.json differs"
+ }
+]

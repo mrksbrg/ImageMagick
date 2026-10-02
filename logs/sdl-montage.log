@@ -1,0 +1,22 @@
+mutate: 9 mutants in MagickCore/montage\.c$, 2 functions
+mutate: baseline over 41 cases in 0s
+  mutants: 9/9 (161s)
+
+mutate: 9 mutants, 161s
+  killed 3, survived 6 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 33.3%   overall: 33.3%
+
+  function                           total killed survived no-cov
+  MontageImageList                       8      2        6      0
+  CloneMontageInfo                       1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       montage.c:458:5 cxx_remove_void_call       qsort((void *) image_list,(size_t) number_images,sizeof(*image_list),
+    x  montage.c:581:7 cxx_remove_void_call       GetMontageGeometry(montage_info->tile,number_images,&x_offset,&y_offset,
+    x  montage.c:606:13 cxx_remove_void_call       GetMontageGeometry(montage_info->tile,number_images,&x_offset,&y,
+    x  montage.c:653:7 cxx_remove_void_call       GetMontageGeometry(montage_info->tile,number_images,&x_offset,&y_offset,
+    x  montage.c:713:7 cxx_remove_void_call       GetMontageGeometry(montage_info->tile,number_images,&x_offset,&y_offset,
+       montage.c:878:9 cxx_remove_void_call       AcquireNextImage(clone_info,montage,exception);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-montage.json

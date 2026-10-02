@@ -1,0 +1,74 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c:121:3:121:42",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c",
+  "line": 121,
+  "col": 3,
+  "function": "AcquireQuantumInfo",
+  "status": "killed",
+  "cases": 1,
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c:180:9:180:43",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c",
+  "line": 180,
+  "col": 9,
+  "function": "quantum.c:AcquireQuantumPixels",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c:218:5:218:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c",
+  "line": 218,
+  "col": 5,
+  "function": "DestroyQuantumInfo",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c:220:5:220:54",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c",
+  "line": 220,
+  "col": 5,
+  "function": "DestroyQuantumInfo",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c:468:3:468:34",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c",
+  "line": 468,
+  "col": 3,
+  "function": "GetQuantumInfo",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c:787:7:787:41",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/quantum.c",
+  "line": 787,
+  "col": 7,
+  "function": "SetQuantumExtent",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ }
+]

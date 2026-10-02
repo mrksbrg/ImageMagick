@@ -1,0 +1,21 @@
+mutate: 11 mutants in MagickCore/signature\.c$, 5 functions
+mutate: baseline over 1380 cases in 0s
+  mutants: 11/11 (191s)
+
+mutate: 11 mutants, 191s
+  killed 8, survived 2 (0 capped), no coverage 1, errors 0
+  mutation score on reached code: 80.0%   overall: 72.7%
+
+  function                           total killed survived no-cov
+  SignatureImage                         4      3        1      0
+  UpdateSignature                        3      3        0      0
+  FinalizeSignature                      2      1        1      0
+  AcquireSignatureInfo                   1      1        0      0
+  SetSignatureDigest                     1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+       signature.c:247:7 cxx_remove_void_call       TransformSignature(signature_info);
+    x  signature.c:521:5 cxx_remove_void_call       SetStringInfoLength(signature,GetPixelChannels(image)*image->columns*
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-signature.json

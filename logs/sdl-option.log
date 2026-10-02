@@ -1,0 +1,18 @@
+mutate: 3 mutants in MagickCore/option\.c$, 3 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 3/3 (280s)
+
+mutate: 3 mutants, 280s
+  killed 0, survived 1 (1 capped), no coverage 2, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CloneImageOptions                      1      0        1      0
+  ResetImageOptions                      1      0        0      1
+  ResetImageOptionIterator               1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+     c option.c:2393:9 cxx_remove_void_call       DestroyImageOptions(image_info);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-option.json

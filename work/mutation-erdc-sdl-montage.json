@@ -1,0 +1,110 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:111:3:111:40",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 111,
+  "col": 3,
+  "function": "CloneMontageInfo",
+  "status": "killed",
+  "cases": 1,
+  "killer": "montage/8867af438e",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:458:5:459:20",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 458,
+  "col": 5,
+  "function": "MontageImageList",
+  "status": "survived",
+  "cases": 41,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:468:5:469:40",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 468,
+  "col": 5,
+  "function": "MontageImageList",
+  "status": "killed",
+  "cases": 1,
+  "killer": "montage/8867af438e",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:474:3:474:43",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 474,
+  "col": 3,
+  "function": "MontageImageList",
+  "status": "killed",
+  "cases": 1,
+  "killer": "montage/8867af438e",
+  "why": "out.miff differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:581:7:582:21",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 581,
+  "col": 7,
+  "function": "MontageImageList",
+  "status": "survived",
+  "cases": 41,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:606:13:607:27",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 606,
+  "col": 13,
+  "function": "MontageImageList",
+  "status": "survived",
+  "cases": 41,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:653:7:654:21",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 653,
+  "col": 7,
+  "function": "MontageImageList",
+  "status": "survived",
+  "cases": 41,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:713:7:714:21",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 713,
+  "col": 7,
+  "function": "MontageImageList",
+  "status": "survived",
+  "cases": 41,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c:878:9:878:55",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/montage.c",
+  "line": 878,
+  "col": 9,
+  "function": "MontageImageList",
+  "status": "survived",
+  "cases": 41,
+  "capped": false,
+  "line_executed": false
+ }
+]
