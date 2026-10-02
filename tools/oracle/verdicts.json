@@ -1132,6 +1132,16 @@
    "why": "the key-size selection; the passphrase is hashed to a fixed-length key, so every case takes the same branch; not probed with other key material"
   },
   {
+   "at": 0,
+   "file": "MagickCore/cipher.c",
+   "function": "SetAESKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InverseAddRoundKey(aes_info->encipher_key+i,aes_info->decipher_key+i);",
+   "verdict": "equivalent",
+   "why": "builds the AES decryption key schedule, which nothing reads: -encipher and -decipher both run EncipherAESBlock (counter mode), so decipher_key is written and never used"
+  },
+  {
    "at": 28,
    "file": "MagickCore/cipher.c",
    "function": "SetAESKey",
@@ -3551,6 +3561,36 @@
    "src": "if (phase_image == (Image *) NULL)",
    "verdict": "gap",
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/identify.c",
+   "function": "IdentifyImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(unsigned long) (elapsed_time/60.0),(unsigned long) floor(fmod(",
+   "verdict": "unobservable",
+   "why": "formats the elapsed time closing a plain identify line, which the oracle replaces with TIMEu TIME (it varies from run to run)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/identify.c",
+   "function": "IdentifyImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-",
+   "verdict": "unobservable",
+   "why": "formats the elapsed time closing a plain identify line, which the oracle replaces with TIMEu TIME (it varies from run to run)"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/identify.c",
+   "function": "IdentifyImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-",
+   "verdict": "unobservable",
+   "why": "formats the elapsed time closing a plain identify line, which the oracle replaces with TIMEu TIME (it varies from run to run)"
   },
   {
    "at": 10,
