@@ -1793,6 +1793,11 @@ Windows file with it gave the same figures as the merge used above. Each family
   `XMLTreeTagToXML` and `SetXMLTreeContent` are called only from MagickWand's drawing wand,
   `AddPathToXMLTree` and `CanonicalXMLContent` from nowhere, `ValidateEntities` by a route
   not found.
+- **`color.c`, family `colorgap` (6 cases):** `-list color`, and `%[pixel:]` of CMYK, Oklch,
+  HDRI and colours not exact at 8 bits. 24 kills: adjusted 78% to **85%**, 16 of 21
+  functions at 80%. Below: `IsSVGCompliant` 46%, `GetColorList` (not reached by `-list
+  color`), and `IsEquivalentImage`, `IsEquivalentAlpha`, `IsEquivalentIntensity`, which
+  nothing outside color.c calls.
 
 ## How to use this in the campaign
 
