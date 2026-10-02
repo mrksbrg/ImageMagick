@@ -219,3 +219,9 @@ refactoring commit.
   pin down: `ImportBGROQuantum` in `MagickCore/quantum-import.c`, floating-point branch,
   is the place to look (MemorySanitizer or Valgrind would say more). The catalogue
   leaves those cases out (`QUANTUM_UNSTABLE` in `cases.py`).
+- **`tile:` under `-compose multiply` composes onto an uninitialised canvas** (Windows,
+  2026-10-02). `magick -size 40x30 -compose multiply tile:rose_patch.miff out.miff` gave
+  a different image in 1 of 4 runs without a fixed `MALLOC_PERTURB_`, and a mean near
+  5e-50 where black is expected: `TextureImage` composes the tile onto a canvas it never
+  cleared. The oracle's fixed `MALLOC_PERTURB_` may hide it, so the catalogue keeps
+  `tile:` to the default compose (`_texture_gap_cases` in `cases.py`).
