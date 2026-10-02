@@ -1,0 +1,20 @@
+mutate: 4 mutants in MagickCore/type\.c$, 2 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 4/4 (105s)
+
+mutate: 4 mutants, 105s
+  killed 0, survived 4 (4 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  TypeComponentTerminus                  3      0        3      0
+  TypeComponentGenesis                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc type.c:1386:22 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
+    xc type.c:1411:22 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
+     c type.c:1412:5 cxx_remove_void_call       ActivateSemaphoreInfo(&type_semaphore);
+    xc type.c:1417:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&type_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-type.json

@@ -1,0 +1,19 @@
+mutate: 51 mutants in MagickCore/channel\.c$, 1 functions
+mutate: baseline over 973 cases in 0s
+  mutants: 25/51 (2s)
+  mutants: 50/51 (132s)
+  mutants: 51/51 (149s)
+
+mutate: 51 mutants, 149s
+  killed 49, survived 2 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 96.1%   overall: 96.1%
+
+  function                           total killed survived no-cov
+  SetImageAlphaChannel                  51     49        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-channel.json
