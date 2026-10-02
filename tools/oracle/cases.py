@@ -2101,6 +2101,56 @@ GAP_COMMANDS += ["{C}/rose.miff -colorspace %s -color-threshold '%s'" % cs_range
 # colours are read, not only their colormap indexes
 GAP_STEP_CASES += [("fax read back and resized",
                     [["{C}/bilevel.miff", "b.fax"], ["fax:b.fax", "-resize", "50%", "out.miff"]], {})]
+# identify.c: pixel locations (identify:locate, identify:limit) on RGB, CMYK, gray and alpha
+# images, a 16-bit image under -verbose, masks and a meta channel in verbose info, and an
+# image read smaller than stored (jpeg:size), which plain identify prints as WxH=>
+GAP_COMMANDS += [
+    "identify -define identify:locate=maximum -define identify:limit=2 {C}/rose.miff",
+    "identify -define identify:locate=minimum {C}/cmyk.miff",
+    "identify -define identify:locate=mean {C}/gray16.miff",
+    "identify -define identify:locate=maximum {C}/rose_alpha.miff",
+    "identify -verbose {C}/gray16.miff",
+    "{C}/rose.miff -channel-fx 'red=>meta' -verbose -write info: +verbose",
+    "{C}/rose.miff -read-mask {C}/bilevel.miff -verbose -write info: +verbose",
+    "{C}/rose.miff -write-mask {C}/bilevel.miff -verbose -write info: +verbose",
+]
+# cipher.c: passphrases of 48 and 64 characters, whose second halves are 24- and 32-byte
+# keys, exactly the 192- and 256-bit sizes SetAESKey chooses between (the catalogue's
+# passphrase gives 18 bytes, so only the 128-bit schedule ran)
+GAP_STEP_CASES += [
+    ("image read smaller than stored, identified",
+     [["{C}/rose.miff", "x.jpg"], ["identify", "-define", "jpeg:size=20x13", "x.jpg"]], {}),
+    ("encipher with a 192-bit key", [["{C}/rose.miff", "-encipher", "pass.txt", "out.miff"]],
+     {"pass.txt": "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKL"}),
+    ("encipher with a 256-bit key", [["{C}/rose.miff", "-encipher", "pass.txt", "out.miff"]],
+     {"pass.txt": "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!?"}),
+    ("encipher with a 184-bit key", [["{C}/rose.miff", "-encipher", "pass.txt", "out.miff"]],
+     {"pass.txt": "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJ"}),
+]
+# compare.c, visual-effects.c, resize.c, channel.c: -metric PHASH per channel; subimage
+# searches with a metric where higher is better (NCC) and with similarity and
+# dissimilarity thresholds; -polaroid with a caption set as a property (the -caption
+# setting is not what PolaroidImage reads), under a gravity; -thumbnail of an image
+# with an ICC profile, which a thumbnail keeps; semi-transparent backgrounds for
+# -alpha remove and background, through FlattenPixelInfo
+GAP_COMMANDS += [
+    "compare -metric PHASH -verbose -precision 17 {C}/rose.miff {C}/rose_blur.miff",
+    "compare -metric NCC -subimage-search {C}/rose.miff ( {C}/rose.miff -crop 20x20+10+10 +repage )",
+    "compare -metric RMSE -subimage-search -similarity-threshold 0.5 {C}/rose.miff "
+    "( {C}/rose.miff -crop 20x20+10+10 +repage )",
+    "compare -metric NCC -subimage-search -similarity-threshold 0.5 {C}/rose.miff "
+    "( {C}/rose.miff -crop 20x20+10+10 +repage )",
+    "compare -metric RMSE -subimage-search -dissimilarity-threshold 0.01 {C}/rose.miff "
+    "( {C}/rose_blur.miff -crop 20x20+10+10 +repage )",
+    "{C}/rose.miff -font {C}/Generic.ttf -set caption 'A rose' -polaroid 5",
+    "{C}/rose.miff -font {C}/Generic.ttf -gravity south -set caption 'A rose' -polaroid 5",
+    _UHDR_JPG + " -thumbnail 30x20",
+    "{C}/rose_alpha.miff -background 'rgba(255,0,0,0.5)' -alpha remove",
+    "{C}/rose_alpha.miff -background 'rgba(255,0,0,0.5)' -alpha background",
+]
+# statistic.c: a single-colour image, whose one histogram bin makes MagickSafeReciprocalLD
+# take 0 (log2 of one bin) when the entropy is computed
+GAP_COMMANDS += ["identify -verbose -precision 17 -size 4x4 xc:red"]
 # channel.c: the -alpha methods the catalogue lacked (activate, associate, disassociate, discrete, off-if-opaque, on) on images with and without alpha
 GAP_COMMANDS += [
     "{C}/rose.miff -alpha activate",

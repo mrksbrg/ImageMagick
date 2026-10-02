@@ -10716,6 +10716,46 @@
    "why": "reads height 6 for smaller matrices; not killed by 3x3 and 5x5 matrices"
   },
   {
+   "at": 12,
+   "file": "MagickCore/visual-effects.c",
+   "function": "ColorMatrixImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (u=0; u < 6; u++)",
+   "verdict": "unobservable",
+   "why": "prints the colour matrix under -debug Transform only; the oracle compares no debug output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/visual-effects.c",
+   "function": "ColorMatrixImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (v=0; v < 6; v++)",
+   "verdict": "unobservable",
+   "why": "prints the colour matrix under -debug Transform only; the oracle compares no debug output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/visual-effects.c",
+   "function": "ColorMatrixImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (u=0; u < 6; u++)",
+   "verdict": "unobservable",
+   "why": "prints the colour matrix under -debug Transform only; the oracle compares no debug output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/visual-effects.c",
+   "function": "ColorMatrixImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (v=0; v < 6; v++)",
+   "verdict": "unobservable",
+   "why": "prints the colour matrix under -debug Transform only; the oracle compares no debug output"
+  },
+  {
    "at": 7,
    "file": "MagickCore/visual-effects.c",
    "function": "ColorMatrixImage",
@@ -10747,6 +10787,26 @@
    "src": "if (image->alpha_trait != UndefinedPixelTrait)",
    "verdict": "gap",
    "why": "no 5x5 colour matrix is applied to an image with alpha"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/visual-effects.c",
+   "function": "ColorMatrixImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (u=0; u < 6; u++)",
+   "verdict": "unobservable",
+   "why": "prints the colour matrix under -debug Transform only; the oracle compares no debug output"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/visual-effects.c",
+   "function": "ColorMatrixImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (v=0; v < 6; v++)",
+   "verdict": "unobservable",
+   "why": "prints the colour matrix under -debug Transform only; the oracle compares no debug output"
   },
   {
    "at": 32,
