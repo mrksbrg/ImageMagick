@@ -10811,6 +10811,66 @@
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
   },
   {
+   "at": 10,
+   "file": "MagickCore/type.c",
+   "function": "LoadTypeCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "path,depth+1,exception);",
+   "verdict": "unobservable",
+   "why": "depth is a size_t: depth-1 from the top level wraps to a huge value, so a nested include trips the depth limit at once; a self-including type.xml then yields the same entries and the same IncludeNodeNestedTooDeeply exit"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/type.c",
+   "function": "LoadTypeCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"encoding\") == 0)",
+   "verdict": "equivalent",
+   "why": "encoding, format, foundry and fullname (description) are stored but never read except to be freed; face and family are tested before them, so a mutated test can only swap which unread field a later keyword lands in"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/type.c",
+   "function": "LoadTypeCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"format\") == 0)",
+   "verdict": "equivalent",
+   "why": "encoding, format, foundry and fullname (description) are stored but never read except to be freed; face and family are tested before them, so a mutated test can only swap which unread field a later keyword lands in"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/type.c",
+   "function": "LoadTypeCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"foundry\") == 0)",
+   "verdict": "equivalent",
+   "why": "encoding, format, foundry and fullname (description) are stored but never read except to be freed; face and family are tested before them, so a mutated test can only swap which unread field a later keyword lands in"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/type.c",
+   "function": "LoadTypeCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"fullname\") == 0)",
+   "verdict": "equivalent",
+   "why": "encoding, format, foundry and fullname (description) are stored but never read except to be freed; face and family are tested before them, so a mutated test can only swap which unread field a later keyword lands in"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/type.c",
+   "function": "LoadTypeCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unobservable",
+   "why": "one more level of a self-including type.xml repeats entries already in the cache, and the IncludeNodeNestedTooDeeply warning from loading the type cache is not reported"
+  },
+  {
    "at": 29,
    "file": "MagickCore/utility.c",
    "function": "ShredFile",

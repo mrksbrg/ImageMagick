@@ -3055,21 +3055,49 @@ _TYPE_SCORE_XML = "<typemap>\n" + "".join(
         ("A", "Normal", 400, "Normal", 0), ("B", "Italic", 400, "Normal", 1),
         ("C", "Oblique", 700, "Condensed", 0), ("D", "Normal", 900, "Expanded", 1),
         ("E", "Normal", 100, "UltraCondensed", 0), ("F", "Italic", 300, "SemiExpanded", 1),
-        ("G", "Normal", 600, "Normal", 1))) + (
+        ("G", "Normal", 600, "Normal", 1), ("H", "Normal", 400, "Condensed", 1))) + (
     '  <type name="Score-Helvetica" family="Helvetica" face="1" glyphs="{C}/Generic.ttf"/>\n'
     "</typemap>\n")
-GAP_STEP_CASES += [("type.xml scoring: -family %s %s" % (family, query),
-                    [["-family", family] + query.split() + ["-pointsize", "12", "label:Ab", "out.miff"]],
+# label: takes its font from image options, where -style and -stretch do not go (they set the
+# command line's draw state), and magick rejects -stretch: -annotate and MVG reach them all
+_SCORE_CANVAS = ["-size", "40x20", "xc:white", "-pointsize", "12"]
+GAP_STEP_CASES += [("type.xml scoring: -family %s %s, annotated" % (family, query),
+                    [_SCORE_CANVAS + ["-family", family] + query.split() + ["-annotate", "+2+14", "Ab",
+                                                                            "out.miff"]],
                     {".config/ImageMagick/type.xml": _TYPE_SCORE_XML})
                    for family, query in (
                        ("ScoreFamily", "-style Normal -weight 400"), ("ScoreFamily", "-style Italic"),
                        ("ScoreFamily", "-style Oblique"), ("ScoreFamily", "-style Italic -weight 700"),
                        ("ScoreFamily", "-style Oblique -weight 300"), ("ScoreFamily", "-style Any -weight 650"),
                        ("ScoreFamily", "-weight 900"), ("ScoreFamily", "-weight 100"),
-                       ("ScoreFamily", "-weight 550"), ("ScoreFamily", "-stretch Condensed"),
-                       ("ScoreFamily", "-stretch Expanded -weight 800"), ("ScoreFamily", "-stretch UltraCondensed"),
-                       ("ScoreFamily", "-stretch SemiExpanded -style Italic"), ("ScoreFamily", "-stretch Any -weight 350"),
-                       ("Arial", "-weight 400"), ("Helvetica", "-style Italic"))]
+                       ("ScoreFamily", "-weight 550"), ("Arial", "-weight 400"), ("Helvetica", "-style Italic"))]
+GAP_STEP_CASES += [("type.xml scoring in MVG: %s" % mvg,
+                    [_SCORE_CANVAS + ["-draw", "font-family ScoreFamily %s text 2,14 'Ab'" % mvg, "out.miff"]],
+                    {".config/ImageMagick/type.xml": _TYPE_SCORE_XML})
+                   for mvg in ("font-stretch condensed", "font-stretch expanded font-weight 800",
+                               "font-stretch ultra-condensed", "font-stretch semi-expanded font-style italic",
+                               "font-stretch normal font-weight 350", "font-stretch extra-condensed font-style oblique")]
+GAP_STEP_CASES += [("type.xml scoring in MVG: an exact match by stretch",
+                    [_SCORE_CANVAS + ["-draw", "font-family ScoreFamily font-style normal font-weight 400 "
+                                      "font-stretch condensed text 2,14 'Ab'", "out.miff"]],
+                    {".config/ImageMagick/type.xml": _TYPE_SCORE_XML})]
+# type.c: LoadTypeCache skips <!...> declarations and comments by hand. A <type> hidden where
+# only a broken skip would find it: in a quoted string of the DOCTYPE (with "]>" before it),
+# in a comment; and a stray "]" in a DOCTYPE without an internal subset
+_HIDDEN_TYPE = "<type name='Ghost-%s' family='GhostFamily' glyphs='{C}/Generic.ttf'/>"
+_REAL_TYPE = '  <type name="Real-%s" family="RealFamily" glyphs="{C}/Generic.ttf"/>\n'
+GAP_STEP_CASES += [("type.xml skipped by hand: %s, listed" % name, [["-list", "font"]],
+                    {".config/ImageMagick/type.xml": xml})
+                   for name, xml in (
+                       ("a type inside a quoted doctype string",
+                        '<?xml version="1.0"?>\n<!DOCTYPE typemap [\n  <!ENTITY e "x]> %s y">\n]>\n'
+                        "<typemap>\n%s</typemap>\n" % (_HIDDEN_TYPE % "Quote", _REAL_TYPE % "Quote")),
+                       ("a stray bracket in the doctype",
+                        '<?xml version="1.0"?>\n<!DOCTYPE typemap SYSTEM "t" ]>\n'
+                        "<typemap>\n%s</typemap>\n" % (_REAL_TYPE % "Bracket")),
+                       ("a type inside a comment",
+                        "<typemap>\n  <!-- %s -->\n%s</typemap>\n" % (_HIDDEN_TYPE % "Comment",
+                                                                      _REAL_TYPE % "Comment")))]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
 # buckets. The case's own fonts.conf (fontconfig reads $HOME/.config/fontconfig, and HOME is
 # the case directory) adds the corpus directory and, at scan time, gives its font an exact
