@@ -1463,6 +1463,22 @@ def _matrix_gap_cases():
                   pre + ["-hough-lines", "9x9+10"])
 
 
+# stream.c: StreamImagePixels has a fast path per map and storage type, and
+# the generic loop for the rest. The stream family above has no BGRA or BGRP
+# map, and no multi-letter map with O (opacity) or I (intensity), which only the
+# generic loop handles.
+STREAM_GAP_MAPS = ["bgra", "bgrp", "ro", "gi"]
+STREAM_STORAGE_TYPES = ["char", "short", "long", "longlong", "float", "double", "quantum"]
+
+
+def _stream_gap_cases():
+    for name, m, t in itertools.product(("rose", "rose_alpha"), STREAM_GAP_MAPS,
+                                        STREAM_STORAGE_TYPES):
+        yield _case("stream", "stream %s -map %s -storage-type %s" % (name, m, t),
+                    [["stream", "-map", m, "-storage-type", t, img(name), "out.raw"]],
+                    ["out.raw"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -2970,7 +2986,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
