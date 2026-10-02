@@ -14511,6 +14511,26 @@
    "src": "for (j=(ssize_t) sizeof(pixel)-1; j >= 0; j--)",
    "verdict": "unobservable",
    "why": "the big-endian byte loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/exception.c",
+   "function": "InheritException",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (relative->exceptions == (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/exception.c",
+   "function": "InheritException",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (p != (const ExceptionInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
   }
  ]
 }

@@ -1955,6 +1955,16 @@ are in three functions out of reach, checked with `reach.py` and the callers:
 by the X11 widget code and MagickWand) and `GetImageMagick` (5; called by nothing).
 **Trusted**, with those three written down as out of reach.
 
+## exception.c: trusted (Windows, 2026-10-02)
+
+The module-policy case reaches `InheritException` (`reach.py`), and its two mutants were run
+by hand on the Mull build (the mutant's id as the environment switch) for `gif:` and plain
+reads under the policy: output identical. The policy error `ReadImage` inherits has already
+been thrown into the command's exception by `SetImageInfo`'s lookup of the same coder, and
+`ThrowException` drops duplicates, so both are `unobservable` (`verdicts.json`). **Adjusted
+98%, trusted.** Out of reach: `SetErrorHandler` (1 mutant), called only by the X11 display
+and animate code. No other survivor is open.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
