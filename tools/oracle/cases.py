@@ -1349,6 +1349,37 @@ RESAMPLE_DISTORTIONS = [
 ]
 
 
+# distort.c: SparseColorImage only ever ran on RGB with the default channels.
+# Every method on CMYK (-channel CMYK), with alpha (-channel RGBA, colours with
+# alpha) and on a gray image; the -verbose report of the fitted coefficients for
+# the two fitted methods, in RGBA and CMYK; and two points closer than a pixel,
+# which caps the inverse-distance weight. Colours in hex: names need colors.xml.
+SPARSE_METHODS = ["Barycentric", "Bilinear", "Shepards", "Inverse", "Voronoi", "Manhattan"]
+_SPARSE_CMYK = "5,5 cmyk(10%,20%,30%,40%)  60,10 cmyk(80%,0,0,10%)  30,40 cmyk(0,50%,50%,0)"
+_SPARSE_RGBA = "5,5 #ff000080  60,10 #0000ff  30,40 #00ff0040  10,40 #ffff00"
+_SPARSE_GRAY = "5,5 #ffffff  30,10 #000000  10,25 #808080"
+
+
+def _sparse_color_cases():
+    for s in SPARSE_METHODS:
+        yield _op("distort", "cmyk -sparse-color %s" % s, [img("cmyk")],
+                  ["-channel", "CMYK", "-sparse-color", s, _SPARSE_CMYK])
+        yield _op("distort", "rose_alpha -channel RGBA -sparse-color %s" % s,
+                  [img("rose_alpha")], ["-channel", "RGBA", "-sparse-color", s, _SPARSE_RGBA])
+        yield _op("distort", "gray8 -sparse-color %s" % s, [img("gray8")],
+                  ["-sparse-color", s, _SPARSE_GRAY])
+    for s in ("Barycentric", "Bilinear"):
+        yield _op("distort", "rose_alpha -verbose -sparse-color %s" % s, [img("rose_alpha")],
+                  ["-verbose", "-channel", "RGBA", "-sparse-color", s, _SPARSE_RGBA,
+                   "+verbose"])
+        yield _op("distort", "cmyk -verbose -sparse-color %s" % s, [img("cmyk")],
+                  ["-verbose", "-channel", "CMYK", "-sparse-color", s, _SPARSE_CMYK,
+                   "+verbose"])
+    for s in ("Shepards", "Inverse"):
+        yield _op("distort", "rose -sparse-color %s points 0.2 apart" % s, [img("rose")],
+                  ["-sparse-color", s, "5,5 #ff0000  5.2,5 #0000ff  40,30 #00ff00"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -2718,7 +2749,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _feature_cases(), _resample_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
