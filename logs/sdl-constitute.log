@@ -1,0 +1,42 @@
+mutate: 27 mutants in MagickCore/constitute\.c$, 6 functions
+mutate: baseline over 10667 cases in 0s
+  mutants: 25/27 (366s)
+  mutants: 27/27 (366s)
+
+mutate: 27 mutants, 366s
+  killed 6, survived 21 (20 capped), no coverage 0, errors 0
+  mutation score on reached code: 22.2%   overall: 22.2%
+
+  function                           total killed survived no-cov
+  ReadImage                             14      4       10      0
+  WriteImage                             9      1        8      0
+  PingImage                              1      0        1      0
+  PingImages                             1      1        0      0
+  ReadImages                             1      0        1      0
+  WriteImages                            1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  constitute.c:322:7 cxx_remove_void_call       ResetTimer(&image->timer);
+     c constitute.c:662:5 cxx_remove_void_call       InheritException(exception,sans_exception);
+     c constitute.c:725:9 cxx_remove_void_call       LockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:732:9 cxx_remove_void_call       UnlockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:760:9 cxx_remove_void_call       LockSemaphoreInfo(delegate_info->semaphore);
+     c constitute.c:764:9 cxx_remove_void_call       UnlockSemaphoreInfo(delegate_info->semaphore);
+     c constitute.c:787:9 cxx_remove_void_call       LockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:794:9 cxx_remove_void_call       UnlockSemaphoreInfo(magick_info->semaphore);
+    xc constitute.c:852:5 cxx_remove_void_call       GetPathComponent(magick_filename,MagickPath,magick_path);
+    xc constitute.c:867:5 cxx_remove_void_call       SyncOrientationFromProperties(next,&constitute_info,exception);
+    xc constitute.c:905:9 cxx_remove_void_call       SetGeometry(next,&geometry);
+     c constitute.c:1073:13 cxx_remove_void_call       AppendImageToList(&images,image);
+    xc constitute.c:1313:3 cxx_remove_void_call       DisassociateImageStream(image);
+     c constitute.c:1373:9 cxx_remove_void_call       LockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:1379:9 cxx_remove_void_call       UnlockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:1391:13 cxx_remove_void_call       LockSemaphoreInfo(delegate_info->semaphore);
+     c constitute.c:1395:13 cxx_remove_void_call       UnlockSemaphoreInfo(delegate_info->semaphore);
+    xc constitute.c:1418:15 cxx_remove_void_call       GetPathComponent(image->filename,ExtensionPath,extension);
+     c constitute.c:1445:17 cxx_remove_void_call       LockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:1451:17 cxx_remove_void_call       UnlockSemaphoreInfo(magick_info->semaphore);
+     c constitute.c:1600:7 cxx_remove_void_call       SyncBlobStream(write_info,p,images);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-constitute.json

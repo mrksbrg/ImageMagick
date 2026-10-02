@@ -1,0 +1,69 @@
+mutate: 74 mutants in MagickCore/morphology\.c$, 13 functions
+mutate: baseline over 2480 cases in 0s
+  mutants: 25/74 (382s)
+  mutants: 50/74 (424s)
+  mutants: 74/74 (762s)
+
+mutate: 74 mutants, 762s
+  killed 33, survived 40 (33 capped), no coverage 1, errors 0
+  mutation score on reached code: 45.2%   overall: 44.6%
+
+  function                           total killed survived no-cov
+  AcquireKernelBuiltIn                  44     15       29      0
+  MorphologyPrimitive                    5      3        2      0
+  ParseKernelArray                       4      2        2      0
+  ParseKernelName                        4      2        2      0
+  ExpandMirrorKernelInfo                 3      3        0      0
+  RotateKernelInfo                       3      2        1      0
+  ScaleGeometryKernelInfo                3      2        1      0
+  MorphologyImage                        2      2        0      0
+  UnityAddKernelInfo                     2      0        2      0
+  ExpandRotateKernelInfo                 1      1        0      0
+  MorphologyApply                        1      1        0      0
+  ScaleKernelInfo                        1      0        1      0
+  ZeroKernelNans                         1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  morphology.c:276:7 cxx_remove_void_call       SetGeometryInfo(&args);
+       morphology.c:375:5 cxx_remove_void_call       ExpandMirrorKernelInfo(kernel);       /* 90 degree mirror rotate */
+    xc morphology.c:423:3 cxx_remove_void_call       SetGeometryInfo(&args);
+     c morphology.c:491:7 cxx_remove_void_call       ExpandMirrorKernelInfo(kernel);
+    xc morphology.c:1395:9 cxx_remove_void_call       RotateKernelInfo(kernel, args->rho);
+    xc morphology.c:1404:9 cxx_remove_void_call       RotateKernelInfo(kernel, args->rho);
+    xc morphology.c:1413:9 cxx_remove_void_call       RotateKernelInfo(kernel, args->rho);
+    xc morphology.c:1422:9 cxx_remove_void_call       RotateKernelInfo(kernel, args->rho);
+    xc morphology.c:1438:13 cxx_remove_void_call       CalcKernelMetaData(kernel);     /* recalculate meta-data */
+     c morphology.c:1447:13 cxx_remove_void_call       CalcKernelMetaData(kernel);     /* recalculate meta-data */
+     c morphology.c:1448:13 cxx_remove_void_call       ScaleKernelInfo(kernel, (double) (1.0/2.0*MagickSQ2), NoValue);
+     c morphology.c:1465:13 cxx_remove_void_call       CalcKernelMetaData(kernel);     /* recalculate meta-data */
+     c morphology.c:1466:13 cxx_remove_void_call       ScaleKernelInfo(kernel, (double) (1.0/2.0*MagickSQ2), NoValue);
+     c morphology.c:1475:13 cxx_remove_void_call       CalcKernelMetaData(kernel);
+     c morphology.c:1476:13 cxx_remove_void_call       ScaleKernelInfo(kernel, (double) (1.0/2.0*MagickSQ2), NoValue);
+     c morphology.c:1485:13 cxx_remove_void_call       CalcKernelMetaData(kernel);
+     c morphology.c:1486:13 cxx_remove_void_call       ScaleKernelInfo(kernel, (double) (1.0/2.0*MagickSQ2), NoValue);
+     c morphology.c:1495:13 cxx_remove_void_call       CalcKernelMetaData(kernel);
+     c morphology.c:1496:13 cxx_remove_void_call       ScaleKernelInfo(kernel, (double) (1.0/2.0*MagickSQ2), NoValue);
+     c morphology.c:1503:13 cxx_remove_void_call       ScaleKernelInfo(kernel, 1.0/2.0, NoValue);
+     c morphology.c:1510:13 cxx_remove_void_call       ScaleKernelInfo(kernel, 1.0/2.0, NoValue);
+     c morphology.c:1517:13 cxx_remove_void_call       ScaleKernelInfo(kernel, 1.0/6.0, NoValue);
+     c morphology.c:1524:13 cxx_remove_void_call       ScaleKernelInfo(kernel, 1.0/6.0, NoValue);
+     c morphology.c:1531:13 cxx_remove_void_call       ScaleKernelInfo(kernel, 1.0/3.0, NoValue);
+     c morphology.c:1536:11 cxx_remove_void_call       RotateKernelInfo(kernel, args->sigma);
+     c morphology.c:1539:11 cxx_remove_void_call       RotateKernelInfo(kernel, args->rho);
+     c morphology.c:1783:11 cxx_remove_void_call       RotateKernelInfo(kernel, args->sigma);
+    xc morphology.c:1813:11 cxx_remove_void_call       RotateKernelInfo(kernel, args->sigma);
+    xc morphology.c:1847:11 cxx_remove_void_call       RotateKernelInfo(kernel, args->sigma);
+     c morphology.c:1868:15 cxx_remove_void_call       ExpandRotateKernelInfo(kernel, 90.0); /* 4 rotated kernels */
+     c morphology.c:1962:15 cxx_remove_void_call       ExpandRotateKernelInfo(kernel, 90.0); /* 4 rotations of the 2 kernels */
+     c morphology.c:1981:15 cxx_remove_void_call       ExpandMirrorKernelInfo(kernel); /* 12 kernels total */
+    xc morphology.c:2072:11 cxx_remove_void_call       RotateKernelInfo(kernel, args->sigma);
+    xc morphology.c:2709:17 cxx_remove_void_call       SetPixelChannel(morphology_image,channel,p[center+i],q);
+    xc morphology.c:2862:13 cxx_remove_void_call       SetPixelChannel(morphology_image,channel,p[center+i],q);
+       morphology.c:4368:9 cxx_remove_void_call       perror("Unable to rotate a non-square, non-linear kernel 90 degrees");
+    x  morphology.c:4448:3 cxx_remove_void_call       SetGeometryInfo(&args);
+       morphology.c:4557:5 cxx_remove_void_call       ScaleKernelInfo(kernel->next, scaling_factor, normalize_flags);
+       morphology.c:4716:5 cxx_remove_void_call       UnityAddKernelInfo(kernel->next, scale);
+    x  morphology.c:4720:3 cxx_remove_void_call       CalcKernelMetaData(kernel);  /* recalculate the meta-data */
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-morphology.json

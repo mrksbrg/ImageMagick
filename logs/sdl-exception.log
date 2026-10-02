@@ -1,0 +1,43 @@
+mutate: 45 mutants in MagickCore/exception\.c$, 14 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/45 (2s)
+  mutants: 45/45 (299s)
+
+mutate: 45 mutants, 299s
+  killed 23, survived 14 (6 capped), no coverage 8, errors 0
+  mutation score on reached code: 62.2%   overall: 51.1%
+
+  function                           total killed survived no-cov
+  CatchException                         7      6        1      0
+  ThrowException                         6      3        3      0
+  DestroyExceptionInfo                   5      2        3      0
+  ExceptionComponentTerminus             4      2        2      0
+  ClearMagickException                   3      3        0      0
+  InheritException                       3      0        0      3
+  SetErrorHandler                        3      0        0      3
+  SetFatalErrorHandler                   3      2        1      0
+  SetWarningHandler                      3      2        1      0
+  CloneExceptionInfo                     2      0        0      2
+  DefaultFatalErrorHandler               2      1        1      0
+  MagickFatalError                       2      0        2      0
+  AcquireExceptionInfo                   1      1        0      0
+  ThrowMagickExceptionList               1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc exception.c:218:3 cxx_remove_void_call       ResetLinkedListIterator(exceptions);
+    x  exception.c:348:3 cxx_remove_void_call       MagickCoreTerminus();
+     c exception.c:424:5 cxx_remove_void_call       ActivateSemaphoreInfo(&exception->semaphore);
+     c exception.c:436:7 cxx_remove_void_call       ClearLinkedList((LinkedListInfo *) exception->exceptions,
+    xc exception.c:442:7 cxx_remove_void_call       RelinquishSemaphoreInfo(&exception->semaphore);
+     c exception.c:494:5 cxx_remove_void_call       ActivateSemaphoreInfo(&exception_semaphore);
+    xc exception.c:497:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&exception_semaphore);
+       exception.c:814:3 cxx_remove_void_call       MagickCoreTerminus();
+       exception.c:815:3 cxx_remove_void_call       exit(1);
+       exception.c:918:5 cxx_remove_void_call       ActivateSemaphoreInfo(&exception_semaphore);
+       exception.c:955:5 cxx_remove_void_call       ActivateSemaphoreInfo(&exception_semaphore);
+       exception.c:1011:11 cxx_remove_void_call       UnlockSemaphoreInfo(exception->semaphore);
+       exception.c:1017:11 cxx_remove_void_call       UnlockSemaphoreInfo(exception->semaphore);
+       exception.c:1032:7 cxx_remove_void_call       UnlockSemaphoreInfo(exception->semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-exception.json

@@ -1,0 +1,18 @@
+mutate: 8 mutants in MagickCore/feature\.c$, 2 functions
+mutate: baseline over 24 cases in 0s
+  mutants: 8/8 (3s)
+
+mutate: 8 mutants, 3s
+  killed 6, survived 2 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 75.0%   overall: 75.0%
+
+  function                           total killed survived no-cov
+  MeanShiftImage                         7      6        1      0
+  HoughLineImage                         1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       feature.c:2104:9 cxx_remove_void_call       AppendImageToList(&lines_image,accumulator_image);
+    x  feature.c:2235:7 cxx_remove_void_call       GetPixelInfo(image,&mean_pixel);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-feature.json

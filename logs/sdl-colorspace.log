@@ -1,0 +1,26 @@
+mutate: 98 mutants in MagickCore/colorspace\.c$, 4 functions
+mutate: baseline over 1057 cases in 0s
+  mutants: 25/98 (3s)
+  mutants: 50/98 (5s)
+  mutants: 75/98 (7s)
+  mutants: 98/98 (161s)
+
+mutate: 98 mutants, 161s
+  killed 93, survived 5 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 94.9%   overall: 94.9%
+
+  function                           total killed survived no-cov
+  ConvertGenericToRGB                   28     28        0      0
+  ConvertRGBToGeneric                   28     28        0      0
+  TransformsRGBImage                    23     19        4      0
+  sRGBTransformImage                    19     18        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  colorspace.c:800:7 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  colorspace.c:2130:7 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  colorspace.c:2283:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(gray),q);
+    x  colorspace.c:2284:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(gray),q);
+    x  colorspace.c:2285:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(gray),q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-colorspace.json
