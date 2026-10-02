@@ -2504,6 +2504,18 @@ GAP_COMMANDS += [
     "{C}/rose_alpha.miff -fill '#ff000080' -draw 'path \"M 10,10 Z\"'",
     "-size 80x30 xc:white -font {C}/Generic.ttf -weight 650 -pointsize 14 -annotate +5+20 Ab",
 ]
+# draw.c: degenerate primitives whose polygon has no edges (DrawPolygonPrimitive draws a
+# point), and the settings GetDrawInfo copies from the command line, which reach it only
+# through a draw info made afresh, as label: and caption: make them (-draw's comes from
+# the command line directly)
+GAP_COMMANDS += ["{C}/rose.miff -fill red -stroke none -draw '%s'" % primitive for primitive in (
+    "line 10,10 10,10", "polygon 10,10 10,10 10,10", "polyline 10,10 10,10", 'path "M 10,10 L 10,10"')]
+GAP_COMMANDS += [
+    "-font {C}/Generic.ttf -pointsize 14 -kerning 2 -interword-spacing 6 -stroke red -strokewidth 1 "
+    "-undercolor yellow -style italic -weight bold label:'Ab cd'",
+    "-font {C}/Generic.ttf -pointsize 14 -weight 650 -density 150 label:'Ab cd'",
+    "-font {C}/Generic.ttf -pointsize 14 -word-break break-all -size 40x caption:'Abcdefgh ijk'",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
