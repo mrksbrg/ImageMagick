@@ -3613,6 +3613,26 @@
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
   },
   {
+   "at": 18,
+   "file": "MagickCore/identify.c",
+   "function": "GetLocationStatistics",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((double) p[i] > channel_statistics[channel].maxima)",
+   "verdict": "equivalent",
+   "why": "a running maximum or minimum: an equal value replaces it with itself, and the locations are collected afterwards for every pixel equal to it"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/identify.c",
+   "function": "GetLocationStatistics",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((double) p[i] < channel_statistics[channel].minima)",
+   "verdict": "equivalent",
+   "why": "a running maximum or minimum: an equal value replaces it with itself, and the locations are collected afterwards for every pixel equal to it"
+  },
+  {
    "at": 29,
    "file": "MagickCore/identify.c",
    "function": "IdentifyImage",
