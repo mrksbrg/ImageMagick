@@ -1590,6 +1590,43 @@ image (they sum `p*log2(p)` over all pairs of grey levels, and some pair is alwa
 missing), so the new cases use noise images of two or three levels, which give finite
 values.
 
+## Catalogue refresh, and rounds for feature, resample and distort (Windows, 2026-10-02)
+
+**Refresh.** Every Windows file's survivors and no-coverage mutants were rerun against the
+catalogue as it stood on the morning of 2026-10-02 (10,683 cases, then 10,753; capped at
+1,500 cases, reports `mutation-refresh1002-<file>.json`). The cases the Mac and ERDC had
+added since the full runs reached almost none of them. **Only `morphology.c` gained: 26
+kills, adjusted 78% to 81%.** `blob.c` gained 8 (73% to 74%), and the other 32 files
+nothing.
+
+**Merging reports.** `gate.py` lets the later report win for a mutant, which is right for
+reruns of survivors, but not when a later, capped rerun meets a mutant an earlier round
+killed. The figures here merge every report of a file with a mutant counted as killed if
+any report killed it.
+
+**Rounds** (`selfcheck --repeat 8`: 0 nondeterministic each):
+
+| File | Cases | Killed | Adjusted before | After | Functions at 80% |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `feature.c` | 12 | 62 | 77% | **87%** | 6 to 7 of 8 |
+| `distort.c`, second round | 24 more (family of 107) | 91 more | 65% | **74%** | 7 to 8 of 13 |
+| `resample.c` | 32 | 7 | 71% | **74%** | 3 of 8 |
+
+- **`feature.c`:** with the noise images and the 37 equivalent mutants in the dead `Q`
+  block, `GetImageFeatures` is above 80%; left below: `RenderHoughLines` 69%.
+- **`distort.c`:** `SparseColorImage` 52% to over 80% (CMYK, alpha, gray, `-verbose`, close
+  points). Left below: `DistortImage` 62%, `GenerateCoefficients` 64%, `RotateImage` 75%,
+  `MagickRound` 50%.
+- **`resample.c`:** `ResamplePixelColor` 62% to 66% only. Most of its survivors are in
+  the shortcut that returns one colour for an area wholly outside the image. Flipping its
+  bounds tests mostly changes speed, not output, so they are candidates for `equivalent`
+  after a closer reading.
+
+Where the Windows files stand per function now: `constitute.c` and `semaphore.c` trusted;
+`feature.c` 7 of 8 functions at 80%, `colorspace.c` 8 of 12 (`RoundToYCC` 60%, and
+`ConvertGenericToRGB`, `ConvertRGBToGeneric`, `GetImageColorspaceType` at 0%),
+`morphology.c` 17 of 23.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
