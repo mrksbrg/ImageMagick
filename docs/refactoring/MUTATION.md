@@ -1724,6 +1724,45 @@ Hand checks of a mutant must run under the oracle's environment (`oracle.env_for
 it some commands (`-colors` on CMYK) give different output from run to run, and three
 `SetImageType` cases added on that evidence killed nothing (replaced in 0d0043cc1).
 
+## Rounds for stream, signature, quantize and resource (Windows, 2026-10-02, evening)
+
+Gated with `gate.py` as of 698cf5fa7 (a kill stands when reports are merged). Re-gating every
+Windows file with it gave the same figures as the merge used above. Each family
+`selfcheck --repeat 8`: 0 nondeterministic; the whole catalogue, 11,116 cases,
+`--repeat 2`: 0 nondeterministic.
+
+| File | Family, cases | Adjusted before | After | Below 80% after |
+| --- | --- | ---: | ---: | --- |
+| `stream.c` | `stream`, 56 more | 69% | **85%** | `QueueAuthenticPixelsStream`, `ValidatePixelCacheMorphology`, accessors no case calls |
+| `signature.c` | `signature`, 6 | 69% | **76%** | `SignatureImage` 76%, `TransformSignature` 73%, `FinalizeSignature` |
+| `quantize.c` | `quantizegap`, 17 | 74% | **81%** | `PosterizeImage` 50%, `KmeansImage` 73%, `RemapImage(s)`, small helpers |
+| `resource.c` | `resource`, 7 | 81% | **94%** | `AcquireUniqueFileResource` 56%, `AsynchronousResourceComponentTerminus` |
+
+- **`stream.c`:** `magick stream` with maps BGRA and BGRP (their own fast paths) and RO
+  and GI (the generic loop's opacity and intensity) at every storage type:
+  `StreamImagePixels` 79% to 99%. In `verdicts.json`, 12 `unobservable` in the destroy
+  paths (they only change whether buffers are freed, or log with logging off) and 1
+  `unresolved` (a heap buffer freed with `munmap`). `ValidatePixelCacheMorphology`'s
+  mutants mostly force a needless reallocation; a stream whose frames change geometry
+  might kill some, not tried.
+- **`signature.c`:** `%#` of small images whose hashed length ends at 56 or 60 mod 64,
+  where `FinalizeSignature` needs an extra padding block (every catalogue image ended
+  below 56). One kill. In `verdicts.json`, 5 `unobservable` (memset sizes that write
+  zeros over bytes set right after or past the block, and a digest word never read) and
+  1 `unresolved` (the boundary at 55 mod 64: image signatures hash multiples of 4 bytes,
+  random.c's lengths unchecked).
+- **`quantize.c`:** `-verbose -colors 16 info:` (the quantization error,
+  `GetImageQuantizeError` 0% to over 80%), posterize with dithering and per channel,
+  k-means with iterations and seed colours, Floyd-Steinberg on alpha, CMYK and gray: 58
+  kills.
+- **`resource.c`:** `-list resource` under a time limit of whole years, months, weeks,
+  days, hours, minutes and seconds (a `policy.xml` per case; `-limit` before `-list` is
+  rejected): `FormatTimeToLive` 0% to 100%. In `verdicts.json`, 5 `unobservable` (Resource
+  event logging, a retry counter, a discarded result) and 1 `unresolved` (an unfilled
+  temporary-name template, which fails only with two temporary files at once). Left: the
+  fallback when creating a temporary file fails (7 mutants, unreached), and the terminus
+  run at abnormal exit.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
