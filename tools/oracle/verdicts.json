@@ -1202,6 +1202,56 @@
    "why": "after a complete sendfile the mutant does not return but falls through (count is not negative), rewinds both files and copies them again with the read/write loop: the same bytes, so the same clone"
   },
   {
+   "at": 14,
+   "file": "MagickCore/cache.c",
+   "function": "ClosePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return(status == -1 ? MagickFalse : MagickTrue);",
+   "verdict": "equivalent",
+   "why": "every caller discards ClosePixelCacheOnDisk's result ((void) at all nine call sites)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCacheOnDisk",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->file != -1)",
+   "verdict": "unobservable",
+   "why": "the old descriptor is not closed when the cache file is reopened: a descriptor leak, nothing reads through it"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "extent=(MagickOffsetType) length-1;",
+   "verdict": "equivalent",
+   "why": "the marker byte goes one past the end instead of at it: the file is a byte longer, and nothing reads past length"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->synchronize != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "changes only how much disk is reserved (posix_fallocate called when not synchronizing, or over a longer range); the cache's contents and the output are the same, on a file system that supports fallocate"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if (posix_fallocate(cache_info->file,offset+1,extent-offset) != 0)",
+   "verdict": "unobservable",
+   "why": "changes only how much disk is reserved (posix_fallocate called when not synchronizing, or over a longer range); the cache's contents and the output are the same, on a file system that supports fallocate"
+  },
+  {
    "at": 12,
    "file": "MagickCore/channel.c",
    "function": "SetImageAlphaChannel",
