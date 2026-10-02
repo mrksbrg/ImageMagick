@@ -12261,6 +12261,376 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].red) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].red) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].red) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].red) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "Q[z][y].direction[i].red+=cooccurrence[z][x].direction[i].red*",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "cooccurrence[y][x].direction[i].red/density_x[z].direction[i].red/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 65,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "cooccurrence[y][x].direction[i].red/density_x[z].direction[i].red/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].green) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].green) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "(fabs(density_y[x].direction[i].red) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 1,
+   "src": "(fabs(density_y[x].direction[i].red) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 65,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "Q[z][y].direction[i].green+=cooccurrence[z][x].direction[i].green*",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "cooccurrence[y][x].direction[i].green/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "density_x[z].direction[i].green/density_y[x].direction[i].red;",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].blue) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].blue) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].blue) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].blue) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 63,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "Q[z][y].direction[i].blue+=cooccurrence[z][x].direction[i].blue*",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "cooccurrence[y][x].direction[i].blue/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "density_x[z].direction[i].blue/density_y[x].direction[i].blue;",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 33,
+   "src": "if (image->colorspace == CMYKColorspace)",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].black) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].black) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].black) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].black) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 65,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "Q[z][y].direction[i].black+=cooccurrence[z][x].direction[i].black*",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "cooccurrence[y][x].direction[i].black/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "density_x[z].direction[i].black/density_y[x].direction[i].black;",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 33,
+   "src": "if (image->alpha_trait != UndefinedPixelTrait)",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].alpha) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fabs(density_x[z].direction[i].alpha) > MagickEpsilon) &&",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].alpha) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(fabs(density_y[x].direction[i].alpha) > MagickEpsilon))",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "cooccurrence[z][x].direction[i].alpha*",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "cooccurrence[y][x].direction[i].alpha/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "density_x[z].direction[i].alpha/",
+   "verdict": "equivalent",
+   "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
   }
  ]
 }

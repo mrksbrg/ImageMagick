@@ -1295,6 +1295,42 @@ def _composite_gap_cases():
                   ["-define", define, "-compose", "over", "-composite"])
 
 
+# feature.c: the information measures of correlation sum p*log2(p) over every
+# pair of grey levels, so they print NaN unless every pair occurs in every
+# direction: in the catalogue's images they always did, and no mutant there
+# could show. Noise images with two or three levels give finite values; with
+# CMYK and alpha for those channels, and distances at and past the image size.
+# The images are made in the command and printed with -verbose info:, and the
+# date properties removed, which would otherwise date each run.
+_NOISE = ["-seed", "5", "-size", "48x48", "xc:", "+noise", "Random"]
+FEATURE_IMAGES = [
+    ("gray, 2 levels", ["-seed", "3", "-size", "32x32", "xc:", "+noise", "Random",
+                        "-colorspace", "gray", "-threshold", "50%"]),
+    ("gray, 3 levels", _NOISE + ["-colorspace", "gray", "-posterize", "3"]),
+    ("rgb, 2 levels", _NOISE + ["-posterize", "2"]),
+    ("cmyk, 2 levels", _NOISE + ["-colorspace", "CMYK", "-posterize", "2"]),
+    ("rgba, 2 levels", _NOISE + ["-posterize", "2", "(", "-seed", "9", "-size", "48x48",
+                                 "xc:", "+noise", "Random", "-colorspace", "gray",
+                                 "-threshold", "50%", ")", "-alpha", "off", "-compose",
+                                 "CopyOpacity", "-composite"]),
+]
+_NO_DATES = ["+set", "date:create", "+set", "date:modify", "+set", "date:timestamp"]
+
+
+def _feature_cases():
+    for label, make in FEATURE_IMAGES:
+        for distance in ("1", "2"):
+            yield _case("feature", "features %s distance %s" % (label, distance),
+                        [make + _NO_DATES + ["-precision", "17", "-features", distance,
+                                             "-verbose", "info:"]], [])
+    small = ["-seed", "3", "-size", "8x8", "xc:", "+noise", "Random", "-colorspace", "gray",
+             "-threshold", "50%"]
+    for distance in ("7", "8"):
+        yield _case("feature", "features 8x8 distance %s" % distance,
+                    [small + _NO_DATES + ["-precision", "17", "-features", distance,
+                                          "-verbose", "info:"]], [])
+
+
 def _blob_path_cases():
     yield _case("blob", "inline svg through a temporary file",
                 [[img("rose"), "-resize", "4x4", "-define", "png:exclude-chunk=date,time",
@@ -2436,7 +2472,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _feature_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
