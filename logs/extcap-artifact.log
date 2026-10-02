@@ -1,0 +1,26 @@
+mutate: 7 mutants in MagickCore/artifact\.c$, 5 functions
+mutate: baseline over 10682 cases in 0s
+  mutants: 7/7 (115s)
+
+mutate: 7 mutants, 115s
+  killed 0, survived 7 (7 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CloneImageArtifacts                    3      0        3      0
+  DeleteImageArtifact                    1      0        1      0
+  DestroyImageArtifacts                  1      0        1      0
+  GetImageArtifact                       1      0        1      0
+  SetImageArtifact                       1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc artifact.c:124:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:132:28 cxx_ne_to_eq               if (image->artifacts != (void *) NULL)
+    xc artifact.c:133:9 cxx_remove_void_call       DestroyImageArtifacts(image);
+    xc artifact.c:219:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:253:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:297:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:472:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-artifact.json
