@@ -2171,6 +2171,15 @@ GAP_COMMANDS += [
     "{C}/rose.miff -define identify:convex-hull=true -verbose -write info: +verbose",
     "{C}/rose.miff -set comment " + "7" * 100 + " -verbose -write info: +verbose",
 ]
+# draw.c: square line caps (TraceSquareLinecap), and an image primitive under an affine
+# transform and a rotation (DrawAffineImage, AffineEdge, InverseAffineMatrix). Gradients'
+# reflect and repeat spreads are API-only (gradient: always pads, MVG has no spread), and
+# draw:render-bounding-rectangles aborts (exit 134), so neither has a case
+GAP_COMMANDS += [
+    "-size 60x40 xc:white -stroke blue -strokewidth 6 -draw 'stroke-linecap square line 10,10 50,30'",
+    "-size 80x60 xc:white -draw \"affine 1,0.3,0,1,0,0 image over 5,5 40,30 '{C}/rose.miff'\"",
+    "-size 80x60 xc:white -draw \"rotate 20 image over 10,5 40,30 '{C}/rose.miff'\"",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
