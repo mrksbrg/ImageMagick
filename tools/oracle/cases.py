@@ -2496,6 +2496,14 @@ GAP_COMMANDS += ["-size 60x40 xc:white -fill none -stroke black -strokewidth 2 -
                      "stroke-dasharray 6 3", "stroke-dasharray 6 3 stroke-dashoffset 2",
                      "stroke-dasharray 6 3 stroke-dashoffset 8", "stroke-dasharray 6 3 stroke-dashoffset 20",
                      "stroke-dasharray 5 2 1")]
+# draw.c: the alpha primitive's methods (only floodfill had a case), a single-point path,
+# and a numeric font weight (GetDrawInfo's fallback when the weight is not a name)
+GAP_COMMANDS += ["{C}/rose.miff -fill '#ff000080' -draw 'alpha 10,10 %s'" % method
+                 for method in ("point", "replace", "filltoborder", "reset")]
+GAP_COMMANDS += [
+    "{C}/rose_alpha.miff -fill '#ff000080' -draw 'path \"M 10,10 Z\"'",
+    "-size 80x30 xc:white -font {C}/Generic.ttf -weight 650 -pointsize 14 -annotate +5+20 Ab",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
