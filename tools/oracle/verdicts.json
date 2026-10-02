@@ -14821,6 +14821,76 @@
    "src": "(image_info->signature != MagickCoreSignature))",
    "verdict": "unobservable",
    "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (montage_info == (MontageInfo *) NULL)",
+   "verdict": "equivalent",
+   "why": "as compiled: on the mutated path montage_info is dereferenced at once, so the compiler may take it to be non-NULL and fold the test; run by hand with the switch set, a montage with the NULL the command line passes behaves as the original"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->geometry != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->tile != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->title != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->frame != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->texture != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->font != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
   }
  ]
 }
