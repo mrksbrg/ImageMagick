@@ -2017,6 +2017,15 @@ No other survivor is open in either file.
 the sixth is the semaphore's lazy initialisation, excused by `classify.py`. **Adjusted 38% to
 100%, trusted**, with no open survivor.
 
+### resource.c: one function short (Windows, 2026-10-02)
+
+`AcquireUniqueFileResource` (56%) is the one function below 80% that is not API only. Its 7
+unreached mutants are the fallback after `mkstemp` fails. The oracle sets
+`MAGICK_TEMPORARY_PATH` to the case directory, and a `temporary-path` policy does not override
+it (line coverage: `mkstemp` succeeded on every call under such a policy), so no case can make
+it fail. The path is reachable in real use (an unwritable temporary directory), so it is not
+excused: `resource.c` stays at 94%, not trusted, with this written down.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
