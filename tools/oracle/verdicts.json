@@ -13031,6 +13031,46 @@
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unobservable",
    "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyHCubeInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "} while (cube_info->node_queue != (HNodes *) NULL);",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "number_children=image->alpha_trait == UndefinedPixelTrait ? 8UL : 16UL;",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) number_children; i++)",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (node_info->list != (PixelInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
   }
  ]
 }
