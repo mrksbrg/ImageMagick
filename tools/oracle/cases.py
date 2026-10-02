@@ -2382,6 +2382,20 @@ GAP_COMMANDS += [
     "{C}/rose.miff -crop 20x20+70+0",
     "{C}/rose.miff -repage 0x0+5+5 -crop 10x10+0+0",
 ]
+# layer.c: frames lying partly off the canvas (a negative offset, and one past the right
+# and bottom edges) under coalesce, dispose (first frame off-canvas: DisposeImages only
+# reads the first frame's offsets) and optimize-transparency; -layers composite with
+# compose:clip-to-self=false
+GAP_COMMANDS += [
+    "-dispose Background -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) "
+    "( -size 8x8 xc:green -repage 20x16+15+12 ) -layers coalesce",
+    "-dispose Background ( -size 8x8 xc:blue -repage 20x16-3-2 ) ( -size 20x16 xc:red ) "
+    "( -size 8x8 xc:green -repage 20x16+15+12 ) -layers dispose",
+    "-dispose Previous -size 20x16 xc:red ( -size 8x8 xc:blue -repage 20x16-3-2 ) "
+    "( -size 8x8 xc:green -repage 20x16+15+12 ) -layers optimize-transparency",
+    "-size 20x16 xc:red ( -size 8x8 xc:blue -repage +15+12 ) null: ( -size 20x16 xc:yellow ) "
+    "-define compose:clip-to-self=false -layers composite",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
