@@ -1805,6 +1805,16 @@ Windows file with it gave the same figures as the merge used above. Each family
   Known upstream issues), so the cases keep the default compose. `option.c` is set aside:
   the drivers reject an unknown option name before `GetCommandOptionFlags` sees it, so its
   hyphen, underscore and `|` branches look unreachable from the command line.
+- **`distort.c`, family `distortargs` (25 cases):** argument counts the distort table never
+  gave (Affine with one and two points, Arc with one to four arguments, Polar and DePolar
+  with each optional argument, the -1 radius and too many, Barrel with three and eight,
+  out-of-range fields of view, too few points for Perspective and Bilinear,
+  `shepards:power`), and Arc rotations at `MagickRound`'s tie. 56 kills: adjusted 83% to
+  **88%**, `GenerateCoefficients` 69% to 84%. In `verdicts.json`: `RotateImage`'s two
+  `shear.x` mutants are `equivalent` (it is used only as `fabs(shear.x) < MagickEpsilon`),
+  and `MagickRound`'s `<` to `<=` is `unresolved` (it differs only on an exact .5). 11 of
+  12 functions at 80%; **`distort.c` is one mutant short of trusted** (`MagickRound`,
+  75%).
 
 ## How to use this in the campaign
 

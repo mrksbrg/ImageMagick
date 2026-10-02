@@ -13441,6 +13441,16 @@
    "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
    "verdict": "equivalent",
    "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/distort.c",
+   "function": "MagickRound",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((x-floor(x)) < (ceil(x)-x))",
+   "verdict": "unresolved",
+   "why": "differs only on an exact .5 fraction (rounds down instead of up); Arc with rotations 270 and 90, whose start angle normalises to half a turn and none, did not kill it, likely since the angle is wrapped again per pixel"
   }
  ]
 }
