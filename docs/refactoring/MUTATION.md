@@ -1776,6 +1776,12 @@ Windows file with it gave the same figures as the merge used above. Each family
   `distort:scale` 2 and 0.05, and a perspective past the horizon. 108 kills: adjusted 74% to
   **83%**; `DistortImage` 62% to over 80%. Below 80%: `GenerateCoefficients` 69%,
   `RotateImage` 75%, `MagickRound` 50%. `resample.c` 1 more kill (74%).
+- **`fx.c`, family `fxgap2` (70 cases):** 35 `-fx` expressions on an image with alpha and
+  on CMYK, with granite second: `!=`, `<=`, `>=`, `||`, `!`, `jinc`, `clamp`, `drc`,
+  `squish`, `++` on a user symbol, the channel symbols `a b c g k m o r y`, hue,
+  saturation, lightness and intensity on `p{}` and `p[]` lookups (also of `u[1]`, `v`,
+  `s`), the loops and `printsize`. 59 kills: adjusted 70% to **74%**, `ExecuteRPN` 59% to
+  71%, 34 of 64 functions at 80%.
 
 ## How to use this in the campaign
 
