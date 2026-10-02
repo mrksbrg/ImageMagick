@@ -1627,6 +1627,30 @@ Where the Windows files stand per function now: `constitute.c` and `semaphore.c`
 `ConvertGenericToRGB`, `ConvertRGBToGeneric`, `GetImageColorspaceType` at 0%),
 `morphology.c` 17 of 23.
 
+## colorspace.c: trusted under the per-function bar (Windows, 2026-10-02)
+
+Sixteen cases (family `composite`): Hue, Saturate, Luminize and Colorize under
+`compose:colorspace` sRGB, Gray, XYZ and Lab. sRGB and Gray are not in the switches of
+`ConvertRGBToGeneric` and `ConvertGenericToRGB`, so they take the default branches, which
+nothing reached (both functions at 0%). Rerun over `colorspace.c` and `composite.c`:
+`selfcheck --repeat 8`, 41 cases: 0 nondeterministic; 6 more kills in `colorspace.c`, both
+functions now at 100%; `composite.c` unchanged at 82%. Two survivors in `RoundToYCC` are
+`equivalent` (`verdicts.json`): at `value == 0.0` and `value == 1388.0` the mutated clamps
+fall through to the rounding, which gives the same index.
+
+**`colorspace.c`: adjusted 88% to 89%, every function at 80% or more, trusted.** Merged
+over every report (full, uncapped, `newcases`, `nocov`, the composite rounds and the
+refresh), with a mutant counted as killed if any report killed it. Out of reach:
+`GetImageColorspaceType` (1 mutant), an API function nothing in ImageMagick calls. Open
+survivors, by line (unmatched, or on unreached lines):
+
+- `TransformsRGBImage` (32): 2099, 2106 (2), 2125, 2127, 2183, 2185, 2233, 2256, 2267,
+  2276, 2341, 2343, 2428, 2434, 2436, 2443, 2445 (2), 2449, 2511, 2573, 2593, 2595, 2597,
+  2628, 2683, 2690, 2832, 2835, 2851, 2896.
+- `sRGBTransformImage` (23): 767, 774 (2), 844, 901, 1106, 1165, 1227, 1247, 1249, 1251,
+  1401 (3), 1403, 1407, 1411, 1468, 1490, 1493, 1510, 1518, 1535.
+- `ConvertHSLToRGB` 328 and `ConvertRGBToHSL` 640 (`<=` to `<`).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
