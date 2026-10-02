@@ -2420,6 +2420,14 @@ def _quantum_gap8_cases():
                  ["-size", "7x5", "-depth", depth] + extra + ["graya:g.raw"] + FLOAT_OUT + ["dec.miff"]]
         yield _case("quantumgap8", "a 14x5 gray file read as 7x5 gray-alpha, -depth %s %s"
                     % (depth, " ".join(extra)), steps, ["g.raw", "dec.miff"])
+    # ImportIndexQuantum at 1, 2 and 4 bits: palette TIFFs keep the palette's
+    # own bits per sample (MIFF stores indexes in 8 bits or more), at an odd
+    # width, under both polarities (line probe: the 1- and 4-bit branches run).
+    for (colors, depth), pol in itertools.product((("2", "1"), ("4", "2"), ("16", "4")), ([], _MIN_IS_WHITE)):
+        steps = [[img("rose"), "-resize", "7x5!", "-colors", colors, "-type", "Palette", "-depth", depth,
+                  "tiff:p.tif"], pol + ["p.tif"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantumgap8", "7x5 palette TIFF, %s colours at %s bits%s"
+                    % (colors, depth, ", min-is-white" if pol else ""), steps, ["p.tif", "dec.miff"])
 
 
 def _resample_cases():
