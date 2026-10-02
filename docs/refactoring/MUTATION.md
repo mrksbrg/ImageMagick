@@ -2045,6 +2045,36 @@ trusted.** Open survivors: `MontageImageList` 441, 443, 445, 446, 643, 645, 865 
 505, 516, 518, 528, 559, 577, 580, 595, 599, 601, 605, 612, 652, 678, 712, 730, 757, 758,
 844, 845, 853, 870.
 
+## morphology.c: trusted (Windows, 2026-10-02)
+
+Four rounds, routes checked first: `morphgap` (`convolve:scale` with a blending factor on
+single and multi-kernel lists, `UnityAddKernelInfo`; 6 kills), `morphgap2`
+(`-define debug=true`, the artifact `MorphologyApply` reads to print changes per iteration
+and stage, with iterations to convergence and multi-stage methods; 28 kills), `morphgap3`
+(`morphology:showKernel` for forty built-in kernels and arguments no case built; 107 kills)
+and `morphgap4` (`MorphologyImage`'s `convolve:bias` and `morphology:compose` defines; 2
+kills). `selfcheck --repeat 8` over each family: 0 nondeterministic.
+
+**`morphology.c`: adjusted 81% to 88%, every function at 80% or more, trusted.** Out of
+reach: `ZeroKernelNans` (5), which nothing calls. Open survivors, by line:
+
+- `AcquireKernelBuiltIn` (45): 1065, 1067, 1117, 1121, 1154, 1188, 1195, 1288, 1308, 1315,
+  1453, 1537, 1548, 1573, 1582, 1586, 1587, 1606, 1630, 1650, 1669, 1697, 1705, 1706, 1707,
+  2080, 2098, 2116, 2139, 2159
+- `MorphologyPrimitiveDirect` (24): 3351, 3363, 3365, 3382, 3394, 3396, 3407, 3424, 3425,
+  3426, 3515, 3530, 3546, 3559, 3561, 3571, 3572, 3588, 3589, 3590, 3596
+- `MorphologyPrimitive` (22): 2746, 2749, 2767, 2770, 2780, 2969, 2971, 2999, 3001, 3034,
+  3036, 3040, 3042, 3052, 3074, 3103, 3152, 3166, 3189, 3191
+- `RotateKernelInfo` (19): 4245, 4248, 4276, 4278, 4286, 4350, 4351, 4361, 4364, 4370, 4394
+- `ParseKernelArray` (8): 270, 282, 296, 297, 339, 349, 362
+- `MorphologyApply` (6): 3668, 3669, 3737, 3926, 4035, 4037
+- `ParseKernelName` (5): 408, 455, 457, 472
+- `ScaleKernelInfo` (4): 4564, 4585, 4591, 4592
+- `AcquireKernelInfo` (2): 518, 537
+- `CalcKernelMetaData` (1): 2470
+- `MorphologyImage` (1): 4156
+- `ShowKernelInfo` (1): 4660
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
