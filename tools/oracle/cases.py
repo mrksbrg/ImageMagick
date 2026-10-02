@@ -2631,6 +2631,25 @@ GAP_COMMANDS += ["-size 40x30 xc:white -fill navy -stroke %s -draw '%s'" % (stro
                      ("none", "circle 20,15 20,25"), ("red -strokewidth 1", "line 5.5,5 5.5,25"),
                      ("red -strokewidth 1", "line 5,5.5 35,5.5"), ("red -strokewidth 2", "rectangle 10.5,10.5 30.5,20.5"),
                      ("none +antialias", "polygon 10.5,10.5 30.5,10.5 20.5,25.5"))]
+# image.c: SyncImageSettings with chromaticity points other than sRGB's own (the earlier case
+# used sRGB's values, which the image already had), with one value and with two; unit
+# conversions on images whose resolution comes from the file, with -units but no -density
+# (a -density option sets the resolution again after the conversion); -background on an
+# image that carries its own
+GAP_COMMANDS += [
+    "{C}/rose.miff -blue-primary 0.2,0.1 -green-primary 0.25,0.65 -red-primary 0.6,0.3 "
+    "-white-point 0.32,0.34 -resize 50%",
+    "{C}/rose.miff -blue-primary 0.2 -green-primary 0.25 -red-primary 0.6 -white-point 0.32 -resize 50%",
+    "{C}/rose.miff -background red -rotate 15",
+]
+GAP_STEP_CASES += [
+    ("resolution in inches converted to centimetres",
+     [["{C}/rose.miff", "-density", "300", "-units", "PixelsPerInch", "x.miff"],
+      ["x.miff", "-units", "PixelsPerCentimeter", "-resize", "50%", "out.miff"]], {}),
+    ("resolution in centimetres converted to inches",
+     [["{C}/rose.miff", "-density", "100", "-units", "PixelsPerCentimeter", "x.miff"],
+      ["x.miff", "-units", "PixelsPerInch", "-resize", "50%", "out.miff"]], {}),
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
