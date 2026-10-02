@@ -1172,6 +1172,36 @@
    "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
   },
   {
+   "at": 23,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (cache_info->length < 0x7ffff000)",
+   "verdict": "equivalent",
+   "why": "sends a cache that sendfile would copy to the read/write loop below instead, which copies the same bytes (and with sendfile, a cache over 2 GiB to sendfile, which copies it whole or falls back to the loop); the clone is the same file either way"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (cache_info->length < 0x7ffff000)",
+   "verdict": "equivalent",
+   "why": "sends a cache that sendfile would copy to the read/write loop below instead, which copies the same bytes (and with sendfile, a cache over 2 GiB to sendfile, which copies it whole or falls back to the loop); the clone is the same file either way"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (count == (ssize_t) cache_info->length)",
+   "verdict": "equivalent",
+   "why": "after a complete sendfile the mutant does not return but falls through (count is not negative), rewinds both files and copies them again with the read/write loop: the same bytes, so the same clone"
+  },
+  {
    "at": 12,
    "file": "MagickCore/channel.c",
    "function": "SetImageAlphaChannel",
