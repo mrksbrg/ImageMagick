@@ -1668,6 +1668,46 @@ from the TIFF coder, and `SetQuantumMetaChannel` and `SetQuantumPad` from the TI
 coders (meta channels, padding). They need cases on such files. `histogram.c` (88%):
 `MinMaxStretchImage` 60%, `DestroyColorCube` 60%, `IsPaletteImage` 67%.
 
+## Rounds for quantum, exception, histogram and matrix (Windows, 2026-10-02, late afternoon)
+
+Each family `selfcheck --repeat 8`: 0 nondeterministic. Figures merge every report of a
+file, with a mutant counted as killed if any report killed it.
+
+| File | Family, cases | Adjusted before | After | Below 80% after |
+| --- | --- | ---: | ---: | --- |
+| `quantum.c` | `metachannel`, 5 | 89% | **94%** | `SetQuantumMetaChannel` 60%, `SetQuantumPad` 0% |
+| `quantum-import.c` | `metachannel` | 58% | 61% | many (typed import routines) |
+| `quantum-export.c` | `metachannel` | 66% | 68% | many |
+| `exception.c` | `exception`, 1 | 96% | 96% | `InheritException` 0%, `SetErrorHandler` |
+| `histogram.c` | `histogram`, 4 | 88% | **93%** | `IsPaletteImage` 67% |
+| `matrix.c` | `matrix`, 3 | 47% | **70%** | 11 of 15 functions |
+| `feature.c` | `matrix` | 87% | 87% | `RenderHoughLines` 69% |
+
+- **`quantum.c`:** an image with a meta channel (`-combine` of five gray images) written as
+  TIFF, contiguous and planar at 8 and 16 bits, and as PSD, then read back, reaches both
+  functions. Open: `SetQuantumMetaChannel`'s bounds (a meta channel of -1, or one equal to
+  the count, which the TIFF reader never passes), and `SetQuantumPad`'s overflow guard and
+  logging (it is mostly called with a pad of 0).
+- **`exception.c`:** a `policy.xml` of the case's own that denies the GIF module makes
+  `ReadImage` inherit the policy error (static.c), which reaches `InheritException`. Its
+  two mutants survive: most likely the same NotAuthorized is thrown directly into the
+  command's exception by an earlier lookup, and duplicates are dropped. `unresolved` until
+  probed. `SetErrorHandler` is called only by the X11 display and animate code.
+- **`histogram.c`:** `-auto-level` on a flat image and a flat channel kills
+  `MinMaxStretchImage`'s `fabs(min-max)` mutants (60% to over 80%). In `verdicts.json`:
+  its two inverted return values are `unobservable` (`AutoLevelImage`'s result is cast to
+  `(void)` in operation.c and mogrify.c), and four mutants in `DestroyColorCube` and
+  `DestroyHCubeInfo` are `unobservable` (they change only which nodes are freed: a leak).
+  Open: `IsPaletteImage`'s `<=` at `MaxColormapSize`. A PseudoClass image of exactly 65,536
+  colours (`+dither -colors 65536`) did not kill it; that image reports `TrueColor` either
+  way. Other open survivors: `CheckImageColors` 728, 755, 778; `UniqueColorsToImage` 1208
+  (unreached), 1211, 1212; `GetNumberColors` 1115 (unreached), 1122;
+  `ClassifyImageColors` 318.
+- **`matrix.c`:** `-hough-lines` with `hough-lines:accumulator` (the only caller of
+  `MatrixToImage`) and with `-limit memory 0 -limit map 0`, which keeps the matrix in a
+  file. `MatrixToImage` 0% to 79%, `ReadMatrixElements` 60%, `WriteMatrixElements` 40%,
+  `SetMatrixExtent` still 0%.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
