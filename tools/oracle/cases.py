@@ -2456,6 +2456,13 @@ pop graphic-context
 GAP_STEP_CASES += [("mvg with every keyword no case used",
                     [["-size", "120x80", "xc:white", "-draw", "@all.mvg", "out.miff"]],
                     {"all.mvg": _MVG_ALL_KEYWORDS})]
+# draw.c: stroke joins on a polyline that turns both ways along horizontal and vertical
+# segments, and on a closed acute triangle, under each join with miter limits of 1 and 10
+# (TraceStrokePolygon's left and right turns, axis-aligned slopes, closed paths)
+GAP_COMMANDS += ["-size 60x50 xc:white -fill none -stroke navy -strokewidth 5 -draw "
+                 "\"stroke-linejoin %s stroke-miterlimit %d polyline 10,10 50,10 50,40 20,40 20,20 35,25 "
+                 "path 'M 10,45 L 30,5 L 50,45 Z'\"" % (join, limit)
+                 for join in ("miter", "round", "bevel") for limit in (1, 10)]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
