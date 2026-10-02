@@ -1383,9 +1383,13 @@ become the file's figures only after ERDC's `conf` rerun.
 **A case can now bring its own configuration.** The oracle sets `HOME` to the case
 directory, and ImageMagick searches `$HOME/.config/ImageMagick/` too. Case files may now
 sit in subdirectories (`oracle.py`, `966a1a639`). It works for **`policy.xml` and
-`type.xml`**, which merge every file found; it does not for `locale.xml` and `log.xml`
-(only the first file found is read, the build's), and a `policy.xml`'s `<include>` parses
-but never loads (a `type.xml` include does). This opens code that earlier sections called
+`type.xml`**, which merge every file found. *Corrected 2026-10-02 evening:* a case's
+`locale.xml` and `log.xml` are read as well (both appear in `-list locale` and `-list log`);
+locale cases compare, but `-list log` orders its files by path, so the build's own `log.xml`
+sorts before or after the case's depending on where the build lives, and two builds of the
+same code differ: no log case can be compared. `configure.xml` really is first-only
+(`AcquireConfigureCache` stops at the first that loads, the build's). A `policy.xml`'s and a
+`mime.xml`'s `<include>` never loads (a `type.xml` include does). This opens code that earlier sections called
 out of reach: `LoadTypeCache`, shredding (`ShredMagickMemory`, `ShredFile`), the
 file-backed virtual memory, rights by path, directory and pattern, symlink protection.
 
