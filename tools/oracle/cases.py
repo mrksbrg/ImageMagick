@@ -2162,6 +2162,18 @@ GAP_COMMANDS += [
     "compare -metric PHASH -subimage-search {C}/rose.miff ( {C}/rose_blur.miff -crop 20x20+30+20 +repage )",
     "compare -metric RMSE -subimage-search {C}/rose.miff ( {C}/rose_blur.miff -crop 20x20+30+20 +repage )",
 ]
+# identify.c, second round: locations and moments on a Lab image (the default branches of
+# the colourspace switches; features on Lab take minutes, so they are left out), the convex
+# hull, a montage's tile directory, a property longer than 80 characters
+GAP_COMMANDS += [
+    "{C}/rose.miff -colorspace Lab -define identify:locate=maximum -write info: +define identify:locate",
+    "{C}/rose.miff -colorspace Lab -define identify:moments=true -verbose -write info: +verbose",
+    "{C}/rose.miff -define identify:convex-hull=true -verbose -write info: +verbose",
+    "{C}/rose.miff -set comment " + "7" * 100 + " -verbose -write info: +verbose",
+]
+GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
+                    [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
+                     ["identify", "-verbose", "m.miff"]], {})]
 GAP_STEP_CASES += [("exif:sync-image=%s on a JPEG with EXIF" % value,
                     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient",
                       "BottomLeft", "x.jpg"],
