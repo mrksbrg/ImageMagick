@@ -2036,6 +2036,15 @@ take it to be non-NULL and fold the test: `equivalent` as compiled, as the Mac f
 NULL-pointer mutants (d50e759cc). The six field copies after it run only for a non-NULL
 `montage_info`, which only MagickWand and the X11 display pass: `unobservable`.
 
+## montage.c: trusted (Windows, 2026-10-02)
+
+Rounds `montagegap` (tile counts, `GetMontageGeometry` to 100%) and `montagegap2` (frames
+picked out of order, which `MontageImageList` sorts by scene: `SceneCompare` to 100%), and the
+`CloneMontageInfo` verdicts above. **Adjusted 78% to 85%, every function at 80% or more,
+trusted.** Open survivors: `MontageImageList` 441, 443, 445, 446, 643, 645, 865 (unreached),
+505, 516, 518, 528, 559, 577, 580, 595, 599, 601, 605, 612, 652, 678, 712, 730, 757, 758,
+844, 845, 853, 870.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
