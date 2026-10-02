@@ -1260,6 +1260,41 @@ def _fx_gap_cases():
                       "null:"]], [])
 
 
+# composite.c: compose:args forms the catalogue never gave. Blur with an
+# ellipse, an angle and an angle range; displace and distort with percent,
+# aspect (!) and centre offsets; dissolve above 100% and below 0; blend with
+# both factors; threshold with and without its threshold; the blends' iteration
+# arguments; and the compose:illuminant and compose:colorspace defines.
+COMPOSE_ARGS = [
+    ("blur", "3", "gray8"), ("blur", "3x1.5", "gray8"), ("blur", "3x1.5+30", "gray8"),
+    ("blur", "3x1.5+0+90", "gray8"),
+    ("displace", "50x50%", "gray8"), ("displace", "50x50%!", "gray8"),
+    ("displace", "20x10!", "gray8"), ("displace", "20x10+5+3", "gray8"),
+    ("displace", "20x10+5+3!", "gray8"),
+    ("distort", "50x50%", "gray8"), ("distort", "50x50%!", "gray8"),
+    ("distort", "20x10!", "gray8"), ("distort", "20x10+5+3", "gray8"),
+    ("distort", "20x10+5+3!", "gray8"),
+    ("dissolve", "150", "rose_alpha"), ("dissolve", "60x150", "rose_alpha"),
+    ("dissolve", "-10", "rose_alpha"), ("blend", "30x80", "rose_blur"),
+    ("threshold", "0.5x0.1", "rose_blur"), ("threshold", "0.5", "rose_blur"),
+    ("saliency-blend", "20x0.001+5", "rose_patch"),
+    ("seamless-blend", "20x0.001+5", "rose_patch"),
+]
+COMPOSE_DEFINES = ["compose:illuminant=nosuch", "compose:colorspace=nosuch",
+                   "compose:illuminant=A"]
+
+
+def _composite_gap_cases():
+    for c, args, src in COMPOSE_ARGS:
+        yield _op("composite", "rose %s compose:args=%s %s" % (c, args, src),
+                  [img("rose"), img(src)],
+                  ["-define", "compose:args=" + args, "-compose", c, "-composite"])
+    for define in COMPOSE_DEFINES:
+        yield _op("composite", "rose over rose_alpha %s" % define,
+                  [img("rose"), img("rose_alpha")],
+                  ["-define", define, "-compose", "over", "-composite"])
+
+
 def _blob_path_cases():
     yield _case("blob", "inline svg through a temporary file",
                 [[img("rose"), "-resize", "4x4", "-define", "png:exclude-chunk=date,time",
@@ -2401,7 +2436,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
