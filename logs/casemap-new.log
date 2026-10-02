@@ -1,0 +1,47 @@
+  casemap: 500/11231 (3s)
+  casemap: 1000/11231 (6s)
+  casemap: 1500/11231 (9s)
+  casemap: 2000/11231 (12s)
+  casemap: 2500/11231 (14s)
+  casemap: 3000/11231 (18s)
+  casemap: 3500/11231 (21s)
+  casemap: 4000/11231 (23s)
+  casemap: 4500/11231 (26s)
+  casemap: 5000/11231 (28s)
+  casemap: 5500/11231 (31s)
+  casemap: 6000/11231 (34s)
+  casemap: 6500/11231 (36s)
+  casemap: 7000/11231 (39s)
+  casemap: 7500/11231 (42s)
+  casemap: 8000/11231 (50s)
+  casemap: 8500/11231 (53s)
+  casemap: 9000/11231 (56s)
+  casemap: 9500/11231 (61s)
+  casemap: 10000/11231 (64s)
+  casemap: 10500/11231 (67s)
+  casemap: 11000/11231 (70s)
+  casemap: 11231/11231 (79s)
+casemap: 11231 cases, 4109 functions reached, 0 cases without a profile, 83s
+Traceback (most recent call last):
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/erdc/new-cases.py", line 43, in <module>
+    main()
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/erdc/new-cases.py", line 33, in main
+    manifest, now = oracle.load_cases(binary)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/erdc/../oracle.py", line 293, in load_cases
+    lists, writable = build_lists(binary)
+                      ^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/erdc/../oracle.py", line 279, in build_lists
+    r = magick(binary, ["-list", name], WORK)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/erdc/../oracle.py", line 175, in magick
+    return subprocess.run([binary] + argv, cwd=cwd, env=env_for(binary, cwd),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/jovyan/sysroot/usr/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/cand/utilities/magick'
