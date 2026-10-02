@@ -14441,6 +14441,56 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "unobservable",
+   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "unobservable",
+   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "unobservable",
+   "why": "the big-endian load loop: lsb_first comes from the host's byte order (GetHostEndian), so on a little-endian host it never runs"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i=0; i < 16; i++)",
+   "verdict": "equivalent",
+   "why": "loads one word more, into W[16], which the schedule loop that follows overwrites before it is read"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/signature.c",
+   "function": "TransformSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=16; i < 64; i++)",
+   "verdict": "unresolved",
+   "why": "the schedule loop then writes W[64], one past the array on the stack: undefined behaviour, no difference seen"
   }
  ]
 }
