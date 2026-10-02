@@ -13211,6 +13211,66 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (extent <= (unsigned int) (GetStringInfoLength(signature_info->message)-8))",
+   "verdict": "unresolved",
+   "why": "differs only when a message ends at 55 mod 64: image signatures hash multiples of 4 bytes, but random.c's key and nonce lengths are not checked"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-8-extent);",
+   "verdict": "unobservable",
+   "why": "writes extra zeros past byte 56: bytes 56-63 are set right after, the rest lies past the 64-byte block (an overrun), so the hash is unchanged"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-8-extent);",
+   "verdict": "unobservable",
+   "why": "writes extra zeros past byte 56: bytes 56-63 are set right after, the rest lies past the 64-byte block (an overrun), so the hash is unchanged"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-extent);",
+   "verdict": "unobservable",
+   "why": "writes zeros past the 64-byte block: a buffer overrun, but the block's own bytes and so the hash are unchanged"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-8);",
+   "verdict": "unobservable",
+   "why": "writes 16 more zeros, over bytes 56-63 that are set right after and past the block: the hash is unchanged"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (SignatureDigestsize/4); i++)",
+   "verdict": "unobservable",
+   "why": "writes one word past the 32-byte digest, which is never read"
   }
  ]
 }
