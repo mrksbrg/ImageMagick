@@ -1929,6 +1929,24 @@ line (unmatched, or on unreached lines):
   MagickFalse`) and a 32-bit-quantum variant: only the CIN coder turns packing off, and
   only for RGB, so they are out of reach from the command line.
 
+## signature.c: trusted (Windows, 2026-10-02)
+
+Three rounds (`signature`: messages ending past 56 bytes mod 64; `signaturegap2`: `%#` under
+a read mask, no kills) and verdicts read from the source. `FinalizeSignature`'s memset sizes
+and digest word are `unobservable`, as noted above. `TransformSignature`'s and
+`SignatureImage`'s big-endian loops are `unobservable` (5): `lsb_first` follows the host's
+byte order, so on a little-endian host they never run. One more word loaded into `W[16]`,
+which the schedule overwrites, is `equivalent`.
+
+**`signature.c`: adjusted 69% (yesterday's run) to 82%, every function at 80% or more,
+trusted.** Out of reach: `GetSignatureBlocksize` (1 mutant), an API function nothing calls.
+Open survivors:
+
+- `SignatureImage` 507 (2), 521 (2): the size of the row buffer and of its hashed length
+  (channels times columns) with `*` to `/`; why no `%#` case shows them is not traced.
+- `UpdateSignature` 791 (unreached: the 64-bit length carry, past 2^29 bytes), 798.
+- `FinalizeSignature` 240 and `TransformSignature` 701, `unresolved` (`verdicts.json`).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
