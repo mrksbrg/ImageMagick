@@ -2760,6 +2760,68 @@ GAP_COMMANDS += ["identify -verbose -channel R {C}/palette.miff"]
 # on an image with transparency and on one whose added alpha channel is fully opaque
 GAP_COMMANDS += ["identify -format '%[opaque]\\n' {C}/rose_alpha.miff",
                  "{C}/rose.miff -alpha set -format '%[opaque]\\n' -write info:"]
+# attribute.c: GetImageQuantumDepth rounds a depth of 33 to 64 up to 64 and leaves one
+# above 64 alone; the FITS writer asks for it unconstrained and writes it as BITPIX
+GAP_STEP_CASES += [("-depth %d written as FITS" % depth,
+                    [["{C}/rose.miff", "-depth", str(depth), "fits:out.miff"]], {})
+                   for depth in (48, 65)]
+# attribute.c: SetImageDepth on a palette image with an alpha channel scales the
+# colormap's alpha too; -cycle copies the colormap back into the pixels
+GAP_COMMANDS += ["{C}/rose_alpha.miff -colors 16 -depth 2 -write histogram:info:- -alpha extract"]
+GAP_COMMANDS += ["{C}/rose_alpha.miff -colors 16 -depth 2 -cycle %d" % n for n in (0, 1)]
+# attribute.c: GetImageBoundingBox reads the four corners as the background to trim; on a
+# bordered image under a black virtual pixel a corner read from outside the image differs,
+# and an image whose one corner differs from the rest drives the corner rule
+_BBOX = " -format '%@\\n' -write info: -trim"
+GAP_COMMANDS += ["{C}/rose.miff -bordercolor white -border 5 -virtual-pixel black" + _BBOX]
+GAP_COMMANDS += ["-size 12x10 xc:white -fill %s -draw 'point %s' -fill black "
+                 "-draw 'rectangle 4,3 7,6'" % corner + _BBOX
+                 for corner in (("lime", "11,9"), ("red", "11,0"), ("blue", "0,9"))]
+# a 2x4 image whose bottom-left pixel is the only one of its colour: a lower row may not
+# shrink the box's height again
+GAP_COMMANDS += ["-size 1x1 ( xc:white xc:red +append ) ( xc:blue xc:red +append ) "
+                 "( xc:white xc:red +append ) ( xc:white xc:blue +append ) -append" + _BBOX]
+# attribute.c: GetImageDepth on a palette image checks red, green and blue in turn (a colour
+# whose green, or blue, alone needs 8 bits), and an image with alpha by its pixels: two
+# colours at 1 bit under a 16-bit alpha
+GAP_COMMANDS += ["-size 1x1 xc:black xc:%s +append -type Palette -format '%%[bit-depth]\\n' "
+                 "-write info:" % colour for colour in ("rgb(0,37,0)", "rgb(0,0,91)")]
+GAP_COMMANDS += ["-size 13x1 gradient:black-white -threshold 50% ( -size 13x1 gradient: ) -alpha off "
+                 "-compose copy_opacity -composite -type PaletteAlpha -format '%[bit-depth]\\n' -write info:"]
+# attribute.c: the pixel scans read their rows through the virtual pixel method, so a scan one
+# row too far shows only when the row below the image is not a copy of the last one
+_VP_BG = " -virtual-pixel background -background "
+GAP_COMMANDS += ["{C}/rose.miff -alpha set -virtual-pixel transparent -format '%[opaque]\\n' -write info:",
+                 "{C}/rose.miff -depth 8" + _VP_BG + "#123456789abc -format '%[bit-depth]\\n' -write info:",
+                 "-size 4x4 xc:gray50" + _VP_BG + "red -type palette -format '%[type]\\n' -write info:"]
+GAP_STEP_CASES += [("a black canvas as PDB under a red background virtual pixel",
+                    [["-size", "4x4", "xc:black", "-virtual-pixel", "background", "-background", "red",
+                      "pdb:out.miff"]], {})]
+# attribute.c: GetEdgeBackgroundColor reads the corners (through the virtual pixel method) unless
+# convex-hull:background-color, or -background, names the colour
+GAP_COMMANDS += ["{C}/rose.miff -bordercolor white -border 3 " + extra + " -format '%[convex-hull]\\n' -write info:"
+                 for extra in ("-virtual-pixel black", "-define convex-hull:background-color=red")]
+# attribute.c: SetImageType to the palette, colour-separation and truecolor types from CMYK
+GAP_COMMANDS += ["{C}/cmyk.miff " + ops for ops in (
+    "-type PaletteBilevelAlpha", "-type PaletteAlpha", "-colors 8 -type ColorSeparationAlpha",
+    "-colors 8 -type TrueColor")]
+# the same written as plain MIFF: the floating-point output hides a colormap left behind
+GAP_STEP_CASES += [("cmyk.miff %s as plain MIFF" % ops, [["{C}/cmyk.miff"] + ops.split() + ["out.miff"]], {})
+                   for ops in ("-type PaletteAlpha", "-colors 8 -type ColorSeparationAlpha",
+                               "-colors 8 -type TrueColor")]
+# attribute.c: the minimum bounding box's orientation: a rectangle at 30 degrees, axis-aligned
+# rectangles (angle 0) under each orientation and an unknown one, a square (equal lengths) and
+# a diamond (two corners equally near the origin)
+_MBB = (" -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:angle]\\n' -write info:")
+GAP_COMMANDS += ["-size 60x60 xc:black -fill white -draw '%s'%s" % (shape, orient) + _MBB
+                 for shape, orients in (
+                     ("polygon 19,23 43,29 41,37 17,31", ("landscape", "portrait")),
+                     ("rectangle 10,20 40,30", ("landscape", "portrait", "other")),
+                     ("rectangle 20,10 30,40", ("landscape", "portrait", "other")),
+                     ("rectangle 10,10 40,40", ("landscape", "portrait")),
+                     ("polygon 30,10 50,30 30,50 10,30", ("",)))
+                 for orient in [(" -define minimum-bounding-box:orientation=" + o) if o else ""
+                                for o in orients]]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]

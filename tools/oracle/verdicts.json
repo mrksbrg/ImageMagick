@@ -782,6 +782,306 @@
    "why": "the clone's own artifacts are not destroyed before the source's are copied in: a leak"
   },
   {
+   "at": 3,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(y > (ssize_t) bounding_box.height) &&",
+   "verdict": "equivalent",
+   "why": "the corner rule never changes the box: a width it writes for a pixel unlike target[3] is reached anyway, by line 520 when the pixel differs from target[1], or by the bottom-right pixel (target[3] != target[1]) otherwise; heights likewise via line 526 and the bottom-left pixel; a shrink only lowers a value inherited from bounds, which the max merge restores (checked by simulation on 500k images, simulator matching the binary)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((x > (ssize_t) bounding_box.width) &&",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((y > (ssize_t) bounding_box.height) &&",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bounding_box.height > bounds.height)",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bounding_box.width > bounds.width)",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 3,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(y > (ssize_t) bounding_box.height) &&",
+   "verdict": "equivalent",
+   "why": "the corner rule never changes the box: a width it writes for a pixel unlike target[3] is reached anyway, by line 520 when the pixel differs from target[1], or by the bottom-right pixel (target[3] != target[1]) otherwise; heights likewise via line 526 and the bottom-left pixel; a shrink only lowers a value inherited from bounds, which the max merge restores (checked by simulation on 500k images, simulator matching the binary)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((x < (ssize_t) bounding_box.width) &&",
+   "verdict": "equivalent",
+   "why": "the corner rule never changes the box: a width it writes for a pixel unlike target[3] is reached anyway, by line 520 when the pixel differs from target[1], or by the bottom-right pixel (target[3] != target[1]) otherwise; heights likewise via line 526 and the bottom-left pixel; a shrink only lowers a value inherited from bounds, which the max merge restores (checked by simulation on 500k images, simulator matching the binary)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((x < (ssize_t) bounding_box.width) &&",
+   "verdict": "equivalent",
+   "why": "the corner rule never changes the box: a width it writes for a pixel unlike target[3] is reached anyway, by line 520 when the pixel differs from target[1], or by the bottom-right pixel (target[3] != target[1]) otherwise; heights likewise via line 526 and the bottom-left pixel; a shrink only lowers a value inherited from bounds, which the max merge restores (checked by simulation on 500k images, simulator matching the binary)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((x < bounding_box.x) &&",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((y < bounding_box.y) &&",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounding_box.x < bounds.x)",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounding_box.y < bounds.y)",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&target[0]);",
+   "verdict": "equivalent",
+   "why": "GetPixelInfoPixel clears the whole PixelInfo and sets every field before it is read"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&target[1]);",
+   "verdict": "equivalent",
+   "why": "GetPixelInfoPixel clears the whole PixelInfo and sets every field before it is read"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&target[2]);",
+   "verdict": "equivalent",
+   "why": "GetPixelInfoPixel clears the whole PixelInfo and sets every field before it is read"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&target[3]);",
+   "verdict": "equivalent",
+   "why": "GetPixelInfoPixel clears the whole PixelInfo and sets every field before it is read"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageBoundingBox",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&zero);",
+   "verdict": "equivalent",
+   "why": "pixel=zero is overwritten by GetPixelInfoPixel, which clears it, before any read"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageConvexHull",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "image->rows*sizeof(*monotone_chain));",
+   "verdict": "unobservable",
+   "why": "the chain allocation shrinks to columns*rows/2 bytes, still enough for the hull's chain on any image of more than a few pixels; an overflow on a tiny image is silent without ASan"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageConvexHull",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (monotone_info != (MemoryInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "inside the branch taken only when an allocation fails; the oracle runs within memory"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageConvexHull",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (vertices_info != (MemoryInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "inside the branch taken only when an allocation fails; the oracle runs within memory"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageDepth",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (depth < current_depth[i])",
+   "verdict": "unobservable",
+   "why": "the body of the per-thread merge loop, which runs only with more than one thread; the oracle runs single-threaded"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageDepth",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "if (depth < current_depth[i])",
+   "verdict": "unobservable",
+   "why": "the body of the per-thread merge loop, which runs only with more than one thread; the oracle runs single-threaded"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageDepth",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (depth < current_depth[i])",
+   "verdict": "unobservable",
+   "why": "the body of the per-thread merge loop, which runs only with more than one thread; the oracle runs single-threaded"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageDepth",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (depth < current_depth[i])",
+   "verdict": "unobservable",
+   "why": "the body of the per-thread merge loop, which runs only with more than one thread; the oracle runs single-threaded"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageDepth",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "while (current_depth[id] < MAGICKCORE_QUANTUM_DEPTH)",
+   "verdict": "equivalent",
+   "why": "the extra pass at the quantum depth finds every clamped value at depth and breaks, leaving the depth at MAGICKCORE_QUANTUM_DEPTH as before"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageMinimumBoundingBox",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "caliper_info.width=(double) image->columns+image->rows;",
+   "verdict": "equivalent",
+   "why": "the first caliper pass always replaces the initial width: the initial area 2*columns*rows exceeds any hull's"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageMinimumBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=1; i < 4; i++)",
+   "verdict": "unobservable",
+   "why": "the extra pass reads bounding_box[4], past the four corners written: uninitialised heap memory, no stable output to compare"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageMinimumBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounding_box[i].x < point.x)",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageMinimumBoundingBox",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounding_box[i].y < point.y)",
+   "verdict": "equivalent",
+   "why": "at the boundary the branch assigns the value the variable already holds"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/attribute.c",
+   "function": "GetImageQuantumDepth",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (depth <= 64)",
+   "verdict": "equivalent",
+   "why": "the two differ only at depth 64, where the original sets 64 and the mutant leaves 64"
+  },
+  {
    "at": 6,
    "file": "MagickCore/attribute.c",
    "function": "IsImageOpaque",
@@ -790,6 +1090,56 @@
    "src": "if (p == (const Quantum *) NULL)",
    "verdict": "unobservable",
    "why": "the clean-up after the pixel cache fails to return a row, which no case can make happen"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/attribute.c",
+   "function": "SetImageDepth",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) GetPixelChannels(image); i++)",
+   "verdict": "equivalent",
+   "why": "the extra index names a channel the image does not have; its traits are undefined, so the pass skips it"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/attribute.c",
+   "function": "SetImageDepth",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) image->colors; i++)",
+   "verdict": "unobservable",
+   "why": "the colormap is allocated with colors+1 entries; the extra pass rescales the spare entry, which nothing reads"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/attribute.c",
+   "function": "TraceConvexHull",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "demark=n+1;",
+   "verdict": "unresolved",
+   "why": "lets the lower hull pop into the upper hull's last point; no %[convex-hull] or minimum-bounding-box output differed over 43 hand-tested shapes (rectangles at 18 angles, squares, diamonds, sparse points), and the reasoning why is not complete"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/attribute.c",
+   "function": "getFeretDiameter",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (distance < MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "the squared distance between hull vertices on the pixel grid is 0 or at least 0.25, never exactly MagickEpsilon"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/attribute.c",
+   "function": "getProjection",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (distance < MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "the squared distance between hull vertices on the pixel grid is 0 or at least 0.25, never exactly MagickEpsilon"
   },
   {
    "at": 44,
