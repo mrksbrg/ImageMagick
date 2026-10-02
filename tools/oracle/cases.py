@@ -3821,6 +3821,10 @@ GAP_STEP_CASES += [("locale.xml with an include, listed", [["-list", "locale"]],
                    ("locale.xml including itself, listed", [["-list", "locale"]],
                     {_LOCALE: '<localemap>\n  <include locale="C" file="locale.xml"/>\n  <locale name="C">\n'
                               '    <Message name="Self">s</Message>\n  </locale>\n</localemap>\n'})]
+# annotate.c: FormatMagickCaption wraps at a multi-byte space (ReplaceSpaceWithNewline's other
+# branch): ideographic, no-break and em spaces in a narrow caption
+GAP_COMMANDS += ["-font {C}/Generic.ttf -pointsize 12 -size 40x caption:'%s'" % t for t in (
+    "word\u3000word\u3000word\u3000word", "word\u00a0word\u00a0word", "longword\u2003longword\u2003x")]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
