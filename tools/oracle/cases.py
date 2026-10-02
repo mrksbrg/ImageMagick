@@ -1596,6 +1596,24 @@ def _fx_gap2_cases():
                   ["-fx", e])
 
 
+# cache.c: PersistPixelCache runs only for the MPC format, which no case wrote
+# or read; written and read back for four kinds of image. And an MVG mask
+# (draw.c sets a composite mask), which may reach MaskPixelCacheNexus.
+_MVG_MASK = ("viewbox 0 0 40 30\npush defs\npush mask m1\nfill #ffffff\n"
+             "circle 20,15 20,4\npop mask\npop defs\npush graphic-context\n"
+             "mask url(#m1)\nfill #ff0000\nrectangle 0,0 40,30\npop graphic-context\n")
+
+
+def _cache_gap_cases():
+    for name in ("rose", "rose_alpha", "cmyk", "palette"):
+        yield _case("cachegap", "%s through MPC" % name,
+                    [[img(name), "out.mpc"], ["out.mpc"] + FLOAT_OUT + ["dec.miff"]],
+                    ["dec.miff"])
+    yield _with_inputs(_op_to("cachegap", "MVG with a mask",
+                              ["-size", "40x30", "xc:#0000ff", "-draw", "@m.mvg"] + FLOAT_OUT,
+                              "out.miff"), files={"m.mvg": _MVG_MASK})
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3170,7 +3188,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
