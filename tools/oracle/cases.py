@@ -2680,6 +2680,17 @@ GAP_STEP_CASES += [
       ["identify", "-format", "%[exif:*]|%[exif:#010F]|%[exif:#010f]|%[exif:@010F]|%[exif:Make]\\n",
        "x.jpg"]], {"exif.bin": _exif_text_block()}),
 ]
+# The image's depth, class and type, printed before the floating-point write: every _op
+# case writes with FLOAT_OUT (-depth 32), which overwrites the depth an operator set, so no
+# case could see it (AppendImages' depth, -depth, -type, -colors, -monochrome, -separate,
+# -combine, and GetImageDepth and SetImageDepth behind them)
+_DEPTH_FORMAT = "-format '%z %r %[type]\\n' -write info:"
+GAP_COMMANDS += [cmd + " " + _DEPTH_FORMAT for cmd in (
+    "{C}/rose.miff {C}/gray16.miff -append", "{C}/gray16.miff {C}/rose.miff +append",
+    "{C}/bilevel.miff {C}/bilevel.miff -append", "{C}/rose.miff -depth 4",
+    "{C}/rose.miff -type Palette", "{C}/rose.miff -colors 8", "{C}/rose.miff -monochrome",
+    "{C}/rose.miff -separate", "{C}/gray8.miff {C}/gray8.miff {C}/gray8.miff -combine",
+    "{C}/rose.miff -type GrayscaleAlpha", "{C}/rose.miff -type TrueColorAlpha")]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
