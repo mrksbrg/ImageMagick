@@ -2235,7 +2235,9 @@ def _fx_gap9_cases():
     # A "?" with no ":" (ResolveTernaryAddresses' error; hand-run: 2 killed).
     # A standalone attribute with a channel qualifier, depth being the first
     # attribute (GetChannelQualifier's range tests; hand-run: 2 killed).
-    for e in ("u>0.5 ? 1", "zz=u>0.5 ? 1; zz", "depth.r/32", "depth.hue"):
+    # And an operand followed by "(" or "}", which GetOperator rejects as not a
+    # real operator (IsRealOperator's two bounds; hand-run: 2 killed).
+    for e in ("u>0.5 ? 1", "zz=u>0.5 ? 1; zz", "depth.r/32", "depth.hue", "0.5(0.5)", "0.5}"):
         yield _case("fxgap9", "-fx %s" % e, [["-size", "2x2", "xc:gray", "-fx", e, "null:"]], [])
 
 

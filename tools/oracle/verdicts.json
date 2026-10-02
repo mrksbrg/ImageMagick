@@ -4783,6 +4783,26 @@
    "why": "differs only when numValStack is exactly MinValStackSize, and then sets it to MinValStackSize: no change"
   },
   {
+   "at": 52,
+   "file": "MagickCore/fx.c",
+   "function": "DeInitFx",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "for (i = (ssize_t)GetImageListLength(pfx->image); i > 0; i--) {",
+   "verdict": "unobservable",
+   "why": "the loop does not run, so the cache views (and, on the second, the statistics) are not freed: a leak when the fx expression is done, nothing reads them again"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/fx.c",
+   "function": "DeInitFx",
+   "mutator": "cxx_gt_to_le",
+   "nth": 1,
+   "src": "for (i = (ssize_t)GetImageListLength(pfx->image); i > 0; i--) {",
+   "verdict": "unobservable",
+   "why": "the loop does not run, so the cache views (and, on the second, the statistics) are not freed: a leak when the fx expression is done, nothing reads them again"
+  },
+  {
    "at": 44,
    "file": "MagickCore/fx.c",
    "function": "GetChannelQualifier",
