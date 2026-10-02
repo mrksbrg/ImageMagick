@@ -1112,6 +1112,16 @@
    "why": "the colormap is allocated with colors+1 entries; the extra pass rescales the spare entry, which nothing reads"
   },
   {
+   "at": 50,
+   "file": "MagickCore/attribute.c",
+   "function": "SetImageType",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)",
+   "verdict": "equivalent",
+   "why": "QuantizeImage converts a non-sRGB image to sRGB itself (quantize.c, the classification step), and an opaque alpha channel added before or after that conversion is the same"
+  },
+  {
    "at": 8,
    "file": "MagickCore/attribute.c",
    "function": "TraceConvexHull",
@@ -1600,6 +1610,26 @@
    "src": "intensity=(int) GetPixelInfoIntensity((const Image *) NULL,color_2)-(int)",
    "verdict": "unresolved",
    "why": "the comparator for SortColormapByIntensity, whose only caller is the PALM writer below 8 bits per pixel; writing PALM at 2 and 4 bits from rose, gray8 and palette did not kill it, and why the order does not reach the file is not established"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/colorspace.c",
+   "function": "RoundToYCC",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (value >= 1388.0)",
+   "verdict": "equivalent",
+   "why": "at value == 1388.0 the mutant falls through to (ssize_t) (1388.5), also 1388"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/colorspace.c",
+   "function": "RoundToYCC",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (value <= 0.0)",
+   "verdict": "equivalent",
+   "why": "at value == 0.0 the mutant falls through to (ssize_t) (0.0+0.5), also 0"
   },
   {
    "at": 39,
@@ -4341,6 +4371,66 @@
    "src": "if (phase_image == (Image *) NULL)",
    "verdict": "gap",
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "number_children=image->alpha_trait == UndefinedPixelTrait ? 8UL : 16UL;",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) number_children; i++)",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (node_info->list != (PixelInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyHCubeInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "} while (cube_info->node_queue != (HNodes *) NULL);",
+   "verdict": "unobservable",
+   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/histogram.c",
+   "function": "MinMaxStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/histogram.c",
+   "function": "MinMaxStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
   },
   {
    "at": 18,
@@ -9816,6 +9906,136 @@
    "why": "center is read only for pixels under a write mask, and no -statistic case sets one"
   },
   {
+   "at": 32,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (cache_info->reference_count == 0)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (destroy == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "logs a trace event when logging is off, which nothing shows"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->file_semaphore != (SemaphoreInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->nexus_info != (NexusInfo **) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->semaphore != (SemaphoreInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyStreamInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "logs a trace event when logging is off, which nothing shows"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyStreamInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (stream_info->map != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyStreamInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (stream_info->pixels != (unsigned char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyStreamInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (stream_info->quantum_info != (QuantumInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyStreamInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (stream_info->stream != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/stream.c",
+   "function": "RelinquishStreamPixels",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (cache_info->mapped == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "frees a heap buffer with munmap (UnmapBlob) instead: probably rejected for an unaligned address, so a leak, but not shown; no case crashed"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/stream.c",
+   "function": "RelinquishStreamPixels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->pixels != (Quantum *) NULL)",
+   "verdict": "unobservable",
+   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
    "at": 38,
    "file": "MagickCore/thread.c",
    "function": "SetMagickThreadValue",
@@ -12991,216 +13211,6 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/colorspace.c",
-   "function": "RoundToYCC",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
-   "src": "if (value <= 0.0)",
-   "verdict": "equivalent",
-   "why": "at value == 0.0 the mutant falls through to (ssize_t) (0.0+0.5), also 0"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/colorspace.c",
-   "function": "RoundToYCC",
-   "mutator": "cxx_ge_to_gt",
-   "nth": 0,
-   "src": "if (value >= 1388.0)",
-   "verdict": "equivalent",
-   "why": "at value == 1388.0 the mutant falls through to (ssize_t) (1388.5), also 1388"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/histogram.c",
-   "function": "MinMaxStretchImage",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
-   "verdict": "unobservable",
-   "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/histogram.c",
-   "function": "MinMaxStretchImage",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 1,
-   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
-   "verdict": "unobservable",
-   "why": "the command line ignores AutoLevelImage's result: (void) in operation.c and mogrify.c"
-  },
-  {
-   "at": 31,
-   "file": "MagickCore/histogram.c",
-   "function": "DestroyHCubeInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "} while (cube_info->node_queue != (HNodes *) NULL);",
-   "verdict": "unobservable",
-   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
-  },
-  {
-   "at": 35,
-   "file": "MagickCore/histogram.c",
-   "function": "DestroyColorCube",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "number_children=image->alpha_trait == UndefinedPixelTrait ? 8UL : 16UL;",
-   "verdict": "unobservable",
-   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/histogram.c",
-   "function": "DestroyColorCube",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "for (i=0; i < (ssize_t) number_children; i++)",
-   "verdict": "unobservable",
-   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
-  },
-  {
-   "at": 20,
-   "file": "MagickCore/histogram.c",
-   "function": "DestroyColorCube",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (node_info->list != (PixelInfo *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/stream.c",
-   "function": "RelinquishStreamPixels",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (cache_info->pixels != (Quantum *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/stream.c",
-   "function": "RelinquishStreamPixels",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (cache_info->mapped == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "frees a heap buffer with munmap (UnmapBlob) instead: probably rejected for an unaligned address, so a leak, but not shown; no case crashed"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyPixelStream",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (IsEventLogging() != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "logs a trace event when logging is off, which nothing shows"
-  },
-  {
-   "at": 32,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyPixelStream",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (cache_info->reference_count == 0)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyPixelStream",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (destroy == MagickFalse)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 27,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyPixelStream",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (cache_info->nexus_info != (NexusInfo **) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 31,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyPixelStream",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (cache_info->file_semaphore != (SemaphoreInfo *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 26,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyPixelStream",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (cache_info->semaphore != (SemaphoreInfo *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyStreamInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (IsEventLogging() != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "logs a trace event when logging is off, which nothing shows"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyStreamInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (stream_info->map != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyStreamInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (stream_info->pixels != (unsigned char *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyStreamInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (stream_info->stream != (Image *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
-  },
-  {
-   "at": 30,
-   "file": "MagickCore/stream.c",
-   "function": "DestroyStreamInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (stream_info->quantum_info != (QuantumInfo *) NULL)",
-   "verdict": "unobservable",
-   "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
   }
  ]
 }

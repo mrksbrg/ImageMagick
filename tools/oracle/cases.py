@@ -2843,10 +2843,11 @@ GAP_COMMANDS += ["{C}/rose.miff -bordercolor white -border 3 " + extra + " -form
 GAP_COMMANDS += ["{C}/cmyk.miff " + ops for ops in (
     "-type PaletteBilevelAlpha", "-type PaletteAlpha", "-colors 8 -type ColorSeparationAlpha",
     "-colors 8 -type TrueColor")]
-# the same written as plain MIFF: the floating-point output hides a colormap left behind
-GAP_STEP_CASES += [("cmyk.miff %s as plain MIFF" % ops, [["{C}/cmyk.miff"] + ops.split() + ["out.miff"]], {})
-                   for ops in ("-type PaletteAlpha", "-colors 8 -type ColorSeparationAlpha",
-                               "-colors 8 -type TrueColor")]
+# the colour-separation types keep a CMYK image's colormap unless they make it DirectClass:
+# a CMYK palette image (remapped onto itself), written as plain MIFF
+GAP_STEP_CASES += [("a CMYK palette image -type %s as plain MIFF" % kind,
+                    [["{C}/cmyk.miff", "+dither", "-remap", "{C}/cmyk.miff", "-type", kind, "out.miff"]], {})
+                   for kind in ("ColorSeparation", "ColorSeparationAlpha")]
 # attribute.c: the minimum bounding box's orientation: a rectangle at 30 degrees, axis-aligned
 # rectangles (angle 0) under each orientation and an unknown one, a square (equal lengths) and
 # a diamond (two corners equally near the origin)
