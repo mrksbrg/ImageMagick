@@ -13901,6 +13901,156 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (row != column)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (k=0; k < (ssize_t) rank; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (k=0; k < (ssize_t) rank; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (k=0; k < (ssize_t) rank; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "for (j=(ssize_t) rank-1; j >= 0; j--)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (columns[j] != rows[j])",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 3,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unobservable",
+   "why": "the copy of the inverse back into matrix is never read: every caller (distort.c) uses only the solution vectors"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 4,
+   "src": "for (j=0; j < (ssize_t) rank; j++)",
+   "verdict": "unobservable",
+   "why": "the copy of the inverse back into matrix is never read: every caller (distort.c) uses only the solution vectors"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 4,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unobservable",
+   "why": "only changes which rows are freed: a leak"
   }
  ]
 }

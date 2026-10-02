@@ -1721,6 +1721,18 @@ def _fx_gap3_cases():
         yield _op("fxgap3", "rose granite -fx %s" % e, [img("rose"), img("granite")], ["-fx", e])
 
 
+# matrix.c: AcquireMatrixInfo keeps a matrix in a file only when it is larger
+# than the max-memory-request policy (not when memory is limited), so
+# SetMatrixExtent never ran; a policy.xml of the case's own sets it to 256 bytes.
+def _matrix_gap2_cases():
+    policy = ('<policymap>\n  <policy domain="system" name="max-memory-request" '
+              'value="256"/>\n</policymap>\n')
+    for label, pre in (("accumulator", ["-define", "hough-lines:accumulator=true"]), ("lines", [])):
+        yield _with_inputs(_op("matrixgap2", "-hough-lines %s, max-memory-request 256" % label,
+                               _HOUGH_INPUT, pre + ["-hough-lines", "9x9+10"]),
+                           files={".config/ImageMagick/policy.xml": policy})
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3361,7 +3373,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
