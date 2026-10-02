@@ -1614,6 +1614,28 @@ def _cache_gap_cases():
                               "out.miff"), files={"m.mvg": _MVG_MASK})
 
 
+# xml-tree.c: ValidateEntities checks parameter entities in an internal
+# DOCTYPE, which no configuration file had: nested, circular and undefined
+# ones, in a policy.xml of the case's own, listed. The other unreached
+# functions (XMLTreeInfoToXML, AddPathToXMLTree, CanonicalXMLContent, ...) are
+# called only from MagickWand's drawing wand, or nowhere.
+XML_DOCTYPES = {
+    "nested": '<!ENTITY % w "10KP">\n  <!ENTITY % nested "%w;">\n  <!ENTITY limit "%nested;">',
+    "circular": '<!ENTITY % a "%b;">\n  <!ENTITY % b "%a;">\n  <!ENTITY limit "%a;">',
+    "undefined": '<!ENTITY limit "%nosuch;">',
+}
+
+
+def _xml_gap_cases():
+    for label, doctype in sorted(XML_DOCTYPES.items()):
+        policy = ('<?xml version="1.0"?>\n<!DOCTYPE policymap [\n  %s\n]>\n<policymap>\n'
+                  '  <policy domain="resource" name="width" value="&limit;"/>\n'
+                  '</policymap>\n' % doctype)
+        yield _with_inputs(_case("xmlgap", "policy.xml with %s parameter entities" % label,
+                                 [["-list", "policy"]], []),
+                           files={".config/ImageMagick/policy.xml": policy})
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3188,7 +3210,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
