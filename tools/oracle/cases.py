@@ -3646,6 +3646,12 @@ GAP_STEP_CASES += [
     ("a read-only path policy on the corpus directory", [["{C}/rose.miff", "out.miff"]],
      {_POLICY: _policy('<policy domain="path" rights="read" pattern="*/corpus"/>')}),
 ]
+# configure.c: AcquireConfigureCache loads only the first configure.xml that parses (the
+# build's own), so a case's configure.xml is searched for and never read: listed, it must not
+# appear
+GAP_STEP_CASES += [("a configure.xml of the case's own, shadowed by the build's", [["-list", "configure"]],
+                    {".config/ImageMagick/configure.xml":
+                         '<configuremap>\n  <configure name="CASE-ENTRY" value="x"/>\n</configuremap>\n'})]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight

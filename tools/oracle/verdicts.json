@@ -2311,6 +2311,186 @@
    "why": "equivalent as compiled: with the test flipped, a NULL ascii85 is passed to memset straight after, which is undefined behaviour, so clang assumes it is never NULL there and keeps the allocation path; the same pattern as GetMagickVersion and AcquireAlignedMemory"
   },
   {
+   "at": 20,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "extent=strlen(token)+MagickPathExtent;",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "file_xml,path,depth+1,exception);",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == quote)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"stealth\") == 0)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bracket_depth > 0)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
+  },
+  {
    "at": 12,
    "file": "MagickCore/decorate.c",
    "function": "FrameImage",
