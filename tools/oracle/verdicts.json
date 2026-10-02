@@ -5155,6 +5155,16 @@
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
   },
   {
+   "at": 37,
+   "file": "MagickCore/paint.c",
+   "function": "GradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(artifact,\"Circle\") == 0)",
+   "verdict": "equivalent",
+   "why": "the Circle extent sets the radii to MagickMax(columns-1,rows-1)/2, the default they already hold; skipping it, or applying it for another extent that then overwrites them, changes nothing"
+  },
+  {
    "at": 26,
    "file": "MagickCore/policy.c",
    "function": "IsRightsAuthorizedByName",
@@ -7698,6 +7708,66 @@
    "why": "a breakpoint of a continuous piecewise kernel: both pieces give the same value there (the filter:verbose cases sample every breakpoint)"
   },
   {
+   "at": 12,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j=0; j < (ssize_t) GetStringInfoLength(key); j++)",
+   "verdict": "unresolved",
+   "why": "leaves the name template unfilled, so every temporary file gets the same name; that fails only when a command holds two at once, not seen in any case"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) TMP_MAX; i++)",
+   "verdict": "unobservable",
+   "why": "the first attempt to create the temporary file succeeds, so the retry counter is never used"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/resource.c",
+   "function": "RelinquishUniqueFileResource",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return(status == 0 ? MagickFalse : MagickTrue);",
+   "verdict": "unobservable",
+   "why": "every caller discards RelinquishUniqueFileResource's result"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/resource.c",
+   "function": "RelinquishUniqueFileResource",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
+  },
+  {
    "at": 15,
    "file": "MagickCore/segment.c",
    "function": "Classify",
@@ -8740,6 +8810,66 @@
    "src": "for (i=0; i < (step-1); i++)",
    "verdict": "equivalent",
    "why": "paints two more background pixels, onto the background border ShearImage added before shearing"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (extent <= (unsigned int) (GetStringInfoLength(signature_info->message)-8))",
+   "verdict": "unresolved",
+   "why": "differs only when a message ends at 55 mod 64: image signatures hash multiples of 4 bytes, but random.c's key and nonce lengths are not checked"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (SignatureDigestsize/4); i++)",
+   "verdict": "unobservable",
+   "why": "writes one word past the 32-byte digest, which is never read"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-8);",
+   "verdict": "unobservable",
+   "why": "writes 16 more zeros, over bytes 56-63 that are set right after and past the block: the hash is unchanged"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-8-extent);",
+   "verdict": "unobservable",
+   "why": "writes extra zeros past byte 56: bytes 56-63 are set right after, the rest lies past the 64-byte block (an overrun), so the hash is unchanged"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-8-extent);",
+   "verdict": "unobservable",
+   "why": "writes extra zeros past byte 56: bytes 56-63 are set right after, the rest lies past the 64-byte block (an overrun), so the hash is unchanged"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "signature_info->message)-extent);",
+   "verdict": "unobservable",
+   "why": "writes zeros past the 64-byte block: a buffer overrun, but the block's own bytes and so the hash are unchanged"
   },
   {
    "at": 12,
@@ -13221,126 +13351,6 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/signature.c",
-   "function": "FinalizeSignature",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
-   "src": "if (extent <= (unsigned int) (GetStringInfoLength(signature_info->message)-8))",
-   "verdict": "unresolved",
-   "why": "differs only when a message ends at 55 mod 64: image signatures hash multiples of 4 bytes, but random.c's key and nonce lengths are not checked"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/signature.c",
-   "function": "FinalizeSignature",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "signature_info->message)-8-extent);",
-   "verdict": "unobservable",
-   "why": "writes extra zeros past byte 56: bytes 56-63 are set right after, the rest lies past the 64-byte block (an overrun), so the hash is unchanged"
-  },
-  {
-   "at": 26,
-   "file": "MagickCore/signature.c",
-   "function": "FinalizeSignature",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "signature_info->message)-8-extent);",
-   "verdict": "unobservable",
-   "why": "writes extra zeros past byte 56: bytes 56-63 are set right after, the rest lies past the 64-byte block (an overrun), so the hash is unchanged"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/signature.c",
-   "function": "FinalizeSignature",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "signature_info->message)-extent);",
-   "verdict": "unobservable",
-   "why": "writes zeros past the 64-byte block: a buffer overrun, but the block's own bytes and so the hash are unchanged"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/signature.c",
-   "function": "FinalizeSignature",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "signature_info->message)-8);",
-   "verdict": "unobservable",
-   "why": "writes 16 more zeros, over bytes 56-63 that are set right after and past the block: the hash is unchanged"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/signature.c",
-   "function": "FinalizeSignature",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "for (i=0; i < (SignatureDigestsize/4); i++)",
-   "verdict": "unobservable",
-   "why": "writes one word past the 32-byte digest, which is never read"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/resource.c",
-   "function": "AcquireUniqueFileResource",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
-   "verdict": "unobservable",
-   "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
-  },
-  {
-   "at": 34,
-   "file": "MagickCore/resource.c",
-   "function": "AcquireUniqueFileResource",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "for (i=0; i < (ssize_t) TMP_MAX; i++)",
-   "verdict": "unobservable",
-   "why": "the first attempt to create the temporary file succeeds, so the retry counter is never used"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/resource.c",
-   "function": "AcquireUniqueFileResource",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "for (j=0; j < (ssize_t) GetStringInfoLength(key); j++)",
-   "verdict": "unresolved",
-   "why": "leaves the name template unfilled, so every temporary file gets the same name; that fails only when a command holds two at once, not seen in any case"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/resource.c",
-   "function": "AcquireUniqueFileResource",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 1,
-   "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
-   "verdict": "unobservable",
-   "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/resource.c",
-   "function": "RelinquishUniqueFileResource",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
-   "verdict": "unobservable",
-   "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/resource.c",
-   "function": "RelinquishUniqueFileResource",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "return(status == 0 ? MagickFalse : MagickTrue);",
-   "verdict": "unobservable",
-   "why": "every caller discards RelinquishUniqueFileResource's result"
   }
  ]
 }
