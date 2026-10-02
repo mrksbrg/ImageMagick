@@ -4473,6 +4473,16 @@
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
   },
   {
+   "at": 55,
+   "file": "MagickCore/geometry.c",
+   "function": "IsSceneGeometry",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((pedantic != MagickFalse) && (strchr(geometry,',') != (char *) NULL))",
+   "verdict": "equivalent",
+   "why": "no caller passes pedantic; with the test inverted a comma list is rejected here, but every caller then falls back to IsGeometry, which accepts it"
+  },
+  {
    "at": 19,
    "file": "MagickCore/geometry.c",
    "function": "ParseGravityGeometry",
@@ -4491,6 +4501,96 @@
    "src": "if (geometry_ratio < image_ratio)",
    "verdict": "equivalent",
    "why": "at a ratio equal to the image's, both arms give the image's own size"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (geometry_ratio >= image_ratio)",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (scale_factor > ((double) *height/(double) stasis_height))",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (stasis_height > *height)",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (stasis_width > *width)",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(scale_factor < ((double) *height/(double) stasis_width)))",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "(scale_factor < ((double) *width/(double) stasis_height)))",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (scale_factor < ((double) *height/(double) stasis_height))",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (stasis_height < *height)",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/geometry.c",
+   "function": "ParseMetaGeometry",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (stasis_width < *width)",
+   "verdict": "equivalent",
+   "why": "at equality the branch assigns the size it already holds"
   },
   {
    "at": 35,
@@ -5823,6 +5923,76 @@
    "src": "mime_info->length++;",
    "verdict": "unobservable",
    "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (montage_info == (MontageInfo *) NULL)",
+   "verdict": "equivalent",
+   "why": "as compiled: on the mutated path montage_info is dereferenced at once, so the compiler may take it to be non-NULL and fold the test; run by hand with the switch set, a montage with the NULL the command line passes behaves as the original"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->font != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->frame != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->geometry != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->texture != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->tile != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/montage.c",
+   "function": "CloneMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (montage_info->title != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
   },
   {
    "at": 37,
@@ -7720,6 +7890,26 @@
    "src": "UpdateSignature(signature_info,random_info->nonce);",
    "verdict": "unobservable",
    "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/registry.c",
+   "function": "SetImageRegistry",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((image_info == (const ImageInfo *) NULL) ||",
+   "verdict": "unobservable",
+   "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/registry.c",
+   "function": "SetImageRegistry",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image_info->signature != MagickCoreSignature))",
+   "verdict": "unobservable",
+   "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
   },
   {
    "at": 9,
@@ -10956,6 +11146,106 @@
    "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
   },
   {
+   "at": 24,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(cache_info->nexus_info == (NexusInfo **) NULL))",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->alpha_trait != cache_info->alpha_trait) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->channels != cache_info->channels) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->colorspace != cache_info->colorspace) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->columns != cache_info->columns) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->metacontent_extent != cache_info->metacontent_extent) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->number_channels != cache_info->number_channels) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image->rows != cache_info->rows) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(memcmp(p,q,image->number_channels*sizeof(*p)) != 0) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/stream.c",
+   "function": "ValidatePixelCacheMorphology",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->storage_class != cache_info->storage_class) ||",
+   "verdict": "unresolved",
+   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
+  },
+  {
    "at": 38,
    "file": "MagickCore/thread.c",
    "function": "SetMagickThreadValue",
@@ -11589,6 +11879,76 @@
    "src": "if ((flags & SigmaValue) != 0)",
    "verdict": "gap",
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/timer.c",
+   "function": "FormatMagickTime",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((date_precision > 0) && (date_precision < (ssize_t) strlen(timestamp)))",
+   "verdict": "equivalent",
+   "why": "at a precision equal to the timestamp's length (25) the mutant writes '\u0000' where the string already ends: the same text (precisions 25 and 26 give the same CreationDate)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/timer.c",
+   "function": "FormatMagickTime",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (limit != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "reads MAGICK_DATE_PRECISION only when it is unset: StringToInteger(NULL) is 0 and DestroyString(NULL) is harmless, so the precision is the same 0; it differs only with the variable set, which the oracle never does"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/timer.c",
+   "function": "GetUserTime",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (time_info->state == RunningTimerState)",
+   "verdict": "unobservable",
+   "why": "only changes the user time, which the oracle masks in every output"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/timer.c",
+   "function": "GetUserTime",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (time_info->state == UndefinedTimerState)",
+   "verdict": "unobservable",
+   "why": "only changes the user time, which the oracle masks in every output"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/timer.c",
+   "function": "StopTimer",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "time_info->elapsed.start+MagickEpsilon;",
+   "verdict": "unobservable",
+   "why": "only changes the elapsed and user times, which the oracle masks in every output"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/timer.c",
+   "function": "StopTimer",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "time_info->elapsed.total+=time_info->elapsed.stop-",
+   "verdict": "unobservable",
+   "why": "only changes the elapsed and user times, which the oracle masks in every output"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/timer.c",
+   "function": "StopTimer",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "time_info->user.total+=time_info->user.stop-",
+   "verdict": "unobservable",
+   "why": "only changes the elapsed and user times, which the oracle masks in every output"
   },
   {
    "at": 36,
@@ -14671,266 +15031,6 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
-  },
-  {
-   "at": 26,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((image->storage_class != cache_info->storage_class) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 19,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->colorspace != cache_info->colorspace) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 20,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->alpha_trait != cache_info->alpha_trait) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->channels != cache_info->channels) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 16,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->columns != cache_info->columns) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 13,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->rows != cache_info->rows) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->number_channels != cache_info->number_channels) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 47,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(memcmp(p,q,image->number_channels*sizeof(*p)) != 0) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 27,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image->metacontent_extent != cache_info->metacontent_extent) ||",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/stream.c",
-   "function": "ValidatePixelCacheMorphology",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(cache_info->nexus_info == (NexusInfo **) NULL))",
-   "verdict": "unresolved",
-   "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/timer.c",
-   "function": "GetUserTime",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (time_info->state == UndefinedTimerState)",
-   "verdict": "unobservable",
-   "why": "only changes the user time, which the oracle masks in every output"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/timer.c",
-   "function": "GetUserTime",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (time_info->state == RunningTimerState)",
-   "verdict": "unobservable",
-   "why": "only changes the user time, which the oracle masks in every output"
-  },
-  {
-   "at": 43,
-   "file": "MagickCore/timer.c",
-   "function": "StopTimer",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "time_info->user.total+=time_info->user.stop-",
-   "verdict": "unobservable",
-   "why": "only changes the elapsed and user times, which the oracle masks in every output"
-  },
-  {
-   "at": 49,
-   "file": "MagickCore/timer.c",
-   "function": "StopTimer",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "time_info->elapsed.total+=time_info->elapsed.stop-",
-   "verdict": "unobservable",
-   "why": "only changes the elapsed and user times, which the oracle masks in every output"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/timer.c",
-   "function": "StopTimer",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "time_info->elapsed.start+MagickEpsilon;",
-   "verdict": "unobservable",
-   "why": "only changes the elapsed and user times, which the oracle masks in every output"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/timer.c",
-   "function": "FormatMagickTime",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (limit != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "reads MAGICK_DATE_PRECISION only when it is unset: StringToInteger(NULL) is 0 and DestroyString(NULL) is harmless, so the precision is the same 0; it differs only with the variable set, which the oracle never does"
-  },
-  {
-   "at": 44,
-   "file": "MagickCore/timer.c",
-   "function": "FormatMagickTime",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((date_precision > 0) && (date_precision < (ssize_t) strlen(timestamp)))",
-   "verdict": "equivalent",
-   "why": "at a precision equal to the timestamp's length (25) the mutant writes '\u0000' where the string already ends: the same text (precisions 25 and 26 give the same CreationDate)"
-  },
-  {
-   "at": 16,
-   "file": "MagickCore/registry.c",
-   "function": "SetImageRegistry",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((image_info == (const ImageInfo *) NULL) ||",
-   "verdict": "unobservable",
-   "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/registry.c",
-   "function": "SetImageRegistry",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(image_info->signature != MagickCoreSignature))",
-   "verdict": "unobservable",
-   "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (montage_info == (MontageInfo *) NULL)",
-   "verdict": "equivalent",
-   "why": "as compiled: on the mutated path montage_info is dereferenced at once, so the compiler may take it to be non-NULL and fold the test; run by hand with the switch set, a montage with the NULL the command line passes behaves as the original"
-  },
-  {
-   "at": 27,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (montage_info->geometry != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (montage_info->tile != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (montage_info->title != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (montage_info->frame != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
-  },
-  {
-   "at": 26,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (montage_info->texture != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/montage.c",
-   "function": "CloneMontageInfo",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (montage_info->font != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
   }
  ]
 }

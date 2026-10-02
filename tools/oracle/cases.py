@@ -3570,6 +3570,14 @@ GAP_STEP_CASES += [
     ("a glob with a subimage", [["{C}/rose.miff", "{C}/granite.miff", "b1.miff"], ["{C}/rose.miff", "b2.miff"],
                                 ["b*.miff[0]", "-append", "out.miff"]], {}),
 ]
+# geometry.c: ParseMetaGeometry's area form with a shrink-only flag; ParseAffineGeometry's
+# determinant (a matrix that inverts, and one that does not); IsSceneGeometry at the limits of a
+# 64-bit scene number
+GAP_COMMANDS += ["{C}/rose.miff -resize 5000@> -format '%wx%h\\n' -write info:",
+                 "-size 30x20 xc:white -affine 2,0.5,0.25,1,3,4 -draw 'rectangle 2,2 10,8'",
+                 "-size 30x20 xc:white -affine 1,2,2,4,0,0 -draw 'rectangle 2,2 10,8'",
+                 "{C}/rose.miff {C}/rose.miff -delete 9223372036854775807 -format '%s\\n' -write info:",
+                 "{C}/rose.miff {C}/rose.miff -delete -9223372036854775808 -format '%s\\n' -write info:"]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
