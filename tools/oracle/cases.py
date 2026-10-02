@@ -1331,6 +1331,31 @@ def _feature_cases():
                                           "-verbose", "info:"]], [])
 
 
+# resample.c: ResamplePixelColor's shortcuts for areas outside the image,
+# per virtual-pixel method, and its averaged result once the EWA ellipse hits
+# its limits. A steep perspective puts a horizon in the viewport, where the
+# ellipses grow without bound; a 2.5x magnification near the edges gives small
+# ellipses that straddle the border.
+RESAMPLE_VIRTUAL_PIXELS = [
+    "background", "black", "checker-tile", "dither", "edge", "gray", "horizontal-tile",
+    "horizontal-tile-edge", "mirror", "none", "random", "tile", "transparent",
+    "vertical-tile", "vertical-tile-edge", "white",
+]
+RESAMPLE_DISTORTIONS = [
+    ("steep perspective", ["-define", "distort:viewport=90x70-10-10", "+distort",
+                           "Perspective", "0,0 0,0  69,0 69,0  0,45 30,6  69,45 39,6"]),
+    ("2.5x near the edges", ["-define", "distort:viewport=60x40+150+95", "-distort", "SRT",
+                             "0,0 2.5 0 0,0"]),
+]
+
+
+def _resample_cases():
+    for v in RESAMPLE_VIRTUAL_PIXELS:
+        for label, how in RESAMPLE_DISTORTIONS:
+            yield _op("resample", "rose_alpha -virtual-pixel %s %s" % (v, label),
+                      [img("rose_alpha")], ["-virtual-pixel", v] + how)
+
+
 def _blob_path_cases():
     yield _case("blob", "inline svg through a temporary file",
                 [[img("rose"), "-resize", "4x4", "-define", "png:exclude-chunk=date,time",
@@ -2589,7 +2614,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _feature_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _feature_cases(), _resample_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
