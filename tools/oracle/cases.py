@@ -2579,6 +2579,19 @@ GAP_STEP_CASES += [
 # string.c: CopyMagickString's return value, which the HDR writer uses as its header lengths;
 # the round trips compare the decoded image, so the file itself is the output here
 GAP_STEP_CASES += [("hdr file itself", [["{C}/rose.miff", "hdr:out.miff"]], {})]
+# utility.c: ExpandFilenames' full path, which only runs when an argument holds a wildcard:
+# globs with options that take values before and after them (whose values it copies),
+# a dotted name read with a subimage spec, and an explicit format prefix with a directory
+GAP_STEP_CASES += [
+    ("glob among options with values",
+     [["{C}/seq.miff", "f%d.miff"], ["-define", "case:x=1", "f*.miff", "-resize", "50%", "-append", "out.miff"]], {}),
+    ("glob range among options with values",
+     [["{C}/seq.miff", "f%d.miff"], ["-define", "case:x=1", "f[0-2].miff", "-resize", "50%", "+append", "out.miff"]], {}),
+    ("dotted name with a subimage spec",
+     [["{C}/rose.miff", "a.b.c.miff"], ["a.b.c.miff[0]", "out.miff"]], {}),
+    ("format prefix with a directory",
+     [["{C}/rose.miff", "miff:sub.d/x.y"], ["miff:sub.d/x.y", "out.miff"]], {"sub.d/keep.txt": "kept\n"}),
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
