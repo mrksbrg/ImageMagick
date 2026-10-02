@@ -2363,6 +2363,13 @@ GAP_COMMANDS += [
     "{C}/wide.miff {C}/gray8.miff {C}/gray8.miff -combine",
     "identify -define identify:locate=minimum {C}/rose.miff",
 ]
+# attribute.c: a uniform border, so the corner pixels decide the background, under a
+# virtual-pixel method other than Edge, so a corner read one pixel too far would differ
+GAP_COMMANDS += [
+    "{C}/rose.miff -bordercolor white -border 5 -virtual-pixel Black -trim +repage",
+    "{C}/rose.miff -bordercolor white -border 5 -virtual-pixel Black -set bbox %@ "
+    "-define trim:edges=north,east -trim +repage",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
