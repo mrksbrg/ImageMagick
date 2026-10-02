@@ -9721,6 +9721,216 @@
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
   },
   {
+   "at": 29,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((path == (const char *) NULL) || (*path == '\\0'))",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((path == (const char *) NULL) || (*path == '\\0'))",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (file == -1)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (passes == -1)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (passes == 0)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return((status == -1 || i < passes) ? MagickFalse : MagickTrue);",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < passes; i++)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j=0; j < (MagickOffsetType) length; j+=count)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (j < (MagickOffsetType) length)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (lseek(file,0,SEEK_SET) < 0)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "return((status == -1 || i < passes) ? MagickFalse : MagickTrue);",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (j < (MagickOffsetType) length)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (lseek(file,0,SEEK_SET) < 0)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "return((status == -1 || i < passes) ? MagickFalse : MagickTrue);",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (i != 0)",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/utility.c",
+   "function": "ShredFile",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetRandomKey(random_info,quantum,GetStringInfoDatum(key));",
+   "verdict": "unobservable",
+   "why": "shreds a temporary file that its callers remove straight after (RelinquishUniqueFileResource, the temporary-resource purge); the result only feeds the release's own status, which callers discard, and the overwritten bytes are never read; reached with the case policy shred=2"
+  },
+  {
    "at": 12,
    "file": "MagickCore/version.c",
    "function": "GetMagickVersion",
