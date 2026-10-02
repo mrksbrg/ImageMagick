@@ -2370,6 +2370,18 @@ GAP_COMMANDS += [
     "{C}/rose.miff -bordercolor white -border 5 -virtual-pixel Black -set bbox %@ "
     "-define trim:edges=north,east -trim +repage",
 ]
+# transform.c: crops on a virtual canvas with negative and positive offsets, crops that run
+# off the image or start exactly at its edge, tile crops (@) with negative and positive
+# offsets
+GAP_COMMANDS += [
+    "{C}/rose.miff -repage 100x80-10-5 -crop 30x20+0+0",
+    "{C}/rose.miff -repage 100x80+10+5 -crop 40x30+60+40",
+    "{C}/rose.miff -crop 3x2-4-3@ +repage -append",
+    "{C}/rose.miff -crop 3x2+4+3@ +repage -append",
+    "{C}/rose.miff -crop 20x20+65+40",
+    "{C}/rose.miff -crop 20x20+70+0",
+    "{C}/rose.miff -repage 0x0+5+5 -crop 10x10+0+0",
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
