@@ -2316,6 +2316,43 @@ def _resample_gap_cases():
                "0,0 0,0  69,0 69,0  0,45 30,1  69,45 39,1"])
 
 
+# quantum-import.c / quantum-export.c: branches no round trip reached. The
+# min-is-white polarity (quantum:polarity) for gray and gray-alpha at every
+# depth; an odd width (7 pixels) for the packed depths 1, 2 and 4, whose last
+# byte holds fewer pixels, in every raw layout; palette with alpha (index and
+# alpha) at the packed depths, odd width, both polarities. A 7x5 crop.
+_ODD = ["-crop", "7x5+20+10", "+repage"]
+QUANTUM_ALL_DEPTHS = [("1", []), ("2", []), ("4", []), ("8", []), ("10", []), ("12", []), ("16", []),
+                      ("24", []), ("32", []), ("16", _FLOAT), ("32", _FLOAT), ("64", _FLOAT)]
+QUANTUM_PACKED_LAYOUTS = ["gray", "graya", "rgb", "rgba", "bgr", "bgra", "rgbo", "cmyk", "cmyka",
+                          "o", "a", "ycbcr", "ycbcra"]
+_MIN_IS_WHITE = ["-define", "quantum:polarity=min-is-white"]
+
+
+def _quantum_odd_round_trip(family, label, f, pre):
+    enc = "enc.%s" % f
+    steps = [[img("rose_alpha")] + _ODD + pre + ["%s:%s" % (f, enc)],
+             ["-size", "7x5"] + pre + ["%s:%s" % (f, enc)] + FLOAT_OUT + ["dec.miff"]]
+    return _case(family, label, steps, [enc, "dec.miff"])
+
+
+def _quantum_gap7_cases(writable_formats):
+    for f, (depth, extra) in itertools.product(("gray", "graya"), QUANTUM_ALL_DEPTHS):
+        if f in writable_formats:
+            yield _quantum_odd_round_trip("quantumgap7", "7x5 -depth %s %s min-is-white -> %s"
+                                          % (depth, " ".join(extra), f), f,
+                                          ["-depth", depth] + extra + _MIN_IS_WHITE)
+    for f, depth in itertools.product(QUANTUM_PACKED_LAYOUTS, ("1", "2", "4")):
+        if f in writable_formats and not (f in ("gray", "graya")):
+            yield _quantum_odd_round_trip("quantumgap7", "7x5 -depth %s -> %s" % (depth, f), f,
+                                          ["-depth", depth])
+    for depth, pol in itertools.product(("1", "2", "4", "8", "16"), ([], _MIN_IS_WHITE)):
+        steps = [[img("rose_alpha")] + _ODD + ["-colors", "4", "-type", "PaletteAlpha", "-depth", depth]
+                 + pol + ["miff:enc.miff"], pol + ["enc.miff"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantumgap7", "7x5 PaletteAlpha -depth %s%s -> miff"
+                    % (depth, " min-is-white" if pol else ""), steps, ["enc.miff", "dec.miff"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -4104,7 +4141,7 @@ def generate(lists, writable_formats):
         _type_cases(lists), _preview_cases(lists),
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
-        _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
+        _quantum_cases(writable_formats), _quantum_gap7_cases(writable_formats), _pixel_jxl_cases(writable_formats),
         _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
