@@ -1651,6 +1651,23 @@ survivors, by line (unmatched, or on unreached lines):
   1401 (3), 1403, 1407, 1411, 1468, 1490, 1493, 1510, 1518, 1535.
 - `ConvertHSLToRGB` 328 and `ConvertRGBToHSL` 640 (`<=` to `<`).
 
+## gem.c and prepress.c: trusted (Windows, 2026-10-02)
+
+Both meet the per-function bar on their full runs and reruns (merged as above). Their open
+survivors, listed so the refactoring phase knows what is not checked:
+
+- **`gem.c`** (adjusted 89%, 4 of 4 functions at 80%): `GenerateDifferentialNoise` 167,
+  170, 178, 181 (unreached), 188, 189 (unreached); `GetOptimalKernelWidth2D` 328 (2),
+  336; `GetOptimalKernelWidth1D` 287, 294.
+- **`prepress.c`** (adjusted 87%, its one function at 87%): `GetImageTotalInkDensity`
+  139, 144.
+
+Not yet: `exception.c` (96%) and `quantum.c` (89%) each have functions at 0% that are not
+API-only. `InheritException` is reached from the JPEG coder's error path, `SetErrorHandler`
+from the TIFF coder, and `SetQuantumMetaChannel` and `SetQuantumPad` from the TIFF and PSD
+coders (meta channels, padding). They need cases on such files. `histogram.c` (88%):
+`MinMaxStretchImage` 60%, `DestroyColorCube` 60%, `IsPaletteImage` 67%.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
