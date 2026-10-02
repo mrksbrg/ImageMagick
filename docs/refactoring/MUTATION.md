@@ -2026,6 +2026,18 @@ it (line coverage: `mkstemp` succeeded on every call under such a policy), so no
 it fail. The path is reachable in real use (an unwritable temporary directory), so it is not
 excused: `resource.c` stays at 94%, not trusted, with this written down.
 
+### An open question about one Mull switch (Windows, 2026-10-02)
+
+`montage.c`'s `CloneMontageInfo` is called by the montage command with a NULL `montage_info`
+(MagickWand/montage.c:348). Its first test, `if (montage_info == NULL) return(clone_info);`,
+mutated to `!=` should then go on to read `montage_info->geometry` and crash. Run by hand on
+the Mull build with that mutant's switch set (`cxx_eq_to_ne:...montage.c:112:...`), a montage
+of two images gives the same output and exit status as without it, and the full run reports
+all seven `CloneMontageInfo` mutants as survived. Either the switch does not take effect for
+this function, or the null read is optimised away; not resolved. If Mull switches can be
+inert, survivors in such functions say nothing, so this is worth checking on the Mac's build
+too.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
