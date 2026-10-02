@@ -1,0 +1,73 @@
+mutate: 74 mutants in MagickCore/cache\.c$, 17 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/74 (315s)
+  mutants: 50/74 (401s)
+  mutants: 74/74 (715s)
+
+mutate: 74 mutants, 715s
+  killed 24, survived 40 (37 capped), no coverage 10, errors 0
+  mutation score on reached code: 37.5%   overall: 32.4%
+
+  function                           total killed survived no-cov
+  GetVirtualPixelCacheNexus             13      9        4      0
+  OpenPixelCache                        13      0       13      0
+  DestroyPixelCache                      6      3        3      0
+  GetImagePixelCache                     6      4        2      0
+  ReadPixelCacheMetacontent              5      0        0      5
+  ReadPixelCachePixels                   5      2        3      0
+  WritePixelCacheMetacontent             5      0        0      5
+  WritePixelCachePixels                  5      2        3      0
+  RelinquishPixelCachePixels             3      0        3      0
+  SetPixelCacheNexusPixels               3      0        3      0
+  CacheComponentTerminus                 2      0        2      0
+  GetOneVirtualPixelInfo                 2      1        1      0
+  ReferencePixelCache                    2      2        0      0
+  ClipPixelCacheNexus                    1      0        1      0
+  ClosePixelCacheOnDisk                  1      0        1      0
+  DestroyPixelCacheNexus                 1      0        1      0
+  SetCacheAlphaChannel                   1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c cache.c:384:5 cxx_remove_void_call       ActivateSemaphoreInfo(&cache_semaphore);
+    xc cache.c:386:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&cache_semaphore);
+    x  cache.c:489:11 cxx_remove_void_call       SetPixelAlpha(image,src_alpha,q);
+    x  cache.c:1031:7 cxx_remove_void_call       RelinquishMagickResource(FileResource,1);
+    xc cache.c:1060:7 cxx_remove_void_call       RelinquishMagickResource(MemoryResource,cache_info->length);
+    xc cache.c:1070:7 cxx_remove_void_call       RelinquishMagickResource(MapResource,cache_info->length);
+    xc cache.c:1080:7 cxx_remove_void_call       RelinquishMagickResource(DiskResource,cache_info->length);
+    xc cache.c:1126:3 cxx_remove_void_call       RelinquishPixelCachePixels(cache_info);
+    xc cache.c:1136:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&cache_info->file_semaphore);
+    xc cache.c:1138:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&cache_info->semaphore);
+    xc cache.c:1194:7 cxx_remove_void_call       RelinquishCacheNexusPixels(nexus_info[i]);
+     c cache.c:1812:5 cxx_remove_void_call       MagickDelay(cpu_throttle);
+    xc cache.c:1856:11 cxx_remove_void_call       RelinquishSemaphoreInfo(&clone_image.semaphore);
+    x  cache.c:2223:3 cxx_remove_void_call       GetPixelInfo(image,pixel);
+    xc cache.c:2968:13 cxx_remove_void_call       SetPixelChannel(image,(PixelChannel) i,(Quantum) 0,virtual_pixel);
+    xc cache.c:2983:13 cxx_remove_void_call       SetPixelChannel(image,(PixelChannel) i,(Quantum) 0,virtual_pixel);
+    xc cache.c:2984:11 cxx_remove_void_call       SetPixelAlpha(image,TransparentAlpha,virtual_pixel);
+    xc cache.c:3003:11 cxx_remove_void_call       SetPixelBlack(image,ClampToQuantum(image->background_color.black),
+     c cache.c:3908:15 cxx_remove_void_call       RelinquishMagickResource(MemoryResource,cache_info->length);
+    xc cache.c:3927:19 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:3949:21 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:3996:19 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4018:21 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4026:9 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4040:9 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4057:9 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4068:9 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4088:15 cxx_remove_void_call       RelinquishMagickResource(MapResource,cache_info->length);
+    xc cache.c:4107:19 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4128:21 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+    xc cache.c:4140:7 cxx_remove_void_call       RelinquishPixelCachePixels(&source_info);
+     c cache.c:4832:11 cxx_remove_void_call       UnlockSemaphoreInfo(cache_info->file_semaphore);
+     c cache.c:4864:7 cxx_remove_void_call       LockSemaphoreInfo(cache_info->file_semaphore);
+     c cache.c:4883:7 cxx_remove_void_call       UnlockSemaphoreInfo(cache_info->file_semaphore);
+    xc cache.c:5299:11 cxx_remove_void_call       PrefetchPixelCacheNexusPixels(nexus_info,mode);
+    xc cache.c:5347:9 cxx_remove_void_call       RelinquishCacheNexusPixels(nexus_info);
+    xc cache.c:5363:3 cxx_remove_void_call       PrefetchPixelCacheNexusPixels(nexus_info,mode);
+     c cache.c:6038:11 cxx_remove_void_call       UnlockSemaphoreInfo(cache_info->file_semaphore);
+     c cache.c:6070:7 cxx_remove_void_call       LockSemaphoreInfo(cache_info->file_semaphore);
+     c cache.c:6089:7 cxx_remove_void_call       UnlockSemaphoreInfo(cache_info->file_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-cache.json

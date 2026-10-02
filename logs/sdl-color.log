@@ -1,0 +1,41 @@
+mutate: 47 mutants in MagickCore/color\.c$, 13 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/47 (0s)
+  mutants: 47/47 (324s)
+
+mutate: 47 mutants, 324s
+  killed 23, survived 13 (8 capped), no coverage 11, errors 0
+  mutation score on reached code: 63.9%   overall: 48.9%
+
+  function                           total killed survived no-cov
+  GetColorTuple                         12     12        0      0
+  QueryColorCompliance                   7      1        6      0
+  ColorComponentTerminus                 4      2        2      0
+  GetColorCompliance                     4      3        1      0
+  IsEquivalentImage                      4      0        0      4
+  GetColorInfoList                       3      0        0      3
+  GetColorList                           3      0        0      3
+  IsColorCacheInstantiated               3      2        1      0
+  QueryColorname                         3      3        0      0
+  AcquireColorCache                      1      0        1      0
+  ListColorInfo                          1      0        0      1
+  LoadColorCache                         1      0        1      0
+  ParseCSSColor                          1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  color.c:894:5 cxx_remove_void_call       GetPixelInfo((Image *) NULL,&color_info->color);
+     c color.c:974:5 cxx_remove_void_call       ActivateSemaphoreInfo(&color_semaphore);
+    xc color.c:979:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&color_semaphore);
+    x  color.c:1069:5 cxx_remove_void_call       SetHeadElementInLinkedList(color_cache,p);
+       color.c:1647:9 cxx_remove_void_call       ActivateSemaphoreInfo(&color_semaphore);
+       color.c:2100:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+    x  color.c:2252:3 cxx_remove_void_call       SetGeometryInfo(geometry_info);
+    xc color.c:2496:7 cxx_remove_void_call       LocaleLower(colorspace);
+     c color.c:2642:15 cxx_remove_void_call       ConvertHCLToRGB(fmod(fmod(geometry_info.rho,360.0)+360.0,360.0)/
+     c color.c:2648:15 cxx_remove_void_call       ConvertHSBToRGB(fmod(fmod(geometry_info.rho,360.0)+360.0,360.0)/
+    xc color.c:2654:15 cxx_remove_void_call       ConvertHSLToRGB(fmod(fmod(geometry_info.rho,360.0)+360.0,360.0)/
+     c color.c:2660:15 cxx_remove_void_call       ConvertHSVToRGB(fmod(fmod(geometry_info.rho,360.0)+360.0,360.0)/
+     c color.c:2666:15 cxx_remove_void_call       ConvertHWBToRGB(fmod(fmod(geometry_info.rho,360.0)+360.0,360.0)/
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-color.json

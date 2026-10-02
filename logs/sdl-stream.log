@@ -1,0 +1,25 @@
+mutate: 11 mutants in MagickCore/stream\.c$, 4 functions
+mutate: baseline over 220 cases in 0s
+  mutants: 11/11 (13s)
+
+mutate: 11 mutants, 13s
+  killed 3, survived 7 (0 capped), no coverage 1, errors 0
+  mutation score on reached code: 30.0%   overall: 27.3%
+
+  function                           total killed survived no-cov
+  DestroyPixelStream                     5      2        3      0
+  ReadStream                             3      1        2      0
+  QueueAuthenticPixelsStream             2      0        2      0
+  GetVirtualPixelStream                  1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  stream.c:240:3 cxx_remove_void_call       RelinquishStreamPixels(cache_info);
+    x  stream.c:245:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&cache_info->file_semaphore);
+    x  stream.c:247:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&cache_info->semaphore);
+    x  stream.c:939:7 cxx_remove_void_call       ResetPixelCacheChannels(image);
+       stream.c:966:9 cxx_remove_void_call       RelinquishStreamPixels(cache_info);
+    x  stream.c:1034:3 cxx_remove_void_call       GetPixelCacheMethods(&cache_methods);
+    x  stream.c:1058:7 cxx_remove_void_call       ResetPixelCacheChannels(image);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-stream.json

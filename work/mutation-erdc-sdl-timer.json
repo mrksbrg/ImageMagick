@@ -1,0 +1,96 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:113:3:113:27",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 113,
+  "col": 3,
+  "function": "AcquireTimerInfo",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:295:3:295:36",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 295,
+  "col": 3,
+  "function": "FormatMagickTime",
+  "status": "killed",
+  "cases": 1,
+  "killer": "encode/0376785cd7",
+  "why": "enc.ps3 differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:336:5:336:25",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 336,
+  "col": 5,
+  "function": "GetElapsedTime",
+  "status": "killed",
+  "cases": 17,
+  "killer": "decode/f84694064d",
+  "why": "stdout differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:385:3:385:20",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 385,
+  "col": 3,
+  "function": "GetMagickTime",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:423:3:423:35",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 423,
+  "col": 3,
+  "function": "GetTimerInfo",
+  "status": "killed",
+  "cases": 2,
+  "killer": "identify/15d9590616",
+  "why": "stdout differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:457:5:457:25",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 457,
+  "col": 5,
+  "function": "GetUserTime",
+  "status": "survived",
+  "cases": 241,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:484:3:484:20",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 484,
+  "col": 3,
+  "function": "IsSourceDataEpochSet",
+  "status": "survived",
+  "cases": 1500,
+  "capped": true,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c:514:3:514:23",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/timer.c",
+  "line": 514,
+  "col": 3,
+  "function": "ResetTimer",
+  "status": "survived",
+  "cases": 17,
+  "capped": false,
+  "line_executed": true
+ }
+]

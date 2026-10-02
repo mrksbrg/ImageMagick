@@ -1,0 +1,67 @@
+mutate: 66 mutants in MagickCore/magick\.c$, 13 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/66 (18s)
+  mutants: 50/66 (407s)
+  mutants: 66/66 (725s)
+
+mutate: 66 mutants, 725s
+  killed 12, survived 38 (36 capped), no coverage 16, errors 0
+  mutation score on reached code: 24.0%   overall: 18.2%
+
+  function                           total killed survived no-cov
+  MagickCoreTerminus                    24      1       23      0
+  MagickSignalHandler                    9      0        0      9
+  MagickCoreGenesis                      5      1        4      0
+  GetMagickInfoList                      4      3        1      0
+  GetMagickList                          4      0        0      4
+  MagickComponentTerminus                4      2        2      0
+  GetImageMagick                         3      0        0      3
+  GetMagickInfo                          3      3        0      0
+  IsMagickTreeInstantiated               3      2        1      0
+  UnregisterMagickInfo                   3      0        3      0
+  SetClientNameAndPath                   2      0        2      0
+  DestroyMagickNode                      1      0        1      0
+  ListMagickInfo                         1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  magick.c:736:3 cxx_remove_void_call       qsort((void *) formats,(size_t) i,sizeof(*formats),MagickInfoCompare);
+    xc magick.c:1083:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->semaphore);
+     c magick.c:1093:9 cxx_remove_void_call       ActivateSemaphoreInfo(&magick_semaphore);
+    x  magick.c:1188:3 cxx_remove_void_call       ClearMagickException(exception);
+     c magick.c:1326:5 cxx_remove_void_call       ActivateSemaphoreInfo(&magick_semaphore);
+    xc magick.c:1334:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&magick_semaphore);
+    xc magick.c:1481:3 cxx_remove_void_call       GetPathComponent(execution_path,TailPath,filename);
+    xc magick.c:1483:3 cxx_remove_void_call       GetPathComponent(execution_path,HeadPath,execution_path);
+    xc magick.c:1501:3 cxx_remove_void_call       InitializeMagickMutex();
+    xc magick.c:1502:3 cxx_remove_void_call       LockMagickMutex();
+     c magick.c:1505:7 cxx_remove_void_call       UnlockMagickMutex();
+    xc magick.c:1510:3 cxx_remove_void_call       SetClientNameAndPath(path);
+    xc magick.c:1641:3 cxx_remove_void_call       InitializeMagickMutex();
+    xc magick.c:1642:3 cxx_remove_void_call       LockMagickMutex();
+     c magick.c:1645:7 cxx_remove_void_call       UnlockMagickMutex();
+    xc magick.c:1648:3 cxx_remove_void_call       MonitorComponentTerminus();
+    xc magick.c:1649:3 cxx_remove_void_call       RegistryComponentTerminus();
+    xc magick.c:1650:3 cxx_remove_void_call       AnnotateComponentTerminus();
+    xc magick.c:1651:3 cxx_remove_void_call       MimeComponentTerminus();
+    xc magick.c:1652:3 cxx_remove_void_call       TypeComponentTerminus();
+    xc magick.c:1656:3 cxx_remove_void_call       ColorComponentTerminus();
+    xc magick.c:1660:3 cxx_remove_void_call       MagicComponentTerminus();
+    xc magick.c:1661:3 cxx_remove_void_call       DelegateComponentTerminus();
+    xc magick.c:1662:3 cxx_remove_void_call       MagickComponentTerminus();
+    xc magick.c:1664:3 cxx_remove_void_call       UnregisterStaticModules();
+    xc magick.c:1672:3 cxx_remove_void_call       CoderComponentTerminus();
+    xc magick.c:1674:3 cxx_remove_void_call       CacheComponentTerminus();
+    xc magick.c:1675:3 cxx_remove_void_call       PolicyComponentTerminus();
+    xc magick.c:1676:3 cxx_remove_void_call       ConfigureComponentTerminus();
+    xc magick.c:1677:3 cxx_remove_void_call       RandomComponentTerminus();
+    xc magick.c:1678:3 cxx_remove_void_call       LocaleComponentTerminus();
+    xc magick.c:1679:3 cxx_remove_void_call       LogComponentTerminus();
+    xc magick.c:1680:3 cxx_remove_void_call       ExceptionComponentTerminus();
+    xc magick.c:1682:3 cxx_remove_void_call       UnlockMagickMutex();
+    xc magick.c:1683:3 cxx_remove_void_call       SemaphoreComponentTerminus();
+     c magick.c:1854:3 cxx_remove_void_call       LockSemaphoreInfo(magick_semaphore);
+     c magick.c:1855:3 cxx_remove_void_call       ResetSplayTreeIterator(magick_list);
+     c magick.c:1864:3 cxx_remove_void_call       UnlockSemaphoreInfo(magick_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-magick.json

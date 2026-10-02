@@ -1,0 +1,132 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:233:3:233:43",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 233,
+  "col": 3,
+  "function": "stream.c:DestroyPixelStream",
+  "status": "killed",
+  "cases": 1,
+  "killer": "identify/53d2bf322e",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:237:3:237:45",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 237,
+  "col": 3,
+  "function": "stream.c:DestroyPixelStream",
+  "status": "killed",
+  "cases": 1,
+  "killer": "identify/53d2bf322e",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:240:3:240:37",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 240,
+  "col": 3,
+  "function": "stream.c:DestroyPixelStream",
+  "status": "survived",
+  "cases": 220,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:245:5:245:57",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 245,
+  "col": 5,
+  "function": "stream.c:DestroyPixelStream",
+  "status": "survived",
+  "cases": 220,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:247:5:247:52",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 247,
+  "col": 5,
+  "function": "stream.c:DestroyPixelStream",
+  "status": "survived",
+  "cases": 220,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:765:9:765:43",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 765,
+  "col": 9,
+  "function": "stream.c:GetVirtualPixelStream",
+  "status": "no-coverage",
+  "cases": 0
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:939:7:939:37",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 939,
+  "col": 7,
+  "function": "stream.c:QueueAuthenticPixelsStream",
+  "status": "survived",
+  "cases": 216,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:966:9:966:43",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 966,
+  "col": 9,
+  "function": "stream.c:QueueAuthenticPixelsStream",
+  "status": "survived",
+  "cases": 216,
+  "capped": false,
+  "line_executed": false
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:1034:3:1034:39",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 1034,
+  "col": 3,
+  "function": "ReadStream",
+  "status": "survived",
+  "cases": 220,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:1049:3:1049:56",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 1049,
+  "col": 3,
+  "function": "ReadStream",
+  "status": "killed",
+  "cases": 6,
+  "killer": "stream/2593fb4f92",
+  "why": "out.raw differs"
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c:1058:7:1058:37",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/stream.c",
+  "line": 1058,
+  "col": 7,
+  "function": "ReadStream",
+  "status": "survived",
+  "cases": 220,
+  "capped": false,
+  "line_executed": true
+ }
+]

@@ -1,0 +1,26 @@
+mutate: 8 mutants in MagickCore/timer\.c$, 8 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 8/8 (286s)
+
+mutate: 8 mutants, 286s
+  killed 3, survived 4 (2 capped), no coverage 1, errors 0
+  mutation score on reached code: 42.9%   overall: 37.5%
+
+  function                           total killed survived no-cov
+  AcquireTimerInfo                       1      0        0      1
+  FormatMagickTime                       1      1        0      0
+  GetElapsedTime                         1      1        0      0
+  GetMagickTime                          1      0        1      0
+  GetTimerInfo                           1      1        0      0
+  GetUserTime                            1      0        1      0
+  IsSourceDataEpochSet                   1      0        1      0
+  ResetTimer                             1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc timer.c:385:3 cxx_remove_void_call       InitializeEpoch();
+       timer.c:457:5 cxx_remove_void_call       StopTimer(time_info);
+    xc timer.c:484:3 cxx_remove_void_call       InitializeEpoch();
+    x  timer.c:514:3 cxx_remove_void_call       StopTimer(time_info);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-timer.json
