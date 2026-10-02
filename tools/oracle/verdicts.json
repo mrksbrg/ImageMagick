@@ -1632,6 +1632,46 @@
    "why": "runs only when ImageMagick shuts down, after the output is written"
   },
   {
+   "at": 23,
+   "file": "MagickCore/color.c",
+   "function": "IsSVGCompliant",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((pixel->colorspace == CMYKColorspace) &&",
+   "verdict": "equivalent",
+   "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/color.c",
+   "function": "IsSVGCompliant",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(fabs((double) (SVGCompliant(pixel->black)-pixel->black)) >= SVGEpsilon))",
+   "verdict": "equivalent",
+   "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/color.c",
+   "function": "IsSVGCompliant",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(fabs((double) (SVGCompliant(pixel->black)-pixel->black)) >= SVGEpsilon))",
+   "verdict": "equivalent",
+   "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/color.c",
+   "function": "IsSVGCompliant",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "(fabs((double) (SVGCompliant(pixel->black)-pixel->black)) >= SVGEpsilon))",
+   "verdict": "equivalent",
+   "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
+  },
+  {
    "at": 67,
    "file": "MagickCore/colormap.c",
    "function": "IntensityCompare",
