@@ -13451,6 +13451,26 @@
    "src": "if ((x-floor(x)) < (ceil(x)-x))",
    "verdict": "unresolved",
    "why": "differs only on an exact .5 fraction (rounds down instead of up); Arc with rotations 270 and 90, whose start angle normalises to half a turn and none, did not kill it, likely since the angle is wrapped again per pixel"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/blob.c",
+   "function": "ReadBlobString",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((string[i] == '\\r') || (string[i] == '\\n'))",
+   "verdict": "equivalent",
+   "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/blob.c",
+   "function": "ReadBlobString",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((string[i] == '\\r') || (string[i] == '\\n'))",
+   "verdict": "equivalent",
+   "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
   }
  ]
 }
