@@ -4382,6 +4382,26 @@
    "why": "Q, the maximum correlation coefficient's matrix, is accumulated but never read: the coefficient is set to sqrt(-1.0) (a 'Future' in feature.c)"
   },
   {
+   "at": 75,
+   "file": "MagickCore/feature.c",
+   "function": "RenderHoughLines",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "draw_info->affine.sx=image->resolution.x == 0.0 ? 1.0 : image->resolution.x/",
+   "verdict": "equivalent",
+   "why": "the resolution is always 0: the only caller, HoughLineImage, passes a fresh AcquireImageInfo() with no density, so the ?: always takes 1.0 (line coverage: the division never runs, even under -density)"
+  },
+  {
+   "at": 75,
+   "file": "MagickCore/feature.c",
+   "function": "RenderHoughLines",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "draw_info->affine.sy=image->resolution.y == 0.0 ? 1.0 : image->resolution.y/",
+   "verdict": "equivalent",
+   "why": "the resolution is always 0: the only caller, HoughLineImage, passes a fresh AcquireImageInfo() with no density, so the ?: always takes 1.0 (line coverage: the division never runs, even under -density)"
+  },
+  {
    "at": 12,
    "file": "MagickCore/fourier.c",
    "function": "ComplexImages",
@@ -4753,6 +4773,126 @@
    "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
   },
   {
+   "at": 60,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "page.height=page.y < 0 ? height : (size_t) ((ssize_t) height+page.y);",
+   "verdict": "unresolved",
+   "why": "differs only for a merged page with no size and a positive offset; the command line fills the size in for a positive offset (-repage 0x0+3+2 becomes 13x10), so only an image file could carry one"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "page.width=page.x < 0 ? width : (size_t) ((ssize_t) width+page.x);",
+   "verdict": "unresolved",
+   "why": "differs only for a merged page with no size and a positive offset; the command line fills the size in for a positive offset (-repage 0x0+3+2 becomes 13x10), so only an image file could carry one"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (page.x > next->page.x)",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (page.y > next->page.y)",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((ssize_t) height < (next->page.y+(ssize_t) next->rows))",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((ssize_t) height < (next->page.y+(ssize_t) next->rows-page.y))",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((ssize_t) width < (next->page.x+(ssize_t) next->columns))",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((ssize_t) width < (next->page.x+(ssize_t) next->columns-page.x))",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "page.height=page.y < 0 ? height : (size_t) ((ssize_t) height+page.y);",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "page.width=page.x < 0 ? width : (size_t) ((ssize_t) width+page.x);",
+   "verdict": "equivalent",
+   "why": "at equality the branch adds nothing or assigns the value already there"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (scene=0; scene < (ssize_t) number_images; scene++)",
+   "verdict": "unobservable",
+   "why": "the scene counter only feeds the progress monitor; the loop ends when the image list does"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/layer.c",
+   "function": "MergeImageLayers",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (scene=0; scene < (ssize_t) number_images; scene++)",
+   "verdict": "unobservable",
+   "why": "the scene counter only feeds the progress monitor; the loop ends when the image list does"
+  },
+  {
    "at": 38,
    "file": "MagickCore/layer.c",
    "function": "OptimizeImageTransparency",
@@ -4973,6 +5113,156 @@
    "src": "if (offset > max_offset)",
    "verdict": "equivalent",
    "why": "a running maximum: >= replaces it with an equal value"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "for (j=(ssize_t) rank-1; j >= 0; j--)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 3,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unobservable",
+   "why": "the copy of the inverse back into matrix is never read: every caller (distort.c) uses only the solution vectors"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 4,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unobservable",
+   "why": "only changes which rows are freed: a leak"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 4,
+   "src": "for (j=0; j < (ssize_t) rank; j++)",
+   "verdict": "unobservable",
+   "why": "the copy of the inverse back into matrix is never read: every caller (distort.c) uses only the solution vectors"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (k=0; k < (ssize_t) rank; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (k=0; k < (ssize_t) rank; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (columns[j] != rows[j])",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (row != column)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) rank; i++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (k=0; k < (ssize_t) rank; k++)",
+   "verdict": "unresolved",
+   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
   },
   {
    "at": 6,
@@ -14151,176 +14441,6 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (row != column)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 1,
-   "src": "for (k=0; k < (ssize_t) rank; k++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_le",
-   "nth": 1,
-   "src": "for (k=0; k < (ssize_t) rank; k++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 31,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 1,
-   "src": "for (k=0; k < (ssize_t) rank; k++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 41,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "for (k=0; k < (ssize_t) number_vectors; k++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 27,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_ge_to_lt",
-   "nth": 0,
-   "src": "for (j=(ssize_t) rank-1; j >= 0; j--)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 15,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (columns[j] != rows[j])",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 2,
-   "src": "for (i=0; i < (ssize_t) rank; i++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_le",
-   "nth": 2,
-   "src": "for (i=0; i < (ssize_t) rank; i++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 31,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 2,
-   "src": "for (i=0; i < (ssize_t) rank; i++)",
-   "verdict": "unresolved",
-   "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 3,
-   "src": "for (i=0; i < (ssize_t) rank; i++)",
-   "verdict": "unobservable",
-   "why": "the copy of the inverse back into matrix is never read: every caller (distort.c) uses only the solution vectors"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 4,
-   "src": "for (j=0; j < (ssize_t) rank; j++)",
-   "verdict": "unobservable",
-   "why": "the copy of the inverse back into matrix is never read: every caller (distort.c) uses only the solution vectors"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/matrix.c",
-   "function": "GaussJordanElimination",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 4,
-   "src": "for (i=0; i < (ssize_t) rank; i++)",
-   "verdict": "unobservable",
-   "why": "only changes which rows are freed: a leak"
-  },
-  {
-   "at": 75,
-   "file": "MagickCore/feature.c",
-   "function": "RenderHoughLines",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "draw_info->affine.sx=image->resolution.x == 0.0 ? 1.0 : image->resolution.x/",
-   "verdict": "equivalent",
-   "why": "the resolution is always 0: the only caller, HoughLineImage, passes a fresh AcquireImageInfo() with no density, so the ?: always takes 1.0 (line coverage: the division never runs, even under -density)"
-  },
-  {
-   "at": 75,
-   "file": "MagickCore/feature.c",
-   "function": "RenderHoughLines",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "draw_info->affine.sy=image->resolution.y == 0.0 ? 1.0 : image->resolution.y/",
-   "verdict": "equivalent",
-   "why": "the resolution is always 0: the only caller, HoughLineImage, passes a fresh AcquireImageInfo() with no density, so the ?: always takes 1.0 (line coverage: the division never runs, even under -density)"
   }
  ]
 }

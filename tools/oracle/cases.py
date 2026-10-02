@@ -3315,6 +3315,11 @@ GAP_COMMANDS += [_MERGE_FRAMES % offsets + "-layers " + method
                  for method in ("merge", "mosaic", "flatten", "trim-bounds")]
 GAP_COMMANDS += ["-size 10x8 xc:red +repage ( -size 6x4 xc:blue +repage -page +12+3 ) -layers " + method
                  for method in ("merge", "mosaic")]
+# a mosaic on a page wider than every frame, and mosaic and merge from a first frame whose page
+# has no size but a negative offset (it does not cover the canvas its size implies)
+GAP_COMMANDS += ["-size 10x8 xc:red -repage 30x20+0+0 ( -size 6x4 xc:blue -repage +1+1 ) -layers mosaic",
+                 "-size 10x8 xc:red -repage 0x0-3-2 ( -size 6x4 xc:blue -repage +1+1 ) -layers mosaic",
+                 "-size 10x8 xc:red -repage 0x0-3-2 ( -size 6x4 xc:blue -repage -5-4 ) -layers merge"]
 # layer.c: OptimizeLayerFrames on sequences that grow, shrink back (needing a background or
 # previous disposal), repeat a frame (DupDispose) and clear to transparency, for optimize,
 # optimize-plus (which may add frames) and optimize-frame
