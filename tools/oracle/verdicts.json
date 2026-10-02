@@ -12641,6 +12641,26 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/colorspace.c",
+   "function": "RoundToYCC",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (value <= 0.0)",
+   "verdict": "equivalent",
+   "why": "at value == 0.0 the mutant falls through to (ssize_t) (0.0+0.5), also 0"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/colorspace.c",
+   "function": "RoundToYCC",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (value >= 1388.0)",
+   "verdict": "equivalent",
+   "why": "at value == 1388.0 the mutant falls through to (ssize_t) (1388.5), also 1388"
   }
  ]
 }
