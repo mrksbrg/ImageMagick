@@ -2353,6 +2353,15 @@ def _quantum_gap7_cases(writable_formats):
                     % (depth, " min-is-white" if pol else ""), steps, ["enc.miff", "dec.miff"])
 
 
+# blob.c: ReadBlobString strips a line's trailing newline; the TEXT reader
+# renders each line it reads, so an unstripped newline shows. A file with an
+# empty line, a CRLF line and no final newline (hand-run: 3 killed).
+def _blob_gap_cases():
+    yield _with_inputs(_op_to("blobgap", "text: with empty, CRLF and unterminated lines",
+                              ["-size", "60x60", "-pointsize", "10", "text:t.txt"] + FLOAT_OUT, "out.miff"),
+                       files={"t.txt": "ab\n\ncd\r\nef"})
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -4142,7 +4151,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _quantum_gap7_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
