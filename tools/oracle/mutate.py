@@ -272,6 +272,17 @@ def _limit_file_size():
     resource.setrlimit(resource.RLIMIT_FSIZE, (2 << 30, resource.getrlimit(resource.RLIMIT_FSIZE)[1]))
 
 
+def _limit_memory():
+    # ORACLE_MEM_GB=N caps each child's address space at N GB, for a machine
+    # whose RAM a few runaway mutants can fill before their timeout (one that
+    # stops pruning quantize.c's colour tree grew it without bound, and six at
+    # once froze an 8 GB WSL). Such a mutant then fails to allocate, and is
+    # killed, as it would be at the timeout. Off unless set.
+    gb = os.environ.get("ORACLE_MEM_GB")
+    if gb:
+        resource.setrlimit(resource.RLIMIT_AS, (int(gb) << 30, resource.getrlimit(resource.RLIMIT_AS)[1]))
+
+
 def _in_function(m, function):
     return m["function"] and plain(m["function"]) == function
 
@@ -481,6 +492,7 @@ def main():
     base_bin = oracle.build("base", "origin/main")  # only for the corpus and option lists
     oracle.WRAPPER = sandbox(binary)  # baseline and mutants alike
     _limit_file_size()
+    _limit_memory()
     manifest, cases = oracle.load_cases(base_bin)
     run = _Run(binary, slug, manifest, {c["id"]: c for c in cases})
     run.max_cases, run.jobs = args.max_cases, args.jobs
