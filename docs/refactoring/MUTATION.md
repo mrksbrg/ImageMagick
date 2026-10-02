@@ -1763,6 +1763,20 @@ Windows file with it gave the same figures as the merge used above. Each family
   fallback when creating a temporary file fails (7 mutants, unreached), and the terminus
   run at abnormal exit.
 
+### Two more rounds: quantize and distort (Windows, 2026-10-02, evening)
+
+- **`quantize.c`, family `quantizegap2` (12 cases):** `+dither -posterize` on truecolour,
+  palette and alpha images (every posterize case had dithered, so `PosterizeImage`'s plain
+  loop and colormap branch never ran), `-kmeans` with fewer seed colours than clusters,
+  `-verbose -kmeans`, and `-remap`/`+remap` over a sequence. 39 kills: adjusted 81% to
+  **85%**, 35 of 47 functions at 80%. `PosterizeImage` 50% to 76%; `RemapImages` stays at
+  20% (a remap of a sequence does not go through it from the command line).
+- **`distort.c`, family `distortgap` (47 cases):** `-verbose` for every method (the
+  coefficients printed as `-fx`; only Polynomial had it), `+distort` for every method,
+  `distort:scale` 2 and 0.05, and a perspective past the horizon. 108 kills: adjusted 74% to
+  **83%**; `DistortImage` 62% to over 80%. Below 80%: `GenerateCoefficients` 69%,
+  `RotateImage` 75%, `MagickRound` 50%. `resample.c` 1 more kill (74%).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
