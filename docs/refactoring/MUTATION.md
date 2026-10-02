@@ -1987,16 +1987,16 @@ are `unresolved` (`verdicts.json`). The other functions below 80% are the stream
 virtual-pixel accessors, which only a coder reading virtual pixels while streaming would
 call; none of nine formats probed does. Not trusted.
 
-## timer.c: trusted (Windows, 2026-10-02)
+## timer.c: not yet trusted (Windows, 2026-10-02)
 
-No new cases: every survivor read from the source. `FormatMagickTime`'s four survivors depend
-on the date precision, which comes from the environment variable `MAGICK_DATE_PRECISION`
-(not a policy). The oracle does not set it, so the precision is 0 and the truncation never
-applies; `StopTimer`'s three and `GetUserTime`'s two change only elapsed and user times,
-which the oracle masks in every output. All nine are `unobservable` (`verdicts.json`).
-**Adjusted 63% to 85%, trusted.** Out of reach: `ContinueTimer` (4), called only by `-bench`
-with `-duration`, whose output carries an unmasked rate, and by the logger. No other survivor
-is open.
+An earlier version of this section called `timer.c` trusted, on a wrong reading:
+`FormatMagickTime`'s four survivors were marked `unobservable` because the date precision
+seemed to come only from the environment variable `MAGICK_DATE_PRECISION`. It can also be
+set with `-define registry:date:precision=N` (registry.c calls `SetMagickDatePrecision`), and
+then the PostScript CreationDate is cut to N characters. The four verdicts were removed and
+cases added (family `timergap`). `StopTimer`'s three and `GetUserTime`'s two survivors stay
+`unobservable` (they change only times the oracle masks); `ContinueTimer` is reached only by
+`-bench -duration` and the logger.
 
 ## How to use this in the campaign
 

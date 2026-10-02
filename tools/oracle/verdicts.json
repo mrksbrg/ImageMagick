@@ -14733,46 +14733,6 @@
    "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
   },
   {
-   "at": 19,
-   "file": "MagickCore/timer.c",
-   "function": "FormatMagickTime",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (date_precision == -1)",
-   "verdict": "unobservable",
-   "why": "the date precision comes from the environment variable MAGICK_DATE_PRECISION, which the oracle does not set; unset it is 0 and the truncation never applies, whatever the mutant"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/timer.c",
-   "function": "FormatMagickTime",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (limit != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "the date precision comes from the environment variable MAGICK_DATE_PRECISION, which the oracle does not set; unset it is 0 and the truncation never applies, whatever the mutant"
-  },
-  {
-   "at": 44,
-   "file": "MagickCore/timer.c",
-   "function": "FormatMagickTime",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "if ((date_precision > 0) && (date_precision < (ssize_t) strlen(timestamp)))",
-   "verdict": "unobservable",
-   "why": "the date precision comes from the environment variable MAGICK_DATE_PRECISION, which the oracle does not set; unset it is 0 and the truncation never applies, whatever the mutant"
-  },
-  {
-   "at": 44,
-   "file": "MagickCore/timer.c",
-   "function": "FormatMagickTime",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((date_precision > 0) && (date_precision < (ssize_t) strlen(timestamp)))",
-   "verdict": "unobservable",
-   "why": "the date precision comes from the environment variable MAGICK_DATE_PRECISION, which the oracle does not set; unset it is 0 and the truncation never applies, whatever the mutant"
-  },
-  {
    "at": 21,
    "file": "MagickCore/timer.c",
    "function": "GetUserTime",
