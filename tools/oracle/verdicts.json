@@ -14531,6 +14531,46 @@
    "src": "while (p != (const ExceptionInfo *) NULL)",
    "verdict": "unobservable",
    "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "decides whether to log a trace event; logging is off"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
+   "verdict": "unresolved",
+   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
+   "verdict": "unresolved",
+   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumPad",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "if (pad >= (MAGICK_SSIZE_MAX/GetImageChannels(image)))",
+   "verdict": "unresolved",
+   "why": "every call the command line makes passes a pad of 0 (run by hand on the Mull build: identical output); the one call with a pad above 0 (tiff.c, a contiguous TIFF with more samples than the channels read) needs a file ImageMagick does not write"
   }
  ]
 }
