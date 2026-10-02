@@ -2516,6 +2516,30 @@ GAP_COMMANDS += [
     "-font {C}/Generic.ttf -pointsize 14 -weight 650 -density 150 label:'Ab cd'",
     "-font {C}/Generic.ttf -pointsize 14 -word-break break-all -size 40x caption:'Abcdefgh ijk'",
 ]
+# property.c: the property names GetMagickProperty knows that no case printed (some are
+# unknown for one image and known for the other), and the properties SetImageProperty maps
+# onto image fields, which -set had never set
+_PROPERTY_FORMAT = "%[bounding-box]|%[convex-hull:extreme-points]|%[height]|%[interlace]|%[mime:type]|%[page]|%[profile:icm]|%[printsize.x]|%[printsize.y]|%[profiles]|%[quality]|%[width]\\n"
+GAP_COMMANDS += ["identify -format '" + _PROPERTY_FORMAT + "' {C}/rose.miff",
+                 "identify -format '" + _PROPERTY_FORMAT + "' " + _UHDR_JPG]
+GAP_COMMANDS += ["{C}/rose.miff -set compose Over -set compress Zip -set delay 20x50 -set density 150x100 "
+                 "-set dispose Background -set gravity Center -set intensity Rec709Luma -set intent Perceptual "
+                 "-set interpolate Bilinear -set kurtosis 1 -set opaque true -set rendering-intent Saturation "
+                 "-set type TrueColor -set units PixelsPerInch"]
+# property.c: InterpretImageProperties' rarer paths: a format read from a file with CRLF
+# lines, the &lt; &gt; &amp; entities, globs over options, artifacts and properties (not
+# date:*, whose date:timestamp is the time of the run), a backslash inside %[...], and a
+# name longer than the 64-character pattern buffer
+GAP_COMMANDS += [
+    "identify -define case:one=1 -define case:two=2 -format '%[option:case:*]|' {C}/rose.miff",
+    "{C}/rose.miff -define art:x=7 -format '%[artifact:art:*]|' -write info: +define art:x",
+    "identify -format '&lt;%w&gt; &amp; %h\\n' {C}/rose.miff",
+    "{C}/rose.miff -set case:a 1 -set case:b 2 -format '%[case:*]|' -write info:",
+    "identify -format '%[fx:w\\*2]|%[" + "a" * 70 + "]\\n' {C}/rose.miff",
+]
+GAP_STEP_CASES += [("format read from a file with CRLF lines",
+                    [["identify", "-format", "@fmt.txt", "{C}/rose.miff"]],
+                    {"fmt.txt": "%wx%h\r\n%[case:a]\r\n"})]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
