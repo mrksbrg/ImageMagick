@@ -1497,6 +1497,26 @@ def _signature_gap_cases():
                     [make + ["-format", "%# %[channels]\\n", "info:"]], [])
 
 
+# quantize.c: GetImageQuantizeError runs only under -verbose, whose report
+# prints the mean and maximum error; posterize with dithering and per channel,
+# k-means with an iteration limit and tolerance and with seed colours, and
+# Floyd-Steinberg on alpha, CMYK and gray, which the catalogue gave only rose.
+QUANTIZE_GAP_OPS = [
+    ["-posterize", "3", "-dither", "FloydSteinberg"], ["-channel", "R", "-posterize", "2"],
+    ["-kmeans", "5x10+0.01"],
+    ["-define", "kmeans:seed-colors=#ff0000;#00ff00;#0000ff", "-kmeans", "3"],
+    ["-dither", "FloydSteinberg", "-colors", "6"],
+]
+
+
+def _quantize_gap_cases():
+    for name in ("rose", "rose_alpha"):
+        yield _case("quantizegap", "%s -verbose -colors 16 info:" % name,
+                    [[img(name), "-verbose", "-colors", "16", "info:"]], [])
+    for name, op in itertools.product(("rose_alpha", "cmyk", "gray8"), QUANTIZE_GAP_OPS):
+        yield _op("quantizegap", "%s %s" % (name, " ".join(op)), [img(name)], op)
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3005,7 +3025,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
