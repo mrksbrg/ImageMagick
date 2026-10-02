@@ -1798,6 +1798,13 @@ Windows file with it gave the same figures as the merge used above. Each family
   functions at 80%. Below: `IsSVGCompliant` 46%, `GetColorList` (not reached by `-list
   color`), and `IsEquivalentImage`, `IsEquivalentAlpha`, `IsEquivalentIntensity`, which
   nothing outside color.c calls.
+- **`composite.c`, family `texturegap` (5 cases):** `tile:` with `-tile-offset` for an
+  opaque texture and one with alpha, and a seamless blend under `-verbose`. 14 kills:
+  adjusted 82% to **83%**; `TextureImage` 73% to 92%, `SeamlessBlendImage` 52% to 77%.
+  Under `-compose multiply`, `tile:` composes onto an uninitialised canvas (ORACLE.md,
+  Known upstream issues), so the cases keep the default compose. `option.c` is set aside:
+  the drivers reject an unknown option name before `GetCommandOptionFlags` sees it, so its
+  hyphen, underscore and `|` branches look unreachable from the command line.
 
 ## How to use this in the campaign
 
