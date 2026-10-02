@@ -14301,6 +14301,26 @@
    "src": "for (i=0; i < (ssize_t) rank; i++)",
    "verdict": "unobservable",
    "why": "only changes which rows are freed: a leak"
+  },
+  {
+   "at": 75,
+   "file": "MagickCore/feature.c",
+   "function": "RenderHoughLines",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "draw_info->affine.sx=image->resolution.x == 0.0 ? 1.0 : image->resolution.x/",
+   "verdict": "equivalent",
+   "why": "the resolution is always 0: the only caller, HoughLineImage, passes a fresh AcquireImageInfo() with no density, so the ?: always takes 1.0 (line coverage: the division never runs, even under -density)"
+  },
+  {
+   "at": 75,
+   "file": "MagickCore/feature.c",
+   "function": "RenderHoughLines",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "draw_info->affine.sy=image->resolution.y == 0.0 ? 1.0 : image->resolution.y/",
+   "verdict": "equivalent",
+   "why": "the resolution is always 0: the only caller, HoughLineImage, passes a fresh AcquireImageInfo() with no density, so the ?: always takes 1.0 (line coverage: the division never runs, even under -density)"
   }
  ]
 }
