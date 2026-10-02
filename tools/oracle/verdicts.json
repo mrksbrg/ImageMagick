@@ -7504,12 +7504,32 @@
   {
    "at": 22,
    "file": "MagickCore/quantize.c",
+   "function": "ReduceImageColors",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (cube_info->colors > cube_info->maximum_colors)",
+   "verdict": "equivalent",
+   "why": "QuantizeImage, RemapImage and KmeansImage call it only when colors > maximum_colors; QuantizeImages calls it always, but at colors == maximum_colors the threshold block sets only next_threshold, which only Reduce, inside the loop that then does not run, reads"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/quantize.c",
    "function": "RemapImage",
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (cube_info->colors > cube_info->maximum_colors)",
    "verdict": "equivalent",
    "why": "with exactly MaxColormapSize colours, ReduceImageColors does nothing: its threshold block and its loop both need colors > maximum_colors, and next_threshold, the one field it sets, is read only by Reduce, inside that loop"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/quantize.c",
+   "function": "SetImageColormap",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image->colors != number_colors)",
+   "verdict": "equivalent",
+   "why": "only the colormap's allocated size changes: unshrunk when DefineImageColormap found fewer colours, resized to its own size when not; nothing reads past colors"
   },
   {
    "at": 28,
