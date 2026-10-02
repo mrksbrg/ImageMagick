@@ -2226,11 +2226,15 @@ def _fx_gap8_cases():
 
 
 # fx.c: an expression read from a file (-fx @file), and "@" alone, which
-# AcquireFxInfoPrivate takes literally (hand-run: both length tests killed).
+# AcquireFxInfoPrivate takes literally (hand-run: both length tests killed),
+# and a "?" with no ":".
 def _fx_gap9_cases():
     yield _with_inputs(_op("fxgap9", "-fx @file", ["-size", "2x2", "xc:gray"], ["-fx", "@e.fx"]),
                        files={"e.fx": "u*0.5\n"})
     yield _case("fxgap9", "-fx @ alone", [["-size", "2x2", "xc:gray", "-fx", "@", "null:"]], [])
+    # A "?" with no ":" (ResolveTernaryAddresses' error; hand-run: 2 killed).
+    for e in ("u>0.5 ? 1", "zz=u>0.5 ? 1; zz"):
+        yield _case("fxgap9", "-fx %s" % e, [["-size", "2x2", "xc:gray", "-fx", e, "null:"]], [])
 
 
 def _resample_cases():

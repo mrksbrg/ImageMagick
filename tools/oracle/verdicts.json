@@ -4883,6 +4883,26 @@
    "why": "when maxUsedOprStack equals usedOprStack, assigns it the same value"
   },
   {
+   "at": 59,
+   "file": "MagickCore/fx.c",
+   "function": "ResolveTernaryAddresses",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (ptern->addr_query == NULL_ADDRESS && ptern->addr_colon == NULL_ADDRESS)",
+   "verdict": "equivalent",
+   "why": "addr_colon is set (GetOperator) only when addr_query is already set, and both are reset together, so query unset with colon set never happens: this test is never true, and the both-unset case it replaces falls through to return MagickTrue anyway"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/fx.c",
+   "function": "ResolveTernaryAddresses",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "} else if (ptern->addr_colon != NULL_ADDRESS) {",
+   "verdict": "equivalent",
+   "why": "this branch is reached only with addr_query unset and addr_colon set, which never happens (GetOperator sets addr_colon only after addr_query; both are reset together)"
+  },
+  {
    "at": 7,
    "file": "MagickCore/fx.c",
    "function": "TypeOfOpr",
