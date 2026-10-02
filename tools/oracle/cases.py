@@ -1554,6 +1554,25 @@ def _quantize_gap2_cases():
     yield _op("quantizegap2", "seq +remap", [img("seq")], ["+remap"])
 
 
+# distort.c, DistortImage: -verbose prints each method's coefficients as an
+# -fx expression, which only Polynomial had; +distort (best fit) for every
+# method; distort:scale above and below 1; and a perspective whose viewport
+# shows the horizon, where pixels past it are invalid.
+def _distort_gap_cases():
+    for m, args in sorted(_DISTORT_ARGS.items()):
+        yield _op("distortgap", "rose -verbose -distort %s" % m, [img("rose")],
+                  ["-verbose", "-distort", m, args, "+verbose"])
+        yield _op("distortgap", "rose +distort %s" % m, [img("rose")], ["+distort", m, args])
+    for m in ("SRT", "Arc", "Barrel", "Cylinder2Plane"):
+        for scale in ("2", "0.05"):
+            yield _op("distortgap", "rose distort:scale=%s -distort %s" % (scale, m),
+                      [img("rose")], ["-define", "distort:scale=" + scale, "-distort", m,
+                                      _DISTORT_ARGS[m]])
+    yield _op("distortgap", "rose +distort Perspective past the horizon", [img("rose")],
+              ["-define", "distort:viewport=90x70-10-10", "+distort", "Perspective",
+               "0,0 0,0  69,0 69,0  0,45 30,6  69,45 39,6"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3062,7 +3081,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
