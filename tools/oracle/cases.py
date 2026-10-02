@@ -2565,6 +2565,17 @@ GAP_COMMANDS += [
     "-size 20x20 xc:red -border 2",
     "-size 20x20 xc:red -frame 3",
 ]
+# string.c: StringToArgv's quoted arguments, through an @list of files with double-quoted,
+# single-quoted and bare names (the catalogue's list quotes nothing), and a font family
+# list with a quoted name that the case's type.xml defines
+GAP_STEP_CASES += [
+    ("@list of files with quoted names",
+     [["@list.txt", "-append", "out.miff"]],
+     {"list.txt": '"{C}/rose.miff" \'{C}/granite.miff\' {C}/rose_blur.miff\n'}),
+    ("a font family list with a quoted name",
+     [["-family", '"Case Missing", CaseFamily', "-pointsize", "12", "label:Ab", "out.miff"]],
+     _TYPE_FILES),
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
