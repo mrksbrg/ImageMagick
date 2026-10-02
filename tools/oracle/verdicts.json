@@ -1152,6 +1152,16 @@
    "why": "the squared distance between hull vertices on the pixel grid is 0 or at least 0.25, never exactly MagickEpsilon"
   },
   {
+   "at": 12,
+   "file": "MagickCore/channel.c",
+   "function": "SetImageAlphaChannel",
+   "mutator": "cxx_lt_to_le",
+   "nth": 3,
+   "src": "for (y=0; y < (ssize_t) image->rows; y++)",
+   "verdict": "unresolved",
+   "why": "the extra pass reads the virtual row below the image; edge, mirror and tile repeat rows already scanned and black, white and gray are opaque; under a transparent or none virtual pixel the original itself keeps the alpha channel of a fully opaque image (%[opaque] True), for a reason not yet traced, so no setting tried tells the two apart"
+  },
+  {
    "at": 44,
    "file": "MagickCore/cipher.c",
    "function": "ByteMultiply",

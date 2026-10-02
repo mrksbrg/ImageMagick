@@ -1708,6 +1708,22 @@ file, with a mutant counted as killed if any report killed it.
   file. `MatrixToImage` 0% to 79%, `ReadMatrixElements` 60%, `WriteMatrixElements` 40%,
   `SetMatrixExtent` still 0%.
 
+## A kill stands when reports are merged (Mac, 2026-10-02)
+
+`gate.py` merged reports so that a later one replaced the earlier result of the same mutant.
+Probes run with `--cases` and only a few cases, so a probe's "survived" means only that those
+cases missed the mutant. Merged after a full run, it overwrote that run's kills: probe p24c
+alone took `channel.c`'s `SetImageAlphaChannel` from 99% to 51%. The catalogue only grows,
+so a kill now stands, and "no-coverage" still never replaces anything (`gate.replaces`).
+Figures computed by merging probes after a full run were too low; on the Mac's 48 files,
+`channel.c` went from 74% to 92% (trusted), `type.c` from 63% to 65% and `utility.c` from 61%
+to 63%. Figures from a single report do not change. Windows' figures should be recomputed if
+they merged reruns limited with `--cases` after a full run.
+
+Hand checks of a mutant must run under the oracle's environment (`oracle.env_for`): outside
+it some commands (`-colors` on CMYK) give different output from run to run, and three
+`SetImageType` cases added on that evidence killed nothing (replaced in 0d0043cc1).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:

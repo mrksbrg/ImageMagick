@@ -7,7 +7,9 @@
 
 Reports are mutate.py's mutation-*.json, merged in the order given: a later
 report replaces the earlier result of the same mutant, so pass the full run
-first and its reruns after it (uncapped, or against new cases only).
+first and its reruns after it (uncapped, or against new cases only). A kill
+stands, though: a rerun limited with --cases runs a few cases, and its
+"survived" says only that those did not kill the mutant.
 
 Each survivor is sorted by classify.py. Three figures are printed for every
 function and file:
@@ -56,16 +58,25 @@ COLUMNS = ("mutants", "killed", "unobservable", "unmatched", "unreached", "no-co
 ROW = "  %-28s %7s %6s %12s %9s %9s %11s %6s %6s %8s  %s"
 
 
-def merged(reports):
-    """The results of all reports, a later report winning for the same mutant.
+def replaces(result, earlier):
+    """Whether a later report's result takes the place of the earlier one.
 
-    Except over "no-coverage": a rerun limited with --cases reports that for
-    any mutant its cases do not reach, which says nothing about the rest."""
+    Not over a kill, and not with "no-coverage": a rerun limited with --cases
+    reports "survived" when its few cases miss the mutant and "no-coverage"
+    when they do not reach it, which says nothing about the cases it did not
+    run. The catalogue only grows, so a kill stands."""
+    if earlier is None:
+        return True
+    return earlier["status"] != "killed" and result["status"] != "no-coverage"
+
+
+def merged(reports):
+    """The results of all reports, a later report winning for the same mutant (see replaces)."""
     by_id = {}
     for path in reports:
         with open(path) as f:
             for result in json.load(f):
-                if result["status"] != "no-coverage" or result["id"] not in by_id:
+                if replaces(result, by_id.get(result["id"])):
                     by_id[result["id"]] = result
     return list(by_id.values())
 
