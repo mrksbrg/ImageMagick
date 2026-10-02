@@ -2141,6 +2141,13 @@ def _cache_gap2_cases():
                                              "-composite"])
     yield _op("cachegap2", "rose on disk, resized and flipped",
               _NO_MEMORY + [img("rose")], ["-resize", "50%", "-flip"])
+    # PersistPixelCache steps each image's offset in the .cache file to a page
+    # boundary; only a list of images uses it (cachegap's MPCs held one).
+    three = [img("rose"), img("granite"), img("logo")]
+    yield _case("cachegap2", "three images to one MPC", [three + ["out.mpc"]], ["out.mpc"])
+    yield _case("cachegap2", "three images to one MPC, read back",
+                [three + ["-write", "out.mpc", "-delete", "0--1", "out.mpc"] + FLOAT_OUT + ["dec.miff"]],
+                ["dec.miff"])
 
 
 def _resample_cases():
