@@ -1533,8 +1533,28 @@ Upstream behaviour a refactoring must keep:
 
 Out of reach, written down: gradients' reflect and repeat spreads (`gradient:` always
 pads, MVG has no spread keyword: `DrawGradientImage` 64 unreached), `ClonePolygonEdgesTLS`
-(more than one thread), the `-debug` loggers of `draw.c`, `IntensityCompare` (only the
-PALM writer below 8 bits sorts a colormap by intensity).
+(more than one thread), the `-debug` loggers of `draw.c`.
+
+### Later rounds the same day (Mac, previews)
+
+Probes on the Mac's own builds against only the new cases, uncapped; ERDC's reruns
+(`confirm-new.sh`) make them official.
+
+| File | Before | After | What the cases were |
+| --- | ---: | ---: | --- |
+| `statistic.c` | 95% | **96%, trusted** | `MagickSafeReciprocalLD`'s three mutants are equivalent: for a single-colour channel the only entropy term becomes -0 or NaN, and NaN is skipped |
+| `colormap.c` | 91% | **93%, trusted** | PALM files below 8 bits written to the compared output, so `IntensityCompare`'s colormap order is in the bytes (read back, any order decodes alike) |
+| `compare.c` | 88% | **90%, trusted** | `phash:normalize` |
+| `draw.c` | 64% | 71% | an MVG file with every keyword no case used (named classes and macros, `use`, mask, symbol, scale, the text and font settings); stroke joins turning both ways under each join and miter limit; dash offsets in the pattern's own graphic context; the `alpha` primitive's methods |
+| `property.c` | 47% | 56% | the property names no case printed, the 14 properties `SetImageProperty` maps onto image fields, format strings from a file, entities, globs |
+| `image.c` | 61% | 63% | smush gaps over fully transparent margins (`rose_alpha` has none, so the gap was always 0); `AcquireImage`'s settings on `xc:` images, which no reader overwrites |
+| `string.c` | 55% | 63% | a `label:` with a control character (the hex-dump layout; `-annotate` does not use `StringToStrings`), `exif:sync-image` values, quoted `@list` names; an HDR file as the compared output for `CopyMagickString`'s return value |
+| `type.c`, `attribute.c`, `transform.c`, `layer.c` | | +3, +1, 0, 0 | a DOCTYPE in `type.xml`; trims of a bordered image under a black virtual pixel; crop and off-canvas layer edge cases (reached, but the survivors sit at exact boundaries) |
+
+So every Mac file in the backlog's first wave is trusted: `resize`, `compare`, `enhance`,
+`visual-effects`, `statistic`, `threshold`, `segment`, `decorate`, `colormap`, `shear`.
+`identify.c` (87%) is trusted too; `channel.c` waits only for ERDC to measure a case it
+already has.
 
 ## Case rounds for distort, fx and composite (Windows, 2026-10-02)
 
