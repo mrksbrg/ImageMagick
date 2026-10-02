@@ -7362,6 +7362,56 @@
    "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
   },
   {
+   "at": 25,
+   "file": "MagickCore/quantize.c",
+   "function": "AssignImageColors",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cube.associate_alpha != MagickFalse)",
+   "verdict": "equivalent",
+   "why": "the alpha written here is never read: no pixel is read between this loop and SyncImage (GetImageQuantizeError runs only when measure_error is set, and then this block is skipped), and SyncImage repaints every pixel, alpha included, from the colormap"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/quantize.c",
+   "function": "AssignImageColors",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "if (image->colors > 1)",
+   "verdict": "equivalent",
+   "why": "with one colour, writes colormap[1], the spare entry AcquireImageColormap allocates (colors+1); nothing reads past colors (PushColormapIndex sends a larger index to 0)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/quantize.c",
+   "function": "DestroyQCubeInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "} while (cube_info->node_queue != (QNodes *) NULL);",
+   "verdict": "unobservable",
+   "why": "stops freeing the node queue after its first block: a leak at the end of a quantization, nothing reads the blocks again and the output is the same"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/quantize.c",
+   "function": "DestroyQCubeInfo",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) CacheBlocks; i++)",
+   "verdict": "unobservable",
+   "why": "skips freeing the cache blocks: a leak at the end of a quantization, nothing reads them again and the output is the same"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/quantize.c",
+   "function": "DestroyQCubeInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cube_info->cache[i] != (ssize_t *) NULL)",
+   "verdict": "unobservable",
+   "why": "skips freeing the cache blocks: a leak at the end of a quantization, nothing reads them again and the output is the same"
+  },
+  {
    "at": 14,
    "file": "MagickCore/quantize.c",
    "function": "IntensityCompare",
