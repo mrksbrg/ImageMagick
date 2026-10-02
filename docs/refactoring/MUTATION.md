@@ -1925,6 +1925,9 @@ line (unmatched, or on unreached lines):
   `ImportBGRQuantum` and `ExportBGRQuantum` did not move: their 24 unreached mutants each are
   not depth branches. Line-interlaced BGRO is written at the size of BGR, as if its opacity
   were left out; not traced yet.
+  The BGR functions' unreached mutants are the unpacked-sample paths (`pack ==
+  MagickFalse`) and a 32-bit-quantum variant: only the CIN coder turns packing off, and
+  only for RGB, so they are out of reach from the command line.
 
 ## How to use this in the campaign
 
