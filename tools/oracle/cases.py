@@ -2395,6 +2395,33 @@ def _token_gap_cases():
                        files={".config/ImageMagick/policy.xml": pol})
 
 
+# quantum-import.c: importers no writer feeds. ImportOpacityQuantum reads the O
+# line of a line-interlaced RGBO or BGRO file, which the writers leave out
+# (ORACLE.md); one row built by hand is that layout: -separate -append stacks
+# the R, G, B (or B, G, R) and A lines. ImportGrayAlphaQuantum reads a gray
+# file twice as wide as gray-alpha, the same bytes (reach.py: both reached).
+QUANTUM_GAP8_DEPTHS = [("1", []), ("4", []), ("8", []), ("10", []), ("12", []), ("16", []), ("24", []),
+                       ("32", []), ("16", _FLOAT), ("24", _FLOAT), ("32", _FLOAT), ("64", _FLOAT)]
+
+
+def _quantum_gap8_cases():
+    for (depth, extra), f in itertools.product(QUANTUM_GAP8_DEPTHS, ("rgbo", "bgro")):
+        if _quantum_unstable(f, extra):
+            continue
+        swap = ["-swap", "0,2"] if f == "bgro" else []
+        steps = [[img("rose_alpha"), "-crop", "7x1+20+10", "+repage", "-separate"] + swap
+                 + ["-append", "-depth", depth] + extra + ["gray:l.raw"],
+                 ["-size", "7x1", "-depth", depth] + extra + ["-interlace", "line", "%s:l.raw" % f]
+                 + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantumgap8", "one hand-built line-interlaced %s row, -depth %s %s"
+                    % (f, depth, " ".join(extra)), steps, ["l.raw", "dec.miff"])
+    for depth, extra in QUANTUM_GAP8_DEPTHS + [("2", [])]:
+        steps = [[img("rose"), "-resize", "14x5!", "-colorspace", "gray", "-depth", depth] + extra + ["gray:g.raw"],
+                 ["-size", "7x5", "-depth", depth] + extra + ["graya:g.raw"] + FLOAT_OUT + ["dec.miff"]]
+        yield _case("quantumgap8", "a 14x5 gray file read as 7x5 gray-alpha, -depth %s %s"
+                    % (depth, " ".join(extra)), steps, ["g.raw", "dec.miff"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -4184,7 +4211,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _quantum_gap7_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(), _fx_gap12_cases(), _cache_gap3_cases(), _token_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(), _fx_gap12_cases(), _cache_gap3_cases(), _token_gap_cases(), _quantum_gap8_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
