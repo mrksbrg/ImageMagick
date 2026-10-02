@@ -2396,6 +2396,16 @@ GAP_COMMANDS += [
     "-size 20x16 xc:red ( -size 8x8 xc:blue -repage +15+12 ) null: ( -size 20x16 xc:yellow ) "
     "-define compose:clip-to-self=false -layers composite",
 ]
+# colormap.c: PALM files below 8 bits per pixel written to the compared output itself,
+# so the colormap SortColormapByIntensity orders is in the bytes (read back, any order
+# decodes to the same pixels)
+# compare.c: phash:normalize, which GetPHASHSimilarity's per-channel square roots need
+GAP_COMMANDS += ["compare -metric PHASH -define phash:normalize=true -verbose -precision 17 "
+                 "{C}/rose.miff {C}/rose_blur.miff"]
+GAP_STEP_CASES += [
+    ("palm at 4 bits, the file itself", [["{C}/palette.miff", "-colors", "12", "palm:out.miff"]], {}),
+    ("palm at 2 bits, the file itself", [["{C}/gray8.miff", "-colors", "4", "palm:out.miff"]], {}),
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
