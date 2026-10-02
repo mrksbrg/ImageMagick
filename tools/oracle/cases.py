@@ -2151,6 +2151,16 @@ GAP_COMMANDS += [
 # statistic.c: a single-colour image, whose one histogram bin makes MagickSafeReciprocalLD
 # take 0 (log2 of one bin) when the entropy is computed
 GAP_COMMANDS += ["identify -verbose -precision 17 -size 4x4 xc:red"]
+# string.c: text with a control character, which StringToStrings lays out as a hex dump;
+# IsStringFalse's false, off, no and 0 through exif:sync-image, on a JPEG whose EXIF block
+# is rewritten with an orientation (read back as Undefined when the define is false)
+GAP_COMMANDS += ["-size 220x60 xc:white -font {C}/Generic.ttf -pointsize 8 -annotate +2+10 'A\x01B'"]
+GAP_STEP_CASES += [("exif:sync-image=%s on a JPEG with EXIF" % value,
+                    [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient",
+                      "BottomLeft", "x.jpg"],
+                     ["-define", "exif:sync-image=" + value, "x.jpg", "out.miff"]],
+                    {"exif.bin": EXIF_BLOCK})
+                   for value in ("false", "off", "no", "0", "true")]
 # channel.c: the -alpha methods the catalogue lacked (activate, associate, disassociate, discrete, off-if-opaque, on) on images with and without alpha
 GAP_COMMANDS += [
     "{C}/rose.miff -alpha activate",
