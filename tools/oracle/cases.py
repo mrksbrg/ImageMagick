@@ -20,6 +20,7 @@ import hashlib
 import itertools
 import json
 import math
+import struct
 
 # Written as floating point at 32 bits so no HDRI precision is lost on output:
 # under Q16 HDRI, SetImageDepth() leaves pixels untouched for depth >= 16, so
@@ -2649,6 +2650,35 @@ GAP_STEP_CASES += [
     ("resolution in centimetres converted to inches",
      [["{C}/rose.miff", "-density", "100", "-units", "PixelsPerCentimeter", "x.miff"],
       ["x.miff", "-units", "PixelsPerInch", "-resize", "50%", "out.miff"]], {}),
+]
+# image.c: a filename pattern %[name] filled from a -define (InterpretImageFilename looks
+# up the image's properties, then artifacts, then the options; the earlier case used -set,
+# a property). property.c: an EXIF block with text tags (Make, Model, Software, Artist; the
+# catalogue's block holds only numbers), read back whole, by name and by tag number
+def _exif_text_block():
+    entries = [(0x010F, 2, b"CaseMake\0"), (0x0110, 2, b"M1\0"), (0x0131, 2, b"Oracle\0"),
+               (0x013B, 2, b"A\0"), (0x0213, 3, struct.pack("<H", 1))]
+    data_at = 8 + 2 + 12 * len(entries) + 4
+    ifd, data = struct.pack("<H", len(entries)), b""
+    for tag, kind, value in entries:
+        count = len(value) if kind == 2 else 1
+        if len(value) <= 4:
+            ifd += struct.pack("<HHI", tag, kind, count) + value.ljust(4, b"\0")
+        else:
+            ifd += struct.pack("<HHII", tag, kind, count, data_at + len(data))
+            data += value
+    block = b"Exif\0\0II*\0" + struct.pack("<I", 8) + ifd + struct.pack("<I", 0) + data
+    assert max(block) < 128  # case files are text
+    return block.decode("latin-1")
+
+
+GAP_STEP_CASES += [
+    ("filename pattern filled from a -define",
+     [["{C}/rose.miff", "-define", "case:t=zz", "g%[case:t].miff"], ["gzz.miff", "out.miff"]], {}),
+    ("exif text tags, whole, by name and by tag number",
+     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "x.jpg"],
+      ["identify", "-format", "%[exif:*]|%[exif:#010F]|%[exif:#010f]|%[exif:@010F]|%[exif:Make]\\n",
+       "x.jpg"]], {"exif.bin": _exif_text_block()}),
 ]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
