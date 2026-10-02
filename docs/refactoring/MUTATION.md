@@ -2136,9 +2136,9 @@ Open survivors, by line:
 A refresh (`refresh1003`) reruns every Windows file's survivors and no-coverage mutants
 against the whole catalogue as of 59cb39e1f (11748 cases, capped at 1500 per mutant), with
 `ORACLE_MEM_GB=2`. Done so far, adjusted, before and after: **cache.c 79% → 82%** (31 kills),
-**fx.c 76% → 81%** (27), **color.c 85% → 86%**, **distort.c 83% → 88%** (`MagickRound` still the
-one function short: an Arc distortion at -90 degrees reaches its .5 tie, but the mutant
-only shifts the angle by a whole turn), quantize.c unchanged (trusted, 91%).
+**fx.c 76% → 81%** (27), **color.c 85% → 86%**; distort.c unchanged at 88% (no kills among its 155; `MagickRound`
+still the one function short: an Arc distortion at -90 degrees reaches its .5 tie, but the
+mutant only shifts the angle by a whole turn), quantize.c unchanged (trusted, 91%).
 
 A capped refresh may sample a new family only in part, so the families written tonight get
 uncapped case rounds of their own after it (`~/after-refresh3.sh`, `~/after-refresh3c.sh`,
