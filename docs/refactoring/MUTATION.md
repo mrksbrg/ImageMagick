@@ -1919,6 +1919,12 @@ line (unmatched, or on unreached lines):
   with `-interlace line` at depths 8, 16, 32 and floating point (BGRO float left out). 32
   kills: `quantum-import.c` 61% to **63%**, `quantum-export.c` 68% to **70%**;
   `ImportOpacityQuantum` 13% to 47%, `ExportOpacityQuantum` 12% to 56%.
+- **Family `quantumgap6` (16 cases):** the same at depths 1, 4, 10, 12 and 24 for RGBO,
+  BGRO and BGR, and 24-bit floating point for RGBO. 21 kills: `quantum-import.c` 63% to
+  **65%**, `quantum-export.c` 70%; `ImportOpacityQuantum` 60%, `ExportOpacityQuantum` 64%.
+  `ImportBGRQuantum` and `ExportBGRQuantum` did not move: their 24 unreached mutants each are
+  not depth branches. Line-interlaced BGRO is written at the size of BGR, as if its opacity
+  were left out; not traced yet.
 
 ## How to use this in the campaign
 
