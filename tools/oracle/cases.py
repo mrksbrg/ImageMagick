@@ -2083,6 +2083,18 @@ GAP_STEP_CASES += [
     ("jpeg sampling factor through a cloned image_info",
      [["-sampling-factor", "2x1", "{C}/rose.miff", "x.jpg"], ["x.jpg", "out.miff"]], {}),
 ]
+# enhance.c, threshold.c (statement deletion): -modulate under each modulate:colorspace on a
+# palette image, whose colormap is modulated on its own; -color-threshold on images in each
+# colour space ColorThresholdImage converts its start and stop colours into
+GAP_CASES += [("palette modulate:colorspace=%s" % cs, ["-define", "modulate:colorspace=" + cs,
+                                                       "-modulate", "110/100/95"], ["palette"])
+              for cs in ("HCL", "HCLp", "HSB", "HSI", "HSV", "HWB", "LCHab", "LCHuv")]
+GAP_COMMANDS += ["{C}/rose.miff -colorspace %s -color-threshold 'sRGB(10,20,30)-sRGB(200,210,220)'"
+                 % cs for cs in ("HCL", "HSB", "HSL", "HSV", "HWB", "Lab")]
+# compress.c (statement deletion): a fax read back and resized, so the decoded pixels'
+# colours are read, not only their colormap indexes
+GAP_STEP_CASES += [("fax read back and resized",
+                    [["{C}/bilevel.miff", "b.fax"], ["fax:b.fax", "-resize", "50%", "out.miff"]], {})]
 # channel.c: the -alpha methods the catalogue lacked (activate, associate, disassociate, discrete, off-if-opaque, on) on images with and without alpha
 GAP_COMMANDS += [
     "{C}/rose.miff -alpha activate",

@@ -3565,6 +3565,16 @@
    "why": "readers give the next frame its predecessor's blob (AcquireNextImage), so the blobs are always equal, and destroying and re-referencing a shared blob changes no reference count; a frame with a blob of its own would tell, and no command makes one"
   },
   {
+   "at": 0,
+   "file": "MagickCore/list.c",
+   "function": "SyncNextImageInList",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyBlob(images->next);",
+   "verdict": "unobservable",
+   "why": "the next frame's own blob is not released before it takes its predecessor's: a leaked reference, and every reader shares the blob anyway (AcquireNextImage)"
+  },
+  {
    "at": 35,
    "file": "MagickCore/magic.c",
    "function": "CompareMagic",
@@ -5172,6 +5182,126 @@
    "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
   },
   {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "FinalizeSignature(random_info->signature_info);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "FinalizeSignature(random_info->signature_info);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitializeSignature(random_info->signature_info);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetStringInfo(random_info->nonce);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetStringInfo(random_info->reservoir);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfo(nonce,GetSignatureDigest(random_info->signature_info));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfo(random_info->nonce,nonce);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfo(random_info->reservoir,GetSignatureDigest(",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(nonce,(GetSignatureDigestsize(",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UpdateSignature(random_info->signature_info,entropy);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "AcquireRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UpdateSignature(random_info->signature_info,nonce);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "DestroyRandomInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&random_info->semaphore);",
+   "verdict": "unobservable",
+   "why": "a semaphore set up or released: with MAGICK_THREAD_LIMIT=1 nothing contends for it, and a leaked semaphore changes no output"
+  },
+  {
    "at": 27,
    "file": "MagickCore/random.c",
    "function": "GenerateEntropicChaos",
@@ -5292,6 +5422,366 @@
    "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
   },
   {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "ConcatenateStringInfo(entropy,chaos);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &entropy);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &nanoseconds);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &nanoseconds);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &pages);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &pid);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &seconds);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &tid);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) &usage);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) entropy);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoDatum(chaos,(unsigned char *) environ[i]);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,(size_t) count);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetStringInfoLength(chaos,(size_t) count);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,MaxEntropyExtent);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetStringInfoLength(chaos,MaxEntropyExtent);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,sizeof(nanoseconds));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetStringInfoLength(chaos,sizeof(nanoseconds));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,sizeof(pages));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,sizeof(pid));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,sizeof(seconds));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,sizeof(tid));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,sizeof(usage));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(chaos,strlen(environ[i]));",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(entropy,MaxEntropyExtent);",
+   "verdict": "unobservable",
+   "why": "entropy gathering for the random reservoir and nonce; the oracle seeds every command (-seed 1), so the generator's seed comes from the secret key and the entropy reaches only temporary filenames and shredding, never the output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GenerateEntropicChaos",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "UnlockSemaphoreInfo(random_info->semaphore);",
+   "verdict": "unobservable",
+   "why": "a semaphore set up or released: with MAGICK_THREAD_LIMIT=1 nothing contends for it, and a leaked semaphore changes no output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "GetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetRandomKey(random_info,length,GetStringInfoDatum(key));",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
    "at": 8,
    "file": "MagickCore/random.c",
    "function": "IncrementRandomNonce",
@@ -5310,6 +5800,26 @@
    "src": "for (i=(ssize_t) (GetStringInfoLength(nonce)-1); i != 0; i--)",
    "verdict": "unobservable",
    "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "RandomComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&random_semaphore);",
+   "verdict": "unobservable",
+   "why": "a semaphore set up or released: with MAGICK_THREAD_LIMIT=1 nothing contends for it, and a leaked semaphore changes no output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "RandomComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&random_semaphore);",
+   "verdict": "unobservable",
+   "why": "a semaphore set up or released: with MAGICK_THREAD_LIMIT=1 nothing contends for it, and a leaked semaphore changes no output"
   },
   {
    "at": 11,
@@ -5378,6 +5888,96 @@
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "random_info->i++;",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "FinalizeSignature(signature_info);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "FinalizeSignature(signature_info);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "IncrementRandomNonce(random_info->nonce);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "IncrementRandomNonce(random_info->nonce);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitializeSignature(signature_info);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "InitializeSignature(signature_info);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfo(random_info->reservoir,GetSignatureDigest(signature_info));",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UpdateSignature(signature_info,random_info->nonce);",
+   "verdict": "unobservable",
+   "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/random.c",
+   "function": "SetRandomKey",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "UpdateSignature(signature_info,random_info->nonce);",
    "verdict": "unobservable",
    "why": "the keyed generator behind GetRandomKey/SetRandomKey; under -seed it serves only temporary filenames and shredding (memory.c, utility.c), which no output shows"
   },
@@ -6209,6 +6809,26 @@
    "src": "if (node == (IntervalTree *) NULL)",
    "verdict": "unobservable",
    "why": "skips a free: a leak, never visible in output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/segment.c",
+   "function": "FreeNodes",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "FreeNodes(node->child);",
+   "verdict": "unobservable",
+   "why": "FreeNodes not recursing into a node's children: the interval tree is leaked, never read again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/segment.c",
+   "function": "FreeNodes",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "FreeNodes(node->sibling);",
+   "verdict": "unobservable",
+   "why": "FreeNodes not recursing into a node's siblings: the interval tree is leaked, never read again"
   },
   {
    "at": 44,
