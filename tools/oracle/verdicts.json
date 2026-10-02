@@ -4730,7 +4730,7 @@
    "nth": 0,
    "src": "(op >= FirstCont && op <= rNull) ? MagickTrue : MagickFalse",
    "verdict": "equivalent",
-   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so IsStealth is false and stays false under each of these mutants"
+   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so the control-range test (op >= FirstCont && op <= rNull) is false under the original and under each of these mutants; the result is set by the four stealth functions (u0, up, sp, vp) alone, which the mutants do not touch"
   },
   {
    "at": 23,
@@ -4740,7 +4740,7 @@
    "nth": 0,
    "src": "(op >= FirstCont && op <= rNull) ? MagickTrue : MagickFalse",
    "verdict": "equivalent",
-   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so IsStealth is false and stays false under each of these mutants"
+   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so the control-range test (op >= FirstCont && op <= rNull) is false under the original and under each of these mutants; the result is set by the four stealth functions (u0, up, sp, vp) alone, which the mutants do not touch"
   },
   {
    "at": 23,
@@ -4750,7 +4750,7 @@
    "nth": 0,
    "src": "(op >= FirstCont && op <= rNull) ? MagickTrue : MagickFalse",
    "verdict": "equivalent",
-   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so IsStealth is false and stays false under each of these mutants"
+   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so the control-range test (op >= FirstCont && op <= rNull) is false under the original and under each of these mutants; the result is set by the four stealth functions (u0, up, sp, vp) alone, which the mutants do not touch"
   },
   {
    "at": 16,
