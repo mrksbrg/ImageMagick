@@ -4803,6 +4803,56 @@
    "why": "the loop does not run, so the cache views (and, on the second, the statistics) are not freed: a leak when the fx expression is done, nothing reads them again"
   },
   {
+   "at": 24,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (fabs((double) regA) > MagickEpsilon) i = pel->element_index-1;",
+   "verdict": "equivalent",
+   "why": "dead code: no element is ever an rIfNotZeroGoto (AddAddressingElement is called with rIfZeroGoto and rGoto only), so this case never runs"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (fabs((double) regA) > MagickEpsilon) i = pel->element_index-1;",
+   "verdict": "equivalent",
+   "why": "dead code: no element is ever an rIfNotZeroGoto (AddAddressingElement is called with rIfZeroGoto and rGoto only), so this case never runs"
+  },
+  {
+   "at": 63,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if (fabs((double) regA) > MagickEpsilon) i = pel->element_index-1;",
+   "verdict": "equivalent",
+   "why": "dead code: no element is ever an rIfNotZeroGoto (AddAddressingElement is called with rIfZeroGoto and rGoto only), so this case never runs"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "else if (regA > 1.0) regA = 1.0;",
+   "verdict": "equivalent",
+   "why": "differs only for regA exactly 1.0, where the mutant sets regA to 1.0: the same value (and 1.0 has no signed twin); hand-run clamp(1): no difference"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (regA >= 0) regA = floor ((double) regA);",
+   "verdict": "equivalent",
+   "why": "differs only for regA equal to 0 (or -0), where floor and ceil both return regA unchanged, sign included; hand-run trunc(-0): no difference"
+  },
+  {
    "at": 44,
    "file": "MagickCore/fx.c",
    "function": "GetChannelQualifier",
