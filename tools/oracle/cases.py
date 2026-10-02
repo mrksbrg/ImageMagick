@@ -2289,6 +2289,7 @@ def _fx_gap11_cases():
 
 # matrix.c: MatrixToImage scales the hough accumulator by its range: all zero
 # for a black image, a white one, and one horizontal line (hand-run: 8 killed).
+# And SetMatrixExtent, below.
 def _matrix_gap3_cases():
     for label, src in (("black", ["-size", "20x15", "xc:black"]),
                        ("white", ["-size", "20x15", "xc:white"]),
@@ -2296,6 +2297,12 @@ def _matrix_gap3_cases():
                                                 "-draw", "line 0,7 19,7"])):
         yield _op("matrixgap3", "hough accumulator of %s" % label, src,
                   ["-define", "hough-lines:accumulator=true", "-hough-lines", "5x5+3"])
+    # With memory exhausted but mapping allowed (-limit memory 0 alone), the
+    # matrix is a file mapped into memory, the one route to SetMatrixExtent
+    # (hand-run: 6 killed).
+    yield _op("matrixgap3", "hough accumulator, matrix mapped from a file",
+              ["-limit", "memory", "0"] + _HOUGH_INPUT,
+              ["-define", "hough-lines:accumulator=true", "-hough-lines", "9x9+10"])
 
 
 def _resample_cases():
