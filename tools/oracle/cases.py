@@ -2263,7 +2263,7 @@ def _fx_gap10_cases():
 # (pfx->ImgNum is 1 for the second): u with a computed index (a constant 0
 # compiles to u0) and qualifiers, u[1].p relative and absolute, and u, u.r;
 # the HSL symbols alone (each sets NeedHsl itself); nesting exactly at the
-# 600 limit, by parentheses and by unary minus (hand-run: 33 killed).
+# 600 limit, by parentheses and by unary minus (hand-run: 36 killed).
 _FX_GAP11_TWO = ["u[1-1]", "u[1-1].r", "u[1-1].lightness", "u[1-1].intensity", "u[1-1].hue",
                  "u[1].p[1,1].r", "u[1].p{2,2}", "u[1].p[1,1].lightness", "u[1].p[1,1].intensity",
                  "u", "u.r",
@@ -2279,6 +2279,12 @@ def _fx_gap11_cases():
                      ("600 parentheses", "(" * 600 + "0.5" + ")" * 600), ("600 minus signs", "-" * 600 + "0.5")):
         yield _case("fxgap11", "%%[fx:] %s" % label,
                     [[img("rose"), "-resize", "4x4", "-format", "%%[fx:%s]\\n" % e, "info:"]], [])
+    # An operand GetOperand cannot read ($zz), and image artifacts used as
+    # variables, a number and not (hand-run: 3 killed).
+    for e in ("$zz", "zzk", "zzb"):
+        yield _case("fxgap11", "-fx %s with artifacts" % e,
+                    [["-size", "2x2", "xc:gray", "-define", "zzk=0.25", "-define", "zzb=abc",
+                      "-fx", e, "-format", "%[fx:u]", "info:"]], [])
 
 
 def _resample_cases():
