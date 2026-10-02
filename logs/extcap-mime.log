@@ -1,0 +1,20 @@
+mutate: 4 mutants in MagickCore/mime\.c$, 2 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 4/4 (103s)
+
+mutate: 4 mutants, 103s
+  killed 0, survived 4 (4 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  MimeComponentTerminus                  3      0        3      0
+  MimeComponentGenesis                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc mime.c:1054:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+    xc mime.c:1100:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+     c mime.c:1101:5 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+    xc mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-mime.json

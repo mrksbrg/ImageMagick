@@ -1,0 +1,25 @@
+mutate: 65 mutants in MagickCore/fourier\.c$, 2 functions
+mutate: baseline over 11 cases in 0s
+  mutants: 25/65 (0s)
+  mutants: 50/65 (1s)
+  mutants: 65/65 (130s)
+
+mutate: 65 mutants, 130s
+  killed 58, survived 7 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 89.2%   overall: 89.2%
+
+  function                           total killed survived no-cov
+  ComplexImages                         63     57        6      0
+  InverseFourierTransformImage           2      1        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  fourier.c:183:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  fourier.c:332:39 cxx_sub_to_add             cr=ar*cos(2.0*MagickPI*(ai-0.5));
+    x  fourier.c:333:39 cxx_sub_to_add             ci=ar*sin(2.0*MagickPI*(ai-0.5));
+    x  fourier.c:357:34 cxx_ne_to_eq               if (images->progress_monitor != (MagickProgressMonitor) NULL)
+       fourier.c:365:17 cxx_post_inc_to_post_dec   progress++;
+       fourier.c:367:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  fourier.c:1513:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-fourier.json

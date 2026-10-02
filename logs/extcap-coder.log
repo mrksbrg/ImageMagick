@@ -1,0 +1,27 @@
+mutate: 9 mutants in MagickCore/coder\.c$, 4 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 9/9 (125s)
+
+mutate: 9 mutants, 125s
+  killed 0, survived 9 (9 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  DestroyCoderNode                       3      0        3      0
+  CoderComponentTerminus                 3      0        3      0
+  IsCoderTreeInstantiated                2      0        2      0
+  CoderComponentGenesis                  1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c coder.c:131:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
+     c coder.c:133:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
+     c coder.c:135:21 cxx_ne_to_eq               if (p->magick != (char *) NULL)
+    xc coder.c:209:23 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
+    xc coder.c:234:23 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
+     c coder.c:235:5 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
+    xc coder.c:240:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&coder_semaphore);
+    xc coder.c:479:27 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
+     c coder.c:480:9 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-coder.json
