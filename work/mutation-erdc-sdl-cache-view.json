@@ -1,0 +1,26 @@
+[
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/cache-view.c:858:3:858:40",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/cache-view.c",
+  "line": 858,
+  "col": 3,
+  "function": "GetOneCacheViewVirtualPixelInfo",
+  "status": "survived",
+  "cases": 19,
+  "capped": false,
+  "line_executed": true
+ },
+ {
+  "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/cache-view.c:864:3:864:47",
+  "mutator": "cxx_remove_void_call",
+  "file": "/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/cache-view.c",
+  "line": 864,
+  "col": 3,
+  "function": "GetOneCacheViewVirtualPixelInfo",
+  "status": "killed",
+  "cases": 1,
+  "killer": "unary/95146e2fa3",
+  "why": "out.miff differs"
+ }
+]

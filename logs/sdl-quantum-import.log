@@ -1,0 +1,233 @@
+mutate: 530 mutants in MagickCore/quantum-import\.c$, 19 functions
+  baseline: 500/10150 (2s)
+  baseline: 1000/10150 (4s)
+  baseline: 1500/10150 (5s)
+  baseline: 2000/10150 (7s)
+  baseline: 2500/10150 (10s)
+  baseline: 3000/10150 (13s)
+  baseline: 3500/10150 (15s)
+  baseline: 4000/10150 (16s)
+  baseline: 4500/10150 (19s)
+  baseline: 5000/10150 (21s)
+  baseline: 5500/10150 (23s)
+  baseline: 6000/10150 (24s)
+  baseline: 6500/10150 (26s)
+  baseline: 7000/10150 (37s)
+  baseline: 7500/10150 (40s)
+  baseline: 8000/10150 (41s)
+  baseline: 8500/10150 (43s)
+  baseline: 9000/10150 (45s)
+  baseline: 9500/10150 (46s)
+  baseline: 10000/10150 (48s)
+  baseline: 10150/10150 (51s)
+mutate: baseline over 10169 cases in 52s
+  mutants: 25/530 (7s)
+  mutants: 50/530 (8s)
+  mutants: 75/530 (10s)
+  mutants: 100/530 (14s)
+  mutants: 125/530 (14s)
+  mutants: 150/530 (51s)
+  mutants: 175/530 (53s)
+  mutants: 200/530 (54s)
+  mutants: 225/530 (54s)
+  mutants: 250/530 (56s)
+  mutants: 275/530 (89s)
+  mutants: 300/530 (173s)
+  mutants: 325/530 (186s)
+  mutants: 350/530 (188s)
+  mutants: 375/530 (367s)
+  mutants: 400/530 (574s)
+  mutants: 425/530 (736s)
+  mutants: 450/530 (789s)
+  mutants: 475/530 (798s)
+  mutants: 500/530 (835s)
+  mutants: 525/530 (1145s)
+  mutants: 530/530 (1173s)
+
+mutate: 530 mutants, 1173s
+  killed 324, survived 158 (53 capped), no coverage 48, errors 0
+  mutation score on reached code: 67.2%   overall: 61.1%
+
+  function                           total killed survived no-cov
+  ImportBGRQuantum                      49     30       19      0
+  ImportRGBQuantum                      49     24       25      0
+  ImportBGRAQuantum                     40     36        4      0
+  ImportBGROQuantum                     40     16       24      0
+  ImportCMYKAQuantum                    40     40        0      0
+  ImportCMYKOQuantum                    40      0        0     40
+  ImportRGBAQuantum                     40     36        4      0
+  ImportRGBOQuantum                     40     36        4      0
+  ImportIndexAlphaQuantum               33      5       28      0
+  ImportCMYKQuantum                     32     32        0      0
+  ImportGrayQuantum                     32     14       18      0
+  ImportGrayAlphaQuantum                26     26        0      0
+  ImportIndexQuantum                    26      9       17      0
+  ImportQuantumPixels                   24     17        7      0
+  ImportCbYCrYQuantum                    8      0        0      8
+  ImportOpacityQuantum                   8      1        7      0
+  ImportAlphaQuantum                     1      1        0      0
+  ImportBlackQuantum                     1      1        0      0
+  ImportMultispectralQuantum             1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  quantum-import.c:482:9 cxx_remove_void_call       SetPixelAlpha(image,OpaqueAlpha,q);
+       quantum-import.c:499:13 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((pixel >> 22) & 0x3ff,range),q);
+       quantum-import.c:500:13 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((pixel >> 12) & 0x3ff,range),
+       quantum-import.c:502:13 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((pixel >> 2) & 0x3ff,range),q);
+       quantum-import.c:513:13 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:515:13 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:517:13 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:550:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:556:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:562:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:574:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:580:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:586:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:602:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:608:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:614:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:636:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:638:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:640:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:879:25 cxx_remove_void_call       case 0: SetPixelRed(image,(Quantum) quantum,q); break;
+       quantum-import.c:880:25 cxx_remove_void_call       case 1: SetPixelGreen(image,(Quantum) quantum,q); break;
+       quantum-import.c:881:25 cxx_remove_void_call       case 2: SetPixelBlue(image,(Quantum) quantum,q); break;
+       quantum-import.c:882:25 cxx_remove_void_call       case 3: SetPixelAlpha(image,(Quantum) quantum,q); break;
+       quantum-import.c:1144:25 cxx_remove_void_call       case 0: SetPixelRed(image,(Quantum) quantum,q); break;
+       quantum-import.c:1145:25 cxx_remove_void_call       case 1: SetPixelGreen(image,(Quantum) quantum,q); break;
+       quantum-import.c:1146:25 cxx_remove_void_call       case 2: SetPixelBlue(image,(Quantum) quantum,q); break;
+       quantum-import.c:1147:25 cxx_remove_void_call       case 3: SetPixelOpacity(image,(Quantum) quantum,q); break;
+    x  quantum-import.c:1159:9 cxx_remove_void_call       SetPixelRed(image,ScaleShortToQuantum((unsigned short) (pixel << 6)),q);
+    x  quantum-import.c:1161:9 cxx_remove_void_call       SetPixelGreen(image,ScaleShortToQuantum((unsigned short) (pixel << 6)),
+    x  quantum-import.c:1164:9 cxx_remove_void_call       SetPixelBlue(image,ScaleShortToQuantum((unsigned short) (pixel << 6)),
+    x  quantum-import.c:1167:9 cxx_remove_void_call       SetPixelOpacity(image,ScaleShortToQuantum((unsigned short)
+       quantum-import.c:1183:13 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum((double) QuantumRange*(double)
+       quantum-import.c:1186:13 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum((double) QuantumRange*(double)
+       quantum-import.c:1189:13 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum((double) QuantumRange*(double)
+       quantum-import.c:1192:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum((double) QuantumRange*(double)
+       quantum-import.c:1224:13 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1226:13 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1228:13 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1230:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1267:13 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1269:13 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1271:13 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1273:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1291:13 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1293:13 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1295:13 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum(pixel),q);
+       quantum-import.c:1297:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum(pixel),q);
+       quantum-import.c:2116:9 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:2131:13 cxx_remove_void_call       SetPixelGray(image,QuantumRange-ScaleCharToQuantum(pixel),q);
+       quantum-import.c:2132:13 cxx_remove_void_call       SetPixelAlpha(image,OpaqueAlpha,q);
+    x  quantum-import.c:2142:9 cxx_remove_void_call       SetPixelAlpha(image,OpaqueAlpha,q);
+       quantum-import.c:2162:17 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 22) & 0x3ff,
+       quantum-import.c:2165:17 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 12) & 0x3ff,
+       quantum-import.c:2168:17 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 2) & 0x3ff,
+       quantum-import.c:2176:19 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 22) & 0x3ff,
+       quantum-import.c:2182:19 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 12) & 0x3ff,
+       quantum-import.c:2191:13 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 2) & 0x3ff,range),
+       quantum-import.c:2194:13 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 12) & 0x3ff,range),
+       quantum-import.c:2197:13 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 22) & 0x3ff,range),
+       quantum-import.c:2205:15 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 2) & 0x3ff,
+       quantum-import.c:2211:15 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((pixel >> 12) & 0x3ff,
+       quantum-import.c:2237:13 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:2241:13 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:2249:13 cxx_remove_void_call       SetPixelGray(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+       quantum-import.c:2283:13 cxx_remove_void_call       SetPixelGray(image,QuantumRange-ScaleShortToQuantum(pixel),q);
+     c quantum-import.c:2673:11 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),
+     c quantum-import.c:2675:11 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+     c quantum-import.c:2687:9 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),q);
+     c quantum-import.c:2688:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+     c quantum-import.c:2716:9 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),q);
+     c quantum-import.c:2717:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+    xc quantum-import.c:2752:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+    xc quantum-import.c:2763:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+    xc quantum-import.c:2782:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+     c quantum-import.c:2797:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,
+     c quantum-import.c:2799:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+     c quantum-import.c:2817:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,(size_t)
+     c quantum-import.c:2819:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+     c quantum-import.c:2838:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,(size_t)
+     c quantum-import.c:2840:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+     c quantum-import.c:2857:9 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),q);
+     c quantum-import.c:2858:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:2910:11 cxx_remove_void_call       SetPixelGray(image,(Quantum) (pixel == 0 ? 0 : QuantumRange),q);
+       quantum-import.c:2911:11 cxx_remove_void_call       SetPixelAlpha(image,((*p) & (1UL << (unsigned char) (6-bit))) == 0 ?
+       quantum-import.c:2913:11 cxx_remove_void_call       SetPixelIndex(image,(Quantum) (pixel == 0 ? 0 : 1),q);
+       quantum-import.c:2924:11 cxx_remove_void_call       SetPixelIndex(image,(Quantum) (pixel == 0 ? 0 : 1),q);
+       quantum-import.c:2925:11 cxx_remove_void_call       SetPixelGray(image,(Quantum) (pixel == 0 ? 0 : QuantumRange),q);
+       quantum-import.c:2926:11 cxx_remove_void_call       SetPixelAlpha(image,((*p) & (1UL << (unsigned char) (6-bit))) == 0 ?
+       quantum-import.c:2941:9 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),q);
+       quantum-import.c:2942:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:2945:9 cxx_remove_void_call       SetPixelAlpha(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:2979:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,(size_t)
+       quantum-import.c:2982:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:2985:13 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum((double) QuantumRange*(double)
+       quantum-import.c:2995:9 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),q);
+       quantum-import.c:2996:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:2999:9 cxx_remove_void_call       SetPixelAlpha(image,ScaleShortToQuantum(pixel),q);
+    x  quantum-import.c:3017:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:3034:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,
+       quantum-import.c:3036:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:3039:13 cxx_remove_void_call       SetPixelAlpha(image,ScaleLongToQuantum(pixel),q);
+       quantum-import.c:3056:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,(size_t)
+       quantum-import.c:3058:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:3061:13 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(pixel),q);
+       quantum-import.c:3079:13 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,(size_t)
+       quantum-import.c:3081:13 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:3084:13 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum(pixel),q);
+       quantum-import.c:3101:9 cxx_remove_void_call       SetPixelIndex(image,PushColormapIndex(image,pixel,&range_exception),q);
+       quantum-import.c:3102:9 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t)
+       quantum-import.c:3105:9 cxx_remove_void_call       SetPixelAlpha(image,ScaleAnyToQuantum(pixel,range),q);
+       quantum-import.c:3137:7 cxx_remove_void_call       ImportPixelChannel(image,quantum_info,number_pixels,p,q,
+       quantum-import.c:3332:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum((double) QuantumRange*(double)
+       quantum-import.c:3342:9 cxx_remove_void_call       SetPixelOpacity(image,ScaleShortToQuantum(pixel),q);
+       quantum-import.c:3358:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum(pixel),q);
+       quantum-import.c:3372:13 cxx_remove_void_call       SetPixelOpacity(image,ScaleLongToQuantum(pixel),q);
+       quantum-import.c:3389:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum(pixel),q);
+       quantum-import.c:3407:13 cxx_remove_void_call       SetPixelOpacity(image,ClampToQuantum(pixel),q);
+       quantum-import.c:3424:9 cxx_remove_void_call       SetPixelOpacity(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3463:9 cxx_remove_void_call       SetPixelAlpha(image,OpaqueAlpha,q);
+     c quantum-import.c:3480:13 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((pixel >> 22) & 0x3ff,range),q);
+     c quantum-import.c:3481:13 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((pixel >> 12) & 0x3ff,range),
+     c quantum-import.c:3483:13 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((pixel >> 2) & 0x3ff,range),q);
+     c quantum-import.c:3494:13 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum(pixel,range),q);
+     c quantum-import.c:3496:13 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum(pixel,range),q);
+     c quantum-import.c:3498:13 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3506:9 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3508:9 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3510:9 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum(pixel,range),q);
+     c quantum-import.c:3531:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3537:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3543:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3555:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3561:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3567:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3583:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3589:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3595:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum((QuantumAny) (pixel >> 4),
+     c quantum-import.c:3617:17 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum(pixel,range),q);
+     c quantum-import.c:3619:17 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum(pixel,range),q);
+     c quantum-import.c:3621:17 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3629:13 cxx_remove_void_call       SetPixelRed(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3631:13 cxx_remove_void_call       SetPixelGreen(image,ScaleAnyToQuantum(pixel,range),q);
+    xc quantum-import.c:3633:13 cxx_remove_void_call       SetPixelBlue(image,ScaleAnyToQuantum(pixel,range),q);
+     c quantum-import.c:3860:25 cxx_remove_void_call       case 0: SetPixelRed(image,(Quantum) quantum,q); break;
+     c quantum-import.c:3861:25 cxx_remove_void_call       case 1: SetPixelGreen(image,(Quantum) quantum,q); break;
+     c quantum-import.c:3862:25 cxx_remove_void_call       case 2: SetPixelBlue(image,(Quantum) quantum,q); break;
+     c quantum-import.c:3863:25 cxx_remove_void_call       case 3: SetPixelAlpha(image,(Quantum) quantum,q); break;
+       quantum-import.c:4125:25 cxx_remove_void_call       case 0: SetPixelRed(image,(Quantum) quantum,q); break;
+       quantum-import.c:4126:25 cxx_remove_void_call       case 1: SetPixelGreen(image,(Quantum) quantum,q); break;
+       quantum-import.c:4127:25 cxx_remove_void_call       case 2: SetPixelBlue(image,(Quantum) quantum,q); break;
+       quantum-import.c:4128:25 cxx_remove_void_call       case 3: SetPixelOpacity(image,(Quantum) quantum,q); break;
+    xc quantum-import.c:4359:7 cxx_remove_void_call       ImportAlphaQuantum(image,quantum_info,number_pixels,p,q,exception);
+    xc quantum-import.c:4395:7 cxx_remove_void_call       ImportCMYKAQuantum(image,quantum_info,number_pixels,p,q,exception);
+     c quantum-import.c:4405:7 cxx_remove_void_call       ImportCMYKOQuantum(image,quantum_info,number_pixels,p,q,exception);
+     c quantum-import.c:4410:7 cxx_remove_void_call       ImportCbYCrYQuantum(image,quantum_info,number_pixels,p,q);
+    xc quantum-import.c:4436:7 cxx_remove_void_call       ImportIndexAlphaQuantum(image,quantum_info,number_pixels,p,q,exception);
+     c quantum-import.c:4481:9 cxx_remove_void_call       SetPixelRed(image,GetPixelGreen(image,q),q);
+     c quantum-import.c:4482:9 cxx_remove_void_call       SetPixelGreen(image,quantum,q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-quantum-import.json

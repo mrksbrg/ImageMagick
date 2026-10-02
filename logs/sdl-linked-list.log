@@ -1,0 +1,31 @@
+mutate: 31 mutants in MagickCore/linked-list\.c$, 13 functions
+  baseline: 500/514 (2s)
+  baseline: 514/514 (18s)
+mutate: baseline over 10683 cases in 18s
+  mutants: 25/31 (130s)
+  mutants: 31/31 (279s)
+
+mutate: 31 mutants, 279s
+  killed 15, survived 1 (1 capped), no coverage 15, errors 0
+  mutation score on reached code: 93.8%   overall: 48.4%
+
+  function                           total killed survived no-cov
+  GetValueFromLinkedList                 4      0        0      4
+  DestroyLinkedList                      3      2        1      0
+  GetNextValueInLinkedList               3      3        0      0
+  RemoveElementByValueFromLinkedList     3      0        0      3
+  AppendValueToLinkedList                2      2        0      0
+  ClearLinkedList                        2      2        0      0
+  GetLastValueInLinkedList               2      2        0      0
+  InsertValueInLinkedList                2      0        0      2
+  InsertValueInSortedLinkedList          2      2        0      0
+  LinkedListToArray                      2      0        0      2
+  RemoveElementFromLinkedList            2      0        0      2
+  RemoveLastElementFromLinkedList        2      0        0      2
+  ResetLinkedListIterator                2      2        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc linked-list.c:233:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&list_info->semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-linked-list.json

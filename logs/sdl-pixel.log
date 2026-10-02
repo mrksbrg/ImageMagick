@@ -1,0 +1,109 @@
+mutate: 267 mutants in MagickCore/pixel\.c$, 13 functions
+mutate: baseline over 10673 cases in 0s
+  mutants: 25/267 (2s)
+  mutants: 50/267 (2s)
+  mutants: 75/267 (3s)
+  mutants: 100/267 (3s)
+  mutants: 125/267 (3s)
+  mutants: 150/267 (3s)
+  mutants: 175/267 (3s)
+  mutants: 200/267 (5s)
+  mutants: 225/267 (8s)
+  mutants: 250/267 (27s)
+  mutants: 267/267 (319s)
+
+mutate: 267 mutants, 319s
+  killed 83, survived 72 (7 capped), no coverage 112, errors 0
+  mutation score on reached code: 53.5%   overall: 31.1%
+
+  function                           total killed survived no-cov
+  ImportCharPixel                       36     10       26      0
+  ImportDoublePixel                     28      0        0     28
+  ImportFloatPixel                      28     10       18      0
+  ImportLongPixel                       28      0        0     28
+  ImportLongLongPixel                   28      0        0     28
+  ImportQuantumPixel                    28      0        0     28
+  ImportShortPixel                      28     10       18      0
+  InterpolatePixelChannels              17     16        1      0
+  InterpolatePixelInfo                  17     15        2      0
+  ResetPixelChannelMap                  13     11        2      0
+  SetPixelChannelMask                   10      6        4      0
+  InterpolatePixelChannel                4      4        0      0
+  ConformPixelInfo                       2      1        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+     c pixel.c:227:11 cxx_remove_void_call       ConvertCMYKToRGB(destination);
+       pixel.c:2538:11 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2539:11 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2540:11 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2557:11 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2558:11 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2559:11 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2560:11 cxx_remove_void_call       SetPixelAlpha(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2577:11 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2578:11 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2579:11 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2580:11 cxx_remove_void_call       SetPixelAlpha(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2597:11 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2598:11 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2599:11 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2673:11 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2674:11 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2675:11 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2676:11 cxx_remove_void_call       SetPixelAlpha(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2693:11 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2694:11 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2695:11 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p++),q);
+       pixel.c:2722:13 cxx_remove_void_call       SetPixelRed(image,ScaleCharToQuantum(*p),q);
+       pixel.c:2728:13 cxx_remove_void_call       SetPixelGreen(image,ScaleCharToQuantum(*p),q);
+       pixel.c:2734:13 cxx_remove_void_call       SetPixelBlue(image,ScaleCharToQuantum(*p),q);
+       pixel.c:2744:13 cxx_remove_void_call       SetPixelAlpha(image,ScaleCharToQuantum(*p),q);
+       pixel.c:2749:13 cxx_remove_void_call       SetPixelBlack(image,ScaleCharToQuantum(*p),q);
+       pixel.c:3040:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3043:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3046:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3065:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3068:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3071:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3074:11 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3093:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3096:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3099:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3191:11 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3194:11 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3197:11 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3225:13 cxx_remove_void_call       SetPixelRed(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3232:13 cxx_remove_void_call       SetPixelGreen(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3239:13 cxx_remove_void_call       SetPixelBlue(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3251:13 cxx_remove_void_call       SetPixelAlpha(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3257:13 cxx_remove_void_call       SetPixelBlack(image,ClampToQuantum((double) QuantumRange*(double)
+       pixel.c:3972:11 cxx_remove_void_call       SetPixelBlue(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:3973:11 cxx_remove_void_call       SetPixelGreen(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:3974:11 cxx_remove_void_call       SetPixelRed(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:3991:11 cxx_remove_void_call       SetPixelBlue(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:3992:11 cxx_remove_void_call       SetPixelGreen(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:3993:11 cxx_remove_void_call       SetPixelRed(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:3994:11 cxx_remove_void_call       SetPixelAlpha(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4011:11 cxx_remove_void_call       SetPixelBlue(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4012:11 cxx_remove_void_call       SetPixelGreen(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4013:11 cxx_remove_void_call       SetPixelRed(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4087:11 cxx_remove_void_call       SetPixelRed(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4088:11 cxx_remove_void_call       SetPixelGreen(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4089:11 cxx_remove_void_call       SetPixelBlue(image,ScaleShortToQuantum(*p++),q);
+       pixel.c:4116:13 cxx_remove_void_call       SetPixelRed(image,ScaleShortToQuantum(*p),q);
+       pixel.c:4122:13 cxx_remove_void_call       SetPixelGreen(image,ScaleShortToQuantum(*p),q);
+       pixel.c:4128:13 cxx_remove_void_call       SetPixelBlue(image,ScaleShortToQuantum(*p),q);
+       pixel.c:4138:13 cxx_remove_void_call       SetPixelAlpha(image,ScaleShortToQuantum(*p),q);
+       pixel.c:4143:13 cxx_remove_void_call       SetPixelBlack(image,ScaleShortToQuantum(*p),q);
+       pixel.c:4971:9 cxx_remove_void_call       SetPixelChannel(destination,channel,ClampToQuantum(sum),pixel);
+    x  pixel.c:5473:3 cxx_remove_void_call       GetPixelInfoPixel(image,(const Quantum *) NULL,pixel);
+    x  pixel.c:5587:9 cxx_remove_void_call       GetPixelInfoPixel(image,p+i*(ssize_t) GetPixelChannels(image),pixels+i);
+    xc pixel.c:6128:7 cxx_remove_void_call       SetPixelChannelAttributes(image,RedPixelChannel,trait,n++);
+     c pixel.c:6143:5 cxx_remove_void_call       SetPixelChannelAttributes(image,CompositeMaskPixelChannel,CopyPixelTrait,
+    xc pixel.c:6338:13 cxx_remove_void_call       SetPixelChannelTraits(image,channel,CopyPixelTrait);
+    xc pixel.c:6357:5 cxx_remove_void_call       SetPixelChannelTraits(image,WriteMaskPixelChannel,CopyPixelTrait);
+     c pixel.c:6359:5 cxx_remove_void_call       SetPixelChannelTraits(image,CompositeMaskPixelChannel,CopyPixelTrait);
+     c pixel.c:6361:5 cxx_remove_void_call       LogPixelChannels(image);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-pixel.json

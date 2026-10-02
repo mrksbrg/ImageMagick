@@ -1,0 +1,17 @@
+mutate: 2 mutants in MagickCore/cache-view\.c$, 1 functions
+  baseline: 19/19 (0s)
+mutate: baseline over 19 cases in 0s
+  mutants: 2/2 (3s)
+
+mutate: 2 mutants, 3s
+  killed 1, survived 1 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 50.0%   overall: 50.0%
+
+  function                           total killed survived no-cov
+  GetOneCacheViewVirtualPixelInfo        2      1        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  cache-view.c:858:3 cxx_remove_void_call       GetPixelInfo(cache_view->image,pixel);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-sdl-cache-view.json
