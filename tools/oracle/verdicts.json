@@ -4653,6 +4653,156 @@
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
   },
   {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "AddElement",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= fNull) pel->number_args = Functions[oprNum-(int) FirstFunc].number_args;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "AddElement",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= aNull) pel->number_args = 0;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "AddElement",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= sNull) pel->number_args = 0;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 4,
+   "file": "MagickCore/fx.c",
+   "function": "IsStealth",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(op >= FirstCont && op <= rNull) ? MagickTrue : MagickFalse",
+   "verdict": "equivalent",
+   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so IsStealth is false and stays false under each of these mutants"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/fx.c",
+   "function": "IsStealth",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "(op >= FirstCont && op <= rNull) ? MagickTrue : MagickFalse",
+   "verdict": "equivalent",
+   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so IsStealth is false and stays false under each of these mutants"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/fx.c",
+   "function": "IsStealth",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "(op >= FirstCont && op <= rNull) ? MagickTrue : MagickFalse",
+   "verdict": "equivalent",
+   "why": "its one caller passes a function (fe at most fNull), always below FirstCont, so IsStealth is false and stays false under each of these mutants"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "OprStr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= fNull) str = Functions[oprNum-(int) FirstFunc].str;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "OprStr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= aNull) str = ImgAttrs[oprNum-(int) FirstImgAttr].str;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "OprStr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= sNull) str = Symbols[oprNum-(int) FirstSym].str;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "OprStr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= rNull) str = Controls[oprNum-(int) FirstCont].str;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "OprStr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= oNull) str = Operators[oprNum].str;",
+   "verdict": "equivalent",
+   "why": "equivalent as compiled: for a constant (oNull) the mutant reads Functions[-1].str, which here is Operators' last entry, \"onull\"; hand-run with fx:debug=true (DumpRPN names every element): the dump is the same"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "TypeOfOpr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (op <= fNull) return etFunction;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "TypeOfOpr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (op <= aNull) return etImgAttr;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "TypeOfOpr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (op <= sNull) return etSymbol;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "TypeOfOpr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (op <= rNull) return etControl;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
    "at": 55,
    "file": "MagickCore/geometry.c",
    "function": "IsSceneGeometry",
