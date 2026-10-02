@@ -7462,6 +7462,86 @@
    "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
   },
   {
+   "at": 20,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "remainder=(remainder-value)/levels;",
+   "verdict": "equivalent",
+   "why": "the map then holds the same colours in another order: (r+v)/L for (r-v)/L still sends 0..L^c-1 onto every combination of levels once (checked for L 2..16, c 1..5), and RemapImage classifies the map into a colour tree, where order does not count (the sums are of small exact multiples)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (image->storage_class == PseudoClass)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) image->colors; i++)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) image->colors; i++)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
    "at": 7,
    "file": "MagickCore/quantize.c",
    "function": "QuantizeErrorCompare",
