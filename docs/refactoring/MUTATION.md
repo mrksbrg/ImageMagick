@@ -1782,6 +1782,17 @@ Windows file with it gave the same figures as the merge used above. Each family
   saturation, lightness and intensity on `p{}` and `p[]` lookups (also of `u[1]`, `v`,
   `s`), the loops and `printsize`. 59 kills: adjusted 70% to **74%**, `ExecuteRPN` 59% to
   71%, 34 of 64 functions at 80%.
+- **`cache.c`, family `cachegap` (5 cases):** MPC written and read back for four kinds of
+  image (`PersistPixelCache`, run only for MPC, 0% to 33%: its attach path stays open),
+  and an MVG drawing under a mask, which did not reach `MaskPixelCacheNexus`. 5 kills, 78% to
+  79%. Out of reach: `ReadPixelCacheMetacontent` and `WritePixelCacheMetacontent` (89
+  mutants), since nothing on the command line gives an image metacontent.
+- **`xml-tree.c`, family `xmlgap` (3 cases):** a `policy.xml` with nested, circular and
+  undefined parameter entities in its DOCTYPE did not reach `ValidateEntities`. The file
+  stays at 77%, and every mutant left is in a function no case calls: `XMLTreeInfoToXML`,
+  `XMLTreeTagToXML` and `SetXMLTreeContent` are called only from MagickWand's drawing wand,
+  `AddPathToXMLTree` and `CanonicalXMLContent` from nowhere, `ValidateEntities` by a route
+  not found.
 
 ## How to use this in the campaign
 
