@@ -2696,6 +2696,10 @@ GAP_COMMANDS += [cmd + " " + _DEPTH_FORMAT for cmd in (
 GAP_COMMANDS += ["{C}/palette.miff " + ops for ops in (
     "-depth 4", "-channel R -depth 2 +channel", "-channel RG -depth 3 +channel")]
 GAP_COMMANDS += ["identify -verbose -channel R {C}/palette.miff"]
+# attribute.c: IsImageOpaque scans pixels only when the image has an alpha channel: %[opaque]
+# on an image with transparency and on one whose added alpha channel is fully opaque
+GAP_COMMANDS += ["identify -format '%[opaque]\\n' {C}/rose_alpha.miff",
+                 "{C}/rose.miff -alpha set -format '%[opaque]\\n' -write info:"]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]

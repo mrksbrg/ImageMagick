@@ -782,6 +782,16 @@
    "why": "the clone's own artifacts are not destroyed before the source's are copied in: a leak"
   },
   {
+   "at": 6,
+   "file": "MagickCore/attribute.c",
+   "function": "IsImageOpaque",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (p == (const Quantum *) NULL)",
+   "verdict": "unobservable",
+   "why": "the clean-up after the pixel cache fails to return a row, which no case can make happen"
+  },
+  {
    "at": 44,
    "file": "MagickCore/cipher.c",
    "function": "ByteMultiply",
