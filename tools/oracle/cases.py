@@ -2180,6 +2180,25 @@ GAP_COMMANDS += [
     "-size 80x60 xc:white -draw \"affine 1,0.3,0,1,0,0 image over 5,5 40,30 '{C}/rose.miff'\"",
     "-size 80x60 xc:white -draw \"rotate 20 image over 10,5 40,30 '{C}/rose.miff'\"",
 ]
+# property.c: the profile property readers, which no case asked for: every EXIF property
+# and named tags of a JPEG whose EXIF block was rewritten, the ICC properties, an IPTC
+# dataset and 8BIM resources of the JPEG with those profiles, and XMP values (read by tag
+# name once %[xmp:...] has parsed them; only the element form yields values)
+GAP_COMMANDS += [
+    "identify -format '%[icc:*]' " + _UHDR_JPG,
+    "identify -format '%[IPTC:2:120]|%[8BIM:1028,1028]|%[8BIM:1000,2000]|%[8BIM:*]' " + _UHDR_JPG,
+]
+GAP_STEP_CASES += [
+    ("exif properties of a JPEG, all and by name",
+     [["{C}/rose.miff", "-profile", "APP1:exif.bin", "-density", "300", "-orient", "BottomLeft",
+       "x.jpg"],
+      ["identify", "-format", "%[exif:*]%[exif:Orientation]|%[exif:XResolution]|%[exif:Bogus]\\n",
+       "x.jpg"]], {"exif.bin": EXIF_BLOCK}),
+    ("xmp properties, element and attribute forms",
+     [["{C}/rose.miff", "-profile", "e.xmp", "xe.miff"], ["{C}/rose.miff", "-profile", "a.xmp", "xa.miff"],
+      ["identify", "-format", "%[xmp:load][%[tiff:Orientation]][%[tiff:XResolution]]\\n", "xe.miff",
+       "xa.miff"]], {"e.xmp": XMP_ELEMENTS, "a.xmp": XMP_ATTRIBUTES}),
+]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
