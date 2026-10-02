@@ -225,3 +225,13 @@ refactoring commit.
   5e-50 where black is expected: `TextureImage` composes the tile onto a canvas it never
   cleared. The oracle's fixed `MALLOC_PERTURB_` may hide it, so the catalogue keeps
   `tile:` to the default compose (`_texture_gap_cases` in `cases.py`).
+- **Quantizing an image with very many colours is not reproducible** (Windows,
+  2026-10-02). `magick hald:8 -colors 64 out.miff` (262,144 colours) gave two different
+  images in 10 runs (4 and 6), under the oracle's environment (one thread, fixed
+  `MALLOC_PERTURB_`), with or without `-treedepth` and dithering; `hald:8` alone was the
+  same every time. Likely the colour-tree pruning that runs when the tree outgrows
+  `MaxQNodes` (`PruneLevel` in `quantize.c`), so that function stays untested.
+- **`+noise Random` with `-seed` is not reproducible at 600x600** (Windows, 2026-10-02).
+  `magick -seed 3 -size 600x600 xc: +noise Random out.miff` gave two different images in
+  12 runs (7 and 5) under the oracle's environment; at 48x48 it was the same in 12 of 12,
+  so the catalogue's noise images stay small.
