@@ -1396,6 +1396,26 @@ def _sparse_color_gap_cases():
                   ["-sparse-color", s, "5,5 #ff0000  5.2,5 #0000ff  40,30 #00ff00"])
 
 
+# quantum.c: SetQuantumMetaChannel and SetQuantumPad are called by the TIFF and
+# PSD coders for images with meta channels, which no case had. -combine with
+# five gray images makes one (RGBA plus a meta channel); written as TIFF,
+# contiguous and planar at 8 and 16 bits, and as PSD, then read back.
+_META5 = [img("rose"), "-separate", img("gray8"), "-resize", "70x46!", img("granite"),
+          "-resize", "70x46!", "-colorspace", "gray", "-combine", "m5.miff"]
+META_CHANNEL_WRITES = [
+    ("tif", []), ("tif", ["-interlace", "plane"]), ("tif", ["-depth", "16"]),
+    ("tif", ["-depth", "16", "-interlace", "plane"]), ("psd", []),
+]
+
+
+def _meta_channel_gap_cases():
+    for fmt, extra in META_CHANNEL_WRITES:
+        enc = "enc." + fmt
+        yield _case("metachannel", "5 channels %s %s" % (" ".join(extra), fmt),
+                    [_META5, ["m5.miff"] + extra + [enc],
+                     [enc] + FLOAT_OUT + ["dec.miff"]], ["dec.miff"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -2841,7 +2861,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
