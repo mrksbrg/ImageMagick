@@ -1815,6 +1815,22 @@ Windows file with it gave the same figures as the merge used above. Each family
   and `MagickRound`'s `<` to `<=` is `unresolved` (it differs only on an exact .5). 11 of
   12 functions at 80%; **`distort.c` is one mutant short of trusted** (`MagickRound`,
   75%).
+- **`fx.c`, family `fxgap3` (18 cases):** colour constants in an expression (`srgb`, `rgb`,
+  `hsl`, `cmyk`, `srgba`, `gray`, `device-gray`, a named colour, a missing `)`),
+  `page.width` and `page.height`, and channel qualifiers on `u`, `v`, `u[1]` and `s`. 41
+  kills: adjusted 74% to **76%**; `GetConstantColour` 20% to 90%, `MaybeXYWH` 23% to 100%,
+  `GetChannelQualifier` 47% to 53%. 36 of 64 functions at 80%.
+- **`matrix.c`, family `matrixgap2` (2 cases):** `-hough-lines` under a `max-memory-request`
+  of 256 bytes did not move the matrix to disk either: `SetMatrixExtent` stays unreached. No
+  new kills. In `verdicts.json`, 15 for `GaussJordanElimination`: the copy-back loops are
+  `unobservable` (every caller in distort.c frees the matrix at once and reads only the
+  solution vectors); the pivot swaps are `unresolved`. Every caller solves least-squares
+  normal equations, symmetric positive semidefinite, so in exact arithmetic the largest
+  element of the unreduced block is on its diagonal and is found first; rounding in a
+  nearly singular system is not ruled out. Adjusted 70% to 71%.
+- **`quantize.c`, family `quantizegap3` (16 cases):** `-dither None -posterize`, gray to two
+  and eight colours, `-treedepth 3`, and a 600x600 noise image. No new kills: `PruneLevel`
+  and `IntensityCompare` stay unreached, so the routes in are not these. 85%.
 
 ## How to use this in the campaign
 
