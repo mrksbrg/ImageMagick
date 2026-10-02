@@ -1670,6 +1670,36 @@ def _texture_gap_cases():
                   "+verbose", "null:"]], [])
 
 
+# distort.c, GenerateCoefficients: argument counts the distort table never
+# gave. Affine with one and two control points; Arc with one to four
+# arguments; Polar and DePolar with each optional argument, the -1 radius and
+# too many; Barrel with three and eight; out-of-range fields of view for the
+# cylinder methods; shepards:power; too few points for Perspective and
+# Bilinear. Errors are compared too.
+DISTORT_ARG_CASES = [
+    ("Affine", "10,10 20,15"), ("Affine", "10,10 20,15  50,30 55,40"),
+    ("Arc", "60"), ("Arc", "60 10"), ("Arc", "60 10 50"), ("Arc", "60 10 50 20"),
+    ("Polar", "-1"), ("Polar", "40 10"), ("Polar", "40 10 30 20"),
+    ("Polar", "40 10 30 20 10 350"), ("Polar", "1 2 3 4 5 6 7"),
+    ("DePolar", "-1"), ("DePolar", "40 10 30 20 10 350"),
+    ("Barrel", "0.1 0.0 -0.2"), ("Barrel", "0.0 0.0 -0.2 1.1 0.1 0.0 0.05 1.0"),
+    ("Barrel", "1 2 3 4 5 6 7"),
+    ("Cylinder2Plane", "170"), ("Cylinder2Plane", "0"), ("Plane2Cylinder", "170"),
+    ("Perspective", "0,0 3,4  69,0 60,5  0,45 8,40"),
+    ("BilinearForward", "0,0 3,4  69,0 60,5  0,45 8,40"),
+]
+
+
+def _distort_args_gap_cases():
+    for m, args in DISTORT_ARG_CASES:
+        yield _op("distortargs", "rose -distort %s %s" % (m, args), [img("rose")],
+                  ["-distort", m, args])
+    for power in ("3", "0.5"):
+        yield _op("distortargs", "rose shepards:power=%s" % power, [img("rose")],
+                  ["-define", "shepards:power=" + power, "-distort", "Shepards",
+                   _DISTORT_ARGS["Shepards"]])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3272,7 +3302,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
