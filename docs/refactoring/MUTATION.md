@@ -1467,6 +1467,75 @@ the first time. These replace the Mac's older figures for these files.
 `GetImageExtrema` (statistic.c) and `IsImagesEqual` (compare.c) have no caller outside
 their files either.
 
+## Under the extended operators: the Mac's files, 2026-10-02 (Mac)
+
+Statement deletion was adopted on 2026-10-02 (`HARNESS-SPLIT.md`), so every Mac file was
+gated again with its `mutation-erdc-sdl-<file>.json` merged in. Six files trusted on the
+defaults fell below the bar (`list`, `enhance`, `threshold`, `segment`, `compress`,
+`random`); all six are back above it, with new cases or verdicts. Figures here merge the
+Mac's probes (`mull-p1sdl`, `mull-p2ext`, built with both operators), so for ERDC's files
+they are previews until `day.sh` re-measures them.
+
+**Trusted under the extended operators (22 of 48):** `artifact`, `cipher`, `client`,
+`coder`, `compress`, `decorate`, `effect`, `enhance`, `fourier`, `list`, `magic`,
+`random`, `resize`, `segment`, `shear`, `static`, `thread`, `threshold`, `version`,
+`vision`, `visual-effects`, and `module` (no case reaches any of its functions, so out of
+reach rather than protected). `version.c` is trusted at 14% adjusted: most of it has no
+caller. `random.c` is trusted only because its keyed generator cannot be observed under
+`-seed`.
+
+What the new survivors showed, and the cases written for them:
+
+- **`ModulateImage`'s colormap branch.** Deleting `ModulateHCL` and the rest survived:
+  the `modulate:colorspace` cases used DirectClass images only, and the colormap is
+  modulated on its own. Palette cases under all eight colour models kill all eight.
+- **`ColorThresholdImage`'s start colour.** Deleting a conversion leaves the start far
+  above every pixel, which shows only if the range selects pixels at all, and the first
+  ranges selected none. One range per model (HCL, HSB, HSL, HSV, Lab) whose converted
+  start lies below its stop kills them; no HWB range tried selects any pixel (2 open).
+- **`HuffmanDecodeImage`'s pixel colour.** Fax images were only written back as MIFF,
+  which stores the indexes; a fax read back and resized reads the colours.
+- **Mutants that should crash and do not.** `GetMagickVersion`, `AcquireAlignedMemory` /
+  `RelinquishAlignedMemory`'s handler test and `Ascii85Initialize` each dereference or
+  call a pointer the compiler knows to be NULL in the mutated branch. That is undefined
+  behaviour and clang removes the branch, so the mutant runs like the original:
+  equivalent as compiled.
+
+New cases for code no case reached (probed or to be probed on the Mac):
+
+- **`cipher.c`**: passphrases of 46, 48 and 64 characters, whose second halves are keys
+  on either side of `SetAESKey`'s 192- and 256-bit choices; the catalogue's passphrase
+  gave 18 bytes, so only the 128-bit schedule ever ran.
+- **`identify.c`**: `identify:locate`, `:limit`, `:moments` and `:convex-hull`, a Lab
+  image (the default branches of the colourspace switches; features on Lab take minutes,
+  so they stay out), a 16-bit image, masks and a meta channel in verbose info, an image
+  read smaller than stored, a montage's tile directory, a long property.
+- **`compare.c`**: PHASH subimage searches (`GetPHASHSimilarity` serves only the
+  search), NCC searches, a blurred patch.
+- **`string.c`**: text with a control character (`StringToStrings`' hex-dump layout) and
+  `exif:sync-image` set to `false`, `off`, `no`, `0`, `true` (`IsStringFalse`).
+- **`draw.c`**: square line caps, images drawn under an affine transform and a rotation.
+- **`property.c`**: the profile property readers (EXIF, ICC, IPTC, 8BIM, XMP), which no
+  case asked for.
+- **`statistic.c`**: a single-colour image, whose one histogram bin passes 0 to
+  `MagickSafeReciprocalLD`.
+
+Upstream behaviour a refactoring must keep:
+
+- **`-similarity-threshold` has no effect** (compare.c). `threshold_trigger` is declared
+  inside `SimilarityImage`'s row loop, so it is false whenever it is tested; the six
+  mutants on the threshold tests are equivalent.
+- **`-define draw:render-bounding-rectangles=true` aborts** (exit 134) on a plain
+  polygon; no case uses it.
+- **A `<include>` in a case's own `policy.xml` or `mime.xml` never loads**; one in
+  `type.xml` does. `type.c` reads the include with `FileToString`, `policy.c` and
+  `mime.c` with `FileToXML`; why the latter fails was not found.
+
+Out of reach, written down: gradients' reflect and repeat spreads (`gradient:` always
+pads, MVG has no spread keyword: `DrawGradientImage` 64 unreached), `ClonePolygonEdgesTLS`
+(more than one thread), the `-debug` loggers of `draw.c`, `IntensityCompare` (only the
+PALM writer below 8 bits sorts a colormap by intensity).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
