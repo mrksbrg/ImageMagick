@@ -1885,8 +1885,25 @@ _TYPE_FILES = {".config/ImageMagick/type.xml": _TYPE_XML,
                ".config/ImageMagick/more.xml":
                    '<typemap>\n  <type name="Case-More" family="MoreFamily" '
                    'glyphs="../../{C}/Generic.ttf"/>\n</typemap>\n'}
+# type.c: a type.xml with a DOCTYPE holding brackets and a quoted '>', and comments with a
+# '>' in them, which LoadTypeCache skips by hand
+_TYPE_DOCTYPE_XML = """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE typemap [
+  <!ELEMENT typemap (type)+>
+  <!ATTLIST type name CDATA #REQUIRED family CDATA "x]y>z" glyphs CDATA #IMPLIED>
+]>
+<!-- a comment before the map, with a > inside -->
+<typemap>
+  <!-- and one inside -->
+  <type name="Doc-Sans" family="DocFamily" glyphs="{C}/Generic.ttf"/>
+</typemap>
+"""
 GAP_STEP_CASES += [
     ("type.xml of the case's own, listed", [["-list", "font"]], _TYPE_FILES),
+    ("type.xml with a DOCTYPE and comments, listed and used",
+     [["-list", "font"], ["-family", "DocFamily", "-pointsize", "12", "label:Ab", "out.miff"]],
+     {".config/ImageMagick/type.xml": _TYPE_DOCTYPE_XML}),
+
     ("type.xml fonts by name, family and weight, and from an include",
      [["-font", "Case-Sans", "-pointsize", "12", "label:Ab", "a.miff"],
       ["-family", "CaseFamily", "-weight", "300", "-pointsize", "12", "label:Ab", "b.miff"],
