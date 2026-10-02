@@ -1533,6 +1533,27 @@ def _resource_gap_cases():
                            files={".config/ImageMagick/policy.xml": policy})
 
 
+# quantize.c, second round: every posterize case dithered, so PosterizeImage's
+# plain loop and its colormap branch never ran (+dither); k-means with fewer
+# seed colours than clusters, and under -verbose (the colours per iteration);
+# a remap over a sequence (RemapImages, -remap and +remap).
+QUANTIZE_GAP2_OPS = [
+    ["+dither", "-posterize", "3"], ["+dither", "-channel", "R", "-posterize", "2"],
+]
+
+
+def _quantize_gap2_cases():
+    for name, op in itertools.product(("rose", "palette", "rose_alpha"), QUANTIZE_GAP2_OPS):
+        yield _op("quantizegap2", "%s %s" % (name, " ".join(op)), [img(name)], op)
+    yield _op("quantizegap2", "rose -kmeans 4 with two seed colours", [img("rose")],
+              ["-define", "kmeans:seed-colors=#ff0000;#00ff00", "-kmeans", "4"])
+    for name in ("rose", "rose_alpha", "cmyk"):
+        yield _case("quantizegap2", "%s -verbose -kmeans 4x5+0.001" % name,
+                    [[img(name), "-verbose", "-kmeans", "4x5+0.001", "+verbose", "null:"]], [])
+    yield _op("quantizegap2", "seq -remap palette", [img("seq")], ["-remap", img("palette")])
+    yield _op("quantizegap2", "seq +remap", [img("seq")], ["+remap"])
+
+
 def _resample_cases():
     for v in RESAMPLE_VIRTUAL_PIXELS:
         for label, how in RESAMPLE_DISTORTIONS:
@@ -3041,7 +3062,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
