@@ -9132,6 +9132,36 @@
    "why": "the ImageInfoRegistryType branch: nothing outside registry.c uses that type, so only the API reaches it"
   },
   {
+   "at": 18,
+   "file": "MagickCore/resample.c",
+   "function": "ClampUpAxes",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "sqrt(discriminant > 0.0 ? discriminant : 0.0);",
+   "verdict": "equivalent",
+   "why": "differs only for a discriminant of exactly 0, where both branches take sqrt(0.0)"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/resample.c",
+   "function": "ClampUpAxes",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "*major_mag = ( (s1s1<=1.0) ? 1.0 : sqrt(s1s1) );",
+   "verdict": "equivalent",
+   "why": "differs only when the value is exactly 1.0, where the other branch gives sqrt(1.0), also exactly 1.0"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/resample.c",
+   "function": "ClampUpAxes",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "*minor_mag = ( (s2s2<=1.0) ? 1.0 : sqrt(s2s2) );",
+   "verdict": "equivalent",
+   "why": "differs only when the value is exactly 1.0, where the other branch gives sqrt(1.0), also exactly 1.0"
+  },
+  {
    "at": 9,
    "file": "MagickCore/resize.c",
    "function": "AcquireResizeFilter",
