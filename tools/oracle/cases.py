@@ -2576,6 +2576,9 @@ GAP_STEP_CASES += [
      [["-family", '"Case Missing", CaseFamily', "-pointsize", "12", "label:Ab", "out.miff"]],
      _TYPE_FILES),
 ]
+# string.c: CopyMagickString's return value, which the HDR writer uses as its header lengths;
+# the round trips compare the decoded image, so the file itself is the output here
+GAP_STEP_CASES += [("hdr file itself", [["{C}/rose.miff", "hdr:out.miff"]], {})]
 GAP_STEP_CASES += [("a montage's tile directory under identify -verbose",
                     [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
                      ["identify", "-verbose", "m.miff"]], {})]
