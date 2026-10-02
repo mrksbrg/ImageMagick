@@ -3670,6 +3670,34 @@ GAP_STEP_CASES += [
 GAP_STEP_CASES += [("a configure.xml of the case's own, shadowed by the build's", [["-list", "configure"]],
                     {".config/ImageMagick/configure.xml":
                          '<configuremap>\n  <configure name="CASE-ENTRY" value="x"/>\n</configuremap>\n'})]
+# locale.c: a case's own locale.xml is read (listed with -list locale): the hand-skipping of
+# <!...> and comments, the include and the nesting of messages. (A case's log.xml is read too,
+# but -list log orders it by path among the build's own, so which build lists it first, and
+# which one governs logging, depends on where the build lives: no log case can be compared.)
+_LOCALE = ".config/ImageMagick/locale.xml"
+def _localemap(body):
+    return '<?xml version="1.0"?>\n<localemap>\n  <locale name="C">\n' + body + '  </locale>\n</localemap>\n'
+_LOCALE_FILES = {
+    "nested messages": _localemap('    <Exception>\n      <Message name="CaseOne">first text</Message>\n'
+                                  '      <Case>\n        <Message name="CaseTwo">  spaced   text  </Message>\n      </Case>\n'
+                                  '    </Exception>\n'),
+    "a quoted doctype string": '<?xml version="1.0"?>\n<!DOCTYPE localemap [\n  <!ENTITY e "x]> <Message name=\'Ghost\'>g</Message> y">\n]>\n'
+                               '<localemap>\n  <locale name="C">\n    <Message name="Real">r</Message>\n  </locale>\n</localemap>\n',
+    "a stray bracket": '<?xml version="1.0"?>\n<!DOCTYPE localemap SYSTEM "t" ]>\n<localemap>\n  <locale name="C">\n'
+                       '    <Message name="Real">r</Message>\n  </locale>\n</localemap>\n',
+    "a comment": _localemap('    <!-- <Message name="Ghost">g</Message> -->\n    <Message name="Real">r</Message>\n'),
+    "another locale": '<?xml version="1.0"?>\n<localemap>\n  <locale name="xx_XX">\n    <Message name="Other">o</Message>\n'
+                      '  </locale>\n  <locale name="C">\n    <Message name="Real">r</Message>\n  </locale>\n</localemap>\n',
+}
+GAP_STEP_CASES += [("locale.xml of the case's own: %s, listed" % name, [["-list", "locale"]], {_LOCALE: xml})
+                   for name, xml in _LOCALE_FILES.items()]
+GAP_STEP_CASES += [("locale.xml with an include, listed", [["-list", "locale"]],
+                    {_LOCALE: '<localemap>\n  <include locale="C" file="more.xml"/>\n  <locale name="C">\n'
+                              '    <Message name="Real">r</Message>\n  </locale>\n</localemap>\n',
+                     ".config/ImageMagick/more.xml": _localemap('    <Message name="More">m</Message>\n')}),
+                   ("locale.xml including itself, listed", [["-list", "locale"]],
+                    {_LOCALE: '<localemap>\n  <include locale="C" file="locale.xml"/>\n  <locale name="C">\n'
+                              '    <Message name="Self">s</Message>\n  </locale>\n</localemap>\n'})]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
