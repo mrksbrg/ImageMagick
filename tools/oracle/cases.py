@@ -3232,6 +3232,25 @@ GAP_COMMANDS += ["{C}/rose.miff %s -crop %s" % (page, geo) for page, geo in (
 GAP_COMMANDS += ["{C}/rose.miff %s-crop %s" % (pre, geo) for pre, geo in (
     ("", "3x2+0-1@!"), ("", "30x20+5+5!"), ("", "70x20"), ("", "30x46"),
     ("+repage ", "30x20"), ("-repage 0x46 ", "30x20"))]
+# layer.c: a persistent first frame (dispose None) under frames with Background dispose that
+# overhang the canvas on each side, followed by full frames: the region a disposal clears
+# shows in coalesce and in optimize-transparency (with every frame disposed to background,
+# the whole canvas is cleared and the difference falls on transparent pixels)
+_LAYERS_OVERHANG = ("-dispose None -size 20x16 xc:red -dispose Background ( -size 8x8 xc:blue -repage 20x16%s ) "
+                    "-dispose None ( -size 20x16 xc:red ) -dispose Background ( -size 8x8 xc:lime -repage 20x16%s ) "
+                    "-dispose None ( -size 20x16 xc:red ) ")
+GAP_COMMANDS += [_LAYERS_OVERHANG % offsets + op for offsets in (("-3-2", "+15+12"), ("+2+3", "+10+6"), ("+0+0", "+12+8"))
+                 for op in ("-layers coalesce", "-layers optimize-transparency")]
+# in coalesce the cleared region must stay visible: a small frame follows the disposals
+GAP_COMMANDS += ["-size 20x16 xc:red -dispose Background ( -size 8x8 xc:blue -repage 20x16%s ) "
+                 "( -size 8x8 xc:lime -repage 20x16%s ) -dispose None ( -size 4x4 xc:yellow -repage 20x16+8+6 ) "
+                 "-layers coalesce" % offsets for offsets in (("-3-2", "+15+12"), ("+2+3", "+10+6"))]
+# layer.c: -layers composite with compose:outside-overlay either way, under Copy; and the
+# comparisons at exactly half alpha (HDRI holds 0.5 exactly), in compare-clear and -overlay
+GAP_COMMANDS += ["-size 10x8 xc:red null: ( -size 14x4 xc:#ffff0080 -repage -2+2 ) -compose Copy "
+                 "-define compose:outside-overlay=%s -layers composite" % v for v in ("false", "true")]
+GAP_COMMANDS += ["-size 10x8 xc:rgba(0,0,255,0.5) ( -size 10x8 xc:none -fill rgba(0,0,255,0.5) -draw 'point 2,2' ) "
+                 "( -size 10x8 xc:rgba(0,0,255,0.5) ) -layers %s" % m for m in ("compare-clear", "compare-overlay")]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight

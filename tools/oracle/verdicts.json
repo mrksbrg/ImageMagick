@@ -4543,6 +4543,256 @@
    "why": "formats the elapsed time closing a plain identify line, which the oracle replaces with TIMEu TIME (it varies from run to run)"
   },
   {
+   "at": 38,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) coalesce_image->columns)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) coalesce_image->rows)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bounds.x > 0)",
+   "verdict": "unresolved",
+   "why": "needs a first frame whose page has no width (or height) and a positive offset; -repage and -set page always fill the size in, so only an image file could carry one"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bounds.y > 0)",
+   "verdict": "unresolved",
+   "why": "needs a first frame whose page has no width (or height) and a positive offset; -repage and -set page always fill the size in, so only an image file could carry one"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (bounds.x > 0)",
+   "verdict": "unresolved",
+   "why": "needs a first frame whose page has no width (or height) and a positive offset; -repage and -set page always fill the size in, so only an image file could carry one"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (bounds.y > 0)",
+   "verdict": "unresolved",
+   "why": "needs a first frame whose page has no width (or height) and a positive offset; -repage and -set page always fill the size in, so only an image file could carry one"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounds.x < 0)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "CoalesceImages",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounds.y < 0)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "bounds.height=(size_t) ((ssize_t) bounds.height+bounds.y);",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "bounds.width=(size_t) ((ssize_t) bounds.width+bounds.x);",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) current_image->columns)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) current_image->rows)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) current_image->columns)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) current_image->rows)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) current_image->columns)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) current_image->rows)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounds.x < 0)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounds.y < 0)",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "next->alpha_trait != UndefinedPixelTrait ? OverCompositeOp : CopyCompositeOp,",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 53,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "bounds.height=(size_t) ((ssize_t) current_image->rows-bounds.y);",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/layer.c",
+   "function": "DisposeImages",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "bounds.width=(size_t) ((ssize_t) current_image->columns-bounds.x);",
+   "verdict": "unobservable",
+   "why": "DisposeImages is reached only through -layers dispose, which returns copies of the first frame (an upstream bug, MUTATION.md): nothing it computes reaches the output"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeImageTransparency",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) current_image->columns)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeImageTransparency",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) current_image->rows)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeImageTransparency",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounds.x < 0)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/layer.c",
+   "function": "OptimizeImageTransparency",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (bounds.y < 0)",
+   "verdict": "equivalent",
+   "why": "at the boundary the clip assigns the value already there (a zero offset adds nothing; a frame ending exactly at the canvas edge keeps its width)"
+  },
+  {
    "at": 10,
    "file": "MagickCore/list.c",
    "function": "CloneImageList",
