@@ -3292,6 +3292,25 @@ GAP_COMMANDS += ["-size 10x8 xc:red null: ( -size 14x4 xc:#ffff0080 -repage -2+2
                  "-define compose:outside-overlay=%s -layers composite" % v for v in ("false", "true")]
 GAP_COMMANDS += ["-size 10x8 xc:rgba(0,0,255,0.5) ( -size 10x8 xc:none -fill rgba(0,0,255,0.5) -draw 'point 2,2' ) "
                  "( -size 10x8 xc:rgba(0,0,255,0.5) ) -layers %s" % m for m in ("compare-clear", "compare-overlay")]
+# layer.c: MergeImageLayers with offsets in one direction at a time, negative and past the
+# first frame, under each merge method; and frames without a page size
+_MERGE_FRAMES = ("-size 10x8 xc:red -repage %s ( -size 6x4 xc:blue -repage %s ) "
+                 "( -size 3x3 xc:green -repage %s ) ")
+GAP_COMMANDS += [_MERGE_FRAMES % offsets + "-layers " + method
+                 for offsets in (("+0+3", "+0-2", "+0+9"), ("+3+0", "-2+0", "+9+0"), ("+4+3", "+1+1", "+2+5"))
+                 for method in ("merge", "mosaic", "flatten", "trim-bounds")]
+GAP_COMMANDS += ["-size 10x8 xc:red +repage ( -size 6x4 xc:blue +repage -page +12+3 ) -layers " + method
+                 for method in ("merge", "mosaic")]
+# layer.c: OptimizeLayerFrames on sequences that grow, shrink back (needing a background or
+# previous disposal), repeat a frame (DupDispose) and clear to transparency, for optimize,
+# optimize-plus (which may add frames) and optimize-frame
+_OPT_SEQ = ("-size 20x16 xc:red ( -size 20x16 xc:red -fill blue -draw 'rectangle 2,2 15,12' ) "
+            "( -size 20x16 xc:red -fill blue -draw 'rectangle 5,5 8,8' ) ( -size 20x16 xc:red ) "
+            "( -size 20x16 xc:red ) ( -size 20x16 xc:none -fill lime -draw 'rectangle 0,0 3,3' ) ")
+GAP_COMMANDS += [_OPT_SEQ + "-layers " + m for m in ("optimize", "optimize-plus", "optimize-frame")]
+GAP_COMMANDS += ["-size 12x10 xc:none ( -size 12x10 xc:none -fill blue -draw 'rectangle 1,1 10,8' ) "
+                 "( -size 12x10 xc:none -fill blue -draw 'rectangle 4,4 6,6' ) ( -size 12x10 xc:none ) -layers " + m
+                 for m in ("optimize-plus", "optimize-frame")]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
