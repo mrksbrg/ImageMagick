@@ -2131,6 +2131,57 @@ Open survivors, by line:
 - one each: `DestroyPixelTLS` 1457, `DestroyKmeansTLS` 2421, `PruneChild` 3148,
   `QuantizeErrorFlatten` 3546, `Reduce` 3607, `ReduceImageColors` 3721, `RemapImages` 3878
 
+## Overnight refresh and case rounds (Windows, 2026-10-03, interim)
+
+A refresh (`refresh1003`) reruns every Windows file's survivors and no-coverage mutants
+against the whole catalogue as of 59cb39e1f (11748 cases, capped at 1500 per mutant), with
+`ORACLE_MEM_GB=2`. Done so far, adjusted, before and after: **cache.c 79% → 82%** (31 kills),
+**fx.c 76% → 81%** (27), **color.c 85% → 86%**, **distort.c 83% → 88%** (`MagickRound` still the
+one function short: an Arc distortion at -90 degrees reaches its .5 tie, but the mutant
+only shifts the angle by a whole turn), quantize.c unchanged (trusted, 91%).
+
+A capped refresh may sample a new family only in part, so the families written tonight get
+uncapped case rounds of their own after it (`~/after-refresh3.sh`, `~/after-refresh3c.sh`,
+then `~/queue-runner.sh` reading `~/round-queue.txt`). Every case below was hand-run against
+the survivors it targets first (`~/mutcase.py`), and run 8 times for determinism:
+
+| family | file | what | hand-run kills |
+|---|---|---|---|
+| `fxgap5` | fx.c | the RPN dump (`fx:debug`) over compound assignments, symbols, grown tables, 99/100-letter tokens | 9 |
+| `fxgap6` | fx.c | jinc, SI and binary number prefixes, lightness/intensity qualifiers, printsize, while, `-monitor -fx` | (lines reached) |
+| `fxgap7` | fx.c | gcd at the 0.001 cut-off and of equal arguments, seeded rand(), a sum nested 120 deep | 5 |
+| `fxgap8` | fx.c | ImageStat's six statistics, composite and red, `-fx` and `%[fx:]` | 10 |
+| `fxgap9` | fx.c | `-fx @file`, `@` alone, `?` with no `:`, standalone `depth.r`/`depth.hue`, `0.5(0.5)`, `0.5}` | 10 |
+| `fxgap10` | fx.c | equal-operand comparisons, shifts by 64 and fractions, `~` exact in a long double, sign(0), airy, signed zeros | 21 |
+| `fxgap11` | fx.c | image references per image of a list (`pfx->ImgNum` 1), `u[1-1]` (a constant 0 compiles to `u0`), `u[1].p`, HSL symbols alone, nesting at the 600 limit, qualifier errors, if(), `$zz`, artifacts as variables | 36 |
+| `cachegap2` | cache.c | named MVG masks (`push mask m1` unquoted never set one), disk caches cloned, a three-image MPC | 8 + masks |
+| `matrixgap3` | matrix.c | the hough accumulator black, white and one line; the matrix mapped from a file (`-limit memory 0` alone) | 14 |
+| `resamplegap` | resample.c | `resample:verbose`'s weighting table, a squeezed perspective | 7 |
+| `quantumgap7` | quantum-import/export.c | min-is-white polarity at every depth, 7-pixel widths for packed depths in 13 layouts, palette with alpha | (round pending) |
+| `blobgap` | blob.c | ReadBlobString's newline stripping through `text:` | 3 |
+
+Verdicts tonight (all with the reasoning in `verdicts.json`): fx.c's operator-table ranges
+(the sentinels `fNull`, `aNull`, `sNull`, `rNull` are never an element's operator),
+`rIfNotZeroGoto` (never generated: a dead case), `ResolveTernaryAddresses`' `:`-without-`?`
+branch (`addr_colon` is set only after `addr_query`), table growth and leaks;
+ClonePixelCacheOnDisk's sendfile tests (both paths copy the whole file); ClampUpAxes' ties;
+IsSVGCompliant's black test. One verdict pushed and withdrawn the same night: FxGcd's `x <= y`
+is not equivalent (equal arguments swap for ever), and `gcd(3,3)` now kills it.
+
+Out of reach, written down rather than excused: ClonePixelCacheOnDisk's read/write loop
+(runs only if `sendfile` fails or the cache is 2 GiB or more; line probe: never on Linux);
+ImportCbYCrYQuantum (only a DPX 4:2:2 file, which the DPX writer never writes); InitFx's and
+AcquireFxInfoPrivate's clean-up after an allocation failure; metacontent in cache.c (set only
+through the API). ResamplePixelColor's virtual-pixel shortcuts survive under eleven
+virtual-pixel methods with a viewport 50 px past the image: the shortcut's single colour and
+the full EWA agree there, but that is not proven for the mutants that widen the shortcut, so
+they stay open.
+
+Tooling: `mutate.py`'s `ORACLE_MEM_GB` (above). A pull of the WSL clone between a round's
+index step and its mutation run makes the casemap stale and the round refuse to start
+(cachegap2's first round died so); new families are now checked for determinism from a
+scratch copy of `cases.py` instead.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
