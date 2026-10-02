@@ -2942,6 +2942,28 @@ GAP_COMMANDS += ["{C}/cmyk.miff " + ops for ops in (
 GAP_STEP_CASES += [("a CMYK palette image -type %s as plain MIFF" % kind,
                     [["{C}/cmyk.miff", "+dither", "-remap", "{C}/cmyk.miff", "-type", kind, "out.miff"]], {})
                    for kind in ("ColorSeparation", "ColorSeparationAlpha")]
+# paint.c: GradientImage's gradient:direction for every gravity, each gradient:extent of a
+# radial gradient, and a gradient:bounding-box, on a non-square canvas (columns != rows)
+GAP_COMMANDS += ["-size 60x40 -define gradient:direction=%s gradient:red-blue" % d for d in (
+    "NorthWest", "North", "NorthEast", "West", "SouthWest", "South", "SouthEast")]
+GAP_COMMANDS += ["-size 60x40 -define gradient:extent=%s radial-gradient:red-blue" % e for e in (
+    "Circle", "Diagonal", "Ellipse", "Maximum", "Minimum")]
+GAP_COMMANDS += ["-size 60x40 -define gradient:bounding-box=30x20+10+5 gradient:red-blue",
+                 "-size 60x40 -define gradient:bounding-box=30x20+10+5 radial-gradient:red-blue"]
+# paint.c: FloodfillPaintImage from seeds on each edge of the image and from outside it,
+# and through a serpentine region (the scanline fill turns back on itself), filling to a
+# border and with fuzz
+_SERPENT = ("-size 30x20 xc:white -fill black -draw 'line 5,0 5,15' -draw 'line 15,5 15,19' "
+            "-draw 'line 25,0 25,15' -fill red ")
+GAP_COMMANDS += ["{C}/rose.miff -fill red -floodfill %s white" % seed for seed in (
+    "+0+10", "+69+10", "+10+0", "+10+45", "+70+10", "+10+46")]
+GAP_COMMANDS += [_SERPENT + "-floodfill +0+0 white", _SERPENT + "-floodfill +29+19 white",
+                 _SERPENT + "-bordercolor black -draw 'color 10,10 filltoborder'",
+                 _SERPENT + "-draw 'color 20,2 floodfill'",
+                 "{C}/rose.miff -fuzz 30% -fill red -floodfill +35+20 red"]
+# paint.c: OilPaintImage copies the channels the channel mask leaves out from the centre pixel
+GAP_COMMANDS += ["{C}/rose.miff -channel R -paint 2 +channel",
+                 "{C}/rose_alpha.miff -channel RGB -paint 3 +channel"]
 # attribute.c: the minimum bounding box's orientation: a rectangle at 30 degrees, axis-aligned
 # rectangles (angle 0) under each orientation and an unknown one, a square (equal lengths) and
 # a diamond (two corners equally near the origin)
