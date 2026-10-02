@@ -3211,7 +3211,7 @@
    "nth": 0,
    "src": "if ((x-floor(x)) < (ceil(x)-x))",
    "verdict": "unresolved",
-   "why": "differs only on an exact .5 fraction (rounds down instead of up); Arc with rotations 270 and 90, whose start angle normalises to half a turn and none, did not kill it, likely since the angle is wrapped again per pixel"
+   "why": "differs only on an exact .5 fraction. At 1245 (Arc's start angle) the result is normalised again per pixel, so a tie there is harmless; at 2679 and 2705 the fraction becomes a source column, where -0.5 and +0.5 are opposite edges, so a tie would show, but it needs atan2 to give exactly pi for a pixel centre. Run by hand over 120 Arc, Polar and DePolar inputs (five sizes, eight argument sets): no difference"
   },
   {
    "at": 46,
