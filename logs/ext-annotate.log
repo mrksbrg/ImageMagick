@@ -1,0 +1,201 @@
+mutate: 605 mutants in MagickCore/annotate\.c$, 23 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 25/605 (0s)
+  mutants: 50/605 (4s)
+  mutants: 75/605 (6s)
+  mutants: 100/605 (11s)
+  mutants: 125/605 (14s)
+  mutants: 150/605 (20s)
+  mutants: 175/605 (31s)
+  mutants: 200/605 (37s)
+  mutants: 225/605 (114s)
+  mutants: 250/605 (122s)
+  mutants: 275/605 (126s)
+  mutants: 300/605 (153s)
+  mutants: 325/605 (225s)
+  mutants: 350/605 (300s)
+  mutants: 375/605 (338s)
+  mutants: 400/605 (411s)
+  mutants: 425/605 (445s)
+  mutants: 450/605 (478s)
+  mutants: 475/605 (548s)
+  mutants: 500/605 (574s)
+  mutants: 525/605 (575s)
+  mutants: 550/605 (576s)
+  mutants: 575/605 (576s)
+  mutants: 600/605 (659s)
+  mutants: 605/605 (662s)
+
+mutate: 605 mutants, 662s
+  killed 373, survived 140 (4 capped), no coverage 92, errors 0
+  mutation score on reached code: 72.7%   overall: 61.7%
+
+  function                           total killed survived no-cov
+  RenderFreetype                       192    115       77      0
+  AnnotateImage                        175    157       18      0
+  RenderPostscript                      81      0        0     81
+  FormatMagickCaption                   30     23        7      0
+  RenderType                            27     17       10      0
+  GetMultilineTypeMetrics               18     11        7      0
+  TraceCubicBezier                      12     12        0      0
+  ComplexTextLayout                     11      6        5      0
+  TraceQuadraticBezier                   8      8        0      0
+  ReplaceSpaceWithNewline                7      3        4      0
+  IsValidPostscriptFontname              7      0        0      7
+  FreetypeReadStream                     5      4        1      0
+  FreetypeRealloc                        5      4        1      0
+  TraceLineTo                            4      4        0      0
+  TraceMoveTo                            4      4        0      0
+  RenderX11                              4      0        0      4
+  AnnotateComponentTerminus              3      0        3      0
+  IsEmptyOutline                         3      2        1      0
+  FreetypeInit                           3      2        1      0
+  GetTypeMetrics                         2      0        2      0
+  FreetypeAlloc                          2      1        1      0
+  AnnotateComponentGenesis               1      0        1      0
+  FreetypeCloseStream                    1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc annotate.c:173:26 cxx_eq_to_ne               if (annotate_semaphore == (SemaphoreInfo *) NULL)
+    xc annotate.c:198:26 cxx_eq_to_ne               if (annotate_semaphore == (SemaphoreInfo *) NULL)
+     c annotate.c:199:5 cxx_remove_void_call       ActivateSemaphoreInfo(&annotate_semaphore);
+    xc annotate.c:200:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&annotate_semaphore);
+    x  annotate.c:271:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  annotate.c:314:3 cxx_remove_void_call       SetGeometry(image,&geometry);
+    x  annotate.c:315:3 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+    x  annotate.c:357:44 cxx_mul_to_div             offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height;
+    x  annotate.c:412:32 cxx_mul_to_div             geometry.height/2.0+i*annotate_info->affine.sy*height-
+       annotate.c:470:44 cxx_mul_to_div             offset.x=annotate_info->affine.tx+i*annotate_info->affine.ry*height;
+       annotate.c:471:44 cxx_mul_to_div             offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height;
+       annotate.c:476:44 cxx_mul_to_div             offset.x=annotate_info->affine.tx+i*annotate_info->affine.ry*height-
+       annotate.c:476:76 cxx_sub_to_add             offset.x=annotate_info->affine.tx+i*annotate_info->affine.ry*height-
+       annotate.c:477:35 cxx_mul_to_div             annotate_info->affine.sx*metrics.width/2.0;
+       annotate.c:477:49 cxx_div_to_mul             annotate_info->affine.sx*metrics.width/2.0;
+       annotate.c:478:44 cxx_mul_to_div             offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height-
+       annotate.c:478:76 cxx_sub_to_add             offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height-
+       annotate.c:479:35 cxx_mul_to_div             annotate_info->affine.rx*metrics.width/2.0;
+       annotate.c:479:49 cxx_div_to_mul             annotate_info->affine.rx*metrics.width/2.0;
+       annotate.c:484:44 cxx_mul_to_div             offset.x=annotate_info->affine.tx+i*annotate_info->affine.ry*height-
+       annotate.c:486:44 cxx_mul_to_div             offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height-
+    x  annotate.c:550:64 cxx_add_to_sub             annotate_info->affine.ty-=(draw_info->affine.sy*(height+
+       annotate.c:625:19 cxx_sub_to_add             offset=space-(*caption);
+       annotate.c:626:18 cxx_ge_to_gt               if (offset >= 0)
+       annotate.c:626:18 cxx_ge_to_lt               if (offset >= 0)
+       annotate.c:629:66 cxx_add_to_sub             (void) CopyMagickString(target,*caption,(size_t) offset+2);
+    x  annotate.c:676:19 cxx_gt_to_ge               if (width > image->columns)
+    x  annotate.c:686:43 cxx_add_to_sub             width=CastDoubleToSizeT(metrics->width+draw_info->stroke_width+0.5);
+    x  annotate.c:686:67 cxx_add_to_sub             width=CastDoubleToSizeT(metrics->width+draw_info->stroke_width+0.5);
+    x  annotate.c:692:54 cxx_gt_to_ge               if ((split != MagickFalse) || (GetUTFOctets(p) > 2))
+    x  annotate.c:698:18 cxx_gt_to_ge               if ((n > 0) && ((*caption)[n-1] != '\n'))
+    x  annotate.c:698:39 cxx_sub_to_add             if ((n > 0) && ((*caption)[n-1] != '\n'))
+    x  annotate.c:705:74 cxx_add_to_sub             (void) ConcatenateMagickString(target,"\n",strlen(*caption)+1);
+    x  annotate.c:800:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  annotate.c:833:16 cxx_sub_to_add             0.5)+(count-1)*draw_info->interline_spacing);
+    x  annotate.c:847:20 cxx_eq_to_ne               if (status == MagickFalse)
+    x  annotate.c:849:26 cxx_gt_to_ge               if (extent.width > metrics->width)
+    x  annotate.c:849:26 cxx_gt_to_le               if (extent.width > metrics->width)
+    x  annotate.c:867:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) count; i++)
+    x  annotate.c:867:15 cxx_lt_to_le               for (i=0; i < (ssize_t) count; i++)
+    x  annotate.c:933:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  annotate.c:945:24 cxx_ne_to_eq               if (draw_info->debug != MagickFalse)
+    x  annotate.c:1033:45 cxx_eq_to_ne               if (strpbrk(draw_info->family,",'\"") == (char *) NULL)
+    x  annotate.c:1036:21 cxx_eq_to_ne               if (type_info == (const TypeInfo *) NULL)
+    x  annotate.c:1056:28 cxx_ne_to_eq               if ((type_info != (const TypeInfo *) NULL) &&
+    x  annotate.c:1057:61 cxx_eq_to_ne               (LocaleCompare(family[i],type_info->family) == 0))
+    x  annotate.c:1060:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) number_families; i++)
+    x  annotate.c:1060:23 cxx_lt_to_le               for (i=0; i < (ssize_t) number_families; i++)
+    x  annotate.c:1069:12 cxx_ne_to_eq               if (font != (char *) NULL)
+       annotate.c:1071:34 cxx_ne_to_eq               if (IsPathAccessible(font) != MagickFalse)
+    x  annotate.c:1097:21 cxx_eq_to_ne               if (type_info == (const TypeInfo *) NULL)
+    x  annotate.c:1109:26 cxx_ne_to_eq               if (type_info->metrics != (char *) NULL)
+    x  annotate.c:1301:31 cxx_ne_to_eq               if (((*grapheme)[i].index != 0) && (last_glyph != 0))
+    x  annotate.c:1301:52 cxx_ne_to_eq               if (((*grapheme)[i].index != 0) && (last_glyph != 0))
+    x  annotate.c:1313:27 cxx_eq_to_ne               if (ft_status == 0)
+    x  annotate.c:1314:28 cxx_sub_to_add             (*grapheme)[i-1].x_advance+=(FT_Pos) ((draw_info->direction ==
+    x  annotate.c:1314:75 cxx_eq_to_ne               (*grapheme)[i-1].x_advance+=(FT_Pos) ((draw_info->direction ==
+    x  annotate.c:1333:12 cxx_ne_to_eq               if (file != (FILE *) NULL)
+    x  annotate.c:1350:14 cxx_gt_to_ge               if (offset > stream->size)
+    x  annotate.c:1363:57 cxx_le_to_lt               return((outline.n_points == 0) || (outline.n_contours <= 0) ? MagickTrue :
+    x  annotate.c:1447:14 cxx_le_to_lt               if (extent <= 0)
+    x  annotate.c:1460:14 cxx_le_to_lt               if (extent <= 0)
+    x  annotate.c:1513:7 cxx_remove_void_call       FT_Set_Default_Properties(*alibrary);
+    x  annotate.c:1645:24 cxx_ne_to_eq               if ((draw_info->font != (char *) NULL) && (*draw_info->font == '@') &&
+    x  annotate.c:1645:63 cxx_eq_to_ne               if ((draw_info->font != (char *) NULL) && (*draw_info->font == '@') &&
+    x  annotate.c:1646:78 cxx_eq_to_ne               (IsRightsAuthorized(PathPolicyDomain,ReadPolicyRights,draw_info->font) == MagickFalse))
+       annotate.c:1667:21 cxx_ne_to_eq               if (type_info != (const TypeInfo *) NULL)
+    x  annotate.c:1692:37 cxx_ge_to_gt               stream->size=attributes.st_size >= 0 ? (unsigned long)
+       annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1709:27 cxx_ne_to_eq               if ((draw_info->metrics != (char *) NULL) &&
+    x  annotate.c:1710:45 cxx_ne_to_eq               (IsPathAccessible(draw_info->metrics) != MagickFalse))
+    x  annotate.c:1714:18 cxx_ne_to_eq               if ((ft_status != 0) && (face->num_charmaps != 0))
+    x  annotate.c:1714:47 cxx_ne_to_eq               if ((ft_status != 0) && (face->num_charmaps != 0))
+    x  annotate.c:1718:49 cxx_eq_to_ne               if (LocaleCompare(encoding,"AdobeCustom") == 0)
+    x  annotate.c:1720:49 cxx_eq_to_ne               if (LocaleCompare(encoding,"AdobeExpert") == 0)
+    x  annotate.c:1722:51 cxx_eq_to_ne               if (LocaleCompare(encoding,"AdobeStandard") == 0)
+    x  annotate.c:1724:48 cxx_eq_to_ne               if (LocaleCompare(encoding,"AppleRoman") == 0)
+    x  annotate.c:1758:11 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1781:41 cxx_ne_to_eq               if ((geometry_flags & SigmaValue) != 0)
+       annotate.c:1790:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+       annotate.c:1805:41 cxx_eq_to_ne               if (face->size->metrics.descender == 0)
+       annotate.c:1806:52 cxx_div_to_mul             metrics->descent=face->size->metrics.y_ppem/-3.5;
+    x  annotate.c:1811:54 cxx_div_to_mul             metrics->height=(double) face->size->metrics.height/64.0;
+    x  annotate.c:1813:39 cxx_gt_to_ge               if (face->size->metrics.max_advance > MagickEpsilon)
+    x  annotate.c:1813:39 cxx_gt_to_le               if (face->size->metrics.max_advance > MagickEpsilon)
+    x  annotate.c:1814:66 cxx_div_to_mul             metrics->max_advance=(double) face->size->metrics.max_advance/64.0;
+    x  annotate.c:1817:37 cxx_add_to_sub             metrics->bounds.x2=metrics->ascent+metrics->descent;
+    x  annotate.c:1818:37 cxx_add_to_sub             metrics->bounds.y2=metrics->ascent+metrics->descent;
+    x  annotate.c:1829:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1835:24 cxx_ne_to_eq               if (draw_info->debug != MagickFalse)
+       annotate.c:1838:23 cxx_ne_to_eq               draw_info->font != (char *) NULL ? draw_info->font : "none",
+       annotate.c:1839:16 cxx_ne_to_eq               encoding != (char *) NULL ? encoding : "none",
+       annotate.c:1840:27 cxx_ne_to_eq               draw_info->encoding != (char *) NULL ? draw_info->encoding : "none",
+    x  annotate.c:1843:25 cxx_eq_to_ne               if (draw_info->render == MagickFalse)
+    x  annotate.c:1881:32 cxx_ne_to_eq               if (image->storage_class != DirectClass)
+    x  annotate.c:1887:23 cxx_lt_to_le               if (GetUTFCode(p) < 0)
+       annotate.c:1895:16 cxx_ne_to_eq               if (utf8 != (unsigned char *) NULL)
+    x  annotate.c:1926:21 cxx_ne_to_eq               if (glyph.image != (FT_Glyph) NULL)
+    x  annotate.c:1928:9 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
+    x  annotate.c:1939:34 cxx_eq_to_ne               (IsEmptyOutline(outline) == MagickFalse))
+    x  annotate.c:1944:22 cxx_lt_to_ge               if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))
+    x  annotate.c:1944:22 cxx_lt_to_le               if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))
+    x  annotate.c:1944:60 cxx_ne_to_eq               if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))
+    x  annotate.c:1946:22 cxx_lt_to_ge               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
+    x  annotate.c:1946:22 cxx_lt_to_le               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
+    x  annotate.c:1946:60 cxx_ne_to_eq               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
+    x  annotate.c:1948:22 cxx_gt_to_ge               if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))
+    x  annotate.c:1948:22 cxx_gt_to_le               if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))
+    x  annotate.c:1948:60 cxx_ne_to_eq               if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))
+    x  annotate.c:1950:22 cxx_gt_to_ge               if ((bounds.yMax > metrics->bounds.y2) && (bounds.yMax != 0))
+    x  annotate.c:1953:37 cxx_ne_to_eq               (draw_info->stroke_pattern != (Image *) NULL)) &&
+    x  annotate.c:1960:35 cxx_minus_to_noop          annotate_info->affine.ty=(-glyph.origin.y/64.0);
+    x  annotate.c:1960:50 cxx_div_to_mul             annotate_info->affine.ty=(-glyph.origin.y/64.0);
+       annotate.c:1974:25 cxx_div_to_mul             point.x+=(origin.x/64.0);
+    x  annotate.c:1991:36 cxx_eq_to_ne               (draw_info->fill_pattern == (Image *) NULL) &&
+    x  annotate.c:1993:38 cxx_eq_to_ne               (draw_info->stroke_pattern == (Image *) NULL)) ? MagickTrue :
+    x  annotate.c:2031:25 cxx_lt_to_le               if ((x_offset < 0) || (x_offset >= (ssize_t) image->columns))
+    x  annotate.c:2031:43 cxx_ge_to_gt               if ((x_offset < 0) || (x_offset >= (ssize_t) image->columns))
+    x  annotate.c:2037:24 cxx_ne_to_eq               active=q != (Quantum *) NULL ? MagickTrue : MagickFalse;
+    x  annotate.c:2045:23 cxx_ne_to_eq               if (q != (Quantum *) NULL)
+       annotate.c:2055:49 cxx_eq_to_ne               if (bitmap->bitmap.pixel_mode == ft_pixel_mode_mono)
+       annotate.c:2056:46 cxx_add_to_sub             fill_opacity=((r[(x >> 3)+y*bitmap->bitmap.pitch] &
+       annotate.c:2056:48 cxx_mul_to_div             fill_opacity=((r[(x >> 3)+y*bitmap->bitmap.pitch] &
+       annotate.c:2057:44 cxx_eq_to_ne               (1 << (~x & 0x07)))) == 0 ? 0.0 : 1.0;
+    x  annotate.c:2060:41 cxx_ge_to_gt               fill_opacity=fill_opacity >= 0.5 ? 1.0 : 0.0;
+    x  annotate.c:2068:17 cxx_remove_void_call       GetPixelInfo(image,&fill_color);
+       annotate.c:2082:34 cxx_sub_to_add             fill_opacity=(1.0-RoundToUnity(Sa+Da-Sa*Da))*(double)
+       annotate.c:2082:50 cxx_add_to_sub             fill_opacity=(1.0-RoundToUnity(Sa+Da-Sa*Da))*(double)
+       annotate.c:2082:61 cxx_mul_to_div             fill_opacity=(1.0-RoundToUnity(Sa+Da-Sa*Da))*(double)
+       annotate.c:2084:17 cxx_remove_void_call       SetPixelAlpha(image,(const Quantum) fill_opacity,q);
+    x  annotate.c:2086:24 cxx_eq_to_ne               if (active == MagickFalse)
+    x  annotate.c:2100:41 cxx_ne_to_eq               (draw_info->stroke_pattern != (Image *) NULL)) &&
+    x  annotate.c:2110:50 cxx_gt_to_ge               if (strlen(annotate_info->primitive) > 7)
+    x  annotate.c:2115:45 cxx_ge_to_gt               if ((fabs(draw_info->interword_spacing) >= MagickEpsilon) &&
+    x  annotate.c:2127:27 cxx_gt_to_ge               if (metrics->origin.x > metrics->width)
+    x  annotate.c:2132:16 cxx_ne_to_eq               if (grapheme != (GraphemeInfo *) NULL)
+    x  annotate.c:2134:12 cxx_ne_to_eq               if (utf8 != (unsigned char *) NULL)
+    x  annotate.c:2136:19 cxx_ne_to_eq               if (glyph.image != (FT_Glyph) NULL)
+    x  annotate.c:2138:7 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
+    x  annotate.c:2156:3 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-annotate.json

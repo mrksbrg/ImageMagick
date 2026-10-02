@@ -1,0 +1,20 @@
+mutate: 4 mutants in MagickCore/annotate\.c$, 2 functions
+mutate: baseline over 10683 cases in 0s
+  mutants: 4/4 (108s)
+
+mutate: 4 mutants, 108s
+  killed 0, survived 4 (4 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  AnnotateComponentTerminus              3      0        3      0
+  AnnotateComponentGenesis               1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    xc annotate.c:173:26 cxx_eq_to_ne               if (annotate_semaphore == (SemaphoreInfo *) NULL)
+    xc annotate.c:198:26 cxx_eq_to_ne               if (annotate_semaphore == (SemaphoreInfo *) NULL)
+     c annotate.c:199:5 cxx_remove_void_call       ActivateSemaphoreInfo(&annotate_semaphore);
+    xc annotate.c:200:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&annotate_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extcap-annotate.json

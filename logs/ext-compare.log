@@ -1,0 +1,173 @@
+mutate: 694 mutants in MagickCore/compare\.c$, 23 functions
+mutate: baseline over 156 cases in 0s
+  mutants: 25/694 (0s)
+  mutants: 50/694 (0s)
+  mutants: 75/694 (0s)
+  mutants: 100/694 (1s)
+  mutants: 125/694 (1s)
+  mutants: 150/694 (1s)
+  mutants: 175/694 (2s)
+  mutants: 200/694 (2s)
+  mutants: 225/694 (3s)
+  mutants: 250/694 (4s)
+  mutants: 275/694 (6s)
+  mutants: 300/694 (7s)
+  mutants: 325/694 (7s)
+  mutants: 350/694 (8s)
+  mutants: 375/694 (9s)
+  mutants: 400/694 (9s)
+  mutants: 425/694 (10s)
+  mutants: 450/694 (11s)
+  mutants: 475/694 (13s)
+  mutants: 500/694 (14s)
+  mutants: 525/694 (16s)
+  mutants: 550/694 (16s)
+  mutants: 575/694 (18s)
+  mutants: 600/694 (22s)
+  mutants: 625/694 (28s)
+  mutants: 650/694 (30s)
+  mutants: 675/694 (131s)
+  mutants: 694/694 (160s)
+
+mutate: 694 mutants, 160s
+  killed 562, survived 109 (0 capped), no coverage 23, errors 0
+  mutation score on reached code: 83.8%   overall: 81.0%
+
+  function                           total killed survived no-cov
+  GetSSIMSimularity                     80     76        4      0
+  GetPHASESimilarity                    61     50       11      0
+  SimilarityImage                       49     28       21      0
+  GetDPCSimilarity                      46     34       12      0
+  GetNCCSimilarity                      46     34       12      0
+  GetMEPPSimilarity                     45     37        8      0
+  GetFUZZSimilarity                     41     38        3      0
+  GetAESimilarity                       40     38        2      0
+  GetMAESimilarity                      39     36        3      0
+  GetMSESimilarity                      39     36        3      0
+  GetPASimilarity                       39     31        8      0
+  GetPDCSimilarity                      35     32        3      0
+  CompareImages                         33     32        1      0
+  GetPHASHSimilarity                    25     16        9      0
+  IsImagesEqual                         23      0        0     23
+  GetImageDistortions                   14     11        3      0
+  GetPSNRSimilarity                      9      9        0      0
+  GetDSSIMSimilarity                     9      9        0      0
+  GetImageDistortion                     7      5        2      0
+  GetRMSESimilarity                      5      4        1      0
+  GetSimilarityMetric                    5      5        0      0
+  SetImageColorMetric                    3      0        3      0
+  GetEdgeCorrelationSurface              1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  compare.c:154:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       compare.c:394:30 cxx_sub_to_add             error=(double) p[i]-(double) GetPixelChannel(reconstruct_image,
+    x  compare.c:416:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+       compare.c:491:28 cxx_ne_to_eq               if (image_statistics != (ChannelStatistics *) NULL)
+       compare.c:494:34 cxx_ne_to_eq               if (reconstruct_statistics != (ChannelStatistics *) NULL)
+    x  compare.c:546:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:561:31 cxx_mul_to_div             alpha=QuantumScale*((double) p[i]-image_statistics[channel].mean);
+       compare.c:561:46 cxx_sub_to_add             alpha=QuantumScale*((double) p[i]-image_statistics[channel].mean);
+       compare.c:562:30 cxx_mul_to_div             beta=QuantumScale*((double) GetPixelChannel(reconstruct_image,
+       compare.c:563:25 cxx_sub_to_add             channel,q)-reconstruct_statistics[channel].mean);
+    x  compare.c:586:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:603:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       compare.c:611:17 cxx_post_inc_to_post_dec   progress++;
+       compare.c:613:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  compare.c:625:15 cxx_lt_to_le               for (k=0; k < (ssize_t) GetPixelChannels(image); k++)
+       compare.c:734:30 cxx_sub_to_add             error=(double) p[i]-(double) GetPixelChannel(reconstruct_image,
+    x  compare.c:758:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:776:15 cxx_lt_to_le               for (k=0; k < (ssize_t) GetPixelChannels(image); k++)
+       compare.c:877:29 cxx_mul_to_div             error=QuantumScale*fabs((double) p[i]-(double) GetPixelChannel(
+       compare.c:877:48 cxx_sub_to_add             error=QuantumScale*fabs((double) p[i]-(double) GetPixelChannel(
+    x  compare.c:897:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+       compare.c:1022:29 cxx_mul_to_div             error=QuantumScale*fabs((double) p[i]-(double) GetPixelChannel(
+       compare.c:1022:48 cxx_sub_to_add             error=QuantumScale*fabs((double) p[i]-(double) GetPixelChannel(
+    x  compare.c:1030:19 cxx_gt_to_ge               if (error > channel_maximum_error)
+    x  compare.c:1045:19 cxx_lt_to_ge               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:1045:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:1051:42 cxx_eq_to_ne               if (((traits & UpdatePixelTrait) == 0) ||
+    x  compare.c:1052:54 cxx_eq_to_ne               ((reconstruct_traits & UpdatePixelTrait) == 0))
+    x  compare.c:1059:33 cxx_gt_to_ge               if (channel_maximum_error > maximum_error)
+       compare.c:1173:29 cxx_mul_to_div             error=QuantumScale*((double) p[i]-(double) GetPixelChannel(
+       compare.c:1173:44 cxx_sub_to_add             error=QuantumScale*((double) p[i]-(double) GetPixelChannel(
+    x  compare.c:1193:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+       compare.c:1266:28 cxx_ne_to_eq               if (image_statistics != (ChannelStatistics *) NULL)
+       compare.c:1269:34 cxx_ne_to_eq               if (reconstruct_statistics != (ChannelStatistics *) NULL)
+    x  compare.c:1321:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:1336:31 cxx_mul_to_div             alpha=QuantumScale*((double) p[i]-image_statistics[channel].mean);
+       compare.c:1336:46 cxx_sub_to_add             alpha=QuantumScale*((double) p[i]-image_statistics[channel].mean);
+       compare.c:1337:30 cxx_mul_to_div             beta=QuantumScale*((double) GetPixelChannel(reconstruct_image,
+       compare.c:1338:25 cxx_sub_to_add             channel,q)-reconstruct_statistics[channel].mean);
+    x  compare.c:1361:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:1379:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       compare.c:1387:17 cxx_post_inc_to_post_dec   progress++;
+       compare.c:1389:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  compare.c:1401:15 cxx_lt_to_le               for (k=0; k < (ssize_t) GetPixelChannels(image); k++)
+    x  compare.c:1454:15 cxx_lt_to_le               for (y=0; y < (ssize_t) rows; y++)
+       compare.c:1506:32 cxx_mul_to_div             distance=QuantumScale*fabs((double) p[i]-(double)
+       compare.c:1506:51 cxx_sub_to_add             distance=QuantumScale*fabs((double) p[i]-(double)
+    x  compare.c:1511:22 cxx_gt_to_ge               if (distance > channel_similarity[i])
+    x  compare.c:1513:22 cxx_gt_to_ge               if (distance > channel_similarity[CompositePixelChannel])
+    x  compare.c:1526:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:1535:35 cxx_gt_to_ge               if (channel_similarity[j] > similarity[j])
+    x  compare.c:1538:53 cxx_gt_to_ge               if (channel_similarity[CompositePixelChannel] > similarity[CompositePixelChannel])
+       compare.c:1635:30 cxx_sub_to_add             error=(double) p[i]-(double) GetPixelChannel(reconstruct_image,
+    x  compare.c:1643:18 cxx_post_inc_to_post_dec   count++;
+    x  compare.c:1658:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+       compare.c:1740:22 cxx_ne_to_eq               if (edge_image != (Image *) NULL)
+       compare.c:1742:28 cxx_ne_to_eq               if (edge_reconstruct != (Image *) NULL)
+    x  compare.c:1797:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(edge_image); i++)
+    x  compare.c:1841:19 cxx_le_to_lt               for (i=0; i <= (ssize_t) MaxPixelChannels; i++)
+    x  compare.c:1895:25 cxx_lt_to_le               if ((image_variance < MagickEpsilon) &&
+    x  compare.c:1896:31 cxx_lt_to_le               (reconstruct_variance < MagickEpsilon))
+    x  compare.c:1897:33 cxx_sub_to_add             pearson=(fabs(image_sum[j]-reconstruct_sum[j]) < MagickEpsilon) ?
+    x  compare.c:1897:54 cxx_lt_to_le               pearson=(fabs(image_sum[j]-reconstruct_sum[j]) < MagickEpsilon) ?
+    x  compare.c:1902:29 cxx_lt_to_le               pearson=denominator < MagickEpsilon ? 0.0 : numerator/denominator;
+    x  compare.c:1904:17 cxx_lt_to_le               if (pearson < -1.0)
+    x  compare.c:1906:17 cxx_gt_to_ge               if (pearson > 1.0)
+    x  compare.c:1959:17 cxx_lt_to_le               for (j=0; j < (ssize_t) channel_phash[0].number_colorspaces; j++)
+    x  compare.c:1968:19 cxx_lt_to_le               for (k=0; k < MaximumNumberOfPerceptualHashes; k++)
+       compare.c:1990:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:1990:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:1990:57 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:1996:42 cxx_eq_to_ne               if (((traits & UpdatePixelTrait) == 0) ||
+       compare.c:1997:54 cxx_eq_to_ne               ((reconstruct_traits & UpdatePixelTrait) == 0))
+       compare.c:1999:41 cxx_div_to_mul             similarity[i]=sqrt(similarity[i]/(double)
+       compare.c:2002:79 cxx_div_to_mul             similarity[CompositePixelChannel]=sqrt(similarity[CompositePixelChannel]/
+    x  compare.c:2060:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:2137:51 cxx_mul_to_div             c1=pow(StringToDouble(artifact,(char **) NULL)*SSIML,2.0);
+       compare.c:2141:51 cxx_mul_to_div             c2=pow(StringToDouble(artifact,(char **) NULL)*SSIML,2.0);
+    x  compare.c:2212:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  compare.c:2284:19 cxx_lt_to_le               for (j=0; j < (ssize_t) GetPixelChannels(image); j++)
+    x  compare.c:2369:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compare.c:2490:25 cxx_lt_to_le               if (fabs(*distortion) < MagickEpsilon)
+    x  compare.c:2549:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compare.c:2674:15 cxx_le_to_lt               for (i=0; i <= MaxPixelChannels; i++)
+    x  compare.c:2675:29 cxx_lt_to_le               if (fabs(distortion[i]) < MagickEpsilon)
+    x  compare.c:2839:14 cxx_eq_to_ne               if (status == MagickFalse)
+    x  compare.c:2841:50 cxx_lt_to_ge               status=fabs(image->error.mean_error_per_pixel) < MagickEpsilon ?
+    x  compare.c:2841:50 cxx_lt_to_le               status=fabs(image->error.mean_error_per_pixel) < MagickEpsilon ?
+    x  compare.c:4755:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compare.c:4757:3 cxx_remove_void_call       SetGeometry(reconstruct,offset);
+       compare.c:4883:26 cxx_le_to_gt               if (similarity <= channel_info.similarity)
+       compare.c:4883:26 cxx_le_to_lt               if (similarity <= channel_info.similarity)
+    x  compare.c:4892:26 cxx_ge_to_gt               if (similarity >= channel_info.similarity)
+    x  compare.c:4900:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       compare.c:4917:13 cxx_remove_void_call       SetPixelChannel(similarity_image,channel,ClampToQuantum((double)
+       compare.c:4918:27 cxx_mul_to_div             QuantumRange*similarity),q);
+       compare.c:4942:34 cxx_ne_to_eq               if (similarity_threshold != DefaultSimilarityThreshold)
+       compare.c:4943:39 cxx_ge_to_gt               if (channel_info.similarity >= similarity_threshold)
+       compare.c:4943:39 cxx_ge_to_lt               if (channel_info.similarity >= similarity_threshold)
+       compare.c:4945:37 cxx_ge_to_gt               if (channel_info.similarity >= similarity_info.similarity)
+       compare.c:4945:37 cxx_ge_to_lt               if (channel_info.similarity >= similarity_info.similarity)
+    x  compare.c:4951:34 cxx_ne_to_eq               if (similarity_threshold != DefaultSimilarityThreshold)
+       compare.c:4952:39 cxx_lt_to_ge               if (channel_info.similarity < similarity_threshold)
+       compare.c:4952:39 cxx_lt_to_le               if (channel_info.similarity < similarity_threshold)
+    x  compare.c:4954:37 cxx_lt_to_le               if (channel_info.similarity < similarity_info.similarity)
+    x  compare.c:4961:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       compare.c:4966:17 cxx_post_inc_to_post_dec   progress++;
+       compare.c:4968:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  compare.c:4976:32 cxx_lt_to_le               if (fabs(*similarity_metric) < MagickEpsilon)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-ext-compare.json
