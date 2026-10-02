@@ -1679,6 +1679,8 @@ def _texture_gap_cases():
 DISTORT_ARG_CASES = [
     ("Affine", "10,10 20,15"), ("Affine", "10,10 20,15  50,30 55,40"),
     ("Arc", "60"), ("Arc", "60 10"), ("Arc", "60 10 50"), ("Arc", "60 10 50 20"),
+    # rotations whose normalised start angle is exactly 0.5 or 0 turns (MagickRound's tie)
+    ("Arc", "60 270"), ("Arc", "360 90"),
     ("Polar", "-1"), ("Polar", "40 10"), ("Polar", "40 10 30 20"),
     ("Polar", "40 10 30 20 10 350"), ("Polar", "1 2 3 4 5 6 7"),
     ("DePolar", "-1"), ("DePolar", "40 10 30 20 10 350"),

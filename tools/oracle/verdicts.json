@@ -13421,6 +13421,26 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/distort.c",
+   "function": "RotateImage",
+   "mutator": "cxx_minus_to_noop",
+   "nth": 0,
+   "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
+   "verdict": "equivalent",
+   "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/distort.c",
+   "function": "RotateImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "shear.x=(-tan((double) DegreesToRadians(angle)/2.0));",
+   "verdict": "equivalent",
+   "why": "shear.x is used only in the identity test, as fabs(shear.x) < MagickEpsilon: the sign does not matter, and for angles in (-45,45] tan(2a) is near zero exactly when tan(a/2) is"
   }
  ]
 }
