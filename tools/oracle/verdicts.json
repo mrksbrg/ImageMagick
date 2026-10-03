@@ -22,6 +22,16 @@
    "why": "FT_Set_Default_Properties only applies the FREETYPE_PROPERTIES environment variable, which the oracle's fixed environment (oracle.env_for) never sets: without the call FreeType keeps the same defaults"
   },
   {
+   "at": 17,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "GetMultilineTypeMetrics",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (extent.width > metrics->width)",
+   "verdict": "equivalent",
+   "why": "takes the widest line: when a line is exactly as wide as the widest so far, either one gives the same width"
+  },
+  {
    "at": 20,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
    "function": "RenderFreetype",
@@ -4382,30 +4392,10 @@
    "why": "FreeType's memory and stream callbacks; FreeType never asks for 0 bytes or reads past the stream here"
   },
   {
-   "at": 11,
-   "file": "MagickCore/annotate.c",
-   "function": "GetMultilineTypeMetrics",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (status == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
-  },
-  {
    "at": 17,
    "file": "MagickCore/annotate.c",
    "function": "GetMultilineTypeMetrics",
    "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (extent.width > metrics->width)",
-   "verdict": "unresolved",
-   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/annotate.c",
-   "function": "GetMultilineTypeMetrics",
-   "mutator": "cxx_gt_to_le",
    "nth": 0,
    "src": "if (extent.width > metrics->width)",
    "verdict": "unresolved",
@@ -4418,16 +4408,6 @@
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
    "src": "for (i=0; i < (ssize_t) count; i++)",
-   "verdict": "unresolved",
-   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/annotate.c",
-   "function": "GetMultilineTypeMetrics",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "0.5)+(count-1)*draw_info->interline_spacing);",
    "verdict": "unresolved",
    "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
   },

@@ -4372,6 +4372,13 @@ GAP_STEP_CASES += [("psd 8bim resolution rewritten per centimetre",
                     [["{C}/rose.miff", "-density", "150", "-units", "PixelsPerInch", "r.psd"],
                      ["r.psd", "-density", "300x200", "-units", "PixelsPerCentimeter", "out.psd"],
                      ["out.psd", "-format", "%x %y %U|%[8BIM:1005,1005]\\n", "info:"]], {})]
+# annotate.c: GetMultilineTypeMetrics through multi-line labels (the widest line sets the width,
+# whichever line it is), interline spacing, and a caption fitted to a size
+GAP_STEP_CASES += [("multi-line text metrics: %s" % args[-3], [["-font", "{C}/Generic.ttf"] + args], {})
+                   for args in (["-pointsize", "14", "label:a\\nbbbbbbbbbbb\\ncc", "-format", "%wx%h\\n", "info:"],
+                                ["-pointsize", "14", "label:wwwwwwwwwww\\nb", "-format", "%wx%h\\n", "info:"],
+                                ["-size", "120x60", "caption:aaa bbbbbbbbbbbbbb cc dd", "-format", "%wx%h %[caption:pointsize]\\n", "info:"],
+                                ["-pointsize", "14", "-interline-spacing", "5", "label:a\\nbbbb\\ncc", "-format", "%wx%h\\n", "info:"])]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
