@@ -3928,6 +3928,19 @@ GAP_STEP_CASES += [("-extent %s of an image with a clip path" % geo,
                     [["{C}/rose.miff", "-profile", "clip.8bim", "-extent", geo,
                       "-write", "8bim:out.8bim", "out.miff"]], {"clip.8bim": _CLIP_8BIM})
                    for geo in ("120x80+10+10", "60x40-5-5")]
+# string.c: PrintStringInfo, which identify -verbose calls for each profile when the image's
+# debug flag is set (-define debug=true sets it without turning event logging on): binary
+# profiles as hex rows, a text profile (XMP) as text, and a profile of exactly two rows
+GAP_STEP_CASES += [
+    ("verbose with debug: binary profiles in hex",
+     [[_UHDR_JPG, "-define", "debug=true", "-colorspace", "gray", "-verbose", "info:"]], {}),
+    ("verbose with debug: an XMP profile as text",
+     [["{C}/rose.miff", "-profile", "meta.xmp", "-define", "debug=true", "-verbose", "info:"]],
+     {"meta.xmp": XMP_ELEMENTS}),
+    ("verbose with debug: a 40-byte profile, two full hex rows",
+     [["{C}/rose.miff", "-profile", "APP1:x.bin", "-define", "debug=true", "-verbose", "info:"]],
+     {"x.bin": "".join(chr(1 + i % 7) for i in range(40))}),
+]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
