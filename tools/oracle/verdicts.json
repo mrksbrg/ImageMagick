@@ -372,6 +372,76 @@
    "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
   },
   {
+   "at": 55,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "proposed_extent=mvg_info->offset+pad+PrimitiveExtentPad+1.0;",
+   "verdict": "equivalent",
+   "why": "asks for two entries fewer (offset+pad+PrimitiveExtentPad-1): the request is padded by PrimitiveExtentPad (4296 entries) beyond what the primitive needs, so it still fits"
+  },
+  {
+   "at": 49,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((proposed_extent <= 0.0) || (proposed_extent > (double) MAGICK_SIZE_MAX))",
+   "verdict": "equivalent",
+   "why": "differs only for a proposed extent of exactly MAGICK_SIZE_MAX entries, which no drawing comes near"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (extent > (GetMaxMemoryRequest()/sizeof(PrimitiveInfo)))",
+   "verdict": "unresolved",
+   "why": "differs only for an extent of exactly the max-memory-request in PrimitiveInfo entries: the policy's 16 MiB floor puts that at tens of thousands of entries, and no case drives a primitive to exactly that size"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (extent <= *mvg_info->extent)",
+   "verdict": "equivalent",
+   "why": "resizes even when the buffer is already big enough: ResizeQuantumMemory keeps the content, the entries past the old extent are reset as usual, and the larger buffer is never read past what is written"
+  },
+  {
+   "at": 21,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if ((proposed_extent <= 0.0) || (proposed_extent > (double) MAGICK_SIZE_MAX))",
+   "verdict": "equivalent",
+   "why": "differs only for a proposed extent of exactly 0, which offset+pad+4296+1 never is"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (extent <= *mvg_info->extent)",
+   "verdict": "equivalent",
+   "why": "when the extent already equals the buffer's, the mutant resizes it to the same size: the content and the zeroed tail are the same"
+  },
+  {
+   "at": 38,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=(ssize_t) *mvg_info->extent; i < (ssize_t) extent; i++)",
+   "verdict": "unresolved",
+   "why": "leaves the new entries past the old extent uninitialised (ResizeQuantumMemory does not zero them): later code writes them before use in the cases here, but an unset primitive or text pointer could be read, undefined"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "ConvertPathToPolygon",
