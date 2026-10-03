@@ -4291,6 +4291,11 @@ GAP_STEP_CASES += [
 # array, zero and negative stroke widths, and skewY (alone and after skewX)
 GAP_STEP_CASES += [("MVG keyword: %s" % draw, [["-size", "70x46", "xc:white", "-draw", draw, "out.miff"]], {})
                    for draw in ['pop graphic-context', 'push defs rectangle 5,5 20,20 pop defs fill red rectangle 25,5 40,20', 'fill none fill-opacity 0.5 stroke red stroke-width 3 rectangle 5,5 30,20', 'fill red fill-opacity 50% rectangle 5,5 30,20', 'stroke blue stroke-opacity 0.4 stroke-width 5 line 5,5 60,40', 'stroke blue stroke-width 4 stroke-dasharray 0 4 line 5,20 60,20', 'stroke blue stroke-width 4 stroke-dasharray 5 0 3 line 5,20 60,20', 'stroke blue stroke-width 0 line 5,5 30,30', 'stroke blue stroke-width -1 line 5,5 30,30', 'skewY 20 fill red rectangle 10,5 40,20', 'fill red skewX 15 skewY -10 rectangle 10,5 40,20']]
+# draw.c: RenderMVGContent's checks on degenerate primitives: zero corner radii, zero width and
+# height, zero ellipse radii, too few points for a polyline, polygon or bezier, a closed two-point
+# path, a circle of radius 0 and a zero-size stroked rectangle
+GAP_STEP_CASES += [("MVG degenerate: %s" % draw, [["-size", "70x46", "xc:white", "-draw", draw, "out.miff"]], {})
+                   for draw in ['fill red roundrectangle 5,5 40,30 0,0', 'fill red roundrectangle 5,5 5,30 3,3', 'fill red roundrectangle 5,5 40,5 3,3', 'fill red ellipse 30,20 0,10 0,360', 'fill red ellipse 30,20 10,0 0,360', 'fill red arc 5,5 40,30 0,90', 'fill red polyline 10,10', 'fill red polygon 5,5 30,30', 'fill red polygon 5,5 30,30 10,25', 'fill red bezier 5,5 30,30', 'fill red bezier 5,5 30,30 50,5', "fill red path 'M 10,10 L 30,30 Z'", 'fill red circle 30,20 30,20', 'stroke blue fill none rectangle 5,5 5,5']]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
