@@ -1522,6 +1522,126 @@
    "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
   },
   {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (point.x > bounds.x2)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (point.x > graphic_context[n]->bounds.x2)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (point.y > bounds.y2)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (point.y > graphic_context[n]->bounds.y2)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (point.x > bounds.x2)",
+   "verdict": "unresolved",
+   "why": "inverts a running bound of the primitive's points, which only feeds the estimate of how many points a rounded rectangle will need (the coordinates count before CheckPrimitiveExtent): a different estimate changes an allocation, not the drawing, unless it falls short of what TraceRoundRectangle writes, which is undefined"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (point.y > bounds.y2)",
+   "verdict": "unresolved",
+   "why": "inverts a running bound of the primitive's points, which only feeds the estimate of how many points a rounded rectangle will need (the coordinates count before CheckPrimitiveExtent): a different estimate changes an allocation, not the drawing, unless it falls short of what TraceRoundRectangle writes, which is undefined"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (point.x < bounds.x1)",
+   "verdict": "unresolved",
+   "why": "inverts a running bound of the primitive's points, which only feeds the estimate of how many points a rounded rectangle will need (the coordinates count before CheckPrimitiveExtent): a different estimate changes an allocation, not the drawing, unless it falls short of what TraceRoundRectangle writes, which is undefined"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (point.y < bounds.y1)",
+   "verdict": "unresolved",
+   "why": "inverts a running bound of the primitive's points, which only feeds the estimate of how many points a rounded rectangle will need (the coordinates count before CheckPrimitiveExtent): a different estimate changes an allocation, not the drawing, unless it falls short of what TraceRoundRectangle writes, which is undefined"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (point.x < bounds.x1)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (point.x < graphic_context[n]->bounds.x1)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (point.y < bounds.y1)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (point.y < graphic_context[n]->bounds.y1)",
+   "verdict": "equivalent",
+   "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
    "at": 40,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "StopInfoCompare",
