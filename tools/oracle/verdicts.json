@@ -2518,8 +2518,8 @@
    "mutator": "cxx_add_to_sub",
    "nth": 0,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "equivalent",
+   "why": "asks for extent-1 instead of extent+1: SetStringInfoLength still allocates the length plus MagickPathExtent, so the extent bytes lcms writes always fit, and the text is the same"
   },
   {
    "at": 31,
@@ -2528,8 +2528,8 @@
    "mutator": "cxx_add_to_sub",
    "nth": 1,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "equivalent",
+   "why": "asks for extent-1 instead of extent+1: SetStringInfoLength still allocates the length plus MagickPathExtent, so the extent bytes lcms writes always fit, and the text is the same"
   },
   {
    "at": 31,
@@ -2538,8 +2538,8 @@
    "mutator": "cxx_add_to_sub",
    "nth": 2,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "equivalent",
+   "why": "asks for extent-1 instead of extent+1: SetStringInfoLength still allocates the length plus MagickPathExtent, so the extent bytes lcms writes always fit, and the text is the same"
   },
   {
    "at": 31,
@@ -2548,8 +2548,8 @@
    "mutator": "cxx_add_to_sub",
    "nth": 3,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "equivalent",
+   "why": "asks for extent-1 instead of extent+1: SetStringInfoLength still allocates the length plus MagickPathExtent, so the extent bytes lcms writes always fit, and the text is the same"
   },
   {
    "at": 33,
