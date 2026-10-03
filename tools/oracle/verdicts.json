@@ -1952,6 +1952,16 @@
    "why": "blob exemption follows image_info->file, a FILE* only an API caller supplies; the command line never sets it"
   },
   {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireNextImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyBlob(GetNextImageInList(image));",
+   "verdict": "unobservable",
+   "why": "releases the fresh blob of the new next image before it is given its own (it was just created, unopened): without it that blob leaks"
+  },
+  {
    "at": 29,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "ClipImagePath",
@@ -1960,6 +1970,56 @@
    "src": "if (clip_mask->storage_class == PseudoClass)",
    "verdict": "equivalent",
    "why": "sends a DirectClass clip mask through SetImageStorageClass(DirectClass), which leaves it as it is, and keeps a PseudoClass one PseudoClass; the mask is only read as gray values afterwards, the same either way"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "DestroyImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImageArtifacts(image);",
+   "verdict": "unobservable",
+   "why": "releases the destroyed image's artifacts: without it they leak, nothing a case sees"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "DestroyImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImagePixels(image);",
+   "verdict": "unobservable",
+   "why": "releases the image's pixel cache as it is destroyed: without it the cache leaks until the process exits, nothing a case sees"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "DestroyImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImageProfiles(image);",
+   "verdict": "unobservable",
+   "why": "releases the destroyed image's profiles: without it they leak, nothing a case sees"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "DestroyImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImageProperties(image);",
+   "verdict": "unobservable",
+   "why": "releases the destroyed image's properties: without it they leak, nothing a case sees"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "DestroyImageInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImageOptions(image_info);",
+   "verdict": "unobservable",
+   "why": "releases the destroyed image_info's options: without it they leak, nothing a case sees"
   },
   {
    "at": 15,
@@ -2090,6 +2150,16 @@
    "src": "(void) CopyMagickString(p,pattern,(size_t) (MagickPathExtent-",
    "verdict": "equivalent",
    "why": "only enlarges the size CopyMagickString is given: the pattern was checked to fit the room left just before, so the same bytes are copied"
+  },
+  {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "ReferenceImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "image->reference_count++;",
+   "verdict": "unobservable",
+   "why": "counting references down instead of up only changes when the image is freed: DestroyImage then never reaches zero and the image leaks; no reference is dropped early, since the count was 1 and goes to 0, then below"
   },
   {
    "at": 10,
