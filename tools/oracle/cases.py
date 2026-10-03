@@ -4037,6 +4037,10 @@ GAP_STEP_CASES += [
     ("a glob with a subimage", [["{C}/rose.miff", "{C}/granite.miff", "b1.miff"], ["{C}/rose.miff", "b2.miff"],
                                 ["b*.miff[0]", "-append", "out.miff"]], {}),
 ]
+# utility.c: AppendImageFormat's branch for a compressed name (.gz and the like), which keeps
+# the compression suffix last: a raw RGB file interlaced by partition, one file per channel
+GAP_STEP_CASES += [("rgb by partition to a .gz name",
+                    [["{C}/rose.miff", "-depth", "8", "-interlace", "partition", "out.rgb.gz"]], {})]
 # geometry.c: ParseMetaGeometry's area form with a shrink-only flag; ParseAffineGeometry's
 # determinant (a matrix that inverts, and one that does not); IsSceneGeometry at the limits of a
 # 64-bit scene number
