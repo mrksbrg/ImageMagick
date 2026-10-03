@@ -5021,3 +5021,6 @@ GAP_STEP_CASES += [("-copy %s %s%s" % (geometry, offset, " under -monitor" if mo
 GAP_STEP_CASES += [("a PNG named %s, read" % name,
                     [["{C}/rose.miff", "-resize", "8x6", "png:" + name], read + [name, "-format", "%m %w %h\\n", "info:"]], {})
                    for name, read in (("x.edit", []), ("a.show", []), ("x.rgb", []), ("x.gray", ["-size", "8x6"]))]
+# annotate.c: RenderFreetype takes the vertical resolution from -density's second value
+GAP_STEP_CASES += [("label at -density 72x144", [["-font", "{C}/Generic.ttf", "-density", "72x144", "-pointsize", "20",
+                                                  "label:Hi", "out.miff"]], {})]
