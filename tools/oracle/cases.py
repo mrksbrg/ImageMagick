@@ -4266,6 +4266,17 @@ GAP_STEP_CASES += [("MVG translucent image primitive %d" % i, [argv[:-1] + ["out
 # the polygon's extent) on a polygon and a point, and a pattern stroke
 GAP_STEP_CASES += [("polygon primitive %d" % i, [spec["argv"][:-1] + ["out.miff"]], spec["files"])
                    for i, spec in enumerate([{'files': {}, 'argv': ['-size', '40x30', 'xc:white', '-fill', 'red', '-draw', 'polyline 10,10', '-depth', '8', 'rgb:-']}, {'files': {}, 'argv': ['-size', '40x30', 'xc:white', '-tile', '{C}/granite.miff', '-draw', 'polygon 5,3 35,8 20,27', '-depth', '8', 'rgb:-']}, {'files': {}, 'argv': ['-size', '40x30', 'xc:white', '-tile', '{C}/granite.miff', '-draw', 'polyline 12,9', '-depth', '8', 'rgb:-']}, {'files': {'m.mvg': 'push defs\n push pattern p 0,0 6,6\n  fill blue rectangle 0,0 2,2\n  fill yellow rectangle 3,3 5,5\n pop pattern\npop defs\nfill none stroke url(#p) stroke-width 4 polygon 5,3 35,8 20,27\n'}, 'argv': ['-size', '40x30', 'xc:white', '-draw', '@m.mvg', '-depth', '8', 'rgb:-']}])]
+# draw.c: TraceStrokePolygon's joins on a thick stroke with sharp and blunt turns both ways and
+# horizontal and vertical runs: miter (limits 1, 4, 10), round (several arc segments) and bevel,
+# open and closed, and round joins with round caps
+_STROKE_PTS = "10,70 40,15 52,70 80,20 100,20 100,55 70,62"
+GAP_STEP_CASES += [("stroke joins: %s" % draw, [["-size", "110x80", "xc:white", "-draw", draw, "out.miff"]], {})
+                   for draw in (["fill none stroke blue stroke-width 12 stroke-linejoin %s stroke-miterlimit %s polyline %s"
+                                 % (join, limit, _STROKE_PTS) for join in ("miter", "round", "bevel") for limit in ("1", "4", "10")]
+                                + ["fill none stroke blue stroke-width 12 stroke-linejoin %s polygon %s" % (join, _STROKE_PTS)
+                                   for join in ("miter", "round", "bevel")]
+                                + ["fill none stroke blue stroke-width 9 stroke-linejoin round stroke-linecap round "
+                                   "polyline 10,40 60,40 60,10 20,70"])]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
