@@ -4134,10 +4134,9 @@ _MVG_MASK = ('push graphic-context\n  push mask "m1"\n    fill white\n    circle
 GAP_STEP_CASES += [
     ("round line caps on a line", [["-size", "70x46", "xc:white", "-draw",
                                     "stroke blue stroke-width 7 stroke-linecap round line 10,10 60,30", "out.miff"]], {}),
+    # round caps on a polyline fail, filled or not: the command ends in a non-conforming
+    # primitive error and writes nothing (a line, above, draws them)
     ("round line caps on an open polyline", [["-size", "70x46", "xc:white", "-draw",
-        "stroke blue stroke-width 5 stroke-linecap round polyline 5,40 20,5 35,40 50,5", "out.miff"]], {}),
-    # with fill none the round caps fail: the command ends in a non-conforming primitive error
-    ("round line caps on an open polyline, no fill", [["-size", "70x46", "xc:white", "-draw",
         "fill none stroke blue stroke-width 5 stroke-linecap round polyline 5,40 20,5 35,40 50,5", "out.miff"]], {}),
     ("an MVG composite mask", [["{C}/rose.miff", "-draw", "@m.mvg", "out.miff"]], {"m.mvg": _MVG_MASK}),
     ("an MVG composite mask, its red channel", [["{C}/rose.miff", "-draw", "@m.mvg", "-format",
