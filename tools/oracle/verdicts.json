@@ -18621,6 +18621,26 @@
    "why": "only changes the user time, which the oracle masks in every output"
   },
   {
+   "at": 0,
+   "file": "MagickCore/timer.c",
+   "function": "GetUserTime",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "StopTimer(time_info);",
+   "verdict": "unobservable",
+   "why": "the timer is not stopped before its total is read or reset: only the user and elapsed time figures change, which vary from run to run anyway and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/timer.c",
+   "function": "ResetTimer",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "StopTimer(time_info);",
+   "verdict": "unobservable",
+   "why": "the timer is not stopped before its total is read or reset: only the user and elapsed time figures change, which vary from run to run anyway and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
    "at": 24,
    "file": "MagickCore/timer.c",
    "function": "StopTimer",
