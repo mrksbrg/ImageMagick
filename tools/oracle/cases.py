@@ -4213,6 +4213,19 @@ GAP_COMMANDS += [
 # image.c: SetImageInfo turning adjoin off for a format that holds one frame: two images to a
 # JPEG name become out-0.jpg and out-1.jpg
 GAP_STEP_CASES += [("two images to a single-frame format", [["{C}/rose.miff", "{C}/rose.miff", "out.jpg"]], {})]
+# layer.c: OptimizeLayerFrames where a frame clears pixels outside the previous frame's change, so
+# a plain background disposal fails and its area must grow to cover them: cleared areas to the
+# right and above, left and below, left and above, right and below, and inside, under each of
+# optimize-frame, optimize-plus (which may add frames) and optimize
+def _clear_outside(square, hole):
+    (x0, y0, x1, y1), (hx, hy, hw, hh) = square, hole
+    return ("-size 40x40 xc:red -alpha set ( +clone -fill blue -draw 'rectangle %d,%d %d,%d' ) "
+            "( +clone ( -size %dx%d xc:none ) -geometry +%d+%d -compose Copy -composite ) " % (x0, y0, x1, y1, hw, hh, hx, hy))
+GAP_COMMANDS += [_clear_outside(square, hole) + "-layers " + op + " -format '%p %D %g %wx%h|' -write info:"
+                 for square, hole in (((20, 20, 30, 30), (25, 2, 11, 9)), ((20, 20, 30, 30), (2, 25, 9, 11)),
+                                      ((20, 20, 30, 30), (2, 2, 9, 9)), ((5, 5, 15, 15), (25, 25, 11, 11)),
+                                      ((10, 10, 30, 30), (12, 12, 6, 6)))
+                 for op in ("optimize-frame", "optimize-plus", "optimize")]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
