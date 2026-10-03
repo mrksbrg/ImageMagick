@@ -1522,6 +1522,66 @@
    "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
   },
   {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "GetDrawValue(token,&next_token)+0.5));",
+   "verdict": "unobservable",
+   "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "GetDrawValue(token,&next_token)+0.5));",
+   "verdict": "unobservable",
+   "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((image->page.width == 0) || (image->page.height == 0))",
+   "verdict": "unobservable",
+   "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
+  },
+  {
+   "at": 52,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((image->page.width == 0) || (image->page.height == 0))",
+   "verdict": "unobservable",
+   "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
+  },
+  {
+   "at": 32,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (*draw_info->macro_expansion >= MacroExpansionLimit)",
+   "verdict": "unresolved",
+   "why": "only changes how macro expansions are counted against MacroExpansionLimit (262144): the difference shows only once that many expansions have happened, which no case does"
+  },
+  {
+   "at": 17,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (number_stops > 0)",
+   "verdict": "unobservable",
+   "why": "only guards releasing the stops: inverted, it leaks them or frees NULL (harmless), nothing a case sees"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "RenderMVGContent",
@@ -1560,6 +1620,16 @@
    "src": "if (point.y > graphic_context[n]->bounds.y2)",
    "verdict": "equivalent",
    "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 17,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (number_stops > 0)",
+   "verdict": "unobservable",
+   "why": "only guards releasing the stops: inverted, it leaks them or frees NULL (harmless), nothing a case sees"
   },
   {
    "at": 12,
@@ -1640,6 +1710,36 @@
    "src": "if (point.y < graphic_context[n]->bounds.y1)",
    "verdict": "equivalent",
    "why": "a running minimum or maximum of the points: the mutant (<= for <, >= for >) differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (draw_info->macro_expansion != (size_t *) NULL)",
+   "verdict": "unresolved",
+   "why": "only changes how macro expansions are counted against MacroExpansionLimit (262144): the difference shows only once that many expansions have happened, which no case does"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "GetDrawValue(token,&next_token)-0.5));",
+   "verdict": "unobservable",
+   "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
+  },
+  {
+   "at": 36,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "ceil(GetDrawValue(token,&next_token)-0.5));",
+   "verdict": "unobservable",
+   "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
   },
   {
    "at": 40,
