@@ -12596,6 +12596,46 @@
    "why": "run by hand on the Mull build over magick stream of four two-frame sequences (frames growing, shrinking, gaining alpha, changing colorspace): no difference; each frame may get a fresh stream cache"
   },
   {
+   "at": 21,
+   "file": "MagickCore/string.c",
+   "function": "ConfigureFileToStringInfo",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "the result of close_utf8 is assigned to file and never read; the function returns right after"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/string.c",
+   "function": "ConfigureFileToStringInfo",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "the result of close_utf8 is assigned to file and never read; the function returns right after"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/string.c",
+   "function": "ConfigureFileToStringInfo",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "the result of close_utf8 is assigned to file and never read; the function returns right after"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/string.c",
+   "function": "ConfigureFileToStringInfo",
+   "mutator": "cxx_sub_to_add",
+   "nth": 3,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "the result of close_utf8 is assigned to file and never read; the function returns right after"
+  },
+  {
    "at": 38,
    "file": "MagickCore/thread.c",
    "function": "SetMagickThreadValue",
@@ -13569,6 +13609,106 @@
    "src": "width=(size_t) ((ssize_t) width-(geometry.x < 0 ? -1 : 1)*geometry.x);",
    "verdict": "equivalent",
    "why": "the two arms of the ternary give the same value at the boundary (0 times the sign, or 0 either way), so the computed size or offset is unchanged"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelBlue(splice_image,GetPixelBlue(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetPixelBlue(splice_image,GetPixelBlue(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "SetPixelBlue(splice_image,GetPixelBlue(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelGreen(splice_image,GetPixelGreen(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetPixelGreen(splice_image,GetPixelGreen(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "SetPixelGreen(splice_image,GetPixelGreen(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelRed(splice_image,GetPixelRed(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetPixelRed(splice_image,GetPixelRed(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "SetPixelRed(splice_image,GetPixelRed(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/transform.c",
+   "function": "SpliceImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "SetPixelRed(splice_image,GetPixelRed(image,p),q);",
+   "verdict": "equivalent",
+   "why": "the loop over the image's channels just above has copied red, green and blue already (the splice image is a clone, so it has them too); the explicit SetPixelRed/Green/Blue repeat it"
   },
   {
    "at": 23,
