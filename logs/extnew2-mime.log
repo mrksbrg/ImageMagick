@@ -1,0 +1,32 @@
+mutate: 98 mutants in MagickCore/mime\.c$, 11 functions
+mutate: baseline over 868 cases in 0s
+  mutants: 25/98 (0s)
+  mutants: 50/98 (0s)
+  mutants: 75/98 (0s)
+  mutants: 98/98 (52s)
+
+mutate: 98 mutants, 52s
+  killed 0, survived 4 (0 capped), no coverage 94, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetMimeInfo                           47      0        0     47
+  LoadMimeCache                         22      0        0     22
+  GetMimeList                           12      0        0     12
+  DestroyMimeElement                     5      0        0      5
+  MagickToMime                           3      0        0      3
+  MimeComponentTerminus                  3      0        3      0
+  IsMimeCacheInstantiated                2      0        0      2
+  GetMimeInfoList                        1      0        0      1
+  GetMimeDescription                     1      0        0      1
+  GetMimeType                            1      0        0      1
+  MimeComponentGenesis                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  mime.c:1054:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+    x  mime.c:1100:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+       mime.c:1101:5 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+    x  mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew2-mime.json
