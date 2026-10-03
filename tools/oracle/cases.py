@@ -3996,6 +3996,64 @@ GAP_STEP_CASES += [
      [["-size", "40x16", "xc:white", "-font", "f.bdf", "-pointsize", "8", "-annotate", "+2+10", "AW", "out.miff"]],
      {"f.bdf": _BDF_FONT}),
 ]
+# property.c: Get8BIMProperty and the clip path tracers (TraceSVGClippath, TracePSClippath),
+# through a hand-made 8BIM profile whose every byte is below 0x80 (it lives in a text case file):
+# a plain resource, an unnamed path with stray, unknown and nested records, closed and open
+# subpaths and real curves, two named paths (an even and an odd name length), and a path whose
+# knots give each of TracePSClippath's forms (c, v, l, y, and closes by v and by y). Another
+# profile starts with an empty path; ids 1999 and 2999, whose bytes are not 7-bit, come from
+# ImageMagick's own 8BIMTEXT format.
+def _8bim_long(v):
+    return v.to_bytes(4, "big")
+def _8bim_record(selector, body=b""):
+    return selector.to_bytes(2, "big") + body.ljust(24, b"\0")
+def _8bim_knot(selector, points):
+    return _8bim_record(selector, b"".join(_8bim_long(y) + _8bim_long(x) for y, x in points))
+def _8bim_subpath(selector, knots):
+    return _8bim_record(selector, knots.to_bytes(2, "big"))
+def _8bim_resource(rid, name, data):
+    name = bytes([len(name)]) + name
+    return b"8BIM" + rid.to_bytes(2, "big") + name + b"\0" * (len(name) % 2) + _8bim_long(len(data)) + data
+def _8bim_pt(y, x):  # 8.24 fixed point, every byte below 0x80
+    return (y << 16, x << 16)
+_8BIM_PATH1 = (_8bim_record(6) + _8bim_record(8) + _8bim_knot(1, [_8bim_pt(0x10, 0x10)] * 3)
+               + _8bim_subpath(0, 3)
+               + _8bim_knot(1, [(0x201000, 0x180000), (0x200000, 0x200000), (0x203000, 0x280000)])
+               + _8bim_knot(2, [(0x600000, 0x304000), (0x602000, 0x380000), (0x604000, 0x400000)])
+               + _8bim_knot(1, [_8bim_pt(0x40, 0x70)] * 3)
+               + _8bim_subpath(3, 2) + _8bim_knot(4, [_8bim_pt(0x08, 0x08), _8bim_pt(0x0c, 0x0c), _8bim_pt(0x10, 0x10)])
+               + _8bim_subpath(0, 5) + _8bim_knot(5, [_8bim_pt(0x50, 0x08), _8bim_pt(0x54, 0x0c), _8bim_pt(0x58, 0x10)])
+               + _8bim_record(9))
+_8BIM_PATH2 = _8bim_subpath(0, 2) + _8bim_knot(1, [_8bim_pt(0x30, 0x30)] * 3) + _8bim_knot(2, [_8bim_pt(0x50, 0x50)] * 3)
+def _8bim_curves():
+    A, A2, B0, B = _8bim_pt(0x10, 0x10), _8bim_pt(0x14, 0x18), _8bim_pt(0x20, 0x30), _8bim_pt(0x24, 0x34)
+    C0, C, D, D2, E = _8bim_pt(0x40, 0x20), _8bim_pt(0x44, 0x24), _8bim_pt(0x50, 0x50), _8bim_pt(0x54, 0x58), _8bim_pt(0x60, 0x40)
+    return (_8bim_subpath(0, 5) + b"".join(_8bim_knot(2, k) for k in ([A, A, A2], [B0, B, B], [C0, C, C], [D, D, D2], [E, E, E]))
+            + _8bim_subpath(0, 2) + _8bim_knot(2, [A2, A, A]) + _8bim_knot(2, [B, B, B])
+            + _8bim_subpath(0, 2) + _8bim_knot(2, [C, C, C]) + _8bim_knot(2, [D, D, D2]))
+_8BIM_RICH = (_8bim_resource(0x0430, b"", b"plain resource text") + _8bim_resource(0x0800, b"", _8BIM_PATH1)
+              + _8bim_resource(0x0801, b"Path A", _8BIM_PATH2) + _8bim_resource(0x0802, b"Odd", _8BIM_PATH2)
+              + _8bim_resource(0x0803, b"Curves", _8bim_curves())).decode("ascii")
+_8BIM_EMPTY_FIRST = (_8bim_resource(0x0800, b"", b"") + _8bim_resource(0x0801, b"", _8BIM_PATH2)).decode("ascii")
+def _8bim_format(fmt, profile=None):
+    return ("8BIM properties %r" % fmt, [["{C}/rose.miff", "-profile", "clip.8bim", "-format", fmt, "info:"]],
+            {"clip.8bim": profile or _8BIM_RICH})
+GAP_STEP_CASES += [
+    _8bim_format("%[8BIM:1999,2998:#1]"), _8bim_format("%[8BIM:1999,2998:#1\nPS]"),
+    _8bim_format("%[8BIM:1999,2998:#2]|%[8BIM:1999,2998:#3\nPS]"),
+    _8bim_format("%[8BIM:1999,2998:Path A\nPS]|%[8BIM:1999,2998:Odd]"),
+    _8bim_format("[%[8BIM:1000,1100]][%[8BIM:1999,2998:Nope]][%[8BIM:3000,3001]][%[8BIM:1999,2998:#9]]"),
+    _8bim_format("%[8BIM:1999,2998:Curves\nPS]"), _8bim_format("%[8BIM:1999,2998:Curves]"),
+    _8bim_format("[%[8BIM:1999,2998:#1]][%[8BIM:1999,2998:#2\nPS]]", _8BIM_EMPTY_FIRST),
+    ("8BIM clip path, -clip", [["{C}/rose.miff", "-profile", "clip.8bim", "-clip", "-fill", "red", "-colorize", "50", "out.miff"]],
+     {"clip.8bim": _8BIM_RICH}),
+    ("8BIM clip path, -clip-path by name", [["{C}/rose.miff", "-profile", "clip.8bim", "-clip-path", "Path A", "-fill", "red",
+                                              "-colorize", "50", "out.miff"]], {"clip.8bim": _8BIM_RICH}),
+    ("8BIM clip path, verbose", [["{C}/rose.miff", "-profile", "clip.8bim", "-verbose", "info:"]], {"clip.8bim": _8BIM_RICH}),
+    ("8BIM resources 1999 and 2999 from 8BIMTEXT",
+     [["{C}/rose.miff", "-profile", "8bimtext:t.txt", "-format", "[%[8BIM:1999,1999]] [%[8BIM:2999,2999]]\\n", "info:"]],
+     {"t.txt": '8BIM#1999="low edge"\n8BIM#2999="high edge"\n'}),
+]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
