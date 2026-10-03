@@ -4240,6 +4240,17 @@ GAP_STEP_CASES += [("MVG opacity: %s" % draw, [["-size", "70x46", "xc:white", "-
                    for draw in ['fill red opacity 0.5 rectangle 5,5 30,30', 'fill red opacity 50% circle 40,20 40,5', 'fill none stroke blue stroke-width 3 opacity 0.4 rectangle 5,5 60,40', 'compliance SVG fill red opacity 0.5 rectangle 5,5 30,30']]
 GAP_STEP_CASES += [("MVG opacity inside a clip path", [["-size", "70x46", "xc:white", "-draw", "@m.mvg", "out.miff"]],
                     {"m.mvg": 'push defs\n push clip-path "c"\n  push graphic-context\n   opacity 0.3\n   rectangle 10,10 50,35\n  pop graphic-context\n pop clip-path\npop defs\npush graphic-context\n clip-path url(#c)\n fill red rectangle 0,0 69,45\npop graphic-context\n'})]
+# draw.c: a macro used twice (the expansion counter), transforms stacked on a rotation (the affine
+# composition), and stop colours outside any gradient, one (no gradient) and two (a gradient over
+# the whole image)
+GAP_STEP_CASES += [
+    ("an MVG macro used twice", [["-size", "70x46", "xc:white", "-draw", "@m.mvg", "out.miff"]],
+     {"m.mvg": 'push graphic-context "dot"\n  fill red circle 10,10 10,5\npop graphic-context\nuse dot\n'
+               'translate 30,10\nuse dot\n'}),
+] + [("MVG: %s" % draw, [["-size", "70x46", "xc:white", "-draw", draw, "out.miff"]], {})
+     for draw in ("rotate 20 rotate 15 fill red rectangle 10,10 40,30",
+                  "skewX 10 rotate 15 fill red rectangle 10,10 40,30",
+                  "stop-color red 0", "stop-color red 0 stop-color blue 1")]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
