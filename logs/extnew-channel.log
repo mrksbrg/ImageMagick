@@ -1,0 +1,49 @@
+mutate: 37 mutants in MagickCore/channel\.c$, 8 functions
+mutate: baseline over 1168 cases in 0s
+  mutants: 25/37 (4s)
+  mutants: 37/37 (147s)
+
+mutate: 37 mutants, 147s
+  killed 9, survived 26 (0 capped), no coverage 2, errors 0
+  mutation score on reached code: 25.7%   overall: 24.3%
+
+  function                           total killed survived no-cov
+  CombineImages                         16      6       10      0
+  ChannelFxImage                         6      0        6      0
+  SeparateImage                          5      0        5      0
+  FlattenPixelInfo                       4      3        1      0
+  GetImageAlphaChannel                   2      0        0      2
+  SetImageAlphaChannel                   2      0        2      0
+  ChannelImage                           1      0        1      0
+  SeparateImages                         1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       channel.c:181:9 cxx_remove_void_call       SetPixelChannel(destination_image,destination_channel,pixel,q);
+    x  channel.c:234:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       channel.c:273:46 cxx_ne_to_eq               if (GetNextImageInList(source_image) != (Image *) NULL)
+    x  channel.c:355:19 cxx_lt_to_le               if (i < 0)
+    x  channel.c:438:17 cxx_post_inc_to_post_dec   channels++;
+    x  channel.c:446:64 cxx_add_to_sub             destination_channel=(PixelChannel) (destination_channel+1);
+    x  channel.c:452:61 cxx_sub_to_add             status=SetImageProgress(source_image,ChannelFxImageTag,p-expression,
+    x  channel.c:526:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:541:32 cxx_le_to_lt               if (fabs(image->gamma-1.0) <= MagickEpsilon)
+    x  channel.c:553:27 cxx_gt_to_ge               if (number_channels > 4)
+    x  channel.c:562:27 cxx_gt_to_ge               if (number_channels > 2)
+    x  channel.c:570:27 cxx_gt_to_ge               if (number_channels > 5)
+    x  channel.c:615:17 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(combine_image); i++)
+    x  channel.c:631:19 cxx_lt_to_le               for (x=0; x < (ssize_t) combine_image->columns; x++)
+    x  channel.c:645:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       channel.c:653:17 cxx_post_inc_to_post_dec   progress++;
+       channel.c:656:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  channel.c:756:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:808:7 cxx_remove_void_call       SetPixelChannel(separate_image,GrayPixelChannel,(Quantum) 0,q);
+    x  channel.c:823:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       channel.c:831:17 cxx_post_inc_to_post_dec   progress++;
+       channel.c:833:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  channel.c:881:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       channel.c:979:42 cxx_mul_to_div             composite[i]=ClampToQuantum(gamma*MagickOver_((double) q[i],beta,
+    x  channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew-channel.json
