@@ -115,9 +115,10 @@ learned from a wrong result or a failed run in the sweeps below:
   in Homebrew's shared fontconfig cache. Both are fixed in `cases.py` (e46ed05f4), and the
   old ids are listed in `tools/oracle/unstable-killers.json`, which `gate.py` reads: a
   kill credited to one of them counts as a survivor, in old reports and in reports from
-  a machine still on the old catalogue. They had been credited with 66 kills in the
-  Mac's reports (52 mutants: 17 in `type.c`, 16 in `property.c`, 5 in `resize.c`) and 19
-  in ERDC's; those mutants are rerun uncapped against the fixed catalogue.
+  a machine still on the old catalogue. They had been credited with 66 kills of 52
+  mutants (17 in `type.c`, 16 in `property.c`, 5 in `resize.c`, the rest one or two a
+  file), and ERDC's run on the old catalogue credited them with 14 more, all of mutants
+  among those 52; the 52 are rerun uncapped against the fixed catalogue.
 - **Runs are resumable and independent.** Results are appended as they
   arrive; each run has its own baseline directory (two concurrent runs once
   deleted each other's); `mutation-<name>.started` lists every mutant as it
