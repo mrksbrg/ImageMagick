@@ -4311,6 +4311,10 @@ GAP_STEP_CASES += [
      {_POLICY: _policy('<policy domain="path" rights="none" pattern="*/sub/*"/>',
                        '<policy domain="path" rights="read|write" pattern="sub/./ok.miff"/>'), "sub/keep.txt": "x"}),
 ]
+# policy.c: LoadPolicyCache's DOCTYPE skipping: a quoted string holding "]>" and a ghost policy
+# (denying GIF) that must stay inside the string, and a stray "]" before the real GIF deny
+GAP_STEP_CASES += [("policy.xml with %s" % label, [["{C}/rose.miff", "x.gif"], ["{C}/rose.miff", "y.bmp"]], {_POLICY: xml})
+                   for label, xml in (("a quoted doctype string", '<?xml version="1.0"?>\n<!DOCTYPE policymap [\n  <!ENTITY e "x]> <policy domain=\'coder\' rights=\'none\' pattern=\'GIF\'/> y">\n]>\n<policymap>\n  <policy domain="coder" rights="none" pattern="BMP"/>\n</policymap>\n'), ("a stray doctype bracket", '<?xml version="1.0"?>\n<!DOCTYPE policymap SYSTEM "t" ]>\n<policymap>\n  <policy domain="coder" rights="none" pattern="GIF"/>\n</policymap>\n'))]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
