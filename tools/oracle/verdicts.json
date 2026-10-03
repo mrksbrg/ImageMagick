@@ -372,6 +372,46 @@
    "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
   },
   {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "ConvertPathToPolygon",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (point.x > bounds.x2)",
+   "verdict": "equivalent",
+   "why": "a running maximum of the edge's points: >= differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "ConvertPathToPolygon",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (point.x < bounds.x1)",
+   "verdict": "equivalent",
+   "why": "a running minimum of the edge's points: <= differs only when a point equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 36,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "ConvertPathToPolygon",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetLogEventMask() & DrawEvent) != 0)",
+   "verdict": "unobservable",
+   "why": "decides whether to log the polygon under -debug Draw: logs are not compared"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "ConvertPathToPolygon",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LogPolygonInfo(polygon_info);",
+   "verdict": "unobservable",
+   "why": "logs the polygon under -debug Draw: logs are not compared"
+  },
+  {
    "at": 9,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "DestroyEdge",
