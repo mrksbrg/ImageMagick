@@ -2382,6 +2382,46 @@
    "why": "releases the destroyed image_info's options: without it they leak, nothing a case sees"
   },
   {
+   "at": 45,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "GetImageMask",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((image->channels & CompositeMaskChannel) == 0)",
+   "verdict": "unresolved",
+   "why": "in the ReadPixelMask or CompositePixelMask branch: the command line reaches GetImageMask only for the write mask (the clip: coder), so these branches are API-only (a C driver is an open owner decision)"
+  },
+  {
+   "at": 40,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "GetImageMask",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((image->channels & ReadMaskChannel) == 0)",
+   "verdict": "unresolved",
+   "why": "in the ReadPixelMask or CompositePixelMask branch: the command line reaches GetImageMask only for the write mask (the clip: coder), so these branches are API-only (a C driver is an open owner decision)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "GetImageMask",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelGray(mask_image,GetPixelCompositeMask(image,p),q);",
+   "verdict": "unresolved",
+   "why": "in the ReadPixelMask or CompositePixelMask branch: the command line reaches GetImageMask only for the write mask (the clip: coder), so these branches are API-only (a C driver is an open owner decision)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "GetImageMask",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelGray(mask_image,GetPixelReadMask(image,p),q);",
+   "verdict": "unresolved",
+   "why": "in the ReadPixelMask or CompositePixelMask branch: the command line reaches GetImageMask only for the write mask (the clip: coder), so these branches are API-only (a C driver is an open owner decision)"
+  },
+  {
    "at": 15,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "InterpretImageFilename",
@@ -2550,6 +2590,26 @@
    "src": "if (first < image_info->scene)",
    "verdict": "equivalent",
    "why": "the scene range bounds: the mutant differs only when the two values are equal, and then swaps or assigns the same value"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SetImageRegionMask",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelCompositeMask(image,pixel,q);",
+   "verdict": "unresolved",
+   "why": "in the ReadPixelMask or CompositePixelMask branch: the command line reaches SetImageRegionMask only for the write mask (-region), so these branches are API-only (a C driver is an open owner decision)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SetImageRegionMask",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelReadMask(image,pixel,q);",
+   "verdict": "unresolved",
+   "why": "in the ReadPixelMask or CompositePixelMask branch: the command line reaches SetImageRegionMask only for the write mask (-region), so these branches are API-only (a C driver is an open owner decision)"
   },
   {
    "at": 18,
