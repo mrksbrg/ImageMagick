@@ -3918,6 +3918,16 @@ GAP_COMMANDS += ["{C}/rose.miff -bordercolor white -border 5 %s-define trim:minS
 GAP_STEP_CASES += [("-extent %s on a JPEG with an 8BIM clip path" % geo,
                     [[_UHDR_JPG, "-extent", geo, "-write", "8bim:clip.8bim", "out.miff"]], {})
                    for geo in ("300x300", "120x80+10+10")]
+# transform.c: that JPEG holds no clip path, so ExtentImage's Update8BIMClipPath had nothing to
+# move. A hand-made 8BIM resource does: id 2048 and one subpath of three knots, every byte
+# below 0x80 so that it survives the case's text file
+_CLIP_8BIM = ("8BIM\x08\x00\x00\x00\x00\x00\x00\x68" + "\x00\x00\x00\x03" + "\x00" * 22
+              + "".join("\x00\x01" + ("\x00" + chr(y) + "\x00\x00\x00" + chr(x) + "\x00\x00") * 3
+                        for y, x in ((0x20, 0x20), (0x60, 0x30), (0x40, 0x70))))
+GAP_STEP_CASES += [("-extent %s of an image with a clip path" % geo,
+                    [["{C}/rose.miff", "-profile", "clip.8bim", "-extent", geo,
+                      "-write", "8bim:out.8bim", "out.miff"]], {"clip.8bim": _CLIP_8BIM})
+                   for geo in ("120x80+10+10", "60x40-5-5")]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
