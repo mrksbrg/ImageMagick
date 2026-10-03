@@ -5582,6 +5582,26 @@
    "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
   },
   {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "CacheComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&cache_semaphore);",
+   "verdict": "equivalent",
+   "why": "cache_semaphore always exists here: MagickCoreGenesis calls CacheComponentGenesis, which creates it, before MagickCoreTerminus (this function's only caller) can run"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "CacheComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&cache_semaphore);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
    "at": 10,
    "file": "MagickCore/cache.c",
    "function": "ClonePixelCacheOnDisk",
@@ -5622,6 +5642,176 @@
    "why": "every caller discards ClosePixelCacheOnDisk's result ((void) at all nine call sites)"
   },
   {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "DestroyPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishPixelCachePixels(cache_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "DestroyPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "DestroyPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&cache_info->semaphore);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "DestroyPixelCacheNexus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishCacheNexusPixels(nexus_info[i]);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "GetImagePixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&clone_image.semaphore);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "GetImagePixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "MagickDelay(cpu_throttle);",
+   "verdict": "unobservable",
+   "why": "the CPU throttle's delay (only when the load average makes cpu_throttle non-zero): timing only, the pixels are the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "OpenPixelCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "RelinquishPixelCachePixels(&source_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
    "at": 21,
    "file": "MagickCore/cache.c",
    "function": "OpenPixelCacheOnDisk",
@@ -5660,6 +5850,36 @@
    "src": "if (posix_fallocate(cache_info->file,offset+1,extent-offset) != 0)",
    "verdict": "unobservable",
    "why": "changes only how much disk is reserved (posix_fallocate called when not synchronizing, or over a longer range); the cache's contents and the output are the same, on a file system that supports fallocate"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheNexusPixels",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishCacheNexusPixels(nexus_info);",
+   "verdict": "unobservable",
+   "why": "a free not done: the semaphore, the cache's pixels or a nexus buffer (freed here before a larger one is acquired) is left allocated; a leak, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheNexusPixels",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "PrefetchPixelCacheNexusPixels(nexus_info,mode);",
+   "verdict": "equivalent",
+   "why": "a cache prefetch hint (MagickCachePrefetch): it moves no data and changes no result, only timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheNexusPixels",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "PrefetchPixelCacheNexusPixels(nexus_info,mode);",
+   "verdict": "equivalent",
+   "why": "a cache prefetch hint (MagickCachePrefetch): it moves no data and changes no result, only timing"
   },
   {
    "at": 12,
@@ -6120,6 +6340,26 @@
    "src": "if (p->path != (char *) NULL)",
    "verdict": "unobservable",
    "why": "runs only when ImageMagick shuts down, after the output is written"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/color.c",
+   "function": "ColorComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&color_semaphore);",
+   "verdict": "equivalent",
+   "why": "color_semaphore always exists here: MagickCoreGenesis calls ColorComponentGenesis, which creates it, before MagickCoreTerminus (this function's only caller) can run"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/color.c",
+   "function": "ColorComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&color_semaphore);",
+   "verdict": "unobservable",
+   "why": "the colour semaphore is not released at shutdown: a leak as the process exits"
   },
   {
    "at": 23,
@@ -17464,6 +17704,36 @@
    "src": "if (cache_info->semaphore != (SemaphoreInfo *) NULL)",
    "verdict": "unobservable",
    "why": "only changes whether the stream's buffers are freed: a leak; the command line never shares a stream cache, so nothing in use is freed (no case crashed)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishStreamPixels(cache_info);",
+   "verdict": "unobservable",
+   "why": "DestroyPixelStream does not free the stream's pixels or semaphores: a leak when the stream is done"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "DestroyPixelStream does not free the stream's pixels or semaphores: a leak when the stream is done"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/stream.c",
+   "function": "DestroyPixelStream",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&cache_info->semaphore);",
+   "verdict": "unobservable",
+   "why": "DestroyPixelStream does not free the stream's pixels or semaphores: a leak when the stream is done"
   },
   {
    "at": 21,
