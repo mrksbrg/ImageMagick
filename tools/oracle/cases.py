@@ -5030,3 +5030,7 @@ GAP_STEP_CASES += [("write mask smaller than the image, %s" % colour,
                     [["-size", "60x40", "xc:" + colour, "m.miff"],
                      ["{C}/rose.miff", "-write-mask", "m.miff", "-negate", "+write-mask", "out.miff"]], {})
                    for colour in ("white", "black")]
+# image.c: ResetImagePage with a relative offset (-repage ...!), which adds to the page offset
+GAP_STEP_CASES += [("-repage %s after 100x80+10+5" % g,
+                    [["{C}/rose.miff", "-repage", "100x80+10+5", "-repage", g, "-format", "%g\\n", "info:"]], {})
+                   for g in ("+3+2!", "+3!")]
