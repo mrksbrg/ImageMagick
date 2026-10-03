@@ -4067,7 +4067,8 @@ _TINY_JPEG = base64.b64decode("/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SE
 def _exif_block(byte_order="<"):
     BYTE, ASCII, SHORT, LONG, RATIONAL, SBYTE, UNDEF, SSHORT, SLONG, SRATIONAL, FLOAT, DOUBLE = range(1, 13)
     ifds = {
-        "0": [(0x010F, ASCII, 8, b"CaseCam\0"), (0x0112, SHORT, 1, struct.pack(byte_order + "H", 6)),
+        "0": [(0x0100, SHORT, 1, struct.pack(byte_order + "H", 70)), (0x0101, SHORT, 1, struct.pack(byte_order + "H", 46)),
+              (0x010F, ASCII, 8, b"CaseCam\0"), (0x0112, SHORT, 1, struct.pack(byte_order + "H", 6)),
               (0x011A, RATIONAL, 1, struct.pack(byte_order + "II", 300, 1)), (0x0128, SHORT, 1, struct.pack(byte_order + "H", 2)),
               (0x8769, LONG, 1, "exif"), (0x8825, LONG, 1, "gps")],
         "exif": [(0x9000, UNDEF, 4, b"0230"), (0x9286, UNDEF, 16, b"ASCII\0\0\0hello!!"),
@@ -4337,7 +4338,8 @@ GAP_STEP_CASES += [("EXIF synced on write, %s, %s" % ("little-endian" if order =
                     [[_exif_jpeg_uri(order)] + opts + [out], [out, "-format", "%[exif:*]\\n", "info:"]], {})
                    for order in ("<", ">")
                    for opts, out in ((["-density", "150x75", "-units", "PixelsPerInch", "-orient", "RightTop"], "out.jpg"),
-                                     (["-density", "50x60", "-units", "PixelsPerCentimeter", "-orient", "BottomLeft"], "out.miff"))]
+                                     (["-density", "50x60", "-units", "PixelsPerCentimeter", "-orient", "BottomLeft"], "out.miff"),
+                                     (["-resize", "50%"], "out.jpg"))]
 GAP_STEP_CASES += [
     ("8BIM clip path through -extent to PSD", [["{C}/rose.miff", "-profile", "clip.8bim", "-extent", "90x60-5-5", "-density", "100",
                                                 "out.psd"], ["out.psd", "-format", "%[8BIM:1999,2998:#1]\\n", "info:"]],
