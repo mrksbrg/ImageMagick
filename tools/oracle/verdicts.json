@@ -3512,6 +3512,56 @@
    "why": "resets the cache's iterator, which GetPolicyInfo then never uses: it walks the list from GetHeadElementInLinkedList through p->next"
   },
   {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (source_info.profile != (cmsHPROFILE) NULL)",
+   "verdict": "unobservable",
+   "why": "guards cmsCloseProfile on the source profile: flipped, an open profile is not closed (a leak) and NULL is passed instead, which cmsCloseProfile returns from without effect"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (target_info.profile != (cmsHPROFILE) NULL)",
+   "verdict": "unobservable",
+   "why": "the same guard for the target profile: a leak, or cmsCloseProfile(NULL), which does nothing"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (target_info.profile != (cmsHPROFILE) NULL)",
+   "verdict": "unobservable",
+   "why": "the same guard for the target profile after the transform: a leak, or cmsCloseProfile(NULL), which does nothing"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "cmsDeleteContext(cms_context);",
+   "verdict": "unobservable",
+   "why": "releases the Little CMS context on the path where the source profile cannot be opened; skipping it only leaks the context"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "cmsDeleteContext(cms_context);",
+   "verdict": "unobservable",
+   "why": "releases the Little CMS context after the transform; skipping it only leaks the context"
+  },
+  {
    "at": 0,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "CloneImageProperties",
