@@ -4152,6 +4152,14 @@ GAP_STEP_CASES += [
     ("a gradient with stops sharing an offset", [["-size", "101x10", "xc:white", "-draw", "@g.mvg", "out.miff"]],
      {"g.mvg": _MVG_DUP_STOPS}),
 ]
+# property.c: GetXMPProperty, listed after a lookup has parsed the profile: simple elements, an
+# exif: name (renamed xmp:), names ending in :* (skipped, with and without children, and the
+# two-character ":*"), a two-character name, nested elements, two rdf:Description blocks; and
+# the same profile behind junk, which the scan for "<x" skips
+_XMP_PROPS = '<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>\n<x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">\n<rdf:Description rdf:about=""><xmp:Rating>5</xmp:Rating><ab>two</ab><exif:FNumber>28/10</exif:FNumber><c:*>star</c:*><q:>colon</q:><:*>tiny</:*><g:*><h>kid</h></g:*><:*><i>kid2</i></:*>\n<dc:subject><rdf:Bag><rdf:li>one</rdf:li><rdf:li>two</rdf:li></rdf:Bag></dc:subject>\n<dc:title><rdf:Alt><rdf:li xml:lang="x-default">A title</rdf:li></rdf:Alt></dc:title><d:*><rdf:li>skip</rdf:li></d:*><e><f>child</f></e></rdf:Description>\n<rdf:Description rdf:about=""><tiff:Make>CaseCam</tiff:Make></rdf:Description>\n</rdf:RDF></x:xmpmeta>\n<?xpacket end="w"?>\n'
+GAP_STEP_CASES += [("XMP properties listed%s" % label,
+                    [["{C}/rose.miff", "-profile", "p.xmp", "-set", "comment", "%[xmp:Rating]", "-verbose", "info:"]],
+                    {"p.xmp": prefix + _XMP_PROPS}) for label, prefix in (("", ""), (", behind junk", "JUNK x Kx <y "))]
 GAP_COMMANDS += ["-size 60x40 -define gradient:angle=30 -define gradient:radii=25,10 radial-gradient:red-blue",
                  "-size 60x40 -define gradient:angle=120 -define gradient:radii=8,20 -define gradient:center=20,15 "
                  "radial-gradient:yellow-navy"]
