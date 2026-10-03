@@ -4197,6 +4197,19 @@ GAP_STEP_CASES += [("-set delay %s, then %s" % (first, second),
                     [["{C}/rose.miff", "-set", "delay", first, "-set", "delay", second, "-format", "%T\\n", "info:"]], {})
                    for first, second in (("50", "10>"), ("5", "30x20<"), ("40", "30x20<"), ("20", "20x30<"),
                                          ("29", "30x7<"))]
+# image.c: SmushImages under gravity, with images of different sizes (each image's gravity offset
+# and the larger width or height), and margins that step from row to row (the gap is their minimum)
+GAP_COMMANDS += [
+    "-gravity center ( -size 30x20 xc:none -fill red -draw 'polygon 0,0 24,10 0,19' ) ( -size 30x40 xc:none -fill blue -draw 'polygon 29,0 5,20 29,39' ) +smush 0",
+    "-gravity center ( -size 30x40 xc:none -fill blue -draw 'polygon 29,0 5,20 29,39' ) ( -size 30x20 xc:none -fill red -draw 'polygon 0,0 24,10 0,19' ) +smush 1",
+    "-gravity south ( -size 30x20 xc:none -fill red -draw 'polygon 0,0 24,10 0,19' ) ( -size 30x40 xc:none -fill blue -draw 'polygon 29,0 5,20 29,39' ) +smush 0",
+    "-gravity center ( -size 20x30 xc:none -fill red -draw 'polygon 0,0 10,24 19,0' ) ( -size 40x30 xc:none -fill blue -draw 'polygon 0,29 20,5 39,29' ) -smush 0",
+    "-gravity center ( -size 40x30 xc:none -fill blue -draw 'polygon 0,29 20,5 39,29' ) ( -size 20x30 xc:none -fill red -draw 'polygon 0,0 10,24 19,0' ) -smush 1",
+    "( -size 20x20 xc:none -fill red -draw 'rectangle 0,0 18,9' -draw 'rectangle 0,10 15,19' ) ( -size 20x20 xc:none -fill blue -draw 'rectangle 1,0 19,9' -draw 'rectangle 4,10 19,19' ) +smush 0",
+    "( -size 20x20 xc:none -fill red -draw 'rectangle 0,0 15,9' -draw 'rectangle 0,10 18,19' ) ( -size 20x20 xc:none -fill blue -draw 'rectangle 4,0 19,9' -draw 'rectangle 1,10 19,19' ) +smush 0",
+    "( -size 20x20 xc:none -fill red -draw 'rectangle 0,0 9,18' -draw 'rectangle 10,0 19,15' ) ( -size 20x20 xc:none -fill blue -draw 'rectangle 0,1 9,19' -draw 'rectangle 10,4 19,19' ) -smush 0",
+    "( -size 20x20 xc:none -fill red -draw 'rectangle 0,0 9,15' -draw 'rectangle 10,0 19,18' ) ( -size 20x20 xc:none -fill blue -draw 'rectangle 0,4 9,19' -draw 'rectangle 10,1 19,19' ) -smush 0",
+]
 GAP_COMMANDS += ["-size 60x40 -define gradient:angle=30 -define gradient:radii=25,10 radial-gradient:red-blue",
                  "-size 60x40 -define gradient:angle=120 -define gradient:radii=8,20 -define gradient:center=20,15 "
                  "radial-gradient:yellow-navy"]
