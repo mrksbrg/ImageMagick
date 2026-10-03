@@ -2329,6 +2329,36 @@ numbers are not 7-bit), IPTC records, an XMP profile, a BDF bitmap font (FreeTyp
 monochrome path), and MSL comments with `&#10;` for a newline that the line-by-line MSL reader
 would otherwise turn into a space.
 
+## Statement deletion on the Windows files (Windows, 2026-10-03, evening)
+
+The owner's decision of 2026-10-02 (`HARNESS-SPLIT.md`) makes statement deletion
+(`cxx_remove_void_call`) part of every file's operators. ERDC ran it for 32 of the 34
+regular Windows files (reports `mutation-erdc-sdl-<file>.json` on `erdc-results`, measured at
+3bce668de, which includes the night's case families); fetched here with
+`tools/oracle/erdc/fetch-results.sh`. gem.c and prepress.c had no report: Windows builds them
+itself (`mull-sdl-gp`, `cxx_default cxx_remove_void_call`, script `~/sdl-gp.sh`, reports
+`mutation-sdl-<file>.json`).
+
+Adjusted, with statement deletion counted (Windows, all reports merged, the trial's excluded):
+quantum-import 66% (868 → 1398 mutants), quantum-export 72%, fx 89%, cache 80%, blob 71%,
+stream 85%, matrix 71%, resample 77%, token 84%, option 75%, xml-tree 76%, color 82%,
+distort 87%, composite 84%, feature 87%, morphology 86%, colorspace 90%, quantize 89%,
+histogram 90%, montage 83%, signature 81%, quantum 90%, resource 89%, timer 75%, registry
+84%, magick 60%, monitor 86%, exception 81%; the API-only files pixel 48%, splay-tree 55%,
+linked-list 42%, cache-view 37%.
+
+**Trust, per function, now counting statement deletion:** montage.c, feature.c and
+composite.c stay trusted. Below the bar again until their new survivors are read:
+colorspace.c (`GetImageColorspaceType`, one mutant, no case), registry.c
+(`RemoveImageRegistry`), monitor.c (`MonitorComponentTerminus`), quantize.c
+(`SetGrayscaleImage`, `QuantizeImages`, `PruneLevel`, `RemapImage`, `RemapImages`),
+signature.c (`FinalizeSignature` and two one-mutant helpers), histogram.c
+(`GetNumberColors`, `DestroyColorCube`, `DestroyHCubeInfo`), morphology.c
+(`ScaleKernelInfo`, `UnityAddKernelInfo`, `ZeroKernelNans`), exception.c (eight functions,
+most of them handler setters and genesis/terminus code), magick.c (seven: terminus, signal
+handler, genesis, list functions), timer.c (six). Their survivors are read next, closest to
+the bar first.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
