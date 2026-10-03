@@ -4818,3 +4818,63 @@ GAP_STEP_CASES += [("@file list with a %s-quoted name holding a space" % kind,
                      ["@list.txt", "-append", "-format", "%w %h %n\\n", "info:"]],
                     {"list.txt": "%sa b.miff%s c.miff\n" % (q, q)})
                    for kind, q in (("double", '"'), ("single", "'"))]
+# profile.c: ProfileImage's colour transforms. The corpus holds no ICC profile, so the cases
+# build their own: a matrix/TRC display profile (RGB) or a kTRC one (GRAY), ICC v2, with every
+# byte below 0x80 so it fits a text case file (fixed-point values, tag offsets and the size are
+# chosen for it). Little CMS accepts them; two RGB profiles that differ only in gamma make a
+# real transform, two of the same length that differ only in their description make
+# CompareStringInfo (string.c) tell them apart
+def _icc_s15(v):
+    b = struct.pack(">i", int(round(v * 65536)))
+    assert all(x < 0x80 for x in b), v
+    return b
+def _icc(name, gamma256=0x0100, gray=False):
+    xyz = lambda x, y, z: b"XYZ " + b"\0" * 4 + _icc_s15(x) + _icc_s15(y) + _icc_s15(z)
+    curv = b"curv" + b"\0" * 4 + struct.pack(">IH", 1, gamma256) + b"\0\0"
+    text = name.encode() + b"\0"
+    desc = b"desc" + b"\0" * 4 + struct.pack(">I", len(text)) + text + b"\0" * 78
+    tags = [(b"desc", desc), (b"wtpt", xyz(1.0, 1.0, 1.0))]
+    if gray:
+        tags += [(b"kTRC", curv)]
+    else:
+        tags += [(b"rXYZ", xyz(0.4375, 0.25, 0.0625)), (b"gXYZ", xyz(0.3125, 0.4375, 0.125)),
+                 (b"bXYZ", xyz(0.25, 0.3125, 0.4375)), (b"rTRC", curv), (b"gTRC", curv), (b"bTRC", curv)]
+    off = 128 + 4 + 12 * len(tags); table = b""; data = b""
+    for sig, body in tags:  # every offset, length and the size with each byte below 0x80
+        body += b"\0" * (-len(body) % 4)
+        while ((off + len(data)) & 0xff) + len(body) > 0x7f or (off + len(data)) & 0x8080:
+            data += b"\0" * 4
+        table += sig + struct.pack(">II", off + len(data), len(body)); data += body
+    while (off + len(data)) & 0x8080:
+        data += b"\0" * 4
+    header = (struct.pack(">I", off + len(data)) + b"lcms" + bytes([2, 0x10, 0, 0]) + b"mntr"
+              + (b"GRAY" if gray else b"RGB ") + b"XYZ " + b"\0" * 12 + b"acspAPPL").ljust(128, b"\0")
+    out = header + struct.pack(">I", len(tags)) + table + data
+    assert all(x < 0x80 for x in out)
+    return out.decode("ascii")
+_ICC = {"a.icc": _icc("tiny"), "b.icc": _icc("tiny", 0x0200), "z.icc": _icc("tinz"),
+        "g.icc": _icc("gray", 0x0200, gray=True), "h.icc": _icc("grey", gray=True)}
+def _icc_case(label, args, src="rose", out=("out.miff",)):
+    return ("ICC " + label, [["{C}/%s.miff" % src] + args + list(out)], _ICC)
+GAP_STEP_CASES += [
+    _icc_case("assigned", ["-profile", "a.icc"]),
+    _icc_case("RGB to RGB", ["-profile", "a.icc", "-profile", "b.icc"]),
+    _icc_case("the same profile twice", ["-profile", "a.icc", "-profile", "a.icc"]),
+    _icc_case("same length, other description", ["-profile", "a.icc", "-profile", "z.icc"]),
+    _icc_case("black-point compensation", ["-profile", "a.icc", "-black-point-compensation", "-profile", "b.icc"]),
+    _icc_case("RGB to RGB with alpha", ["-profile", "a.icc", "-profile", "b.icc"], "rose_alpha"),
+    _icc_case("RGB to RGB at depth 16", ["-depth", "16", "-profile", "a.icc", "-profile", "b.icc"]),
+    _icc_case("RGB to RGB in floating point", ["-define", "quantum:format=floating-point", "-depth", "32",
+                                               "-profile", "a.icc", "-profile", "b.icc"]),
+    _icc_case("removed, then another", ["-profile", "a.icc", "+profile", "icc", "-profile", "b.icc"]),
+    _icc_case("CMYK image, RGB profiles", ["-colorspace", "cmyk", "-profile", "a.icc", "-profile", "b.icc"]),
+    _icc_case("RGB there and back", ["-profile", "a.icc", "-profile", "b.icc", "-profile", "a.icc"]),
+    _icc_case("RGB to gray", ["-profile", "a.icc", "-profile", "g.icc"]),
+    _icc_case("RGB to gray with alpha", ["-profile", "a.icc", "-profile", "g.icc"], "rose_alpha"),
+    _icc_case("gray to RGB", ["-colorspace", "gray", "-profile", "g.icc", "-profile", "a.icc"]),
+    _icc_case("gray to RGB with alpha", ["-colorspace", "gray", "-profile", "g.icc", "-profile", "a.icc"], "rose_alpha"),
+    _icc_case("gray to gray", ["-colorspace", "gray", "-profile", "g.icc", "-profile", "h.icc"]),
+    _icc_case("RGB to gray, type", ["-profile", "a.icc", "-profile", "g.icc", "-format", "%[type]\\n"], out=("info:",)),
+    _icc_case("RGB to gray with alpha, type", ["-profile", "a.icc", "-profile", "g.icc", "-format", "%[type]\\n"],
+              "rose_alpha", out=("info:",)),
+]
