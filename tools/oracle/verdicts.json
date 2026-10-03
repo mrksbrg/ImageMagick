@@ -2,6 +2,76 @@
  "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
  "verdicts": [
   {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "return((size_t) (p-source));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "return((size_t) (p-source-1));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "return((size_t) (p-source-1));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 4,
+   "src": "return((size_t) (p-source-1));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
+   "at": 25,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "return((size_t) (p-source-1));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
+   "at": 25,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "return((size_t) (p-source-1));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
+   "at": 25,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CopyMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 4,
+   "src": "return((size_t) (p-source-1));",
+   "verdict": "unobservable",
+   "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "PrintStringInfo",
