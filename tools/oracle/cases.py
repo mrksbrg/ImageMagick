@@ -4809,3 +4809,12 @@ SVG = """<svg xmlns="http://www.w3.org/2000/svg" width="120" height="90" viewBox
   <text x="15" y="50" font-size="12" fill="black">svg text</text>
 </svg>
 """
+# string.c: StringToArgv counts a quoted argument as one, through the closing quote, before it
+# splits the text; an @file list (ExpandFilenames) whose file name holds a space is split by it,
+# in double and in single quotes
+GAP_STEP_CASES += [("@file list with a %s-quoted name holding a space" % kind,
+                    [["{C}/rose.miff", "-resize", "20x20", "a b.miff"],
+                     ["{C}/rose.miff", "-resize", "10x10", "c.miff"],
+                     ["@list.txt", "-append", "-format", "%w %h %n\\n", "info:"]],
+                    {"list.txt": "%sa b.miff%s c.miff\n" % (q, q)})
+                   for kind, q in (("double", '"'), ("single", "'"))]
