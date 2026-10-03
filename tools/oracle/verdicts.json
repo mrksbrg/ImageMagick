@@ -8722,6 +8722,16 @@
    "why": "changes only the returned status, which every CLI caller discards ((void) in operation.c and mogrify.c); visible through the API only"
   },
   {
+   "at": 0,
+   "file": "MagickCore/exception.c",
+   "function": "ExceptionComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&exception_semaphore);",
+   "verdict": "equivalent",
+   "why": "exception_semaphore always exists here: MagickCoreGenesis calls ExceptionComponentGenesis, which creates it, before MagickCoreTerminus (this function's only caller) can run"
+  },
+  {
    "at": 25,
    "file": "MagickCore/exception.c",
    "function": "InheritException",
@@ -10623,6 +10633,296 @@
    "src": "if (offset > max_offset)",
    "verdict": "equivalent",
    "why": "a running maximum: >= replaces it with an equal value"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&magick_semaphore);",
+   "verdict": "equivalent",
+   "why": "magick_semaphore always exists here: MagickCoreGenesis calls MagickComponentGenesis, which creates it, before MagickCoreTerminus (this function's only caller) can run"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreGenesis",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitializeMagickMutex();",
+   "verdict": "unobservable",
+   "why": "the magick mutex at genesis: initialisation of a zero-initialised static pthread mutex and a lock/unlock with no other thread running; nothing the command line shows depends on it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreGenesis",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "the magick mutex at genesis: initialisation of a zero-initialised static pthread mutex and a lock/unlock with no other thread running; nothing the command line shows depends on it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreGenesis",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "the magick mutex at genesis: initialisation of a zero-initialised static pthread mutex and a lock/unlock with no other thread running; nothing the command line shows depends on it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitializeMagickMutex();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "MonitorComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RegistryComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "AnnotateComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "MimeComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "TypeComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ColorComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "MagicComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DelegateComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "MagickComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnregisterStaticModules();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CoderComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CacheComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "PolicyComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ConfigureComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RandomComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LocaleComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LogComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ExceptionComponentTerminus();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "MagickCoreTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "UnlockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "shutdown clean-up as the process exits: these component terminus calls and the mutex initialise/lock/unlock only free memory and destroy semaphores, which the OS reclaims, and none writes a file (ResourceComponentTerminus, which removes temporary files, is not among them: its deletion is killed); the command-line run is single-threaded here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "UnregisterMagickInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LockSemaphoreInfo(magick_semaphore);",
+   "verdict": "unobservable",
+   "why": "UnregisterMagickInfo runs only at shutdown (UnregisterStaticModules, from MagickCoreTerminus): without the lock, the iterator reset or the unlock, an entry may stay registered or a semaphore stay locked as the process exits; nothing reads them"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "UnregisterMagickInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetSplayTreeIterator(magick_list);",
+   "verdict": "unobservable",
+   "why": "UnregisterMagickInfo runs only at shutdown (UnregisterStaticModules, from MagickCoreTerminus): without the lock, the iterator reset or the unlock, an entry may stay registered or a semaphore stay locked as the process exits; nothing reads them"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/magick.c",
+   "function": "UnregisterMagickInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(magick_semaphore);",
+   "verdict": "unobservable",
+   "why": "UnregisterMagickInfo runs only at shutdown (UnregisterStaticModules, from MagickCoreTerminus): without the lock, the iterator reset or the unlock, an entry may stay registered or a semaphore stay locked as the process exits; nothing reads them"
   },
   {
    "at": 6,
