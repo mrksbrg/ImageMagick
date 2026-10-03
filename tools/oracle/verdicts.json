@@ -2,6 +2,26 @@
  "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
  "verdicts": [
   {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "PrintStringInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < string_info->length; i++)",
+   "verdict": "unresolved",
+   "why": "the mutant also tests p[length]; AcquireStringInfo and BlobToStringInfo zero the padding, so that byte stops the loop at i == length as the original does. Only a profile shortened in place by SetStringInfoLength keeps its old bytes there, and no case was found that prints one"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "PrintStringInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((p[i] < 32) && (isspace((int)p[i]) == 0))",
+   "verdict": "equivalent",
+   "why": "p[i] <= 32 differs from p[i] < 32 only at 32, a space, which the isspace() test that follows excludes either way"
+  },
+  {
    "at": 59,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/utility.c",
    "function": "ExpandFilename",
