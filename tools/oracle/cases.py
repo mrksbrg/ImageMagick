@@ -4878,3 +4878,13 @@ GAP_STEP_CASES += [
     _icc_case("RGB to gray with alpha, type", ["-profile", "a.icc", "-profile", "g.icc", "-format", "%[type]\\n"],
               "rose_alpha", out=("info:",)),
 ]
+# ... a profile that is not ICC at all (Little CMS's error reaches stderr through the handler
+# ProfileImage installs), on an image without and with a profile, and a transform under
+# -monitor (its progress lines)
+_ICC_BAD = dict(_ICC, **{"x.icc": "A" * 200})
+GAP_STEP_CASES += [
+    ("ICC not a profile", [["{C}/rose.miff", "-profile", "x.icc", "out.miff"]], _ICC_BAD),
+    ("ICC not a profile, after one", [["{C}/rose.miff", "-profile", "a.icc", "-profile", "x.icc", "out.miff"]], _ICC_BAD),
+    _icc_case("RGB to RGB under -monitor", ["-profile", "a.icc", "-monitor", "-profile", "b.icc"]),
+    _icc_case("RGB to gray under -monitor", ["-profile", "a.icc", "-monitor", "-profile", "g.icc"]),
+]
