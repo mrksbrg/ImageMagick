@@ -2273,6 +2273,15 @@ adding `config/sRGB.icm` and `config/cmyk.icm` to `DECODE_FILES`, which would op
 `ProfileImage` and the ICC transforms (it changes the frozen corpus on every machine, so it is
 not done unasked).
 
+**The third is no longer needed (afternoon, 2026-10-03).** The cases now build their own ICC
+profiles, ICC v2 with every byte below 0x80 so they fit text case files: matrix/TRC RGB and
+kTRC gray display profiles, and lut16 profiles (two grid points, table values at most 0x7F7F)
+for CMYK, Lab and XYZ. Little CMS accepts all five, so `ProfileImage` runs real transforms
+between every pair of colour spaces it handles. Hand-run against mull-macx, they kill 42 of its
+55 open mutants and `CompareStringInfo`'s status test; five more are leaks (verdicts). The
+remaining eight are the low-precision path, which an HDRI build never takes, and the
+`exif:ColorSpace` checks for an image whose EXIF says sRGB.
+
 Two earlier verdicts were wrong: `GetMultilineTypeMetrics` and `RenderFreetype` mutants called
 "a font metric that no output shows" are killed by a multi-line label (its width is the widest
 line's) and by a label with descenders (`label:Ajg_`); the five verdicts are removed.
