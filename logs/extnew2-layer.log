@@ -1,0 +1,100 @@
+mutate: 125 mutants in MagickCore/layer\.c$, 14 functions
+mutate: baseline over 52 cases in 0s
+  mutants: 25/125 (1s)
+  mutants: 50/125 (2s)
+  mutants: 75/125 (3s)
+  mutants: 100/125 (3s)
+  mutants: 125/125 (4s)
+
+mutate: 125 mutants, 4s
+  killed 41, survived 68 (0 capped), no coverage 16, errors 0
+  mutation score on reached code: 37.6%   overall: 32.8%
+
+  function                           total killed survived no-cov
+  OptimizeLayerFrames                   34     16       18      0
+  MergeImageLayers                      23      8       15      0
+  CoalesceImages                        14      5        9      0
+  DisposeImages                         14      0        0     14
+  CompareImagesBounds                   12      0       12      0
+  OptimizeImageTransparency             12      6        6      0
+  IsBoundsCleared                        5      0        5      0
+  ComparePixels                          3      3        0      0
+  CompositeCanvas                        2      2        0      0
+  CompositeLayers                        2      0        2      0
+  ClearBounds                            1      1        0      0
+  CompareImagesLayers                    1      0        1      0
+  RemoveDuplicateLayers                  1      0        0      1
+  RemoveZeroDelayLayers                  1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  layer.c:182:15 cxx_lt_to_le               for (y=0; y < (ssize_t) bounds->height; y++)
+    x  layer.c:184:50 cxx_add_to_sub             p=GetVirtualPixels(image1,bounds->x,bounds->y+y,bounds->width,1,exception);
+    x  layer.c:188:17 cxx_lt_to_le               for (x=0; x < (ssize_t) bounds->width; x++)
+    x  layer.c:190:36 cxx_ge_to_gt               if ((GetPixelAlpha(image1,p) >= (Quantum) (QuantumRange/2)) &&
+    x  layer.c:191:36 cxx_lt_to_le               (GetPixelAlpha(image2,q) < (Quantum) (QuantumRange/2)))
+    x  layer.c:251:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       layer.c:258:20 cxx_gt_to_ge               if (bounds.x > 0)
+       layer.c:258:20 cxx_gt_to_le               if (bounds.x > 0)
+       layer.c:264:20 cxx_gt_to_ge               if (bounds.y > 0)
+       layer.c:264:20 cxx_gt_to_le               if (bounds.y > 0)
+    x  layer.c:304:18 cxx_lt_to_le               if (bounds.x < 0)
+    x  layer.c:309:43 cxx_gt_to_ge               if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) coalesce_image->columns)
+    x  layer.c:311:18 cxx_lt_to_le               if (bounds.y < 0)
+    x  layer.c:316:44 cxx_gt_to_ge               if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) coalesce_image->rows)
+    x  layer.c:639:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  layer.c:642:3 cxx_remove_void_call       GetPixelInfo(alpha_image,&alpha_pixel);
+    x  layer.c:643:3 cxx_remove_void_call       GetPixelInfo(beta_image,&beta_pixel);
+    x  layer.c:644:15 cxx_lt_to_le               for (x=0; x < (ssize_t) alpha_image->columns; x++)
+    x  layer.c:650:17 cxx_lt_to_le               for (y=0; y < (ssize_t) alpha_image->rows; y++)
+    x  layer.c:674:40 cxx_sub_to_add             for (x=(ssize_t) alpha_image->columns-1; x >= 0; x--)
+    x  layer.c:674:46 cxx_ge_to_gt               for (x=(ssize_t) alpha_image->columns-1; x >= 0; x--)
+    x  layer.c:680:17 cxx_lt_to_le               for (y=0; y < (ssize_t) alpha_image->rows; y++)
+    x  layer.c:693:15 cxx_lt_to_le               for (y=0; y < (ssize_t) alpha_image->rows; y++)
+    x  layer.c:699:17 cxx_lt_to_le               for (x=0; x < (ssize_t) alpha_image->columns; x++)
+    x  layer.c:712:43 cxx_ge_to_gt               for (y=(ssize_t) alpha_image->rows-1; y >= 0; y--)
+    x  layer.c:718:17 cxx_lt_to_le               for (x=0; x < (ssize_t) alpha_image->columns; x++)
+    x  layer.c:796:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  layer.c:984:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  layer.c:1014:43 cxx_ne_to_eq               GetImageListLength(image),(add_frames != MagickFalse ? 2UL : 1UL)*
+    x  layer.c:1145:36 cxx_mul_to_div             dup_bounds.width*dup_bounds.height
+    x  layer.c:1147:20 cxx_lt_to_le               < bounds[i].width * bounds[i].height )
+    x  layer.c:1147:38 cxx_mul_to_div             < bounds[i].width * bounds[i].height )
+       layer.c:1166:28 cxx_ne_to_eq               if ( dup_image != (Image *) NULL)
+    x  layer.c:1172:9 cxx_remove_void_call       ClearBounds(bgnd_image,&bgnd_bounds,exception);
+    x  layer.c:1194:32 cxx_lt_to_le               if ( bgnd_bounds.x < 0 )
+    x  layer.c:1203:35 cxx_lt_to_le               if ( try_bounds.x < bgnd_bounds.x )
+    x  layer.c:1207:45 cxx_lt_to_le               if ( bgnd_bounds.width < try_bounds.width )
+    x  layer.c:1215:45 cxx_lt_to_le               if ( bgnd_bounds.width < try_bounds.width )
+    x  layer.c:1218:35 cxx_lt_to_le               if ( try_bounds.y < bgnd_bounds.y )
+    x  layer.c:1222:44 cxx_lt_to_le               if (bgnd_bounds.height < try_bounds.height)
+    x  layer.c:1230:45 cxx_lt_to_le               if ( bgnd_bounds.height < try_bounds.height )
+    x  layer.c:1275:34 cxx_mul_to_div             < bounds[i-1].width*bounds[i-1].height
+    x  layer.c:1282:29 cxx_sub_to_add             if ( disposals[i-1] == DupDispose )
+    x  layer.c:1298:25 cxx_ne_to_eq               if (bgnd_image != (Image *) NULL)
+    x  layer.c:1304:21 cxx_sub_to_add             disposals[i-1]=DupDispose;
+    x  layer.c:1515:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  layer.c:1560:22 cxx_lt_to_le               if (bounds.x < 0)
+    x  layer.c:1565:47 cxx_gt_to_ge               if ((bounds.x+(ssize_t) bounds.width) > (ssize_t) current_image->columns)
+    x  layer.c:1567:22 cxx_lt_to_le               if (bounds.y < 0)
+    x  layer.c:1572:48 cxx_gt_to_ge               if ((bounds.y+(ssize_t) bounds.height) > (ssize_t) current_image->rows)
+    x  layer.c:1574:9 cxx_remove_void_call       ClearBounds(current_image,&bounds,exception);
+    x  layer.c:1827:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  layer.c:1858:27 cxx_ne_to_eq               if ( source->next != (Image *) NULL )
+    x  layer.c:1976:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  layer.c:1993:20 cxx_gt_to_ge               if (page.x > next->page.x)
+    x  layer.c:1998:20 cxx_gt_to_ge               if (page.y > next->page.y)
+    x  layer.c:2003:29 cxx_lt_to_le               if ((ssize_t) width < (next->page.x+(ssize_t) next->columns-page.x))
+    x  layer.c:2005:30 cxx_lt_to_le               if ((ssize_t) height < (next->page.y+(ssize_t) next->rows-page.y))
+    x  layer.c:2028:29 cxx_lt_to_le               if ((ssize_t) width < (next->page.x+(ssize_t) next->columns))
+    x  layer.c:2030:30 cxx_lt_to_le               if ((ssize_t) height < (next->page.y+(ssize_t) next->rows))
+    x  layer.c:2044:23 cxx_lt_to_le               page.width=page.x < 0 ? width : (size_t) ((ssize_t) width+page.x);
+    x  layer.c:2044:62 cxx_add_to_sub             page.width=page.x < 0 ? width : (size_t) ((ssize_t) width+page.x);
+    x  layer.c:2046:24 cxx_lt_to_le               page.height=page.y < 0 ? height : (size_t) ((ssize_t) height+page.y);
+    x  layer.c:2046:65 cxx_add_to_sub             page.height=page.y < 0 ? height : (size_t) ((ssize_t) height+page.y);
+    x  layer.c:2053:27 cxx_lt_to_le               for (scene=0; scene < (ssize_t) number_images; scene++)
+    x  layer.c:2053:59 cxx_post_inc_to_post_dec   for (scene=0; scene < (ssize_t) number_images; scene++)
+    x  layer.c:2083:23 cxx_lt_to_le               for (scene=0; scene < (ssize_t) number_images; scene++)
+    x  layer.c:2083:55 cxx_post_inc_to_post_dec   for (scene=0; scene < (ssize_t) number_images; scene++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew2-layer.json
