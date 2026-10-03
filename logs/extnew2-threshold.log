@@ -1,0 +1,47 @@
+mutate: 106 mutants in MagickCore/threshold\.c$, 19 functions
+mutate: baseline over 2 cases in 0s
+  mutants: 25/106 (0s)
+  mutants: 50/106 (0s)
+  mutants: 75/106 (0s)
+  mutants: 100/106 (0s)
+  mutants: 106/106 (0s)
+
+mutate: 106 mutants, 0s
+  killed 0, survived 10 (0 capped), no coverage 96, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  TriangleThreshold                     13      0        0     13
+  RangeThresholdImage                   11      0        0     11
+  OrderedDitherImage                    10      0        0     10
+  AdaptiveThresholdImage                 8      0        0      8
+  KapurThreshold                         8      0        0      8
+  ColorThresholdImage                    7      0        0      7
+  ClampImage                             6      0        0      6
+  PerceptibleImage                       6      0        0      6
+  OTSUThreshold                          5      0        0      5
+  BilevelImage                           5      0        0      5
+  BlackThresholdImage                    5      0        5      0
+  RandomThresholdImage                   5      0        0      5
+  WhiteThresholdImage                    5      0        5      0
+  GetThresholdMapFile                    4      0        0      4
+  DestroyThresholdMap                    3      0        0      3
+  AutoThresholdImage                     2      0        0      2
+  GetThresholdMap                        1      0        0      1
+  ListThresholdMaps                      1      0        0      1
+  PerceptibleThreshold                   1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  threshold.c:955:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:963:3 cxx_remove_void_call       GetPixelInfo(image,&threshold);
+    x  threshold.c:1041:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:1049:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:1052:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  threshold.c:2546:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:2554:3 cxx_remove_void_call       GetPixelInfo(image,&threshold);
+    x  threshold.c:2632:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:2640:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:2642:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew2-threshold.json
