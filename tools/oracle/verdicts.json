@@ -72,6 +72,146 @@
    "why": "GetFillColor overwrites the whole of fill_color next: a copy of draw_info->fill, or GetOneVirtualPixelInfo, which itself starts with GetPixelInfo"
   },
   {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "file_xml,path,depth+1,exception);",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 53,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((char *) keyword,\"thread-support\") == 0)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 34,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 34,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (delegate_info->thread_support == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 16,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 39,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 55,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "function": "LoadDelegateCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPathComponent(filename,HeadPath,path);",
+   "verdict": "unresolved",
+   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+  },
+  {
    "at": 25,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "DrawBoundingRectangles",
