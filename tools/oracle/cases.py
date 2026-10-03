@@ -4951,3 +4951,22 @@ GAP_STEP_CASES += [
     _icc_lut_case("RGB to CMYK, type", ["a.icc", "c.icc"], out=("-format", "%[type]\\n", "info:")),
     _icc_lut_case("RGB to CMYK with alpha, type", ["a.icc", "c.icc"], "rose_alpha", out=("-format", "%[type]\\n", "info:")),
 ]
+# profile.c: an 8BIM block holding an IPTC record and an ICC profile (the hand-built one).
+# Reading it gives the image both profiles (GetProfilesFromResourceBlock); a new ICC profile,
+# or one removed, rewrites the 8BIM resource in place (WriteTo8BimProfile), padding an
+# odd-length profile to an even one
+def _8bim_with_icc(icc):
+    return (_8bim_resource(0x0404, b"", b"\x1c\x02\x78\x00\x05hello")
+            + _8bim_resource(0x040F, b"", icc)).decode("ascii")
+_ICC_ODD = _icc("tiny") + "\0"  # one byte past the declared size
+_ICC_8BIM = dict(_ICC, **{"x.8bim": _8bim_with_icc(_ICC["a.icc"].encode()),
+                          "o.8bim": _8bim_with_icc(_ICC_ODD.encode()), "o.icc": _ICC_ODD})
+GAP_STEP_CASES += [("8BIM with ICC: %s" % label, [["{C}/rose.miff", "-profile", load] + args], _ICC_8BIM)
+                   for label, load, args in (
+                       ("profiles listed", "x.8bim", ["-format", "%[profiles]|%[icc:description]\\n", "info:"]),
+                       ("converted", "x.8bim", ["-profile", "b.icc", "-write", "8bim:out.8bim", "out.miff"]),
+                       ("ICC removed", "x.8bim", ["+profile", "icc", "8bim:out.8bim"]),
+                       ("IPTC removed", "x.8bim", ["+profile", "iptc", "8bim:out.8bim"]),
+                       ("odd-length ICC, converted", "o.8bim", ["-profile", "b.icc", "8bim:out.8bim"]),
+                       ("odd-length ICC set", "x.8bim", ["-profile", "o.icc", "8bim:out.8bim"]),
+                       ("the same ICC set", "x.8bim", ["-profile", "a.icc", "8bim:out.8bim"]))]
