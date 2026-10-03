@@ -9193,6 +9193,66 @@
    "why": "the oracle builds without FFTW, so -fft never makes the magnitude and phase pair and -ift never ran on two images; two read images reach the check and the stub's warning"
   },
   {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "(void) DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "on an error path that returns NULL (the expression failed to translate), the RPN tables are not freed: a leak; the error is reported the same way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "(void) DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "on an error path that returns NULL (the expression failed to translate), the RPN tables are not freed: a leak; the error is reported the same way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "(void) DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "on an error path that returns NULL (the expression failed to translate), the RPN tables are not freed: a leak; the error is reported the same way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "(void) DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "on an error path that returns NULL (the expression failed to translate), the RPN tables are not freed: a leak; the error is reported the same way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "(void) DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "on an error path that returns NULL (the expression failed to translate), the RPN tables are not freed: a leak; the error is reported the same way"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "(void) DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "on an error path that returns NULL (the expression failed to translate), the RPN tables are not freed: a leak; the error is reported the same way"
+  },
+  {
    "at": 16,
    "file": "MagickCore/fx.c",
    "function": "AddElement",
@@ -9271,6 +9331,26 @@
    "src": "for (i = (ssize_t)GetImageListLength(pfx->image); i > 0; i--) {",
    "verdict": "unobservable",
    "why": "the loop does not run, so the cache views (and, on the second, the statistics) are not freed: a leak when the fx expression is done, nothing reads them again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/fx.c",
+   "function": "DestroyFxInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyFxRt (&pfx->fxrts[t]);",
+   "verdict": "unobservable",
+   "why": "DestroyFxInfo does not free the run-time tables or the RPN: a leak once the fx evaluation is done, nothing reads them again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/fx.c",
+   "function": "DestroyFxInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyRPN (pfx);",
+   "verdict": "unobservable",
+   "why": "DestroyFxInfo does not free the run-time tables or the RPN: a leak once the fx evaluation is done, nothing reads them again"
   },
   {
    "at": 9,
