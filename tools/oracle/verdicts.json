@@ -1972,6 +1972,46 @@
    "why": "sends a DirectClass clip mask through SetImageStorageClass(DirectClass), which leaves it as it is, and keeps a PseudoClass one PseudoClass; the mask is only read as gray values afterwards, the same either way"
   },
   {
+   "at": 21,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "CloneImageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->page != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "drops the page string from the cloned image_info; the command line sets it again where it is used (SetImageInfo re-parses a filename's [scenes], and -page and -texture are applied from the options): tried with -page before an image read and made, -texture under xc:none and -extent, and anim.miff[1-2], unchanged. Only an API caller could see it"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "CloneImageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->scenes != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "drops the scenes string from the cloned image_info; the command line sets it again where it is used (SetImageInfo re-parses a filename's [scenes], and -page and -texture are applied from the options): tried with -page before an image read and made, -texture under xc:none and -extent, and anim.miff[1-2], unchanged. Only an API caller could see it"
+  },
+  {
+   "at": 28,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "CloneImageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->server_name != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "drops the X server name from the cloned image_info, which only the X11 code reads; no case talks to an X server"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "CloneImageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->texture != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "drops the texture string from the cloned image_info; the command line sets it again where it is used (SetImageInfo re-parses a filename's [scenes], and -page and -texture are applied from the options): tried with -page before an image read and made, -texture under xc:none and -extent, and anim.miff[1-2], unchanged. Only an API caller could see it"
+  },
+  {
    "at": 0,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "DestroyImage",
