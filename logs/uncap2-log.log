@@ -1,0 +1,80 @@
+mutate: 54 mutants in MagickCore/log\.c$, 10 functions
+mutate: baseline over 12205 cases in 0s
+  mutants: 25/54 (1484s)
+  mutants: 50/54 (2691s)
+  mutants: 54/54 (2924s)
+
+mutate: 54 mutants, 2924s
+  killed 0, survived 54 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  LoadLogCache                          27      0       27      0
+  GetLogInfo                             8      0        8      0
+  DestroyLogElement                      4      0        4      0
+  LogComponentTerminus                   4      0        4      0
+  IsLogCacheInstantiated                 3      0        3      0
+  AcquireLogCache                        2      0        2      0
+  CheckEventLogging                      2      0        2      0
+  ParseLogHandlers                       2      0        2      0
+  GetLogEventMask                        1      0        1      0
+  LogComponentGenesis                    1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  log.c:327:5 cxx_remove_void_call       GetTimerInfo((TimerInfo *) &log_info->timer);
+    x  log.c:334:16 cxx_eq_to_ne               if (status == MagickFalse)
+    x  log.c:413:16 cxx_eq_to_ne               if (log_info == (const LogInfo *) NULL)
+    x  log.c:452:41 cxx_eq_to_ne               if (IsLogCacheInstantiated(exception) == MagickFalse)
+    x  log.c:460:13 cxx_eq_to_ne               if ((name == (const char *) NULL) || (LocaleCompare(name,"*") == 0))
+    x  log.c:462:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+       log.c:467:12 cxx_ne_to_eq               while (p != (ElementInfo *) NULL)
+       log.c:470:44 cxx_eq_to_ne               if (LocaleCompare(name,log_info->name) == 0)
+       log.c:474:9 cxx_eq_to_ne               if (p == (ElementInfo *) NULL)
+       log.c:477:5 cxx_remove_void_call       SetHeadElementInLinkedList(log_cache,p);
+       log.c:478:3 cxx_remove_void_call       UnlockSemaphoreInfo(log_semaphore);
+    x  log.c:725:36 cxx_ne_to_eq               if (IsLinkedListEmpty(log_cache) != MagickFalse)
+    x  log.c:733:24 cxx_ne_to_eq               event_logging=(p != (ElementInfo *) NULL) &&
+    x  log.c:743:25 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
+       log.c:744:9 cxx_remove_void_call       ActivateSemaphoreInfo(&log_semaphore);
+    x  log.c:749:11 cxx_remove_void_call       CheckEventLogging();
+    x  log.c:956:20 cxx_ne_to_eq               for ( ; *q != '\0'; q++)
+       log.c:960:22 cxx_eq_to_ne               if (*q == quote)
+    x  log.c:973:41 cxx_gt_to_ge               if (bracket_depth > 0)
+    x  log.c:977:29 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
+    x  log.c:977:55 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
+    x  log.c:991:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+    x  log.c:991:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+       log.c:1000:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       log.c:1000:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       log.c:1000:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       log.c:1004:22 cxx_ne_to_eq               if (*token != '=')
+       log.c:1007:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+       log.c:1009:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+       log.c:1009:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+       log.c:1018:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+       log.c:1019:29 cxx_ne_to_eq               if (*path != '\0')
+       log.c:1022:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+       log.c:1027:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       log.c:1030:35 cxx_add_to_sub             path,depth+1,exception);
+    x  log.c:1046:9 cxx_remove_void_call       GetTimerInfo((TimerInfo *) &log_info->timer);
+    x  log.c:1055:20 cxx_eq_to_ne               if (status == MagickFalse)
+    x  log.c:1071:54 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"events") == 0)
+    x  log.c:1084:36 cxx_ne_to_eq               if (log_info->filename != (char *) NULL)
+    x  log.c:1092:34 cxx_ne_to_eq               if (log_info->format != (char *) NULL)
+    x  log.c:1126:33 cxx_lt_to_le               if (log_info->limit < 1024)
+       log.c:1127:40 cxx_mul_to_div             log_info->limit=1024*1024*StringToUnsignedLong(token);
+    x  log.c:1148:13 cxx_eq_to_ne               if (cache == (LinkedListInfo *) NULL)
+    x  log.c:1177:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
+    x  log.c:1216:17 cxx_ne_to_eq               if (p->format != (char *) NULL)
+    x  log.c:1218:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  log.c:1220:19 cxx_ne_to_eq               if (p->filename != (char *) NULL)
+       log.c:1223:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->event_semaphore);
+    x  log.c:1230:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
+       log.c:1231:5 cxx_remove_void_call       ActivateSemaphoreInfo(&log_semaphore);
+    x  log.c:1233:17 cxx_ne_to_eq               if (log_cache != (LinkedListInfo *) NULL)
+    x  log.c:1237:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&log_semaphore);
+    x  log.c:1787:16 cxx_ne_to_eq               while ((*p != '\0') && ((isspace((int) ((unsigned char) *p)) != 0) ||
+    x  log.c:1790:46 cxx_post_inc_to_post_dec   for (i=0; *LogHandlers[i].name != '\0'; i++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-log.json

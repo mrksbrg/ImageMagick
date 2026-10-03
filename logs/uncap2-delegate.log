@@ -1,0 +1,59 @@
+mutate: 39 mutants in MagickCore/delegate\.c$, 5 functions
+mutate: baseline over 12205 cases in 0s
+  mutants: 25/39 (176s)
+  mutants: 39/39 (920s)
+
+mutate: 39 mutants, 920s
+  killed 0, survived 39 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  LoadDelegateCache                     21      0       21      0
+  GetDelegateInfo                        9      0        9      0
+  DestroyDelegate                        5      0        5      0
+  DelegateComponentTerminus              2      0        2      0
+  IsDelegateCacheInstantiated            2      0        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  delegate.c:299:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  delegate.c:301:17 cxx_ne_to_eq               if (p->decode != (char *) NULL)
+    x  delegate.c:303:17 cxx_ne_to_eq               if (p->encode != (char *) NULL)
+    x  delegate.c:305:19 cxx_ne_to_eq               if (p->commands != (char *) NULL)
+       delegate.c:308:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->semaphore);
+       delegate.c:316:5 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
+    x  delegate.c:321:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&delegate_semaphore);
+       delegate.c:1284:7 cxx_remove_void_call       UnlockSemaphoreInfo(delegate_semaphore);
+       delegate.c:1285:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+    x  delegate.c:1292:29 cxx_gt_to_ge               if (delegate_info->mode > 0)
+    x  delegate.c:1299:29 cxx_lt_to_le               if (delegate_info->mode < 0)
+    x  delegate.c:1306:53 cxx_eq_to_ne               if (LocaleCompare(decode,delegate_info->decode) == 0)
+       delegate.c:1307:55 cxx_eq_to_ne               if (LocaleCompare(encode,delegate_info->encode) == 0)
+    x  delegate.c:1309:35 cxx_eq_to_ne               if (LocaleCompare(decode,"*") == 0)
+       delegate.c:1313:37 cxx_eq_to_ne               if (LocaleCompare(encode,"*") == 0)
+    x  delegate.c:1320:5 cxx_remove_void_call       SetHeadElementInLinkedList(delegate_cache,p);
+    x  delegate.c:1628:30 cxx_eq_to_ne               if (delegate_semaphore == (SemaphoreInfo *) NULL)
+       delegate.c:1629:9 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
+    x  delegate.c:2136:23 cxx_add_to_sub             extent=strlen(token)+MagickPathExtent;
+    x  delegate.c:2159:22 cxx_eq_to_ne               if (*q == quote)
+    x  delegate.c:2172:41 cxx_gt_to_ge               if (bracket_depth > 0)
+    x  delegate.c:2190:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+    x  delegate.c:2190:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+       delegate.c:2199:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       delegate.c:2199:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       delegate.c:2199:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       delegate.c:2203:22 cxx_ne_to_eq               if (*token != '=')
+       delegate.c:2206:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+       delegate.c:2208:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+       delegate.c:2208:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+       delegate.c:2217:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+       delegate.c:2218:29 cxx_ne_to_eq               if (*path != '\0')
+       delegate.c:2221:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+       delegate.c:2226:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       delegate.c:2229:44 cxx_add_to_sub             file_xml,path,depth+1,exception);
+    x  delegate.c:2296:41 cxx_ne_to_eq               if (delegate_info->commands != (char *) NULL)
+       delegate.c:2358:62 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"thread-support") == 0)
+       delegate.c:2361:47 cxx_eq_to_ne               if (delegate_info->thread_support == MagickFalse)
+    x  delegate.c:2372:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-delegate.json
