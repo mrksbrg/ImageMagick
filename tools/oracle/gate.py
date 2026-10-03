@@ -58,6 +58,18 @@ COLUMNS = ("mutants", "killed", "unobservable", "unmatched", "unreached", "no-co
 ROW = "  %-28s %7s %6s %12s %9s %9s %11s %6s %6s %8s  %s"
 
 
+# Cases found nondeterministic after they were credited with kills: those kills do not count.
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "unstable-killers.json")) as _f:
+    UNSTABLE_KILLERS = {k for k in json.load(_f) if not k.startswith("_")}
+
+
+def honest(result):
+    """The result, a kill by an unstable case read as a survivor."""
+    if result["status"] == "killed" and result.get("killer") in UNSTABLE_KILLERS:
+        return dict(result, status="survived", killer=None)
+    return result
+
+
 def replaces(result, earlier):
     """Whether a later report's result takes the place of the earlier one.
 
@@ -75,7 +87,7 @@ def merged(reports):
     by_id = {}
     for path in reports:
         with open(path) as f:
-            for result in json.load(f):
+            for result in map(honest, json.load(f)):
                 if replaces(result, by_id.get(result["id"])):
                     by_id[result["id"]] = result
     return list(by_id.values())
