@@ -3980,6 +3980,22 @@ GAP_STEP_CASES += [("rotated three-line text, aligned %s" % align,
                     [["-size", "120x120", "xc:white", "-font", "{C}/Generic.ttf", "-pointsize", "14", "-draw",
                       "rotate 20 text-align %s text 60,40 'ab\\ncd\\nef'" % align, "out.miff"]], {})
                    for align in ("left", "center", "right")]
+# annotate.c: RenderFreetype's two other pixel paths. A transparent fill (-fill none) punches
+# the glyphs out of the alpha channel instead of compositing; a BDF bitmap font (plain text, so
+# it fits a case file) gives FreeType's monochrome bitmaps, one byte per row for the 8-pixel A
+# and two for the 16-pixel W
+_BDF_FONT = 'STARTFONT 2.1\nFONT -misc-case-medium-r-normal--8-80-75-75-c-80-iso10646-1\nSIZE 8 75 75\nFONTBOUNDINGBOX 16 8 0 -1\nSTARTPROPERTIES 2\nFONT_ASCENT 7\nFONT_DESCENT 1\nENDPROPERTIES\nCHARS 2\nSTARTCHAR A\nENCODING 65\nSWIDTH 500 0\nDWIDTH 8 0\nBBX 8 8 0 -1\nBITMAP\n18\n24\n42\n42\n7E\n42\n42\n00\nENDCHAR\nSTARTCHAR W\nENCODING 87\nSWIDTH 1000 0\nDWIDTH 16 0\nBBX 16 8 0 -1\nBITMAP\n8001\n8001\n8181\n4242\n4242\n2424\n1818\n0000\nENDCHAR\nENDFONT\n'
+GAP_STEP_CASES += [
+    ("text with a transparent fill over an image with alpha",
+     [["{C}/rose.miff", "-alpha", "set", "-font", "{C}/Generic.ttf", "-pointsize", "18", "-fill", "none",
+       "-annotate", "+5+22", "Hole Ab", "out.miff"]], {}),
+    ("text with a transparent fill over half-transparent blue",
+     [["-size", "90x30", "xc:#0000ff80", "-font", "{C}/Generic.ttf", "-pointsize", "18", "-fill", "none",
+       "-annotate", "+5+22", "Half Ab", "out.miff"]], {}),
+    ("text in a BDF bitmap font",
+     [["-size", "40x16", "xc:white", "-font", "f.bdf", "-pointsize", "8", "-annotate", "+2+10", "AW", "out.miff"]],
+     {"f.bdf": _BDF_FONT}),
+]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
