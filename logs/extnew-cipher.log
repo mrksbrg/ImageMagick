@@ -1,0 +1,78 @@
+mutate: 64 mutants in MagickCore/cipher\.c$, 12 functions
+mutate: baseline over 6 cases in 0s
+  mutants: 25/64 (1s)
+  mutants: 50/64 (1s)
+  mutants: 64/64 (1s)
+
+mutate: 64 mutants, 1s
+  killed 10, survived 50 (0 capped), no coverage 4, errors 0
+  mutation score on reached code: 16.7%   overall: 15.6%
+
+  function                           total killed survived no-cov
+  SetAESKey                             21     10       11      0
+  InverseAddRoundKey                    12      0       12      0
+  PasskeyDecipherImage                   7      0        7      0
+  PasskeyEncipherImage                   7      0        7      0
+  DestroyAESInfo                         4      0        4      0
+  ByteMultiply                           4      0        4      0
+  EncipherAESBlock                       2      0        2      0
+  DecipherImage                          2      0        0      2
+  EncipherImage                          2      0        0      2
+  AddRoundKey                            1      0        1      0
+  InitializeRoundKey                     1      0        1      0
+  IncrementCipherNonce                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  cipher.c:240:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  cipher.c:242:30 cxx_ne_to_eq               if (aes_info->decipher_key != (unsigned int *) NULL)
+    x  cipher.c:245:30 cxx_ne_to_eq               if (aes_info->encipher_key != (unsigned int *) NULL)
+    x  cipher.c:248:21 cxx_ne_to_eq               if (aes_info->key != (StringInfo *) NULL)
+    x  cipher.c:293:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  cipher.c:303:14 cxx_eq_to_ne               if ((alpha == 0) || (beta == 0))
+    x  cipher.c:303:29 cxx_eq_to_ne               if ((alpha == 0) || (beta == 0))
+    x  cipher.c:305:47 cxx_add_to_sub             return((unsigned int) InverseLog[(Log[alpha]+Log[beta]) % 0xff]);
+    x  cipher.c:305:59 cxx_rem_to_div             return((unsigned int) InverseLog[(Log[alpha]+Log[beta]) % 0xff]);
+    x  cipher.c:367:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  cipher.c:473:17 cxx_lt_to_le               for (j=0; j < 4; j++)
+    x  cipher.c:480:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  cipher.c:533:34 cxx_ge_to_gt               for (i=(ssize_t) (length-1); i >= 0; i--)
+    x  cipher.c:615:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  cipher.c:648:44 cxx_mul_to_div             GetSignatureDigestsize(signature_info))*sizeof(*input_block));
+    x  cipher.c:690:5 cxx_remove_void_call       EncipherAESBlock(aes_info,output_block,output_block);
+    x  cipher.c:691:17 cxx_lt_to_le               for (i=0; x < (ssize_t) length; x++)
+    x  cipher.c:691:38 cxx_post_inc_to_post_dec   for (i=0; x < (ssize_t) length; x++)
+       cipher.c:694:8 cxx_post_inc_to_post_dec   i++;
+    x  cipher.c:717:12 cxx_eq_to_ne               return(y == (ssize_t) image->rows ? MagickTrue : MagickFalse);
+    x  cipher.c:828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  cipher.c:868:44 cxx_mul_to_div             GetSignatureDigestsize(signature_info))*sizeof(*input_block));
+    x  cipher.c:910:5 cxx_remove_void_call       EncipherAESBlock(aes_info,output_block,output_block);
+    x  cipher.c:911:17 cxx_lt_to_le               for (i=0; x < (ssize_t) length; x++)
+    x  cipher.c:911:38 cxx_post_inc_to_post_dec   for (i=0; x < (ssize_t) length; x++)
+       cipher.c:914:8 cxx_post_inc_to_post_dec   i++;
+    x  cipher.c:934:12 cxx_eq_to_ne               return(y == (ssize_t) image->rows ? MagickTrue : MagickFalse);
+    x  cipher.c:971:15 cxx_lt_to_ge               for (i=0; i < 4; i++)
+    x  cipher.c:971:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  cipher.c:971:21 cxx_post_inc_to_post_dec   for (i=0; i < 4; i++)
+    x  cipher.c:974:17 cxx_lt_to_ge               for (j=0; j < 4; j++)
+    x  cipher.c:974:17 cxx_lt_to_le               for (j=0; j < 4; j++)
+    x  cipher.c:974:23 cxx_post_inc_to_post_dec   for (j=0; j < 4; j++)
+    x  cipher.c:976:45 cxx_add_to_sub             ByteMultiply(0xb,(alpha[i] >> (8*((j+1) % 4))) & 0xff) ^
+    x  cipher.c:976:49 cxx_rem_to_div             ByteMultiply(0xb,(alpha[i] >> (8*((j+1) % 4))) & 0xff) ^
+    x  cipher.c:977:45 cxx_add_to_sub             ByteMultiply(0xd,(alpha[i] >> (8*((j+2) % 4))) & 0xff) ^
+    x  cipher.c:977:49 cxx_rem_to_div             ByteMultiply(0xd,(alpha[i] >> (8*((j+2) % 4))) & 0xff) ^
+    x  cipher.c:978:45 cxx_add_to_sub             ByteMultiply(0x9,(alpha[i] >> (8*((j+3) % 4))) & 0xff)) << (8*j);
+    x  cipher.c:978:49 cxx_rem_to_div             ByteMultiply(0x9,(alpha[i] >> (8*((j+3) % 4))) & 0xff)) << (8*j);
+    x  cipher.c:1020:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  cipher.c:1042:15 cxx_lt_to_le               for (i=0; i < n; i++)
+    x  cipher.c:1049:15 cxx_lt_to_le               for (i=n; i < bytes; i++)
+    x  cipher.c:1065:15 cxx_lt_to_ge               for (i=0; i < 4; i++)
+    x  cipher.c:1065:15 cxx_lt_to_le               for (i=0; i < 4; i++)
+    x  cipher.c:1068:35 cxx_add_to_sub             aes_info->decipher_key[bytes-4+i]=aes_info->encipher_key[bytes-4+i];
+    x  cipher.c:1068:67 cxx_sub_to_add             aes_info->decipher_key[bytes-4+i]=aes_info->encipher_key[bytes-4+i];
+    x  cipher.c:1068:69 cxx_add_to_sub             aes_info->decipher_key[bytes-4+i]=aes_info->encipher_key[bytes-4+i];
+    x  cipher.c:1070:15 cxx_lt_to_ge               for (i=4; i < (bytes-4); i+=4)
+    x  cipher.c:1070:15 cxx_lt_to_le               for (i=4; i < (bytes-4); i+=4)
+    x  cipher.c:1071:5 cxx_remove_void_call       InverseAddRoundKey(aes_info->encipher_key+i,aes_info->decipher_key+i);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew-cipher.json

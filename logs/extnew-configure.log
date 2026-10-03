@@ -1,0 +1,65 @@
+mutate: 64 mutants in MagickCore/configure\.c$, 13 functions
+mutate: baseline over 11231 cases in 0s
+  mutants: 25/64 (0s)
+  mutants: 50/64 (0s)
+  mutants: 64/64 (750s)
+
+mutate: 64 mutants, 750s
+  killed 0, survived 36 (0 capped), no coverage 28, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  LoadConfigureCache                    19      0       19      0
+  GetConfigureList                      12      0        0     12
+  GetConfigureInfo                      11      0        0     11
+  GetConfigureOption                     4      0        0      4
+  DestroyConfigureElement                3      0        3      0
+  ConfigureComponentTerminus             3      0        3      0
+  GetConfigureOptions                    3      0        3      0
+  GetConfigurePaths                      3      0        3      0
+  IsConfigureCacheInstantiated           2      0        2      0
+  AcquireConfigureCache                  1      0        1      0
+  ConfigureComponentGenesis              1      0        1      0
+  GetConfigureInfoList                   1      0        1      0
+  GetConfigureValue                      1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  configure.c:184:18 cxx_eq_to_ne               if (status == MagickTrue)
+    x  configure.c:234:27 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+    x  configure.c:266:20 cxx_ne_to_eq               if (p->value != (char *) NULL)
+    x  configure.c:268:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
+    x  configure.c:270:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  configure.c:279:27 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+       configure.c:280:5 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
+    x  configure.c:286:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&configure_semaphore);
+    x  configure.c:458:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  configure.c:679:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  configure.c:689:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
+    x  configure.c:724:3 cxx_remove_void_call       ResetLinkedListIterator(options);
+    x  configure.c:765:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  configure.c:790:18 cxx_ge_to_gt               if ((q >= path) && (*q != *DirectorySeparator))
+    x  configure.c:906:14 cxx_ne_to_eq               if (home != (char *) NULL)
+    x  configure.c:1031:31 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+       configure.c:1032:9 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
+    x  configure.c:1186:23 cxx_add_to_sub             extent=strlen(token)+MagickPathExtent;
+    x  configure.c:1209:22 cxx_eq_to_ne               if (*q == quote)
+    x  configure.c:1222:41 cxx_gt_to_ge               if (bracket_depth > 0)
+    x  configure.c:1240:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+    x  configure.c:1240:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+       configure.c:1249:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       configure.c:1249:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       configure.c:1249:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+       configure.c:1253:22 cxx_ne_to_eq               if (*token != '=')
+       configure.c:1256:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+       configure.c:1258:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+       configure.c:1258:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+       configure.c:1267:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+       configure.c:1268:29 cxx_ne_to_eq               if (*path != '\0')
+       configure.c:1271:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+       configure.c:1276:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       configure.c:1279:44 cxx_add_to_sub             file_xml,path,depth+1,exception);
+       configure.c:1336:55 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"stealth") == 0)
+    x  configure.c:1358:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew-configure.json
