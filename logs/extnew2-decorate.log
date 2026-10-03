@@ -1,0 +1,23 @@
+mutate: 16 mutants in MagickCore/decorate\.c$, 3 functions
+mutate: baseline over 10 cases in 0s
+  mutants: 16/16 (0s)
+
+mutate: 16 mutants, 0s
+  killed 0, survived 6 (0 capped), no coverage 10, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  RaiseImage                            10      0        0     10
+  FrameImage                             5      0        5      0
+  BorderImage                            1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  decorate.c:117:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  decorate.c:209:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  decorate.c:349:23 cxx_lt_to_le               for (y=0; y < (ssize_t) frame_info->inner_bevel; y++)
+    x  decorate.c:463:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       decorate.c:471:17 cxx_post_inc_to_post_dec   progress++;
+       decorate.c:473:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew2-decorate.json
