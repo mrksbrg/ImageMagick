@@ -2,6 +2,96 @@
  "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
  "verdicts": [
   {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "AcquireString",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 25,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "AcquireStringInfo",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~string_info->length >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "BlobToStringInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "CloneString",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateString",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateString",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < source_length)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateStringInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateStringInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < source->length)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConstantString",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~length >= 1UL)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
    "at": 18,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "CopyMagickString",
@@ -140,6 +230,36 @@
    "src": "if ((p[i] < 32) && (isspace((int)p[i]) == 0))",
    "verdict": "equivalent",
    "why": "p[i] <= 32 differs from p[i] < 32 only at 32, a space, which the isspace() test that follows excludes either way"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "SetStringInfoLength",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "StringInfoToHexString",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < MagickPathExtent)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "StringInfoToString",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~length >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: the mutant differs from the original only when ~length equals the bound exactly, i.e. for a length within MagickPathExtent of SIZE_MAX (or two lengths summing to SIZE_MAX), which no string or buffer in memory can have"
   },
   {
    "at": 20,
