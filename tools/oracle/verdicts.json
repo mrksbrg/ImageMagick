@@ -3222,6 +3222,26 @@
    "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
   },
   {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((*token != '>') && (*q != '\\0'))",
+   "verdict": "equivalent",
+   "why": "skips the loop over the <locale> element's attributes: the main loop then reads name, =, the value and > as bare tokens, none of which starts with '<', so it adds nothing to the tag or the messages, exactly as the loop does"
+  },
+  {
+   "at": 30,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((*token != '>') && (*q != '\\0'))",
+   "verdict": "equivalent",
+   "why": "skips the loop over the <locale> element's attributes: the main loop then reads name, =, the value and > as bare tokens, none of which starts with '<', so it adds nothing to the tag or the messages, exactly as the loop does"
+  },
+  {
    "at": 0,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
    "function": "LoadLocaleCache",
