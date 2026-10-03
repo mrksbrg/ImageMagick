@@ -3941,6 +3941,21 @@ GAP_STEP_CASES += [
      [["{C}/rose.miff", "-profile", "APP1:x.bin", "-define", "debug=true", "-verbose", "info:"]],
      {"x.bin": "".join(chr(1 + i % 7) for i in range(40))}),
 ]
+# string.c: StripMagickString, through MSL's <comment> and <label>: surrounding blanks and
+# quotes, a lone quote pair, a quote followed by blanks, and a newline (as &#10;: ReadMSLImage
+# turns the file's own line ends into spaces before the parser sees them)
+_MSL_COMMENT = """<?xml version="1.0" encoding="UTF-8"?>
+<image>
+  <read filename="{C}/rose.miff" />
+  <comment>%s</comment>
+  <label>%s</label>
+  <write filename="out.miff" />
+</image>
+"""
+GAP_STEP_CASES += [("MSL comment and label %r" % text,
+                    [["msl:s.msl", "out.miff", "-format", "[%c|%l]\\n", "info:"]],
+                    {"s.msl": _MSL_COMMENT % (text, text)})
+                   for text in ('  "quoted text"  ', "'\"", "line one&#10;line two", '"   ')]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
