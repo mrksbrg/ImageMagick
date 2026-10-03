@@ -2193,6 +2193,40 @@ index step and its mutation run makes the casemap stale and the round refuse to 
 (cachegap2's first round died so); new families are now checked for determinism from a
 scratch copy of `cases.py` instead.
 
+## Behaviour found while writing cases (Mac, 2026-10-03)
+
+The cases record ImageMagick as it behaves, bugs included: a refactoring must keep each of
+these until someone decides to fix it on purpose (and then the case's baseline changes).
+
+- **`-define draw:render-bounding-rectangles=true` aborts** (SIGABRT, status 134, no message)
+  for every primitive drawn as a polygon, in the plain builds too. `DrawBoundingRectangles`
+  therefore has no case; its 59 mutants are recorded as unresolved.
+- **`-set intensity` never takes**: `SetImageProperty` parses it with
+  `MagickIntensityOptions`, which has no table in `GetCommandOptionInfo` (only
+  `MagickPixelIntensityOptions` does), so every value parses to -1.
+- **`-set delay N<` takes the delay from sigma**, not rho: `10<` sets 0, `30x20<` sets 20.
+- **`%[exif:#hhhh]` and `%[exif:@hhhh]` never return a value**: `GetEXIFProperty` advances its
+  `property` pointer while parsing the hex digits and stores the tag under the empty name that
+  is left, which only shows as a "read-only property" warning. `%[exif:!]` stores every tag
+  under `#hhhh` or `@hhhh`, which a later `%[#hhhh]` in the same format reads back.
+- **Round line caps on a polyline fail** (filled or not): `-draw "stroke-linecap round
+  polyline ..."` ends in "non-conforming drawing primitive definition" and writes nothing; on a
+  line they draw.
+- **A locale.xml `<include>` never adds a message** (also with `policy.xml` and `mime.xml`, see
+  above; a `type.xml` include works), and a case's `delegates.xml` is never read.
+- **An MVG mask macro must have a quoted name** (`push mask "m1"`): unquoted, `mask m1` finds no
+  macro and draws unmasked.
+- **AcquireImage's settings transfer is overwritten on the command line**: `-delay`, `-density`
+  and `-extract` before an image is read are applied again by `ReadImage` and
+  `SyncImageSettings`, so only an API caller of `AcquireImage` could see its own transfer.
+
+Hand-made inputs that made unreachable code reachable, all in `cases.py`: an 8BIM profile with
+clip paths (every byte below 0x80, so it fits a text case file), 8BIMTEXT for the resource ids
+whose bytes are not 7-bit, an EXIF block inside a 4x4 JPEG passed as `inline:` base64 (its tag
+numbers are not 7-bit), IPTC records, an XMP profile, a BDF bitmap font (FreeType's
+monochrome path), and MSL comments with `&#10;` for a newline that the line-by-line MSL reader
+would otherwise turn into a space.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
