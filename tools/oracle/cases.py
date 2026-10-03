@@ -4351,6 +4351,21 @@ GAP_STEP_CASES += [
 # refused before any program runs (IsRightsAuthorizedByName's execute test), and MSVG renders it
 GAP_STEP_CASES += [("SVG with delegates not executable", [["{C}/draw.svg", "-format", "%wx%h\\n", "info:"]],
                     {_POLICY: _policy('<policy domain="delegate" rights="read" pattern="*"/>')})]
+# profile.c: an 8BIM profile carrying IPTC (0x0404), XMP (0x0424, padded so its length bytes stay
+# below 0x80) and a small 7-bit EXIF block (0x0422), which GetProfilesFromResourceBlock lifts out
+# as profiles of their own; read back directly and after a MIFF round trip
+_8BIM_EMBEDDED = (_8bim_resource(0x0404, b"", _IPTC.encode("latin-1"))
+                  + _8bim_resource(0x0424, b"", _XMP_PROPS.encode("ascii").ljust(0x500, b" "))
+                  + _8bim_resource(0x0422, b"", b"Exif\0\0II*\0" + struct.pack("<IH", 8, 2)
+                                   + struct.pack("<HHIHH", 0x0112, 3, 1, 3, 0) + struct.pack("<HHI", 0x0131, 2, 4)
+                                   + b"ABC\0" + b"\0" * 4)).decode("ascii")
+GAP_STEP_CASES += [
+    ("8BIM with embedded profiles", [["{C}/rose.miff", "-profile", "8bim:r.8bim", "-format",
+                                      "%[profiles]|%[IPTC:2:120]|%[xmp:Rating]|%[exif:Orientation]|%[exif:Software]\\n", "info:"]],
+     {"r.8bim": _8BIM_EMBEDDED}),
+    ("8BIM with embedded profiles, written", [["{C}/rose.miff", "-profile", "8bim:r.8bim", "out.miff"],
+                                              ["out.miff", "-format", "%[profiles]\\n", "info:"]], {"r.8bim": _8BIM_EMBEDDED}),
+]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
