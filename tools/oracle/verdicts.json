@@ -72,6 +72,16 @@
    "why": "GetFillColor overwrites the whole of fill_color next: a copy of draw_info->fill, or GetOneVirtualPixelInfo, which itself starts with GetPixelInfo"
   },
   {
+   "at": 29,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "ClipImagePath",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (clip_mask->storage_class == PseudoClass)",
+   "verdict": "equivalent",
+   "why": "sends a DirectClass clip mask through SetImageStorageClass(DirectClass), which leaves it as it is, and keeps a PseudoClass one PseudoClass; the mask is only read as gray values afterwards, the same either way"
+  },
+  {
    "at": 22,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "Get8BIMProperty",
