@@ -5034,3 +5034,13 @@ GAP_STEP_CASES += [("write mask smaller than the image, %s" % colour,
 GAP_STEP_CASES += [("-repage %s after 100x80+10+5" % g,
                     [["{C}/rose.miff", "-repage", "100x80+10+5", "-repage", g, "-format", "%g\\n", "info:"]], {})
                    for g in ("+3+2!", "+3!")]
+# image.c: IsValidFormatSpecifier refuses a %0d (a lone zero is no width) in an output name
+# written frame by frame; SetImageAlpha under a write mask of exactly one half (only a mask
+# above one half lets the alpha through)
+GAP_STEP_CASES += [
+    ("two frames to o_%0d.miff, +adjoin", [["{C}/rose.miff", "{C}/rose.miff", "+adjoin", "o_%0d.miff"]], {}),
+    ("alpha set under a write mask of one half",
+     [["-size", "70x46", "xc:gray(50%)", "h.miff"],
+      ["{C}/rose.miff", "-write-mask", "h.miff", "-alpha", "set", "-channel", "A", "-evaluate", "set", "50%",
+       "+channel", "+write-mask", "out.miff"]], {}),
+]
