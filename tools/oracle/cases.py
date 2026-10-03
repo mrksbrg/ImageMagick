@@ -4379,6 +4379,10 @@ GAP_STEP_CASES += [("multi-line text metrics: %s" % args[-3], [["-font", "{C}/Ge
                                 ["-pointsize", "14", "label:wwwwwwwwwww\\nb", "-format", "%wx%h\\n", "info:"],
                                 ["-size", "120x60", "caption:aaa bbbbbbbbbbbbbb cc dd", "-format", "%wx%h %[caption:pointsize]\\n", "info:"],
                                 ["-pointsize", "14", "-interline-spacing", "5", "label:a\\nbbbb\\ncc", "-format", "%wx%h\\n", "info:"])]
+# annotate.c: a label whose glyphs reach below the baseline and past their advance (j, g, _), for
+# RenderFreetype's glyph bounds
+GAP_STEP_CASES += [("label with descenders", [["-font", "{C}/Generic.ttf", "-pointsize", "20", "label:Ajg_", "-format",
+                                               "%wx%h\\n", "info:"]], {})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]

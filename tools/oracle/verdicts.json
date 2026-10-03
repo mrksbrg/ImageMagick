@@ -4677,16 +4677,6 @@
    "function": "RenderFreetype",
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
-   "src": "if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))",
-   "verdict": "unresolved",
-   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/annotate.c",
-   "function": "RenderFreetype",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
    "src": "if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))",
    "verdict": "unresolved",
    "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
@@ -4788,16 +4778,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))",
-   "verdict": "unresolved",
-   "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
-  },
-  {
-   "at": 55,
-   "file": "MagickCore/annotate.c",
-   "function": "RenderFreetype",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))",
    "verdict": "unresolved",
    "why": "a font metric (height, max advance, glyph bounds) that no output shows: -annotate draws glyphs, and label: sizes its image from ascent and descent only; not killed by 38 text cases"
   },
