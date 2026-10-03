@@ -2374,3 +2374,37 @@ the bar first.
   and name them.
 - A full-file run costs 20–30 minutes and a single function a minute or two,
   so run per function during refactoring and per file before pushing.
+
+## A C driver and external programs (Mac, evening of 2026-10-03)
+
+The owner allowed both: a C driver for code the command line cannot reach, and external programs
+for the delegates, installed with Homebrew.
+
+**`imdriver`** (`tools/oracle/driver/imdriver.c`) calls `GradientImage` with each spread method
+(every caller in the library passes `PadSpread`), sets and reads the read, write and composite
+masks, runs `AcquireImage` from `ImageInfo` fields the command line overwrites, and prints the
+policy, locale and mime lists. `driver/build.sh BUILDDIR` links it against that build's own
+MagickCore, beside its `magick`, so a mutant switched on in the environment is active in it too;
+`tools/oracle/build.sh` now does this for every oracle build. A case step that starts with
+`@driver` runs it (`oracle.command_line`); where it is not built the step runs `magick` with an
+unknown option, which fails alike in every run of that build, so a driver case can neither kill
+nor reach anything there. 37 cases. Hand-run against mull-macx they kill **59 of draw.c's 72**
+open mutants in its functions under the bar (`DrawGradientImage`'s reflect and repeat spreads)
+and **10 of image.c's 28** (masks, `AcquireImage`). The list cases kill nothing in locale.c,
+policy.c or mime.c: what is open there is loading configuration, not listing it.
+
+**Upstream:** `GetMimeList`'s order differs from run to run (entries that compare equal), so
+the driver sorts it.
+
+**External programs:** Ghostscript 10.08.0 and Inkscape 1.4.4 (Homebrew, `/opt/homebrew/bin`,
+on the oracle's PATH; an older `gs` in `/usr/local/bin` was never on it). They add little:
+PostScript is read through the ps coder's own Ghostscript call, and the PostScript conversions
+in `delegates.xml` are not taken when a PostScript image is written to another PostScript
+format, so `InvokeDelegate` and the delegate command letters stay unreached; two cases kill
+two `ExternalDelegateCommand` mutants. Inkscape's and Graphviz's (`dot`) output differ between
+runs, so no case uses them. A program upgrade changes the baselines of the cases that use it.
+
+**ERDC** computes the official figures, so it needs the driver built against its own builds
+(`tools/oracle/build.sh` does it on the next build, or `driver/build.sh` on an existing one) and
+Ghostscript on its PATH; until then the driver and Ghostscript cases fail alike there and count
+for nothing. The kills above reach the official figures once ERDC has both.
