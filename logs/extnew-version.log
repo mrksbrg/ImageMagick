@@ -1,0 +1,20 @@
+mutate: 19 mutants in MagickCore/version\.c$, 5 functions
+mutate: baseline over 192 cases in 0s
+  mutants: 19/19 (18s)
+
+mutate: 19 mutants, 18s
+  killed 0, survived 1 (0 capped), no coverage 18, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CRC32                                 10      0        0     10
+  GetMagickSignature                     4      0        0      4
+  GetMagickHomeURL                       3      0        0      3
+  GetMagickQuantumRange                  1      0        0      1
+  GetMagickVersion                       1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  version.c:625:15 cxx_ne_to_eq               if (version != (size_t *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew-version.json
