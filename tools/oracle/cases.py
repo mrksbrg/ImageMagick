@@ -4296,6 +4296,21 @@ GAP_STEP_CASES += [("MVG keyword: %s" % draw, [["-size", "70x46", "xc:white", "-
 # path, a circle of radius 0 and a zero-size stroked rectangle
 GAP_STEP_CASES += [("MVG degenerate: %s" % draw, [["-size", "70x46", "xc:white", "-draw", draw, "out.miff"]], {})
                    for draw in ['fill red roundrectangle 5,5 40,30 0,0', 'fill red roundrectangle 5,5 5,30 3,3', 'fill red roundrectangle 5,5 40,5 3,3', 'fill red ellipse 30,20 0,10 0,360', 'fill red ellipse 30,20 10,0 0,360', 'fill red arc 5,5 40,30 0,90', 'fill red polyline 10,10', 'fill red polygon 5,5 30,30', 'fill red polygon 5,5 30,30 10,25', 'fill red bezier 5,5 30,30', 'fill red bezier 5,5 30,30 50,5', "fill red path 'M 10,10 L 30,30 Z'", 'fill red circle 30,20 30,20', 'stroke blue fill none rectangle 5,5 5,5']]
+# policy.c: IsRightsAuthorizedByName's canonical forms of a path. sub/./new.miff does not exist
+# yet, so only its real directory joined to its name matches */sub/new.miff; a policy on */sub
+# matches the real directory; sub/./in.miff, once written, matches by its full real path; and a
+# deny on */sub/* is sticky against a later allow written as the raw path
+GAP_STEP_CASES += [
+    ("policy on a new file's canonical name", [["{C}/rose.miff", "sub/./new.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="read" pattern="*/sub/new.miff"/>'), "sub/keep.txt": "x"}),
+    ("policy on a file's canonical directory", [["{C}/rose.miff", "sub/./x.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="none" pattern="*/sub"/>'), "sub/keep.txt": "x"}),
+    ("policy on a file's canonical path", [["{C}/rose.miff", "sub/in.miff"], ["sub/./in.miff", "out.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="write" pattern="*/sub/in.miff"/>'), "sub/keep.txt": "x"}),
+    ("a canonical deny is sticky", [["{C}/rose.miff", "sub/./ok.miff"]],
+     {_POLICY: _policy('<policy domain="path" rights="none" pattern="*/sub/*"/>',
+                       '<policy domain="path" rights="read|write" pattern="sub/./ok.miff"/>'), "sub/keep.txt": "x"}),
+]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
