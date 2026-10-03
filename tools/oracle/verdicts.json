@@ -3934,6 +3934,76 @@
   {
    "at": 8,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*p == '\\\\') || (*p == escape))",
+   "verdict": "equivalent",
+   "why": "only sizes the result: counting more characters as needing a backslash makes the buffer larger, and the copy loop below, which decides the escapes itself, writes the same string"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*p == '\\\\') || (*p == escape))",
+   "verdict": "equivalent",
+   "why": "only sizes the result: counting more characters as needing a backslash makes the buffer larger, and the copy loop below, which decides the escapes itself, writes the same string"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~length >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: differs only for a length within MagickPathExtent of SIZE_MAX"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (~length < 1)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: differs only for a length near SIZE_MAX"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~length < 1)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: differs only for a length near SIZE_MAX"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (p=source; *p != '\\0'; p++)",
+   "verdict": "unresolved",
+   "why": "undercounts the result's length (no escapes counted, or fewer): the buffer is length+MagickPathExtent, so the copy still fits unless the escaped string is longer than MagickPathExtent, which no caller here produces (the TTF preview text has no quote or backslash)"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "EscapeString",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "length++;",
+   "verdict": "unresolved",
+   "why": "undercounts the result's length (no escapes counted, or fewer): the buffer is length+MagickPathExtent, so the copy still fits unless the escaped string is longer than MagickPathExtent, which no caller here produces (the TTF preview text has no quote or backslash)"
+  },
+  {
+   "at": 8,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "InterpretSiPrefixValue",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
