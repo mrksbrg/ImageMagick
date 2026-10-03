@@ -4277,6 +4277,15 @@ GAP_STEP_CASES += [("stroke joins: %s" % draw, [["-size", "110x80", "xc:white", 
                                    for join in ("miter", "round", "bevel")]
                                 + ["fill none stroke blue stroke-width 9 stroke-linejoin round stroke-linecap round "
                                    "polyline 10,40 60,40 60,10 20,70"])]
+# image.c: CloneImage of a montage (its montage and directory strings are copied), and of an
+# offset image scaled by exactly 3 across and 1 down (or the reverse): a scale difference of
+# exactly 2 keeps the page offsets scaled apart
+GAP_STEP_CASES += [
+    ("a montage cloned and written", [["montage", "{C}/rose.miff", "{C}/rose.miff", "-geometry", "+2+2", "m.miff"],
+                                      ["m.miff", "(", "+clone", ")", "-delete", "0", "out.miff"]], {}),
+    ("an offset image scaled 3 by 1", [["{C}/rose.miff", "-repage", "+10+5", "-resize", "210x46!", "-format", "%g\\n", "info:"]], {}),
+    ("an offset image sampled 1 by 3", [["{C}/rose.miff", "-repage", "+10+5", "-sample", "70x138!", "-format", "%g\\n", "info:"]], {}),
+]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
