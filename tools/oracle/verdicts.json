@@ -92,6 +92,26 @@
    "why": "p[i] <= 32 differs from p[i] < 32 only at 32, a space, which the isspace() test that follows excludes either way"
   },
   {
+   "at": 20,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "StripMagickString",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "return((size_t) (q-p+1));",
+   "verdict": "unobservable",
+   "why": "the return value: every caller (msl.c, tiff.c, xpm.c, ps.c, nt-feature.c) casts it to void"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "StripMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "return((size_t) (q-p+1));",
+   "verdict": "unobservable",
+   "why": "the return value: every caller (msl.c, tiff.c, xpm.c, ps.c, nt-feature.c) casts it to void"
+  },
+  {
    "at": 59,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/utility.c",
    "function": "ExpandFilename",
