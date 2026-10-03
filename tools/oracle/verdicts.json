@@ -2,6 +2,76 @@
  "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
  "verdicts": [
   {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "FT_Done_Glyph(glyph.image);",
+   "verdict": "unobservable",
+   "why": "releases FreeType's glyph, face or library: without it they leak until the process exits, which changes nothing a case can see"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "FT_Done_Glyph(glyph.image);",
+   "verdict": "unobservable",
+   "why": "releases FreeType's glyph, face or library: without it they leak until the process exits, which changes nothing a case can see"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "FreetypeDone(memory,library,stream);",
+   "verdict": "unobservable",
+   "why": "releases FreeType's glyph, face or library: without it they leak until the process exits, which changes nothing a case can see"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "FreetypeDone(memory,library,stream);",
+   "verdict": "unobservable",
+   "why": "releases FreeType's glyph, face or library: without it they leak until the process exits, which changes nothing a case can see"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "FreetypeDone(memory,library,stream);",
+   "verdict": "unobservable",
+   "why": "releases FreeType's glyph, face or library: without it they leak until the process exits, which changes nothing a case can see"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "FreetypeDone(memory,library,stream);",
+   "verdict": "unobservable",
+   "why": "releases FreeType's glyph, face or library: without it they leak until the process exits, which changes nothing a case can see"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&fill_color);",
+   "verdict": "equivalent",
+   "why": "GetFillColor overwrites the whole of fill_color next: a copy of draw_info->fill, or GetOneVirtualPixelInfo, which itself starts with GetPixelInfo"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "AcquireString",
