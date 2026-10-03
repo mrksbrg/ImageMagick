@@ -372,6 +372,26 @@
    "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
   },
   {
+   "at": 9,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DestroyEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (edge < (ssize_t) polygon_info->number_edges)",
+   "verdict": "equivalent",
+   "why": "after the decrement, edge equal to number_edges means the last edge was removed: the memmove the mutant then makes copies (number_edges-edge)=0 edges, nothing"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DestroyPolygonInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (polygon_info->edges != (EdgeInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards freeing the edges: inverted, it leaks them, or walks no edges (number_edges is 0 when edges is NULL) and frees NULL, which is harmless"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "DrawAffineImage",
