@@ -3974,6 +3974,12 @@ GAP_STEP_CASES += [("a width limit with an E prefix",
 # string.c: FileToString strips a leading @ only from a name longer than one character: a
 # color correction file named just "@" is read under that name
 GAP_STEP_CASES += [("-cdl from a file named @", [["{C}/rose.miff", "-cdl", "@", "out.miff"]], {"@": CDL})]
+# annotate.c: AnnotateImage's text-align offsets for the second and later lines: rotated text
+# (affine.ry is 0 without a rotation) of three lines, under each alignment
+GAP_STEP_CASES += [("rotated three-line text, aligned %s" % align,
+                    [["-size", "120x120", "xc:white", "-font", "{C}/Generic.ttf", "-pointsize", "14", "-draw",
+                      "rotate 20 text-align %s text 60,40 'ab\\ncd\\nef'" % align, "out.miff"]], {})
+                   for align in ("left", "center", "right")]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
