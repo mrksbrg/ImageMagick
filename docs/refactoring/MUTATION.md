@@ -2193,6 +2193,40 @@ index step and its mutation run makes the casemap stale and the round refuse to 
 (cachegap2's first round died so); new families are now checked for determinism from a
 scratch copy of `cases.py` instead.
 
+## The Mac's morning case rounds (2026-10-03)
+
+Hand-checked cases, then probes p47 to p53 (`mutation-probe-p4x-*`, `-p5x-*`), moved the Mac's
+untrusted files (adjusted; every figure merges ERDC's reports and the probes):
+
+| File | Before (07:20) | Now (09:15) | What holds it back |
+| --- | ---: | ---: | --- |
+| transform.c | 82% | **85%, trusted** | |
+| layer.c | 89% | **92%, trusted** | |
+| version.c | 70% | **80%, trusted** | |
+| property.c | 61% | 86% | `GetICCProperty` 75%: its last four need an ICC text tag over 4096 bytes |
+| string.c | 67% | 85% | five functions, each held by overflow-only sizes or unreachable tails |
+| draw.c | 71% | 79% | `DrawGradientImage` (reflect and repeat spreads are API-only), `DrawBoundingRectangles` (aborts) |
+| image.c | 66% | 78% | `AcquireImage` and `CloneImageInfo`: the command line overwrites what they set |
+| locale.c | 69% | 77% | `IsLocaleTreeInstantiated`: environment fallbacks no case can set |
+| utility.c | 71% | 74% | `AcquireUniqueSymbolicLink`: only the inkscape delegate reaches it |
+| annotate.c | 66% | 71% | text metrics no output shows, and kerning the corpus font lacks |
+| policy.c | 56% | 61% | `IsPathContainsSymlink`: a case cannot make a symlink |
+| profile.c | 41% | 52% | `ProfileImage`: ICC transforms need two ICC profiles (see below) |
+
+**What would lift these further is not more cases but three owner decisions:** a C driver for
+API-only code (`AcquireImage`'s transfer, the reflect and repeat gradients, the read and
+composite masks, `GetMimeInfo`, the policy and locale list functions); whether external
+programs may run (inkscape for the SVG delegate, Ghostscript for `RenderPostscript`); and
+adding `config/sRGB.icm` and `config/cmyk.icm` to `DECODE_FILES`, which would open
+`ProfileImage` and the ICC transforms (it changes the frozen corpus on every machine, so it is
+not done unasked).
+
+Two earlier verdicts were wrong: `GetMultilineTypeMetrics` and `RenderFreetype` mutants called
+"a font metric that no output shows" are killed by a multi-line label (its width is the widest
+line's) and by a label with descenders (`label:Ajg_`); the five verdicts are removed.
+`macall` (an uncapped rerun of every open mutant of the untrusted files, verdicts included)
+will find any other. Cases pushed after 8b0a004ab await a probe after `macall`.
+
 ## Behaviour found while writing cases (Mac, 2026-10-03)
 
 The cases record ImageMagick as it behaves, bugs included: a refactoring must keep each of
