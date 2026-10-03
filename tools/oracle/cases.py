@@ -5044,3 +5044,51 @@ GAP_STEP_CASES += [
       ["{C}/rose.miff", "-write-mask", "h.miff", "-alpha", "set", "-channel", "A", "-evaluate", "set", "50%",
        "+channel", "+write-mask", "out.miff"]], {}),
 ]
+# Cases that call the API through imdriver (tools/oracle/driver: the owner allowed a C driver,
+# 2026-10-03), for code the command line cannot reach. draw.c: GradientImage with each spread
+# method (every caller in the library passes PadSpread), linear and radial, with a short
+# vector or radii so the spread matters, an angle, an extent and a centre. image.c: the read,
+# write and composite masks under four operations, GetImageMask of each, and AcquireImage
+# from ImageInfo fields the command line overwrites. Policy, locale and mime lists, and a
+# mime lookup (the driver sorts the mime list: GetMimeList's order varies between runs)
+def _driver(*args):
+    return [["@driver"] + list(args)]
+_DRIVER_CASES = []
+for _type, _art in (("linear", "gradient:vector=10,5,20,8"), ("radial", "gradient:radii=6,4")):
+    for _spread in ("pad", "reflect", "repeat"):
+        _DRIVER_CASES.append(("driver gradient %s %s, %s" % (_type, _spread, _art),
+                              _driver("gradient", _type, _spread, "40x20", _art, "red:0.0", "yellow:0.4",
+                                      "blue:1.0", "out.miff")))
+_DRIVER_CASES += [
+    ("driver gradient linear reflect at 30 degrees",
+     _driver("gradient", "linear", "reflect", "40x20", "gradient:angle=30", "red:0.2", "blue:0.7", "out.miff")),
+    ("driver gradient radial repeat, maximum extent, off centre",
+     _driver("gradient", "radial", "repeat", "40x20", "gradient:extent=Maximum", "gradient:center=10,8",
+             "red:0.1", "blue:0.5", "out.miff")),
+    ("driver gradient radial reflect, diagonal extent, equal stops",
+     _driver("gradient", "radial", "reflect", "40x20", "gradient:extent=Diagonal", "red:0.3", "green:0.3",
+             "blue:0.9", "out.miff")),
+]
+for _kind in ("read", "write", "composite"):
+    for _op in ("negate", "blur", "composite", "colorize"):
+        _DRIVER_CASES.append(("driver %s mask, %s" % (_kind, _op),
+                              _driver("mask", _kind, "{C}/rose.miff", "{C}/bilevel.miff", _op, "out.miff")))
+    _DRIVER_CASES.append(("driver %s mask, GetImageMask" % _kind,
+                          _driver("getmask", _kind, "{C}/rose.miff", "{C}/bilevel.miff", "out.miff")))
+_DRIVER_CASES += [
+    ("driver AcquireImage, size, page, density, depth, quality, units, extract, interlace",
+     _driver("acquire", "size=30x20+2+3", "page=100x80+5+6", "density=72x96", "depth=8", "quality=90",
+             "units=PixelsPerInch", "extract=10x10+1+1", "interlace=Plane")),
+    ("driver AcquireImage, per centimetre, options",
+     _driver("acquire", "size=30x20", "page=+5+6", "density=150", "units=PixelsPerCentimeter", "dither=false",
+             "ping=1")),
+    ("driver AcquireImage, extract and page alone, colour options",
+     _driver("acquire", "extract=10x10", "page=100x80", "background=red", "border-color=blue",
+             "matte-color=green", "delay=5", "dispose=Background")),
+    ("driver AcquireImage, odd geometries", _driver("acquire", "size=30", "extract=50%", "page=A4")),
+]
+_DRIVER_CASES += [("driver %s list %r" % (kind, pattern), _driver("list", kind, pattern))
+                  for kind, pattern in (("policy", "*"), ("policy", "system*"), ("locale", "*"),
+                                        ("locale", "Magick/*"), ("mime", "*"), ("mime", "image/*"), ("mime", "*nope*"))]
+_DRIVER_CASES += [("driver mime of %s" % name, _driver("mime", "{C}/%s" % name)) for name in ("rose.miff", "bilevel.miff")]
+GAP_STEP_CASES += [(label, steps, {}) for label, steps in _DRIVER_CASES]

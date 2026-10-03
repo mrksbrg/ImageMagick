@@ -70,6 +70,10 @@ configure_and_make() {  # <srcdir> <builddir> <extra cflags> [configure flags...
   fi
   make -C "$bld" -j"$JOBS" "utilities/magick$EXE" > "$bld/make.log" 2>&1 \
     || { tail -30 "$bld/make.log" >&2; echo "build failed, see $bld/make.log" >&2; exit 1; }
+  # imdriver, for the cases that call the API (driver/build.sh); without it those cases
+  # fail alike in every run of this build
+  "$ROOT/tools/oracle/driver/build.sh" "$bld" > /dev/null 2>> "$bld/make.log" \
+    || echo "imdriver not built, see $bld/make.log" >&2
 }
 
 case "${1:-}" in

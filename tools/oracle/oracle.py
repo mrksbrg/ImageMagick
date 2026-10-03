@@ -371,8 +371,22 @@ def fix_dates(d):
             pass
 
 
+DRIVER_STEP = "@driver"  # a step that calls the API through imdriver (tools/oracle/driver)
+
+
+def driver_path(binary):
+    """The imdriver built against the same build as binary (driver/build.sh)."""
+    return os.path.join(os.path.dirname(binary), "imdriver")
+
+
 def command_line(binary, argv):
     """The full command for one expanded step, wrapper and seed included."""
+    if argv and argv[0] == DRIVER_STEP:
+        # Without a driver beside the binary the step fails alike in every run of this
+        # build, so a driver case can neither kill a mutant nor reach a function there.
+        if not os.path.exists(driver_path(binary)):
+            return WRAPPER + [binary, "-imdriver-not-built"]
+        return WRAPPER + [driver_path(binary)] + argv[1:]
     # Every random generator is seeded; unseeded ones read /dev/urandom.
     # conjure takes `-key value` script variables, not options, so MSL
     # cases must avoid random operators instead.
