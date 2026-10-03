@@ -2662,6 +2662,36 @@
    "why": "releases the fresh blob of the new next image before it is given its own (it was just created, unopened): without it that blob leaks"
   },
   {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AppendImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (next->columns > width)",
+   "verdict": "equivalent",
+   "why": "takes the larger width of a stack: with >= an equal width is assigned again, the same value"
+  },
+  {
+   "at": 16,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AppendImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (next->depth > depth)",
+   "verdict": "equivalent",
+   "why": "takes the larger depth: with >= an equal depth is assigned again, the same value"
+  },
+  {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AppendImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (next->rows > height)",
+   "verdict": "equivalent",
+   "why": "takes the larger height of a row: with >= an equal height is assigned again, the same value"
+  },
+  {
    "at": 29,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "ClipImagePath",

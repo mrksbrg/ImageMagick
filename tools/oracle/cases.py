@@ -5001,3 +5001,17 @@ GAP_STEP_CASES += [("EXIF sync, %s" % label, [[_exif_uri(block), "-resize", "50%
                         _exif_ifd0([_exif_entry(0x0110, 11, 1, struct.pack("<f", 1.5)), _EXIF_W, _EXIF_H])),
                        ("no components before the width",
                         _exif_ifd0([_exif_entry(0x010F, 2, 0, b"\0" * 4), _EXIF_W, _EXIF_H])))]
+# image.c: AppendImages under gravity (GravityAdjustGeometry offsets the smaller image across
+# the stack, which way depending on -append or +append), and CopyImagePixels through -copy:
+# a region with a source offset, one that overruns the right or the bottom edge (refused), one
+# at the corner, and one under -monitor
+GAP_STEP_CASES += [("rose and half a rose, -gravity %s %sappend" % (grav, sign),
+                    [["{C}/rose.miff", "(", "{C}/rose.miff", "-resize", "50%", ")", "-gravity", grav,
+                      sign + "append", "out.miff"]], {})
+                   for grav, sign in (("center", "-"), ("southeast", "+"), ("east", "-"), ("south", "+"))]
+GAP_STEP_CASES += [("-copy %s %s%s" % (geometry, offset, " under -monitor" if monitor else ""),
+                    [["{C}/rose.miff", "(", "{C}/rose.miff", "-negate", ")"] + (["-monitor"] if monitor else [])
+                     + ["-copy", geometry, offset, "out.miff"]], {})
+                   for geometry, offset, monitor in (("20x10+5+7", "+30+20", False), ("20x10+5+7", "+60+20", False),
+                                                     ("20x10+5+7", "+30+40", False), ("20x10+5+7", "+30+20", True),
+                                                     ("20x10", "+50+36", False))]
