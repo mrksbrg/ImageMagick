@@ -162,6 +162,16 @@
    "why": "the resource matched and status is now true, so the loop ends: the length it adjusts is never read again"
   },
   {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetEXIFProperty",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (tag_value < 0x20000)",
+   "verdict": "equivalent",
+   "why": "tag_value reaches 0x10000 and up only in a GPS directory (tag_offset2 is 0x10000 there and 0 elsewhere, Interop included), so it is never exactly 0x20000"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "TracePSClippath",
