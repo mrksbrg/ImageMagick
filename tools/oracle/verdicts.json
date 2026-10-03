@@ -12592,6 +12592,46 @@
    "why": "the alpha written here is never read: no pixel is read between this loop and SyncImage (GetImageQuantizeError runs only when measure_error is set, and then this block is skipped), and SyncImage repaints every pixel, alpha included, from the colormap"
   },
   {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "AssignImageColors",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelRed(image,ClampToQuantum(",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "AssignImageColors",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelGreen(image,ClampToQuantum(",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "AssignImageColors",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelBlue(image,ClampToQuantum(",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "AssignImageColors",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelAlpha(image,ClampToQuantum(",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
    "at": 12,
    "file": "MagickCore/quantize.c",
    "function": "DestroyQCubeInfo",
@@ -12620,6 +12660,46 @@
    "src": "} while (cube_info->node_queue != (QNodes *) NULL);",
    "verdict": "unobservable",
    "why": "stops freeing the node queue after its first block: a leak at the end of a quantization, nothing reads the blocks again and the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "FloydSteinbergDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelRed(image,ClampToQuantum(image->colormap[index].red),",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "FloydSteinbergDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelGreen(image,ClampToQuantum(image->colormap[index].green),",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "FloydSteinbergDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelBlue(image,ClampToQuantum(image->colormap[index].blue),",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "FloydSteinbergDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelAlpha(image,ClampToQuantum(image->colormap[index].alpha),",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
   },
   {
    "at": 14,
@@ -12670,6 +12750,16 @@
    "src": "intensity=GetPixelInfoIntensity((const Image *) NULL,color_1)-",
    "verdict": "equivalent",
    "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "KmeansImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyQCubeInfo(cube_info);",
+   "verdict": "unobservable",
+   "why": "the colour cube is not destroyed: a leak when the quantization is done, nothing reads it again"
   },
   {
    "at": 25,
@@ -12792,6 +12882,26 @@
    "why": "differs only for two errors within MagickEpsilon of each other (here: both within epsilon of zero, the errors being non-negative), which the original already counts as equal, so their order was never fixed; the sorted values, and so next_threshold, are the same to within epsilon"
   },
   {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyQCubeInfo(cube_info);",
+   "verdict": "unobservable",
+   "why": "the colour cube is not destroyed: a leak when the quantization is done, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyQCubeInfo(cube_info);",
+   "verdict": "unobservable",
+   "why": "the colour cube is not destroyed: a leak when the quantization is done, nothing reads it again"
+  },
+  {
    "at": 22,
    "file": "MagickCore/quantize.c",
    "function": "ReduceImageColors",
@@ -12810,6 +12920,86 @@
    "src": "if (cube_info->colors > cube_info->maximum_colors)",
    "verdict": "equivalent",
    "why": "with exactly MaxColormapSize colours, ReduceImageColors does nothing: its threshold block and its loop both need colors > maximum_colors, and next_threshold, the one field it sets, is read only by Reduce, inside that loop"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "RemapImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyQCubeInfo(cube_info);",
+   "verdict": "unobservable",
+   "why": "the colour cube is not destroyed: a leak when the quantization is done, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "RemapImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyQCubeInfo(cube_info);",
+   "verdict": "unobservable",
+   "why": "the colour cube is not destroyed: a leak when the quantization is done, nothing reads it again"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "RiemersmaDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelRed(image,ClampToQuantum(image->colormap[index].red),q);",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "RiemersmaDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelGreen(image,ClampToQuantum(image->colormap[index].green),q);",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "RiemersmaDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelBlue(image,ClampToQuantum(image->colormap[index].blue),q);",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "RiemersmaDither",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelAlpha(image,ClampToQuantum(image->colormap[index].alpha),q);",
+   "verdict": "equivalent",
+   "why": "a colour write SyncImage undoes: AssignImageColors (the dithers' only caller, through DitherImage) ends with SyncImage, which sets every pixel's red, green, blue and alpha from its colormap index; the dithers read each pixel before writing it and never read the written colour back, so only the index write counts"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "SetGrayscaleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "qsort((void *) image->colormap,image->colors,sizeof(PixelInfo),",
+   "verdict": "equivalent",
+   "why": "SetGrayscaleImage's colormap order and indexes are rebuilt: its one caller, QuantizeImage, then classifies the pixels and AssignImageColors writes a new colormap and every index (as for IntensityCompare)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/quantize.c",
+   "function": "SetGrayscaleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelIndex(image,(Quantum) colormap_index[ScaleQuantumToMap(",
+   "verdict": "equivalent",
+   "why": "SetGrayscaleImage's colormap order and indexes are rebuilt: its one caller, QuantizeImage, then classifies the pixels and AssignImageColors writes a new colormap and every index (as for IntensityCompare)"
   },
   {
    "at": 18,
