@@ -72,6 +72,196 @@
    "why": "GetFillColor overwrites the whole of fill_color next: a copy of draw_info->fill, or GetOneVirtualPixelInfo, which itself starts with GetPixelInfo"
   },
   {
+   "at": 51,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((double) image->delay < floor(geometry_info.rho+0.5))",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 51,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((double) image->delay > floor(geometry_info.rho+0.5))",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 64,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 64,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 68,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "image->ticks_per_second=CastDoubleToSsizeT(floor(geometry_info.sigma+",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 26,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((double) image->delay > floor(geometry_info.rho+0.5))",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 26,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((double) image->delay < floor(geometry_info.rho+0.5))",
+   "verdict": "unresolved",
+   "why": "-delay given before the image: ReadImage re-applies the delay option to every image it reads (constitute.c), overwriting what AcquireImage set; tried with 7x50, 1< and -2>, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 37,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "SetBlobExempt(image,image_info->file != (FILE *) NULL ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "blob exemption follows image_info->file, a FILE* only an API caller supplies; the command line never sets it"
+  },
+  {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((flags & XValue) != 0) || ((flags & YValue) != 0))",
+   "verdict": "unresolved",
+   "why": "-extract given before an image is read: ReadImage applies read_info->extract to the image it reads, overwriting what AcquireImage set; -delay, -density and -extract before the input were tried and changed nothing. Only an API caller of AcquireImage could see it (a C driver is an open owner decision)"
+  },
+  {
+   "at": 49,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((flags & XValue) != 0) || ((flags & YValue) != 0))",
+   "verdict": "unresolved",
+   "why": "-extract given before an image is read: ReadImage applies read_info->extract to the image it reads, overwriting what AcquireImage set; -delay, -density and -extract before the input were tried and changed nothing. Only an API caller of AcquireImage could see it (a C driver is an open owner decision)"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((flags & RhoValue) != 0)",
+   "verdict": "unresolved",
+   "why": "-density given before the image: the command line's settings pass (SyncImageSettings) sets the resolution again after reading, overwriting what AcquireImage set; tried with xc: and a read image, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 25,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((flags & SigmaValue) != 0)",
+   "verdict": "unresolved",
+   "why": "-density given before the image: the command line's settings pass (SyncImageSettings) sets the resolution again after reading, overwriting what AcquireImage set; tried with xc: and a read image, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->density != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "-density given before the image: the command line's settings pass (SyncImageSettings) sets the resolution again after reading, overwriting what AcquireImage set; tried with xc: and a read image, unchanged. Only an API caller of AcquireImage could see it"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_info->extract != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "-extract given before an image is read: ReadImage applies read_info->extract to the image it reads, overwriting what AcquireImage set; -delay, -density and -extract before the input were tried and changed nothing. Only an API caller of AcquireImage could see it (a C driver is an open owner decision)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfoRGBA(BackgroundColorRGBA,&image->background_color);",
+   "verdict": "unresolved",
+   "why": "the default colour is overwritten from image_info a few lines on (image->background_color=image_info->background_color and the like) whenever there is an image_info; images acquired with none (from the API, or internally) were not found to show it"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfoRGBA(BorderColorRGBA,&image->border_color);",
+   "verdict": "unresolved",
+   "why": "the default colour is overwritten from image_info a few lines on (image->background_color=image_info->background_color and the like) whenever there is an image_info; images acquired with none (from the API, or internally) were not found to show it"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfoRGBA(MatteColorRGBA,&image->matte_color);",
+   "verdict": "unresolved",
+   "why": "the default colour is overwritten from image_info a few lines on (image->background_color=image_info->background_color and the like) whenever there is an image_info; images acquired with none (from the API, or internally) were not found to show it"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfoRGBA(TransparentColorRGBA,&image->transparent_color);",
+   "verdict": "unresolved",
+   "why": "the default colour is overwritten from image_info a few lines on (image->background_color=image_info->background_color and the like) whenever there is an image_info; images acquired with none (from the API, or internally) were not found to show it"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "AcquireImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetBlobExempt(image,image_info->file != (FILE *) NULL ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "blob exemption follows image_info->file, a FILE* only an API caller supplies; the command line never sets it"
+  },
+  {
    "at": 29,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "ClipImagePath",
