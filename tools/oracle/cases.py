@@ -4366,6 +4366,12 @@ GAP_STEP_CASES += [
     ("8BIM with embedded profiles, written", [["{C}/rose.miff", "-profile", "8bim:r.8bim", "out.miff"],
                                               ["out.miff", "-format", "%[profiles]\\n", "info:"]], {"r.8bim": _8BIM_EMBEDDED}),
 ]
+# profile.c: Sync8BimProfile rewriting the PSD's resolution resource (0x03ED) for a new density in
+# centimetres, x and y apart, written to PSD again and read back from the 8BIM profile
+GAP_STEP_CASES += [("psd 8bim resolution rewritten per centimetre",
+                    [["{C}/rose.miff", "-density", "150", "-units", "PixelsPerInch", "r.psd"],
+                     ["r.psd", "-density", "300x200", "-units", "PixelsPerCentimeter", "out.psd"],
+                     ["out.psd", "-format", "%x %y %U|%[8BIM:1005,1005]\\n", "info:"]], {})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
