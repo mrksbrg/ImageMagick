@@ -3967,7 +3967,7 @@ GAP_STEP_CASES += [("MSL comment and label %r" % text,
                     [["msl:s.msl", "out.miff", "-format", "[%c|%l]\\n", "info:"]],
                     {"s.msl": _MSL_COMMENT % (text, text)})
                    for text in ('  "quoted text"  ', "'\"", "line one&#10;line two", '"   ')]
-# string.c: InterpretSiPrefixValue with the largest prefix letter, E (10^18), and no B after it: a
+# string.c: InterpretSiPrefixValue at the bottom of its letter range, E (10^18), with no B after it: a
 # width limit of 100 that the 70-pixel rose passes
 GAP_STEP_CASES += [("a width limit with an E prefix",
                     [["-limit", "width", "0.0000000000000001E", "{C}/rose.miff", "-format", "%w\\n", "info:"]], {})]
