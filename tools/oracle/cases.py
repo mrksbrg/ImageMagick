@@ -4064,22 +4064,22 @@ GAP_STEP_CASES += [_8bim_format("[%[8BIM:1999,2998:#1]]", "8BIM\x08\x00\x05\x00\
 # by number (#hex, @hex for GPS) is stored under an empty name, so it shows only as a warning,
 # one per command; exif:! stores every tag as #hex or @hex, read back in the same format.
 _TINY_JPEG = base64.b64decode("/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/wAALCAAEAAQBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAAAf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AH//Z")
-def _exif_block():
+def _exif_block(byte_order="<"):
     BYTE, ASCII, SHORT, LONG, RATIONAL, SBYTE, UNDEF, SSHORT, SLONG, SRATIONAL, FLOAT, DOUBLE = range(1, 13)
     ifds = {
-        "0": [(0x010F, ASCII, 8, b"CaseCam\0"), (0x0112, SHORT, 1, struct.pack("<H", 6)),
-              (0x011A, RATIONAL, 1, struct.pack("<II", 300, 1)), (0x0128, SHORT, 1, struct.pack("<H", 2)),
+        "0": [(0x010F, ASCII, 8, b"CaseCam\0"), (0x0112, SHORT, 1, struct.pack(byte_order + "H", 6)),
+              (0x011A, RATIONAL, 1, struct.pack(byte_order + "II", 300, 1)), (0x0128, SHORT, 1, struct.pack(byte_order + "H", 2)),
               (0x8769, LONG, 1, "exif"), (0x8825, LONG, 1, "gps")],
         "exif": [(0x9000, UNDEF, 4, b"0230"), (0x9286, UNDEF, 16, b"ASCII\0\0\0hello!!"),
-                 (0x9201, SRATIONAL, 1, struct.pack("<ii", -7, 3)), (0x920A, RATIONAL, 1, struct.pack("<II", 50, 1)),
-                 (0xA002, LONG, 1, struct.pack("<I", 70)), (0x9204, SSHORT, 1, struct.pack("<h", -2)),
-                 (0x9205, SLONG, 1, struct.pack("<i", -40000)), (0x9206, FLOAT, 1, struct.pack("<f", 2.5)),
-                 (0x9207, DOUBLE, 1, struct.pack("<d", -1.25)), (0x9208, SBYTE, 2, struct.pack("<bb", -3, 4)),
+                 (0x9201, SRATIONAL, 1, struct.pack(byte_order + "ii", -7, 3)), (0x920A, RATIONAL, 1, struct.pack(byte_order + "II", 50, 1)),
+                 (0xA002, LONG, 1, struct.pack(byte_order + "I", 70)), (0x9204, SSHORT, 1, struct.pack(byte_order + "h", -2)),
+                 (0x9205, SLONG, 1, struct.pack(byte_order + "i", -40000)), (0x9206, FLOAT, 1, struct.pack(byte_order + "f", 2.5)),
+                 (0x9207, DOUBLE, 1, struct.pack(byte_order + "d", -1.25)), (0x9208, SBYTE, 2, struct.pack(byte_order + "bb", -3, 4)),
                  (0xA005, LONG, 1, "interop")],
         "gps": [(0x0000, BYTE, 4, bytes([2, 3, 0, 0])), (0x0001, ASCII, 2, b"N\0"),
-                (0x0002, RATIONAL, 3, struct.pack("<IIIIII", 55, 1, 42, 1, 30, 1))],
+                (0x0002, RATIONAL, 3, struct.pack(byte_order + "IIIIII", 55, 1, 42, 1, 30, 1))],
         "interop": [(0x0001, ASCII, 4, b"R98\0"), (0x0002, UNDEF, 4, b"0100"), (0x8769, LONG, 1, "exif")],
-        "1": [(0x0103, SHORT, 1, struct.pack("<H", 6))],
+        "1": [(0x0103, SHORT, 1, struct.pack(byte_order + "H", 6))],
     }
     order = ["0", "exif", "gps", "interop", "1"]
     offsets, pos = {}, 8
@@ -4087,23 +4087,23 @@ def _exif_block():
         offsets[name] = pos
         pos += 2 + 12 * len(ifds[name]) + 4 + sum(len(v) + len(v) % 2 for _, _, _, v in ifds[name]
                                                    if not isinstance(v, str) and len(v) > 4)
-    out = bytearray(b"II*\0" + struct.pack("<I", offsets["0"]))
+    out = bytearray((b"II*\0" if byte_order == "<" else b"MM\0*") + struct.pack(byte_order + "I", offsets["0"]))
     for name in order:
-        entries, data = bytearray(struct.pack("<H", len(ifds[name]))), bytearray()
+        entries, data = bytearray(struct.pack(byte_order + "H", len(ifds[name]))), bytearray()
         data_at = offsets[name] + 2 + 12 * len(ifds[name]) + 4
         for tag, fmt, count, v in ifds[name]:
             if isinstance(v, str):
-                field = struct.pack("<I", offsets[v])
+                field = struct.pack(byte_order + "I", offsets[v])
             elif len(v) <= 4:
                 field = v.ljust(4, b"\0")
             else:
-                field = struct.pack("<I", data_at + len(data))
+                field = struct.pack(byte_order + "I", data_at + len(data))
                 data += v + b"\0" * (len(v) % 2)
-            entries += struct.pack("<HHI", tag, fmt, count) + field
-        out += entries + struct.pack("<I", offsets["1"] if name == "0" else 0) + data
+            entries += struct.pack(byte_order + "HHI", tag, fmt, count) + field
+        out += entries + struct.pack(byte_order + "I", offsets["1"] if name == "0" else 0) + data
     return bytes(out)
-def _exif_jpeg_uri():
-    app1 = b"Exif\0\0" + _exif_block()
+def _exif_jpeg_uri(byte_order="<"):
+    app1 = b"Exif\0\0" + _exif_block(byte_order)
     jpeg = _TINY_JPEG[:2] + b"\xff\xe1" + struct.pack(">H", len(app1) + 2) + app1 + _TINY_JPEG[2:]
     return "inline:data:image/jpeg;base64," + base64.b64encode(jpeg).decode()
 GAP_STEP_CASES += [("EXIF properties %r" % fmt, [[_exif_jpeg_uri(), "-format", fmt + "\\n", "info:"]], {})
@@ -4112,6 +4112,7 @@ GAP_STEP_CASES += [("EXIF properties %r" % fmt, [[_exif_jpeg_uri(), "-format", f
                                "%[exif:GPSLatitudeRef]|%[exif:InteroperabilityIndex]|%[exif:Make]"]
                    + ["%%[exif:%s]" % key for key in ("#a002", "#A002", "#010f", "#010F", "#9000", "@0001",
                                                      "#00g0", "#12345", "#1234", "")]]
+GAP_STEP_CASES += [("EXIF properties, big-endian", [[_exif_jpeg_uri(">"), "-format", "%[exif:*]\\n", "info:"]], {})]
 # image.c: SetImageRegionMask through -region (a region inside the image, one centred by gravity
 # and lifted again by +region, and one larger than the image), and GetImageMask through the
 # clip: coder, written and read, with the 8BIM clip paths above
