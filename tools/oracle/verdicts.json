@@ -1702,6 +1702,16 @@
    "why": "tag_value reaches 0x10000 and up only in a GPS directory (tag_offset2 is 0x10000 there and 0 elsewhere, Interop included), so it is never exactly 0x20000"
   },
   {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetXMPProperty",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (GetStringInfoLength(profile) < 17)",
+   "verdict": "equivalent",
+   "why": "differs only for a profile of exactly 17 bytes, which cannot hold an rdf:RDF element with an rdf:Description in it, so no property would be added either way"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "TracePSClippath",
