@@ -1602,6 +1602,136 @@
    "why": "sends a DirectClass clip mask through SetImageStorageClass(DirectClass), which leaves it as it is, and keeps a PseudoClass one PseudoClass; the mask is only read as gray values afterwards, the same either way"
   },
   {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((p-filename+(ssize_t) option_length) >= MagickPathExtent)",
+   "verdict": "unresolved",
+   "why": "guards the interpolated name against MagickPathExtent: differs only for a name within a few bytes of 4096 characters, which no file system here can create (and none of the cases has)"
+  },
+  {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((p-filename+(ssize_t) pattern_length) >= MagickPathExtent)",
+   "verdict": "unresolved",
+   "why": "guards the interpolated name against MagickPathExtent: differs only for a name within a few bytes of 4096 characters, which no file system here can create (and none of the cases has)"
+  },
+  {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((p-filename+1) >= MagickPathExtent)",
+   "verdict": "unresolved",
+   "why": "guards the interpolated name against MagickPathExtent: differs only for a name within a few bytes of 4096 characters, which no file system here can create (and none of the cases has)"
+  },
+  {
+   "at": 41,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((p-filename+(ssize_t) option_length) >= MagickPathExtent)",
+   "verdict": "unresolved",
+   "why": "guards the interpolated name against MagickPathExtent: differs only for a name within a few bytes of 4096 characters, which no file system here can create (and none of the cases has)"
+  },
+  {
+   "at": 42,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((p-filename+(ssize_t) pattern_length) >= MagickPathExtent)",
+   "verdict": "unresolved",
+   "why": "guards the interpolated name against MagickPathExtent: differs only for a name within a few bytes of 4096 characters, which no file system here can create (and none of the cases has)"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((p-filename+1) >= MagickPathExtent)",
+   "verdict": "unresolved",
+   "why": "guards the interpolated name against MagickPathExtent: differs only for a name within a few bytes of 4096 characters, which no file system here can create (and none of the cases has)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (extent >= sizeof(pattern))",
+   "verdict": "unresolved",
+   "why": "a %[...] key of 4096 characters or more: none of the cases has one"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if ((count <= 0) || ((size_t) count != pattern_length))",
+   "verdict": "equivalent",
+   "why": "a %d, %o or %x conversion of a number never yields an empty string, so count is never 0"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(image_info != (ImageInfo *) NULL))",
+   "verdict": "unresolved",
+   "why": "the command line copies its options onto each image as artifacts before writing, so an option is always found on the image first and the image_info fallback is never needed (-set option:foo with o_%[foo].miff wrote o_bar.miff either way); only an API caller could see it"
+  },
+  {
+   "at": 2,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(p-filename)));",
+   "verdict": "equivalent",
+   "why": "only enlarges the size CopyMagickString is given: the pattern was checked to fit the room left just before, so the same bytes are copied"
+  },
+  {
+   "at": 2,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "(p-filename)));",
+   "verdict": "equivalent",
+   "why": "only enlarges the size CopyMagickString is given: the option was checked to fit the room left just before, so the same bytes are copied"
+  },
+  {
+   "at": 59,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(void) CopyMagickString(p,option,(size_t) (MagickPathExtent-",
+   "verdict": "equivalent",
+   "why": "only enlarges the size CopyMagickString is given: the option was checked to fit the room left just before, so the same bytes are copied"
+  },
+  {
+   "at": 60,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "InterpretImageFilename",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(void) CopyMagickString(p,pattern,(size_t) (MagickPathExtent-",
+   "verdict": "equivalent",
+   "why": "only enlarges the size CopyMagickString is given: the pattern was checked to fit the room left just before, so the same bytes are copied"
+  },
+  {
    "at": 18,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "SmushImages",
