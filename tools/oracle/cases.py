@@ -4286,6 +4286,11 @@ GAP_STEP_CASES += [
     ("an offset image scaled 3 by 1", [["{C}/rose.miff", "-repage", "+10+5", "-resize", "210x46!", "-format", "%g\\n", "info:"]], {}),
     ("an offset image sampled 1 by 3", [["{C}/rose.miff", "-repage", "+10+5", "-sample", "70x138!", "-format", "%g\\n", "info:"]], {}),
 ]
+# draw.c: RenderMVGContent's keywords at their edges: an unbalanced pop, drawing inside defs (not
+# rendered), fill-opacity with no fill and as a percentage, stroke-opacity, zero entries in a dash
+# array, zero and negative stroke widths, and skewY (alone and after skewX)
+GAP_STEP_CASES += [("MVG keyword: %s" % draw, [["-size", "70x46", "xc:white", "-draw", draw, "out.miff"]], {})
+                   for draw in ['pop graphic-context', 'push defs rectangle 5,5 20,20 pop defs fill red rectangle 25,5 40,20', 'fill none fill-opacity 0.5 stroke red stroke-width 3 rectangle 5,5 30,20', 'fill red fill-opacity 50% rectangle 5,5 30,20', 'stroke blue stroke-opacity 0.4 stroke-width 5 line 5,5 60,40', 'stroke blue stroke-width 4 stroke-dasharray 0 4 line 5,20 60,20', 'stroke blue stroke-width 4 stroke-dasharray 5 0 3 line 5,20 60,20', 'stroke blue stroke-width 0 line 5,5 30,30', 'stroke blue stroke-width -1 line 5,5 30,30', 'skewY 20 fill red rectangle 10,5 40,20', 'fill red skewX 15 skewY -10 rectangle 10,5 40,20']]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
