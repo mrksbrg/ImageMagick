@@ -10595,6 +10595,26 @@
    "why": "a running maximum: >= replaces it with an equal value"
   },
   {
+   "at": 6,
+   "file": "MagickCore/matrix.c",
+   "function": "EdgeX",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (x < 0L)",
+   "verdict": "equivalent",
+   "why": "differs only for an index of exactly 0, which both branches return as 0"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/matrix.c",
+   "function": "EdgeY",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (y < 0L)",
+   "verdict": "equivalent",
+   "why": "differs only for an index of exactly 0, which both branches return as 0"
+  },
+  {
    "at": 27,
    "file": "MagickCore/matrix.c",
    "function": "GaussJordanElimination",
@@ -10743,6 +10763,26 @@
    "src": "for (k=0; k < (ssize_t) rank; k++)",
    "verdict": "unresolved",
    "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/matrix.c",
+   "function": "RelinquishMagickMatrix",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (matrix == (double **) NULL )",
+   "verdict": "unobservable",
+   "why": "skips freeing the rows (or the whole matrix, returning it instead of NULL); every caller (distort.c, GenerateCoefficients) assigns the result to a local it never reads again: a leak only"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "RelinquishMagickMatrix",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) number_rows; i++)",
+   "verdict": "unobservable",
+   "why": "skips freeing the rows (or the whole matrix, returning it instead of NULL); every caller (distort.c, GenerateCoefficients) assigns the result to a local it never reads again: a leak only"
   },
   {
    "at": 6,
