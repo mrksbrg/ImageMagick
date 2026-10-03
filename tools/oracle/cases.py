@@ -4179,6 +4179,24 @@ GAP_STEP_CASES += [
                                                "[%[IPTC:2:105]]\\n", "info:"]],
      {"p.8bim": "8BIM\x04\x04\x00\x00\x00\x00\x00\x14" + _iptc(2, 105, "from 8BIM")}),
 ]
+# property.c: SetImageProperty's image attributes through -set: a valid value, Undefined (0) and an
+# unknown name for compress, intent and interpolate; a non-default value then Undefined for dispose,
+# gravity, interpolate and units; each written out (verbose, an interpolative resize, a MIFF
+# header). And -set delay with > and < (where < takes the delay from sigma) at its boundaries.
+_SET_TAIL = ["-verbose", "-write", "info:", "+verbose", "-interpolative-resize", "50%", "out.miff"]
+GAP_STEP_CASES += [("-set %s %s" % (key, value), [["{C}/rose.miff", "-set", key, value] + _SET_TAIL], {})
+                   for key, values in (("compress", ("RLE", "Undefined", "NoSuch")),
+                                       ("intent", ("Saturation", "Undefined", "NoSuch")),
+                                       ("interpolate", ("Nearest",)))
+                   for value in values]
+GAP_STEP_CASES += [("-set %s %s, then Undefined" % (key, value),
+                    [["{C}/rose.miff", "-set", key, value, "-set", key, "Undefined"] + _SET_TAIL], {})
+                   for key, value in (("dispose", "Background"), ("gravity", "South"), ("interpolate", "Nearest"),
+                                      ("units", "PixelsPerCentimeter"))]
+GAP_STEP_CASES += [("-set delay %s, then %s" % (first, second),
+                    [["{C}/rose.miff", "-set", "delay", first, "-set", "delay", second, "-format", "%T\\n", "info:"]], {})
+                   for first, second in (("50", "10>"), ("5", "30x20<"), ("40", "30x20<"), ("20", "20x30<"),
+                                         ("29", "30x7<"))]
 GAP_COMMANDS += ["-size 60x40 -define gradient:angle=30 -define gradient:radii=25,10 radial-gradient:red-blue",
                  "-size 60x40 -define gradient:angle=120 -define gradient:radii=8,20 -define gradient:center=20,15 "
                  "radial-gradient:yellow-navy"]
