@@ -2199,6 +2199,45 @@ they stay open.
 
 composite.c after the refresh: 83% → 84%.
 
+**The refresh is complete (09:34, three instances).** Adjusted, every regular Windows file, with every report so far (the trial's excluded):
+
+| file | adjusted |
+|---|---|
+| blob.c | 75% |
+| cache.c | 82% (83 after its rounds) |
+| cache-view.c | 36% (API) |
+| color.c | 86% |
+| colorspace.c | 90% |
+| composite.c | 84% |
+| distort.c | 88% |
+| exception.c | 98% |
+| feature.c | 88% |
+| fx.c | 81% (92 after its rounds) |
+| gem.c | 89% |
+| histogram.c | 94% |
+| linked-list.c | 40% (API) |
+| magick.c | 81% |
+| matrix.c | 73% |
+| monitor.c | 100% |
+| montage.c | 85% |
+| morphology.c | 89% |
+| option.c | 77% |
+| pixel.c | 50% (API) |
+| prepress.c | 87% |
+| quantize.c | 91% |
+| quantum.c | 94% |
+| quantum-export.c | 72% |
+| quantum-import.c | 69% |
+| registry.c | 92% |
+| resample.c | 75% (77 after its round) |
+| resource.c | 94% |
+| signature.c | 82% |
+| splay-tree.c | 54% (API) |
+| stream.c | 86% |
+| timer.c | 86% |
+| token.c | 78% |
+| xml-tree.c | 77% (API) |
+
 **A correction to the hand-run counts.** Until about 01:15, `~/mutcase.py` ran every ad-hoc command in one directory (`runs/hand/adhoc_1`), and two hand-runs at once overwrote each other's files. That happened between about 01:00 and 01:25, while a long resample probe ran beside the matrix, resample and some fx probes, and produced false kills (the matrix SetMatrixExtent kills, and one stray distort kill, which first looked like a nondeterministic Arc distortion). mutcase now uses a directory per process. The case rounds are what count; the table's hand-run figures are replaced by round results as the rounds finish.
 
 Tooling: `mutate.py`'s `ORACLE_MEM_GB` (above). A pull of the WSL clone between a round's
