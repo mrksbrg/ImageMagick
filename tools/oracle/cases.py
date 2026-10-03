@@ -4019,6 +4019,11 @@ GAP_COMMANDS += [
 # the case wrote, with and without a subimage
 GAP_STEP_CASES += [
     ("a file read back through a glob under ~/", [["{C}/rose.miff", "f.miff"], ["~/f*.miff", "-negate", "out.miff"]], {}),
+    # the glob's head is "~/d", not "~": ExpandFilename's "~/" test and its $HOME lookup, seen
+    # in the directory the file was found in ($HOME/d, or ./d when $HOME is not substituted)
+    ("a glob under ~/ in a subdirectory, with its directory",
+     [["{C}/rose.miff", "d/f.miff"], ["~/d/f*.miff", "-format", "%d|%f %wx%h\\n", "info:"]],
+     {"d/keep.txt": "x"}),
     ("a file under ~root", [["~root/no-such-file.miff", "out.miff"]], {}),
     ("a glob under ~root (the user's home is looked up)", [["~root/no-such-*.miff", "out.miff"]], {}),
     ("a glob under ~ of no such user", [["~no-such-user-x/no-such-*.miff", "out.miff"]], {}),
