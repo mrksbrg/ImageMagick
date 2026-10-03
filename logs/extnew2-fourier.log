@@ -1,0 +1,12 @@
+mutate: 7 mutants in MagickCore/fourier\.c$, 2 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 7/7 (0s)
+
+mutate: 7 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 7, errors 0
+
+  function                           total killed survived no-cov
+  ComplexImages                          6      0        0      6
+  InverseFourierTransformImage           1      0        0      1
+
+  full results: build-oracle/work/mutation-extnew2-fourier.json
