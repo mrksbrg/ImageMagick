@@ -2,6 +2,26 @@
  "about": "Hand verdicts on surviving mutants; see tools/oracle/classify.py",
  "verdicts": [
   {
+   "at": 59,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/utility.c",
+   "function": "ExpandFilename",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (getpwnam_r(username,&pwd,buffer,sizeof(buffer),&entry) < 0)",
+   "verdict": "unresolved",
+   "why": "getpwnam_r returns 0 or a positive errno, never below 0, so the original never returns here; both mutants return on success too and leave ~user unexpanded. That shows only in a glob that matches under another user's home, and the cases have none to read: root's home is closed (0750 on macOS, 0700 on Linux), and no other user's home exists and is readable on every machine"
+  },
+  {
+   "at": 59,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/utility.c",
+   "function": "ExpandFilename",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (getpwnam_r(username,&pwd,buffer,sizeof(buffer),&entry) < 0)",
+   "verdict": "unresolved",
+   "why": "getpwnam_r returns 0 or a positive errno, never below 0, so the original never returns here; both mutants return on success too and leave ~user unexpanded. That shows only in a glob that matches under another user's home, and the cases have none to read: root's home is closed (0750 on macOS, 0700 on Linux), and no other user's home exists and is readable on every machine"
+  },
+  {
    "at": 55,
    "file": "MagickCore/annotate.c",
    "function": "AnnotateImage",
