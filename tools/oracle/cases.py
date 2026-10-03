@@ -4127,6 +4127,22 @@ GAP_STEP_CASES += [
     ("clip: written from a named 8BIM clip path", [["{C}/rose.miff", "-profile", "clip.8bim", "-clip-path", "Path A",
                                                     "clip:m.miff"]], {"clip.8bim": _8BIM_RICH}),
 ]
+# draw.c: round line caps (DrawRoundLinecap) on a line and an open polyline, and a composite mask
+# from a named MVG macro (push mask "m1" ... mask m1: the name must be quoted to become a macro)
+_MVG_MASK = ('push graphic-context\n  push mask "m1"\n    fill white\n    circle 35,23 35,5\n  pop mask\n'
+             '  mask m1\n  fill red\n  rectangle 0,0 70,46\npop graphic-context\n')
+GAP_STEP_CASES += [
+    ("round line caps on a line", [["-size", "70x46", "xc:white", "-draw",
+                                    "stroke blue stroke-width 7 stroke-linecap round line 10,10 60,30", "out.miff"]], {}),
+    ("round line caps on an open polyline", [["-size", "70x46", "xc:white", "-draw",
+        "stroke blue stroke-width 5 stroke-linecap round polyline 5,40 20,5 35,40 50,5", "out.miff"]], {}),
+    # with fill none the round caps fail: the command ends in a non-conforming primitive error
+    ("round line caps on an open polyline, no fill", [["-size", "70x46", "xc:white", "-draw",
+        "fill none stroke blue stroke-width 5 stroke-linecap round polyline 5,40 20,5 35,40 50,5", "out.miff"]], {}),
+    ("an MVG composite mask", [["{C}/rose.miff", "-draw", "@m.mvg", "out.miff"]], {"m.mvg": _MVG_MASK}),
+    ("an MVG composite mask, its red channel", [["{C}/rose.miff", "-draw", "@m.mvg", "-format",
+                                                 "%[fx:mean.r] %[fx:maxima.r]\\n", "info:"]], {"m.mvg": _MVG_MASK}),
+]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
