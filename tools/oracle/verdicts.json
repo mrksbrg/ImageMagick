@@ -232,6 +232,186 @@
    "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
   },
   {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (x > inverse_edge.x1)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "if (x > inverse_edge.x1)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 2,
+   "src": "if (x > inverse_edge.x1)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 3,
+   "src": "if (x > inverse_edge.x1)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (affine->rx < -MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "compares a term of the inverse transform with -MagickEpsilon: the mutant differs only for a term of exactly -1e-12, which no transform here yields"
+  },
+  {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (affine->sx < -MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "compares a term of the inverse transform with -MagickEpsilon: the mutant differs only for a term of exactly -1e-12, which no transform here yields"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (x < inverse_edge.x2)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (x < inverse_edge.x2)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "if (x < inverse_edge.x2)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "AffineEdge",
+   "mutator": "cxx_lt_to_le",
+   "nth": 3,
+   "src": "if (x < inverse_edge.x2)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (edge.y2 > ((double) image->rows-1.0))",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 20,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (inverse_edge.x2 > ((double) image->columns-1.0))",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (min.x > extent[i].x)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (min.y > extent[i].y)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (edge.y1 < 0.0)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 20,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (inverse_edge.x1 < 0.0)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (max.x < extent[i].x)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawAffineImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (max.y < extent[i].y)",
+   "verdict": "equivalent",
+   "why": "a running bound or clamp (the edge's or the extent's minimum or maximum): the mutant (>= for >, <= for <) differs only when the value equals the bound, and then assigns the same value"
+  },
+  {
    "at": 25,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "DrawBoundingRectangles",
