@@ -4234,6 +4234,12 @@ GAP_STEP_CASES += [("clip path in objectBoundingBox units%s" % label,
                     [["-size", "70x46", "xc:white", "-draw", "@m.mvg", "out.miff"]],
                     {"m.mvg": _MVG_BBOX_CLIP.replace("rectangle 10,10 60,40", shape)})
                    for label, shape in (("", "rectangle 10,10 60,40"), (", polygon", "polygon 60,40 10,35 20,10 55,5"))]
+# draw.c: the MVG opacity keyword outside SVG compliance: a fraction, a percentage, with no fill
+# (the stroke takes it), after compliance SVG, and inside a clip path (where it is ignored)
+GAP_STEP_CASES += [("MVG opacity: %s" % draw, [["-size", "70x46", "xc:white", "-draw", draw, "out.miff"]], {})
+                   for draw in ['fill red opacity 0.5 rectangle 5,5 30,30', 'fill red opacity 50% circle 40,20 40,5', 'fill none stroke blue stroke-width 3 opacity 0.4 rectangle 5,5 60,40', 'compliance SVG fill red opacity 0.5 rectangle 5,5 30,30']]
+GAP_STEP_CASES += [("MVG opacity inside a clip path", [["-size", "70x46", "xc:white", "-draw", "@m.mvg", "out.miff"]],
+                    {"m.mvg": 'push defs\n push clip-path "c"\n  push graphic-context\n   opacity 0.3\n   rectangle 10,10 50,35\n  pop graphic-context\n pop clip-path\npop defs\npush graphic-context\n clip-path url(#c)\n fill red rectangle 0,0 69,45\npop graphic-context\n'})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
