@@ -4142,6 +4142,19 @@ GAP_STEP_CASES += [
     ("an MVG composite mask, its red channel", [["{C}/rose.miff", "-draw", "@m.mvg", "-format",
                                                  "%[fx:mean.r] %[fx:maxima.r]\\n", "info:"]], {"m.mvg": _MVG_MASK}),
 ]
+# draw.c: DrawGradientImage's stop lookup where a pixel's offset lands exactly on two stops of
+# the same offset (0 and 0.5 on a 101-pixel ramp, x/100) and on a stop beyond 1; and an
+# elliptical radial gradient at an angle (GetStopColorOffset's rotation)
+_MVG_DUP_STOPS = ("push defs\n  push gradient g1 linear 0,0 100,0\n"
+                  "    stop-color red 0\n    stop-color lime 0\n    stop-color blue 0.5\n    stop-color yellow 0.5\n"
+                  "    stop-color black 1.5\n  pop gradient\npop defs\nfill url(#g1) rectangle 0,0 100,9\n")
+GAP_STEP_CASES += [
+    ("a gradient with stops sharing an offset", [["-size", "101x10", "xc:white", "-draw", "@g.mvg", "out.miff"]],
+     {"g.mvg": _MVG_DUP_STOPS}),
+]
+GAP_COMMANDS += ["-size 60x40 -define gradient:angle=30 -define gradient:radii=25,10 radial-gradient:red-blue",
+                 "-size 60x40 -define gradient:angle=120 -define gradient:radii=8,20 -define gradient:center=20,15 "
+                 "radial-gradient:yellow-navy"]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
