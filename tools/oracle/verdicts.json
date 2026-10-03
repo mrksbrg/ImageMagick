@@ -162,6 +162,56 @@
    "why": "the return value: every caller (msl.c, tiff.c, xpm.c, ps.c, nt-feature.c) casts it to void"
   },
   {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "SubstituteString",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "extent=strlen(*string)+replace_extent-search_extent+1;",
+   "verdict": "unresolved",
+   "why": "the buffer is resized to OverAllocateMemory(extent+MagickPathExtent), so subtracting replace_extent asks for 2*replace_extent less: short of the result only when the replacement is longer than MagickPathExtent/2 (2048), and then the copy overflows the heap, undefined rather than a sure difference"
+  },
+  {
+   "at": 51,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "SubstituteString",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "extent=strlen(*string)+replace_extent-search_extent+1;",
+   "verdict": "equivalent",
+   "why": "the buffer is resized to OverAllocateMemory(extent+MagickPathExtent), so asking for 2 bytes less still leaves MagickPathExtent-2 bytes more than the result needs"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "SubstituteString",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (replace_extent > search_extent)",
+   "verdict": "equivalent",
+   "why": "also resizes when the replacement is as long as the search string, to a size that already holds the result; p is recomputed from the offset, so the string is the same"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "SubstituteString",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (replace_extent > search_extent)",
+   "verdict": "unresolved",
+   "why": "skips the resize when the replacement is longer: the string's own MagickPathExtent of slack absorbs the growth until the replacements add more than that, and past it the write overflows the heap, undefined rather than a sure difference"
+  },
+  {
+   "at": 37,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "SubstituteString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "extent=strlen(*string)+replace_extent-search_extent+1;",
+   "verdict": "equivalent",
+   "why": "the buffer is resized to OverAllocateMemory(extent+MagickPathExtent), so adding search_extent instead of subtracting it only asks for more room than the result needs"
+  },
+  {
    "at": 59,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/utility.c",
    "function": "ExpandFilename",
