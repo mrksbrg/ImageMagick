@@ -2902,6 +2902,26 @@
    "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
   },
   {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/policy.c",
+   "function": "GetPolicyInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (q=policyname; *q != '\\0'; q++)",
+   "verdict": "equivalent",
+   "why": "strips whitespace from the policy name: every caller (GetPolicyValue's literal names such as resource:area, the list functions' \"*\") passes a name without any, so the loop changes nothing"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/policy.c",
+   "function": "GetPolicyInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetLinkedListIterator(policy_cache);",
+   "verdict": "equivalent",
+   "why": "resets the cache's iterator, which GetPolicyInfo then never uses: it walks the list from GetHeadElementInLinkedList through p->next"
+  },
+  {
    "at": 0,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "CloneImageProperties",
