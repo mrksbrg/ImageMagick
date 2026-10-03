@@ -5054,10 +5054,10 @@ GAP_STEP_CASES += [
 def _driver(*args):
     return [["@driver"] + list(args)]
 _DRIVER_CASES = []
-for _type, _art in (("linear", "gradient:vector=10,5,20,8"), ("radial", "gradient:radii=6,4")):
-    for _spread in ("pad", "reflect", "repeat"):
-        _DRIVER_CASES.append(("driver gradient %s %s, %s" % (_type, _spread, _art),
-                              _driver("gradient", _type, _spread, "40x20", _art, "red:0.0", "yellow:0.4",
+for _drv_type, _drv_art in (("linear", "gradient:vector=10,5,20,8"), ("radial", "gradient:radii=6,4")):
+    for _drv_spread in ("pad", "reflect", "repeat"):
+        _DRIVER_CASES.append(("driver gradient %s %s, %s" % (_drv_type, _drv_spread, _drv_art),
+                              _driver("gradient", _drv_type, _drv_spread, "40x20", _drv_art, "red:0.0", "yellow:0.4",
                                       "blue:1.0", "out.miff")))
 _DRIVER_CASES += [
     ("driver gradient linear reflect at 30 degrees",
@@ -5069,12 +5069,12 @@ _DRIVER_CASES += [
      _driver("gradient", "radial", "reflect", "40x20", "gradient:extent=Diagonal", "red:0.3", "green:0.3",
              "blue:0.9", "out.miff")),
 ]
-for _kind in ("read", "write", "composite"):
-    for _op in ("negate", "blur", "composite", "colorize"):
-        _DRIVER_CASES.append(("driver %s mask, %s" % (_kind, _op),
-                              _driver("mask", _kind, "{C}/rose.miff", "{C}/bilevel.miff", _op, "out.miff")))
-    _DRIVER_CASES.append(("driver %s mask, GetImageMask" % _kind,
-                          _driver("getmask", _kind, "{C}/rose.miff", "{C}/bilevel.miff", "out.miff")))
+for _drv_kind in ("read", "write", "composite"):
+    for _drv_op in ("negate", "blur", "composite", "colorize"):
+        _DRIVER_CASES.append(("driver %s mask, %s" % (_drv_kind, _drv_op),
+                              _driver("mask", _drv_kind, "{C}/rose.miff", "{C}/bilevel.miff", _drv_op, "out.miff")))
+    _DRIVER_CASES.append(("driver %s mask, GetImageMask" % _drv_kind,
+                          _driver("getmask", _drv_kind, "{C}/rose.miff", "{C}/bilevel.miff", "out.miff")))
 _DRIVER_CASES += [
     ("driver AcquireImage, size, page, density, depth, quality, units, extract, interlace",
      _driver("acquire", "size=30x20+2+3", "page=100x80+5+6", "density=72x96", "depth=8", "quality=90",
