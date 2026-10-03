@@ -4978,3 +4978,26 @@ GAP_STEP_CASES += [("8BIM resolution from a PSD, new density %s" % units,
                     [["{C}/rose.miff", "-units", "PixelsPerInch", "-density", "72", "a.psd"],
                      ["a.psd[0]", "-units", units, "-density", density, "8bim:out.8bim"]], {})
                    for units, density in (("PixelsPerInch", "150x100"), ("PixelsPerCentimeter", "40x30"))]
+# profile.c: SyncExifProfile's limits, with small hand-made IFDs in a JPEG resized (so the sync
+# rewrites ImageWidth): an IFD that exactly fits the block, and entries before ImageWidth that
+# a bound one off would stop at (a DOUBLE and a FLOAT, the last two formats; no components)
+def _exif_ifd0(entries, tail=b""):
+    return (b"II*\0" + struct.pack("<IH", 8, len(entries)) + b"".join(entries) + struct.pack("<I", 0) + tail)
+def _exif_entry(tag, fmt, count, field):
+    return struct.pack("<HHI", tag, fmt, count) + field
+def _exif_uri(block):
+    app1 = b"Exif\0\0" + block
+    jpeg = _TINY_JPEG[:2] + b"\xff\xe1" + struct.pack(">H", len(app1) + 2) + app1 + _TINY_JPEG[2:]
+    return "inline:data:image/jpeg;base64," + base64.b64encode(jpeg).decode()
+_EXIF_W = _exif_entry(0x0100, 3, 1, struct.pack("<HH", 70, 0))
+_EXIF_H = _exif_entry(0x0101, 3, 1, struct.pack("<HH", 46, 0))
+GAP_STEP_CASES += [("EXIF sync, %s" % label, [[_exif_uri(block), "-resize", "50%", "out.jpg"]], {})
+                   for label, block in (
+                       ("an IFD that exactly fits", _exif_ifd0([_EXIF_W, _EXIF_H])),
+                       ("a DOUBLE before the width",
+                        _exif_ifd0([_exif_entry(0x0110, 12, 1, struct.pack("<I", 50)), _EXIF_W, _EXIF_H],
+                                   struct.pack("<d", 1.5))),
+                       ("a FLOAT before the width",
+                        _exif_ifd0([_exif_entry(0x0110, 11, 1, struct.pack("<f", 1.5)), _EXIF_W, _EXIF_H])),
+                       ("no components before the width",
+                        _exif_ifd0([_exif_entry(0x010F, 2, 0, b"\0" * 4), _EXIF_W, _EXIF_H])))]
