@@ -5015,3 +5015,9 @@ GAP_STEP_CASES += [("-copy %s %s%s" % (geometry, offset, " under -monitor" if mo
                    for geometry, offset, monitor in (("20x10+5+7", "+30+20", False), ("20x10+5+7", "+60+20", False),
                                                      ("20x10+5+7", "+30+40", False), ("20x10+5+7", "+30+20", True),
                                                      ("20x10", "+50+36", False))]
+# image.c: SetImageInfoFromExtension, with a PNG written under extensions that say otherwise:
+# .edit and .show (in its table of explicit formats with no coder: the extension is trusted
+# and the read fails), .rgb (trust withdrawn: often SGI) and .gray (an explicit raw format)
+GAP_STEP_CASES += [("a PNG named %s, read" % name,
+                    [["{C}/rose.miff", "-resize", "8x6", "png:" + name], read + [name, "-format", "%m %w %h\\n", "info:"]], {})
+                   for name, read in (("x.edit", []), ("a.show", []), ("x.rgb", []), ("x.gray", ["-size", "8x6"]))]
