@@ -1852,6 +1852,36 @@
    "why": "differs only for a profile of exactly 17 bytes, which cannot hold an rdf:RDF element with an rdf:Description in it, so no property would be added either way"
   },
   {
+   "at": 51,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "SetImageProperty",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (image->delay > (size_t) floor(geometry_info.rho+0.5))",
+   "verdict": "equivalent",
+   "why": "with >, the mutant (>= instead of >, or comparing with floor(rho-0.5), which is floor(rho+0.5)-1) differs only when the delay already equals floor(rho+0.5), and then assigns floor(rho+0.5): the same value"
+  },
+  {
+   "at": 17,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "SetImageProperty",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (image->delay > (size_t) floor(geometry_info.rho+0.5))",
+   "verdict": "equivalent",
+   "why": "with >, the mutant (>= instead of >, or comparing with floor(rho-0.5), which is floor(rho+0.5)-1) differs only when the delay already equals floor(rho+0.5), and then assigns floor(rho+0.5): the same value"
+  },
+  {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "SetImageProperty",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (intensity < 0)",
+   "verdict": "equivalent",
+   "why": "MagickIntensityOptions has no table in GetCommandOptionInfo (only MagickPixelIntensityOptions has), so ParseCommandOption always returns -1 here and -set intensity never takes: the value is never 0"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "TracePSClippath",
