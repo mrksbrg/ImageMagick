@@ -4970,3 +4970,11 @@ GAP_STEP_CASES += [("8BIM with ICC: %s" % label, [["{C}/rose.miff", "-profile", 
                        ("odd-length ICC, converted", "o.8bim", ["-profile", "b.icc", "8bim:out.8bim"]),
                        ("odd-length ICC set", "x.8bim", ["-profile", "o.icc", "8bim:out.8bim"]),
                        ("the same ICC set", "x.8bim", ["-profile", "a.icc", "8bim:out.8bim"]))]
+# profile.c: Sync8BimProfile rewrites the 8BIM resolution resource (0x03ED) from the image's
+# density as the image is written. The resource id has a byte above 0x7F, so the 8BIM comes
+# from a PSD the first step writes (the PSD writer adds the resource; the reader keeps the
+# block as the image's 8BIM profile); the density is then changed per inch and per centimetre
+GAP_STEP_CASES += [("8BIM resolution from a PSD, new density %s" % units,
+                    [["{C}/rose.miff", "-units", "PixelsPerInch", "-density", "72", "a.psd"],
+                     ["a.psd[0]", "-units", units, "-density", density, "8bim:out.8bim"]], {})
+                   for units, density in (("PixelsPerInch", "150x100"), ("PixelsPerCentimeter", "40x30"))]
