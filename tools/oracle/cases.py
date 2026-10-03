@@ -3967,6 +3967,10 @@ GAP_STEP_CASES += [("MSL comment and label %r" % text,
                     [["msl:s.msl", "out.miff", "-format", "[%c|%l]\\n", "info:"]],
                     {"s.msl": _MSL_COMMENT % (text, text)})
                    for text in ('  "quoted text"  ', "'\"", "line one&#10;line two", '"   ')]
+# string.c: InterpretSiPrefixValue with the largest prefix letter, E (10^18), and no B after it: a
+# width limit of 100 that the 70-pixel rose passes
+GAP_STEP_CASES += [("a width limit with an E prefix",
+                    [["-limit", "width", "0.0000000000000001E", "{C}/rose.miff", "-format", "%w\\n", "info:"]], {})]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
