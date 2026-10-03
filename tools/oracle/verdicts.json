@@ -2814,6 +2814,56 @@
   {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateMagickString",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "return(count+(size_t) (p-source));",
+   "verdict": "unobservable",
+   "why": "the length ConcatenateMagickString returns: every caller in MagickCore, MagickWand and the coders discards it"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateMagickString",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "return(count+strlen(p));",
+   "verdict": "unobservable",
+   "why": "the length ConcatenateMagickString returns: every caller in MagickCore, MagickWand and the coders discards it"
+  },
+  {
+   "at": 17,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "count=(size_t) (q-destination);",
+   "verdict": "unresolved",
+   "why": "changes the room the function thinks is left (count or i), which matters only when the source does not fit and must be truncated: callers pass MagickPathExtent buffers, and no case concatenates near that length; past it the copy overflows"
+  },
+  {
+   "at": 8,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "i=length-count;",
+   "verdict": "unresolved",
+   "why": "changes the room the function thinks is left (count or i), which matters only when the source does not fit and must be truncated: callers pass MagickPathExtent buffers, and no case concatenates near that length; past it the copy overflows"
+  },
+  {
+   "at": 24,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "ConcatenateMagickString",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "return(count+(size_t) (p-source));",
+   "verdict": "unobservable",
+   "why": "the length ConcatenateMagickString returns: every caller in MagickCore, MagickWand and the coders discards it"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "ConcatenateString",
    "mutator": "cxx_lt_to_le",
    "nth": 0,
