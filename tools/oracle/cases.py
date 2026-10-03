@@ -4160,6 +4160,25 @@ _XMP_PROPS = '<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>\n<x:xmpmeta xml
 GAP_STEP_CASES += [("XMP properties listed%s" % label,
                     [["{C}/rose.miff", "-profile", "p.xmp", "-set", "comment", "%[xmp:Rating]", "-verbose", "info:"]],
                     {"p.xmp": prefix + _XMP_PROPS}) for label, prefix in (("", ""), (", behind junk", "JUNK x Kx <y "))]
+# property.c: GetIPTCProperty over hand-made IPTC records (all bytes below 0x80): junk before the
+# first marker, a dataset found twice (joined by ;), a record whose declared length runs past the
+# end, a first match that is empty (which hides the property), and IPTC inside an 8BIM profile
+def _iptc(dataset, record, data, declared=None):
+    n = len(data) if declared is None else declared
+    return "\x1c" + chr(dataset) + chr(record) + chr(n >> 8) + chr(n & 0xff) + data
+_IPTC = ("junk" + _iptc(2, 120, "first caption") + _iptc(2, 25, "kw1") + _iptc(2, 25, "kw2") + _iptc(2, 5, "Title")
+         + _iptc(2, 120, "second") + _iptc(2, 90, "Lund", 9))
+GAP_STEP_CASES += [
+    ("IPTC properties", [["{C}/rose.miff", "-profile", "iptc:p.iptc", "-format",
+                          "[%[IPTC:2:120]][%[IPTC:2:25]][%[IPTC:2:5]][%[IPTC:2:90]][%[IPTC:2:7]]\\n", "info:"]],
+     {"p.iptc": _IPTC}),
+    ("IPTC property whose first record is empty", [["{C}/rose.miff", "-profile", "iptc:p.iptc", "-format",
+                                                    "[%[IPTC:2:120]]\\n", "info:"]],
+     {"p.iptc": _iptc(2, 120, "") + _iptc(2, 120, "after empty")}),
+    ("IPTC property inside an 8BIM profile", [["{C}/rose.miff", "-profile", "8bim:p.8bim", "-format",
+                                               "[%[IPTC:2:105]]\\n", "info:"]],
+     {"p.8bim": "8BIM\x04\x04\x00\x00\x00\x00\x00\x14" + _iptc(2, 105, "from 8BIM")}),
+]
 GAP_COMMANDS += ["-size 60x40 -define gradient:angle=30 -define gradient:radii=25,10 radial-gradient:red-blue",
                  "-size 60x40 -define gradient:angle=120 -define gradient:radii=8,20 -define gradient:center=20,15 "
                  "radial-gradient:yellow-navy"]
