@@ -142,6 +142,66 @@
    "why": "GetFillColor overwrites the whole of fill_color next: a copy of draw_info->fill, or GetOneVirtualPixelInfo, which itself starts with GetPixelInfo"
   },
   {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
+   "function": "ConfigureComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&configure_semaphore);",
+   "verdict": "unobservable",
+   "why": "activates the configure semaphore at shutdown, with one thread: nothing a case sees"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
+   "function": "GetConfigureOptions",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetLinkedListIterator(options);",
+   "verdict": "equivalent",
+   "why": "resets the iterator of a list just created, which already starts at its head (AppendValueToLinkedList sets it on the first append)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
+   "function": "GetConfigureOptions",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetLinkedListIterator(paths);",
+   "verdict": "equivalent",
+   "why": "resets the iterator of a list just created, which already starts at its head (AppendValueToLinkedList sets it on the first append)"
+  },
+  {
+   "at": 7,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
+   "function": "GetConfigurePaths",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((q >= path) && (*q != *DirectorySeparator))",
+   "verdict": "unresolved",
+   "why": "differs only for a one-character entry in MAGICK_CONFIGURE_PATH, which the oracle's fixed environment never has and a case cannot set: environment-dependent"
+  },
+  {
+   "at": 9,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
+   "function": "GetConfigurePaths",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (home != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the XDG_CONFIG_HOME branch: the oracle leaves it unset, so the mutant only appends a nonexistent \"(null)/ImageMagick/\" path; with it set, the mutant would skip it. Environment-dependent, and a case cannot set the environment"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
+   "function": "IsConfigureCacheInstantiated",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&configure_semaphore);",
+   "verdict": "unobservable",
+   "why": "activates the configure semaphore, with one thread: nothing a case sees"
+  },
+  {
    "at": 19,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
    "function": "LoadDelegateCache",
