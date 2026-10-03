@@ -4254,6 +4254,10 @@ GAP_STEP_CASES += [
 # image.c: StripImage on an image that has profiles (8BIM, ICC, IPTC, MPF): -strip removes them
 GAP_STEP_CASES += [("-strip of a JPEG with profiles", [[_UHDR_JPG, "-strip", "-format", "%[profiles]|%c\\n", "info:"]], {}),
                    ("-strip of a JPEG with profiles, written", [[_UHDR_JPG, "-strip", "out.miff"]], {})]
+# draw.c: an image primitive under rotations and flips that turn the inverse transform's terms
+# negative or zero (DrawAffineImage, AffineEdge's sign branches), some reaching past the canvas
+GAP_STEP_CASES += [("MVG image primitive: %s" % draw, [["-size", "80x60", "xc:white", "-draw", draw, "out.miff"]], {})
+                   for draw in ["translate 40,30 rotate 90 image over -15,-10 30,20 '{C}/rose.miff'", "translate 40,30 rotate 180 image over -15,-10 30,20 '{C}/rose.miff'", "translate 40,30 rotate 270 image over -15,-10 30,20 '{C}/rose.miff'", "translate 40,30 rotate 135 image over -15,-10 30,20 '{C}/rose.miff'", "translate 40,30 rotate -45 image over -15,-10 30,20 '{C}/rose.miff'", "affine -1,0,0,1,60,0 image over 5,5 40,30 '{C}/rose.miff'", "affine 1,0,0,-1,0,55 image over 5,5 40,30 '{C}/rose.miff'", "translate 70,0 rotate 30 image over -20,-5 50,30 '{C}/rose.miff'"]]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
