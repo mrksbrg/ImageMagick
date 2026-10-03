@@ -1792,6 +1792,56 @@
    "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
   },
   {
+   "at": 50,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetIPTCProperty",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "size_t remaining = GetStringInfoLength(profile)-(i+5);",
+   "verdict": "unresolved",
+   "why": "a larger remaining count lets a record that declares more than the profile holds copy its full declared length: zeroes from the padding up to MagickPathExtent, the same text, but past that an out-of-bounds read"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetIPTCProperty",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~length >= 1)",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~length: differs only for a length of SIZE_MAX, which a 16-bit IPTC length cannot reach"
+  },
+  {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetIPTCProperty",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attribute != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards the release of an attribute that starts with ';': inverted, it leaks it or frees NULL, which DestroyString does harmlessly"
+  },
+  {
+   "at": 52,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetIPTCProperty",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )",
+   "verdict": "equivalent",
+   "why": "the loop reads up to five bytes past the profile, which are its zeroed padding (profiles are cloned through AcquireStringInfo, which zeroes MagickPathExtent bytes after the data): no 0x1c marker there"
+  },
+  {
+   "at": 47,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetIPTCProperty",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "size_t remaining = GetStringInfoLength(profile)-(i+5);",
+   "verdict": "unresolved",
+   "why": "a larger remaining count lets a record that declares more than the profile holds copy its full declared length: zeroes from the padding up to MagickPathExtent, the same text, but past that an out-of-bounds read"
+  },
+  {
    "at": 33,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "GetXMPProperty",
