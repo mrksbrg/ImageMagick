@@ -72,6 +72,176 @@
    "why": "GetFillColor overwrites the whole of fill_color next: a copy of draw_info->fill, or GetOneVirtualPixelInfo, which itself starts with GetPixelInfo"
   },
   {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~((size_t) count) >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~count: differs only for a count within MagickPathExtent of SIZE_MAX, which a profile's 32-bit lengths cannot reach"
+  },
+  {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if (~((size_t) count) >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "an overflow guard on ~count: differs only for a count within MagickPathExtent of SIZE_MAX, which a profile's 32-bit lengths cannot reach"
+  },
+  {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (macroman_resource != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards the release of resource or macroman_resource: inverted, it leaks the string or passes NULL to DestroyString, which only frees it (free(NULL) is harmless), and nothing a case sees changes"
+  },
+  {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (macroman_resource != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards the release of resource or macroman_resource: inverted, it leaks the string or passes NULL to DestroyString, which only frees it (free(NULL) is harmless), and nothing a case sees changes"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards the release of resource or macroman_resource: inverted, it leaks the string or passes NULL to DestroyString, which only frees it (free(NULL) is harmless), and nothing a case sees changes"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (resource != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards the release of resource or macroman_resource: inverted, it leaks the string or passes NULL to DestroyString, which only frees it (free(NULL) is harmless), and nothing a case sees changes"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a resource it does not want by adding its length instead of subtracting it: the loop then reads on past the profile's end, into the StringInfo's zeroed padding while the overrun stays under MagickPathExtent, where no 8BIM signature can match; beyond that it reads unowned memory, undefined rather than a sure difference"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a resource it does not want by adding its length instead of subtracting it: the loop then reads on past the profile's end, into the StringInfo's zeroed padding while the overrun stays under MagickPathExtent, where no 8BIM signature can match; beyond that it reads unowned memory, undefined rather than a sure difference"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "Get8BIMProperty",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));",
+   "verdict": "equivalent",
+   "why": "the resource matched and status is now true, so the loop ends: the length it adjusts is never read again"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TracePSClippath",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i=0; i < 3; i++)",
+   "verdict": "unresolved",
+   "why": "i <= 3 reads a fourth control point into point[3], past the end of the 3-element array on the stack: undefined, though it changed nothing in the runs"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TracePSClippath",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "for (i=0; i < 3; i++)",
+   "verdict": "unresolved",
+   "why": "i <= 3 reads a fourth control point into point[3], past the end of the 3-element array on the stack: undefined, though it changed nothing in the runs"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TracePSClippath",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a record by adding 24 to the remaining length instead of subtracting it: the tracer then reads past the resource into the attribute buffer's uninitialised tail (memcpy fills only count bytes), so what it traces there is undefined"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TracePSClippath",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a record by adding 24 to the remaining length instead of subtracting it: the tracer then reads past the resource into the attribute buffer's uninitialised tail (memcpy fills only count bytes), so what it traces there is undefined"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TracePSClippath",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a record by adding 24 to the remaining length instead of subtracting it: the tracer then reads past the resource into the attribute buffer's uninitialised tail (memcpy fills only count bytes), so what it traces there is undefined"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TraceSVGClippath",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a record by adding 24 to the remaining length instead of subtracting it: the tracer then reads past the resource into the attribute buffer's uninitialised tail (memcpy fills only count bytes), so what it traces there is undefined"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TraceSVGClippath",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a record by adding 24 to the remaining length instead of subtracting it: the tracer then reads past the resource into the attribute buffer's uninitialised tail (memcpy fills only count bytes), so what it traces there is undefined"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "TraceSVGClippath",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));",
+   "verdict": "unresolved",
+   "why": "skips a record by adding 24 to the remaining length instead of subtracting it: the tracer then reads past the resource into the attribute buffer's uninitialised tail (memcpy fills only count bytes), so what it traces there is undefined"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "AcquireString",
