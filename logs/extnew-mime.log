@@ -1,0 +1,62 @@
+mutate: 98 mutants in MagickCore/mime\.c$, 11 functions
+mutate: baseline over 11231 cases in 0s
+  mutants: 25/98 (0s)
+  mutants: 50/98 (0s)
+  mutants: 75/98 (0s)
+  mutants: 98/98 (698s)
+
+mutate: 98 mutants, 698s
+  killed 0, survived 34 (0 capped), no coverage 64, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetMimeInfo                           47      0        0     47
+  LoadMimeCache                         22      0       22      0
+  GetMimeList                           12      0        0     12
+  DestroyMimeElement                     5      0        5      0
+  MagickToMime                           3      0        0      3
+  MimeComponentTerminus                  3      0        3      0
+  IsMimeCacheInstantiated                2      0        2      0
+  GetMimeInfoList                        1      0        1      0
+  GetMimeDescription                     1      0        0      1
+  GetMimeType                            1      0        0      1
+  MimeComponentGenesis                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  mime.c:458:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:678:26 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+       mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+       mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+       mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+       mime.c:840:19 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+       mime.c:849:13 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+       mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
+       mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
+       mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       mime.c:861:24 cxx_add_to_sub             depth+1,exception);
+    x  mime.c:879:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:886:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:890:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:909:26 cxx_ne_to_eq               for (p=token; *p != '\0'; )
+    x  mime.c:911:18 cxx_eq_to_ne               if (*p == '\\')
+    x  mime.c:914:55 cxx_ne_to_eq               if (isdigit((int) ((unsigned char) *p)) != 0)
+    x  mime.c:921:36 cxx_post_inc_to_post_dec   mime_info->length++;
+    x  mime.c:938:32 cxx_post_inc_to_post_dec   mime_info->length++;
+    x  mime.c:942:28 cxx_post_inc_to_post_dec   mime_info->length++;
+    x  mime.c:945:34 cxx_ne_to_eq               if (mime_info->data_type != StringData)
+    x  mime.c:959:16 cxx_eq_to_ne               if (*c == ':')
+    x  mime.c:963:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:969:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:981:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    x  mime.c:1054:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+    x  mime.c:1084:16 cxx_ne_to_eq               if (p->magic != (unsigned char *) NULL)
+    x  mime.c:1086:18 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
+    x  mime.c:1088:22 cxx_ne_to_eq               if (p->description != (char *) NULL)
+    x  mime.c:1090:15 cxx_ne_to_eq               if (p->type != (char *) NULL)
+    x  mime.c:1092:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  mime.c:1100:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+       mime.c:1101:5 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+    x  mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew-mime.json

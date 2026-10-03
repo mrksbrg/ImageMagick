@@ -1,0 +1,25 @@
+mutate: 10 mutants in MagickCore/colormap\.c$, 4 functions
+mutate: baseline over 2740 cases in 0s
+  mutants: 10/10 (146s)
+
+mutate: 10 mutants, 146s
+  killed 3, survived 7 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 30.0%   overall: 30.0%
+
+  function                           total killed survived no-cov
+  SortColormapByIntensity                4      1        3      0
+  AcquireImageColormap                   3      0        3      0
+  CycleColormapImage                     2      1        1      0
+  IntensityCompare                       1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  colormap.c:116:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  colormap.c:126:23 cxx_eq_to_ne               if (image->colormap == (PixelInfo *) NULL)
+    x  colormap.c:139:15 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  colormap.c:202:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  colormap.c:319:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  colormap.c:334:15 cxx_lt_to_le               for (j=0; j < (ssize_t) image->colors; j++)
+    x  colormap.c:379:7 cxx_remove_void_call       SetPixelViaPixelInfo(image,image->colormap+(ssize_t) index,q);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew-colormap.json
