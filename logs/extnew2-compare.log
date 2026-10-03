@@ -1,0 +1,33 @@
+mutate: 122 mutants in MagickCore/compare\.c$, 19 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/122 (0s)
+  mutants: 50/122 (0s)
+  mutants: 75/122 (0s)
+  mutants: 100/122 (0s)
+  mutants: 122/122 (0s)
+
+mutate: 122 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 122, errors 0
+
+  function                           total killed survived no-cov
+  IsImagesEqual                         23      0        0     23
+  SimilarityImage                       17      0        0     17
+  GetDPCSimilarity                      12      0        0     12
+  GetNCCSimilarity                      12      0        0     12
+  GetPHASESimilarity                    11      0        0     11
+  GetMEPPSimilarity                      8      0        0      8
+  GetPASimilarity                        8      0        0      8
+  GetSSIMSimularity                      4      0        0      4
+  GetFUZZSimilarity                      3      0        0      3
+  GetMAESimilarity                       3      0        0      3
+  GetMSESimilarity                       3      0        0      3
+  GetPDCSimilarity                       3      0        0      3
+  GetPHASHSimilarity                     3      0        0      3
+  GetImageDistortions                    3      0        0      3
+  SetImageColorMetric                    3      0        0      3
+  GetAESimilarity                        2      0        0      2
+  GetImageDistortion                     2      0        0      2
+  CompareImages                          1      0        0      1
+  GetRMSESimilarity                      1      0        0      1
+
+  full results: build-oracle/work/mutation-extnew2-compare.json
