@@ -1,0 +1,27 @@
+mutate: 9 mutants in MagickCore/configure\.c$, 4 functions
+mutate: baseline over 12205 cases in 0s
+  mutants: 9/9 (827s)
+
+mutate: 9 mutants, 827s
+  killed 0, survived 9 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetConfigureOptions                    3      0        3      0
+  GetConfigurePaths                      3      0        3      0
+  ConfigureComponentTerminus             2      0        2      0
+  ConfigureComponentGenesis              1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  configure.c:234:27 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+       configure.c:280:5 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
+    x  configure.c:286:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&configure_semaphore);
+    x  configure.c:679:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  configure.c:689:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
+    x  configure.c:724:3 cxx_remove_void_call       ResetLinkedListIterator(options);
+    x  configure.c:765:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  configure.c:790:18 cxx_ge_to_gt               if ((q >= path) && (*q != *DirectorySeparator))
+    x  configure.c:906:14 cxx_ne_to_eq               if (home != (char *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-configure.json

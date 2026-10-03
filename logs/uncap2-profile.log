@@ -1,0 +1,25 @@
+mutate: 6 mutants in MagickCore/profile\.c$, 5 functions
+mutate: baseline over 11578 cases in 0s
+  mutants: 6/6 (704s)
+
+mutate: 6 mutants, 704s
+  killed 0, survived 6 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CloneImageProfiles                     2      0        2      0
+  AppendImageProfileProperty             1      0        1      0
+  DeleteImageProfile                     1      0        1      0
+  GetNextImageProfile                    1      0        1      0
+  ResetImageProfileIterator              1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       profile.c:143:16 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
+    x  profile.c:235:27 cxx_ne_to_eq               if (image->profiles != (void *) NULL)
+       profile.c:236:9 cxx_remove_void_call       DestroyImageProfiles(image);
+    x  profile.c:271:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:374:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-profile.json
