@@ -1602,6 +1602,126 @@
    "why": "sends a DirectClass clip mask through SetImageStorageClass(DirectClass), which leaves it as it is, and keeps a PseudoClass one PseudoClass; the mask is only read as gray values afterwards, the same either way"
   },
   {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (next->columns > width)",
+   "verdict": "equivalent",
+   "why": "takes the larger of two sizes: when they are equal, either one is the same value"
+  },
+  {
+   "at": 15,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (next->rows > height)",
+   "verdict": "equivalent",
+   "why": "takes the larger of two sizes: when they are equal, either one is the same value"
+  },
+  {
+   "at": 3,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushXGap",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "((x+i) >= (ssize_t) gap))",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushXGap",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((x+i) < (ssize_t) gap)",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 37,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushXGap",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(((ssize_t) left_image->columns-x-1) >= (ssize_t) gap))",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 7,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushXGap",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "((x+i) >= (ssize_t) gap))",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushXGap",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((x+i) < (ssize_t) gap)",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 3,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushYGap",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "((y+i) >= (ssize_t) gap))",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushYGap",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((y+i) < (ssize_t) gap)",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushYGap",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(((ssize_t) top_image->rows-y-1) >= (ssize_t) gap))",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 7,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushYGap",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "((y+i) >= (ssize_t) gap))",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SmushYGap",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((y+i) < (ssize_t) gap)",
+   "verdict": "equivalent",
+   "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
+  },
+  {
    "at": 22,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "Get8BIMProperty",
