@@ -2408,3 +2408,13 @@ runs, so no case uses them. A program upgrade changes the baselines of the cases
 (`tools/oracle/build.sh` does it on the next build, or `driver/build.sh` on an existing one) and
 Ghostscript on its PATH; until then the driver and Ghostscript cases fail alike there and count
 for nothing. The kills above reach the official figures once ERDC has both.
+
+**Installing Ghostscript upgraded 15 libraries, and stale baselines faked kills (21:03-21:47).**
+`brew install ghostscript` upgraded libtiff, little-cms2, fontconfig, harfbuzz, pango and ten
+more. The oracle builds link them dynamically, so cases that encode TIFF or WebP, render text or
+list formats changed output; the baseline cache, keyed by the binary's own hash, did not notice,
+and the Mac's uncapped rerun (macall2) counted every mutant those cases met as killed: 63 false
+kills in image.c, annotate.c, locale.c, memory.c, policy.c and configure.c, set aside and rerun.
+The cache key now includes a fingerprint of the shared libraries the binary loads (resolved path
+and size, `oracle.library_fingerprint`), so an upgrade starts a new baseline. Hand runs
+(`stepkill`) compute their baseline in the same session and were not affected.

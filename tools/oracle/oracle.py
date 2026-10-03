@@ -499,8 +499,27 @@ def file_sha(path):
     return h.hexdigest()
 
 
+def library_fingerprint(binary):
+    """The shared libraries binary loads, by resolved path and size: an upgrade of one
+    (Homebrew upgrades dependencies as it installs) changes results the binary's own
+    hash does not see, so it must start a new baseline (2026-10-03)."""
+    if sys.platform == "darwin":
+        r = subprocess.run(["otool", "-L", binary], capture_output=True, text=True)
+        paths = [l.split(" (")[0].strip() for l in r.stdout.splitlines()[1:]]
+    else:
+        r = subprocess.run(["ldd", binary], capture_output=True, text=True)
+        paths = [l.split("=>")[-1].split(" (")[0].strip() for l in r.stdout.splitlines() if "/" in l]
+    parts = []
+    for path in sorted(p for p in paths if p.startswith("/")):
+        real = os.path.realpath(path)
+        size = os.path.getsize(real) if os.path.exists(real) else -1
+        parts.append("%s:%d" % (real, size))
+    return hashlib.sha256("\n".join(parts).encode()).hexdigest()
+
+
 def cache_path(binary, manifest):
-    key = "%s-%s-h%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION)
+    key = "%s-%s-h%s-l%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
+                             library_fingerprint(binary)[:8])
     return os.path.join(WORK, "cache", key + ".json")
 
 
