@@ -2922,6 +2922,176 @@
    "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
   },
   {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "AcquireCLocale",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (c_locale == (locale_t) NULL)",
+   "verdict": "equivalent",
+   "why": "creates the C locale object again when it exists, or not at all the first time: with the oracle's fixed LC_ALL=C, the C locale object and the process locale format numbers the same, so taking the other branch (with or without the _l variant) gives the same text"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "DestroyCLocale",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (c_locale != (locale_t) NULL)",
+   "verdict": "unobservable",
+   "why": "only guards freeing the C locale object at shutdown: inverted, it leaks it or frees NULL"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "DestroyCLocale",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "freelocale(c_locale);",
+   "verdict": "unobservable",
+   "why": "frees the C locale object at shutdown: without it, it leaks"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "FormatLocaleFileList",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (locale == (locale_t) NULL)",
+   "verdict": "equivalent",
+   "why": "with the oracle's fixed LC_ALL=C, the C locale object and the process locale format numbers the same, so taking the other branch (with or without the _l variant) gives the same text"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "FormatLocaleStringList",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (locale == (locale_t) NULL)",
+   "verdict": "equivalent",
+   "why": "with the oracle's fixed LC_ALL=C, the C locale object and the process locale format numbers the same, so taking the other branch (with or without the _l variant) gives the same text"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "FormatLocaleStringList",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (n < 0)",
+   "verdict": "equivalent",
+   "why": "for n == 0 the mutant also writes a NUL at the buffer's end, after an empty string: the text is the same"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "GetLocaleInfoList",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleInfoCompare);",
+   "verdict": "equivalent",
+   "why": "the messages come from the splay tree, already in tag order, and all from one file: sorting them by path and tag changes nothing"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "GetLocaleOptions",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetLinkedListIterator(messages);",
+   "verdict": "equivalent",
+   "why": "resets the iterator of a list just created, which already starts at its head"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "GetLocaleOptions",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetLinkedListIterator(paths);",
+   "verdict": "equivalent",
+   "why": "resets the iterator of a list just created, which already starts at its head"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "InterpretLocaleValue",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (locale == (locale_t) NULL)",
+   "verdict": "equivalent",
+   "why": "with the oracle's fixed LC_ALL=C, the C locale object and the process locale format numbers the same, so taking the other branch (with or without the _l variant) gives the same text"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 4,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p != (const char *) NULL)",
+   "verdict": "unresolved",
+   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&locale_semaphore);",
+   "verdict": "unobservable",
+   "why": "activates the locale semaphore, with one thread: nothing a case sees"
+  },
+  {
    "at": 17,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
    "function": "LoadLocaleCache",
@@ -3012,6 +3182,16 @@
    "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
   },
   {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "inverts LoadLocaleCache's returned status, which every caller discards"
+  },
+  {
    "at": 16,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
    "function": "LoadLocaleCache",
@@ -3050,6 +3230,36 @@
    "src": "GetPathComponent(filename,HeadPath,path);",
    "verdict": "unresolved",
    "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LocaleComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&locale_semaphore);",
+   "verdict": "unobservable",
+   "why": "activates the locale semaphore at shutdown, with one thread: nothing a case sees"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LocaleComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyCLocale();",
+   "verdict": "unobservable",
+   "why": "frees the C locale object at shutdown: without it, it leaks"
+  },
+  {
+   "at": 41,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LocaleInfoCompare",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((*p)->path,(*q)->path) == 0)",
+   "verdict": "unresolved",
+   "why": "inverts the path test in the message comparator: with one locale file every path is equal and the mutant compares paths only, so all messages tie and qsort's order of ties is left to the C library (unchanged on the Mac)"
   },
   {
    "at": 22,
