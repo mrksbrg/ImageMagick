@@ -1982,6 +1982,26 @@
    "why": "also copies the primitive into linecap[4] (the array has 5), whose primitive is set to UndefinedPrimitive just after: it only ends the polygon, as before"
   },
   {
+   "at": 67,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "GetDrawInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "draw_info->debug=(GetLogEventMask() & (DrawEvent | AnnotateEvent)) != 0 ?",
+   "verdict": "unobservable",
+   "why": "sets draw_info->debug from the log event mask, which only gates LogMagickEvent calls: without -debug nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 39,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "GetDrawInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (draw_info->image_info->server_name != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "copies the X server name, which only the X11 code reads; no case talks to an X server"
+  },
+  {
    "at": 23,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "GetStopColorOffset",
