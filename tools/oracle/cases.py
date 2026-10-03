@@ -4112,6 +4112,21 @@ GAP_STEP_CASES += [("EXIF properties %r" % fmt, [[_exif_jpeg_uri(), "-format", f
                                "%[exif:GPSLatitudeRef]|%[exif:InteroperabilityIndex]|%[exif:Make]"]
                    + ["%%[exif:%s]" % key for key in ("#a002", "#A002", "#010f", "#010F", "#9000", "@0001",
                                                      "#00g0", "#12345", "#1234", "")]]
+# image.c: SetImageRegionMask through -region (a region inside the image, one centred by gravity
+# and lifted again by +region, and one larger than the image), and GetImageMask through the
+# clip: coder, written and read, with the 8BIM clip paths above
+GAP_STEP_CASES += [
+    ("-region inside the image", [["{C}/rose.miff", "-region", "30x20+10+5", "-negate", "out.miff"]], {}),
+    ("-region by gravity, then +region", [["{C}/rose.miff", "-gravity", "center", "-region", "30x20+3-2", "-negate",
+                                           "+region", "-flop", "out.miff"]], {}),
+    ("-region larger than the image", [["{C}/rose.miff", "-region", "100x100-10-10", "-negate", "out.miff"]], {}),
+    ("clip: written from an 8BIM clip path", [["{C}/rose.miff", "-profile", "clip.8bim", "clip:m.miff"]],
+     {"clip.8bim": _8BIM_RICH}),
+    ("clip: read back", [["{C}/rose.miff", "-profile", "clip.8bim", "m.miff"], ["clip:m.miff", "out.miff"]],
+     {"clip.8bim": _8BIM_RICH}),
+    ("clip: written from a named 8BIM clip path", [["{C}/rose.miff", "-profile", "clip.8bim", "-clip-path", "Path A",
+                                                    "clip:m.miff"]], {"clip.8bim": _8BIM_RICH}),
+]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
