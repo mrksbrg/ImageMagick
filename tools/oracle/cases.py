@@ -4888,3 +4888,66 @@ GAP_STEP_CASES += [
     _icc_case("RGB to RGB under -monitor", ["-profile", "a.icc", "-monitor", "-profile", "b.icc"]),
     _icc_case("RGB to gray under -monitor", ["-profile", "a.icc", "-monitor", "-profile", "g.icc"]),
 ]
+# ... and profiles built on lut16 tables (A2B0 and B2A0, two grid points, every table value at
+# most 0x7F7F so its bytes stay below 0x80): CMYK (an output profile), Lab and XYZ (colour space
+# profiles). They reach ProfileImage's CMYK, Lab and XYZ branches as source and as target, and
+# make black-point compensation matter (the matrix profiles' black is already zero)
+def _icc_lut16(nin, nout, rows):
+    body = b"mft2" + b"\0" * 4 + bytes([nin, nout, 2, 0])
+    body += b"".join(struct.pack(">i", 65536 if i == j else 0) for i in range(3) for j in range(3))
+    body += struct.pack(">HH", 2, 2) + struct.pack(">HH", 0, 0x7F7F) * nin
+    body += b"".join(struct.pack(">H", v) for row in rows for v in row)
+    return body + struct.pack(">HH", 0, 0x7F7F) * nout
+def _icc_corners(nin, f):
+    rows = []
+    for k in range(2 ** nin):
+        bits = [(k >> (nin - 1 - i)) & 1 for i in range(nin)]
+        row = [min(0x7F7F, max(0, int(v))) & 0x7F7F for v in f(bits)]
+        rows.append([v if (v & 0xFF) < 0x80 else (v & 0x7F00) | 0x7F for v in row])
+    return rows
+def _icc_with_luts(name, space, pcs, cls, a2b, b2a):
+    text = name.encode() + b"\0"
+    desc = b"desc" + b"\0" * 4 + struct.pack(">I", len(text)) + text + b"\0" * 78
+    white = b"XYZ " + b"\0" * 4 + _icc_s15(1.0) * 3
+    tags = [(b"desc", desc), (b"wtpt", white), (b"A2B0", a2b), (b"B2A0", b2a)]
+    off = 128 + 4 + 12 * len(tags); table = b""; data = b""
+    for sig, body in tags:
+        body += b"\0" * (-len(body) % 4)
+        while len(body) & 0x8080:  # trailing zeros after a tag's content are ignored
+            body += b"\0" * 4
+        while (off + len(data)) & 0x8080:
+            data += b"\0" * 4
+        table += sig + struct.pack(">II", off + len(data), len(body)); data += body
+    while (off + len(data)) & 0x8080:
+        data += b"\0" * 4
+    header = (struct.pack(">I", off + len(data)) + b"lcms" + bytes([2, 0x10, 0, 0]) + cls + space + pcs
+              + b"\0" * 12 + b"acspAPPL").ljust(128, b"\0")
+    out = header + struct.pack(">I", len(tags)) + table + data
+    assert all(x < 0x80 for x in out)
+    return out.decode("ascii")
+def _icc_cmyk():
+    a2b = _icc_lut16(4, 3, _icc_corners(4, lambda b: [0x7F7F * (1 - b[0]) * (1 - b[3]) * (0.75 + 0.25 * (1 - b[1])),
+                                                       0x7F7F * (1 - b[1]) * (1 - b[3]) * (0.75 + 0.25 * (1 - b[2])),
+                                                       0x7F7F * (1 - b[2]) * (1 - b[3]) * (0.75 + 0.25 * (1 - b[0]))]))
+    b2a = _icc_lut16(3, 4, _icc_corners(3, lambda b: [0x7F7F * (1 - b[0]), 0x7F7F * (1 - b[1]), 0x7F7F * (1 - b[2]),
+                                                       0x2020 * (1 - max(b))]))
+    return _icc_with_luts("cmyk", b"CMYK", b"XYZ ", b"prtr", a2b, b2a)
+def _icc_space(name, sig):
+    rows = _icc_corners(3, lambda b: [0x7F7F * b[0], 0x4040 + 0x1010 * b[1], 0x4040 + 0x2020 * b[2]])
+    return _icc_with_luts(name, sig, sig, b"spac", _icc_lut16(3, 3, rows), _icc_lut16(3, 3, rows))
+_ICC_LUT = dict(_ICC, **{"c.icc": _icc_cmyk(), "l.icc": _icc_space("lab", b"Lab "), "x.icc": _icc_space("xyz", b"XYZ ")})
+def _icc_lut_case(label, profiles, src="rose", out=("out.miff",), extra=()):
+    return ("ICC " + label, [["{C}/%s.miff" % src] + list(extra) + [a for p in profiles for a in ("-profile", p)]
+                             + list(out)], _ICC_LUT)
+GAP_STEP_CASES += [
+    _icc_lut_case("RGB to CMYK", ["a.icc", "c.icc"]),
+    _icc_lut_case("RGB to CMYK and back", ["a.icc", "c.icc", "a.icc"]),
+    _icc_lut_case("RGB to CMYK with alpha", ["a.icc", "c.icc"], "rose_alpha"),
+    _icc_lut_case("RGB to CMYK, black-point compensation", ["a.icc", "c.icc"], extra=("-black-point-compensation",)),
+    _icc_lut_case("RGB to Lab", ["a.icc", "l.icc"]),
+    _icc_lut_case("RGB to Lab and back", ["a.icc", "l.icc", "a.icc"]),
+    _icc_lut_case("RGB to XYZ", ["a.icc", "x.icc"]),
+    _icc_lut_case("RGB to XYZ and back", ["a.icc", "x.icc", "a.icc"]),
+    _icc_lut_case("RGB to CMYK, type", ["a.icc", "c.icc"], out=("-format", "%[type]\\n", "info:")),
+    _icc_lut_case("RGB to CMYK with alpha, type", ["a.icc", "c.icc"], "rose_alpha", out=("-format", "%[type]\\n", "info:")),
+]
