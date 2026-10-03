@@ -1702,6 +1702,96 @@
    "why": "tag_value reaches 0x10000 and up only in a GPS directory (tag_offset2 is 0x10000 there and 0 elsewhere, Interop included), so it is never exactly 0x20000"
   },
   {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_add_to_sub",
+   "nth": 2,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_add_to_sub",
+   "nth": 3,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 33,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (GetStringInfoLength(profile) < 128)",
+   "verdict": "equivalent",
+   "why": "differs only for a profile of exactly 128 bytes: that is the ICC header alone, with no tag table, so lcms finds no description, manufacturer, model or copyright either way"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetICCProperty",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "SetStringInfoLength(info,extent+1);",
+   "verdict": "unresolved",
+   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+  },
+  {
    "at": 33,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "GetXMPProperty",
