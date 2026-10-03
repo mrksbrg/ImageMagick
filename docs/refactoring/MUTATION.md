@@ -2359,6 +2359,28 @@ most of them handler setters and genesis/terminus code), magick.c (seven: termin
 handler, genesis, list functions), timer.c (six). Their survivors are read next, closest to
 the bar first.
 
+### Statement-deletion survivors: first verdicts, cases and uncapped reruns (Windows, 2026-10-03, night)
+
+- **A local build with statement deletion** for every Windows file: `mull-sdl-win`
+  (`~/build-sdl-win.sh`; instrumenting composite.c and distort.c takes about 2 GB per compiler,
+  so `-j2` on an 8 GB WSL; `-j8` froze it). gem.c and prepress.c have no
+  `cxx_remove_void_call` mutants at all, so they stay trusted.
+- **Uncapped reruns of every statement-deletion survivor** (`~/night-sdl*.sh`, reports
+  `mutation-sdl-uncap*-<file>.json`): unlike the default operators, ERDC's 1500-case cap did
+  hide killers here. First results: quantize 6 of 27 killed, composite 3 of 12, montage 2 of
+  6, registry 1 of 4, signature 1 of 3, histogram 1 of 8, feature 1 of 2, quantum-export 1
+  of 8; monitor, colorspace and xml-tree none.
+- **Verdicts:** monitor.c 2 (the semaphore is always created at genesis; its release at
+  shutdown only leaks), quantize.c 19 (colour writes SyncImage undoes, 12; SetGrayscaleImage's
+  sort and index writes, 2; DestroyQCubeInfo, leaks, 5).
+- **`morphgap5`**: `morphology:showKernel` for edge kernels with an angle, every FreiChen type
+  and the expanding kernels; hand-run with `mull-sdl-win`, 27 statement-deletion survivors
+  killed (deleted RotateKernelInfo, ScaleKernelInfo, CalcKernelMetaData, Expand*KernelInfo).
+  Queued as a round with statement deletion (`~/sdl-queue-runner.sh`, reports
+  `mutation-sdlcases-<family>-<file>.json`).
+- colorspace.c's `GetImageColorspaceType` and registry.c's `RemoveImageRegistry` have no
+  caller in ImageMagick: API only, out of reach for a command-line oracle.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
