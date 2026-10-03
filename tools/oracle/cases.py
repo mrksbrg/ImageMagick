@@ -4057,6 +4057,61 @@ GAP_STEP_CASES += [
 # ... and a profile that ends right after a resource's name (4 zero bytes and an x), which a
 # length test one off would read as a zero-length resource
 GAP_STEP_CASES += [_8bim_format("[%[8BIM:1999,2998:#1]]", "8BIM\x08\x00\x05\x00\x00\x00\x00x")]
+# property.c: GetEXIFProperty over a hand-made little-endian EXIF block, in a 4x4 JPEG passed
+# inline as base64 (its tag numbers have bytes above 0x7f, so no text case file can hold it):
+# IFD0 points to an Exif IFD and a GPS IFD and on to IFD1; the Exif IFD points to an Interop IFD,
+# which points back to the Exif IFD (a loop); values come in every TIFF format. A tag looked up
+# by number (#hex, @hex for GPS) is stored under an empty name, so it shows only as a warning,
+# one per command; exif:! stores every tag as #hex or @hex, read back in the same format.
+_TINY_JPEG = base64.b64decode("/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/wAALCAAEAAQBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAAAf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AH//Z")
+def _exif_block():
+    BYTE, ASCII, SHORT, LONG, RATIONAL, SBYTE, UNDEF, SSHORT, SLONG, SRATIONAL, FLOAT, DOUBLE = range(1, 13)
+    ifds = {
+        "0": [(0x010F, ASCII, 8, b"CaseCam\0"), (0x0112, SHORT, 1, struct.pack("<H", 6)),
+              (0x011A, RATIONAL, 1, struct.pack("<II", 300, 1)), (0x0128, SHORT, 1, struct.pack("<H", 2)),
+              (0x8769, LONG, 1, "exif"), (0x8825, LONG, 1, "gps")],
+        "exif": [(0x9000, UNDEF, 4, b"0230"), (0x9286, UNDEF, 16, b"ASCII\0\0\0hello!!"),
+                 (0x9201, SRATIONAL, 1, struct.pack("<ii", -7, 3)), (0x920A, RATIONAL, 1, struct.pack("<II", 50, 1)),
+                 (0xA002, LONG, 1, struct.pack("<I", 70)), (0x9204, SSHORT, 1, struct.pack("<h", -2)),
+                 (0x9205, SLONG, 1, struct.pack("<i", -40000)), (0x9206, FLOAT, 1, struct.pack("<f", 2.5)),
+                 (0x9207, DOUBLE, 1, struct.pack("<d", -1.25)), (0x9208, SBYTE, 2, struct.pack("<bb", -3, 4)),
+                 (0xA005, LONG, 1, "interop")],
+        "gps": [(0x0000, BYTE, 4, bytes([2, 3, 0, 0])), (0x0001, ASCII, 2, b"N\0"),
+                (0x0002, RATIONAL, 3, struct.pack("<IIIIII", 55, 1, 42, 1, 30, 1))],
+        "interop": [(0x0001, ASCII, 4, b"R98\0"), (0x0002, UNDEF, 4, b"0100"), (0x8769, LONG, 1, "exif")],
+        "1": [(0x0103, SHORT, 1, struct.pack("<H", 6))],
+    }
+    order = ["0", "exif", "gps", "interop", "1"]
+    offsets, pos = {}, 8
+    for name in order:  # each IFD, then the values that do not fit in its entries
+        offsets[name] = pos
+        pos += 2 + 12 * len(ifds[name]) + 4 + sum(len(v) + len(v) % 2 for _, _, _, v in ifds[name]
+                                                   if not isinstance(v, str) and len(v) > 4)
+    out = bytearray(b"II*\0" + struct.pack("<I", offsets["0"]))
+    for name in order:
+        entries, data = bytearray(struct.pack("<H", len(ifds[name]))), bytearray()
+        data_at = offsets[name] + 2 + 12 * len(ifds[name]) + 4
+        for tag, fmt, count, v in ifds[name]:
+            if isinstance(v, str):
+                field = struct.pack("<I", offsets[v])
+            elif len(v) <= 4:
+                field = v.ljust(4, b"\0")
+            else:
+                field = struct.pack("<I", data_at + len(data))
+                data += v + b"\0" * (len(v) % 2)
+            entries += struct.pack("<HHI", tag, fmt, count) + field
+        out += entries + struct.pack("<I", offsets["1"] if name == "0" else 0) + data
+    return bytes(out)
+def _exif_jpeg_uri():
+    app1 = b"Exif\0\0" + _exif_block()
+    jpeg = _TINY_JPEG[:2] + b"\xff\xe1" + struct.pack(">H", len(app1) + 2) + app1 + _TINY_JPEG[2:]
+    return "inline:data:image/jpeg;base64," + base64.b64encode(jpeg).decode()
+GAP_STEP_CASES += [("EXIF properties %r" % fmt, [[_exif_jpeg_uri(), "-format", fmt + "\\n", "info:"]], {})
+                   for fmt in ["%[exif:*]",
+                               "%[exif:!][%[#0112]][%[@0000]][%[@0001]][%[#9000]][%[#0001]][%[unknown]]",
+                               "%[exif:GPSLatitudeRef]|%[exif:InteroperabilityIndex]|%[exif:Make]"]
+                   + ["%%[exif:%s]" % key for key in ("#a002", "#A002", "#010f", "#010F", "#9000", "@0001",
+                                                     "#00g0", "#12345", "#1234", "")]]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
