@@ -4227,6 +4227,13 @@ GAP_COMMANDS += [_clear_outside(square, hole) + "-layers " + op + " -format '%p 
                                       ((20, 20, 30, 30), (2, 2, 9, 9)), ((5, 5, 15, 15), (25, 25, 11, 11)),
                                       ((10, 10, 30, 30), (12, 12, 6, 6)))
                  for op in ("optimize-frame", "optimize-plus", "optimize")]
+# draw.c: a clip path in objectBoundingBox units, which scales to the bounds of what the using
+# context has drawn (a rectangle and a circle; a polygon and a circle)
+_MVG_BBOX_CLIP = 'push defs\n push clip-path "cp"\n  push graphic-context\n   clip-units objectBoundingBox\n   rectangle 0.2,0.2 0.8,0.8\n  pop graphic-context\n pop clip-path\npop defs\npush graphic-context\n clip-path url(#cp)\n fill red rectangle 10,10 60,40\n fill blue circle 30,25 30,12\npop graphic-context\n'
+GAP_STEP_CASES += [("clip path in objectBoundingBox units%s" % label,
+                    [["-size", "70x46", "xc:white", "-draw", "@m.mvg", "out.miff"]],
+                    {"m.mvg": _MVG_BBOX_CLIP.replace("rectangle 10,10 60,40", shape)})
+                   for label, shape in (("", "rectangle 10,10 60,40"), (", polygon", "polygon 60,40 10,35 20,10 55,5"))]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
