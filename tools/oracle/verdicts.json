@@ -1172,6 +1172,16 @@
    "why": "string[i] is always '\u0000' here (every branch ends with string[i]='\u0000' or i=strlen(string)), so the mutant only writes '\u0000' over '\u0000'"
   },
   {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (count == (ssize_t) cache_info->length)",
+   "verdict": "equivalent",
+   "why": "after a complete sendfile the mutant does not return but falls through (count is not negative), rewinds both files and copies them again with the read/write loop: the same bytes, so the same clone"
+  },
+  {
    "at": 23,
    "file": "MagickCore/cache.c",
    "function": "ClonePixelCacheOnDisk",
@@ -1190,16 +1200,6 @@
    "src": "if (cache_info->length < 0x7ffff000)",
    "verdict": "equivalent",
    "why": "sends a cache that sendfile would copy to the read/write loop below instead, which copies the same bytes (and with sendfile, a cache over 2 GiB to sendfile, which copies it whole or falls back to the loop); the clone is the same file either way"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/cache.c",
-   "function": "ClonePixelCacheOnDisk",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (count == (ssize_t) cache_info->length)",
-   "verdict": "equivalent",
-   "why": "after a complete sendfile the mutant does not return but falls through (count is not negative), rewinds both files and copies them again with the read/write loop: the same bytes, so the same clone"
   },
   {
    "at": 14,
@@ -1222,16 +1222,6 @@
    "why": "the old descriptor is not closed when the cache file is reopened: a descriptor leak, nothing reads through it"
   },
   {
-   "at": 32,
-   "file": "MagickCore/cache.c",
-   "function": "SetPixelCacheExtent",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "extent=(MagickOffsetType) length-1;",
-   "verdict": "equivalent",
-   "why": "the marker byte goes one past the end instead of at it: the file is a byte longer, and nothing reads past length"
-  },
-  {
    "at": 28,
    "file": "MagickCore/cache.c",
    "function": "SetPixelCacheExtent",
@@ -1240,6 +1230,16 @@
    "src": "if (cache_info->synchronize != MagickFalse)",
    "verdict": "unobservable",
    "why": "changes only how much disk is reserved (posix_fallocate called when not synchronizing, or over a longer range); the cache's contents and the output are the same, on a file system that supports fallocate"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "extent=(MagickOffsetType) length-1;",
+   "verdict": "equivalent",
+   "why": "the marker byte goes one past the end instead of at it: the file is a byte longer, and nothing reads past length"
   },
   {
    "at": 52,
@@ -1722,16 +1722,6 @@
    "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
   },
   {
-   "at": 42,
-   "file": "MagickCore/color.c",
-   "function": "IsSVGCompliant",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "(fabs((double) (SVGCompliant(pixel->black)-pixel->black)) >= SVGEpsilon))",
-   "verdict": "equivalent",
-   "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
-  },
-  {
    "at": 58,
    "file": "MagickCore/color.c",
    "function": "IsSVGCompliant",
@@ -1746,6 +1736,16 @@
    "file": "MagickCore/color.c",
    "function": "IsSVGCompliant",
    "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "(fabs((double) (SVGCompliant(pixel->black)-pixel->black)) >= SVGEpsilon))",
+   "verdict": "equivalent",
+   "why": "the black test decides nothing: for a CMYK colour ConcatenateColorComponent skips the percent scale (CMYK is not sRGB-compatible) and GetColorTuple's depth 8 changes no scale (it formats with SVGCompliance, so 255 either way; depth is read nowhere after); for any other colour black is 0, which every test passes. Hand-run on four CMYK and sRGB colours at depth 16, txt:, no difference"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/color.c",
+   "function": "IsSVGCompliant",
+   "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "(fabs((double) (SVGCompliant(pixel->black)-pixel->black)) >= SVGEpsilon))",
    "verdict": "equivalent",
@@ -4778,7 +4778,7 @@
    "function": "AddElement",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "else if (oprNum <= fNull) pel->number_args = Functions[oprNum-(int) FirstFunc].number_args;",
+   "src": "else if (oprNum <= aNull) pel->number_args = 0;",
    "verdict": "equivalent",
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
   },
@@ -4788,7 +4788,7 @@
    "function": "AddElement",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "else if (oprNum <= aNull) pel->number_args = 0;",
+   "src": "else if (oprNum <= fNull) pel->number_args = Functions[oprNum-(int) FirstFunc].number_args;",
    "verdict": "equivalent",
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
   },
@@ -4853,6 +4853,26 @@
    "why": "the loop does not run, so the cache views (and, on the second, the statistics) are not freed: a leak when the fx expression is done, nothing reads them again"
   },
   {
+   "at": 9,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (regA >= 0) regA = floor ((double) regA);",
+   "verdict": "equivalent",
+   "why": "differs only for regA equal to 0 (or -0), where floor and ceil both return regA unchanged, sign included; hand-run trunc(-0): no difference"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/fx.c",
+   "function": "ExecuteRPN",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "else if (regA > 1.0) regA = 1.0;",
+   "verdict": "equivalent",
+   "why": "differs only for regA exactly 1.0, where the mutant sets regA to 1.0: the same value (and 1.0 has no signed twin); hand-run clamp(1): no difference"
+  },
+  {
    "at": 24,
    "file": "MagickCore/fx.c",
    "function": "ExecuteRPN",
@@ -4883,24 +4903,14 @@
    "why": "dead code: no element is ever an rIfNotZeroGoto (AddAddressingElement is called with rIfZeroGoto and rGoto only), so this case never runs"
   },
   {
-   "at": 14,
+   "at": 35,
    "file": "MagickCore/fx.c",
-   "function": "ExecuteRPN",
-   "mutator": "cxx_gt_to_ge",
+   "function": "GetChannelQualifier",
+   "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "else if (regA > 1.0) regA = 1.0;",
+   "src": "if (op >= (int) FirstImgAttr && op <= (int) ((OperatorE)aNull) &&",
    "verdict": "equivalent",
-   "why": "differs only for regA exactly 1.0, where the mutant sets regA to 1.0: the same value (and 1.0 has no signed twin); hand-run clamp(1): no difference"
-  },
-  {
-   "at": 9,
-   "file": "MagickCore/fx.c",
-   "function": "ExecuteRPN",
-   "mutator": "cxx_ge_to_gt",
-   "nth": 0,
-   "src": "if (regA >= 0) regA = floor ((double) regA);",
-   "verdict": "equivalent",
-   "why": "differs only for regA equal to 0 (or -0), where floor and ceil both return regA unchanged, sign included; hand-run trunc(-0): no difference"
+   "why": "differs only for op == aNull, and no caller passes it: the attribute call site (GetOperand) runs only for ia != aNull, the others pass functions"
   },
   {
    "at": 44,
@@ -4909,16 +4919,6 @@
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "op == fS || (op >= (int) FirstImgAttr && op <= aNull)",
-   "verdict": "equivalent",
-   "why": "differs only for op == aNull, and no caller passes it: the attribute call site (GetOperand) runs only for ia != aNull, the others pass functions"
-  },
-  {
-   "at": 35,
-   "file": "MagickCore/fx.c",
-   "function": "GetChannelQualifier",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
-   "src": "if (op >= (int) FirstImgAttr && op <= (int) ((OperatorE)aNull) &&",
    "verdict": "equivalent",
    "why": "differs only for op == aNull, and no caller passes it: the attribute call site (GetOperand) runs only for ia != aNull, the others pass functions"
   },
@@ -4958,16 +4958,6 @@
    "function": "OprStr",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "else if (oprNum <= fNull) str = Functions[oprNum-(int) FirstFunc].str;",
-   "verdict": "equivalent",
-   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
-  },
-  {
-   "at": 16,
-   "file": "MagickCore/fx.c",
-   "function": "OprStr",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
    "src": "else if (oprNum <= aNull) str = ImgAttrs[oprNum-(int) FirstImgAttr].str;",
    "verdict": "equivalent",
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
@@ -4978,9 +4968,19 @@
    "function": "OprStr",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "else if (oprNum <= sNull) str = Symbols[oprNum-(int) FirstSym].str;",
+   "src": "else if (oprNum <= fNull) str = Functions[oprNum-(int) FirstFunc].str;",
    "verdict": "equivalent",
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/fx.c",
+   "function": "OprStr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "else if (oprNum <= oNull) str = Operators[oprNum].str;",
+   "verdict": "equivalent",
+   "why": "equivalent as compiled: for a constant (oNull) the mutant reads Functions[-1].str, which here is Operators' last entry, \"onull\"; hand-run with fx:debug=true (DumpRPN names every element): the dump is the same"
   },
   {
    "at": 16,
@@ -4998,9 +4998,9 @@
    "function": "OprStr",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "else if (oprNum <= oNull) str = Operators[oprNum].str;",
+   "src": "else if (oprNum <= sNull) str = Symbols[oprNum-(int) FirstSym].str;",
    "verdict": "equivalent",
-   "why": "equivalent as compiled: for a constant (oNull) the mutant reads Functions[-1].str, which here is Operators' last entry, \"onull\"; hand-run with fx:debug=true (DumpRPN names every element): the dump is the same"
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
   },
   {
    "at": 24,
@@ -5043,36 +5043,6 @@
    "why": "this branch is reached only with addr_query unset and addr_colon set, which never happens (GetOperator sets addr_colon only after addr_query; both are reset together)"
   },
   {
-   "at": 38,
-   "file": "MagickCore/fx.c",
-   "function": "TranslateExpression",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "pel = &pfx->Elements[pfx->usedElements-1];",
-   "verdict": "equivalent",
-   "why": "the rCopyFrom element AddAddressingElement just added already has do_push set (AddElement sets it; only goto elements clear it), and the mutant sets it on the spare slot past the end, which the next AddElement sets the same way"
-  },
-  {
-   "at": 38,
-   "file": "MagickCore/fx.c",
-   "function": "TranslateExpression",
-   "mutator": "cxx_sub_to_add",
-   "nth": 1,
-   "src": "pel = &pfx->Elements[pfx->usedElements-1];",
-   "verdict": "equivalent",
-   "why": "the rCopyFrom element AddAddressingElement just added already has do_push set (AddElement sets it; only goto elements clear it), and the mutant sets it on the spare slot past the end, which the next AddElement sets the same way"
-  },
-  {
-   "at": 31,
-   "file": "MagickCore/fx.c",
-   "function": "TranslateExpression",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "StartEleNdx = pfx->usedElements-1;",
-   "verdict": "equivalent",
-   "why": "StartEleNdx is assigned here and never read"
-  },
-  {
    "at": 16,
    "file": "MagickCore/fx.c",
    "function": "TranslateExpression",
@@ -5093,14 +5063,34 @@
    "why": "StartEleNdx is assigned here and never read"
   },
   {
-   "at": 7,
+   "at": 31,
    "file": "MagickCore/fx.c",
-   "function": "TypeOfOpr",
-   "mutator": "cxx_le_to_lt",
+   "function": "TranslateExpression",
+   "mutator": "cxx_sub_to_add",
    "nth": 0,
-   "src": "if (op <= fNull) return etFunction;",
+   "src": "StartEleNdx = pfx->usedElements-1;",
    "verdict": "equivalent",
-   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+   "why": "StartEleNdx is assigned here and never read"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "pel = &pfx->Elements[pfx->usedElements-1];",
+   "verdict": "equivalent",
+   "why": "the rCopyFrom element AddAddressingElement just added already has do_push set (AddElement sets it; only goto elements clear it), and the mutant sets it on the spare slot past the end, which the next AddElement sets the same way"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/fx.c",
+   "function": "TranslateExpression",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "pel = &pfx->Elements[pfx->usedElements-1];",
+   "verdict": "equivalent",
+   "why": "the rCopyFrom element AddAddressingElement just added already has do_push set (AddElement sets it; only goto elements clear it), and the mutant sets it on the spare slot past the end, which the next AddElement sets the same way"
   },
   {
    "at": 7,
@@ -5118,7 +5108,7 @@
    "function": "TypeOfOpr",
    "mutator": "cxx_le_to_lt",
    "nth": 0,
-   "src": "if (op <= sNull) return etSymbol;",
+   "src": "if (op <= fNull) return etFunction;",
    "verdict": "equivalent",
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
   },
@@ -5129,6 +5119,16 @@
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "if (op <= rNull) return etControl;",
+   "verdict": "equivalent",
+   "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/fx.c",
+   "function": "TypeOfOpr",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (op <= sNull) return etSymbol;",
    "verdict": "equivalent",
    "why": "no element's operator is ever fNull, aNull, sNull or rNull: AddElement's callers pass a function only if fe != fNull, an attribute only if ia != aNull, a symbol only if se != sNull, and no caller passes rNull; OprStr's other callers pass an img_attr_qual only when it is not aNull, and in ExecuteRPN's default branch a real operator. The mutant differs only at that sentinel"
   },
@@ -8102,16 +8102,6 @@
    "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
   },
   {
-   "at": 25,
-   "file": "MagickCore/quantize.c",
-   "function": "AssignImageColors",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (cube.associate_alpha != MagickFalse)",
-   "verdict": "equivalent",
-   "why": "the alpha written here is never read: no pixel is read between this loop and SyncImage (GetImageQuantizeError runs only when measure_error is set, and then this block is skipped), and SyncImage repaints every pixel, alpha included, from the colormap"
-  },
-  {
    "at": 18,
    "file": "MagickCore/quantize.c",
    "function": "AssignImageColors",
@@ -8122,14 +8112,14 @@
    "why": "with one colour, writes colormap[1], the spare entry AcquireImageColormap allocates (colors+1); nothing reads past colors (PushColormapIndex sends a larger index to 0)"
   },
   {
-   "at": 31,
+   "at": 25,
    "file": "MagickCore/quantize.c",
-   "function": "DestroyQCubeInfo",
+   "function": "AssignImageColors",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
-   "src": "} while (cube_info->node_queue != (QNodes *) NULL);",
-   "verdict": "unobservable",
-   "why": "stops freeing the node queue after its first block: a leak at the end of a quantization, nothing reads the blocks again and the output is the same"
+   "src": "if (cube.associate_alpha != MagickFalse)",
+   "verdict": "equivalent",
+   "why": "the alpha written here is never read: no pixel is read between this loop and SyncImage (GetImageQuantizeError runs only when measure_error is set, and then this block is skipped), and SyncImage repaints every pixel, alpha included, from the colormap"
   },
   {
    "at": 12,
@@ -8150,6 +8140,16 @@
    "src": "if (cube_info->cache[i] != (ssize_t *) NULL)",
    "verdict": "unobservable",
    "why": "skips freeing the cache blocks: a leak at the end of a quantization, nothing reads them again and the output is the same"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/quantize.c",
+   "function": "DestroyQCubeInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "} while (cube_info->node_queue != (QNodes *) NULL);",
+   "verdict": "unobservable",
+   "why": "stops freeing the node queue after its first block: a leak at the end of a quantization, nothing reads the blocks again and the output is the same"
   },
   {
    "at": 14,
@@ -8202,16 +8202,6 @@
    "why": "changes the colormap order only: SetGrayscaleImage's one caller, QuantizeImage, then reclassifies the pixels and AssignImageColors rebuilds the colormap and every index, so the sorted colormap never reaches output; hand-run on the six quantizegap4 cases (palette MIFF and -verbose colormap), no difference"
   },
   {
-   "at": 20,
-   "file": "MagickCore/quantize.c",
-   "function": "PosterizeImage",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "remainder=(remainder-value)/levels;",
-   "verdict": "equivalent",
-   "why": "the map then holds the same colours in another order: (r+v)/L for (r-v)/L still sends 0..L^c-1 onto every combination of levels once (checked for L 2..16, c 1..5), and RemapImage classifies the map into a colour tree, where order does not count (the sums are of small exact multiples)"
-  },
-  {
    "at": 25,
    "file": "MagickCore/quantize.c",
    "function": "PosterizeImage",
@@ -8242,22 +8232,12 @@
    "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
   },
   {
-   "at": 50,
-   "file": "MagickCore/quantize.c",
-   "function": "PosterizeImage",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)",
-   "verdict": "equivalent",
-   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
-  },
-  {
    "at": 52,
    "file": "MagickCore/quantize.c",
    "function": "PosterizeImage",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
-   "src": "if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)",
+   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
    "verdict": "equivalent",
    "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
   },
@@ -8277,9 +8257,29 @@
    "function": "PosterizeImage",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
-   "src": "if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)",
+   "src": "if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)",
    "verdict": "equivalent",
    "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)",
+   "verdict": "equivalent",
+   "why": "posterizes the colormap of a PseudoClass image, but the pixels are then posterized one by one and QuantizeImage rebuilds the colormap from them, so this colormap is never read; hand-run on rose and rose_alpha -colors 16 +dither -posterize 4, palette MIFF, no difference"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "remainder=(remainder-value)/levels;",
+   "verdict": "equivalent",
+   "why": "the map then holds the same colours in another order: (r+v)/L for (r-v)/L still sends 0..L^c-1 onto every combination of levels once (checked for L 2..16, c 1..5), and RemapImage classifies the map into a colour tree, where order does not count (the sums are of small exact multiples)"
   },
   {
    "at": 7,
@@ -13949,6 +13949,136 @@
    "src": "file=close_utf8(file)-1;",
    "verdict": "equivalent",
    "why": "the result of close_utf8 is assigned and never read"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((passes == 0) && (status != MagickFalse))",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*source == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (buffer == (unsigned char *) NULL)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (destination_file == -1)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (passes == -1)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (source_file == -1)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 65,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 65,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((passes == 0) && (status != MagickFalse))",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/utility.c",
+   "function": "AcquireUniqueSymbolicLink",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((size_t) count != length)",
+   "verdict": "unresolved",
+   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
   },
   {
    "at": 14,
