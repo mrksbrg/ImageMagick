@@ -1732,6 +1732,36 @@
    "why": "only enlarges the size CopyMagickString is given: the pattern was checked to fit the room left just before, so the same bytes are copied"
   },
   {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SetImageInfo",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (first > last)",
+   "verdict": "equivalent",
+   "why": "the scene range bounds: the mutant differs only when the two values are equal, and then swaps or assigns the same value"
+  },
+  {
+   "at": 9,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SetImageInfo",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (last > image_info->number_scenes)",
+   "verdict": "equivalent",
+   "why": "the scene range bounds: the mutant differs only when the two values are equal, and then swaps or assigns the same value"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
+   "function": "SetImageInfo",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (first < image_info->scene)",
+   "verdict": "equivalent",
+   "why": "the scene range bounds: the mutant differs only when the two values are equal, and then swaps or assigns the same value"
+  },
+  {
    "at": 18,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "SmushImages",
