@@ -5092,3 +5092,11 @@ _DRIVER_CASES += [("driver %s list %r" % (kind, pattern), _driver("list", kind, 
                                         ("locale", "Magick/*"), ("mime", "*"), ("mime", "image/*"), ("mime", "*nope*"))]
 _DRIVER_CASES += [("driver mime of %s" % name, _driver("mime", "{C}/%s" % name)) for name in ("rose.miff", "bilevel.miff")]
 GAP_STEP_CASES += [(label, steps, {}) for label, steps in _DRIVER_CASES]
+# delegate.c: PostScript read back through Ghostscript (the owner allowed external programs,
+# 2026-10-03; gs from Homebrew, on the oracle's PATH), and PostScript written as EPS. Where gs is
+# missing the read fails alike in every run. Inkscape's SVG output and Graphviz's (dot) vary
+# between runs, so no case uses them.
+GAP_STEP_CASES += [
+    ("PostScript through Ghostscript, read back", [["{C}/rose.miff", "a.ps"], ["a.ps", "out.miff"]], {}),
+    ("PostScript through Ghostscript, as EPS", [["{C}/rose.miff", "a.ps"], ["a.ps", "b.eps"], ["b.eps", "out.miff"]], {}),
+]
