@@ -11445,6 +11445,26 @@
    "why": "runs only when the mime semaphore was never created; MimeComponentGenesis creates it at start-up"
   },
   {
+   "at": 0,
+   "file": "MagickCore/monitor.c",
+   "function": "MonitorComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&monitor_semaphore);",
+   "verdict": "equivalent",
+   "why": "the branch never runs: MagickCoreGenesis calls MonitorComponentGenesis, which creates monitor_semaphore, before MagickCoreTerminus (the only caller) can run, so the semaphore is never NULL here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/monitor.c",
+   "function": "MonitorComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&monitor_semaphore);",
+   "verdict": "unobservable",
+   "why": "the semaphore is not released at shutdown: a leak as the process exits, nothing uses it afterwards"
+  },
+  {
    "at": 17,
    "file": "MagickCore/montage.c",
    "function": "CloneMontageInfo",
