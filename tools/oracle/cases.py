@@ -4079,6 +4079,11 @@ GAP_STEP_CASES += [("locale.xml with an include, listed", [["-list", "locale"]],
 # branch): ideographic, no-break and em spaces in a narrow caption
 GAP_COMMANDS += ["-font {C}/Generic.ttf -pointsize 12 -size 40x caption:'%s'" % t for t in (
     "word\u3000word\u3000word\u3000word", "word\u00a0word\u00a0word", "longword\u2003longword\u2003x")]
+# transform.c: SpliceImage on an image without alpha under a transparent background: the
+# splice image gains an alpha channel the source lacks, which only the explicit SetPixelAlpha
+# after each channel loop sets (the loop skips a channel the source does not have)
+GAP_COMMANDS += ["{C}/rose.miff -background none %s-splice 5x4+10+8" % grav
+                 for grav in ("", "-gravity center ", "-gravity southeast ")]
 GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % grav
                  for grav in ("", "-gravity center ", "-gravity southeast ")]
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
