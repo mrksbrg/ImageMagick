@@ -4330,6 +4330,21 @@ GAP_STEP_CASES += [("an empty MVG macro used", [["-size", "40x30", "xc:white", "
 # draw.c: GetDrawInfo reading -direction for a label (label: builds its own draw info)
 GAP_STEP_CASES += [("label right to left", [["-direction", "right-to-left", "-font", "{C}/Generic.ttf", "-pointsize", "14",
                                              "label:abc def", "out.miff"]], {})]
+# profile.c: SyncExifProfile rewriting resolution and orientation in the hand-made EXIF block (both
+# byte orders, with Exif, GPS and Interop directories to walk) as a JPEG or MIFF is written; and
+# the 8BIM profile's clip paths through -extent to PSD and through -crop
+GAP_STEP_CASES += [("EXIF synced on write, %s, %s" % ("little-endian" if order == "<" else "big-endian", out),
+                    [[_exif_jpeg_uri(order)] + opts + [out], [out, "-format", "%[exif:*]\\n", "info:"]], {})
+                   for order in ("<", ">")
+                   for opts, out in ((["-density", "150x75", "-units", "PixelsPerInch", "-orient", "RightTop"], "out.jpg"),
+                                     (["-density", "50x60", "-units", "PixelsPerCentimeter", "-orient", "BottomLeft"], "out.miff"))]
+GAP_STEP_CASES += [
+    ("8BIM clip path through -extent to PSD", [["{C}/rose.miff", "-profile", "clip.8bim", "-extent", "90x60-5-5", "-density", "100",
+                                                "out.psd"], ["out.psd", "-format", "%[8BIM:1999,2998:#1]\\n", "info:"]],
+     {"clip.8bim": _8BIM_RICH}),
+    ("8BIM clip path through -crop", [["{C}/rose.miff", "-profile", "clip.8bim", "-crop", "40x30+5+5", "+repage", "out.miff"],
+                                       ["out.miff", "-format", "%[8BIM:1999,2998:#1]\\n", "info:"]], {"clip.8bim": _8BIM_RICH}),
+]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
