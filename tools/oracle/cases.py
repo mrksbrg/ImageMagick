@@ -4251,6 +4251,9 @@ GAP_STEP_CASES += [
      for draw in ("rotate 20 rotate 15 fill red rectangle 10,10 40,30",
                   "skewX 10 rotate 15 fill red rectangle 10,10 40,30",
                   "stop-color red 0", "stop-color red 0 stop-color blue 1")]
+# image.c: StripImage on an image that has profiles (8BIM, ICC, IPTC, MPF): -strip removes them
+GAP_STEP_CASES += [("-strip of a JPEG with profiles", [[_UHDR_JPG, "-strip", "-format", "%[profiles]|%c\\n", "info:"]], {}),
+                   ("-strip of a JPEG with profiles, written", [[_UHDR_JPG, "-strip", "out.miff"]], {})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
