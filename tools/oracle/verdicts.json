@@ -72,6 +72,56 @@
    "why": "the length CopyMagickString returns from here (a NUL at offset 1 or 2 of a group of four, or in the tail of a string cut at its limit) is read only by log.c, which builds log file names and -debug log lines with it, and logging is not compared; hdr.c and png.c read it too, but their fixed strings (11, 24 and 8 characters, all within the limit) end on the 4th and 1st returns, not this one. Every other caller casts it to void"
   },
   {
+   "at": 8,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "InterpretSiPrefixValue",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == 'B') || (*q == 'P'))",
+   "verdict": "equivalent",
+   "why": "the sentinel is read only by SiPrefixToDoubleInterval, to scale a value ending in % by interval/100, and every caller (resource and policy limits, memory, log and timer settings) passes an interval of 100: the scale is exactly 1, so stepping q past a % (or past any other character) changes nothing"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "InterpretSiPrefixValue",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == 'B') || (*q == 'P'))",
+   "verdict": "equivalent",
+   "why": "the sentinel is read only by SiPrefixToDoubleInterval, to scale a value ending in % by interval/100, and every caller (resource and policy limits, memory, log and timer settings) passes an interval of 100: the scale is exactly 1, so stepping q past a % (or past any other character) changes nothing"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "InterpretSiPrefixValue",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (e >= MagickEpsilon)",
+   "verdict": "equivalent",
+   "why": "e is a whole number from the table, never equal to MagickEpsilon (1e-12)"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "InterpretSiPrefixValue",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if ((*q >= 'E') && (*q <= 'z'))",
+   "verdict": "equivalent",
+   "why": "excludes only 'z', whose exponent (-21) is negative and never applied (e >= MagickEpsilon fails), and which q does not step over either way"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
+   "function": "InterpretSiPrefixValue",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (sentinel != (char **) NULL)",
+   "verdict": "unresolved",
+   "why": "the sentinel is read only by SiPrefixToDoubleInterval, to scale a value ending in % by interval/100, and every caller (resource and policy limits, memory, log and timer settings) passes an interval of 100: the scale is exactly 1, so the value never depends on the sentinel; but the mutant leaves the caller's q unset, and SiPrefixToDoubleInterval then reads *q through an uninitialised pointer: undefined, though it never crashed in the runs"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/string.c",
    "function": "PrintStringInfo",
