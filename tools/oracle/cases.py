@@ -4210,6 +4210,9 @@ GAP_COMMANDS += [
     "( -size 20x20 xc:none -fill red -draw 'rectangle 0,0 9,18' -draw 'rectangle 10,0 19,15' ) ( -size 20x20 xc:none -fill blue -draw 'rectangle 0,1 9,19' -draw 'rectangle 10,4 19,19' ) -smush 0",
     "( -size 20x20 xc:none -fill red -draw 'rectangle 0,0 9,15' -draw 'rectangle 10,0 19,18' ) ( -size 20x20 xc:none -fill blue -draw 'rectangle 0,4 9,19' -draw 'rectangle 10,1 19,19' ) -smush 0",
 ]
+# image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
+GAP_STEP_CASES += [("output name with an invalid specifier before %d",
+                    [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
 GAP_COMMANDS += ["-size 60x40 -define gradient:angle=30 -define gradient:radii=25,10 radial-gradient:red-blue",
                  "-size 60x40 -define gradient:angle=120 -define gradient:radii=8,20 -define gradient:center=20,15 "
                  "radial-gradient:yellow-navy"]
