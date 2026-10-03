@@ -692,6 +692,656 @@
    "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
   },
   {
+   "at": 39,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "antialias=(repeat < length) && ((repeat+1.0) > length) ?",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 16,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "antialias=repeat+1.0 > gradient->radius ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 40,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 1,
+   "src": "alpha=(offset-gradient->stops[i].offset)/",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 40,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 2,
+   "src": "alpha=(offset-gradient->stops[i].offset)/",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 31,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((ssize_t) fmod(offset,2.0) == 0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (gradient->type == LinearGradient)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (gradient->type == LinearGradient)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (i == (ssize_t) gradient->number_stops)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (i == (ssize_t) gradient->number_stops)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (i == 0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 6,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (i == 0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 45,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "antialias=(repeat < length) && ((repeat+1.0) > length) ?",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 21,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "antialias=repeat+1.0 > gradient->radius ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 45,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "antialias=(repeat < length) && ((repeat+1.0) > length) ?",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 21,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "antialias=repeat+1.0 > gradient->radius ? MagickTrue :",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "antialias=(repeat < length) && ((repeat+1.0) > length) ?",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (i=0; i < (ssize_t) gradient->number_stops; i++)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) gradient->number_stops; i++)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (offset < 0.0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "if (offset < gradient->stops[i].offset)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "if (offset < gradient->stops[i].offset)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (repeat < 0.0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "if (repeat < 0.0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 18,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "antialias=(repeat < length) && ((repeat+1.0) > length) ?",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i=0; i < (ssize_t) gradient->number_stops; i++)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) gradient->number_stops; i++)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (offset < 0.0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (offset < gradient->stops[i].offset)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "if (offset < gradient->stops[i].offset)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (repeat < 0.0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if (repeat < 0.0)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 8,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_minus_to_noop",
+   "nth": 0,
+   "src": "offset=(-offset);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 29,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_minus_to_noop",
+   "nth": 0,
+   "src": "repeat=gradient->radius-fmod(-repeat,gradient->radius);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_minus_to_noop",
+   "nth": 0,
+   "src": "repeat=length-fmod(-repeat,length);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 35,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "offset=MagickSafeReciprocal(length)*repeat;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "offset=repeat*MagickSafeReciprocal(gradient->radius);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 3,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "(y != CastDoubleToSsizeT(ceil(gradient_vector->y1-0.5))))",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 3,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "(y != CastDoubleToSsizeT(ceil(gradient_vector->y1-0.5))))",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 7,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if ((x != CastDoubleToSsizeT(ceil(gradient_vector->x1-0.5))) ||",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 7,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if ((x != CastDoubleToSsizeT(ceil(gradient_vector->x1-0.5))) ||",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (antialias != MagickFalse)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 19,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (gradient->type != RadialGradient)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 49,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i=0; i < (ssize_t) gradient->number_stops; i++)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 49,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (i=0; i < (ssize_t) gradient->number_stops; i++)",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "CompositePixelInfoBlend(&gradient->stops[i].color,1.0-alpha,",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "CompositePixelInfoBlend(&gradient->stops[i].color,1.0-alpha,",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&zero);",
+   "verdict": "unresolved",
+   "why": "without it zero, which starts each row's pixel and composite, is uninitialised: the colour fields are then overwritten per pixel, but its colorspace, alpha trait and fuzz are read uninitialised, undefined rather than a sure difference"
+  },
+  {
+   "at": 26,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "(gradient->stops[j].offset-gradient->stops[i].offset);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 26,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "(gradient->stops[j].offset-gradient->stops[i].offset);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 49,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "(y != CastDoubleToSsizeT(ceil(gradient_vector->y1-0.5))))",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 49,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "(y != CastDoubleToSsizeT(ceil(gradient_vector->y1-0.5))))",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 53,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "CompositePixelInfoBlend(&gradient->stops[i].color,1.0-alpha,",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 53,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "CompositePixelInfoBlend(&gradient->stops[i].color,1.0-alpha,",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "alpha=(offset-gradient->stops[i].offset)/",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "alpha=(offset-gradient->stops[i].offset)/",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 22,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "alpha=gradient->radius-repeat;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 12,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "alpha=length-repeat;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 48,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "composite=gradient->stops[gradient->number_stops-1].color;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 48,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "composite=gradient->stops[gradient->number_stops-1].color;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 53,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "if ((x != CastDoubleToSsizeT(ceil(gradient_vector->x1-0.5))) ||",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 53,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "if ((x != CastDoubleToSsizeT(ceil(gradient_vector->x1-0.5))) ||",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 34,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "j=(ssize_t) gradient->number_stops-1L;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "offset=1.0-fmod(offset,1.0);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "repeat=gradient->radius-fmod(-repeat,gradient->radius);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "DrawGradientImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "repeat=length-fmod(-repeat,length);",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
    "at": 12,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
    "function": "DrawRoundLinecap",
@@ -700,6 +1350,56 @@
    "src": "for (i=0; i < 4; i++)",
    "verdict": "equivalent",
    "why": "also copies the primitive into linecap[4] (the array has 5), whose primitive is set to UndefinedPrimitive just after: it only ends the polygon, as before"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "GetStopColorOffset",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "return(sqrt(v.x*v.x+v.y*v.y));",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "GetStopColorOffset",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "v.x=(double) x-gradient->center.x;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 14,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "GetStopColorOffset",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "v.y=(double) y-gradient->center.y;",
+   "verdict": "unresolved",
+   "why": "in the reflect or repeat spread, which only the API can ask for: MVG and SVG gradients and the gradient: coder always pad (GradientImage is called with PadSpread)"
+  },
+  {
+   "at": 40,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "StopInfoCompare",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
+   "verdict": "unresolved",
+   "why": "changes only how StopInfoCompare ranks two stops of the same offset, and qsort leaves the order of ties to the C library: a case with shared offsets kept its order on the Mac either way"
+  },
+  {
+   "at": 23,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "function": "StopInfoCompare",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
+   "verdict": "unresolved",
+   "why": "changes only how StopInfoCompare ranks two stops of the same offset, and qsort leaves the order of ties to the C library: a case with shared offsets kept its order on the Mac either way"
   },
   {
    "at": 51,
