@@ -4347,6 +4347,10 @@ GAP_STEP_CASES += [
     ("8BIM clip path through -crop", [["{C}/rose.miff", "-profile", "clip.8bim", "-crop", "40x30+5+5", "+repage", "out.miff"],
                                        ["out.miff", "-format", "%[8BIM:1999,2998:#1]\\n", "info:"]], {"clip.8bim": _8BIM_RICH}),
 ]
+# policy.c: a delegate policy without the execute right: the SVG reader's svg:decode delegate is
+# refused before any program runs (IsRightsAuthorizedByName's execute test), and MSVG renders it
+GAP_STEP_CASES += [("SVG with delegates not executable", [["{C}/draw.svg", "-format", "%wx%h\\n", "info:"]],
+                    {_POLICY: _policy('<policy domain="delegate" rights="read" pattern="*"/>')})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
