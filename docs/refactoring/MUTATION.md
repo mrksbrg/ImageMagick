@@ -2155,8 +2155,8 @@ the survivors it targets first (`~/mutcase.py`), and run 8 times for determinism
 | `fxgap10` | fx.c | equal-operand comparisons, shifts by 64 and fractions, `~` exact in a long double, sign(0), airy, signed zeros | 21 |
 | `fxgap11` | fx.c | image references per image of a list (`pfx->ImgNum` 1), `u[1-1]` (a constant 0 compiles to `u0`), `u[1].p`, HSL symbols alone, nesting at the 600 limit, qualifier errors, if(), `$zz`, artifacts as variables | 36 |
 | `cachegap2` | cache.c | named MVG masks (`push mask m1` unquoted never set one), disk caches cloned, a three-image MPC | 8 + masks |
-| `matrixgap3` | matrix.c | the hough accumulator black, white and one line; the matrix mapped from a file (`-limit memory 0` alone) | 14 |
-| `resamplegap` | resample.c | `resample:verbose`'s weighting table, a squeezed perspective | 7 |
+| `matrixgap3` | matrix.c | the hough accumulator black, white and one line; the matrix mapped from a file (`-limit memory 0` alone) | 14 claimed; its round: 31 killed, but not SetMatrixExtent's (see below) |
+| `resamplegap` | resample.c | `resample:verbose`'s weighting table, a squeezed perspective | 7 claimed; its round: 5 killed (adjusted 75% to 77%) |
 | `quantumgap7` | quantum-import/export.c | min-is-white polarity at every depth, 7-pixel widths for packed depths in 13 layouts, palette with alpha | (round pending) |
 | `blobgap` | blob.c | ReadBlobString's newline stripping through `text:` | 3 |
 
@@ -2176,6 +2176,8 @@ through the API). ResamplePixelColor's virtual-pixel shortcuts survive under ele
 virtual-pixel methods with a viewport 50 px past the image: the shortcut's single colour and
 the full EWA agree there, but that is not proven for the mutants that widen the shortcut, so
 they stay open.
+
+**A correction to the hand-run counts.** Until about 01:15, `~/mutcase.py` ran every ad-hoc command in one directory (`runs/hand/adhoc_1`), and two hand-runs at once overwrote each other's files. That happened between about 01:00 and 01:25, while a long resample probe ran beside the matrix, resample and some fx probes, and produced false kills (the matrix SetMatrixExtent kills, and one stray distort kill, which first looked like a nondeterministic Arc distortion). mutcase now uses a directory per process. The case rounds are what count; the table's hand-run figures are replaced by round results as the rounds finish.
 
 Tooling: `mutate.py`'s `ORACLE_MEM_GB` (above). A pull of the WSL clone between a round's
 index step and its mutation run makes the casemap stale and the round refuse to start
