@@ -2022,6 +2022,136 @@
    "why": "both scans stop once their count reaches the current gap (the margin scan at columns-x-1 >= gap, the other at x+i >= gap), so x+i never exceeds gap: the mutant either stops one step later, past the gap, or assigns the gap a value no larger than the original does, and the gap only ever takes x+i when it is below it; the result is the same"
   },
   {
+   "at": 17,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "path,locale,depth+1,exception);",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 34,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 36,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"locale\") == 0)",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 10,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 32,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (LocaleCompare(locale,token) != 0)",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 13,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 16,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 39,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 55,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
+   "at": 0,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "function": "LoadLocaleCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPathComponent(filename,HeadPath,path);",
+   "verdict": "unresolved",
+   "why": "inside LoadLocaleCache's <include> block, whose included file never adds a message in this build: a locale.xml holding only an include (relative or absolute file, with or without a locale attribute, in a case's $HOME or alone on the configure path) leaves the cache empty, and ImageMagick falls back to english.xml or the built-in messages; a locale.xml including itself does not recurse either (a depth-1 mutant would hang). With the include's effect always nil, these lines cannot show. Cause not traced: no debugger works on this machine"
+  },
+  {
    "at": 22,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "Get8BIMProperty",
