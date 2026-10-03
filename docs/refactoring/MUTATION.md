@@ -2277,10 +2277,11 @@ not done unasked).
 profiles, ICC v2 with every byte below 0x80 so they fit text case files: matrix/TRC RGB and
 kTRC gray display profiles, and lut16 profiles (two grid points, table values at most 0x7F7F)
 for CMYK, Lab and XYZ. Little CMS accepts all five, so `ProfileImage` runs real transforms
-between every pair of colour spaces it handles. Hand-run against mull-macx, they kill 42 of its
+between every pair of colour spaces it handles. Hand-run against mull-macx, they kill 41 of its
 55 open mutants and `CompareStringInfo`'s status test; five more are leaks (verdicts). The
-remaining eight are the low-precision path, which an HDRI build never takes, and the
-`exif:ColorSpace` checks for an image whose EXIF says sRGB.
+remaining nine are the low-precision path, which an HDRI build never takes, two translations
+set to the 0.0 they already hold, the profile iterator's reset, and the `exif:ColorSpace`
+checks when the same profile is applied again.
 
 Two earlier verdicts were wrong: `GetMultilineTypeMetrics` and `RenderFreetype` mutants called
 "a font metric that no output shows" are killed by a multi-line label (its width is the widest
