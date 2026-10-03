@@ -4322,6 +4322,11 @@ GAP_STEP_CASES += [("policies of the same name in two domains", [["-list", "reso
                                       '<policy domain="resource" name="area" value="10MP"/>',
                                       '<policy domain="system" name="width" value="9"/>',
                                       '<policy domain="resource" name="width" value="1000"/>')})]
+# draw.c: GetMVGMacros with an empty named macro after a full one (its body has length 0, so
+# nothing is stored, and using it draws nothing)
+GAP_STEP_CASES += [("an empty MVG macro used", [["-size", "40x30", "xc:white", "-draw", "@m.mvg", "out.miff"]],
+                    {"m.mvg": 'push graphic-context "a"\n  fill red circle 10,10 10,5\npop graphic-context\n'
+                              'push graphic-context "e"\npop graphic-context\nuse e\n'})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
