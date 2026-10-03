@@ -2273,6 +2273,12 @@ adding `config/sRGB.icm` and `config/cmyk.icm` to `DECODE_FILES`, which would op
 `ProfileImage` and the ICC transforms (it changes the frozen corpus on every machine, so it is
 not done unasked).
 
+**memory.c's three `max-memory-request` boundaries stay open.** A case's own policy.xml is
+loaded, but `GetMaxMemoryRequestFromPolicy` raises any value below 16 MiB to 16 MiB, so an
+allocation exactly at the limit needs a 16 MiB input (too large for a case file) or an image
+whose pixel cache is exactly that size, where a refused allocation falls back to a disk cache
+with the same output.
+
 **The third is no longer needed (afternoon, 2026-10-03).** The cases now build their own ICC
 profiles, ICC v2 with every byte below 0x80 so they fit text case files: matrix/TRC RGB and
 kTRC gray display profiles, and lut16 profiles (two grid points, table values at most 0x7F7F)
