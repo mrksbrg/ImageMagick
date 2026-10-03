@@ -2288,7 +2288,7 @@ def _fx_gap11_cases():
 
 
 # matrix.c: MatrixToImage scales the hough accumulator by its range: all zero
-# for a black image, a white one, and one horizontal line (hand-run: 8 killed).
+# for a black image, a white one, and one horizontal line (its round: 31 killed in all).
 # And SetMatrixExtent, below.
 def _matrix_gap3_cases():
     for label, src in (("black", ["-size", "20x15", "xc:black"]),
@@ -2299,7 +2299,7 @@ def _matrix_gap3_cases():
                   ["-define", "hough-lines:accumulator=true", "-hough-lines", "5x5+3"])
     # With memory exhausted but mapping allowed (-limit memory 0 alone), the
     # matrix is a file mapped into memory, the one route to SetMatrixExtent
-    # (hand-run: 6 killed).
+    # (reached; the hand-run kills were false, from a shared run directory).
     yield _op("matrixgap3", "hough accumulator, matrix mapped from a file",
               ["-limit", "memory", "0"] + _HOUGH_INPUT,
               ["-define", "hough-lines:accumulator=true", "-hough-lines", "9x9+10"])
@@ -2307,7 +2307,7 @@ def _matrix_gap3_cases():
 
 # resample.c: resample:verbose prints SetResampleFilter's weighting table, and a
 # perspective squeezed into 20x20 drives ScaleResampleFilter near its limit
-# (hand-run: 7 killed).
+# (its round: 5 killed).
 def _resample_gap_cases():
     yield _case("resamplegap", "distort with resample:verbose",
                 [[img("rose"), "-define", "resample:verbose=1", "-distort", "SRT", "0.5,10", "null:"]], [])
