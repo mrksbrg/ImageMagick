@@ -4054,6 +4054,9 @@ GAP_STEP_CASES += [
      [["{C}/rose.miff", "-profile", "8bimtext:t.txt", "-format", "[%[8BIM:1999,1999]] [%[8BIM:2999,2999]]\\n", "info:"]],
      {"t.txt": '8BIM#1999="low edge"\n8BIM#2999="high edge"\n'}),
 ]
+# ... and a profile that ends right after a resource's name (4 zero bytes and an x), which a
+# length test one off would read as a zero-length resource
+GAP_STEP_CASES += [_8bim_format("[%[8BIM:1999,2998:#1]]", "8BIM\x08\x00\x05\x00\x00\x00\x00x")]
 # transform.c: CropImage at the edges of the virtual canvas: a crop ending exactly where the
 # image's page offset begins (in x, and in y with x inside), a negative crop of an offset image,
 # and pages with a zero width or height, where the crop's page comes from the image size
