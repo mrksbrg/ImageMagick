@@ -2242,6 +2242,36 @@
    "why": "the resource matched and status is now true, so the loop ends: the length it adjusts is never read again"
   },
   {
+   "at": 36,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetEXIFProperty",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((offset < 0) || (size_t) offset >= length)",
+   "verdict": "equivalent",
+   "why": "differs only for an IFD offset equal to the length: the directory bounds test just after (directory > exif+length-2) rejects it, as the original does here"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetEXIFProperty",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (length < 16)",
+   "verdict": "equivalent",
+   "why": "differs only when exactly 16 bytes follow the Exif header: the 8-byte TIFF header and a 2-byte entry count leave 6 bytes, less than one 12-byte IFD entry, so the entry loop stops at once (q > exif+length-12) and nothing is read either way"
+  },
+  {
+   "at": 11,
+   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
+   "function": "GetEXIFProperty",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (length < 6)",
+   "verdict": "equivalent",
+   "why": "differs only for a 6-byte profile, which cannot hold the TIFF block that the length < 16 test after the Exif header requires anyway"
+  },
+  {
    "at": 14,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/property.c",
    "function": "GetEXIFProperty",
