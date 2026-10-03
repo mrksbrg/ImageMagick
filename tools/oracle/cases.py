@@ -4315,6 +4315,13 @@ GAP_STEP_CASES += [
 # (denying GIF) that must stay inside the string, and a stray "]" before the real GIF deny
 GAP_STEP_CASES += [("policy.xml with %s" % label, [["{C}/rose.miff", "x.gif"], ["{C}/rose.miff", "y.bmp"]], {_POLICY: xml})
                    for label, xml in (("a quoted doctype string", '<?xml version="1.0"?>\n<!DOCTYPE policymap [\n  <!ENTITY e "x]> <policy domain=\'coder\' rights=\'none\' pattern=\'GIF\'/> y">\n]>\n<policymap>\n  <policy domain="coder" rights="none" pattern="BMP"/>\n</policymap>\n'), ("a stray doctype bracket", '<?xml version="1.0"?>\n<!DOCTYPE policymap SYSTEM "t" ]>\n<policymap>\n  <policy domain="coder" rights="none" pattern="GIF"/>\n</policymap>\n'))]
+# policy.c: GetPolicyInfo's domain filter: system-domain policies named area and width, ahead of
+# the resource-domain ones that resource:area and resource:width must find
+GAP_STEP_CASES += [("policies of the same name in two domains", [["-list", "resource"], ["{C}/rose.miff", "out.miff"]],
+                    {_POLICY: _policy('<policy domain="system" name="area" value="1KP"/>',
+                                      '<policy domain="resource" name="area" value="10MP"/>',
+                                      '<policy domain="system" name="width" value="9"/>',
+                                      '<policy domain="resource" name="width" value="1000"/>')})]
 # image.c: InterpretImageFilename copying an invalid specifier (%q) literally before a valid one
 GAP_STEP_CASES += [("output name with an invalid specifier before %d",
                     [["{C}/rose.miff", "{C}/rose.miff", "-scene", "3", "o_%q_%d.miff"]], {})]
