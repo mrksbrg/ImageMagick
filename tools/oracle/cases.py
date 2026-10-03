@@ -5024,3 +5024,9 @@ GAP_STEP_CASES += [("a PNG named %s, read" % name,
 # annotate.c: RenderFreetype takes the vertical resolution from -density's second value
 GAP_STEP_CASES += [("label at -density 72x144", [["-font", "{C}/Generic.ttf", "-density", "72x144", "-pointsize", "20",
                                                   "label:Hi", "out.miff"]], {})]
+# image.c: SetImageMask with a write mask smaller than the image: past the mask's last column
+# and row the image is left unmasked, where a bound one off would read the mask's edge
+GAP_STEP_CASES += [("write mask smaller than the image, %s" % colour,
+                    [["-size", "60x40", "xc:" + colour, "m.miff"],
+                     ["{C}/rose.miff", "-write-mask", "m.miff", "-negate", "+write-mask", "out.miff"]], {})
+                   for colour in ("white", "black")]
