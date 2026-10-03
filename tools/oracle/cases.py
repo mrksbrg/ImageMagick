@@ -110,7 +110,9 @@ DEST_WIDER_UNSTABLE = ("Displace", "Distort")
 # pixels unwritten, so the image holds whatever memory held: under a parallel
 # load 19 of 64 runs of the same command differed. selfcheck, which runs each
 # case twice, missed it, and it counted as a kill in 155 mutation runs.
-WRITE_MASK_UNSTABLE = ("-scale 50%",)
+# -scale 150x100% does the same, more rarely: 1 of 80 runs under a load of ten
+# (2026-10-03), once in a cached baseline, so every mutant it met counted as killed.
+WRITE_MASK_UNSTABLE = ("-scale 50%", "-scale 150x100%")
 
 
 def img(name):
@@ -4569,7 +4571,10 @@ GAP_COMMANDS += ["{C}/rose_alpha.miff -background none %s-splice 5x4+10+8" % gra
 # type.c: LoadFontConfigFonts sorts each fontconfig font into ImageMagick's width and weight
 # buckets. The case's own fonts.conf (fontconfig reads $HOME/.config/fontconfig, and HOME is
 # the case directory) adds the corpus directory and, at scan time, gives its font an exact
-# bucket boundary: every width and weight threshold the function compares against
+# bucket boundary: every width and weight threshold the function compares against.
+# A plain file at .cache/fontconfig keeps fontconfig from writing its cache into the case
+# directory: whether it writes one there depends on the shared caches other runs left in
+# Homebrew's cache directory, so the file came and went between baseline and mutant runs
 def _fonts_conf(width, weight, style):
     return ('<?xml version="1.0"?>\n<!DOCTYPE fontconfig SYSTEM "fonts.dtd">\n<fontconfig>\n'
             '  <dir prefix="relative">../../{C}</dir>\n'
@@ -4580,7 +4585,8 @@ def _fonts_conf(width, weight, style):
             '    <edit name="style" mode="assign"><string>%s</string></edit>\n'
             '  </match>\n</fontconfig>\n' % (width, weight, style))
 GAP_STEP_CASES += [("fontconfig font at width %d, weight %d, style %s, listed" % (width, weight, style),
-                    [["-list", "font"]], {".config/fontconfig/fonts.conf": _fonts_conf(width, weight, style)})
+                    [["-list", "font"]], {".config/fontconfig/fonts.conf": _fonts_conf(width, weight, style),
+                     ".cache/fontconfig": ""})
                    for width, weight, style in (
                        (30, 0, "Regular"), (50, 40, "Italic"), (63, 50, "Bold"), (75, 75, "Regular"),
                        (87, 80, "Oblique"), (100, 100, "Regular"), (113, 180, "Italic"),
