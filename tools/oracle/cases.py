@@ -5288,6 +5288,28 @@ _DRAWINFO_OPTIONS = ("encoding=AppleRoman", "family=Serif", "fill=red", "gravity
 GAP_STEP_CASES += [("driver drawinfo: %s" % label, _driver("drawinfo", *args), {}) for label, args in (
     ("no options", ()), ("every option", _DRAWINFO_OPTIONS), ("a numeric weight", ("weight=650",)),
     ("a weight that is no name or number", ("weight=nonsense",)))]
+# configure.c through imdriver: AcquireConfigureCache parses only the first configure.xml it finds,
+# the build's, so a case's own configure.xml is never read (see the configure case above). The
+# driver puts the case directory first on MAGICK_CONFIGURE_PATH before MagickCoreGenesis, so
+# LoadConfigureCache parses the case's file: a DOCTYPE with a quoted '>' and brackets, a stray ']',
+# a quoted SYSTEM id, a comment holding '>', one never closed, an include (which never loads: see
+# MUTATION.md, FileToXML), a stealth entry, and files just over 4 KB.
+_CFG_E = ('<configure name="CASE-ONE" value="first"/>\n'
+          '  <configure name="CASE-HIDDEN" value="h" stealth="True"/>\n')
+_CFG_FILES = {
+    "a DOCTYPE, a comment and an include":
+        '<?xml version="1.0"?>\n<!DOCTYPE configuremap [\n  <!ATTLIST configure name CDATA "x]>y" '
+        'value CDATA #IMPLIED>\n]>\n<!-- a comment with a > inside -->\n<configuremap>\n'
+        '  <include file="more.xml"/>\n  ' + _CFG_E + '</configuremap>\n',
+    "a stray bracket": '<!DOCTYPE configuremap SYSTEM "t" ]>\n<configuremap>\n  ' + _CFG_E + '</configuremap>\n',
+    "a quoted SYSTEM id": "<!DOCTYPE configuremap SYSTEM 'a>b'>\n<configuremap>\n  " + _CFG_E + '</configuremap>\n',
+    "a comment never closed": '<configuremap>\n  ' + _CFG_E + '</configuremap>\n<!-- never closed ',
+    "just over 4 KB, the padding first": '<configuremap>\n  <!-- ' + 'p' * 4040 + ' -->\n  ' + _CFG_E + '</configuremap>\n',
+    "just over 4 KB, the padding last": '<configuremap>\n  ' + _CFG_E + '  <!-- ' + 'q' * 3990 + ' -->\n</configuremap>\n',
+    "an absolute include": '<configuremap>\n  <include file="/nonexistent/more.xml"/>\n  ' + _CFG_E + '</configuremap>\n',
+}
+GAP_STEP_CASES += [("driver configure: %s" % name, _driver("configure"), {"configure.xml": xml})
+                   for name, xml in _CFG_FILES.items()]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

@@ -2116,6 +2116,26 @@ static int SymlinkCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int ConfigureCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* configure   lists the configure entries after the case directory was put first on
+     MAGICK_CONFIGURE_PATH (main does it before MagickCoreGenesis), so LoadConfigureCache parses the
+     case's own configure.xml, which the command line never does (the build's is found first). Prints
+     name, value and stealth, not the path (it names the machine's case directory). */
+  const ConfigureInfo **list;
+  size_t n=0,k;
+  (void) argc; (void) argv;
+  list=GetConfigureInfoList("*",&n,exception);
+  for (k=0; k < n; k++)
+    if (strcmp(list[k]->path,"[built-in]") != 0)
+      (void) printf("%s = %s%s\n",list[k]->name,list[k]->value,list[k]->stealth != MagickFalse ? " (stealth)" : "");
+  (void) printf("entries %.20g\n",(double) n);
+  if (list != (const ConfigureInfo **) NULL)
+    list=(const ConfigureInfo **) RelinquishMagickMemory((void *) list);
+  Report(exception);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -2125,6 +2145,17 @@ int main(int argc,char **argv)
     {
       (void) fprintf(stderr,"imdriver gradient|mask|getmask|acquire|list|mime ...\n");
       return(2);
+    }
+  if (strcmp(argv[1],"configure") == 0)
+    {
+      char cwd[MagickPathExtent], value[3*MagickPathExtent];
+      const char *old=getenv("MAGICK_CONFIGURE_PATH");
+      if (getcwd(cwd,sizeof(cwd)) != (char *) NULL)
+        {
+          (void) snprintf(value,sizeof(value),"%s%s%s",cwd,old != (const char *) NULL ? ":" : "",
+            old != (const char *) NULL ? old : "");
+          (void) setenv("MAGICK_CONFIGURE_PATH",value,1);
+        }
     }
   MagickCoreGenesis(*argv,MagickFalse);
   exception=AcquireExceptionInfo();
@@ -2155,6 +2186,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"memory") == 0) status=MemoryCmd(argc,argv,exception);
   else if (strcmp(argv[1],"pathauth") == 0) status=PathAuthCmd(argc,argv,exception);
   else if (strcmp(argv[1],"nextimage") == 0) status=NextImageCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"configure") == 0) status=ConfigureCmd(argc,argv,exception);
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);

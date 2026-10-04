@@ -23381,6 +23381,106 @@
    "src": "ActivateSemaphoreInfo(&policy_semaphore);",
    "verdict": "unobservable",
    "why": "activates the policy semaphore at shutdown, with one thread: nothing a case sees"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "equivalent",
+   "why": "depth is 0 at every include, because no include ever loads a file to recurse into (FileToXML refuses regular files with extent ~0UL, MUTATION.md), so >= and > the recursion limit agree"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unobservable",
+   "why": "in LoadConfigureCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's configure cases reach the branch)"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "file_xml,path,depth+1,exception);",
+   "verdict": "unobservable",
+   "why": "runs only after an include file loaded, which never happens (FileToXML refuses regular files with extent ~0UL, MUTATION.md)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/configure.c",
+   "function": "LoadConfigureCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPathComponent(filename,HeadPath,path);",
+   "verdict": "unobservable",
+   "why": "without it the include path starts from whatever the stack held; FileToXML refuses the result like any other regular file (extent ~0UL, MUTATION.md), so nothing loads either way"
   }
  ]
 }
