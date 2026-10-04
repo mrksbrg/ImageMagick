@@ -5338,6 +5338,21 @@ def _windrv_cases():
         yield _windrv("MSBOrderLong and MSBOrderShort of %d bytes" % n, ("blob", "msb", str(n)))
     yield _with_inputs(_windrv("FileToImage", ("blob", "filetoimage", "in.txt", "o.txt"), ["o.txt"]),
                        files={"in.txt": "hello\n" * 2000})
+    # option.c: ParsePixelChannelOption's numeric channels (-channel-fx with a number, a negative,
+    # the last and one past the last of MaxPixelChannels, a non-number) and ParseChannelOption's
+    # ",type" after the shorthand; GetCommandOptionFlags in convert's option loop, with options
+    # written with dashes or underscores inside (its retry without them) and a '|' list
+    for expr in ("0=>2", "2<=>0", "1=>0,0=>2", "63=>0", "64=>0", "-1=>0", "foo=>0", "2.5=>1", "|0=>1", ";1=>2"):
+        yield _case("optgap", "-channel-fx %s" % expr,
+                    [[img("rose"), "-channel-fx", expr] + FLOAT_OUT + ["out.miff"]], ["out.miff"])
+    for spec in ("RGB,sync", "RG,Index", "RGB,bogus", "Red,", "CMY,Black", "K,Sync"):
+        yield _case("optgap", "-channel %s -negate" % spec,
+                    [[img("cmyk" if "K" in spec or "CMY" in spec else "rose"), "-channel", spec, "-negate"] + FLOAT_OUT
+                     + ["out.miff"]], ["out.miff"])
+    for opt in (["-auto_orient"], ["-auto-orient"], ["-autoorient"], ["-flip_"], ["-trim-"], ["-negate_x"]):
+        yield _case("optgap", "convert %s" % opt[0], [["convert", img("rose")] + opt + FLOAT_OUT + ["out.miff"]],
+                    ["out.miff"])
+    yield _case("optgap", "identify -verbose -auto_orient", [["identify", "-format", "%wx%h\\n", "-auto_orient", img("rose")]], [])
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
