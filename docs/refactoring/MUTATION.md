@@ -2410,6 +2410,63 @@ after the sweep).
 A fresh sweep of all 34 files with the statement-deletion build (`~/sweep1004*.sh`, reports
 `mutation-sweep1004*-<file>.json`) runs now, to give one consistent report per file.
 
+### The statement-deletion sweep, and trust after it (Windows, 2026-10-04, 15:00)
+
+The sweep finished at 15:01: every regular Windows file against the whole catalogue with the
+`mull-sdl-win` build (Mull defaults and `cxx_remove_void_call`), capped at 1500 cases per mutant.
+It ran in three instances, cut to two jobs for an hour while the owner worked on the machine.
+
+**A gate fix first.** `gate.merged` lets a later report replace an earlier non-kill, so the
+order of the reports matters. The Windows status script passed them in glob order, which is
+arbitrary; it now passes them oldest first (by modification time). Only quantize.c moved: 91 →
+92, and `AcquirePixelTLS`/`DestroyPixelTLS` from 67/25 to 100 (their survivors are pattern
+kinds). Earlier figures in this file may be off by a point for the same reason.
+
+**Verdicts today** (all read by hand, each against a precedent where there is one):
+semaphore.c 17 (mutex calls with one thread, a leaked free, the pthread failure paths: no case
+reaches them without fault injection), timer.c 6 (stopwatch figures; `SOURCE_DATE_EPOCH` is
+never set), exception.c 5 (the semaphore guard `ExceptionComponentGenesis` makes dead, the fatal
+path, `InheritException`'s iterator reset, a no-op on its one command-line caller), resource.c
+11 (semaphore guards made dead by `ResourceComponentGenesis`, the `open_utf8` fallback this build
+never reaches because it has `mkstemp`), quantum.c 1 (a leak), token.c 10 (Tokenizer's
+escape, whitespace and second-quote branches: every caller passes escape NUL, no whitespace set,
+one quote character and flag 0).
+
+Adjusted, all reports merged oldest first: semaphore 56 → 100, resource 90 → 97, exception 84
+→ 91, quantize 92, histogram 92, monitor 92, fx 91, constitute 91, quantum 91, colorspace 90,
+token 85 → 90, gem 89, morphology 88, feature 88, distort 88, registry 88, prepress 87, timer
+79 → 85, stream 85, color 84 → 85, composite 84, montage 84, signature 82, cache 81, option 76 →
+77, magick 71 → 77, resample 77, xml-tree 76, blob 71 → 74, quantum-export 73, matrix 73,
+quantum-import 68, splay-tree 55, pixel 48, linked-list 42, cache-view 37.
+
+**Trusted, counting statement deletion (17 of 36):** composite, feature, morphology,
+colorspace, quantize, histogram, montage, signature, resource, gem, prepress, registry, magick,
+monitor, exception, constitute, semaphore. Written down as out of reach on the way: magick.c's
+`MagickSignalHandler` (runs only on a signal), `GetMagickList` (widget.c, a special build) and
+`GetImageMagick` (API only); resource.c's `AsynchronousResourceComponentTerminus` (called only
+from `MagickSignalHandler`); exception.c's `SetErrorHandler` (animate.c, display.c) and
+`CloneExceptionInfo` (API only); signature.c's two setters (API only).
+
+**Short (one to three functions), and what each needs:**
+
+- distort.c `MagickRound` (75%): `<` → `<=` differs only at exactly x.5.
+- color.c `IsSVGCompliant` (67%): `>= SVGEpsilon` → `>` needs a channel exactly 1e-6 from an
+  8-bit value. From image pixels (32-bit floats) that cannot happen: a float near k·257 has an
+  ulp far above 1e-6, and near 0 a float is never the double 1e-6. Colours parsed as doubles are
+  not ruled out. A plateau candidate.
+- timer.c `ContinueTimer`, `AcquireTimerInfo`: run only under `-bench` (magick-cli.c) and log
+  timestamps. Their verdicts are written, but a verdict applies only to a mutant some case
+  executes. **Proposal:** a `-bench` case, with a `NORMALISE` rule for the
+  `Performance[n]: ...i ...ips ...e ...u ...` line. That changes the oracle on every machine,
+  so it is the owner's call.
+- quantum.c `SetQuantumMetaChannel` (bounds at -1 and at the meta-channel count): a planar TIFF
+  with meta channels, whose reader resets the channel with -1 (tiff.c:2021). `SetQuantumPad`'s
+  overflow guard is unresolved.
+- token.c `GlobExpression` (76%, glob cases) and `StoreToken`'s truncation at
+  `max_token_length-1` (an 8BIMTEXT line whose token fills meta.c's buffer).
+- option.c, resample.c, xml-tree.c, quantum.c: gaps; linked-list.c and cache-view.c: one or two
+  functions each that a case could reach, the rest API only.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
