@@ -1,0 +1,103 @@
+mutate: 475 mutants in MagickCore/segment\.c$, 16 functions
+  baseline: 29/29 (1s)
+mutate: baseline over 29 cases in 1s
+  mutants: 25/475 (0s)
+  mutants: 50/475 (0s)
+  mutants: 75/475 (1s)
+  mutants: 100/475 (1s)
+  mutants: 125/475 (2s)
+  mutants: 150/475 (4s)
+  mutants: 175/475 (7s)
+  mutants: 200/475 (7s)
+  mutants: 225/475 (7s)
+  mutants: 250/475 (7s)
+  mutants: 275/475 (7s)
+  mutants: 300/475 (8s)
+  mutants: 325/475 (8s)
+  mutants: 350/475 (10s)
+  mutants: 375/475 (14s)
+  mutants: 400/475 (17s)
+  mutants: 425/475 (19s)
+  mutants: 450/475 (20s)
+  mutants: 475/475 (139s)
+
+mutate: 475 mutants, 139s
+  killed 338, survived 54 (0 capped), no coverage 83, errors 0
+  mutation score on reached code: 86.2%   overall: 71.2%
+
+  function                           total killed survived no-cov
+  Classify                             124    108       16      0
+  GetImageDynamicThreshold              83      0        0     83
+  OptimalTau                            65     47       18      0
+  ConsolidateCrossings                  59     52        7      0
+  InitializeIntervalTree                24     22        2      0
+  ScaleSpace                            22     20        2      0
+  ZeroCrossHistogram                    19     19        0      0
+  SegmentImage                          15     11        4      0
+  DefineRegion                          13     11        2      0
+  InitializeHistogram                   13     13        0      0
+  DerivativeHistogram                   11     11        0      0
+  MeanStability                          7      7        0      0
+  ActiveNodes                            7      7        0      0
+  InitializeList                         5      5        0      0
+  Stability                              5      5        0      0
+  FreeNodes                              3      0        3      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  segment.c:402:18 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:411:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       segment.c:419:17 cxx_post_inc_to_post_dec   progress++;
+       segment.c:420:66 cxx_mul_to_div             proceed=SetImageProgress(image,SegmentImageTag,progress,2*image->rows);
+       segment.c:421:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+       segment.c:477:34 cxx_ne_to_eq               for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+       segment.c:486:34 cxx_ne_to_eq               for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+       segment.c:502:34 cxx_ne_to_eq               for (cluster=head; cluster != (Cluster *) NULL; cluster=cluster->next)
+    x  segment.c:512:23 cxx_gt_to_ge               if (number_clusters > 256)
+    x  segment.c:522:20 cxx_le_to_lt               for (i=(-255); i <= 255; i++)
+    x  segment.c:576:7 cxx_remove_void_call       SetPixelIndex(image,(Quantum) 0,q);
+    x  segment.c:629:30 cxx_div_to_mul             ratio=numerator/distance_squared;
+    x  segment.c:646:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       segment.c:654:17 cxx_post_inc_to_post_dec   progress++;
+       segment.c:655:66 cxx_mul_to_div             proceed=SetImageProgress(image,SegmentImageTag,progress,2*image->rows);
+       segment.c:656:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  segment.c:732:21 cxx_gt_to_ge               for (k=j-1; k > 0; k--)
+    x  segment.c:737:21 cxx_lt_to_le               for (k=j+1; k < 255; k++)
+    x  segment.c:744:21 cxx_gt_to_ge               for (k=j-1; k > 0; k--)
+    x  segment.c:747:13 cxx_lt_to_le               if (k < 0)
+    x  segment.c:758:20 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:770:20 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:782:20 cxx_post_inc_to_post_dec   count++;
+    x  segment.c:834:22 cxx_gt_to_ge               if (extents->index > 255)
+    x  segment.c:841:33 cxx_lt_to_le               if (extrema[extents->index] < 0)
+       segment.c:1414:17 cxx_remove_void_call       FreeNodes(root);
+       segment.c:1433:15 cxx_remove_void_call       FreeNodes(root);
+    x  segment.c:1502:12 cxx_eq_to_ne               if (node == (IntervalTree *) NULL)
+    x  segment.c:1504:3 cxx_remove_void_call       FreeNodes(node->sibling);
+    x  segment.c:1505:3 cxx_remove_void_call       FreeNodes(node->child);
+    x  segment.c:1555:27 cxx_sub_to_add             count=(size_t) ((max_tau-min_tau)/delta_tau)+2;
+    x  segment.c:1563:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) count; i++)
+    x  segment.c:1572:25 cxx_ge_to_gt               for (tau=max_tau; tau >= min_tau; tau-=delta_tau)
+    x  segment.c:1604:17 cxx_lt_to_ge               for (j=0; j < 255; j++)
+    x  segment.c:1604:17 cxx_lt_to_le               for (j=0; j < 255; j++)
+    x  segment.c:1604:25 cxx_post_inc_to_post_dec   for (j=0; j < 255; j++)
+    x  segment.c:1605:41 cxx_ne_to_eq               if (zero_crossing[i].crossings[j] != 0)
+    x  segment.c:1607:36 cxx_minus_to_noop          zero_crossing[i].crossings[0]=(-zero_crossing[i].crossings[j]);
+    x  segment.c:1608:19 cxx_gt_to_ge               for (j=255; j > 0; j--)
+    x  segment.c:1632:15 cxx_le_to_lt               for (i=0; i <= 255; i++)
+    x  segment.c:1651:26 cxx_le_to_gt               for (x=node->left; x <= node->right; x++)
+    x  segment.c:1651:26 cxx_le_to_lt               for (x=node->left; x <= node->right; x++)
+    x  segment.c:1653:16 cxx_ne_to_eq               if (peak != MagickFalse)
+    x  segment.c:1655:45 cxx_gt_to_ge               if (zero_crossing[k].histogram[x] > value)
+    x  segment.c:1655:45 cxx_gt_to_le               if (zero_crossing[k].histogram[x] > value)
+    x  segment.c:1662:43 cxx_lt_to_ge               if (zero_crossing[k].histogram[x] < value)
+    x  segment.c:1662:43 cxx_lt_to_le               if (zero_crossing[k].histogram[x] < value)
+    x  segment.c:1688:3 cxx_remove_void_call       FreeNodes(root);
+    x  segment.c:1738:15 cxx_le_to_lt               for (x=0; x <= 255; x++)
+    x  segment.c:1741:18 cxx_lt_to_le               if (gamma[x] < MagickEpsilon)
+    x  segment.c:1821:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       segment.c:1829:22 cxx_ge_to_gt               for (i-- ; i >= 0; i--)
+       segment.c:1829:22 cxx_ge_to_lt               for (i-- ; i >= 0; i--)
+    x  segment.c:1859:15 cxx_lt_to_ge               for (i=0; i < MaxDimension; i++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-segment.json
