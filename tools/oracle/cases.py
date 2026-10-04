@@ -5539,6 +5539,19 @@ def _windrv_cases():
     for target, fuzz in (("{C}/rose.miff", "0"), ("{C}/rose.miff[10x8+5+4]", "0"), ("{C}/rose.miff[10x8+5+4]", "5000"),
                          ("{C}/tiny.miff", "0"), ("{C}/tiny.miff", "30000"), ("{C}/granite.miff[4x4+0+0]", "0")):
         yield _windrv("color subimage %s fuzz %s" % (target, fuzz), ("color", "subimage", img("rose"), target, fuzz))
+    # stream.c: ReadStream with a handler that hashes each row, and one that also asks the
+    # streaming image for pixels (the stream cache methods: the stream then ends after its
+    # first row, every run alike); WriteStream with a handler that takes the encoded bytes
+    for name in ("rose", "rose_alpha", "cmyk", "palette", "gray16", "anim"):
+        for mode in ("plain", "read"):
+            yield _windrv("stream %s %s" % (mode, name), ("stream", mode, img(name)))
+    for fmt in ("png", "ppm", "gif", "jpg", "tif", "bmp", "pam"):
+        for mode in ("plain", "read"):
+            yield _case("windrv", "stream %s of rose as %s" % (mode, fmt),
+                        [[img("rose_alpha"), "r." + fmt], ["@driver", "stream", mode, "r." + fmt]], [])
+    for name, fmt in (("rose", "PNG"), ("rose", "PPM"), ("rose", "GIF"), ("rose", "MIFF"), ("rose_alpha", "PNG"),
+                      ("cmyk", "TIFF"), ("anim", "GIF"), ("palette", "BMP")):
+        yield _windrv("stream write %s as %s" % (name, fmt), ("stream", "write", img(name), fmt))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

@@ -1460,6 +1460,82 @@ static int ColorCmd(int argc,char **argv,ExceptionInfo *exception)
   return(Fail(exception,"color: tuple R G B K A DEPTH COLORSPACE ALPHA | equiv FUZZ R G B A R G B A | subimage IMAGE TARGET FUZZ"));
 }
 
+/* stream.c: ReadStream with a handler that asks the streaming image for pixels (the stream
+   cache methods), WriteStream with a handler that takes the encoded bytes */
+static size_t stream_rows=0, stream_bytes=0;
+static int stream_probe=1;
+static unsigned long stream_hash=2166136261UL;
+
+static size_t ReadRow(const Image *image,const void *pixels,const size_t columns)
+{
+  Quantum q[MaxPixelChannels];
+  const Quantum *v;
+  ExceptionInfo *sans=AcquireExceptionInfo();
+  ssize_t x;
+  size_t n=columns*GetPixelChannels(image)*sizeof(Quantum);
+  stream_hash=(stream_hash ^ Fnv((const unsigned char *) pixels,n))*16777619UL & 0xffffffffUL;
+  if ((stream_probe == 0) || (stream_rows >= 2))
+    {
+      stream_rows++;
+      sans=DestroyExceptionInfo(sans);
+      return(columns);
+    }
+  for (x=0; x < (ssize_t) columns; x+=(ssize_t) (columns/3+1))
+  {
+    (void) memset(q,0,sizeof(q));
+    (void) printf("row %.20g x %.20g: virtual %d",(double) stream_rows,(double) x,
+      (int) GetOneVirtualPixel(image,x,0,q,sans));
+    (void) printf(" %.4f authentic %d",(double) q[0],(int) GetOneAuthenticPixel((Image *) image,x,0,q,sans));
+    (void) printf(" %.4f\n",(double) q[0]);
+  }
+  v=GetVirtualPixelQueue(image);
+  (void) printf("  queue %s meta %s authentic-meta %s\n",v != NULL ? "yes" : "no",
+    GetVirtualMetacontent(image) != NULL ? "yes" : "no",
+    GetAuthenticMetacontent((Image *) image) != NULL ? "yes" : "no");
+  sans=DestroyExceptionInfo(sans);
+  stream_rows++;
+  return(columns);
+}
+
+static size_t WriteBytes(const Image *magick_unused(image),const void *data,const size_t length)
+{
+  stream_hash=(stream_hash ^ Fnv((const unsigned char *) data,length))*16777619UL & 0xffffffffUL;
+  stream_bytes+=length;
+  return(length);
+}
+
+static int StreamCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* stream read IMAGE | stream write IMAGE FORMAT */
+  ImageInfo *image_info=AcquireImageInfo();
+  Image *image;
+  if ((argc == 4) && ((strcmp(argv[2],"read") == 0) || (strcmp(argv[2],"plain") == 0)))
+    {
+      stream_probe=strcmp(argv[2],"read") == 0 ? 1 : 0;
+      (void) CopyMagickString(image_info->filename,argv[3],MagickPathExtent);
+      image=ReadStream(image_info,ReadRow,exception);
+      (void) printf("rows %.20g hash %08lx\n",(double) stream_rows,stream_hash);
+      Report(exception);
+      if (image != (Image *) NULL) image=DestroyImageList(image);
+    }
+  else if ((argc == 5) && (strcmp(argv[2],"write") == 0))
+    {
+      image=Read(argv[3],exception);
+      if (image == (Image *) NULL)
+        return(Fail(exception,"read"));
+      (void) FormatLocaleString(image_info->filename,MagickPathExtent,"%s:-",argv[4]);
+      (void) CopyMagickString(image->filename,image_info->filename,MagickPathExtent);
+      (void) printf("write %d",(int) WriteStream(image_info,image,WriteBytes,exception));
+      (void) printf(" bytes %.20g hash %08lx\n",(double) stream_bytes,stream_hash);
+      Report(exception);
+      image=DestroyImageList(image);
+    }
+  else
+    return(Fail(exception,"stream: read IMAGE | write IMAGE FORMAT"));
+  image_info=DestroyImageInfo(image_info);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1490,6 +1566,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"glob") == 0) status=GlobCmd(argc,argv,exception);
   else if (strcmp(argv[1],"tokenize") == 0) status=TokenizeCmd(argc,argv,exception);
   else if (strcmp(argv[1],"color") == 0) status=ColorCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"stream") == 0) status=StreamCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
