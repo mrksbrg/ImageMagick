@@ -1,0 +1,31 @@
+mutate: 170 mutants in MagickCore/transform\.c$, 15 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/170 (0s)
+  mutants: 50/170 (0s)
+  mutants: 75/170 (0s)
+  mutants: 100/170 (0s)
+  mutants: 125/170 (0s)
+  mutants: 150/170 (0s)
+  mutants: 170/170 (0s)
+
+mutate: 170 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 170, errors 0
+
+  function                           total killed survived no-cov
+  SpliceImage                           25      0        0     25
+  ConsolidateCMYKImages                 24      0        0     24
+  ExcerptImage                          23      0        0     23
+  CropImage                             18      0        0     18
+  CropImageToTiles                      17      0        0     17
+  TrimImage                             15      0        0     15
+  ChopImage                             13      0        0     13
+  FlipImage                              6      0        0      6
+  FlopImage                              6      0        0      6
+  TransposeImage                         6      0        0      6
+  TransverseImage                        6      0        0      6
+  RollImage                              5      0        0      5
+  TransformImage                         4      0        0      4
+  ExtentImage                            1      0        0      1
+  ShaveImage                             1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-transform.json

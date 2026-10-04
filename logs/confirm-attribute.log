@@ -1,0 +1,31 @@
+mutate: 83 mutants in MagickCore/attribute\.c$, 18 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/83 (0s)
+  mutants: 50/83 (0s)
+  mutants: 75/83 (0s)
+  mutants: 83/83 (0s)
+
+mutate: 83 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 83, errors 0
+
+  function                           total killed survived no-cov
+  GetImageBoundingBox                   18      0        0     18
+  FloydSteinbergImageDepth              14      0        0     14
+  GetImageDepth                         10      0        0     10
+  GetImageType                           8      0        0      8
+  GetEdgeBoundingBox                     7      0        0      7
+  GetImageMinimumBoundingBox             6      0        0      6
+  GetEdgeBackgroundCensus                4      0        0      4
+  GetImageConvexHull                     4      0        0      4
+  SetImageDepth                          2      0        0      2
+  SetImageType                           2      0        0      2
+  TraceConvexHull                        1      0        0      1
+  getProjection                          1      0        0      1
+  getFeretDiameter                       1      0        0      1
+  GetImageQuantumDepth                   1      0        0      1
+  IdentifyImageGray                      1      0        0      1
+  IdentifyImageMonochrome                1      0        0      1
+  IdentifyImageType                      1      0        0      1
+  IsImageOpaque                          1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-attribute.json
