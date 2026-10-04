@@ -1,19 +1,19 @@
 mutate: 105 mutants in MagickCore/policy\.c$, 17 functions
-mutate: baseline over 76 cases in 0s
+mutate: baseline over 128 cases in 0s
   mutants: 25/105 (0s)
-  mutants: 50/105 (5s)
-  mutants: 75/105 (6s)
-  mutants: 100/105 (6s)
-  mutants: 105/105 (8s)
+  mutants: 50/105 (12s)
+  mutants: 75/105 (12s)
+  mutants: 100/105 (16s)
+  mutants: 105/105 (19s)
 
-mutate: 105 mutants, 8s
-  killed 0, survived 32 (0 capped), no coverage 73, errors 0
+mutate: 105 mutants, 19s
+  killed 0, survived 46 (0 capped), no coverage 59, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   IsPathContainsSymlink                 23      0        0     23
   SetMagickSecurityPolicyValue          20      0        0     20
-  IsRightsAuthorizedByName              13      0        0     13
+  IsRightsAuthorizedByName              13      0       13      0
   LoadPolicyCache                       10      0       10      0
   SetMagickSecurityPolicy               10      0        0     10
   AcquirePolicyCache                     6      0        6      0
@@ -26,7 +26,7 @@ mutate: 105 mutants, 8s
   GetPolicyInfoList                      1      0        0      1
   GetPolicyValue                         1      0        1      0
   IsPolicyPathSeparator                  1      0        0      1
-  IsPathAuthorized                       1      0        0      1
+  IsPathAuthorized                       1      0        1      0
   PolicyComponentGenesis                 1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
@@ -44,6 +44,20 @@ mutate: 105 mutants, 8s
     x  policy.c:473:58 cxx_mul_to_div             destination=(char *) AcquireMagickMemory((length+pad)*sizeof(*destination));
     x  policy.c:477:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
     x  policy.c:561:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  policy.c:704:15 cxx_ne_to_eq               if ((status != MagickFalse) && (symlink_follow_allowed == MagickFalse))
+    x  policy.c:817:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+       policy.c:821:12 cxx_eq_to_ne               name == (const char *) NULL ? "undefined" : name,
+       policy.c:823:15 cxx_eq_to_ne               pattern == (const char *) NULL ? "undefined" : pattern);
+       policy.c:829:45 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+    x  policy.c:839:3 cxx_remove_void_call       ResetLinkedListIterator(policy_cache);
+    x  policy.c:852:15 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
+    x  policy.c:852:70 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
+    x  policy.c:872:74 cxx_mul_to_div             canonical_candidate=(char *) AcquireCriticalMemory(length*
+    x  policy.c:890:73 cxx_ne_to_eq               (GlobExpression(canonical_path,policy->pattern,MagickFalse) != MagickFalse))
+    x  policy.c:917:27 cxx_ne_to_eq               if (canonical_candidate != (char *) NULL)
+    x  policy.c:919:22 cxx_ne_to_eq               if (canonical_path != (char *) NULL)
+    x  policy.c:947:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+       policy.c:949:33 cxx_eq_to_ne               "  authorized: %s",status == MagickFalse ? "false" : "true");
     x  policy.c:1093:22 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
     x  policy.c:1095:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
     x  policy.c:1097:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
@@ -64,4 +78,4 @@ mutate: 105 mutants, 8s
     x  policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ca57d53bb-policy.json
+  full results: build-oracle/work/mutation-confirm-acf185307-policy.json
