@@ -1,0 +1,74 @@
+mutate: 231 mutants in MagickCore/compress\.c$, 9 functions
+  baseline: 108/108 (1s)
+mutate: baseline over 108 cases in 1s
+  mutants: 25/231 (0s)
+  mutants: 50/231 (0s)
+  mutants: 75/231 (1s)
+  mutants: 100/231 (2s)
+  mutants: 125/231 (2s)
+  mutants: 150/231 (3s)
+  mutants: 175/231 (4s)
+  mutants: 200/231 (5s)
+  mutants: 225/231 (134s)
+  mutants: 231/231 (203s)
+
+mutate: 231 mutants, 203s
+  killed 190, survived 41 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 82.3%   overall: 82.3%
+
+  function                           total killed survived no-cov
+  HuffmanDecodeImage                    79     64       15      0
+  HuffmanEncodeImage                    64     50       14      0
+  PackbitsEncodeImage                   28     24        4      0
+  LZWEncodeImage                        21     18        3      0
+  Ascii85Encode                         13     11        2      0
+  Ascii85Tuple                           9      9        0      0
+  Ascii85Flush                           8      7        1      0
+  ZLIBEncodeImage                        8      7        1      0
+  Ascii85Initialize                      1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  compress.c:267:22 cxx_eq_to_ne               if (image->ascii85 == (Ascii85Info *) NULL)
+    x  compress.c:280:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compress.c:333:15 cxx_lt_to_ge               for (n=0; n < 4; n++)
+    x  compress.c:333:15 cxx_lt_to_le               for (n=0; n < 4; n++)
+    x  compress.c:442:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       compress.c:454:19 cxx_ne_to_eq               if (mb_hash != (HuffmanTable **) NULL)
+       compress.c:456:19 cxx_ne_to_eq               if (mw_hash != (HuffmanTable **) NULL)
+       compress.c:458:20 cxx_ne_to_eq               if (scanline != (unsigned char *) NULL)
+    x  compress.c:484:20 cxx_lt_to_ge               while (runlength < 11)
+    x  compress.c:516:13 cxx_ge_to_gt               if (x >= (ssize_t) image->columns)
+    x  compress.c:545:18 cxx_gt_to_ge               if (length > 13)
+       compress.c:547:28 cxx_lt_to_ge               while (runlength < 11)
+       compress.c:547:28 cxx_lt_to_le               while (runlength < 11)
+       compress.c:549:50 cxx_eq_to_ne               do { InputBit(bit); } while ((int) bit == 0);
+    x  compress.c:574:17 cxx_add_to_sub             if ((x+count) > (ssize_t) image->columns)
+    x  compress.c:574:25 cxx_gt_to_ge               if ((x+count) > (ssize_t) image->columns)
+    x  compress.c:575:43 cxx_sub_to_add             count=(ssize_t) image->columns-x;
+    x  compress.c:576:21 cxx_gt_to_ge               if (count > 0)
+    x  compress.c:585:38 cxx_lt_to_le               if ((x >= 0) && (x < (ssize_t) image->columns))
+    x  compress.c:743:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compress.c:751:65 cxx_add_to_sub             scanline=(unsigned char *) AcquireQuantumMemory((size_t) width+1UL,
+    x  compress.c:756:33 cxx_mul_to_div             (void) memset(scanline,0,width*sizeof(*scanline));
+       compress.c:767:5 cxx_remove_void_call       Ascii85Initialize(image);
+    x  compress.c:788:64 cxx_ge_to_gt               *q++=(unsigned char) (GetPixelIntensity(huffman_image,p) >=
+    x  compress.c:801:29 cxx_gt_to_ge               for (runlength=0; ((n > 0) && (*q == 0)); n--)
+    x  compress.c:806:21 cxx_ge_to_gt               if (runlength >= 64)
+    x  compress.c:808:25 cxx_lt_to_le               if (runlength < 1792)
+    x  compress.c:822:46 cxx_gt_to_ge               for (runlength=0; ((*q != 0) && (n > 0)); n--)
+    x  compress.c:827:25 cxx_ge_to_gt               if (runlength >= 64)
+    x  compress.c:830:29 cxx_ge_to_gt               if (runlength >= 1792)
+    x  compress.c:846:47 cxx_eq_to_ne               if (GetPreviousImageInList(huffman_image) == (Image *) NULL)
+       compress.c:871:9 cxx_remove_void_call       Ascii85Encode(image,byte);
+       compress.c:874:5 cxx_remove_void_call       Ascii85Flush(image);
+    x  compress.c:960:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compress.c:974:23 cxx_lt_to_le               for (index=0; index < 256; index++)
+    x  compress.c:1022:37 cxx_lt_to_le               for (index=0; index < 256; index++)
+    x  compress.c:1096:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  compress.c:1124:22 cxx_eq_to_ne               if ((*pixels == *(pixels+1)) && (*(pixels+1) == *(pixels+2)))
+    x  compress.c:1124:54 cxx_eq_to_ne               if ((*pixels == *(pixels+1)) && (*(pixels+1) == *(pixels+2)))
+    x  compress.c:1144:37 cxx_lt_to_le               while (((ssize_t) count < i) && (*pixels == *(pixels+count)))
+    x  compress.c:1249:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-compress.json
