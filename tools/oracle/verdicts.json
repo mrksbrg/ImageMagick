@@ -8992,6 +8992,56 @@
    "why": "the policy error ReadImage inherits has already been thrown into the command's exception by SetImageInfo's lookup of the same coder, and ThrowException drops duplicates; both mutants run by hand on gif: reads under a module policy give identical output"
   },
   {
+   "at": 0,
+   "file": "MagickCore/exception.c",
+   "function": "InheritException",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ResetLinkedListIterator((LinkedListInfo *) relative->exceptions);",
+   "verdict": "equivalent",
+   "why": "the reset is a no-op on the only command-line caller, ReadImage (constitute.c:662): its sans_exception is fresh, ThrowException only appends (GetLastValueInLinkedList does not move the iterator) and AppendValueToLinkedList points the iterator at the first element; the other callers clone wands and views (MagickWand API only)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/exception.c",
+   "function": "MagickFatalError",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "MagickCoreTerminus();",
+   "verdict": "unobservable",
+   "why": "the fatal path (MagickCoreTerminus, exit) after a fatal error such as a failed critical allocation; the oracle runs within memory and no case raises a fatal error"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/exception.c",
+   "function": "MagickFatalError",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path (MagickCoreTerminus, exit) after a fatal error such as a failed critical allocation; the oracle runs within memory and no case raises a fatal error"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/exception.c",
+   "function": "SetFatalErrorHandler",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&exception_semaphore);",
+   "verdict": "unobservable",
+   "why": "the guard is never taken: ExceptionComponentGenesis (MagickCoreGenesis) acquires exception_semaphore before any handler can be set, so the branch is dead on every path the command line runs"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/exception.c",
+   "function": "SetWarningHandler",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&exception_semaphore);",
+   "verdict": "unobservable",
+   "why": "the guard is never taken: ExceptionComponentGenesis (MagickCoreGenesis) acquires exception_semaphore before any handler can be set, so the branch is dead on every path the command line runs"
+  },
+  {
    "at": 37,
    "file": "MagickCore/feature.c",
    "function": "GetImageFeatures",
