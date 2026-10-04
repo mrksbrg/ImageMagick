@@ -1719,12 +1719,23 @@ static int BlobIOCmd(int argc,char **argv,ExceptionInfo *exception)
           (void) CloseBlob(image);
         }
     }
-  else if ((argc == 5) && (strcmp(argv[2],"extent") == 0))
+  else if ((argc >= 5) && (strcmp(argv[2],"extent") == 0))
     {
+      /* blobio extent OUT EXTENT [PREWRITE] [sync]: PREWRITE bytes written before the extent
+         is set; sync sets MAGICK_SYNCHRONIZE (the posix_fallocate path) */
       FILE *file;
       long size=-1;
+      if ((argc > 6) && (strcmp(argv[6],"sync") == 0))
+        (void) setenv("MAGICK_SYNCHRONIZE","true",1);
       (void) CopyMagickString(image->filename,argv[3],MagickPathExtent);
       status=OpenBlob(image_info,image,WriteBinaryBlobMode,exception);
+      if ((status != MagickFalse) && (argc > 5))
+        {
+          long k;
+          for (k=0; k < atol(argv[5]); k++)
+            (void) WriteBlobByte(image,(unsigned char) ('a'+k % 26));
+          (void) printf("prewrite tell %.20g\n",(double) TellBlob(image));
+        }
       if (status != MagickFalse)
         {
           (void) printf("extent %d\n",(int) SetBlobExtent(image,(MagickSizeType) atol(argv[4])));

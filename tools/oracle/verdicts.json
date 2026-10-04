@@ -23201,6 +23201,36 @@
    "src": "if ((offset+1) >= (ssize_t) sizeof(partial))",
    "verdict": "equivalent",
    "why": "offset is always 0 at this test (the leading separator is the first thing appended), so 1 >= MagickPathExtent, 1 > MagickPathExtent and -1 >= MagickPathExtent are all false"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/blob.c",
+   "function": "FileToImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "equivalent",
+   "why": "if fstat failed the buffer would keep its default size (MagickMaxBufferExtent); the copy loop reads to the end of the file either way, so only the chunk size changes, never the bytes copied"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/blob.c",
+   "function": "ImageToFile",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "equivalent",
+   "why": "if fstat failed the buffer would keep its default size (MagickMaxBufferExtent); the copy loop reads to the end of the file either way, so only the chunk size changes, never the bytes copied"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/blob.c",
+   "function": "InjectImageBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "equivalent",
+   "why": "if fstat failed the buffer would keep its default size (MagickMaxBufferExtent); the copy loop reads to the end of the file either way, so only the chunk size changes, never the bytes copied"
   }
  ]
 }

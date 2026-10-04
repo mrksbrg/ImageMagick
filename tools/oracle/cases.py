@@ -5696,6 +5696,14 @@ def _windrv_cases():
                            files={"%s.txt" % name: blob_texts[name]})
     for extent in ("0", "1", "100", "5000"):
         yield _windrv("SetBlobExtent %s" % extent, ("blobio", "extent", "e.bin", extent), ["e.bin"])
+    # second wave: an extent below, at and above what is already written, and with
+    # MAGICK_SYNCHRONIZE (posix_fallocate); FileToImage of an empty file (a zero buffer size)
+    for prewrite, extent in (("10", "5"), ("10", "10"), ("10", "11"), ("10", "300")):
+        for sync in ("", "sync"):
+            yield _windrv("SetBlobExtent %s after %s bytes%s" % (extent, prewrite, ", synchronized" if sync else ""),
+                          tuple(["blobio", "extent", "e.bin", extent, prewrite] + ([sync] if sync else [])), ["e.bin"])
+    yield _with_inputs(_windrv("FileToImage of an empty file", ("blob", "filetoimage", "empty.txt", "o.txt"), ["o.txt"]),
+                       files={"empty.txt": ""})
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
