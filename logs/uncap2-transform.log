@@ -1,0 +1,33 @@
+mutate: 18 mutants in MagickCore/transform\.c$, 1 functions
+mutate: baseline over 526 cases in 0s
+  mutants: 18/18 (69s)
+
+mutate: 18 mutants, 69s
+  killed 0, survived 18 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CropImage                             18      0       18      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  transform.c:578:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:616:15 cxx_lt_to_le               if ((page.x < 0) && (bounding_box.x >= 0))
+    x  transform.c:616:39 cxx_ge_to_gt               if ((page.x < 0) && (bounding_box.x >= 0))
+    x  transform.c:625:18 cxx_lt_to_le               if (page.x < 0)
+    x  transform.c:628:15 cxx_lt_to_le               if ((page.y < 0) && (bounding_box.y >= 0))
+    x  transform.c:628:39 cxx_ge_to_gt               if ((page.y < 0) && (bounding_box.y >= 0))
+    x  transform.c:638:18 cxx_lt_to_le               if (page.y < 0)
+    x  transform.c:641:37 cxx_gt_to_ge               if ((page.x+(ssize_t) page.width) > (ssize_t) image->columns)
+    x  transform.c:643:45 cxx_gt_to_ge               if ((geometry->width != 0) && (page.width > geometry->width))
+    x  transform.c:645:38 cxx_gt_to_ge               if ((page.y+(ssize_t) page.height) > (ssize_t) image->rows)
+    x  transform.c:647:47 cxx_gt_to_ge               if ((geometry->height != 0) && (page.height > geometry->height))
+    x  transform.c:667:17 cxx_gt_to_ge               if ((offset.x > (ssize_t) image->page.width) ||
+    x  transform.c:668:17 cxx_gt_to_ge               (offset.y > (ssize_t) image->page.height))
+    x  transform.c:728:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:736:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:738:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:745:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:754:7 cxx_remove_void_call       AppendImageProfileProperty(crop_image,"hdrgm","hdrgm:Transform",
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-transform.json
