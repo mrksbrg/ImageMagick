@@ -5321,10 +5321,16 @@ def _windrv_cases():
     # left out: it writes the date.
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "GIF", 1), ("rose", "PPM", 1),
                               ("rose", "TIFF", 1), ("rose", "JPEG", 1), ("rose_alpha", "PNG", 1),
-                              ("rose", "GIF", 3), ("rose", "MIFF", 2), ("rose", "TIFF", 2), ("rose", "PNG", 2)):
+                              ("rose", "GIF", 3), ("rose", "MIFF", 2), ("rose", "TIFF", 2), ("rose", "PNG", 2),
+                              # formats without blob support: the temporary-file route
+                              # (not HTML: WriteHTMLImage through ImageToBlob frees an invalid pointer
+                              # in DestroyImageInfo, an upstream crash; not JSON: it varies between runs)
+                              ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "SHTML", 1),
+                              ("rose", "INFO", 1), ("rose", "VICAR", 1)):
         yield _windrv("blob of %d %s %s" % (frames, name, fmt), ("blob", "toblob", img(name), fmt, str(frames)))
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
-                              ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2)):
+                              ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2),
+                              ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1), ("rose", "INFO", 1)):
         for seekable in ("1", "0"):
             yield _windrv("custom stream of %d %s %s%s" % (frames, name, fmt, "" if seekable == "1" else ", no seek"),
                           ("blob", "custom", img(name), fmt, str(frames), seekable))
