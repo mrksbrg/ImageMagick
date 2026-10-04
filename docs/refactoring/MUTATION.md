@@ -2532,6 +2532,38 @@ parses into an attribute with no value, and `XMLTreeInfoToXML` then crashes in
 
 Trusted now, Windows: **22 of 36**.
 
+### option.c, blob.c, quantum-import.c and quantum-export.c (Windows, 2026-10-04, evening)
+
+**option.c 77 → 88, trusted.** `optgap`: `-channel-fx` with numeric, negative, out-of-range and
+non-numeric channels (ParsePixelChannelOption), `-channel` shorthand with `,type`, including
+`Undefined` (ParseChannelOption). 12 verdicts on GetCommandOptionFlags: every command-line
+caller passes one option it already recognised by its exact name (a name with an underscore or
+a stray dash is rejected as UnrecognizedOption first), so the list, length and retry-without-
+dashes branches cannot change the flags. Its three functions under the bar are written down
+(GetCommandOptions: display.c; Reset/RemoveImageOption: API only).
+
+**blob.c 74 → 86, not yet trusted.** A `blob` driver command: ImageToBlob and ImagesToBlob over
+eleven formats, BlobToImage and PingBlob back, custom streams over a memory buffer with and
+without seek and tell (ImageToCustomStream, ImagesToCustomStream, CustomStreamToImage),
+MSBOrderLong/Short and FileToImage; formats without blob support (MPC, SHTML, INFO, VICAR) for
+the temporary-file route. Seventeen small functions remain under the bar, a few survivors each.
+**A third upstream crash:** writing the corpus rose as HTML through ImageToBlob frees an
+invalid pointer in DestroyImageInfo (WriteHTMLImage → WriteImage); no case uses it.
+
+**quantum-import.c 68 → 100 and quantum-export.c 73 → 100, trusted.** A `quantum` driver
+command: ExportQuantumPixels row by row (the bytes' FNV hash) and ImportQuantumPixels from a
+byte pattern or a round trip, for all 27 quantum types at depths 1 to 64, unsigned and
+floating point, MSB, min-is-white, unpacked, padded and 32-bit-quantum variants, index and
+opacity types of a palette image given an alpha channel; 1252 cases, three rounds. What made
+the difference in the last round: the round trip's target is blanked first (a clone of the
+source hid every skipped import). Four verdicts on the bit-packing clamps (at equality they
+assign the value already there). Driver notes: it uses the QuantumInfo's own buffer
+(`GetQuantumPixels`), since ExportBGROQuantum at 24-bit floating point writes past what
+`GetQuantumExtent` reports; meta channels are set before `AcquireQuantumInfo` and filled
+(they start uninitialised).
+
+Trusted now, Windows: **25 of 36**.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
