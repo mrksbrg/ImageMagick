@@ -1,11 +1,11 @@
 mutate: 95 mutants in MagickCore/random\.c$, 10 functions
-mutate: baseline over 18 cases in 0s
+mutate: baseline over 203 cases in 0s
   mutants: 25/95 (0s)
   mutants: 50/95 (0s)
   mutants: 75/95 (0s)
-  mutants: 95/95 (1s)
+  mutants: 95/95 (7s)
 
-mutate: 95 mutants, 1s
+mutate: 95 mutants, 7s
   killed 0, survived 4 (0 capped), no coverage 91, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -28,4 +28,4 @@ mutate: 95 mutants, 1s
     x  random.c:833:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&random_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-926d3b9c5-random.json
+  full results: build-oracle/work/mutation-confirm-6660a942c-random.json
