@@ -2633,6 +2633,23 @@ an angle falls exactly on half a turn. Unresolved, not provably equivalent.
 
 Trusted now, Windows: **31 of 36**. Far: fx.c, cache.c, stream.c, blob.c (86).
 
+**stream.c 85 → 99, trusted.** A `stream` driver command: ReadStream with a handler that
+hashes each row, and one that also asks the streaming image for pixels (GetOneVirtualPixel,
+GetOneAuthenticPixel, GetVirtualPixels inside, across and outside the row, the queue and the
+metacontent), over six corpus images and seven formats converted first; WriteStream in eight
+formats. Asking for pixels inside the handler ends the stream after its first row, every run
+alike. Two functions under the bar, written down: GetVirtualPixelsStream is identical to
+GetAuthenticPixelsFromStream and folded with it by the compiler (coverage is recorded under
+the other name), and GetOneVirtualPixelFromStream is never installed, because of:
+
+**A fifth upstream bug.** SetPixelCacheMethods (cache.c) copies the one-virtual-pixel handler
+only when the cache already has one: it tests `cache_info->methods.get_one_virtual_pixel_from_handler`
+where the authentic version, two statements later, tests `cache_methods->...`. ReadStream's
+GetOneVirtualPixelFromStream is never installed, and GetOneVirtualPixel on a streaming image
+falls back to the ordinary pixel cache.
+
+Trusted now, Windows: **33 of 36**. Far: fx.c, cache.c, blob.c (86).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
