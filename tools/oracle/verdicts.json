@@ -22709,8 +22709,8 @@
    "mutator": "cxx_le_to_gt",
    "nth": 0,
    "src": "for (y=poly_extent.y1; y <= poly_extent.y2; y++)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 25,
@@ -22719,8 +22719,8 @@
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "for (y=poly_extent.y1; y <= poly_extent.y2; y++)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 45,
@@ -22729,8 +22729,8 @@
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "for (y=poly_extent.y1; y <= poly_extent.y2; y++)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 11,
@@ -22739,8 +22739,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 1,
    "src": "if (status == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 69,
@@ -22749,8 +22749,8 @@
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "q=GetCacheViewAuthenticPixels(image_view,x,y,(size_t) (poly_extent.x2-",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 1,
@@ -22759,8 +22759,8 @@
    "mutator": "cxx_add_to_sub",
    "nth": 0,
    "src": "x+1),1,exception);",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 6,
@@ -22769,8 +22769,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (q == (Quantum *) NULL)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 0,
@@ -22779,8 +22779,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 0,
    "src": "GetPixelInfo(image,&pixel);",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 10,
@@ -22789,8 +22789,8 @@
    "mutator": "cxx_le_to_gt",
    "nth": 0,
    "src": "for ( ; x <= poly_extent.x2; x++)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 10,
@@ -22799,8 +22799,8 @@
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "for ( ; x <= poly_extent.x2; x++)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 30,
@@ -22809,8 +22809,8 @@
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "for ( ; x <= poly_extent.x2; x++)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 7,
@@ -22819,8 +22819,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if ((x == CastDoubleToSsizeT(ceil(primitive_info->point.x-0.5))) &&",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 57,
@@ -22829,8 +22829,8 @@
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "if ((x == CastDoubleToSsizeT(ceil(primitive_info->point.x-0.5))) &&",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 3,
@@ -22839,8 +22839,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "(y == CastDoubleToSsizeT(ceil(primitive_info->point.y-0.5))))",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 53,
@@ -22849,8 +22849,8 @@
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "(y == CastDoubleToSsizeT(ceil(primitive_info->point.y-0.5))))",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 24,
@@ -22859,8 +22859,8 @@
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 41,
@@ -22869,8 +22869,8 @@
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 0,
@@ -22879,8 +22879,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 0,
    "src": "GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 0,
@@ -22889,8 +22889,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 0,
    "src": "SetPixelViaPixelInfo(image,&pixel,q);",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 55,
@@ -22899,8 +22899,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 21,
@@ -22909,8 +22909,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 1,
    "src": "if (draw_info->debug != MagickFalse)",
-   "verdict": "unresolved",
-   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+   "verdict": "equivalent",
+   "why": "in DrawPolygonPrimitive's point branch, which cannot run: the function returns at its top when primitive_info->coordinates <= 1, so 'coordinates == 1' never holds there; and with two or more coordinates the first subpath always yields an edge - ConvertPrimitiveToPath emits its first point as a moveto and always keeps its last point (duplicates are dropped only in between), and ConvertPathToPolygon makes every run of two or more points an edge at the next moveto or at the end - so number_edges is never 0 (also checked with -debug draw on coincident points)"
   },
   {
    "at": 15,

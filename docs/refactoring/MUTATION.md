@@ -3012,10 +3012,11 @@ deleted rather than left standing. New verdicts cover:
   row request.
 - *Equivalent.* The y clamp (its row loop is simply empty), the bounds tests and the thread
   count.
-- *The point branch* of DrawPolygonPrimitive (21 mutants) stays **unresolved**. It needs a
-  polygon without edges. A primitive with one coordinate returns at entry, and coincident
-  points keep a moveto and a lineto, so they always form one edge (checked with
-  `-debug draw`).
+- *The point branch* of DrawPolygonPrimitive (21 mutants) is **unreachable**, so its mutants
+  are equivalent. The function returns at its top for one coordinate. With two or more, the
+  first subpath always yields an edge: ConvertPrimitiveToPath always keeps the subpath's first
+  and last points, and ConvertPathToPolygon makes every run of two or more points an edge. So
+  `number_edges == 0` never holds either (also checked with `-debug draw`).
 - *ClonePolygonEdgesTLS* is only reached with more than one thread. The oracle pins one
   (`MAGICK_THREAD_LIMIT=1`). A `-limit thread 4` case on a 1024×1024 polygon gives four
   threads where the build has OpenMP. The Mac's build caps the limit at 1, so only ERDC can
