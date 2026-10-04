@@ -3036,9 +3036,13 @@ right. The driver's logcfg cases print it as it is.
 
 **Verdict clean-up.** The night removed verdicts on mutants that are now killed, either in
 ERDC's reports or by these cases: log, mime, delegate, profile and configure. The `gap`
-records (verdicts carrying `killed_by`) are kept. Four log.c mutants at line 1440 (the
-buffer-growth test) do not change the Mac's output at all, as if the Mac's Mull build lacked
-them. They have no verdict and are left for ERDC to measure.
+records (verdicts carrying `killed_by`) are kept. The four log.c mutants at line 1440 (the
+buffer-growth test) first looked inert, but the cause was the format's length. A wrong test
+doubles the buffer once per format character. With 35 characters that is 141 TB, which macOS
+still hands out lazily. A 60-character format overflows it, and the event is dropped. That
+case kills two of the four. `>=` → `>` is equivalent (one character's delay, covered by the
+free margin). `q-text` → `q+text` stays unresolved: it changes nothing even with 60
+characters on the Mac.
 
 **Open items for the owner:**
 
