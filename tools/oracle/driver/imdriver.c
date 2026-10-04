@@ -1432,6 +1432,7 @@ static int ColorCmd(int argc,char **argv,ExceptionInfo *exception)
       ImageInfo *image_info=AcquireImageInfo();
       image=AcquireImage(image_info,exception);
       image->fuzz=atof(argv[3]);
+      image->alpha_trait=BlendPixelTrait;  /* IsEquivalentAlpha compares only with alpha */
       GetPixelInfo(image,&p); GetPixelInfo(image,&q);
       p.red=atof(argv[4]); p.green=atof(argv[5]); p.blue=atof(argv[6]); p.alpha=atof(argv[7]);
       q.red=atof(argv[8]); q.green=atof(argv[9]); q.blue=atof(argv[10]); q.alpha=atof(argv[11]);
