@@ -1652,7 +1652,17 @@ static int CacheCmd(int argc,char **argv,ExceptionInfo *exception)
   clone=CloneImage(image,0,0,MagickTrue,exception);
   if (clone != (Image *) NULL)
     {
+      Quantum *q;
       (void) printf("clone %08lx\n",HashRows(clone,exception));
+      /* the clone shares the cache until it is written: then the cache is copied (on disk,
+         ClonePixelCacheOnDisk) */
+      q=GetAuthenticPixels(clone,0,0,1,1,exception);
+      if (q != (Quantum *) NULL)
+        {
+          q[0]=(Quantum) (QuantumRange/3.0);
+          (void) SyncAuthenticPixels(clone,exception);
+        }
+      (void) printf("clone written %08lx, original %08lx\n",HashRows(clone,exception),HashRows(image,exception));
       clone=DestroyImage(clone);
     }
   (void) printf("reshape %d",(int) ReshapePixelCache(image,image->rows,image->columns,exception));
