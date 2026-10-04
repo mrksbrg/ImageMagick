@@ -2504,7 +2504,11 @@ def _fx_gap14_cases():
 # "p {2,3}", "u .r"), which only PeekChar's own SkipSpaces skips (hand-run with exact mutant ids,
 # mull-sdl-win: PeekChar's statement deletion killed), over two images so u[1] differs from u
 _FX_GAP15 = ["p {2,3}.r", "u [1]", "abs (u)", "u .r", "max (u, v)", "rand ()", "v .p [-1,0].b",
-             "for (i=0, i<3, i=i+1); i/3"]
+             "for (i=0, i<3, i=i+1); i/3",
+             # second batch (hand-run, one kill each): a trailing ';' (AcquireFxInfoPrivate's
+             # chLimit test), a nested property (GetProperty's bracket level), a bare '#'
+             # (GetHexColour's length), the image one past the last (ChkImgNum)
+             "u;", "%[fx:%[fx:0.25]]", "#", "u[2]"]
 
 
 def _fx_gap15_cases():
