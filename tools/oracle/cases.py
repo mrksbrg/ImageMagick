@@ -5444,6 +5444,12 @@ def _windrv_cases():
             for filt, scale in (("Point", "0"), ("Gaussian", "1"), ("Gaussian", "3")):
                 yield _windrv("resample %s %s %s %s margin 40" % (name, vp, filt, scale),
                               ("resample", img(name), vp, filt, scale, "margin=40"))
+    # timer.c: -bench (AcquireTimerInfo) and -duration (ContinueTimer) in magick-cli.c; the
+    # oracle masks the report's timings (owner's decision, 2026-10-04). A duration far longer
+    # than the run keeps every iteration, so the output is the same each time.
+    for args in (["-bench", "2"], ["-bench", "3", "-duration", "1000"], ["-bench", "2", "-concurrent", "-duration", "1000"]):
+        yield _case("benchgap", "rose %s -negate" % " ".join(args),
+                    [args + [img("rose"), "-negate"] + FLOAT_OUT + ["out.miff"]], ["out.miff"])
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

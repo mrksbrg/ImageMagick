@@ -130,6 +130,10 @@ NORMALISE = [
     (re.compile(rb"(?im)^(\s*(elapsed time|user time|pixels per second)\s*:).*$"), rb"\1 TIME"),
     (re.compile(rb'(?i)("?(elapsedTime|userTime|pixelsPerSecond)"?\s*:\s*)"?[^",\n]*"?'),
      rb"\1TIME"),
+    # The -bench report (magick-cli.c): iterations per second, efficiency, user and elapsed
+    # time vary; the thread count and the iterations stay (owner's decision, 2026-10-04).
+    (re.compile(rb"(Performance\[[0-9]+\]: [0-9]+i) \S+ips \S+e \S+u \S+"),
+     rb"\1 TIMEips TIMEe TIMEu TIME"),
     # User and elapsed time closing a plain identify / info: line.
     (re.compile(rb"\b[0-9]+\.[0-9]+u [0-9]+:[0-9]+\.[0-9]+"), rb"TIMEu TIME"),
     # The PDF writer dates its output from the file ctime, not SOURCE_DATE_EPOCH.
