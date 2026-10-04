@@ -1,21 +1,20 @@
 mutate: 173 mutants in MagickCore/image\.c$, 44 functions
-  baseline: 10/10 (0s)
-mutate: baseline over 10 cases in 0s
-  mutants: 25/173 (1s)
-  mutants: 50/173 (1s)
-  mutants: 75/173 (1s)
-  mutants: 100/173 (1s)
-  mutants: 125/173 (1s)
-  mutants: 150/173 (1s)
-  mutants: 173/173 (2s)
+mutate: baseline over 41 cases in 0s
+  mutants: 25/173 (3s)
+  mutants: 50/173 (4s)
+  mutants: 75/173 (4s)
+  mutants: 100/173 (5s)
+  mutants: 125/173 (6s)
+  mutants: 150/173 (6s)
+  mutants: 173/173 (8s)
 
-mutate: 173 mutants, 2s
-  killed 0, survived 40 (0 capped), no coverage 133, errors 0
+mutate: 173 mutants, 8s
+  killed 0, survived 82 (0 capped), no coverage 91, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  InterpretImageFilename                13      0        0     13
-  SetImageInfo                          13      0        0     13
+  InterpretImageFilename                13      0       13      0
+  SetImageInfo                          13      0       13      0
   AcquireImage                          12      0       12      0
   NewMagickImage                        12      0        0     12
   SetImageColor                         11      0        0     11
@@ -26,10 +25,10 @@ mutate: 173 mutants, 2s
   AppendImages                           6      0        0      6
   IsTaintImage                           5      0        0      5
   ModifyImage                            5      0        0      5
-  ResetImagePixels                       5      0        0      5
+  ResetImagePixels                       5      0        5      0
   AcquireNextImage                       3      0        0      3
   ClipImagePath                          3      0        0      3
-  CloneImage                             3      0        0      3
+  CloneImage                             3      0        3      0
   CloneImageInfo                         3      0        3      0
   GetImageInfo                           3      0        3      0
   GetImageReferenceCount                 3      0        0      3
@@ -40,15 +39,15 @@ mutate: 173 mutants, 2s
   GetImageMask                           2      0        0      2
   IsHighDynamicRangeImage                2      0        0      2
   SetImageAlpha                          2      0        0      2
-  SetImageBackgroundColor                2      0        0      2
+  SetImageBackgroundColor                2      0        2      0
   CopyImagePixels                        1      0        0      1
-  DisassociateImageStream                1      0        0      1
-  GetImageVirtualPixelMethod             1      0        0      1
+  DisassociateImageStream                1      0        1      0
+  GetImageVirtualPixelMethod             1      0        1      0
   IsValidFormatSpecifier                 1      0        0      1
-  ReferenceImage                         1      0        0      1
+  ReferenceImage                         1      0        1      0
   ResetImagePage                         1      0        0      1
-  SetImageStorageClass                   1      0        0      1
-  SetImageExtent                         1      0        0      1
+  SetImageStorageClass                   1      0        1      0
+  SetImageExtent                         1      0        1      0
   SetImageInfoBlob                       1      0        1      0
   SetImageInfoCustomStream               1      0        0      1
   SetImageInfoFile                       1      0        1      0
@@ -56,7 +55,7 @@ mutate: 173 mutants, 2s
   SetImageVirtualPixelMethod             1      0        0      1
   StripImage                             1      0        0      1
   SyncImage                              1      0        0      1
-  SyncImagesSettings                     1      0        0      1
+  SyncImagesSettings                     1      0        1      0
   SyncImageSettings                      1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
@@ -72,6 +71,9 @@ mutate: 173 mutants, 2s
     x  image.c:300:64 cxx_add_to_sub             if ((double) image->delay < floor(geometry_info.rho+0.5))
     x  image.c:305:75 cxx_add_to_sub             image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+
     x  image.c:308:77 cxx_add_to_sub             image->ticks_per_second=CastDoubleToSsizeT(floor(geometry_info.sigma+
+    x  image.c:820:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:847:22 cxx_ne_to_eq               if (image->ascii85 != (void *) NULL)
+    x  image.c:848:5 cxx_remove_void_call       Ascii85Initialize(clone_image);
     x  image.c:976:24 cxx_ne_to_eq               if (image_info->page != (char *) NULL)
     x  image.c:985:31 cxx_ne_to_eq               if (image_info->server_name != (char *) NULL)
     x  image.c:989:27 cxx_ne_to_eq               if (image_info->texture != (char *) NULL)
@@ -94,12 +96,51 @@ mutate: 173 mutants, 2s
     x  image.c:1289:24 cxx_ne_to_eq               if (image_info->font != (char *) NULL)
     x  image.c:1291:27 cxx_ne_to_eq               if (image_info->texture != (char *) NULL)
     x  image.c:1293:27 cxx_ne_to_eq               if (image_info->density != (char *) NULL)
+    x  image.c:1336:3 cxx_remove_void_call       DisassociateBlob(image);
     x  image.c:1370:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:1381:19 cxx_ne_to_eq               if (synchronize != (const char *) NULL)
     x  image.c:1391:54 cxx_ne_to_eq               image_info->debug=(GetLogEventMask() & ImageEvent) != 0 ? MagickTrue :
+    x  image.c:1624:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:1718:19 cxx_ne_to_eq               if (literal != (char *) NULL)
+    x  image.c:1723:15 cxx_ne_to_eq               if (literal != (char *) NULL)
+    x  image.c:1725:45 cxx_lt_to_le               while ((*cursor != '\0') && ((p-filename) < ((ssize_t) MagickPathExtent-1)))
+    x  image.c:1770:28 cxx_add_to_sub             if ((p-filename+(ssize_t) pattern_length) >= MagickPathExtent)
+    x  image.c:1770:55 cxx_ge_to_gt               if ((p-filename+(ssize_t) pattern_length) >= MagickPathExtent)
+    x  image.c:1772:73 cxx_sub_to_add             (void) CopyMagickString(p,pattern,(size_t) (MagickPathExtent-
+    x  image.c:1773:17 cxx_sub_to_add             (p-filename)));
+    x  image.c:1801:20 cxx_ge_to_gt               if (extent >= sizeof(pattern))
+    x  image.c:1812:25 cxx_ne_to_eq               (image_info != (ImageInfo *) NULL))
+    x  image.c:1817:50 cxx_ge_to_gt               if ((p-filename+(ssize_t) option_length) >= MagickPathExtent)
+    x  image.c:1819:68 cxx_sub_to_add             (void) CopyMagickString(p,option,(size_t) (MagickPathExtent-
+    x  image.c:1829:20 cxx_add_to_sub             if ((p-filename+1) >= MagickPathExtent)
+    x  image.c:1829:24 cxx_ge_to_gt               if ((p-filename+1) >= MagickPathExtent)
+    x  image.c:2195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2321:14 cxx_ne_to_eq               if (pixels != (void *) NULL)
+    x  image.c:2338:15 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    x  image.c:2346:16 cxx_eq_to_ne               if (status == MagickFalse)
+    x  image.c:2356:48 cxx_mul_to_div             (void) memset(q,0,GetPixelChannels(image)*sizeof(Quantum));
+    x  image.c:2497:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2502:47 cxx_eq_to_ne               ((image->alpha_trait & BlendPixelTrait) == 0))
+    x  image.c:2691:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2731:16 cxx_gt_to_ge               if ((columns > (size_t) MAGICK_SSIZE_MAX) ||
+    x  image.c:2890:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2931:23 cxx_gt_to_ge               if (first > last)
+    x  image.c:2933:23 cxx_lt_to_ge               if (first < image_info->scene)
+    x  image.c:2935:22 cxx_gt_to_ge               if (last > image_info->number_scenes)
+    x  image.c:2992:30 cxx_eq_to_ne               if ((delegate_info == (const DelegateInfo *) NULL) &&
+    x  image.c:2993:59 cxx_eq_to_ne               ((*component != '\0') && (IsGlob(component) == MagickFalse)))
+    x  image.c:3011:37 cxx_ne_to_eq               if (IsStringTrue(literal) != MagickFalse)
+    x  image.c:3015:23 cxx_ne_to_eq               if (literal != (char *) NULL)
+    x  image.c:3023:54 cxx_gt_to_ge               if ((image_info->adjoin != MagickFalse) && (frames > 1))
+    x  image.c:3034:54 cxx_gt_to_ge               if ((image_info->adjoin != MagickFalse) && (frames > 0))
+    x  image.c:3087:11 cxx_remove_void_call       SetImageInfoFile(image_info,(FILE *) NULL);
+    x  image.c:3137:52 cxx_eq_to_ne               (GetMagickEndianSupport(magick_info) == MagickFalse))
+    x  image.c:3144:48 cxx_eq_to_ne               (GetMagickEndianSupport(magick_info) == MagickFalse))
     x  image.c:3183:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:3254:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:4110:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:4141:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-55d582237-image.json
+  full results: build-oracle/work/mutation-confirm-e34c65b55-image.json
