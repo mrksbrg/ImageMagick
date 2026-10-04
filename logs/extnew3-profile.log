@@ -1,0 +1,177 @@
+mutate: 292 mutants in MagickCore/profile\.c$, 31 functions
+mutate: baseline over 187 cases in 0s
+  mutants: 25/292 (1s)
+  mutants: 50/292 (1s)
+  mutants: 75/292 (4s)
+  mutants: 100/292 (7s)
+  mutants: 125/292 (9s)
+  mutants: 150/292 (12s)
+  mutants: 175/292 (18s)
+  mutants: 200/292 (20s)
+  mutants: 225/292 (22s)
+  mutants: 250/292 (23s)
+  mutants: 275/292 (23s)
+  mutants: 292/292 (136s)
+
+mutate: 292 mutants, 136s
+  killed 132, survived 121 (0 capped), no coverage 39, errors 0
+  mutation score on reached code: 52.2%   overall: 45.2%
+
+  function                           total killed survived no-cov
+  ProfileImage                          56     41       15      0
+  SyncExifProfile                       54     19       35      0
+  TransformDoublePixels                 22     21        1      0
+  TransformQuantumPixels                22      0        0     22
+  WriteTo8BimProfile                    16     10        6      0
+  Sync8BimProfile                       13     10        3      0
+  WriteProfileDimension                 12      8        4      0
+  PatchCorruptProfile                    9      0        9      0
+  AcquirePixelTLS                        8      6        2      0
+  GetProfilesFromResourceBlock           8      2        6      0
+  GetXMPNumeratorAndDenominator          8      0        0      8
+  SetImageProfileInternal                7      2        5      0
+  AcquireTransformTLS                    6      4        2      0
+  CMSExceptionHandler                    6      4        2      0
+  Update8BIMClipPath                     6      2        4      0
+  DestroyPixelTLS                        5      1        4      0
+  DestroyTransformTLS                    5      2        3      0
+  GetXMPOffsets                          4      0        4      0
+  CloneImageProfiles                     3      0        3      0
+  RemoveImageProfile                     3      0        0      3
+  ReplaceXMPValue                        3      0        0      3
+  TryAccumulate                          3      0        0      3
+  SyncXMPProfile                         3      0        3      0
+  AppendImageProfileProperty             2      0        2      0
+  ValidateXMPProfile                     2      0        2      0
+  DeleteImageProfile                     1      0        1      0
+  GetImageProfile                        1      0        1      0
+  GetNextImageProfile                    1      0        1      0
+  ResetImageProfileIterator              1      0        1      0
+  AcquireProfileStringInfo               1      0        1      0
+  ReadProfileMSBShort                    1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+       profile.c:143:16 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
+       profile.c:143:53 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
+    x  profile.c:231:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:235:27 cxx_ne_to_eq               if (image->profiles != (void *) NULL)
+       profile.c:236:9 cxx_remove_void_call       DestroyImageProfiles(image);
+    x  profile.c:271:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:339:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:374:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:479:14 cxx_eq_to_ne               if (pixels == (void **) NULL)
+    x  profile.c:481:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetMagickResourceLimit(ThreadResource); i++)
+    x  profile.c:481:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetMagickResourceLimit(ThreadResource); i++)
+    x  profile.c:482:19 cxx_ne_to_eq               if (pixels[i] != (void *) NULL)
+    x  profile.c:507:40 cxx_mul_to_div             (void) memset(pixels,0,number_threads*sizeof(*pixels));
+    x  profile.c:511:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    x  profile.c:526:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetMagickResourceLimit(ThreadResource); i++)
+    x  profile.c:527:22 cxx_ne_to_eq               if (transform[i] != (cmsHTRANSFORM) NULL)
+    x  profile.c:528:7 cxx_remove_void_call       cmsDeleteTransform(transform[i]);
+    x  profile.c:551:43 cxx_mul_to_div             (void) memset(transform,0,number_threads*sizeof(*transform));
+    x  profile.c:552:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    x  profile.c:588:20 cxx_ne_to_eq               if (image->debug != MagickFalse)
+       profile.c:590:24 cxx_ne_to_eq               severity,message != (char *) NULL ? message : "no message");
+    x  profile.c:632:31 cxx_eq_to_ne               if (target_info->channels == 1)
+    x  profile.c:1030:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:1046:13 cxx_remove_void_call       ResetImageProfileIterator(image);
+    x  profile.c:1069:51 cxx_eq_to_ne               (CompareStringInfo(icc_profile,profile) == 0))
+    x  profile.c:1076:40 cxx_ne_to_eq               if (LocaleCompare(value,"1") != 0)
+    x  profile.c:1077:13 cxx_remove_void_call       SetsRGBImageProfile(image,exception);
+    x  profile.c:1079:43 cxx_ne_to_eq               if (LocaleCompare(value,"R98.") != 0)
+    x  profile.c:1080:13 cxx_remove_void_call       SetsRGBImageProfile(image,exception);
+    x  profile.c:1124:13 cxx_remove_void_call       cmsDeleteContext(cms_context);
+    x  profile.c:1177:13 cxx_remove_void_call       SetLCMSInfoTranslate(&source_info,0.0);
+    x  profile.c:1274:13 cxx_remove_void_call       SetLCMSInfoTranslate(&target_info,0.0);
+       profile.c:1425:41 cxx_ne_to_eq               if (source_info.profile != (cmsHPROFILE) NULL)
+       profile.c:1427:41 cxx_ne_to_eq               if (target_info.profile != (cmsHPROFILE) NULL)
+       profile.c:1463:17 cxx_remove_void_call       TransformQuantumPixels(id,image,&source_info,&target_info,
+    x  profile.c:1516:37 cxx_ne_to_eq               if (target_info.profile != (cmsHPROFILE) NULL)
+    x  profile.c:1520:9 cxx_remove_void_call       cmsDeleteContext(cms_context);
+    x  profile.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:1723:19 cxx_lt_to_le               for (p=datum; p < (datum+length-16); )
+    x  profile.c:1732:22 cxx_add_to_sub             if (((length_byte+1) & 0x01) != 0)
+    x  profile.c:1734:11 cxx_gt_to_ge               if (p > (datum+length-4))
+    x  profile.c:1740:16 cxx_lt_to_le               if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))
+    x  profile.c:1740:61 cxx_gt_to_ge               if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))
+    x  profile.c:1772:62 cxx_sub_to_add             (void) memcpy(extract_profile->datum,datum,offset-4);
+    x  profile.c:1817:19 cxx_lt_to_le               for (p=datum; p < (datum+length-16); )
+    x  profile.c:1825:22 cxx_add_to_sub             if (((length_byte+1) & 0x01) != 0)
+    x  profile.c:1827:11 cxx_gt_to_ge               if (p > (datum+length-4))
+    x  profile.c:1831:27 cxx_sub_to_add             if ((p > (datum+length-count)) || (count > (ssize_t) length) ||
+    x  profile.c:1831:46 cxx_gt_to_ge               if ((p > (datum+length-count)) || (count > (ssize_t) length) ||
+    x  profile.c:1832:16 cxx_le_to_lt               (count <= 0))
+    x  profile.c:1964:37 cxx_eq_to_ne               if (((LocaleCompare(name, "exif") == 0) || (LocaleCompare(name, "app1") == 0)) &&
+    x  profile.c:1964:75 cxx_eq_to_ne               if (((LocaleCompare(name, "exif") == 0) || (LocaleCompare(name, "app1") == 0)) &&
+    x  profile.c:1965:37 cxx_gt_to_ge               (GetStringInfoLength(profile) > 2))
+    x  profile.c:1965:37 cxx_gt_to_le               (GetStringInfoLength(profile) > 2))
+       profile.c:1981:28 cxx_ne_to_eq               if (exif_profile != (StringInfo *) NULL)
+       profile.c:1983:15 cxx_remove_void_call       SetStringInfoDatum(exif_profile,profile_start);
+       profile.c:1984:15 cxx_remove_void_call       ConcatenateStringInfo(exif_profile,profile);
+       profile.c:1985:15 cxx_remove_void_call       SetStringInfoLength(profile,GetStringInfoLength(exif_profile));
+       profile.c:1986:15 cxx_remove_void_call       SetStringInfo(profile,exif_profile);
+       profile.c:2009:16 cxx_eq_to_ne               if (document == (xmlDocPtr) NULL)
+       profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
+    x  profile.c:2043:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  profile.c:2046:32 cxx_gt_to_ge               if ((length == 0) || (length > GetMaxProfileSize()))
+       profile.c:2048:18 cxx_ne_to_eq               if (length != 0)
+    x  profile.c:2056:34 cxx_eq_to_ne               if ((LocaleCompare(name,"xmp") == 0) &&
+    x  profile.c:2071:15 cxx_gt_to_ge               if ((length > 4) && (LocaleCompare(key,"app1") == 0) &&
+    x  profile.c:2097:14 cxx_gt_to_ge               if (length > GetMaxProfileSize())
+    x  profile.c:2257:15 cxx_lt_to_le               if (*length < 2)
+    x  profile.c:2311:35 cxx_le_to_lt               if ((format == 3) && (dimension <= MAGICK_USHORT_MAX))
+    x  profile.c:2316:17 cxx_gt_to_ge               if (dimension > UINT32_MAX)
+    x  profile.c:2318:14 cxx_eq_to_ne               if (format == 3)
+       profile.c:2319:5 cxx_remove_void_call       WriteProfileShort(endian,4,entry+2);
+    x  profile.c:2372:14 cxx_lt_to_le               if (length < 16)
+    x  profile.c:2393:18 cxx_lt_to_le               if (length < 16)
+    x  profile.c:2411:15 cxx_lt_to_le               if ((offset < 0) || ((size_t) offset >= length))
+    x  profile.c:2411:40 cxx_ge_to_gt               if ((offset < 0) || ((size_t) offset >= length))
+    x  profile.c:2428:20 cxx_lt_to_le               if ((directory < exif) || (directory > (exif+length-2)))
+    x  profile.c:2428:42 cxx_gt_to_ge               if ((directory < exif) || (directory > (exif+length-2)))
+    x  profile.c:2433:28 cxx_sub_to_add             directory_length=length-(size_t) (directory-exif);
+    x  profile.c:2433:48 cxx_sub_to_add             directory_length=length-(size_t) (directory-exif);
+    x  profile.c:2434:26 cxx_lt_to_le               if (directory_length < 6)
+    x  profile.c:2438:44 cxx_sub_to_add             if (number_entries > ((directory_length-6)/12))
+    x  profile.c:2438:47 cxx_div_to_mul             if (number_entries > ((directory_length-6)/12))
+    x  profile.c:2440:19 cxx_lt_to_le               for ( ; entry < number_entries; entry++)
+    x  profile.c:2459:13 cxx_gt_to_ge               if (q > (exif+length-12))
+    x  profile.c:2466:19 cxx_lt_to_le               if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))
+    x  profile.c:2466:39 cxx_ge_to_gt               if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))
+    x  profile.c:2482:23 cxx_lt_to_le               if ((offset < 0) ||
+    x  profile.c:2483:32 cxx_add_to_sub             ((size_t) (offset+(ssize_t) number_bytes) > length))
+    x  profile.c:2485:23 cxx_lt_to_le               if (~length < number_bytes)
+    x  profile.c:2495:52 cxx_eq_to_ne               WriteProfileDimension(endian,tag_value == TAG_IMAGE_WIDTH ?
+    x  profile.c:2503:52 cxx_eq_to_ne               WriteProfileDimension(endian,tag_value == TAG_PIXEL_X_DIMENSION ?
+    x  profile.c:2554:23 cxx_eq_to_ne               (tag_value == TAG_INTEROP_OFFSET)) && (format == 4) &&
+    x  profile.c:2558:32 cxx_lt_to_le               if (((size_t) offset < (length-1)) &&
+    x  profile.c:2558:41 cxx_sub_to_add             if (((size_t) offset < (length-1)) &&
+    x  profile.c:2559:22 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
+    x  profile.c:2564:20 cxx_post_inc_to_post_dec   entry++;
+    x  profile.c:2570:35 cxx_mul_to_div             if ((directory+2+(12*number_entries)) > (exif+length))
+    x  profile.c:2570:53 cxx_gt_to_ge               if ((directory+2+(12*number_entries)) > (exif+length))
+    x  profile.c:2570:53 cxx_gt_to_le               if ((directory+2+(12*number_entries)) > (exif+length))
+    x  profile.c:2572:70 cxx_mul_to_div             offset=(ssize_t) ReadProfileLong(endian,directory+2+(12*
+    x  profile.c:2574:27 cxx_ne_to_eq               if ((offset != 0) && ((size_t) offset < (length-1)) &&
+    x  profile.c:2574:53 cxx_lt_to_ge               if ((offset != 0) && ((size_t) offset < (length-1)) &&
+    x  profile.c:2574:53 cxx_lt_to_le               if ((offset != 0) && ((size_t) offset < (length-1)) &&
+    x  profile.c:2574:62 cxx_sub_to_add             if ((offset != 0) && ((size_t) offset < (length-1)) &&
+    x  profile.c:2575:26 cxx_lt_to_ge               (level < (MaxDirectoryStack-2)))
+    x  profile.c:2575:26 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
+    x  profile.c:2616:16 cxx_lt_to_le               if (length < 7)
+    x  profile.c:2620:16 cxx_ge_to_gt               if ((count >= (ssize_t) length) || (count < 0))
+    x  profile.c:2627:46 cxx_lt_to_le               if ((count > (ssize_t) length) || (count < 0))
+    x  profile.c:2696:38 cxx_sub_to_add             if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||
+    x  profile.c:2696:46 cxx_lt_to_le               if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||
+    x  profile.c:2697:29 cxx_add_to_sub             (((size_t) (pos-datum)+tag_length) > length) ||
+    x  profile.c:2697:42 cxx_gt_to_ge               (((size_t) (pos-datum)+tag_length) > length) ||
+    x  profile.c:2815:36 cxx_sub_to_add             if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
+    x  profile.c:2815:58 cxx_gt_to_ge               if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
+    x  profile.c:2816:19 cxx_eq_to_ne               (*value == '\0'))
+    x  profile.c:2978:41 cxx_le_to_lt               if ((count != 0) && ((size_t) count <= length))
+    x  profile.c:2986:16 cxx_lt_to_le               if ((count < 0) || ((size_t) count > length))
+    x  profile.c:2991:13 cxx_gt_to_ge               if ((id > 1999) && (id < 2999))
+    x  profile.c:2991:28 cxx_lt_to_le               if ((id > 1999) && (id < 2999))
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew3-profile.json
