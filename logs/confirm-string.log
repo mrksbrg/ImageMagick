@@ -1,12 +1,12 @@
 mutate: 87 mutants in MagickCore/string\.c$, 30 functions
-mutate: baseline over 30 cases in 0s
-  mutants: 25/87 (2s)
-  mutants: 50/87 (2s)
-  mutants: 75/87 (3s)
-  mutants: 87/87 (4s)
+mutate: baseline over 10 cases in 0s
+  mutants: 25/87 (1s)
+  mutants: 50/87 (1s)
+  mutants: 75/87 (1s)
+  mutants: 87/87 (1s)
 
-mutate: 87 mutants, 4s
-  killed 0, survived 34 (0 capped), no coverage 53, errors 0
+mutate: 87 mutants, 1s
+  killed 0, survived 29 (0 capped), no coverage 58, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -20,18 +20,18 @@ mutate: 87 mutants, 4s
   ConcatenateStringInfo                  3      0        0      3
   DestroyStringInfo                      3      0        3      0
   AcquireString                          2      0        2      0
-  AcquireStringInfo                      2      0        2      0
+  AcquireStringInfo                      2      0        0      2
   BlobToStringInfo                       2      0        0      2
   CompareStringInfo                      2      0        0      2
   ConcatenateString                      2      0        0      2
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
-  SetStringInfoLength                    2      0        2      0
+  SetStringInfoLength                    2      0        0      2
   StringInfoToDigest                     2      0        0      2
   StringInfoToString                     2      0        0      2
   StringToArgv                           2      0        0      2
   StripMagickString                      2      0        0      2
-  CloneString                            1      0        1      0
+  CloneString                            1      0        0      1
   ConstantString                         1      0        1      0
   FileToString                           1      0        0      1
   FileToStringInfo                       1      0        0      1
@@ -44,9 +44,6 @@ mutate: 87 mutants, 4s
   survivors (equivalent, or a gap in the catalogue):
     x  string.c:107:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:114:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
-    x  string.c:160:28 cxx_ge_to_gt               if (~string_info->length >= (MagickPathExtent-1))
-    x  string.c:165:63 cxx_mul_to_div             (void) memset(string_info->datum,0,(length+MagickPathExtent)*
-    x  string.c:260:24 cxx_ne_to_eq               if (*destination != (char *) NULL)
     x  string.c:415:20 cxx_sub_to_add             count=(size_t) (q-destination);
     x  string.c:416:11 cxx_sub_to_add             i=length-count;
        string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
@@ -74,8 +71,6 @@ mutate: 87 mutants, 4s
     x  string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
     x  string.c:1368:30 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
     x  string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
-    x  string.c:1733:15 cxx_lt_to_le               if (~length < MagickPathExtent)
-       string.c:1737:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-af3128576-string.json
+  full results: build-oracle/work/mutation-confirm-55d582237-string.json
