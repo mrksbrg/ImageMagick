@@ -1,13 +1,12 @@
 mutate: 81 mutants in MagickCore/string\.c$, 29 functions
-  baseline: 23/23 (0s)
-mutate: baseline over 38 cases in 0s
-  mutants: 25/81 (2s)
-  mutants: 50/81 (2s)
-  mutants: 75/81 (3s)
-  mutants: 81/81 (4s)
+mutate: baseline over 13 cases in 0s
+  mutants: 25/81 (0s)
+  mutants: 50/81 (1s)
+  mutants: 75/81 (2s)
+  mutants: 81/81 (2s)
 
-mutate: 81 mutants, 4s
-  killed 0, survived 52 (0 capped), no coverage 29, errors 0
+mutate: 81 mutants, 2s
+  killed 0, survived 51 (0 capped), no coverage 30, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -22,15 +21,15 @@ mutate: 81 mutants, 4s
   AcquireString                          2      0        2      0
   AcquireStringInfo                      2      0        2      0
   BlobToStringInfo                       2      0        0      2
-  ConcatenateString                      2      0        2      0
+  ConcatenateString                      2      0        0      2
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
   SetStringInfoLength                    2      0        2      0
   StringInfoToDigest                     2      0        0      2
   StringInfoToString                     2      0        0      2
-  StringToArgv                           2      0        0      2
+  StringToArgv                           2      0        2      0
   StripMagickString                      2      0        0      2
-  CloneString                            1      0        1      0
+  CloneString                            1      0        0      1
   CompareStringInfo                      1      0        0      1
   ConcatenateMagickString                1      0        1      0
   ConstantString                         1      0        1      0
@@ -46,10 +45,7 @@ mutate: 81 mutants, 4s
     x  string.c:114:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
     x  string.c:160:28 cxx_ge_to_gt               if (~string_info->length >= (MagickPathExtent-1))
     x  string.c:165:63 cxx_mul_to_div             (void) memset(string_info->datum,0,(length+MagickPathExtent)*
-    x  string.c:260:24 cxx_ne_to_eq               if (*destination != (char *) NULL)
        string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
-    x  string.c:477:15 cxx_lt_to_le               if (~length < source_length)
-    x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:596:15 cxx_lt_to_le               if ((offset < 0) || (offset != (MagickOffsetType) ((ssize_t) offset)))
        string.c:598:28 cxx_sub_to_add             file=close_utf8(file)-1;
     x  string.c:603:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
@@ -76,6 +72,8 @@ mutate: 81 mutants, 4s
     x  string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
     x  string.c:1733:15 cxx_lt_to_le               if (~length < MagickPathExtent)
        string.c:1737:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
+       string.c:2105:21 cxx_ge_to_gt               for (i--; i >= 0; i--)
+       string.c:2105:21 cxx_ge_to_lt               for (i--; i >= 0; i--)
        string.c:2365:17 cxx_ne_to_eq               if (count != (size_t *) NULL)
     x  string.c:2370:37 cxx_lt_to_le               if (((int) ((unsigned char) *p) < 32) &&
        string.c:2402:25 cxx_lt_to_ge               for (j=0; j < i; j++)
@@ -96,4 +94,4 @@ mutate: 81 mutants, 4s
     x  string.c:2666:60 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-7b727442d-string.json
+  full results: build-oracle/work/mutation-confirm-cfeecf925-string.json
