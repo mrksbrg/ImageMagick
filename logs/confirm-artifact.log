@@ -1,30 +1,27 @@
 mutate: 14 mutants in MagickCore/artifact\.c$, 9 functions
-mutate: baseline over 83 cases in 0s
-  mutants: 14/14 (4s)
+mutate: baseline over 30 cases in 0s
+  mutants: 14/14 (1s)
 
-mutate: 14 mutants, 4s
-  killed 0, survived 7 (0 capped), no coverage 7, errors 0
+mutate: 14 mutants, 1s
+  killed 0, survived 4 (0 capped), no coverage 10, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   CloneImageArtifacts                    3      0        3      0
   DefineImageArtifact                    3      0        0      3
   RemoveImageArtifact                    2      0        0      2
-  DeleteImageArtifact                    1      0        1      0
+  DeleteImageArtifact                    1      0        0      1
   DestroyImageArtifacts                  1      0        1      0
-  GetImageArtifact                       1      0        1      0
+  GetImageArtifact                       1      0        0      1
   GetNextImageArtifact                   1      0        0      1
   ResetImageArtifactIterator             1      0        0      1
-  SetImageArtifact                       1      0        1      0
+  SetImageArtifact                       1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
     x  artifact.c:124:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  artifact.c:132:28 cxx_ne_to_eq               if (image->artifacts != (void *) NULL)
     x  artifact.c:133:9 cxx_remove_void_call       DestroyImageArtifacts(image);
-    x  artifact.c:219:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  artifact.c:253:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  artifact.c:297:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  artifact.c:472:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-acf185307-artifact.json
+  full results: build-oracle/work/mutation-confirm-af3128576-artifact.json

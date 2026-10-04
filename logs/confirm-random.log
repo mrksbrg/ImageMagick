@@ -1,10 +1,10 @@
 mutate: 75 mutants in MagickCore/random\.c$, 10 functions
-mutate: baseline over 128 cases in 0s
-  mutants: 25/75 (0s)
-  mutants: 50/75 (0s)
-  mutants: 75/75 (6s)
+mutate: baseline over 30 cases in 0s
+  mutants: 25/75 (1s)
+  mutants: 50/75 (2s)
+  mutants: 75/75 (3s)
 
-mutate: 75 mutants, 6s
+mutate: 75 mutants, 3s
   killed 0, survived 68 (0 capped), no coverage 7, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -91,4 +91,4 @@ mutate: 75 mutants, 6s
     x  random.c:936:18 cxx_ne_to_eq               while (i-- != 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-acf185307-random.json
+  full results: build-oracle/work/mutation-confirm-af3128576-random.json
