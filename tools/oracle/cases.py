@@ -5440,6 +5440,10 @@ def _windrv_cases():
                                        ("Gaussian", "3", []), ("Lanczos", "1.5", []), ("Box", "0.7", [])):
                 yield _windrv("resample %s %s %s %s %s" % (name, vp, filt, scale, " ".join(extra)),
                               tuple(["resample", img(name), vp, filt, scale] + extra))
+            # second wave: 40 pixels beyond the edges, past the tiling shortcuts' 32-pixel bounds
+            for filt, scale in (("Point", "0"), ("Gaussian", "1"), ("Gaussian", "3")):
+                yield _windrv("resample %s %s %s %s margin 40" % (name, vp, filt, scale),
+                              ("resample", img(name), vp, filt, scale, "margin=40"))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

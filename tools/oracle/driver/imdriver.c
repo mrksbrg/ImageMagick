@@ -1279,7 +1279,7 @@ static int ResampleCmd(int argc,char **argv,ExceptionInfo *exception)
   Image *image;
   ResampleFilter *filter;
   ssize_t method, type, i;
-  double u, v, scale;
+  double u, v, scale, margin=8.0;
   PixelInfo pixel;
   MagickBooleanType status;
 
@@ -1297,17 +1297,19 @@ static int ResampleCmd(int argc,char **argv,ExceptionInfo *exception)
   if (type >= 0)
     SetResampleFilter(filter,(FilterType) type);
   for (i=6; i < argc; i++)
-    if (strncmp(argv[i],"interpolate=",12) == 0)
+    if (strncmp(argv[i],"margin=",7) == 0)
+      margin=atof(argv[i]+7);
+    else if (strncmp(argv[i],"interpolate=",12) == 0)
       (void) SetResampleFilterInterpolateMethod(filter,(PixelInterpolateMethod)
         ParseCommandOption(MagickInterpolateOptions,MagickFalse,argv[i]+12));
   if (scale > 0.0)
     ScaleResampleFilter(filter,scale,0.3*scale,-0.2*scale,scale);
   GetPixelInfo(image,&pixel);
-  for (v=-8.0; v <= (double) image->rows+8.0; v+=0.5)
+  for (v=-margin; v <= (double) image->rows+margin; v+=0.5)
   {
     unsigned long h=2166136261UL;
     int hits=0;
-    for (u=-8.0; u <= (double) image->columns+8.0; u+=0.5)
+    for (u=-margin; u <= (double) image->columns+margin; u+=0.5)
     {
       unsigned char bytes[64];
       int n;
