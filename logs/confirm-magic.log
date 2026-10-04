@@ -1,9 +1,9 @@
 mutate: 31 mutants in MagickCore/magic\.c$, 10 functions
-mutate: baseline over 203 cases in 0s
-  mutants: 25/31 (10s)
-  mutants: 31/31 (10s)
+mutate: baseline over 68 cases in 0s
+  mutants: 25/31 (2s)
+  mutants: 31/31 (3s)
 
-mutate: 31 mutants, 10s
+mutate: 31 mutants, 3s
   killed 0, survived 19 (0 capped), no coverage 12, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -41,4 +41,4 @@ mutate: 31 mutants, 10s
     x  magic.c:822:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&magic_cache_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6660a942c-magic.json
+  full results: build-oracle/work/mutation-confirm-9ae3bdd76-magic.json
