@@ -2948,3 +2948,68 @@ Consequences, as the code behaves today:
 Only a non-seekable file (a FIFO) takes FileToXML's other branch, which works; no case can make one.
 **For the owner:** this is a real upstream defect (likely worth reporting); the campaign keeps the
 behaviour as it is. If it is ever fixed, the verdicts that cite it must be revisited.
+
+## The Mac's night: imdriver for the API-only Mac files (2026-10-04/05, night)
+
+Owner-approved driver work (see "Owner's decisions"). Every number below is a **Mac
+estimate**: the cases were hand-run against the Mac's Mull build (`mull-macx`) with each
+mutant switched on, and checked for determinism. ERDC is the official measurer; its confirm
+rounds rerun the survivors against each push, so the gate figures change only when those
+rounds land. Compare the numbers here with ERDC's, not with each other.
+
+**A harness fix the night depended on.** The macOS sandbox for mutated runs allowed only
+`magick` to be executed, so every `@driver` case failed alike under it (status 71) and could
+kill nothing on the Mac. `mutate.py` now allows the driver beside the binary too. Driver
+cases always worked on Linux, so ERDC's earlier figures are unaffected. The oracle's cache
+key also takes the driver's hash now, so a changed `imdriver` invalidates stale baselines.
+
+**New imdriver commands, with the case directory first on `MAGICK_CONFIGURE_PATH`.**
+`configure`, `logcfg`, `mimecfg` and `delegatecfg` prepend the case directory before
+`MagickCoreGenesis`. The case's own configure.xml, log.xml, mime.xml or delegates.xml is
+then parsed first and governs lookups. On the command line it is read only after the
+build's own, and ordered by path, so no command-line case can compare it (see the locale and
+log notes). The driver prints the case's path as `CASE`.
+
+| file | driver command | what the cases vary | Mac kills |
+|---|---|---|---|
+| configure.c | `configure` | 7 configure.xml shapes (DOCTYPE, quoted `>`, unclosed comment, 4 KB boundary, includes) | parser survivors; include branch → verdicts |
+| log.c | `logcfg` | 8 log.xml shapes (limit at/below/above 1024, unlimited, spaced handlers, events, stealth, include) | 8 kills; 5 include verdicts |
+| mime.c | `mimecfg` | byte/short/long/string patterns, masks, LSB/MSB/host endianness, `offset:extent`, escapes, priorities, a pattern, includes; byte strings sized at and around each `offset+4` bound | all 31 GetMimeInfo survivors; 7 LoadMimeCache mutants whose "unobservable" verdicts were wrong (removed); include `depth` `>=`→`<` |
+| delegate.c | `delegatecfg` | every %-letter as rose:'s fields change (quality 0, units cm, resolution exactly `MagickEpsilon`, rows/columns 0, extent, scenes, alpha), escapes and `&LT;`/`&GT;`/`&AMP;` (the loader decodes only lower case), lookups by decode/encode/mode, lists, multi-line commands, 7 parser shapes, InvokeDelegate of programs that do not exist, ExternalDelegateCommand against a policy that refuses all but a few tokens | 51 of 74 survivors, plus 34 that had verdicts or kinds (42 verdicts removed) |
+| also tonight | `string`, `symlink`, `metrics`, `memory`, `pathauth`, `nextimage`, `drawinfo` | see the commits and the sections above | string.c, utility.c, annotate.c, memory.c, policy.c, image.c, draw.c |
+
+Two techniques worth keeping:
+
+- **Deny all, allow a few.** A delegate policy refuses `*` and allows `nosuch`, the driver
+  and `selfkill`. Which tokens are refused (`NotAuthorized`) shows which tokens
+  `IsExecutableToken` hands to the policy. No program ever runs.
+- **`@SELF selfkill`.** The driver runs itself as the delegate and kills itself with SIGKILL,
+  which gives a child ended by a signal (status −1) without a shell. Both sandboxes allow it:
+  the macOS profile allows the driver, and landlock allows the binary it started.
+
+**Verdicts are now wrong in both directions, and were corrected.** Several mime.c and
+delegate.c verdicts said "unobservable: only GetMimeInfo reads it" or "unobservable: the
+oracle blocks every launch". The driver now kills those mutants, so 49 such verdicts were
+deleted rather than left standing. New verdicts cover:
+
+- leaks
+- allocation and temporary-file failures
+- the spawn wait (timing only)
+- the include branches (see the FileToXML bug below)
+- a CR-escape branch that StringToList makes unreachable (it splits commands at every CR)
+- the popen output loop, which needs a shell that the sandbox does not have; this one stays **unresolved**
+
+**Open items for the owner:**
+
+1. **The FileToXML upstream bug** (section above). No `<include>` in color, configure,
+   delegate, locale, log, mime or policy .xml ever loads, which matters most for policy.xml.
+   It is worth reporting upstream; doing so is the owner's decision.
+2. **delegate.c 556 (`message != NULL` → `==`).** The driver reaches it (signal-killed
+   child, no message buffer). The mutant's NULL read does not crash on the Mac, presumably
+   because the compiler drops the undefined read. It is recorded as unresolved. Proving it
+   would need the disassembly, or lldb with developer mode enabled. I did not enable
+   developer mode.
+3. **ERDC confirmation.** The Mac numbers above are estimates. The confirm loop picks up
+   each push (configure, log, mime, delegate, draw, image, policy, memory, annotate) and the
+   resweep follows. Read the gate from ERDC's `mutation-erdc-confirm-<sha>-*.json` once they
+   land.
