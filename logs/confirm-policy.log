@@ -1,12 +1,12 @@
 mutate: 105 mutants in MagickCore/policy\.c$, 17 functions
-mutate: baseline over 30 cases in 0s
+mutate: baseline over 10 cases in 0s
   mutants: 25/105 (0s)
-  mutants: 50/105 (2s)
-  mutants: 75/105 (2s)
-  mutants: 100/105 (4s)
-  mutants: 105/105 (5s)
+  mutants: 50/105 (1s)
+  mutants: 75/105 (1s)
+  mutants: 100/105 (2s)
+  mutants: 105/105 (2s)
 
-mutate: 105 mutants, 5s
+mutate: 105 mutants, 2s
   killed 0, survived 46 (0 capped), no coverage 59, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -78,4 +78,4 @@ mutate: 105 mutants, 5s
     x  policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-af3128576-policy.json
+  full results: build-oracle/work/mutation-confirm-55d582237-policy.json

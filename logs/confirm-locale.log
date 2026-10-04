@@ -1,5 +1,5 @@
 mutate: 54 mutants in MagickCore/locale\.c$, 19 functions
-mutate: baseline over 30 cases in 0s
+mutate: baseline over 10 cases in 0s
   mutants: 25/54 (0s)
   mutants: 50/54 (1s)
   mutants: 54/54 (1s)
@@ -44,4 +44,4 @@ mutate: 54 mutants, 1s
     x  locale.c:1715:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&locale_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-af3128576-locale.json
+  full results: build-oracle/work/mutation-confirm-55d582237-locale.json
