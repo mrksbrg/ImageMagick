@@ -13712,6 +13712,16 @@
    "why": "only the colormap's allocated size changes: unshrunk when DefineImageColormap found fewer colours, resized to its own size when not; nothing reads past colors"
   },
   {
+   "at": 0,
+   "file": "MagickCore/quantum.c",
+   "function": "DestroyQuantumInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyQuantumPixels(quantum_info);",
+   "verdict": "unobservable",
+   "why": "leaves the quantum pixel buffers unfreed: a leak, no output changes"
+  },
+  {
    "at": 28,
    "file": "MagickCore/quantum.c",
    "function": "SetQuantumPad",
