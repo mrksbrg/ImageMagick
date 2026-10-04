@@ -2508,13 +2508,21 @@ _FX_GAP15 = ["p {2,3}.r", "u [1]", "abs (u)", "u .r", "max (u, v)", "rand ()", "
              # second batch (hand-run, one kill each): a trailing ';' (AcquireFxInfoPrivate's
              # chLimit test), a nested property (GetProperty's bracket level), a bare '#'
              # (GetHexColour's length), the image one past the last (ChkImgNum)
-             "u;", "%[fx:%[fx:0.25]]", "#", "u[2]"]
+             "u;", "%[fx:%[fx:0.25]]", "#", "u[2]",
+             # third batch: spaces where only TranslateExpression's, the after-operator and
+             # the after-unary-prefix SkipSpaces skip them (hand-run, one kill each)
+             "( )", "u+( )", "a= 1;a", "- "]
 
 
 def _fx_gap15_cases():
     for e in _FX_GAP15:
         yield _case("fxgap15", "-fx %s of two images" % e,
                     [[img("rose"), img("granite"), "-fx", e, "-format", "%[fx:mean]\\n", "info:"]], [])
+    # epoch( with a space before the property: only PeekStr's SkipSpaces skips it (hand-run:
+    # killed); a fixed date property, not the file's
+    for e in ("epoch( %[date:x])", "epoch(%[date:x])"):
+        yield _case("fxgap15", "%%[fx:%s] of a set date" % e,
+                    [[img("rose"), "-set", "date:x", "2020-01-02T03:04:05Z", "-format", "%%[fx:%s]\\n" % e, "info:"]], [])
 
 
 # color.c, statement deletion: colours given in the HCL, HSB, HSL, HSV and HWB
