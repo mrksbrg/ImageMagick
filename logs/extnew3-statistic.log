@@ -1,0 +1,56 @@
+mutate: 149 mutants in MagickCore/statistic\.c$, 29 functions
+mutate: baseline over 1 cases in 0s
+  mutants: 25/149 (0s)
+  mutants: 50/149 (0s)
+  mutants: 75/149 (0s)
+  mutants: 100/149 (0s)
+  mutants: 125/149 (0s)
+  mutants: 149/149 (0s)
+
+mutate: 149 mutants, 0s
+  killed 0, survived 8 (0 capped), no coverage 141, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetImageMoments                       29      0        0     29
+  GetImageStatistics                    21      0        0     21
+  EvaluateImages                        15      0        0     15
+  GetMedianPixel                         9      0        0      9
+  PolynomialImage                        9      0        0      9
+  AddNodePixelList                       9      0        0      9
+  GetImageRange                          6      0        0      6
+  StatisticImage                         6      0        0      6
+  AcquirePixelTLS                        4      0        0      4
+  ApplyEvaluateOperator                  4      0        4      0
+  EvaluateImage                          4      0        4      0
+  FunctionImage                          4      0        0      4
+  MagickSafeReciprocalLD                 4      0        0      4
+  GetImageExtrema                        3      0        0      3
+  DestroyPixelTLS                        2      0        0      2
+  AcquireImageCanvas                     2      0        0      2
+  ApplyFunction                          2      0        0      2
+  GetImagePerceptualHash                 2      0        0      2
+  DestroyPixelList                       2      0        0      2
+  DestroyPixelListTLS                    2      0        0      2
+  AcquirePixelListTLS                    2      0        0      2
+  EvaluateMax                            1      0        0      1
+  IntensityCompare                       1      0        0      1
+  GetImageEntropy                        1      0        0      1
+  GetImageKurtosis                       1      0        0      1
+  GetImageMean                           1      0        0      1
+  GetImageMedian                         1      0        0      1
+  GetModePixelList                       1      0        0      1
+  ResetPixelList                         1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  statistic.c:332:41 cxx_ge_to_gt               if ((QuantumScale*(double) pixel) >= MagickEpsilon)
+    x  statistic.c:381:23 cxx_le_to_lt               if (fabs(value) <= MagickEpsilon)
+    x  statistic.c:383:27 cxx_lt_to_le               if (((double) pixel < 0.0) && ((value-floor(value)) > MagickEpsilon))
+    x  statistic.c:383:59 cxx_gt_to_ge               if (((double) pixel < 0.0) && ((value-floor(value)) > MagickEpsilon))
+    x  statistic.c:859:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  statistic.c:918:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       statistic.c:926:17 cxx_post_inc_to_post_dec   progress++;
+       statistic.c:928:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew3-statistic.json
