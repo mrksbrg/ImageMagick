@@ -1,11 +1,11 @@
 mutate: 54 mutants in MagickCore/locale\.c$, 19 functions
-mutate: baseline over 307 cases in 0s
+mutate: baseline over 76 cases in 0s
   mutants: 25/54 (0s)
-  mutants: 50/54 (42s)
-  mutants: 54/54 (43s)
+  mutants: 50/54 (3s)
+  mutants: 54/54 (3s)
 
-mutate: 54 mutants, 43s
-  killed 0, survived 13 (0 capped), no coverage 41, errors 0
+mutate: 54 mutants, 3s
+  killed 0, survived 12 (0 capped), no coverage 42, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -21,7 +21,7 @@ mutate: 54 mutants, 43s
   GetLocaleList                          2      0        0      2
   AcquireCLocale                         1      0        1      0
   DestroyLocaleOptions                   1      0        0      1
-  FormatLocaleFileList                   1      0        1      0
+  FormatLocaleFileList                   1      0        0      1
   LocaleInfoCompare                      1      0        0      1
   GetLocaleValue                         1      0        0      1
   InterpretLocaleValue                   1      0        1      0
@@ -33,7 +33,6 @@ mutate: 54 mutants, 43s
     x  locale.c:138:16 cxx_eq_to_ne               if (c_locale == (locale_t) NULL)
     x  locale.c:263:16 cxx_ne_to_eq               if (c_locale != (locale_t) NULL)
     x  locale.c:267:5 cxx_remove_void_call       freelocale(c_locale);
-    x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
     x  locale.c:463:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
        locale.c:476:18 cxx_sub_to_add             string[length-1]='\0';
     x  locale.c:1006:18 cxx_eq_to_ne               if (locale == (locale_t) NULL)
@@ -45,4 +44,4 @@ mutate: 54 mutants, 43s
     x  locale.c:1715:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&locale_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-d09139dff-locale.json
+  full results: build-oracle/work/mutation-confirm-ca57d53bb-locale.json
