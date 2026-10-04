@@ -1,0 +1,183 @@
+mutate: 154 mutants in MagickCore/property\.c$, 20 functions
+mutate: baseline over 202 cases in 0s
+  mutants: 25/154 (21s)
+  mutants: 50/154 (23s)
+  mutants: 75/154 (42s)
+  mutants: 100/154 (46s)
+  mutants: 125/154 (64s)
+  mutants: 150/154 (72s)
+  mutants: 154/154 (73s)
+
+mutate: 154 mutants, 73s
+  killed 0, survived 143 (0 capped), no coverage 11, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetEXIFProperty                       31      0       31      0
+  InterpretImageProperties              24      0       24      0
+  GetMagickProperty                     22      0       22      0
+  SetImageProperty                      16      0       16      0
+  Get8BIMProperty                        9      0        9      0
+  GetICCProperty                         9      0        9      0
+  GetMagickPropertyLetter                9      0        9      0
+  GetIPTCProperty                        6      0        6      0
+  TracePSClippath                        6      0        0      6
+  GetImageProperty                       4      0        4      0
+  CloneImageProperties                   3      0        3      0
+  DefineImageProperty                    3      0        0      3
+  TraceSVGClippath                       3      0        3      0
+  GetXMPProperty                         2      0        2      0
+  RemoveImageProperty                    2      0        0      2
+  DeleteImageProperty                    1      0        1      0
+  DestroyImageProperties                 1      0        1      0
+  ReadPropertyMSBShort                   1      0        1      0
+  GetNextImageProperty                   1      0        1      0
+  ResetImagePropertyIterator             1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  property.c:156:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:210:29 cxx_ne_to_eq               if (image->properties != (void *) NULL)
+    x  property.c:211:9 cxx_remove_void_call       DestroyImageProperties(image);
+    x  property.c:299:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:333:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:463:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
+    x  property.c:463:55 cxx_sub_to_add             for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
+    x  property.c:481:56 cxx_sub_to_add             size_t remaining = GetStringInfoLength(profile)-(i+5);
+    x  property.c:481:59 cxx_add_to_sub             size_t remaining = GetStringInfoLength(profile)-(i+5);
+    x  property.c:483:21 cxx_ge_to_gt               if (~length >= 1)
+    x  property.c:504:21 cxx_ne_to_eq               if (attribute != (char *) NULL)
+    x  property.c:590:15 cxx_lt_to_le               if (*length < 2)
+    x  property.c:672:27 cxx_ne_to_eq               if (macroman_resource != (char *) NULL)
+    x  property.c:674:18 cxx_ne_to_eq               if (resource != (char *) NULL)
+    x  property.c:679:31 cxx_ge_to_gt               if (~((size_t) count) >= (MagickPathExtent-1))
+    x  property.c:709:44 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));
+    x  property.c:719:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));
+    x  property.c:726:27 cxx_ge_to_gt               if (~((size_t) count) >= (MagickPathExtent-1))
+    x  property.c:734:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));
+    x  property.c:756:25 cxx_ne_to_eq               if (macroman_resource != (char *) NULL)
+    x  property.c:758:16 cxx_ne_to_eq               if (resource != (char *) NULL)
+    x  property.c:1318:24 cxx_le_to_lt               if (strlen(property) <= 5)
+    x  property.c:1401:14 cxx_lt_to_le               if (length < 6)
+    x  property.c:1420:14 cxx_lt_to_le               if (length < 16)
+    x  property.c:1437:15 cxx_lt_to_le               if ((offset < 0) || (size_t) offset >= length)
+    x  property.c:1437:39 cxx_ge_to_gt               if ((offset < 0) || (size_t) offset >= length)
+    x  property.c:1460:20 cxx_lt_to_le               if ((directory < exif) || (directory > (exif+length-2)))
+    x  property.c:1460:42 cxx_gt_to_ge               if ((directory < exif) || (directory > (exif+length-2)))
+    x  property.c:1466:19 cxx_lt_to_le               for ( ; entry < number_entries; entry++)
+    x  property.c:1480:13 cxx_gt_to_ge               if (q > (exif+length-12))
+    x  property.c:1488:18 cxx_ge_to_gt               if (format >= (sizeof(tag_bytes)/sizeof(*tag_bytes)))
+    x  property.c:1493:22 cxx_lt_to_le               if (components < 0)
+    x  property.c:1509:27 cxx_lt_to_le               if ((dir_offset < 0) || (size_t) dir_offset >= length)
+    x  property.c:1509:55 cxx_ge_to_gt               if ((dir_offset < 0) || (size_t) dir_offset >= length)
+    x  property.c:1511:59 cxx_lt_to_le               if (((size_t) dir_offset+(size_t) number_bytes) < (size_t) dir_offset)
+    x  property.c:1513:35 cxx_add_to_sub             if ((size_t) (dir_offset+(ssize_t) number_bytes) > length)
+    x  property.c:1523:18 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-tag_bytes[format])))
+    x  property.c:1523:46 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-tag_bytes[format])))
+    x  property.c:1532:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
+    x  property.c:1533:74 cxx_add_to_sub             value=(char *) AcquireQuantumMemory((size_t) number_bytes+1UL,
+    x  property.c:1619:22 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-number_bytes)))
+    x  property.c:1619:50 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-number_bytes)))
+    x  property.c:1622:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
+    x  property.c:1623:74 cxx_add_to_sub             value=(char *) AcquireQuantumMemory((size_t) number_bytes+1UL,
+    x  property.c:1674:35 cxx_lt_to_le               if (tag_value < 0x20000)
+    x  property.c:1701:39 cxx_lt_to_le               if (((size_t) tag_offset1 < length) &&
+    x  property.c:1702:24 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
+    x  property.c:1717:29 cxx_lt_to_le               for (i=0; i < level; i++)
+    x  property.c:1726:37 cxx_mul_to_div             if ((directory+2+(12*number_entries)+4) > (exif+length))
+    x  property.c:1726:57 cxx_gt_to_ge               if ((directory+2+(12*number_entries)+4) > (exif+length))
+    x  property.c:1730:65 cxx_lt_to_le               if ((tag_offset1 != 0) && ((size_t) tag_offset1 < length) &&
+    x  property.c:1731:28 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
+    x  property.c:1764:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 128)
+    x  property.c:1789:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    x  property.c:1789:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    x  property.c:1800:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    x  property.c:1800:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    x  property.c:1811:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    x  property.c:1811:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    x  property.c:1822:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    x  property.c:1822:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    x  property.c:1876:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 17)
+    x  property.c:1933:43 cxx_le_to_lt               if ((xmp_namespace_length <= 2) ||
+    x  property.c:2220:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
+    x  property.c:2228:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(22,(ssize_t) length));
+    x  property.c:2242:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
+    x  property.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:2324:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:2324:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:2325:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
+    x  property.c:2515:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:2515:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:2518:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) &&
+    x  property.c:2519:27 cxx_ne_to_eq               (IsEventLogging() != MagickFalse))
+    x  property.c:2701:35 cxx_gt_to_ge               fabs(image->resolution.x) > MagickEpsilon ? image->resolution.x :
+    x  property.c:2710:35 cxx_gt_to_ge               fabs(image->resolution.y) > MagickEpsilon ? image->resolution.y :
+       property.c:2775:18 cxx_ne_to_eq               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
+       property.c:2775:53 cxx_eq_to_ne               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
+    x  property.c:2892:17 cxx_ne_to_eq               if (image != (Image *) NULL)
+    x  property.c:2920:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:2920:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:2923:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) &&
+    x  property.c:2924:27 cxx_ne_to_eq               (IsEventLogging() != MagickFalse))
+    x  property.c:3056:23 cxx_lt_to_ge               for (n=0; n < (ssize_t) number_points; n++)
+    x  property.c:3056:23 cxx_lt_to_le               for (n=0; n < (ssize_t) number_points; n++)
+    x  property.c:3058:34 cxx_lt_to_le               if (convex_hull[n].y < extreme.y)
+    x  property.c:3063:34 cxx_ne_to_eq               if (convex_hull[n].y != extreme.y)
+    x  property.c:3065:34 cxx_lt_to_le               if (convex_hull[n].x < extreme.x)
+    x  property.c:3072:23 cxx_lt_to_le               for (n=0; n < (ssize_t) number_points; n++)
+    x  property.c:3079:34 cxx_ne_to_eq               if (convex_hull[n].x != extreme.x)
+    x  property.c:3081:34 cxx_lt_to_le               if (convex_hull[n].y < extreme.y)
+    x  property.c:3088:23 cxx_lt_to_le               for (n=0; n < (ssize_t) number_points; n++)
+    x  property.c:3095:34 cxx_ne_to_eq               if (convex_hull[n].y != extreme.y)
+    x  property.c:3097:34 cxx_gt_to_ge               if (convex_hull[n].x > extreme.x)
+    x  property.c:3104:23 cxx_lt_to_le               for (n=0; n < (ssize_t) number_points; n++)
+    x  property.c:3111:34 cxx_ne_to_eq               if (convex_hull[n].x != extreme.x)
+    x  property.c:3113:34 cxx_gt_to_ge               if (convex_hull[n].y > extreme.y)
+       property.c:3350:44 cxx_eq_to_ne               if (LocaleCompare("output",property) == 0)
+       property.c:3375:25 cxx_ne_to_eq               if (papersize != (const char *) NULL)
+       property.c:3407:27 cxx_ne_to_eq               if (icc_profile != (cmsHPROFILE *) NULL)
+    x  property.c:3599:17 cxx_ne_to_eq               if (image != (Image *) NULL)
+    x  property.c:3640:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:3779:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3779:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3782:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3782:65 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3786:28 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:3807:18 cxx_ne_to_eq               if (image_info != (ImageInfo *) NULL)
+       property.c:3867:20 cxx_eq_to_ne               if (*p == '\n') /* return-newline EOL */
+    x  property.c:3974:29 cxx_lt_to_le               for (offset=0; offset < (MagickPathExtent-1L) && (*p != '\0'); )
+    x  property.c:3976:37 cxx_ne_to_eq               if ((*p == '\\') && (*(p+1) != '\0'))
+       property.c:3999:22 cxx_ge_to_gt               if (offset >= 64)
+       property.c:3999:22 cxx_ge_to_lt               if (offset >= 64)
+    x  property.c:4062:11 cxx_remove_void_call       GetPixelInfo(property_image,&pixel);
+    x  property.c:4183:15 cxx_remove_void_call       ResetImageArtifactIterator(property_image);
+       property.c:4185:62 cxx_ne_to_eq               if (GlobExpression(key,pattern+9,MagickTrue) != MagickFalse)
+       property.c:4188:32 cxx_ne_to_eq               if (string != (const char *) NULL)
+       property.c:4194:22 cxx_eq_to_ne               if (string == (char *) NULL)
+       property.c:4206:15 cxx_remove_void_call       ResetImagePropertyIterator(property_image);
+       property.c:4207:65 cxx_ne_to_eq               while ((key=GetNextImageProperty(property_image)) != (const char *) NULL)
+       property.c:4208:60 cxx_ne_to_eq               if (GlobExpression(key,pattern,MagickTrue) != MagickFalse)
+       property.c:4211:32 cxx_ne_to_eq               if (string != (const char *) NULL)
+    x  property.c:4274:18 cxx_ge_to_gt               if (offset >= 64)
+    x  property.c:4288:52 cxx_ne_to_eq               if ((property_image != image) && (property_image != (Image *) NULL))
+    x  property.c:4290:55 cxx_ne_to_eq               if ((property_info != image_info) && (property_info != (ImageInfo *) NULL))
+       property.c:4294:26 cxx_ne_to_eq               if (interpret_text != (char *) NULL)
+    x  property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:4427:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:4434:24 cxx_le_to_lt               if (strlen(property) <= 1)
+    x  property.c:4444:24 cxx_gt_to_ge               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:4444:24 cxx_gt_to_le               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:4444:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:4444:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:4445:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
+    x  property.c:4500:26 cxx_lt_to_le               if (colorspace < 0)
+    x  property.c:4510:23 cxx_lt_to_ge               if (compose < 0)
+    x  property.c:4510:23 cxx_lt_to_le               if (compose < 0)
+    x  property.c:4540:32 cxx_gt_to_ge               if (image->delay > (size_t) floor(geometry_info.rho+0.5))
+    x  property.c:4540:66 cxx_add_to_sub             if (image->delay > (size_t) floor(geometry_info.rho+0.5))
+    x  property.c:4661:25 cxx_lt_to_le               if (intensity < 0)
+    x  property.c:4776:32 cxx_lt_to_le               if (rendering_intent < 0)
+    x  property.c:4814:20 cxx_lt_to_ge               if (type < 0)
+    x  property.c:4814:20 cxx_lt_to_le               if (type < 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-extnew3-property.json
