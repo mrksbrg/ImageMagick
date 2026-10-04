@@ -5171,7 +5171,38 @@ _DRIVER_CASES += [("driver %s list %r" % (kind, pattern), _driver("list", kind, 
                   for kind, pattern in (("policy", "*"), ("policy", "system*"), ("locale", "*"),
                                         ("locale", "Magick/*"), ("mime", "*"), ("mime", "image/*"), ("mime", "*nope*"))]
 _DRIVER_CASES += [("driver mime of %s" % name, _driver("mime", "{C}/%s" % name)) for name in ("rose.miff", "bilevel.miff")]
+# string.c through imdriver: functions the command line cannot reach, or reaches only where the
+# result is not observable. EscapeString (no MagickCore caller at all), SanitizeString (its
+# replacement loop), CompareStringInfo (the length branch that decides the sign), the truncation
+# arithmetic of ConcatenateMagickString, and ConfigureFileToStringInfo. All are pure of the
+# machine's fonts/locale, so the kills are portable.
+_DRIVER_CASES += [
+    ("driver string escape backslash and percent", _driver("string", "escape", "a\\b%c%", "%")),
+    ("driver string escape with a quote escape", _driver("string", "escape", 'say "hi" \\ok', '"')),
+    ("driver string sanitize control bytes", _driver("string", "sanitize", "61010263")),
+    ("driver string sanitize leading and trailing control", _driver("string", "sanitize", "0141420a")),
+    ("driver string compare shorter first", _driver("string", "compare", "2", "5")),
+    ("driver string compare longer first", _driver("string", "compare", "5", "2")),
+    ("driver string concat truncating", _driver("string", "concat", "abc", "defgh", "6")),
+    ("driver string concat exact fit", _driver("string", "concat", "abcd", "ef", "7")),
+    ("driver string concat with room", _driver("string", "concat", "abc", "defgh", "100")),
+]
 GAP_STEP_CASES += [(label, steps, {}) for label, steps in _DRIVER_CASES]
+# ConfigureFileToStringInfo reads a file (it maps it); the case ships one.
+GAP_STEP_CASES += [("driver string configfile", _driver("string", "configfile", "cf.dat"),
+                    {"cf.dat": "hello world\n12345\x01\x02end"})]
+# utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
+# copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
+# driver calls it and reads the destination back (= the source either way). Two cases: the default
+# policy takes the symlink path, a policy forbidding symlinks the file-copy path.
+GAP_STEP_CASES += [
+    ("driver symlink, symlink path", _driver("symlink", "src.dat"),
+     {"src.dat": "symlink test content 12345"}),
+    ("driver symlink, copy path (symlinks forbidden)", _driver("symlink", "src.dat"),
+     {"src.dat": "symlink test content 12345",
+      ".config/ImageMagick/policy.xml":
+          '<policymap>\n  <policy domain="system" name="symlink" rights="none" pattern="follow"/>\n'
+          '</policymap>\n'})]
 
 
 # Windows files through imdriver (2026-10-04). pixel.c: ExportImagePixels and ImportImagePixels

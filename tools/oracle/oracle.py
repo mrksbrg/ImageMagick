@@ -556,9 +556,18 @@ def program_fingerprint(binary):
     return hashlib.sha256("\n".join(parts).encode()).hexdigest()
 
 
+def driver_fingerprint(binary):
+    """The imdriver beside the binary, by hash: a @driver case's baseline depends on it, so a
+    rebuilt driver (a new or changed command) must start a fresh baseline, which the binary's own
+    hash does not capture (2026-10-04)."""
+    driver = driver_path(binary)
+    return file_sha(driver)[:8] if os.path.exists(driver) else "none"
+
+
 def cache_path(binary, manifest):
-    key = "%s-%s-h%s-l%s-p%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
-                                 library_fingerprint(binary)[:8], program_fingerprint(binary)[:8])
+    key = "%s-%s-h%s-l%s-p%s-d%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
+                                     library_fingerprint(binary)[:8], program_fingerprint(binary)[:8],
+                                     driver_fingerprint(binary))
     return os.path.join(WORK, "cache", key + ".json")
 
 

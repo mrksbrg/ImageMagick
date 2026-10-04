@@ -175,12 +175,16 @@ def sandbox(binary):
     out = os.path.realpath(oracle.OUT)
     if not oracle.MACOS:
         return bwrap_sandbox(out) if shutil.which("bwrap") else landlock_sandbox(out)
+    # The @driver cases run imdriver beside the binary; allow it to exec too, else every driver
+    # case fails alike under the sandbox and can kill nothing (it did, silently, on macOS until
+    # 2026-10-04). imdriver is part of the harness, built from driver/imdriver.c, not a delegate.
+    driver = os.path.realpath(oracle.driver_path(binary))
     profile = ("(version 1)(allow default)"
-               "(deny process-exec)(allow process-exec (literal \"%s\"))"
+               "(deny process-exec)(allow process-exec (literal \"%s\") (literal \"%s\"))"
                "(deny network*)"
                "(deny file-write*)(allow file-write* (subpath \"%s\")"
                " (literal \"/dev/null\") (literal \"/dev/tty\") (literal \"/dev/dtracehelper\"))"
-               % (os.path.realpath(binary), out))
+               % (os.path.realpath(binary), driver, out))
     return ["/usr/bin/sandbox-exec", "-p", profile]
 
 

@@ -1746,6 +1746,121 @@ static int BlobIOCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static size_t FromHex(const char *hex,unsigned char *out,size_t limit)
+{
+  size_t n=0,i,len=strlen(hex);
+  for (i=0; (i+1 < len) && (n < limit); i+=2)
+    {
+      int hi=hex[i],lo=hex[i+1];
+      hi=(hi<='9')?hi-'0':((hi|0x20)-'a'+10);
+      lo=(lo<='9')?lo-'0':((lo|0x20)-'a'+10);
+      out[n++]=(unsigned char) ((hi<<4)|lo);
+    }
+  return(n);
+}
+
+static void PrintHex(const unsigned char *b,size_t n)
+{
+  size_t i;
+  for (i=0; i < n; i++) (void) printf("%02x",b[i]);
+  (void) printf("\n");
+}
+
+static StringInfo *AllBytes(size_t length,unsigned char value)
+{
+  StringInfo *s=AcquireStringInfo(length);
+  if (length != 0) (void) memset(GetStringInfoDatum(s),value,length);
+  return(s);
+}
+
+static int StringCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* string escape SRC ESC                 EscapeString
+     string sanitize HEX                   SanitizeString (hex in/out: control bytes are reachable)
+     string compare LENA LENB              CompareStringInfo (equal all-'a' prefix: the length branch)
+     string concat DEST SRC LEN            ConcatenateMagickString (small LEN forces truncation)
+     string configfile FILE                ConfigureFileToStringInfo */
+  if ((argc == 5) && (strcmp(argv[2],"escape") == 0))
+    {
+      char *r=EscapeString(argv[3],argv[4][0]);
+      (void) printf("escape %s\n",r);
+      r=DestroyString(r);
+      return(0);
+    }
+  if ((argc == 4) && (strcmp(argv[2],"sanitize") == 0))
+    {
+      unsigned char in[MagickPathExtent]; char *src,*r;
+      size_t n=FromHex(argv[3],in,sizeof(in)-1);
+      in[n]='\0';
+      src=(char *) in;
+      r=SanitizeString(src);
+      (void) printf("sanitize "); PrintHex((unsigned char *) r,strlen(r));
+      r=DestroyString(r);
+      return(0);
+    }
+  if ((argc == 5) && (strcmp(argv[2],"compare") == 0))
+    {
+      StringInfo *a=AllBytes((size_t) atol(argv[3]),'a'),*b=AllBytes((size_t) atol(argv[4]),'a');
+      (void) printf("compare %d\n",CompareStringInfo(a,b));
+      a=DestroyStringInfo(a); b=DestroyStringInfo(b);
+      return(0);
+    }
+  if ((argc == 6) && (strcmp(argv[2],"concat") == 0))
+    {
+      size_t length=(size_t) atol(argv[5]),count;
+      char *buffer=(char *) AcquireQuantumMemory(length+1,sizeof(*buffer));
+      if (buffer == (char *) NULL) return(1);
+      *buffer='\0';
+      (void) CopyMagickString(buffer,argv[3],length);
+      count=ConcatenateMagickString(buffer,argv[4],length);
+      (void) printf("concat %s count %.20g\n",buffer,(double) count);
+      buffer=(char *) RelinquishMagickMemory(buffer);
+      return(0);
+    }
+  if ((argc == 4) && (strcmp(argv[2],"configfile") == 0))
+    {
+      StringInfo *s=ConfigureFileToStringInfo(argv[3]);
+      if (s == (StringInfo *) NULL) { (void) printf("configfile (none)\n"); return(0); }
+      { size_t i,len=GetStringInfoLength(s),sum=0;
+        const unsigned char *d=GetStringInfoDatum(s);
+        for (i=0; i < len; i++) sum=(sum+d[i]) & 0xffffff;
+        (void) printf("configfile length %.20g sum %.20g\n",(double) len,(double) sum); }
+      s=DestroyStringInfo(s);
+      return(0);
+    }
+  (void) fprintf(stderr,"string escape|sanitize|compare|concat|configfile ...\n");
+  return(2);
+}
+
+static int SymlinkCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* symlink SOURCEFILE   AcquireUniqueSymbolicLink to a fresh destination (a symlink, or a copy
+     when policy forbids symlinks or shred is set), then read the destination back. The name is
+     random, so only the status and the destination's content (= the source's) are printed. */
+  char destination[MagickPathExtent];
+  MagickBooleanType status;
+  (void) exception;
+  if (argc != 3) { (void) fprintf(stderr,"symlink SOURCEFILE\n"); return(2); }
+  *destination='\0';
+  status=AcquireUniqueSymbolicLink(argv[2],destination);
+  (void) printf("status %d\n",(int) status);
+  if (status != MagickFalse)
+    {
+      FILE *f=fopen(destination,"rb");
+      if (f != (FILE *) NULL)
+        {
+          int c; size_t sum=0,n=0;
+          while ((c=fgetc(f)) != EOF) { sum=(sum+(size_t) c) & 0xffffff; n++; }
+          (void) fclose(f);
+          (void) printf("content length %.20g sum %.20g\n",(double) n,(double) sum);
+        }
+      else
+        (void) printf("content (unreadable)\n");
+      (void) RelinquishUniqueFileResource(destination);
+    }
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1779,6 +1894,8 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"stream") == 0) status=StreamCmd(argc,argv,exception);
   else if (strcmp(argv[1],"cache") == 0) status=CacheCmd(argc,argv,exception);
   else if (strcmp(argv[1],"blobio") == 0) status=BlobIOCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"string") == 0) status=StringCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"symlink") == 0) status=SymlinkCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
