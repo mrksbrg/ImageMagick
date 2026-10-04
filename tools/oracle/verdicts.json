@@ -182,16 +182,6 @@
    "why": "differs only for a one-character entry in MAGICK_CONFIGURE_PATH, which the oracle's fixed environment never has and a case cannot set: environment-dependent"
   },
   {
-   "at": 9,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
-   "function": "GetConfigurePaths",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (home != (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the XDG_CONFIG_HOME branch: the oracle leaves it unset, so the mutant only appends a nonexistent \"(null)/ImageMagick/\" path; with it set, the mutant would skip it. Environment-dependent, and a case cannot set the environment"
-  },
-  {
    "at": 0,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/configure.c",
    "function": "IsConfigureCacheInstantiated",
@@ -200,16 +190,6 @@
    "src": "ActivateSemaphoreInfo(&configure_semaphore);",
    "verdict": "unobservable",
    "why": "activates the configure semaphore, with one thread: nothing a case sees"
-  },
-  {
-   "at": 19,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "file_xml,path,depth+1,exception);",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
   },
   {
    "at": 11,
@@ -222,36 +202,6 @@
    "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so a wrong path loads nothing either way (the driver's delegatecfg cases reach the branch)"
   },
   {
-   "at": 53,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare((char *) keyword,\"thread-support\") == 0)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
-   "at": 34,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
-   "at": 34,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (delegate_info->thread_support == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
    "at": 10,
    "file": "MagickCore/delegate.c",
    "function": "LoadDelegateCache",
@@ -260,16 +210,6 @@
    "src": "if (depth >= MagickMaxRecursionDepth)",
    "verdict": "unobservable",
    "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so the depth never reaches the limit (the driver's delegatecfg cases reach the branch)"
-  },
-  {
-   "at": 10,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ge_to_lt",
-   "nth": 0,
-   "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
   },
   {
    "at": 10,
@@ -290,26 +230,6 @@
    "src": "if (*token != '=')",
    "verdict": "unobservable",
    "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's delegatecfg cases reach the branch)"
-  },
-  {
-   "at": 13,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (file_xml != (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
-   "at": 0,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "GetPathComponent(filename,HeadPath,path);",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
   },
   {
    "at": 6,
@@ -7061,16 +6981,6 @@
    "why": "equivalent as compiled: with the test flipped, a NULL ascii85 is passed to memset straight after, which is undefined behaviour, so clang assumes it is never NULL there and keeps the allocation path; the same pattern as GetMagickVersion and AcquireAlignedMemory"
   },
   {
-   "at": 20,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "extent=strlen(token)+MagickPathExtent;",
-   "verdict": "unresolved",
-   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
-  },
-  {
    "at": 19,
    "file": "MagickCore/configure.c",
    "function": "LoadConfigureCache",
@@ -7101,16 +7011,6 @@
    "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
   },
   {
-   "at": 46,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare((char *) keyword,\"stealth\") == 0)",
-   "verdict": "unresolved",
-   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
-  },
-  {
    "at": 34,
    "file": "MagickCore/configure.c",
    "function": "LoadConfigureCache",
@@ -7134,26 +7034,6 @@
    "at": 10,
    "file": "MagickCore/configure.c",
    "function": "LoadConfigureCache",
-   "mutator": "cxx_ge_to_lt",
-   "nth": 0,
-   "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (bracket_depth > 0)",
-   "verdict": "unresolved",
-   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (*path != '\\0')",
@@ -7167,26 +7047,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (*token != '=')",
-   "verdict": "unresolved",
-   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
-  },
-  {
-   "at": 13,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (file_xml != (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unresolved",
    "why": "AcquireConfigureCache stops at the first configure.xml that loads, the build's own, so LoadConfigureCache only ever parses that fixed file; a case's configure.xml is searched for but never read, and nothing on the command line varies the input"
   },
@@ -7414,36 +7274,6 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 18,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((asynchronous == MagickFalse) && (message !=  (char *) NULL))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*arguments[1] == '\\0')",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (arguments == (char **) NULL)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 12,
    "file": "MagickCore/delegate.c",
    "function": "ExternalDelegateCommand",
@@ -7454,102 +7284,12 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 12,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "for (i=1; i < (ssize_t) number_arguments; i++)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 11,
    "file": "MagickCore/delegate.c",
    "function": "ExternalDelegateCommand",
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (status < 0)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((asynchronous == MagickFalse) && (message !=  (char *) NULL))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 48,
-   "file": "MagickCore/delegate.c",
-   "function": "GetDelegateInfo",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare(decode,delegate_info->decode) == 0)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/delegate.c",
-   "function": "GetDelegateInfo",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (delegate_info->mode > 0)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 56,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(IsRightsAuthorized(DelegatePolicyDomain,rights,decode) == MagickFalse))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 74,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((temporary != MagickFalse) && (AcquireUniqueFilename(image->filename) ==",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 75,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (CopyDelegateFile(image->filename,input_filename,MagickFalse,exception) == MagickFalse)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 9,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "((encode != (const char *) NULL) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(delegate_info->encode != (char *) NULL)) ||",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -7580,16 +7320,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if ((encode != (const char *) NULL) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 37,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (IsPathAccessible(input_filename) != MagickFalse)",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -7630,26 +7360,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (image_info->temporary != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 5,
-   "src": "if (temporary != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 39,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "for ( ; commands[i] != (char *) NULL; i++)",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -7732,16 +7442,6 @@
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unobservable",
    "why": "the status LoadDelegateCache returns, which its callers do not pass on to the CLI"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
   },
   {
    "at": 17,
@@ -10395,52 +10095,12 @@
    "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
   },
   {
-   "at": 8,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*q == '>') && (bracket_depth == 0))",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 34,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*q == '>') && (bracket_depth == 0))",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*q == quote)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
    "at": 11,
    "file": "MagickCore/log.c",
    "function": "LoadLogCache",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (*token == *DirectorySeparator)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 45,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare((char *) keyword,\"events\") == 0)",
    "verdict": "unresolved",
    "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
   },
@@ -10458,101 +10118,11 @@
    "at": 10,
    "file": "MagickCore/log.c",
    "function": "LoadLogCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (cache == (LinkedListInfo *) NULL)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (status == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ge_to_gt",
-   "nth": 0,
-   "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
    "mutator": "cxx_ge_to_lt",
    "nth": 0,
    "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (bracket_depth > 0)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 20,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (log_info->limit < 1024)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 25,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_mul_to_div",
-   "nth": 0,
-   "src": "log_info->limit=1024*1024*StringToUnsignedLong(token);",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "for ( ; *q != '\\0'; q++)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (*path != '\\0')",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (*token != '=')",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+   "verdict": "unobservable",
+   "why": "the IncludeElementNestedTooDeeply exception goes to the ExceptionInfo GetLogInfo acquires and destroys without reporting, and the include can never load a file (see the FileToXML bug in MUTATION.md)"
   },
   {
    "at": 13,
@@ -10561,8 +10131,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (file_xml != (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+   "verdict": "unobservable",
+   "why": "in LoadLogCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file (see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'); the mutant's LoadLogCache(NULL) returns at once"
   },
   {
    "at": 14,
@@ -10571,21 +10141,11 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
+   "verdict": "unobservable",
+   "why": "AcquireLogCache ignores LoadLogCache's status; the cache is returned either way"
   },
   {
    "at": 16,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 39,
    "file": "MagickCore/log.c",
    "function": "LoadLogCache",
    "mutator": "cxx_ne_to_eq",
@@ -10601,46 +10161,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 33,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 0,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "GetPathComponent(filename,HeadPath,path);",
-   "verdict": "unresolved",
-   "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
-  },
-  {
-   "at": 0,
-   "file": "MagickCore/log.c",
-   "function": "LoadLogCache",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "GetTimerInfo((TimerInfo *) &log_info->timer);",
    "verdict": "unresolved",
    "why": "needs a log.xml other than the build's; a case's own is read, but -list log orders the files by path, so the build's own sorts before or after it depending on where the build lives, and two builds of the same code differ (no log case can be compared)"
   },
@@ -11705,16 +11225,6 @@
    "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
-   "at": 17,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "for (p=token; *p != '\\0'; )",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
    "at": 10,
    "file": "MagickCore/mime.c",
    "function": "LoadMimeCache",
@@ -11733,26 +11243,6 @@
    "src": "if (attribute != (const char *) NULL)",
    "verdict": "unobservable",
    "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 4,
-   "src": "if (attribute != (const char *) NULL)",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 7,
-   "src": "if (attribute != (const char *) NULL)",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
   },
   {
    "at": 14,
@@ -11783,46 +11273,6 @@
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unobservable",
    "why": "the status LoadMimeCache returns; no CLI path reports it"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "mime_info->length++;",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 1,
-   "src": "mime_info->length++;",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 2,
-   "src": "mime_info->length++;",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 0,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "GetPathComponent(filename,HeadPath,path);",
-   "verdict": "unresolved",
-   "why": "removing it leaves path uninitialised before the include name is appended, so what is read depends on the stack (undefined behaviour); the Mac's mimecfg include case happens to report an include nested too deeply, which is not a portable kill"
   },
   {
    "at": 0,
@@ -12225,24 +11675,14 @@
    "why": "the <include> of a case's policy.xml is parsed but never loads, with a relative or an absolute path (the case's own type.xml include does load); cause not found, so these mutants change nothing observable here"
   },
   {
-   "at": 11,
-   "file": "MagickCore/profile.c",
-   "function": "AcquireProfileStringInfo",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (length > GetMaxProfileSize())",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
    "at": 17,
    "file": "MagickCore/profile.c",
    "function": "GetProfilesFromResourceBlock",
    "mutator": "cxx_add_to_sub",
    "nth": 0,
    "src": "if (((length_byte+1) & 0x01) != 0)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "(length_byte-1) and (length_byte+1) have the same parity"
   },
   {
    "at": 41,
@@ -12251,8 +11691,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if ((p > (datum+length-count)) || (count > (ssize_t) length) ||",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "count == length cannot pass the test before it: a resource's 12-byte header precedes its data, so p > datum+length-count already holds"
   },
   {
    "at": 6,
@@ -12261,38 +11701,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (p > (datum+length-4))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/profile.c",
-   "function": "GetProfilesFromResourceBlock",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
-   "src": "(count <= 0))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 22,
-   "file": "MagickCore/profile.c",
-   "function": "GetProfilesFromResourceBlock",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "if ((p > (datum+length-count)) || (count > (ssize_t) length) ||",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/profile.c",
-   "function": "GetXMPNumeratorAndDenominator",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "approximation=num/(double) den;",
-   "verdict": "unresolved",
-   "why": "the continued-fraction approximation of a non-integer resolution; not killed by 72.5 and 7"
+   "verdict": "equivalent",
+   "why": "p == datum+length-4 would put the resource's header start at length-12, which the loop condition p < datum+length-16 already excludes"
   },
   {
    "at": 10,
@@ -12311,8 +11721,8 @@
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "if (fraction <= 0.0)",
-   "verdict": "unresolved",
-   "why": "the continued-fraction approximation of a non-integer resolution; not killed by 72.5 and 7"
+   "verdict": "equivalent",
+   "why": "for fraction == 0 the mutant goes on with remainder = +inf; the next step's term is +inf, which TryAccumulate refuses, so the loop breaks with the same numerator and denominator (checked on 400,000 values)"
   },
   {
    "at": 20,
@@ -12321,28 +11731,8 @@
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "for (i=0; i < 128; i++)",
-   "verdict": "unresolved",
-   "why": "the continued-fraction iteration count; not killed by 72.5 and 7"
-  },
-  {
-   "at": 22,
-   "file": "MagickCore/profile.c",
-   "function": "GetXMPNumeratorAndDenominator",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "if (fabs(approximation-value) <= MagickEpsilon)",
-   "verdict": "unresolved",
-   "why": "the continued-fraction approximation of a non-integer resolution; not killed by 72.5 and 7"
-  },
-  {
-   "at": 22,
-   "file": "MagickCore/profile.c",
-   "function": "GetXMPOffsets",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "(((size_t) (pos-datum)+tag_length) > length) ||",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "the 128-step bound is never reached: convergent denominators grow at least like Fibonacci numbers and overflow TryAccumulate's 64-bit limit within 94 steps, so the loop always breaks earlier"
   },
   {
    "at": 35,
@@ -12351,18 +11741,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "(((size_t) (pos-datum)+tag_length) > length) ||",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 43,
-   "file": "MagickCore/profile.c",
-   "function": "GetXMPOffsets",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "a tag ending exactly at the profile's end is followed by the terminating NUL, not '>', so the next test returns false either way"
   },
   {
    "at": 35,
@@ -12372,77 +11752,7 @@
    "nth": 0,
    "src": "if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||",
    "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 34,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (((LocaleCompare(name, \"exif\") == 0) || (LocaleCompare(name, \"app1\") == 0)) &&",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 72,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (((LocaleCompare(name, \"exif\") == 0) || (LocaleCompare(name, \"app1\") == 0)) &&",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 30,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare(name,\"xmp\") == 0)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 30,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "(GetStringInfoLength(profile) > 2))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 30,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_gt_to_le",
-   "nth": 0,
-   "src": "(GetStringInfoLength(profile) > 2))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (length != GetStringInfoLength(profile))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 6,
-   "file": "MagickCore/profile.c",
-   "function": "PatchCorruptProfile",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (p != (unsigned char *) NULL)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "why": "only differs for a tag at the very start of the profile, where the mutant reads the byte before the buffer: undefined behaviour, not a portable kill"
   },
   {
    "at": 40,
@@ -12450,16 +11760,6 @@
    "function": "ProfileImage",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
-   "src": "(CompareStringInfo(icc_profile,profile) == 0))",
-   "verdict": "unresolved",
-   "why": "ProfileImage's test for an identical ICC profile; the one corpus ICC profile did not tell the branches apart"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/profile.c",
-   "function": "ProfileImage",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 1,
    "src": "(CompareStringInfo(icc_profile,profile) == 0))",
    "verdict": "unresolved",
    "why": "ProfileImage's test for an identical ICC profile; the one corpus ICC profile did not tell the branches apart"
@@ -12483,36 +11783,6 @@
    "src": "if (LocaleCompare(value,\"R98.\") != 0)",
    "verdict": "unresolved",
    "why": "the sRGB-profile identification of ProfileImage; needs a second, different ICC profile"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "ReadProfileByte",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (*length < 1)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "ReadProfileMSBLong",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (*length < 4)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "ReadProfileMSBShort",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (*length < 2)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
   },
   {
    "at": 15,
@@ -12546,74 +11816,14 @@
    "why": "new_length == length needs no resize either way"
   },
   {
-   "at": 31,
-   "file": "MagickCore/profile.c",
-   "function": "SetImageProfileInternal",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((LocaleCompare(name,\"xmp\") == 0) &&",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/profile.c",
-   "function": "SetImageProfileInternal",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (recursive == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 29,
-   "file": "MagickCore/profile.c",
-   "function": "SetImageProfileInternal",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if ((length == 0) || (length > GetMaxProfileSize()))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "SetImageProfileInternal",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if ((length > 4) && (LocaleCompare(key,\"app1\") == 0) &&",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/profile.c",
-   "function": "Sync8BimProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (id == 0x0422)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
    "at": 11,
    "file": "MagickCore/profile.c",
    "function": "Sync8BimProfile",
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "if ((count >= (ssize_t) length) || (count < 0))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 41,
-   "file": "MagickCore/profile.c",
-   "function": "Sync8BimProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((count > (ssize_t) length) || (count < 0))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "a name that takes all the remaining bytes leaves a size of 0 (read past the end returns 0), so nothing is written; returning there changes nothing"
   },
   {
    "at": 11,
@@ -12622,78 +11832,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (length < 7)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "((size_t) (offset+(ssize_t) number_bytes) > length))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 42,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "if (number_entries > ((directory_length-6)/12))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(components == 1) && (number_bytes == 4))",
-   "verdict": "unresolved",
-   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
-  },
-  {
-   "at": 35,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(components == 1) && (number_bytes == 4))",
-   "verdict": "unresolved",
-   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(tag_value == TAG_INTEROP_OFFSET)) && (format == 4) &&",
-   "verdict": "unresolved",
-   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(tag_value == TAG_INTEROP_OFFSET)) && (format == 4) &&",
-   "verdict": "unresolved",
-   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
-  },
-  {
-   "at": 16,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (((tag_value == TAG_EXIF_OFFSET) ||",
-   "verdict": "unresolved",
-   "why": "nested EXIF directories: a sub-IFD needs tag 0x8769 or 0xa005, whose bytes are above 127 and cannot be written as case text (case files are text)"
+   "verdict": "equivalent",
+   "why": "with exactly 7 bytes after '8BIM' the resource's size reads as 0 (or does not fit), so neither the resolution nor the EXIF sync writes anything; returning there changes nothing"
   },
   {
    "at": 17,
@@ -12747,7 +11887,7 @@
    "nth": 0,
    "src": "if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))",
    "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "why": "format 13 would index format_bytes[13], one past the static array: undefined behaviour, not a portable kill"
   },
   {
    "at": 37,
@@ -12756,28 +11896,8 @@
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "if ((offset < 0) || ((size_t) offset >= length))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 37,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if ((directory < exif) || (directory > (exif+length-2)))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 19,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (number_entries > ((directory_length-6)/12))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "an IFD offset equal to the length puts the directory past exif+length-2, which the loop's first test rejects with the same effect (nothing written)"
   },
   {
    "at": 6,
@@ -12786,8 +11906,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (q > (exif+length-12))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "q == exif+length-12 cannot happen: the entry bound leaves at least 4 bytes after the last entry, so q <= exif+length-16"
   },
   {
    "at": 17,
@@ -12801,74 +11921,14 @@
    "why": "no case reached this before the gaps family's case named in killed_by"
   },
   {
-   "at": 15,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((directory < exif) || (directory > (exif+length-2)))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((offset < 0) ||",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((offset < 0) || ((size_t) offset >= length))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 27,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((ssize_t) number_bytes < components)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 15,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (components < 0)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
    "at": 21,
    "file": "MagickCore/profile.c",
    "function": "SyncExifProfile",
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (directory_length < 6)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "a directory_length of 6 allows (6-6)/12 = 0 entries, so continuing or not writes nothing"
   },
   {
    "at": 11,
@@ -12877,8 +11937,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (length < 16)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "a 16-byte EXIF has no room for an IFD entry: the entry bound (directory_length-6)/12 is 0 for every IFD offset, so nothing is written whether it returns or not"
   },
   {
    "at": 11,
@@ -12887,8 +11947,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 1,
    "src": "if (length < 16)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "a 16-byte EXIF has no room for an IFD entry: the entry bound (directory_length-6)/12 is 0 for every IFD offset, so nothing is written whether it returns or not"
   },
   {
    "at": 12,
@@ -12897,58 +11957,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (~length < number_bytes)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "directory_length=length-(size_t) (directory-exif);",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 43,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "directory_length=length-(size_t) (directory-exif);",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 28,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 39,
-   "file": "MagickCore/profile.c",
-   "function": "SyncExifProfile",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "if (number_entries > ((directory_length-6)/12))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/profile.c",
-   "function": "SyncXMPProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(*value == '\\0'))",
-   "verdict": "unresolved",
-   "why": "the empty-value test before YResolution; not killed with unequal and equal densities"
+   "verdict": "equivalent",
+   "why": "the test before it ensures offset+number_bytes <= length, so number_bytes <= length and ~length < number_bytes never holds for a length below half the address space"
   },
   {
    "at": 51,
@@ -12994,52 +12004,12 @@
   {
    "at": 17,
    "file": "MagickCore/profile.c",
-   "function": "TryAccumulate",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((accumulated < 0.0) || (accumulated > (double) MAGICK_ULONG_MAX))",
-   "verdict": "equivalent",
-   "why": "an accumulated value of exactly 0 is accepted either way"
-  },
-  {
-   "at": 27,
-   "file": "MagickCore/profile.c",
-   "function": "ValidateXMPProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (IsStringTrue(artifact) == MagickFalse)",
-   "verdict": "unresolved",
-   "why": "xmp:validate: no case sets it, and a case with it has not been probed yet"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/profile.c",
-   "function": "WriteTo8BimProfile",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "extract_profile=AcquireStringInfo(offset+extent);",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/profile.c",
    "function": "WriteTo8BimProfile",
    "mutator": "cxx_add_to_sub",
    "nth": 0,
    "src": "if (((length_byte+1) & 0x01) != 0)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 30,
-   "file": "MagickCore/profile.c",
-   "function": "WriteTo8BimProfile",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare(name,\"xmp\") == 0)",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "(length_byte-1) and (length_byte+1) have the same parity"
   },
   {
    "at": 56,
@@ -13048,8 +12018,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "count == length cannot pass the test before it: a resource's 12-byte header precedes its data, so p > datum+length-count already holds"
   },
   {
    "at": 6,
@@ -13058,28 +12028,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (p > (datum+length-4))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/profile.c",
-   "function": "WriteTo8BimProfile",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
-  },
-  {
-   "at": 37,
-   "file": "MagickCore/profile.c",
-   "function": "WriteTo8BimProfile",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))",
-   "verdict": "unresolved",
-   "why": "a bounds or format check in a profile parser: only a malformed or truncated profile reaches the other branch, and every profile the catalogue has is well formed"
+   "verdict": "equivalent",
+   "why": "p == datum+length-4 would put the resource's header start at length-12, which the loop condition p < datum+length-16 already excludes"
   },
   {
    "at": 18,
@@ -22983,16 +21933,6 @@
    "why": "runs only after an include file loaded, which never happens (FileToXML refuses regular files with extent ~0UL, MUTATION.md)"
   },
   {
-   "at": 0,
-   "file": "MagickCore/configure.c",
-   "function": "LoadConfigureCache",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "GetPathComponent(filename,HeadPath,path);",
-   "verdict": "unobservable",
-   "why": "without it the include path starts from whatever the stack held; FileToXML refuses the result like any other regular file (extent ~0UL, MUTATION.md), so nothing loads either way"
-  },
-  {
    "at": 16,
    "file": "MagickCore/log.c",
    "function": "LoadLogCache",
@@ -23241,6 +22181,526 @@
    "src": "(void) MagickDelay(100);  /* sleep 0.1 seconds */",
    "verdict": "unobservable",
    "why": "the wait for a spawned delegate's input to disappear (at most 2 s); removing the 0.1 s delay changes only how long it waits, which the oracle does not compare"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/profile.c",
+   "function": "CloneImageProfiles",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyImageProfiles(image);",
+   "verdict": "unobservable",
+   "why": "CloneImageProfiles replaces the image's profiles with the clone's either way; without DestroyImageProfiles the old tree is only leaked (the driver's profile cases and coalesce reach it)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/profile.c",
+   "function": "DestroyPixelTLS",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (pixels == (void **) NULL)",
+   "verdict": "unobservable",
+   "why": "the mutant returns before freeing a non-NULL pixel array: a leak, which nothing observes"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/profile.c",
+   "function": "DestroyTransformTLS",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (transform[i] != (cmsHTRANSFORM) NULL)",
+   "verdict": "unobservable",
+   "why": "AcquireTransformTLS fills every slot or fails as a whole, so every transform here is non-NULL; the mutant skips deleting them: a leak"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/profile.c",
+   "function": "DestroyTransformTLS",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "cmsDeleteTransform(transform[i]);",
+   "verdict": "unobservable",
+   "why": "removing cmsDeleteTransform leaks the transform; nothing observes it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/profile.c",
+   "function": "ProfileImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "ResetImageProfileIterator(image);",
+   "verdict": "equivalent",
+   "why": "the reset after DeleteImageProfile: the splay tree's iterator still names the profile after the deleted one, so continuing visits the same profiles as restarting would (those before it were already checked and did not match); the driver's 'profile: strip' case reaches it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/profile.c",
+   "function": "ValidateXMPProfile",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "xmlFreeDoc(document);",
+   "verdict": "unobservable",
+   "why": "removing xmlFreeDoc leaks the parsed document; the driver's 'profile: validate' case reaches it"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "if ((directory+2+(12*number_entries)) > (exif+length))",
+   "verdict": "equivalent",
+   "why": "directory+2+12*n never exceeds exif+length (the entry bound leaves room for the next pointer), and 12/n is smaller still"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/profile.c",
+   "function": "SyncExifProfile",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((directory+2+(12*number_entries)) > (exif+length))",
+   "verdict": "equivalent",
+   "why": "directory+2+12*n == exif+length cannot happen: the entry bound leaves at least 4 bytes for the next pointer"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/profile.c",
+   "function": "GetXMPNumeratorAndDenominator",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < 128; i++)",
+   "verdict": "equivalent",
+   "why": "the 128-step bound is never reached: convergent denominators grow at least like Fibonacci numbers and overflow TryAccumulate's 64-bit limit within 94 steps, so the loop always breaks earlier"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,GetClientName(),extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,GetClientName(),extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,domain,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,domain,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,event,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,event,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,function,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,function,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%.17g\",(double)",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%.17g\",(double)",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%.17g\",(double)",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%.17g\",(double)",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,r,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,r,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 53,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,GetLogName(),extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,GetLogName(),extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%.17g\",(double)",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 2,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%.17g\",(double)",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%lu:%02lu.%03lu\",",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%lu:%02lu.%03lu\",",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatMagickTime(seconds,extent-(q-text),q);",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatMagickTime(seconds,extent-(q-text),q);",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%0.3fu\",user_time);",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),\"%0.3fu\",user_time);",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,MagickLibVersionText,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 64,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q+=(ptrdiff_t) CopyMagickString(q,MagickLibVersionText,extent-(q-text));",
+   "verdict": "equivalent",
+   "why": "the copy limit extent-(q-text) is never reached: the resize test at the top of the loop leaves more than MagickPathExtent bytes free before each format character, and no single expansion (client or log name, domain, an event of at most MagickPathExtent-1 characters, a function, module, number, time or version) is that long; a larger limit, which both mutants give, changes nothing"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/log.c",
+   "function": "AcquireLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (status == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "the exception it throws goes to the ExceptionInfo GetLogInfo acquires and destroys without reporting; the built-in log entries are appended either way"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "GetLogInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((name == (const char *) NULL) || (LocaleCompare(name,\"*\") == 0))",
+   "verdict": "equivalent",
+   "why": "GetLogInfo is static and every caller passes \"*\", for which both tests are true"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/log.c",
+   "function": "GetLogInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (p != (ElementInfo *) NULL)",
+   "verdict": "equivalent",
+   "why": "the search by name is never reached: GetLogInfo is static and every caller passes \"*\""
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/log.c",
+   "function": "GetLogInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetHeadElementInLinkedList(log_cache,p);",
+   "verdict": "equivalent",
+   "why": "the search by name is never reached: GetLogInfo is static and every caller passes \"*\""
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/log.c",
+   "function": "GetLogInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "UnlockSemaphoreInfo(log_semaphore);",
+   "verdict": "equivalent",
+   "why": "the search by name is never reached: GetLogInfo is static and every caller passes \"*\""
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/log.c",
+   "function": "LogInfoCompare",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare((*p)->path,(*q)->path) == 0)",
+   "verdict": "unresolved",
+   "why": "a qsort comparator: only the order of log maps sharing a path would change, and qsort orders ties differently on macOS and glibc (not a portable kill)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/log.c",
+   "function": "GetLogInfoList",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "qsort((void *) preferences,(size_t) i,sizeof(*preferences),LogInfoCompare);",
+   "verdict": "unresolved",
+   "why": "without the sort only the order of maps from one file could show (the driver prints only the case's section), and that order is a qsort tie, which differs between platforms"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "extent=strlen(event)+MagickPathExtent;",
+   "verdict": "unresolved",
+   "why": "a smaller initial extent stops the buffer from growing, so a long event overruns the heap buffer: undefined behaviour, killed on the Mac only some of the time"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "\"</entry>\",timestamp,(unsigned long) (elapsed_time/60.0),",
+   "verdict": "unobservable",
+   "why": "elapsed time in the XML format: a timing, which no case can compare"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(1000000.0*(elapsed_time-floor(elapsed_time))+0.5),user_time,",
+   "verdict": "unobservable",
+   "why": "elapsed time in the XML format: a timing, which no case can compare"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(unsigned long) (elapsed_time/60.0),(unsigned long) floor(fmod(",
+   "verdict": "unobservable",
+   "why": "elapsed time for %r: a timing, which no case can compare"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-floor(",
+   "verdict": "unobservable",
+   "why": "elapsed time for %r: a timing, which no case can compare"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/log.c",
+   "function": "LogMagickEventList",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (n < 0)",
+   "verdict": "equivalent",
+   "why": "vsnprintf returns a negative count only on an encoding error, and setting event[MagickPathExtent-1] to NUL changes nothing otherwise: vsnprintf always terminates within the buffer"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/log.c",
+   "function": "LogMagickEventList",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (n < 0)",
+   "verdict": "equivalent",
+   "why": "vsnprintf returns a negative count only on an encoding error, and setting event[MagickPathExtent-1] to NUL changes nothing otherwise: vsnprintf always terminates within the buffer"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/log.c",
+   "function": "LogMagickEventList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((log_info->handler_mask & DebugHandler) != 0)",
+   "verdict": "equivalent",
+   "why": "the debug handler's body is Windows-only; on other systems it is empty"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/log.c",
+   "function": "LogMagickEventList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((log_info->handler_mask & EventHandler) != 0)",
+   "verdict": "equivalent",
+   "why": "the event handler's body is Windows-only; on other systems it is empty"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/log.c",
+   "function": "LogMagickEventList",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "UnlockSemaphoreInfo(log_info->event_semaphore);",
+   "verdict": "unobservable",
+   "why": "runs only when TranslateEvent returns NULL, which it does only when memory runs out"
   }
  ]
 }

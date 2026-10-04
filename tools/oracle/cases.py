@@ -5332,6 +5332,31 @@ _LOG_FILES = (
      '/>\n</logmap>\n<!-- unclosed', ("Annotate",)))
 GAP_STEP_CASES += [("driver logcfg: %s" % name, _driver("logcfg", *args), {"log.xml": xml})
                    for name, xml, args in _LOG_FILES]
+# And events through the case's handlers: logcfg EVENTS COUNT LEN [method] logs COUNT annotate
+# events of LEN characters, then two from modules named without a directory and with a leading
+# separator, and lists the log files the file handler left. Formats use only the reproducible
+# letters (not %i, %p, %r, %t, %u); %l is a line of imdriver.c, %m and %f name its function.
+_LOG_FILES2 = (
+    ('every reproducible format letter, escapes and a trailing %', '<logmap>\n  <log events="None" output="stdout" format="%c|%d|%e|%f|%l|%m|%n|%v|%%|%z|a\\rb\\nc|end%"/>\n</logmap>\n', ('Annotate', '2', '12'), {}),
+    ('no format', '<logmap>\n  <log events="None" output="stdout"/>\n</logmap>\n', ('Annotate', '1', '5'), {}),
+    ('events of 5000 characters, three times over', '<logmap>\n  <log events="None" output="stdout" format="%e|%e|%e"/>\n</logmap>\n', ('Annotate', '2', '5000'), {}),
+    ('an event of 4090 characters', '<logmap>\n  <log events="None" output="stdout" format="[%e]"/>\n</logmap>\n', ('Annotate', '1', '4090'), {}),
+    ('a file handler rotating three generations at 1024 bytes', '<logmap>\n  <log events="None" output="file" filename="log-%g.xml" generations="3" limit="1024" format="%d %e"/>\n</logmap>\n', ('Annotate', '40', '60'), {}),
+    ('a file handler of one generation', '<logmap>\n  <log events="None" output="file" filename="log-%g.xml" generations="1" limit="1024" format="%d %e"/>\n</logmap>\n', ('Annotate', '40', '60'), {}),
+    ('a file handler appending to an existing log', '<logmap>\n  <log events="None" output="file" filename="log-%g.xml" generations="2" limit="2000" format="%d %e"/>\n</logmap>\n', ('Annotate', '5', '10'), {'log-0.xml': 'earlier\n'}),
+    ('a log method', '<logmap>\n  <log events="None" output="stdout" format="%d %e"/>\n</logmap>\n', ('Annotate', '2', '8', 'method'), {}),
+    ('console, debug, event and stderr handlers', '<logmap>\n  <log events="None" output="console,debug,event,stderr" format="%d %e"/>\n</logmap>\n', ('Annotate', '2', '8'), {}),
+    ('a file handler rotating two generations', '<logmap>\n  <log events="None" output="file" filename="log-%g.xml" generations="2" limit="1024" format="%d %e"/>\n</logmap>\n', ('Annotate', '40', '60'), {}),
+    ('a log element inside a comment', '<logmap>\n  <!-- <log events="Annotate" output="stdout" format="hidden %e"/> -->\n  <log events="None" output="stdout" format="%d %e"/>\n</logmap>\n', ('Annotate', '1', '5'), {}),
+    ('two log elements in one map', '<logmap>\n  <log events="None" output="stdout" format="%d %e"/>\n  <log events="None" output="stderr" format="second %e"/>\n</logmap>\n', ('Annotate', '1', '5'), {}),
+    ('a file handler whose directory does not exist', '<logmap>\n  <log events="None" output="file" filename="nodir/log-%g.xml" format="%d %e"/>\n</logmap>\n', ('Annotate', '3', '5'), {}),
+    ('modules with no directory and a leading separator', '<logmap>\n  <log events="None" output="stdout" format="%m|%f|%l|%e"/>\n</logmap>\n', ('Annotate', '0', '1'), {}),
+    ('a log file that reaches its limit exactly', '<logmap>\n  <log events="None" output="file" filename="log-%g.xml" generations="3" limit="1024" format="%e"/>\n</logmap>\n', ('Annotate', '40', '21'), {}),
+    ('two log maps in one file', '<logmap>\n  <log events="None" output="stdout" format="first %e"/>\n</logmap>\n<logmap>\n  <log events="None" output="stdout" format="second %e"/>\n</logmap>\n', ('Annotate', '1', '5'), {}),
+    ('an event mask that is not one', '<logmap>\n  <log events="Annotate" output="stdout" format="%d %e"/>\n</logmap>\n', ('Nonsense', '1', '4'), {}),
+)
+GAP_STEP_CASES += [("driver logcfg: %s" % name, _driver("logcfg", *args), dict({"log.xml": xml}, **extra))
+                   for name, xml, args, extra in _LOG_FILES2]
 # mime.c GetMimeInfo through imdriver: its byte, short, long and string matching reads mime.xml's
 # data-type, offset, mask and endian fields, and no command-line case reaches it with an entry the
 # build's mime.xml does not have. With the case directory first on MAGICK_CONFIGURE_PATH the case's
@@ -5431,6 +5456,12 @@ _DELEGATE_FILES = (
 )
 GAP_STEP_CASES += [("driver delegatecfg: %s" % name, _driver("delegatecfg", *args), files)
                    for name, files, args in _DELEGATE_FILES]
+# profile.c through imdriver: SetImageProfile, SyncImageProfiles, Update8BIMClipPath and the rest
+# on blobs built byte by byte at each bound (profilecases.py says which); the profiles' bytes are
+# printed after every op. The command line reaches these functions only with whole files.
+import profilecases as _profilecases
+GAP_STEP_CASES += [("driver profile: %s" % name, _driver("profile", *args), files)
+                   for name, args, files in _profilecases.CASES]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

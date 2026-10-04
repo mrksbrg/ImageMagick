@@ -28,6 +28,7 @@
 #include "MagickCore/blob-private.h"
 #include "MagickCore/policy-private.h"
 #include "MagickCore/utility-private.h"
+#include "MagickCore/profile-private.h"
 
 static int Fail(ExceptionInfo *exception,const char *what)
 {
@@ -2138,9 +2139,16 @@ static int ConfigureCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int CompareNames(const void *,const void *);
+
+static void PrintLogMethod(const LogEventType type,const char *text)
+{
+  (void) printf("method %d: %s\n",(int) type,text);
+}
+
 static int LogCfgCmd(int argc,char **argv,ExceptionInfo *exception)
 {
-  /* logcfg [EVENTS]   with the case directory first on MAGICK_CONFIGURE_PATH (see main), so the
+  /* logcfg [EVENTS [COUNT [LEN [method]]]]   with the case directory first on MAGICK_CONFIGURE_PATH (see main), so the
      case's own log.xml is parsed first and governs logging: ListLogInfo's section for it (its path
      printed as CASE), IsEventLogging, then, if EVENTS is given, SetLogEventMask(EVENTS) and one
      LogMagickEvent each of Annotate and Trace through the case's handlers. */
@@ -2172,6 +2180,50 @@ static int LogCfgCmd(int argc,char **argv,ExceptionInfo *exception)
       (void) LogMagickEvent(AnnotateEvent,GetMagickModule(),"an annotate event");
       (void) LogMagickEvent(TraceEvent,GetMagickModule(),"a trace event");
       (void) fflush(stdout);
+    }
+  if (argc > 3)
+    {
+      /* COUNT [LEN [method]]: COUNT more annotate events of LEN characters each (through a log
+         method too, if asked), then the log files the file handler left, by size and hash */
+      int count=atoi(argv[3]), length=argc > 4 ? atoi(argv[4]) : 10, i;
+      char *message=(char *) AcquireQuantumMemory((size_t) length+1,1);
+      char **names;
+      size_t n=0, j;
+      if (message == (char *) NULL) return(1);
+      (void) memset(message,'m',(size_t) length);
+      message[length]='\0';
+      if ((argc > 5) && (strcmp(argv[5],"method") == 0))
+        SetLogMethod(PrintLogMethod);
+      for (i=0; i < count; i++)
+      {
+        (void) LogMagickEvent(AnnotateEvent,GetMagickModule(),"%d %s",i,message);
+        (void) fflush(stdout);
+      }
+      message=(char *) RelinquishMagickMemory(message);
+      /* and two events whose module names have no directory, and a leading separator */
+      (void) LogMagickEvent(AnnotateEvent,"plain.c","PlainModule",7,"no directory");
+      (void) LogMagickEvent(AnnotateEvent,"/lead.c","LeadModule",8,"a leading separator");
+      (void) fflush(stdout);
+      names=ListFiles(".","log-*",&n);
+      if (names != (char **) NULL)
+        {
+          qsort(names,n,sizeof(*names),CompareNames);
+          for (j=0; j < n; j++)
+          {
+            FILE *f=fopen(names[j],"rb");
+            unsigned long long hash=1469598103934665603ULL;
+            size_t size=0;
+            int c;
+            if (f != (FILE *) NULL)
+              {
+                while ((c=fgetc(f)) != EOF) { hash=(hash^(unsigned char) c)*1099511628211ULL; size++; }
+                (void) fclose(f);
+              }
+            (void) printf("file %s %.20g fnv1a %016llx\n",names[j],(double) size,hash);
+            names[j]=DestroyString(names[j]);
+          }
+          names=(char **) RelinquishMagickMemory(names);
+        }
     }
   Report(exception);
   return(0);
@@ -2412,6 +2464,167 @@ static int DelegateCfgCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static void PrintProfiles(const Image *image)
+{
+  const char *name;
+  ResetImageProfileIterator(image);
+  for (name=GetNextImageProfile(image); name != (const char *) NULL; name=GetNextImageProfile(image))
+  {
+    const StringInfo *profile=GetImageProfile(image,name);
+    const unsigned char *datum=GetStringInfoDatum(profile);
+    size_t i, length=GetStringInfoLength(profile);
+    (void) printf("  %s %.20g ",name,(double) length);
+    if (length <= 4096)
+      PrintHex(datum,length);
+    else
+      {
+        /* a long profile by its FNV-1a hash */
+        unsigned long long hash=1469598103934665603ULL;
+        for (i=0; i < length; i++) hash=(hash^datum[i])*1099511628211ULL;
+        (void) printf("fnv1a %016llx\n",hash);
+      }
+  }
+}
+
+static int ProfileCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* profile OP...   on a 64x48 image, profile.c's API one op at a time:
+       geom=WxH res=X,Y units=N orient=N   set the image's fields
+       set=NAME:HEX       SetImageProfile (prints its status)
+       setfile=NAME:FILE  the same, the hex read from FILE
+       artifact=KEY:VALUE SetImageArtifact (xmp:validate; split at the last colon)
+       acquire=N          AcquireProfileStringInfo of N bytes (whether one came back)
+       sync               SyncImageProfiles (the EXIF, 8BIM and XMP fields from the image's)
+       clip=OLDWxOLDH:WxH+X+Y   Update8BIMClipPath
+       append=PROFILE:PROPERTY:VALUE   AppendImageProfileProperty, then the property
+       clone              CloneImage, then the clone's profiles
+       remove=NAME        RemoveImageProfile
+       strip=PATTERN      ProfileImage with no data, the iterator two profiles in: deletes the
+                          matching profiles
+     After each op the profiles (name, length, hex) and any exception are printed. */
+  Image *image;
+  ImageInfo *image_info;
+  int k;
+  image_info=AcquireImageInfo();
+  (void) CopyMagickString(image_info->filename,"xc:white",MagickPathExtent);
+  image_info->size=AcquireString("64x48");
+  image=ReadImage(image_info,exception);
+  if (image == (Image *) NULL) return(Fail(exception,"profile: xc:white"));
+  for (k=2; k < argc; k++)
+  {
+    char name[4*MagickPathExtent], *value, *colon;
+    (void) CopyMagickString(name,argv[k],sizeof(name));
+    value=strchr(name,'=');
+    if (value != (char *) NULL) *value++='\0'; else value=name+strlen(name);
+    (void) printf("%.60s\n",argv[k]);
+    if (strcmp(name,"geom") == 0)
+      (void) sscanf(value,"%zux%zu",&image->columns,&image->rows);
+    else if (strcmp(name,"res") == 0)
+      (void) sscanf(value,"%lf,%lf",&image->resolution.x,&image->resolution.y);
+    else if (strcmp(name,"units") == 0) image->units=(ResolutionType) atoi(value);
+    else if (strcmp(name,"orient") == 0) image->orientation=(OrientationType) atoi(value);
+    else if ((strcmp(name,"set") == 0) || (strcmp(name,"setfile") == 0))
+      {
+        static unsigned char bytes[1048576];
+        StringInfo *profile;
+        size_t n;
+        colon=strchr(value,':');
+        if (colon == (char *) NULL) continue;
+        *colon++='\0';
+        if (name[3] == '\0')
+          n=FromHex(colon,bytes,sizeof(bytes));
+        else
+          {
+            /* the hex is in a file: one argument may not exceed 128 KB on Linux */
+            static char hex[2*sizeof(bytes)+1];
+            FILE *f=fopen(colon,"rb");
+            size_t m=0;
+            if (f != (FILE *) NULL) { m=fread(hex,1,sizeof(hex)-1,f); (void) fclose(f); }
+            hex[m]='\0';
+            n=FromHex(hex,bytes,sizeof(bytes));
+          }
+        profile=BlobToStringInfo(bytes,n);
+        (void) printf("  status %d\n",(int) SetImageProfile(image,value,profile,exception));
+        profile=DestroyStringInfo(profile);
+      }
+    else if (strcmp(name,"sync") == 0) SyncImageProfiles(image);
+    else if (strcmp(name,"artifact") == 0)
+      {
+        colon=strrchr(value,':');
+        if (colon == (char *) NULL) continue;
+        *colon++='\0';
+        (void) SetImageArtifact(image,value,colon);
+      }
+    else if (strcmp(name,"acquire") == 0)
+      {
+        StringInfo *profile=AcquireProfileStringInfo("test",(size_t) atol(value),exception);
+        (void) printf("  acquired %d\n",profile != (StringInfo *) NULL ? 1 : 0);
+        if (profile != (StringInfo *) NULL) profile=DestroyStringInfo(profile);
+      }
+    else if (strcmp(name,"clip") == 0)
+      {
+        size_t ow=0, oh=0;
+        RectangleInfo geometry;
+        (void) memset(&geometry,0,sizeof(geometry));
+        colon=strchr(value,':');
+        if (colon == (char *) NULL) continue;
+        *colon++='\0';
+        (void) sscanf(value,"%zux%zu",&ow,&oh);
+        (void) ParseAbsoluteGeometry(colon,&geometry);
+        Update8BIMClipPath(image,ow,oh,&geometry);
+      }
+    else if (strcmp(name,"append") == 0)
+      {
+        char *property, *v;
+        property=strchr(value,':');
+        if (property == (char *) NULL) continue;
+        *property++='\0';
+        v=strchr(property,':');
+        if (v == (char *) NULL) continue;
+        *v++='\0';
+        AppendImageProfileProperty(image,value,property,v,exception);
+        v=(char *) GetImageProperty(image,property,exception);
+        (void) printf("  %s = %s\n",property,v != (char *) NULL ? v : "(null)");
+      }
+    else if (strcmp(name,"clone") == 0)
+      {
+        Image *clone=CloneImage(image,0,0,MagickTrue,exception);
+        if (clone != (Image *) NULL)
+          {
+            (void) printf("  clone:\n");
+            PrintProfiles(clone);
+            clone=DestroyImage(clone);
+          }
+      }
+    else if (strcmp(name,"strip") == 0)
+      {
+        /* the iterator left mid-way (two profiles in), as a caller iterating would leave it */
+        ResetImageProfileIterator(image);
+        (void) GetNextImageProfile(image);
+        (void) GetNextImageProfile(image);
+        (void) printf("  status %d\n",(int) ProfileImage(image,value,(const void *) NULL,0,exception));
+      }
+    else if (strcmp(name,"remove") == 0)
+      {
+        StringInfo *profile=RemoveImageProfile(image,value);
+        (void) printf("  removed %d\n",profile != (StringInfo *) NULL ? 1 : 0);
+        if (profile != (StringInfo *) NULL) profile=DestroyStringInfo(profile);
+      }
+    else
+      (void) printf("  unknown op\n");
+    PrintProfiles(image);
+    if (exception->severity != UndefinedException)
+      {
+        (void) printf("  exception %d %s\n",(int) exception->severity,
+          exception->reason != NULL ? exception->reason : "");
+        ClearMagickException(exception);
+      }
+  }
+  image=DestroyImage(image);
+  image_info=DestroyImageInfo(image_info);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -2466,6 +2679,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"configure") == 0) status=ConfigureCmd(argc,argv,exception);
   else if (strcmp(argv[1],"logcfg") == 0) status=LogCfgCmd(argc,argv,exception);
   else if (strcmp(argv[1],"mimecfg") == 0) status=MimeCfgCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"profile") == 0) status=ProfileCmd(argc,argv,exception);
   else if (strcmp(argv[1],"delegatecfg") == 0) status=DelegateCfgCmd(argc,argv,exception);
   else if (strcmp(argv[1],"selfkill") == 0) { (void) raise(SIGKILL); status=0; }
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
