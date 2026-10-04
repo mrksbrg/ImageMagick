@@ -1,13 +1,12 @@
 mutate: 87 mutants in MagickCore/string\.c$, 30 functions
-  baseline: 50/50 (0s)
-mutate: baseline over 1402 cases in 0s
-  mutants: 25/87 (100s)
-  mutants: 50/87 (100s)
-  mutants: 75/87 (101s)
-  mutants: 87/87 (148s)
+mutate: baseline over 307 cases in 0s
+  mutants: 25/87 (46s)
+  mutants: 50/87 (46s)
+  mutants: 75/87 (46s)
+  mutants: 87/87 (86s)
 
-mutate: 87 mutants, 148s
-  killed 0, survived 35 (0 capped), no coverage 52, errors 0
+mutate: 87 mutants, 86s
+  killed 0, survived 37 (0 capped), no coverage 50, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -24,7 +23,7 @@ mutate: 87 mutants, 148s
   AcquireStringInfo                      2      0        2      0
   BlobToStringInfo                       2      0        0      2
   CompareStringInfo                      2      0        0      2
-  ConcatenateString                      2      0        0      2
+  ConcatenateString                      2      0        2      0
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
   SetStringInfoLength                    2      0        2      0
@@ -52,6 +51,8 @@ mutate: 87 mutants, 148s
     x  string.c:416:11 cxx_sub_to_add             i=length-count;
        string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
     x  string.c:429:27 cxx_sub_to_add             return(count+(size_t) (p-source));
+    x  string.c:477:15 cxx_lt_to_le               if (~length < source_length)
+    x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:596:15 cxx_lt_to_le               if ((offset < 0) || (offset != (MagickOffsetType) ((ssize_t) offset)))
        string.c:598:28 cxx_sub_to_add             file=close_utf8(file)-1;
     x  string.c:603:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
@@ -80,4 +81,4 @@ mutate: 87 mutants, 148s
     x  string.c:1931:15 cxx_lt_to_le               if (~length < MagickPathExtent)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-1501a027d-string.json
+  full results: build-oracle/work/mutation-confirm-d09139dff-string.json

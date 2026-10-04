@@ -1,23 +1,23 @@
 mutate: 139 mutants in MagickCore/property\.c$, 19 functions
-mutate: baseline over 1352 cases in 0s
-  mutants: 25/139 (98s)
-  mutants: 50/139 (98s)
-  mutants: 75/139 (98s)
-  mutants: 100/139 (99s)
-  mutants: 125/139 (124s)
-  mutants: 139/139 (150s)
+mutate: baseline over 307 cases in 0s
+  mutants: 25/139 (46s)
+  mutants: 50/139 (47s)
+  mutants: 75/139 (47s)
+  mutants: 100/139 (48s)
+  mutants: 125/139 (48s)
+  mutants: 139/139 (89s)
 
-mutate: 139 mutants, 150s
-  killed 0, survived 60 (0 capped), no coverage 79, errors 0
+mutate: 139 mutants, 89s
+  killed 0, survived 93 (0 capped), no coverage 46, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetEXIFProperty                       25      0       25      0
-  InterpretImageProperties              24      0        0     24
+  InterpretImageProperties              24      0       24      0
   GetMagickProperty                     22      0        0     22
   SetImageProperty                      16      0       16      0
   Get8BIMProperty                        9      0        0      9
-  GetMagickPropertyLetter                9      0        0      9
+  GetMagickPropertyLetter                9      0        9      0
   TracePSClippath                        6      0        0      6
   GetICCProperty                         5      0        5      0
   GetIPTCProperty                        4      0        4      0
@@ -75,7 +75,40 @@ mutate: 139 mutants, 150s
     x  property.c:1933:43 cxx_le_to_lt               if ((xmp_namespace_length <= 2) ||
     x  property.c:2324:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
     x  property.c:2324:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    x  property.c:2515:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:2515:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:2518:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) &&
+    x  property.c:2519:27 cxx_ne_to_eq               (IsEventLogging() != MagickFalse))
+    x  property.c:2701:35 cxx_gt_to_ge               fabs(image->resolution.x) > MagickEpsilon ? image->resolution.x :
+    x  property.c:2710:35 cxx_gt_to_ge               fabs(image->resolution.y) > MagickEpsilon ? image->resolution.y :
+       property.c:2775:18 cxx_ne_to_eq               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
+       property.c:2775:53 cxx_eq_to_ne               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
+    x  property.c:2892:17 cxx_ne_to_eq               if (image != (Image *) NULL)
     x  property.c:3640:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:3779:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3779:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3782:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3782:65 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
+    x  property.c:3786:28 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:3807:18 cxx_ne_to_eq               if (image_info != (ImageInfo *) NULL)
+       property.c:3867:20 cxx_eq_to_ne               if (*p == '\n') /* return-newline EOL */
+    x  property.c:3974:29 cxx_lt_to_le               for (offset=0; offset < (MagickPathExtent-1L) && (*p != '\0'); )
+    x  property.c:3976:37 cxx_ne_to_eq               if ((*p == '\\') && (*(p+1) != '\0'))
+       property.c:3999:22 cxx_ge_to_gt               if (offset >= 64)
+       property.c:3999:22 cxx_ge_to_lt               if (offset >= 64)
+    x  property.c:4062:11 cxx_remove_void_call       GetPixelInfo(property_image,&pixel);
+    x  property.c:4183:15 cxx_remove_void_call       ResetImageArtifactIterator(property_image);
+       property.c:4185:62 cxx_ne_to_eq               if (GlobExpression(key,pattern+9,MagickTrue) != MagickFalse)
+       property.c:4188:32 cxx_ne_to_eq               if (string != (const char *) NULL)
+       property.c:4194:22 cxx_eq_to_ne               if (string == (char *) NULL)
+       property.c:4206:15 cxx_remove_void_call       ResetImagePropertyIterator(property_image);
+       property.c:4207:65 cxx_ne_to_eq               while ((key=GetNextImageProperty(property_image)) != (const char *) NULL)
+       property.c:4208:60 cxx_ne_to_eq               if (GlobExpression(key,pattern,MagickTrue) != MagickFalse)
+       property.c:4211:32 cxx_ne_to_eq               if (string != (const char *) NULL)
+    x  property.c:4274:18 cxx_ge_to_gt               if (offset >= 64)
+    x  property.c:4288:52 cxx_ne_to_eq               if ((property_image != image) && (property_image != (Image *) NULL))
+    x  property.c:4290:55 cxx_ne_to_eq               if ((property_info != image_info) && (property_info != (ImageInfo *) NULL))
+       property.c:4294:26 cxx_ne_to_eq               if (interpret_text != (char *) NULL)
     x  property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  property.c:4427:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  property.c:4434:24 cxx_le_to_lt               if (strlen(property) <= 1)
@@ -95,4 +128,4 @@ mutate: 139 mutants, 150s
     x  property.c:4814:20 cxx_lt_to_le               if (type < 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-1501a027d-property.json
+  full results: build-oracle/work/mutation-confirm-d09139dff-property.json
