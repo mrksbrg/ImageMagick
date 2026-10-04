@@ -1,21 +1,22 @@
 mutate: 170 mutants in MagickCore/transform\.c$, 15 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 636 cases in 0s
   mutants: 25/170 (0s)
   mutants: 50/170 (0s)
   mutants: 75/170 (0s)
   mutants: 100/170 (0s)
   mutants: 125/170 (0s)
   mutants: 150/170 (0s)
-  mutants: 170/170 (0s)
+  mutants: 170/170 (29s)
 
-mutate: 170 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 170, errors 0
+mutate: 170 mutants, 29s
+  killed 0, survived 18 (0 capped), no coverage 152, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   SpliceImage                           25      0        0     25
   ConsolidateCMYKImages                 24      0        0     24
   ExcerptImage                          23      0        0     23
-  CropImage                             18      0        0     18
+  CropImage                             18      0       18      0
   CropImageToTiles                      17      0        0     17
   TrimImage                             15      0        0     15
   ChopImage                             13      0        0     13
@@ -28,4 +29,25 @@ mutate: 170 mutants, 0s
   ExtentImage                            1      0        0      1
   ShaveImage                             1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-transform.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  transform.c:578:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:616:15 cxx_lt_to_le               if ((page.x < 0) && (bounding_box.x >= 0))
+    x  transform.c:616:39 cxx_ge_to_gt               if ((page.x < 0) && (bounding_box.x >= 0))
+    x  transform.c:625:18 cxx_lt_to_le               if (page.x < 0)
+    x  transform.c:628:15 cxx_lt_to_le               if ((page.y < 0) && (bounding_box.y >= 0))
+    x  transform.c:628:39 cxx_ge_to_gt               if ((page.y < 0) && (bounding_box.y >= 0))
+    x  transform.c:638:18 cxx_lt_to_le               if (page.y < 0)
+    x  transform.c:641:37 cxx_gt_to_ge               if ((page.x+(ssize_t) page.width) > (ssize_t) image->columns)
+    x  transform.c:643:45 cxx_gt_to_ge               if ((geometry->width != 0) && (page.width > geometry->width))
+    x  transform.c:645:38 cxx_gt_to_ge               if ((page.y+(ssize_t) page.height) > (ssize_t) image->rows)
+    x  transform.c:647:47 cxx_gt_to_ge               if ((geometry->height != 0) && (page.height > geometry->height))
+    x  transform.c:667:17 cxx_gt_to_ge               if ((offset.x > (ssize_t) image->page.width) ||
+    x  transform.c:668:17 cxx_gt_to_ge               (offset.y > (ssize_t) image->page.height))
+    x  transform.c:728:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:736:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:738:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:745:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:754:7 cxx_remove_void_call       AppendImageProfileProperty(crop_image,"hdrgm","hdrgm:Transform",
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-1501a027d-transform.json
