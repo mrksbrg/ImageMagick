@@ -1390,6 +1390,75 @@ static int TokenizeCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* color.c: colour tuples and names from a PixelInfo of doubles; IsEquivalent* */
+extern MagickBooleanType IsEquivalentAlpha(const Image *,const PixelInfo *,const PixelInfo *);
+extern MagickBooleanType IsEquivalentIntensity(const Image *,const PixelInfo *,const PixelInfo *);
+
+static int ColorCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* color tuple R G B K A DEPTH COLORSPACE ALPHA     GetColorTuple, QueryColorname x4
+     color equiv FUZZ R G B A R G B A                 IsEquivalentAlpha, IsEquivalentIntensity
+     color subimage IMAGE TARGET FUZZ                 IsEquivalentImage */
+  if ((argc == 11) && (strcmp(argv[2],"tuple") == 0))
+    {
+      PixelInfo pixel;
+      char tuple[MagickPathExtent], name[MagickPathExtent];
+      ssize_t cs;
+      static const ComplianceType compliance[] = { SVGCompliance, X11Compliance, XPMCompliance,
+        CSSCompliance, AllCompliance };
+      size_t i;
+      GetPixelInfo((Image *) NULL,&pixel);
+      pixel.red=atof(argv[3]); pixel.green=atof(argv[4]); pixel.blue=atof(argv[5]);
+      pixel.black=atof(argv[6]); pixel.alpha=atof(argv[7]);
+      pixel.depth=(size_t) atol(argv[8]);
+      cs=ParseCommandOption(MagickColorspaceOptions,MagickFalse,argv[9]);
+      if (cs >= 0) pixel.colorspace=(ColorspaceType) cs;
+      pixel.alpha_trait=atoi(argv[10]) != 0 ? BlendPixelTrait : UndefinedPixelTrait;
+      *tuple='\0'; GetColorTuple(&pixel,MagickFalse,tuple); (void) printf("tuple %s\n",tuple);
+      *tuple='\0'; GetColorTuple(&pixel,MagickTrue,tuple); (void) printf("hex %s\n",tuple);
+      for (i=0; i < sizeof(compliance)/sizeof(*compliance); i++)
+      {
+        *name='\0';
+        (void) printf("name %d %d %s\n",(int) compliance[i],(int) QueryColorname((Image *) NULL,&pixel,
+          compliance[i],name,exception),name);
+      }
+      Report(exception);
+      return(0);
+    }
+  if ((argc == 12) && (strcmp(argv[2],"equiv") == 0))
+    {
+      Image *image;
+      PixelInfo p, q;
+      ImageInfo *image_info=AcquireImageInfo();
+      image=AcquireImage(image_info,exception);
+      image->fuzz=atof(argv[3]);
+      GetPixelInfo(image,&p); GetPixelInfo(image,&q);
+      p.red=atof(argv[4]); p.green=atof(argv[5]); p.blue=atof(argv[6]); p.alpha=atof(argv[7]);
+      q.red=atof(argv[8]); q.green=atof(argv[9]); q.blue=atof(argv[10]); q.alpha=atof(argv[11]);
+      p.alpha_trait=q.alpha_trait=BlendPixelTrait;
+      (void) printf("alpha %d intensity %d\n",(int) IsEquivalentAlpha(image,&p,&q),
+        (int) IsEquivalentIntensity(image,&p,&q));
+      image=DestroyImage(image);
+      image_info=DestroyImageInfo(image_info);
+      return(0);
+    }
+  if ((argc == 6) && (strcmp(argv[2],"subimage") == 0))
+    {
+      Image *image=Read(argv[3],exception), *target=Read(argv[4],exception);
+      ssize_t x=0, y=0;
+      if ((image == (Image *) NULL) || (target == (Image *) NULL))
+        return(Fail(exception,"read"));
+      image->fuzz=atof(argv[5]);
+      (void) printf("equivalent %d at %.20g,%.20g\n",(int) IsEquivalentImage(image,target,&x,&y,exception),
+        (double) x,(double) y);
+      Report(exception);
+      target=DestroyImage(target);
+      image=DestroyImage(image);
+      return(0);
+    }
+  return(Fail(exception,"color: tuple R G B K A DEPTH COLORSPACE ALPHA | equiv FUZZ R G B A R G B A | subimage IMAGE TARGET FUZZ"));
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1419,6 +1488,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"resample") == 0) status=ResampleCmd(argc,argv,exception);
   else if (strcmp(argv[1],"glob") == 0) status=GlobCmd(argc,argv,exception);
   else if (strcmp(argv[1],"tokenize") == 0) status=TokenizeCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"color") == 0) status=ColorCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

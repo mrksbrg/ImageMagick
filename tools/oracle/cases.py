@@ -5492,6 +5492,25 @@ def _windrv_cases():
     for pad in ("0", "3", "3074457345618258602", "3074457345618258603"):  # (one below the guard crashes on its allocation)
         yield _windrv("quantum pad %s" % pad, ("quantum", "export", img("rose"), "rgb", "8", "Unsigned", "LSB",
                                                "pad=" + pad))
+    # color.c: GetColorTuple and QueryColorname from a PixelInfo of doubles, exactly SVGEpsilon
+    # (1e-6) away from an 8-bit value in each channel (IsSVGCompliant's boundary, which image
+    # pixels, 32-bit floats, cannot reach), at depth 8 and 16, RGB, gray and CMYK, with alpha;
+    # IsEquivalentAlpha and IsEquivalentIntensity around the fuzz; IsEquivalentImage
+    for r, g, b, k in (("1e-06", "0", "0", "0"), ("0", "1e-06", "0", "0"), ("0", "0", "1e-06", "0"),
+                       ("0", "0", "0", "1e-06"), ("2e-06", "0", "0", "0"), ("5e-07", "0", "0", "0"),
+                       ("257", "514", "771", "0"), ("257.5", "0", "65535", "0"), ("0", "0", "0", "0")):
+        for depth, cs, alpha in (("16", "sRGB", "0"), ("8", "sRGB", "0"), ("16", "sRGB", "1"),
+                                 ("16", "CMYK", "0"), ("16", "Gray", "0")):
+            yield _windrv("color tuple %s,%s,%s,%s depth %s %s%s" % (r, g, b, k, depth, cs, " alpha" if alpha == "1" else ""),
+                          ("color", "tuple", r, g, b, k, "32768", depth, cs, alpha))
+    for fuzz, p, q in (("0", "100 100 100 65535", "100 100 100 65535"), ("0", "100 100 100 65535", "100 100 101 65535"),
+                       ("1000", "100 100 100 65535", "900 100 100 65535"), ("1000", "100 100 100 65535", "2000 100 100 0"),
+                       ("1000", "100 100 100 65535", "100 100 100 64000"), ("1", "0 0 0 0", "0 0 0 1"),
+                       ("65535", "0 0 0 0", "65535 65535 65535 65535")):
+        yield _windrv("color equivalence fuzz %s: %s ~ %s" % (fuzz, p, q), tuple(["color", "equiv", fuzz] + p.split() + q.split()))
+    for target, fuzz in (("{C}/rose.miff", "0"), ("{C}/rose.miff[10x8+5+4]", "0"), ("{C}/rose.miff[10x8+5+4]", "5000"),
+                         ("{C}/tiny.miff", "0"), ("{C}/tiny.miff", "30000"), ("{C}/granite.miff[4x4+0+0]", "0")):
+        yield _windrv("color subimage %s fuzz %s" % (target, fuzz), ("color", "subimage", img("rose"), target, fuzz))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
