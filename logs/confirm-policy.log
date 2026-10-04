@@ -1,26 +1,26 @@
-mutate: 111 mutants in MagickCore/policy\.c$, 17 functions
-mutate: baseline over 77 cases in 0s
-  mutants: 25/111 (0s)
-  mutants: 50/111 (6s)
-  mutants: 75/111 (6s)
-  mutants: 100/111 (10s)
-  mutants: 111/111 (12s)
+mutate: 105 mutants in MagickCore/policy\.c$, 17 functions
+mutate: baseline over 1402 cases in 0s
+  mutants: 25/105 (0s)
+  mutants: 50/105 (101s)
+  mutants: 75/105 (101s)
+  mutants: 100/105 (161s)
+  mutants: 105/105 (196s)
 
-mutate: 111 mutants, 12s
-  killed 6, survived 46 (0 capped), no coverage 59, errors 0
-  mutation score on reached code: 11.5%   overall: 5.4%
+mutate: 105 mutants, 196s
+  killed 0, survived 46 (0 capped), no coverage 59, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   IsPathContainsSymlink                 23      0        0     23
   SetMagickSecurityPolicyValue          20      0        0     20
-  IsRightsAuthorizedByName              14      1       13      0
-  LoadPolicyCache                       14      4       10      0
+  IsRightsAuthorizedByName              13      0       13      0
+  LoadPolicyCache                       10      0       10      0
   SetMagickSecurityPolicy               10      0        0     10
   AcquirePolicyCache                     6      0        6      0
   GetPolicyInfo                          4      0        4      0
-  DestroyPolicyElement                   4      1        3      0
   PolicyComponentTerminus                4      0        4      0
   AcquirePolicyString                    3      0        3      0
+  DestroyPolicyElement                   3      0        3      0
   GetPolicyList                          2      0        0      2
   ValidateSecurityPolicy                 2      0        0      2
   GetPolicyInfoList                      1      0        0      1
@@ -78,4 +78,4 @@ mutate: 111 mutants, 12s
     x  policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-policy.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-policy.json
