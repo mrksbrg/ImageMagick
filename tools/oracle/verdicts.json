@@ -15358,6 +15358,106 @@
    "why": "the first attempt to create the temporary file succeeds, so the retry counter is never used"
   },
   {
+   "at": 0,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&resource_semaphore[FileResource]);",
+   "verdict": "unobservable",
+   "why": "the guard is never taken: ResourceComponentGenesis (MagickCoreGenesis) acquires every resource semaphore at start-up, so the branch is dead on every path the command line runs"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "ActivateSemaphoreInfo(&resource_semaphore[FileResource]);",
+   "verdict": "unobservable",
+   "why": "the guard is never taken: ResourceComponentGenesis (MagickCoreGenesis) acquires every resource semaphore at start-up, so the branch is dead on every path the command line runs"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (j=0; j < (ssize_t) GetStringInfoLength(key); j++)",
+   "verdict": "unobservable",
+   "why": "the open_utf8 fallback after mkstemp fails: this build has mkstemp (MAGICKCORE_HAVE_MKSTEMP), which succeeds in the writable case directory, so the loop breaks before reaching it"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (j=0; j < (ssize_t) GetStringInfoLength(key); j++)",
+   "verdict": "unobservable",
+   "why": "the open_utf8 fallback after mkstemp fails: this build has mkstemp (MAGICKCORE_HAVE_MKSTEMP), which succeeds in the writable case directory, so the loop breaks before reaching it"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (j=0; j < (ssize_t) GetStringInfoLength(key); j++)",
+   "verdict": "unobservable",
+   "why": "the open_utf8 fallback after mkstemp fails: this build has mkstemp (MAGICKCORE_HAVE_MKSTEMP), which succeeds in the writable case directory, so the loop breaks before reaching it"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((file >= 0) || (errno != EEXIST))",
+   "verdict": "unobservable",
+   "why": "the open_utf8 fallback after mkstemp fails: this build has mkstemp (MAGICKCORE_HAVE_MKSTEMP), which succeeds in the writable case directory, so the loop breaks before reaching it"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if ((file >= 0) || (errno != EEXIST))",
+   "verdict": "unobservable",
+   "why": "the open_utf8 fallback after mkstemp fails: this build has mkstemp (MAGICKCORE_HAVE_MKSTEMP), which succeeds in the writable case directory, so the loop breaks before reaching it"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((file >= 0) || (errno != EEXIST))",
+   "verdict": "unobservable",
+   "why": "the open_utf8 fallback after mkstemp fails: this build has mkstemp (MAGICKCORE_HAVE_MKSTEMP), which succeeds in the writable case directory, so the loop breaks before reaching it"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/resource.c",
+   "function": "AcquireUniqueFileResource",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "unobservable",
+   "why": "runs only when a freshly created temporary file cannot be stat'ed or added to the splay tree, which does not happen within memory in a writable directory"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/resource.c",
+   "function": "GetMagickResource",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&resource_semaphore[type]);",
+   "verdict": "unobservable",
+   "why": "the guard is never taken: ResourceComponentGenesis (MagickCoreGenesis) acquires every resource semaphore at start-up, so the branch is dead on every path the command line runs"
+  },
+  {
    "at": 14,
    "file": "MagickCore/resource.c",
    "function": "RelinquishUniqueFileResource",
@@ -15376,6 +15476,16 @@
    "src": "if ((GetLogEventMask() & ResourceEvent) != 0)",
    "verdict": "unobservable",
    "why": "decides whether to log a Resource event; logging is off, and with -debug the log carries timestamps"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/resource.c",
+   "function": "RelinquishUniqueFileResource",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&resource_semaphore[FileResource]);",
+   "verdict": "unobservable",
+   "why": "the guard is never taken: ResourceComponentGenesis (MagickCoreGenesis) acquires every resource semaphore at start-up, so the branch is dead on every path the command line runs"
   },
   {
    "at": 15,
