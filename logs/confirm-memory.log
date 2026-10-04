@@ -1,15 +1,15 @@
-mutate: 43 mutants in MagickCore/memory\.c$, 11 functions
-mutate: baseline over 77 cases in 0s
-  mutants: 25/43 (5s)
-  mutants: 43/43 (7s)
+mutate: 36 mutants in MagickCore/memory\.c$, 11 functions
+mutate: baseline over 1402 cases in 0s
+  mutants: 25/36 (93s)
+  mutants: 36/36 (94s)
 
-mutate: 43 mutants, 7s
-  killed 7, survived 29 (0 capped), no coverage 7, errors 0
-  mutation score on reached code: 19.4%   overall: 16.3%
+mutate: 36 mutants, 94s
+  killed 0, survived 29 (0 capped), no coverage 7, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  AcquireVirtualMemory                  14      6        8      0
-  ShredMagickMemory                     12      1       11      0
+  ShredMagickMemory                     11      0       11      0
+  AcquireVirtualMemory                   8      0        8      0
   CopyMagickMemory                       4      0        0      4
   SetMagickMemoryMethods                 3      0        0      3
   AcquireAlignedMemory                   2      0        2      0
@@ -52,4 +52,4 @@ mutate: 43 mutants, 7s
     x  memory.c:1712:12 cxx_lt_to_le               return(i < passes ? MagickFalse : MagickTrue);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-memory.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-memory.json
