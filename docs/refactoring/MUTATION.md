@@ -2832,9 +2832,9 @@ and `473:66` (the fontmap index). That moved `GetTypeInfoByFamily` up but left i
 
 **Fix applied.** The `Arial`/`Helvetica` scoring queries and the `Score-Helvetica` entry are
 removed from `cases.py`; scoring cases now query only `ScoreFamily`, whose entries live in the
-case's own type.xml and do not depend on installed fonts. (The `-family Helvetica` *annotate*
-commands at cases.py ~3220 are a related hazard — a family the system defines ambiguously — and
-should be reviewed next.)
+case's own type.xml and do not depend on installed fonts. (The `-family Helvetica`/`Times,Courier` *annotate* commands at cases.py ~3220 were the same
+hazard — families the system font config also defines — and have now been converted to case-local
+`FamTest`/`SecondFam` families too, same code path, portable.)
 
 **Still open** (`GetTypeInfoByFamily`, portable): `446:19`/`447:51` (the request/font italic
 clauses — a clean case-local kill is blocked because command-line `-style` adds a synthetic slant
