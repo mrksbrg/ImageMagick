@@ -1,0 +1,23 @@
+mutate: 115 mutants in MagickCore/vision\.c$, 9 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/115 (0s)
+  mutants: 50/115 (0s)
+  mutants: 75/115 (0s)
+  mutants: 100/115 (0s)
+  mutants: 115/115 (0s)
+
+mutate: 115 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 115, errors 0
+
+  function                           total killed survived no-cov
+  ConnectedComponentsImage              77      0        0     77
+  AngleThreshold                        12      0        0     12
+  MinorAxisThreshold                     5      0        0      5
+  PerimeterThreshold                     4      0        0      4
+  CircularityThreshold                   4      0        0      4
+  IntegralImage                          4      0        0      4
+  CCObjectInfoCompare                    3      0        0      3
+  MajorAxisThreshold                     3      0        0      3
+  EccentricityThreshold                  3      0        0      3
+
+  full results: build-oracle/work/mutation-extnew3-vision.json

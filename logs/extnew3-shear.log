@@ -1,0 +1,24 @@
+mutate: 126 mutants in MagickCore/shear\.c$, 9 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/126 (0s)
+  mutants: 50/126 (0s)
+  mutants: 75/126 (0s)
+  mutants: 100/126 (0s)
+  mutants: 125/126 (0s)
+  mutants: 126/126 (0s)
+
+mutate: 126 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 126, errors 0
+
+  function                           total killed survived no-cov
+  ShearRotateImage                      45      0        0     45
+  IntegralRotateImage                   29      0        0     29
+  XShearImage                           16      0        0     16
+  YShearImage                           13      0        0     13
+  RadonTransform                         7      0        0      7
+  RadonProjection                        6      0        0      6
+  CropToFitImage                         4      0        0      4
+  DeskewImage                            3      0        0      3
+  ShearImage                             3      0        0      3
+
+  full results: build-oracle/work/mutation-extnew3-shear.json
