@@ -1609,6 +1609,31 @@ static int CacheCmd(int argc,char **argv,ExceptionInfo *exception)
       }
     }
   (void) printf("rows %08lx\n",HashRows(image,exception));
+  if ((meta != 0) && (image->columns > 4) && (image->rows > 3))
+    {
+      /* a region narrower than a row and several rows high: the cache copies it (Read/
+         WritePixelCacheMetacontent) instead of handing out its own memory */
+      size_t w=image->columns/2, h=image->rows/2, k;
+      Quantum *q=GetAuthenticPixels(image,1,1,w,h,exception);
+      unsigned char *m=(unsigned char *) GetAuthenticMetacontent(image);
+      const void *vm;
+      for (k=0; (q != NULL) && (m != NULL) && (k < w*h*meta); k++)
+        m[k]=(unsigned char) ((k*29+5) & 0xff);
+      if (q != NULL)
+        (void) SyncAuthenticPixels(image,exception);
+      if (GetVirtualPixels(image,2,1,w,h,exception) != (const Quantum *) NULL)
+        {
+          vm=GetVirtualMetacontent(image);
+          (void) printf("region meta %08lx\n",vm != NULL ? Fnv((const unsigned char *) vm,w*h*meta) : 0UL);
+        }
+    }
+  for (x=0; x < (ssize_t) image->columns; x+=(ssize_t) image->columns/3+1)
+  {
+    Quantum q[MaxPixelChannels];
+    (void) memset(q,0,sizeof(q));
+    (void) printf("authentic %.20g: %d %.4f\n",(double) x,(int) GetOneAuthenticPixel(image,x,
+      (ssize_t) image->rows/2,q,exception),(double) q[0]);
+  }
   (void) printf("cache pixels %s length %.20g\n",GetPixelCachePixels(image,&length,exception) != NULL ? "yes" : "no",
     (double) length);
   for (method=0; method <= (ssize_t) CheckerTileVirtualPixelMethod; method++)
