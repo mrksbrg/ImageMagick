@@ -1,5 +1,5 @@
 mutate: 111 mutants in MagickCore/policy\.c$, 17 functions
-mutate: baseline over 68 cases in 0s
+mutate: baseline over 77 cases in 0s
   mutants: 25/111 (0s)
   mutants: 50/111 (6s)
   mutants: 75/111 (6s)
@@ -7,18 +7,18 @@ mutate: baseline over 68 cases in 0s
   mutants: 111/111 (12s)
 
 mutate: 111 mutants, 12s
-  killed 0, survived 52 (0 capped), no coverage 59, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+  killed 6, survived 46 (0 capped), no coverage 59, errors 0
+  mutation score on reached code: 11.5%   overall: 5.4%
 
   function                           total killed survived no-cov
   IsPathContainsSymlink                 23      0        0     23
   SetMagickSecurityPolicyValue          20      0        0     20
-  IsRightsAuthorizedByName              14      0       14      0
-  LoadPolicyCache                       14      0       14      0
+  IsRightsAuthorizedByName              14      1       13      0
+  LoadPolicyCache                       14      4       10      0
   SetMagickSecurityPolicy               10      0        0     10
   AcquirePolicyCache                     6      0        6      0
   GetPolicyInfo                          4      0        4      0
-  DestroyPolicyElement                   4      0        4      0
+  DestroyPolicyElement                   4      1        3      0
   PolicyComponentTerminus                4      0        4      0
   AcquirePolicyString                    3      0        3      0
   GetPolicyList                          2      0        0      2
@@ -54,26 +54,20 @@ mutate: 111 mutants, 12s
     x  policy.c:852:70 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
     x  policy.c:872:74 cxx_mul_to_div             canonical_candidate=(char *) AcquireCriticalMemory(length*
     x  policy.c:890:73 cxx_ne_to_eq               (GlobExpression(canonical_path,policy->pattern,MagickFalse) != MagickFalse))
-    x  policy.c:915:27 cxx_ne_to_eq               if (canonical_directory != (char *) NULL)
     x  policy.c:917:27 cxx_ne_to_eq               if (canonical_candidate != (char *) NULL)
     x  policy.c:919:22 cxx_ne_to_eq               if (canonical_path != (char *) NULL)
     x  policy.c:947:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
        policy.c:949:33 cxx_eq_to_ne               "  authorized: %s",status == MagickFalse ? "false" : "true");
-    x  policy.c:1091:20 cxx_ne_to_eq               if (p->value != (char *) NULL)
     x  policy.c:1093:22 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
     x  policy.c:1095:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
     x  policy.c:1097:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
-    x  policy.c:1197:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
     x  policy.c:1197:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
     x  policy.c:1197:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
     x  policy.c:1201:22 cxx_ne_to_eq               if (*token != '=')
     x  policy.c:1204:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
     x  policy.c:1206:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-    x  policy.c:1206:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
-    x  policy.c:1215:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
     x  policy.c:1216:29 cxx_ne_to_eq               if (*path != '\0')
     x  policy.c:1219:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
-    x  policy.c:1224:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
        policy.c:1227:35 cxx_add_to_sub             path,depth+1,exception);
     x  policy.c:1253:20 cxx_eq_to_ne               if (status == MagickFalse)
     x  policy.c:1334:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
@@ -84,4 +78,4 @@ mutate: 111 mutants, 12s
     x  policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-9ae3bdd76-policy.json
+  full results: build-oracle/work/mutation-confirm-e7f5bfd63-policy.json
