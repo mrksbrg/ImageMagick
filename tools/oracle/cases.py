@@ -5421,7 +5421,7 @@ def _windrv_cases():
     # GaussJordanElimination over regular, nearly singular, exactly singular and pivoting systems,
     # and least squares through LeastSquaresAddTerms
     for w, h in ((1, 1), (4, 3), (7, 5), (2, 9)):
-        for storage in ("memory", "map", "disk"):
+        for storage in ("memory", "map", "disk", "disksync"):
             yield _windrv("matrix %dx%d in %s" % (w, h, storage), ("matrix", "info", str(w), str(h), storage))
     for n in (1, 2, 3, 4, 6):
         for kind in ("regular", "singular", "zero", "pivot", "lsq"):

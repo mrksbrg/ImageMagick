@@ -1164,6 +1164,12 @@ static int MatrixCmd(int argc,char **argv,ExceptionInfo *exception)
           (void) SetMagickResourceLimit(MemoryResource,0);
           (void) SetMagickResourceLimit(MapResource,0);
         }
+      if (strcmp(argv[5],"disksync") == 0)  /* AcquireMatrixInfo reads MAGICK_SYNCHRONIZE */
+        {
+          (void) setenv("MAGICK_SYNCHRONIZE","true",1);
+          (void) SetMagickResourceLimit(MemoryResource,0);
+          (void) SetMagickResourceLimit(MapResource,0);
+        }
       else if (strcmp(argv[5],"map") == 0)
         (void) SetMagickResourceLimit(MemoryResource,0);
       matrix=AcquireMatrixInfo(columns,rows,sizeof(double),exception);
@@ -1205,7 +1211,13 @@ static int MatrixCmd(int argc,char **argv,ExceptionInfo *exception)
       Describe("null image",image,exception);
       if (image != (Image *) NULL) image=DestroyImage(image);
       Report(exception);
+      (void) printf("resources held: memory %.20g map %.20g disk %.20g\n",
+        (double) GetMagickResource(MemoryResource),(double) GetMagickResource(MapResource),
+        (double) GetMagickResource(DiskResource));
       matrix=DestroyMatrixInfo(matrix);
+      (void) printf("resources after: memory %.20g map %.20g disk %.20g\n",
+        (double) GetMagickResource(MemoryResource),(double) GetMagickResource(MapResource),
+        (double) GetMagickResource(DiskResource));
       return(0);
     }
   if ((argc >= 5) && (strcmp(argv[2],"gauss") == 0))

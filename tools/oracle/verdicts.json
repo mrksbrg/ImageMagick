@@ -11485,6 +11485,46 @@
    "why": "the swap code runs only for an off-diagonal pivot; every caller solves least-squares normal equations (symmetric positive semidefinite), whose largest element in the unreduced block lies on its diagonal and is found first, so in exact arithmetic no swap happens; rounding in a nearly singular system is not ruled out"
   },
   {
+   "at": 49,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((column == -1) || (row == -1) || (fabsl(max) < LDBL_MIN))",
+   "verdict": "equivalent",
+   "why": "a pivot whose magnitude equals LDBL_MIN exactly does not occur: the systems are either regular (pivots far above it) or exactly singular (a zero pivot), so < and <= give the same answer"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/matrix.c",
+   "function": "GaussJordanElimination",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (fabsl(hp_matrix[column][column]) < LDBL_MIN)",
+   "verdict": "equivalent",
+   "why": "a pivot whose magnitude equals LDBL_MIN exactly does not occur: the systems are either regular (pivots far above it) or exactly singular (a zero pivot), so < and <= give the same answer"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/matrix.c",
+   "function": "MatrixToImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (value < min_value)",
+   "verdict": "equivalent",
+   "why": "updates the running minimum or maximum also when the value equals it: the same value is assigned"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/matrix.c",
+   "function": "MatrixToImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (value > max_value)",
+   "verdict": "equivalent",
+   "why": "updates the running minimum or maximum also when the value equals it: the same value is assigned"
+  },
+  {
    "at": 11,
    "file": "MagickCore/matrix.c",
    "function": "RelinquishMagickMatrix",
