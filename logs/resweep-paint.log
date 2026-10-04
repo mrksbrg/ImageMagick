@@ -1,0 +1,72 @@
+mutate: 311 mutants in MagickCore/paint\.c$, 8 functions
+  baseline: 17/17 (0s)
+mutate: baseline over 162 cases in 1s
+  mutants: 25/311 (1s)
+  mutants: 50/311 (2s)
+  mutants: 75/311 (2s)
+  mutants: 100/311 (4s)
+  mutants: 125/311 (5s)
+  mutants: 150/311 (6s)
+  mutants: 175/311 (6s)
+  mutants: 200/311 (7s)
+  mutants: 225/311 (8s)
+  mutants: 250/311 (9s)
+  mutants: 275/311 (9s)
+  mutants: 300/311 (10s)
+  mutants: 311/311 (139s)
+
+mutate: 311 mutants, 139s
+  killed 243, survived 37 (0 capped), no coverage 31, errors 0
+  mutation score on reached code: 86.8%   overall: 78.1%
+
+  function                           total killed survived no-cov
+  FloodfillPaintImage                   97     84       13      0
+  GradientImage                         68     66        2      0
+  OilPaintImage                         57     50        7      0
+  TransparentPaintImageChroma           31      0        0     31
+  OpaquePaintImage                      29     24        5      0
+  TransparentPaintImage                 19     13        6      0
+  AcquireHistogramTLS                    6      4        2      0
+  DestroyHistogramTLS                    4      2        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  paint.c:178:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  paint.c:180:35 cxx_ge_to_gt               if ((x_offset < 0) || (x_offset >= (ssize_t) image->columns))
+    x  paint.c:182:35 cxx_ge_to_gt               if ((y_offset < 0) || (y_offset >= (ssize_t) image->rows))
+    x  paint.c:216:3 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  paint.c:249:22 cxx_mul_to_div             q+=(ptrdiff_t) x1*(ssize_t) GetPixelChannels(floodplane_image);
+    x  paint.c:267:19 cxx_lt_to_le               if (start < x1)
+    x  paint.c:278:42 cxx_sub_to_add             ((ssize_t) image->columns-x),1,exception);
+    x  paint.c:304:13 cxx_le_to_lt               if (x <= x2)
+    x  paint.c:306:66 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,x,y,(size_t) (x2-x+1),1,
+    x  paint.c:308:73 cxx_sub_to_add             q=GetCacheViewAuthenticPixels(floodplane_view,x,y,(size_t) (x2-x+1),1,
+    x  paint.c:312:21 cxx_le_to_gt               for ( ; x <= x2; x++)
+    x  paint.c:312:21 cxx_le_to_lt               for ( ; x <= x2; x++)
+    x  paint.c:314:50 cxx_ne_to_eq               if (GetPixelGray(floodplane_image,q) != 0)
+    x  paint.c:448:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  paint.c:584:44 cxx_eq_to_ne               if (LocaleCompare(artifact,"Circle") == 0)
+    x  paint.c:676:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetMagickResourceLimit(ThreadResource); i++)
+    x  paint.c:677:22 cxx_ne_to_eq               if (histogram[i] != (size_t *) NULL)
+    x  paint.c:696:43 cxx_mul_to_div             (void) memset(histogram,0,number_threads*sizeof(*histogram));
+    x  paint.c:697:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    x  paint.c:741:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       paint.c:748:24 cxx_ne_to_eq               if (linear_image != (Image *) NULL)
+       paint.c:750:23 cxx_ne_to_eq               if (paint_image != (Image *) NULL)
+    x  paint.c:853:13 cxx_remove_void_call       SetPixelChannel(paint_image,channel,p[center+i],q);
+    x  paint.c:864:40 cxx_ne_to_eq               if (linear_image->progress_monitor != (MagickProgressMonitor) NULL)
+       paint.c:872:17 cxx_post_inc_to_post_dec   progress++;
+       paint.c:875:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  paint.c:954:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  paint.c:965:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  paint.c:1019:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       paint.c:1027:17 cxx_post_inc_to_post_dec   progress++;
+       paint.c:1030:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  paint.c:1101:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  paint.c:1112:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  paint.c:1138:17 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
+    x  paint.c:1147:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       paint.c:1155:17 cxx_post_inc_to_post_dec   progress++;
+       paint.c:1158:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-paint.json

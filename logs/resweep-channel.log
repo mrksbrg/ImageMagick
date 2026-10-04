@@ -1,0 +1,63 @@
+mutate: 236 mutants in MagickCore/channel\.c$, 8 functions
+mutate: baseline over 1463 cases in 4s
+  mutants: 25/236 (0s)
+  mutants: 50/236 (2s)
+  mutants: 75/236 (3s)
+  mutants: 100/236 (4s)
+  mutants: 125/236 (4s)
+  mutants: 150/236 (26s)
+  mutants: 175/236 (53s)
+  mutants: 200/236 (92s)
+  mutants: 225/236 (117s)
+  mutants: 236/236 (241s)
+
+mutate: 236 mutants, 241s
+  killed 202, survived 32 (10 capped), no coverage 2, errors 0
+  mutation score on reached code: 86.3%   overall: 85.6%
+
+  function                           total killed survived no-cov
+  SetImageAlphaChannel                  92     82       10      0
+  CombineImages                         43     33       10      0
+  ChannelFxImage                        36     32        4      0
+  SeparateImage                         24     19        5      0
+  ChannelImage                          15     14        1      0
+  FlattenPixelInfo                      15     14        1      0
+  SeparateImages                         9      8        1      0
+  GetImageAlphaChannel                   2      0        0      2
+
+  survivors (equivalent, or a gap in the catalogue):
+       channel.c:181:9 cxx_remove_void_call       SetPixelChannel(destination_image,destination_channel,pixel,q);
+    x  channel.c:234:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:438:17 cxx_post_inc_to_post_dec   channels++;
+    x  channel.c:446:64 cxx_add_to_sub             destination_channel=(PixelChannel) (destination_channel+1);
+    x  channel.c:452:61 cxx_sub_to_add             status=SetImageProgress(source_image,ChannelFxImageTag,p-expression,
+    x  channel.c:526:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:541:32 cxx_le_to_lt               if (fabs(image->gamma-1.0) <= MagickEpsilon)
+    x  channel.c:553:27 cxx_gt_to_ge               if (number_channels > 4)
+    x  channel.c:562:27 cxx_gt_to_ge               if (number_channels > 2)
+    x  channel.c:570:27 cxx_gt_to_ge               if (number_channels > 5)
+    x  channel.c:615:17 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(combine_image); i++)
+    x  channel.c:631:19 cxx_lt_to_le               for (x=0; x < (ssize_t) combine_image->columns; x++)
+    x  channel.c:645:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       channel.c:653:17 cxx_post_inc_to_post_dec   progress++;
+       channel.c:656:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  channel.c:756:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:808:7 cxx_remove_void_call       SetPixelChannel(separate_image,GrayPixelChannel,(Quantum) 0,q);
+    x  channel.c:823:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       channel.c:831:17 cxx_post_inc_to_post_dec   progress++;
+       channel.c:833:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  channel.c:881:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       channel.c:979:42 cxx_mul_to_div             composite[i]=ClampToQuantum(gamma*MagickOver_((double) q[i],beta,
+    xc channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc channel.c:1015:50 cxx_ne_to_eq               if ((image->alpha_trait & BlendPixelTrait) != 0)
+    xc channel.c:1134:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+    xc channel.c:1202:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+    xc channel.c:1236:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    xc channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+    xc channel.c:1244:21 cxx_eq_to_ne               if ((status == MagickFalse) || (opaque == MagickFalse))
+    xc channel.c:1244:48 cxx_eq_to_ne               if ((status == MagickFalse) || (opaque == MagickFalse))
+    xc channel.c:1252:21 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+    xc channel.c:1269:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-channel.json

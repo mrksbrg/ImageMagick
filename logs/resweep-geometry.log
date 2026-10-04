@@ -1,0 +1,73 @@
+mutate: 338 mutants in MagickCore/geometry\.c$, 14 functions
+  baseline: 456/456 (2s)
+mutate: baseline over 14263 cases in 2s
+  mutants: 25/338 (2s)
+  mutants: 50/338 (3s)
+  mutants: 75/338 (6s)
+  mutants: 100/338 (6s)
+  mutants: 125/338 (8s)
+  mutants: 150/338 (11s)
+  mutants: 175/338 (14s)
+  mutants: 200/338 (23s)
+  mutants: 225/338 (92s)
+  mutants: 250/338 (106s)
+  mutants: 275/338 (164s)
+  mutants: 300/338 (245s)
+  mutants: 325/338 (272s)
+  mutants: 338/338 (321s)
+
+mutate: 338 mutants, 321s
+  killed 303, survived 31 (28 capped), no coverage 4, errors 0
+  mutation score on reached code: 90.7%   overall: 89.6%
+
+  function                           total killed survived no-cov
+  ParseGeometry                         93     90        3      0
+  ParseMetaGeometry                     74     57       17      0
+  GetGeometry                           59     59        0      0
+  ParseGravityGeometry                  52     46        6      0
+  GravityAdjustGeometry                 14     14        0      0
+  ParsePageGeometry                     11     10        1      0
+  IsSceneGeometry                       10     10        0      0
+  ParseAffineGeometry                    9      6        3      0
+  GetPageGeometry                        6      6        0      0
+  ListPagesizes                          4      0        0      4
+  IsGeometry                             2      2        0      0
+  ParseRegionGeometry                    2      2        0      0
+  SetGeometry                            1      0        1      0
+  SetGeometryInfo                        1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  geometry.c:831:3 cxx_remove_void_call       GetAffineMatrix(affine_matrix);
+    x  geometry.c:834:32 cxx_lt_to_le               for (i=0; (*p != '\0') && (i < 6); i++)
+    x  geometry.c:877:25 cxx_lt_to_le               if (fabs(determinant) < MagickEpsilon)
+    xc geometry.c:1159:49 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    xc geometry.c:1187:22 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+    xc geometry.c:1187:37 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+    xc geometry.c:1323:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc geometry.c:1386:30 cxx_lt_to_le               if (geometry_ratio < image_ratio)
+    xc geometry.c:1394:28 cxx_ge_to_gt               if (geometry_ratio >= image_ratio)
+    xc geometry.c:1412:29 cxx_lt_to_le               if ((region_info->width < image->columns) &&
+    xc geometry.c:1419:29 cxx_gt_to_ge               if ((region_info->width > image->columns) &&
+    xc geometry.c:1420:30 cxx_gt_to_ge               (region_info->height > image->rows))
+    xc geometry.c:1493:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc geometry.c:1502:3 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+    xc geometry.c:1540:26 cxx_ge_to_gt               if (geometry_ratio >= image_ratio)
+    xc geometry.c:1579:34 cxx_gt_to_ge               if (scale_factor > ((double) *height/(double) stasis_height))
+    xc geometry.c:1583:32 cxx_lt_to_le               if (scale_factor < ((double) *height/(double) stasis_height))
+    xc geometry.c:1591:33 cxx_lt_to_le               (scale_factor < ((double) *width/(double) stasis_height)))
+    xc geometry.c:1591:51 cxx_div_to_mul             (scale_factor < ((double) *width/(double) stasis_height)))
+    xc geometry.c:1597:43 cxx_ne_to_eq               if (((flags & MinimumValue) != 0) &&
+    xc geometry.c:1598:33 cxx_lt_to_le               (scale_factor < ((double) *height/(double) stasis_width)))
+     c geometry.c:1599:46 cxx_div_to_mul             scale_factor=(double) *height/(double) stasis_width;
+    xc geometry.c:1608:24 cxx_lt_to_le               if (stasis_width < *width)
+    xc geometry.c:1610:25 cxx_lt_to_le               if (stasis_height < *height)
+    xc geometry.c:1615:24 cxx_gt_to_ge               if (stasis_width > *width)
+    xc geometry.c:1617:25 cxx_gt_to_ge               if (stasis_height > *height)
+    xc geometry.c:1633:29 cxx_add_to_sub             area=geometry_info.rho+sqrt(MagickEpsilon);
+    xc geometry.c:1639:20 cxx_lt_to_le               if ((scale.x < (double) *width) || (scale.y < (double) *height))
+    xc geometry.c:1639:51 cxx_lt_to_le               if ((scale.x < (double) *width) || (scale.y < (double) *height))
+    xc geometry.c:1709:32 cxx_ne_to_eq               (((flags & PercentValue) != 0) || ((flags & SeparatorValue) == 0)))
+    xc geometry.c:1795:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-geometry.json
