@@ -2381,6 +2381,35 @@ the bar first.
 - colorspace.c's `GetImageColorspaceType` and registry.c's `RemoveImageRegistry` have no
   caller in ImageMagick: API only, out of reach for a command-line oracle.
 
+### Trust with statement deletion, after the night (Windows, 2026-10-04, 04:15)
+
+The uncapped reruns of every statement-deletion survivor finished at 03:56. They killed what
+ERDC's 1500-case cap had missed in most files: morphology 27, quantum-import 29, distort 7,
+color 5, fx 4, matrix 4, exception 3, stream 2, and one or two in several others.
+Statement-deletion rounds: `morphgap5` 3 more, `fxgap14` 1, `colorgap3` 5. The night's verdicts
+on statement deletion number about 110 (shutdown clean-up, leaks, colour writes SyncImage
+undoes, semaphores created at genesis, prefetch hints, timer figures the oracle masks).
+
+Adjusted, all reports merged (trial excluded), against the evening's figures: monitor 86 → 92,
+colorspace 90, registry 84 → 88, quantize 89 → 92, signature 81 → 82, histogram 90, morphology
+86 → 88, composite 84, feature 87 → 88, montage 83 → 84, exception 81 → 84, magick 60 → 71,
+timer 75 → 79, fx 89 → 91, distort 87 → 88, quantum 90, resource 89 → 90, token 84 → 85,
+stream 85, color 82 → 84, matrix 71 → 73, resample 77, blob 71, option 75 → 76,
+quantum-export 72 → 73, quantum-import 66 → 68, xml-tree 76, cache 80 → 81.
+
+**Trusted again, counting statement deletion (every function at 80% or written down as out of
+reach):** monitor.c, montage.c, composite.c, feature.c; and, with one function each written
+down, morphology.c (`ZeroKernelNans`, which nothing calls), colorspace.c
+(`GetImageColorspaceType`, no caller in ImageMagick: API only) and registry.c
+(`RemoveImageRegistry`, likewise). gem.c and prepress.c have no statement-deletion mutants and
+stay trusted. Close: histogram.c (its two destroy functions now have verdicts),
+signature.c (`GetSignatureBlocksize` and `SetSignatureDigest`, API only), quantize.c
+(`QuantizeImages` at 79%: `quantizegap11`, hand-run, kills its three survivors; its round runs
+after the sweep).
+
+A fresh sweep of all 34 files with the statement-deletion build (`~/sweep1004*.sh`, reports
+`mutation-sweep1004*-<file>.json`) runs now, to give one consistent report per file.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
