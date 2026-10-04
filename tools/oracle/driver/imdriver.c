@@ -12,6 +12,7 @@
     imdriver splaytree OP...                        (add:K=V get:K delete:K remove:K ...)
     imdriver cacheview IMAGE X Y
     imdriver xml FILE|-TAG OP...                    (print child:T addchild:T:OFF content:X path:A/B:OFF ...)
+    imdriver blob toblob|custom IMAGE FORMAT FRAMES [SEEKABLE] | msb BYTES | filetoimage FILE OUT
 
   It is linked against the build under test (build.sh), so a mutant switched on in the
   environment is active here as in magick. Output goes to stdout or to the named file.
@@ -21,6 +22,7 @@
 #include <string.h>
 #include "MagickCore/studio.h"
 #include "MagickCore/MagickCore.h"
+#include "MagickCore/blob-private.h"
 
 static int Fail(ExceptionInfo *exception,const char *what)
 {
@@ -793,6 +795,198 @@ static int Xml(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* blob.c: blobs, custom streams over a memory buffer, byte order, FileToImage */
+typedef struct _MemoryStream
+{
+  unsigned char *data;
+  size_t length, extent;
+  MagickOffsetType offset;
+  int seekable;
+} MemoryStream;
+
+static ssize_t StreamWrite(unsigned char *data,const size_t count,void *user)
+{
+  MemoryStream *s=(MemoryStream *) user;
+  if ((size_t) s->offset+count > s->extent)
+    {
+      s->extent=2*((size_t) s->offset+count);
+      s->data=(unsigned char *) ResizeQuantumMemory(s->data,s->extent,1);
+    }
+  (void) memcpy(s->data+s->offset,data,count);
+  s->offset+=(MagickOffsetType) count;
+  if ((size_t) s->offset > s->length)
+    s->length=(size_t) s->offset;
+  return((ssize_t) count);
+}
+
+static ssize_t StreamRead(unsigned char *data,const size_t count,void *user)
+{
+  MemoryStream *s=(MemoryStream *) user;
+  size_t n=count;
+  if ((size_t) s->offset >= s->length)
+    return(0);
+  if ((size_t) s->offset+n > s->length)
+    n=s->length-(size_t) s->offset;
+  (void) memcpy(data,s->data+s->offset,n);
+  s->offset+=(MagickOffsetType) n;
+  return((ssize_t) n);
+}
+
+static MagickOffsetType StreamSeek(const MagickOffsetType offset,const int whence,void *user)
+{
+  MemoryStream *s=(MemoryStream *) user;
+  MagickOffsetType o=offset;
+  if (whence == SEEK_CUR) o+=s->offset;
+  if (whence == SEEK_END) o+=(MagickOffsetType) s->length;
+  if (o < 0)
+    return(-1);
+  s->offset=o;
+  return(o);
+}
+
+static MagickOffsetType StreamTell(void *user)
+{
+  return(((MemoryStream *) user)->offset);
+}
+
+static unsigned long Fnv(const unsigned char *p,size_t n)
+{
+  unsigned long h=2166136261UL;
+  size_t i;
+  for (i=0; i < n; i++)
+    h=((h ^ p[i])*16777619UL) & 0xffffffffUL;
+  return(h);
+}
+
+static void Describe(const char *what,Image *image,ExceptionInfo *exception)
+{
+  Image *p;
+  if (image == (Image *) NULL)
+    {
+      (void) printf("%s: no image\n",what);
+      return;
+    }
+  for (p=image; p != (Image *) NULL; p=GetNextImageInList(p))
+  {
+    (void) SignatureImage(p,exception);
+    (void) printf("%s: %s %.20gx%.20g %s\n",what,p->magick,(double) p->columns,(double) p->rows,
+      GetImageProperty(p,"signature",exception));
+  }
+}
+
+static int Blob(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* blob toblob IMAGE FORMAT FRAMES          ImageToBlob/ImagesToBlob, BlobToImage, PingBlob
+     blob custom IMAGE FORMAT FRAMES SEEKABLE ImageToCustomStream/ImagesToCustomStream, CustomStreamToImage
+     blob msb BYTES                           MSBOrderLong and MSBOrderShort of 0..BYTES-1
+     blob filetoimage FILE OUT                FileToImage into OUT's blob */
+  ImageInfo *image_info;
+  Image *image, *images;
+  size_t length=0, frames, i;
+  void *blob;
+
+  if ((argc >= 4) && (strcmp(argv[2],"msb") == 0))
+    {
+      unsigned char bytes[64];
+      size_t n=(size_t) atol(argv[3]) % 64;
+      (void) memset(bytes,0,sizeof(bytes));  /* a length not a multiple of 4 reads past it */
+      for (i=0; i < n; i++) bytes[i]=(unsigned char) i;
+      MSBOrderLong(bytes,n);
+      for (i=0; i < n; i++) (void) printf(" %u",(unsigned) bytes[i]);
+      (void) printf("\n");
+      MSBOrderShort(bytes,n);
+      for (i=0; i < n; i++) (void) printf(" %u",(unsigned) bytes[i]);
+      (void) printf("\n");
+      return(0);
+    }
+  if ((argc == 5) && (strcmp(argv[2],"filetoimage") == 0))
+    {
+      MagickBooleanType status;
+      image_info=AcquireImageInfo();
+      image=AcquireImage(image_info,exception);
+      (void) CopyMagickString(image->filename,argv[4],MagickPathExtent);
+      status=OpenBlob(image_info,image,WriteBinaryBlobMode,exception);
+      if (status != MagickFalse)
+        {
+          status=FileToImage(image,argv[3],exception);
+          (void) printf("filetoimage %d tell %.20g\n",(int) status,(double) TellBlob(image));
+          (void) CloseBlob(image);
+        }
+      Report(exception);
+      image=DestroyImage(image);
+      image_info=DestroyImageInfo(image_info);
+      return(0);
+    }
+  if (argc < 6)
+    return(Fail(exception,"blob: toblob|custom IMAGE FORMAT FRAMES [SEEKABLE]"));
+  image=Read(argv[3],exception);
+  if (image == (Image *) NULL)
+    return(Fail(exception,"read"));
+  frames=(size_t) atol(argv[5]);
+  images=NewImageList();
+  for (i=0; i < frames; i++)
+    AppendImageToList(&images,CloneImage(image,0,0,MagickTrue,exception));
+  image=DestroyImage(image);
+  image_info=AcquireImageInfo();
+  (void) CopyMagickString(image_info->magick,argv[4],MagickPathExtent);
+  (void) FormatLocaleString(image_info->filename,MagickPathExtent,"%s:",argv[4]);
+  if (strcmp(argv[2],"toblob") == 0)
+    {
+      Image *back;
+      blob=frames > 1 ? ImagesToBlob(image_info,images,&length,exception) :
+        ImageToBlob(image_info,images,&length,exception);
+      (void) printf("blob %.20g bytes %08lx\n",(double) length,
+        blob != NULL ? Fnv((const unsigned char *) blob,length) : 0UL);
+      Report(exception);
+      if (blob != (void *) NULL)
+        {
+          back=BlobToImage(image_info,blob,length,exception);
+          Describe("back",back,exception);
+          if (back != (Image *) NULL) back=DestroyImageList(back);
+          back=PingBlob(image_info,blob,length,exception);
+          if (back != (Image *) NULL)
+            (void) printf("ping: %.20gx%.20g\n",(double) back->columns,(double) back->rows);
+          if (back != (Image *) NULL) back=DestroyImageList(back);
+          blob=RelinquishMagickMemory(blob);
+        }
+    }
+  else
+    {
+      MemoryStream s;
+      CustomStreamInfo *custom=AcquireCustomStreamInfo(exception);
+      Image *back;
+      (void) memset(&s,0,sizeof(s));
+      s.seekable=argc > 6 ? atoi(argv[6]) : 1;
+      SetCustomStreamData(custom,&s);
+      SetCustomStreamWriter(custom,StreamWrite);
+      SetCustomStreamReader(custom,StreamRead);
+      if (s.seekable != 0)
+        {
+          SetCustomStreamSeeker(custom,StreamSeek);
+          SetCustomStreamTeller(custom,StreamTell);
+        }
+      image_info->custom_stream=custom;
+      *image_info->filename='\0';  /* the format comes from magick; CustomStreamToImage prefixes it */
+      if (frames > 1)
+        ImagesToCustomStream(image_info,images,exception);
+      else
+        ImageToCustomStream(image_info,images,exception);
+      (void) printf("stream %.20g bytes %08lx\n",(double) s.length,s.data != NULL ? Fnv(s.data,s.length) : 0UL);
+      Report(exception);
+      s.offset=0;
+      back=CustomStreamToImage(image_info,exception);
+      Describe("back",back,exception);
+      if (back != (Image *) NULL) back=DestroyImageList(back);
+      image_info->custom_stream=(CustomStreamInfo *) NULL;
+      custom=DestroyCustomStreamInfo(custom);
+      if (s.data != NULL) s.data=(unsigned char *) RelinquishMagickMemory(s.data);
+    }
+  Report(exception);
+  images=DestroyImageList(images);
+  image_info=DestroyImageInfo(image_info);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -816,6 +1010,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"splaytree") == 0) status=Tree(argc,argv,exception);
   else if (strcmp(argv[1],"cacheview") == 0) status=View(argc,argv,exception);
   else if (strcmp(argv[1],"xml") == 0) status=Xml(argc,argv,exception);
+  else if (strcmp(argv[1],"blob") == 0) status=Blob(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

@@ -5315,6 +5315,23 @@ def _windrv_cases():
                 "path:a/b/c:0 path:a/b/d:5 path:a/e:2 content:<&> top print",
                 "content:t&ext addchild:x:9 addchild:y:1 top print"):
         yield _windrv("xml from NewXMLTreeTag: %s" % ops, tuple(["xml", "-root"] + ops.split()))
+    # blob.c: ImageToBlob and ImagesToBlob, BlobToImage and PingBlob back; custom streams over a
+    # memory buffer (with and without seek and tell), ImageToCustomStream, ImagesToCustomStream
+    # and CustomStreamToImage; MSBOrderLong and MSBOrderShort; FileToImage into a blob. PS is
+    # left out: it writes the date.
+    for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "GIF", 1), ("rose", "PPM", 1),
+                              ("rose", "TIFF", 1), ("rose", "JPEG", 1), ("rose_alpha", "PNG", 1),
+                              ("rose", "GIF", 3), ("rose", "MIFF", 2), ("rose", "TIFF", 2), ("rose", "PNG", 2)):
+        yield _windrv("blob of %d %s %s" % (frames, name, fmt), ("blob", "toblob", img(name), fmt, str(frames)))
+    for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
+                              ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2)):
+        for seekable in ("1", "0"):
+            yield _windrv("custom stream of %d %s %s%s" % (frames, name, fmt, "" if seekable == "1" else ", no seek"),
+                          ("blob", "custom", img(name), fmt, str(frames), seekable))
+    for n in (0, 1, 2, 3, 4, 5, 8, 13, 16):
+        yield _windrv("MSBOrderLong and MSBOrderShort of %d bytes" % n, ("blob", "msb", str(n)))
+    yield _with_inputs(_windrv("FileToImage", ("blob", "filetoimage", "in.txt", "o.txt"), ["o.txt"]),
+                       files={"in.txt": "hello\n" * 2000})
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
