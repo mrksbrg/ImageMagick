@@ -5472,6 +5472,16 @@ GAP_STEP_CASES += [
      [["-size", "8x8", "xc:white", "-fill", "red", "-stroke", "blue", "-strokewidth", "0",
        "-draw", "polygon %s,2 %s,2 %s,5" % (x, x2, x3), "txt:-"]], {})
     for x, x2, x3 in (("8", "11", "9"), ("8.75", "11.75", "9.75"))]
+# draw.c ClonePolygonEdgesTLS: the oracle pins one thread (MAGICK_THREAD_LIMIT=1), so the per-thread
+# edge copies are never made. -limit thread 4 on a polygon spanning over 524288 pixels gives four
+# threads where the build has OpenMP (ERDC; a build without it caps the limit at 1, as the Mac's
+# does). Rows are drawn independently, each from its thread's copy, so the result is the same
+# for any schedule; the signature keeps the output small.
+GAP_STEP_CASES += [
+    ("draw a 1024x1024 polygon on four threads",
+     [["-limit", "thread", "4", "-size", "1024x1024", "xc:white", "-fill", "red", "-stroke", "blue",
+       "-strokewidth", "3", "-draw", "polygon 10,10 1000,40 900,1010 30,900", "-format", "%#", "info:"]], {}),
+]
 # profile.c through imdriver: SetImageProfile, SyncImageProfiles, Update8BIMClipPath and the rest
 # on blobs built byte by byte at each bound (profilecases.py says which); the profiles' bytes are
 # printed after every op. The command line reaches these functions only with whole files.

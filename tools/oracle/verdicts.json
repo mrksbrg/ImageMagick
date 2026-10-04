@@ -2333,23 +2333,23 @@
   },
   {
    "at": 40,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "StopInfoCompare",
    "mutator": "cxx_le_to_gt",
    "nth": 0,
    "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
    "verdict": "unresolved",
-   "why": "changes only how StopInfoCompare ranks two stops of the same offset, and qsort leaves the order of ties to the C library: a case with shared offsets kept its order on the Mac either way"
+   "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
   },
   {
    "at": 23,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "StopInfoCompare",
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
    "verdict": "unresolved",
-   "why": "changes only how StopInfoCompare ranks two stops of the same offset, and qsort leaves the order of ties to the C library: a case with shared offsets kept its order on the Mac either way"
+   "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
   },
   {
    "at": 51,
@@ -23091,6 +23091,16 @@
    "src": "if (SetImageStorageClass(clip_mask,DirectClass,exception) == MagickFalse)",
    "verdict": "unobservable",
    "why": "SetImageStorageClass to DirectClass fails only when the pixel cache cannot be allocated"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/draw.c",
+   "function": "StopInfoCompare",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
+   "verdict": "unresolved",
+   "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
   }
  ]
 }
