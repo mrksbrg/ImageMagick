@@ -1,11 +1,12 @@
 mutate: 60 mutants in MagickCore/geometry\.c$, 11 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 13 cases in 0s
   mutants: 25/60 (0s)
   mutants: 50/60 (0s)
-  mutants: 60/60 (0s)
+  mutants: 60/60 (1s)
 
-mutate: 60 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 60, errors 0
+mutate: 60 mutants, 1s
+  killed 0, survived 1 (0 capped), no coverage 59, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ParseGeometry                         17      0        0     17
@@ -15,9 +16,13 @@ mutate: 60 mutants, 0s
   ListPagesizes                          4      0        0      4
   ParseAffineGeometry                    3      0        0      3
   GetPageGeometry                        2      0        0      2
-  IsSceneGeometry                        1      0        0      1
+  IsSceneGeometry                        1      0        1      0
   ParsePageGeometry                      1      0        0      1
   SetGeometry                            1      0        0      1
   SetGeometryInfo                        1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-7b727442d-geometry.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  geometry.c:692:58 cxx_ne_to_eq               if ((pedantic != MagickFalse) && (strchr(geometry,',') != (char *) NULL))
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-cfeecf925-geometry.json
