@@ -1047,7 +1047,12 @@ static QuantumInfo *SetupQuantum(const ImageInfo *image_info,Image *image,char *
     if (strcmp(argv[i],"pack") == 0) SetQuantumPack(quantum_info,MagickTrue);
     else if (strcmp(argv[i],"nopack") == 0) SetQuantumPack(quantum_info,MagickFalse);
     else if (strcmp(argv[i],"minwhite") == 0) SetQuantumMinIsWhite(quantum_info,MagickTrue);
-    else if (strncmp(argv[i],"pad=",4) == 0) (void) SetQuantumPad(image,quantum_info,(size_t) atol(argv[i]+4));
+    else if (strncmp(argv[i],"pad=",4) == 0)
+      (void) printf("pad %s: %d\n",argv[i]+4,(int) SetQuantumPad(image,quantum_info,
+        (size_t) strtoull(argv[i]+4,(char **) NULL,10)));
+    else if (strncmp(argv[i],"metachannel=",12) == 0)
+      (void) printf("metachannel %s: %d\n",argv[i]+12,(int) SetQuantumMetaChannel(image,quantum_info,
+        (ssize_t) atol(argv[i]+12)));
     else if (strncmp(argv[i],"scale=",6) == 0) SetQuantumScale(quantum_info,atof(argv[i]+6));
     else if (strncmp(argv[i],"quantum=",8) == 0) SetQuantumQuantum(quantum_info,(size_t) atol(argv[i]+8));
     else if (strcmp(argv[i],"disassociated") == 0) SetQuantumAlphaType(quantum_info,DisassociatedQuantumAlpha);

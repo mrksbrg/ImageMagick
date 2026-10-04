@@ -5482,6 +5482,16 @@ def _windrv_cases():
             ("", "64", " ", "=", "\"", "-", "0")):
         yield _windrv("tokenize %r max %s escape %s flag %s" % (line, maxlen, escape, flag),
                       ("tokenize", line, maxlen, white, breaks, quotes, escape, flag))
+    # quantum.c: SetQuantumMetaChannel at and beyond its bounds (-1 and the number of meta
+    # channels) on an image with two meta channels, exporting the multispectral row; and
+    # SetQuantumPad at its overflow guard (MAGICK_SSIZE_MAX over the channel count)
+    for ch in ("-2", "-1", "0", "1", "2"):
+        yield _windrv("quantum meta channel %s of 2" % ch,
+                      ("quantum", "export", img("rose"), "multispectral", "8", "Unsigned", "LSB", "meta=2",
+                       "metachannel=" + ch))
+    for pad in ("0", "3", "3074457345618258602", "3074457345618258603"):  # (one below the guard crashes on its allocation)
+        yield _windrv("quantum pad %s" % pad, ("quantum", "export", img("rose"), "rgb", "8", "Unsigned", "LSB",
+                                               "pad=" + pad))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
