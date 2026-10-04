@@ -2805,3 +2805,38 @@ the non-antialiased mono opacity rounding `fill_opacity >= 0.5` (L2060, an exact
 the per-glyph bounds min/max guards with their `!= 0` tests (L1944–L1950). Some of these are
 reachable with targeted cases (a stroked `-annotate`, `+antialias`); that is the next pass.
 annotate.c stays untrusted (RenderFreetype at gate 77%); closing it is more than a short sitting.
+
+## Correction: type.c is NOT trusted — the earlier "trusted" came from a flaky, non-portable kill (2026-10-04)
+
+The note above ("type.c: add Narrow.ttf ... trusted") was wrong, and this corrects it. The
+second font was a real improvement, but the claim that it lifted `GetTypeInfoByFamily` over the
+bar relied on a kill that does not hold.
+
+**What happened.** The scoring cases included queries against the `Arial` and `Helvetica`
+families. Those families are also defined by the machine's system font config (the Mac resolves
+64 `Helvetica` entries from Ghostscript/URW), so the scorer chose among dozens of ambiguous
+entries, and which one won depended on the config load order. On the Mac that flaky choice
+happened to make mutants `446:19` and `447:51` differ and so "killed" them, pushing the local
+figure to 82%. It is not reproducible: a second Mac run did not repeat it, and ERDC (different
+system fonts) never saw it. ERDC is the official measure for the Mac's files, and there
+`GetTypeInfoByFamily` is **44 killed, gate 78.6% (adjusted 79%) — careful, not trusted**.
+
+**What the second font genuinely bought, portably** (confirmed in ERDC's merged figure): four
+scorer kills a single glyph file could not reach — `446:45` and `447:22` (the italic/oblique
+`+25`, the clauses a case-local `ScoreFamily` query does decide), `458:22` (the stretch `range`),
+and `473:66` (the fontmap index). That moved `GetTypeInfoByFamily` up but left it one kill short.
+
+**Fix applied.** The `Arial`/`Helvetica` scoring queries and the `Score-Helvetica` entry are
+removed from `cases.py`; scoring cases now query only `ScoreFamily`, whose entries live in the
+case's own type.xml and do not depend on installed fonts. (The `-family Helvetica` *annotate*
+commands at cases.py ~3220 are a related hazard — a family the system defines ambiguously — and
+should be reviewed next.)
+
+**Still open** (`GetTypeInfoByFamily`, portable): `446:19`/`447:51` (the request/font italic
+clauses — a clean case-local kill is blocked because command-line `-style` adds a synthetic slant
+that masks which font was selected); `458:65` (the stretch divisor, order-preserving); `366`/
+`369`/`371` (the first exact-match pass, very likely equivalent: breaking it is masked by the
+scoring pass, which returns the same font because an exact match holds the unique maximum score
+for the corpus's sub-900 weights); `475` and the fontmap/`family==NULL` lines `429`/`430`/`477`/
+`478`. type.c stays **careful, not trusted**; the campaign-wide lesson is that a scoring case must
+use a case-local family, never one the system font config also defines.

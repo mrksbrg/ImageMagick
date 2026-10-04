@@ -3925,7 +3925,6 @@ _TYPE_SCORE_XML = "<typemap>\n" + "".join(
         ("C", "Oblique", 700, "Condensed", "Generic.ttf"), ("D", "Normal", 900, "Expanded", "Narrow.ttf"),
         ("E", "Normal", 100, "UltraCondensed", "Generic.ttf"), ("F", "Italic", 300, "SemiExpanded", "Narrow.ttf"),
         ("G", "Normal", 600, "Normal", "Narrow.ttf"), ("H", "Normal", 400, "Condensed", "Narrow.ttf"))) + (
-    '  <type name="Score-Helvetica" family="Helvetica" glyphs="{C}/Narrow.ttf"/>\n'
     "</typemap>\n")
 # label: takes its font from image options, where -style and -stretch do not go (they set the
 # command line's draw state), and magick rejects -stretch: -annotate and MVG reach them all
@@ -3939,7 +3938,13 @@ GAP_STEP_CASES += [("type.xml scoring: -family %s %s, annotated" % (family, quer
                        ("ScoreFamily", "-style Oblique"), ("ScoreFamily", "-style Italic -weight 700"),
                        ("ScoreFamily", "-style Oblique -weight 300"), ("ScoreFamily", "-style Any -weight 650"),
                        ("ScoreFamily", "-weight 900"), ("ScoreFamily", "-weight 100"),
-                       ("ScoreFamily", "-weight 550"), ("Arial", "-weight 400"), ("Helvetica", "-style Italic"))]
+                       ("ScoreFamily", "-weight 550"))]
+# NOTE: these scoring cases query only ScoreFamily, whose entries live in the case's own type.xml.
+# A query against a family the system font config also defines (Arial, Helvetica: 64 entries on
+# the Mac) scores among those ambiguous entries, and which one wins depends on the config load
+# order, so such a "kill" is flaky and differs between machines (it made type.c look trusted on
+# the Mac while ERDC, with other system fonts, did not reproduce it). Keep scoring cases to
+# case-local families only.
 GAP_STEP_CASES += [("type.xml scoring in MVG: %s" % mvg,
                     [_SCORE_CANVAS + ["-draw", "font-family ScoreFamily %s text 2,14 'Ab'" % mvg, "out.miff"]],
                     {".config/ImageMagick/type.xml": _TYPE_SCORE_XML})
