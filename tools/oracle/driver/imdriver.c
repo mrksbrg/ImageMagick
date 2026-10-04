@@ -1042,6 +1042,7 @@ static QuantumInfo *SetupQuantum(const ImageInfo *image_info,Image *image,char *
     else if (strcmp(argv[i],"minwhite") == 0) SetQuantumMinIsWhite(quantum_info,MagickTrue);
     else if (strncmp(argv[i],"pad=",4) == 0) (void) SetQuantumPad(image,quantum_info,(size_t) atol(argv[i]+4));
     else if (strncmp(argv[i],"scale=",6) == 0) SetQuantumScale(quantum_info,atof(argv[i]+6));
+    else if (strncmp(argv[i],"quantum=",8) == 0) SetQuantumQuantum(quantum_info,(size_t) atol(argv[i]+8));
     else if (strcmp(argv[i],"disassociated") == 0) SetQuantumAlphaType(quantum_info,DisassociatedQuantumAlpha);
   }
   return(quantum_info);

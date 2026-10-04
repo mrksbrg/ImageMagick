@@ -5379,7 +5379,18 @@ def _windrv_cases():
         for depth, fmt in ((16, "Unsigned"), (32, "Unsigned"), (64, "Unsigned"), (32, "FloatingPoint")):
             yield _windrv("quantum export %s %d %s MSB" % (t, depth, fmt),
                           tuple(["quantum", "export", img(src), t, str(depth), fmt, "MSB"] + extra))
-    for t, src in (("gray", "rose"), ("index", "palette"), ("grayalpha", "rose_alpha")):
+    # second wave: unpacked rows and a 32-bit quantum (the PushQuantumLongPixel and
+    # PopQuantumLongPixel paths) for every type at the depths that have them
+    for t, src in sorted(quantum_sources.items()):
+        extra = ["meta=2"] if t == "multispectral" else []
+        for depth in (10, 12, 16):
+            for opts in (["nopack"], ["quantum=32"]):
+                yield _windrv("quantum export %s %d %s" % (t, depth, opts[0]),
+                              tuple(["quantum", "export", img(src), t, str(depth), "Unsigned", "LSB"] + opts + extra))
+                yield _windrv("quantum import %s %d %s" % (t, depth, opts[0]),
+                              tuple(["quantum", "import", img(src), t, str(depth), "Unsigned", "LSB", "out.miff"]
+                                    + opts + extra), ["out.miff"])
+    for t, src in (("gray", "rose"), ("index", "palette"), ("grayalpha", "rose_alpha"), ("indexalpha", "palette")):
         for depth in (1, 8, 16):
             for mode, out in (("export", []), ("import", ["out.miff"])):
                 yield _windrv("quantum %s %s %d min-is-white" % (mode, t, depth),
