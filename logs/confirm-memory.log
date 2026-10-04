@@ -1,9 +1,9 @@
 mutate: 36 mutants in MagickCore/memory\.c$, 11 functions
-mutate: baseline over 128 cases in 0s
-  mutants: 25/36 (7s)
-  mutants: 36/36 (9s)
+mutate: baseline over 30 cases in 0s
+  mutants: 25/36 (2s)
+  mutants: 36/36 (3s)
 
-mutate: 36 mutants, 9s
+mutate: 36 mutants, 3s
   killed 0, survived 29 (0 capped), no coverage 7, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -52,4 +52,4 @@ mutate: 36 mutants, 9s
     x  memory.c:1712:12 cxx_lt_to_le               return(i < passes ? MagickFalse : MagickTrue);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-acf185307-memory.json
+  full results: build-oracle/work/mutation-confirm-af3128576-memory.json
