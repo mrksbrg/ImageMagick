@@ -1,19 +1,18 @@
-mutate: 105 mutants in MagickCore/policy\.c$, 17 functions
-mutate: baseline over 57 cases in 0s
-  mutants: 25/105 (1s)
-  mutants: 50/105 (5s)
-  mutants: 75/105 (5s)
-  mutants: 100/105 (8s)
-  mutants: 105/105 (130s)
+mutate: 89 mutants in MagickCore/policy\.c$, 15 functions
+mutate: baseline over 38 cases in 0s
+  mutants: 25/89 (1s)
+  mutants: 50/89 (3s)
+  mutants: 75/89 (4s)
+  mutants: 89/89 (5s)
 
-mutate: 105 mutants, 130s
-  killed 16, survived 54 (0 capped), no coverage 35, errors 0
-  mutation score on reached code: 22.9%   overall: 15.2%
+mutate: 89 mutants, 5s
+  killed 0, survived 44 (0 capped), no coverage 45, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  IsPathContainsSymlink                 23     13       10      0
   SetMagickSecurityPolicyValue          20      0        0     20
-  IsRightsAuthorizedByName              13      1       12      0
+  IsRightsAuthorizedByName              12      0       12      0
+  IsPathContainsSymlink                 10      0        0     10
   LoadPolicyCache                       10      0       10      0
   SetMagickSecurityPolicy               10      0        0     10
   AcquirePolicyCache                     6      0        6      0
@@ -25,8 +24,6 @@ mutate: 105 mutants, 130s
   ValidateSecurityPolicy                 2      0        0      2
   GetPolicyInfoList                      1      0        0      1
   GetPolicyValue                         1      0        1      0
-  IsPolicyPathSeparator                  1      1        0      0
-  IsPathAuthorized                       1      1        0      0
   PolicyComponentGenesis                 1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
@@ -44,16 +41,6 @@ mutate: 105 mutants, 130s
     x  policy.c:473:58 cxx_mul_to_div             destination=(char *) AcquireMagickMemory((length+pad)*sizeof(*destination));
     x  policy.c:477:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
     x  policy.c:561:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  policy.c:630:18 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:630:22 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:648:15 cxx_add_to_sub             ((i+1) < (ssize_t) sizeof(component)))
-    x  policy.c:648:19 cxx_lt_to_le               ((i+1) < (ssize_t) sizeof(component)))
-    x  policy.c:660:40 cxx_sub_to_add             if ((offset > 0) && (partial[offset-1] != *DirectorySeparator))
-    x  policy.c:665:20 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:665:24 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:673:16 cxx_add_to_sub             if ((offset+i) >= (ssize_t) sizeof(partial))
-    x  policy.c:673:20 cxx_ge_to_gt               if ((offset+i) >= (ssize_t) sizeof(partial))
-    x  policy.c:689:35 cxx_ne_to_eq               if (IsPolicyPathSeparator(*p) != MagickFalse)
     x  policy.c:817:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
        policy.c:821:12 cxx_eq_to_ne               name == (const char *) NULL ? "undefined" : name,
        policy.c:823:15 cxx_eq_to_ne               pattern == (const char *) NULL ? "undefined" : pattern);
@@ -86,4 +73,4 @@ mutate: 105 mutants, 130s
     x  policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e34c65b55-policy.json
+  full results: build-oracle/work/mutation-confirm-7b727442d-policy.json
