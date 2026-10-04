@@ -1,10 +1,10 @@
 mutate: 62 mutants in MagickCore/type\.c$, 10 functions
-mutate: baseline over 10 cases in 0s
+mutate: baseline over 57 cases in 0s
   mutants: 25/62 (0s)
   mutants: 50/62 (0s)
-  mutants: 62/62 (0s)
+  mutants: 62/62 (3s)
 
-mutate: 62 mutants, 0s
+mutate: 62 mutants, 3s
   killed 0, survived 4 (0 capped), no coverage 58, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -27,4 +27,4 @@ mutate: 62 mutants, 0s
     x  type.c:1417:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&type_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-55d582237-type.json
+  full results: build-oracle/work/mutation-confirm-e34c65b55-type.json
