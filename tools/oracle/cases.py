@@ -5281,6 +5281,13 @@ def _windrv_cases():
         "special": '<r t="a\tb\rc\nd" q="&quot;&apos;&lt;&gt;&amp;">x &gt; y &apos; &quot; z\r\nw\ttab</r>\n',
         "mismatched": '<r><a></b></r>\n',
         "nested": '<r><a>1<b>2<c>3</c>4</b>5</a><a>6</a><d/></r>\n',
+        # fourth wave: output past the writers' 4 KB buffers (their growth checks), processing
+        # instructions before and after the root, a control character (CanonicalXMLContent's
+        # base64 branch)
+        "big": '<r a="%s">' % ("A" * 5000) + "".join('<e%d k="%s" j="%s">%s</e%d>' % (i, "v" * 40, "w" * 30, "t" * 60, i)
+                                                   for i in range(300)) + "</r>\n",
+        "pis": '<?a one?><?a two?><?b three?>\n<r>x<?c inside?></r>\n<?d after?><?a three?>\n',
+        "control": '<r k="a&#1;b">c&#2;d&#9;e</r>\n',
     }
     for name, ops in (
             ("plain", "print child:b attr:k sibling attr:k attr:zz next top attr:a attr:b"),
@@ -5290,6 +5297,9 @@ def _windrv_cases():
             ("mismatched", "print"),
             ("nested", "child:a child:b child:c top child:a sibling next top path:a/b/z:1 path:q/r:0 print"),
             ("nested", "child:a content:changed top child:d addchild:e:0 content:x\r\ny top print"),
+            ("big", "print"), ("big", "child:e299 attr:k top addchild:z:0 content:%s top print" % ("Z" * 5000)),
+            ("pis", "print"), ("control", "print"),
+            ("nested", "path:a[1]/b/q:0 path:a[0]/n:2 path:a/b/c/d:0 print"),
     ):
         yield _with_inputs(_windrv("xml %s: %s" % (name, ops), tuple(["xml", "%s.xml" % name] + ops.split())),
                            files={"%s.xml" % name: xml_docs[name]})
