@@ -5456,6 +5456,22 @@ _DELEGATE_FILES = (
 )
 GAP_STEP_CASES += [("driver delegatecfg: %s" % name, _driver("delegatecfg", *args), files)
                    for name, files, args in _DELEGATE_FILES]
+# draw.c at two bounds no case reached. CheckPrimitiveExtent refuses an extent above
+# max-memory-request/sizeof(PrimitiveInfo); the policy's floor is 16 MiB, and an ellipse of radius
+# 10000 swept to 247.2495 degrees needs exactly that many primitives (the window is 0.0007 degrees
+# wide, found by bisection; 247.2495 is in its middle), so the resize after the test is the one
+# that fails. And DrawPolygonPrimitive clamps a polygon that starts just past the right edge to
+# the last column: one starting at 8 or 8.75 on an 8-wide image, with no stroke.
+GAP_STEP_CASES += [
+    ("draw an ellipse whose extent is exactly the max-memory-request",
+     [["-size", "8x8", "xc:white", "-fill", "red", "-draw", "ellipse 0,0 10000,10000 0,247.2495", "txt:-"]],
+     {".config/ImageMagick/policy.xml":
+          '<policymap>\n  <policy domain="system" name="max-memory-request" value="16MiB"/>\n</policymap>\n'}),
+] + [
+    ("draw a polygon starting at x=%s on an 8-wide image" % x,
+     [["-size", "8x8", "xc:white", "-fill", "red", "-stroke", "blue", "-strokewidth", "0",
+       "-draw", "polygon %s,2 %s,2 %s,5" % (x, x2, x3), "txt:-"]], {})
+    for x, x2, x3 in (("8", "11", "9"), ("8.75", "11.75", "9.75"))]
 # profile.c through imdriver: SetImageProfile, SyncImageProfiles, Update8BIMClipPath and the rest
 # on blobs built byte by byte at each bound (profilecases.py says which); the profiles' bytes are
 # printed after every op. The command line reaches these functions only with whole files.

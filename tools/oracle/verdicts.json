@@ -393,13 +393,13 @@
   },
   {
    "at": 38,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "CheckPrimitiveExtent",
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
    "src": "for (i=(ssize_t) *mvg_info->extent; i < (ssize_t) extent; i++)",
    "verdict": "unresolved",
-   "why": "leaves the new entries past the old extent uninitialised (ResizeQuantumMemory does not zero them): later code writes them before use in the cases here, but an unset primitive or text pointer could be read, undefined"
+   "why": "the mutant leaves the newly grown primitive entries uninitialised; nothing a case shows reads them before they are written"
   },
   {
    "at": 27,
@@ -1953,13 +1953,13 @@
   },
   {
    "at": 44,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "DrawPolygonPrimitive",
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?",
    "verdict": "equivalent",
-   "why": "a running bound of the polygon's edges, or its clamp to the image: the mutant (<= for <, >= for >) differs only when the value equals the bound, and then assigns the same value"
+   "why": "the mutant's y1 differs from the base's start row only when y1 lies in (rows-0.5, rows): then ceil(y1-0.5) is rows, past y2, and its row loop is empty, while the polygon begins more than mid+1 below the last row's centre, so the base's pass over that row adds no coverage either - the same pixels"
   },
   {
    "at": 44,
@@ -2013,13 +2013,13 @@
   },
   {
    "at": 20,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "DrawPolygonPrimitive",
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?",
    "verdict": "equivalent",
-   "why": "a running bound of the polygon's edges, or its clamp to the image: the mutant (<= for <, >= for >) differs only when the value equals the bound, and then assigns the same value"
+   "why": "the mutant's y1 differs from the base's start row only when y1 lies in (rows-0.5, rows): then ceil(y1-0.5) is rows, past y2, and its row loop is empty, while the polygon begins more than mid+1 below the last row's centre, so the base's pass over that row adds no coverage either - the same pixels"
   },
   {
    "at": 20,
@@ -3403,13 +3403,13 @@
   },
   {
    "at": 41,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/locale.c",
+   "file": "MagickCore/locale.c",
    "function": "LocaleInfoCompare",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (LocaleCompare((*p)->path,(*q)->path) == 0)",
    "verdict": "unresolved",
-   "why": "inverts the path test in the message comparator: with one locale file every path is equal and the mutant compares paths only, so all messages tie and qsort's order of ties is left to the C library (unchanged on the Mac)"
+   "why": "a qsort comparator: the mutant orders entries from different files by tag and entries from one file not at all, an inconsistent order whose result differs between macOS's and glibc's qsort (not a portable kill)"
   },
   {
    "at": 22,
@@ -22701,6 +22701,396 @@
    "src": "UnlockSemaphoreInfo(log_info->event_semaphore);",
    "verdict": "unobservable",
    "why": "runs only when TranslateEvent returns NULL, which it does only when memory runs out"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "for (y=poly_extent.y1; y <= poly_extent.y2; y++)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "for (y=poly_extent.y1; y <= poly_extent.y2; y++)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (y=poly_extent.y1; y <= poly_extent.y2; y++)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (status == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 69,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "q=GetCacheViewAuthenticPixels(image_view,x,y,(size_t) (poly_extent.x2-",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 1,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "x+1),1,exception);",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (q == (Quantum *) NULL)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,&pixel);",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "for ( ; x <= poly_extent.x2; x++)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "for ( ; x <= poly_extent.x2; x++)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for ( ; x <= poly_extent.x2; x++)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((x == CastDoubleToSsizeT(ceil(primitive_info->point.x-0.5))) &&",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((x == CastDoubleToSsizeT(ceil(primitive_info->point.x-0.5))) &&",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 3,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(y == CastDoubleToSsizeT(ceil(primitive_info->point.y-0.5))))",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 53,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(y == CastDoubleToSsizeT(ceil(primitive_info->point.y-0.5))))",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetFillColor(draw_info,x-poly_extent.x1,y-poly_extent.y1,&pixel,",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "SetPixelViaPixelInfo(image,&pixel,q);",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (SyncCacheViewAuthenticPixels(image_view,exception) == MagickFalse)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (draw_info->debug != MagickFalse)",
+   "verdict": "unresolved",
+   "why": "the point branch of DrawPolygonPrimitive needs a polygon with no edges, and no primitive gives one: a primitive of one coordinate returns at the top of the function, and coincident points keep a moveto and a lineto, hence one edge (checked with -debug draw for polygons, polylines, paths, lines, beziers, arcs and ellipses of coincident points)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((bounds.x1 >= (double) image->columns) ||",
+   "verdict": "equivalent",
+   "why": "bounds.x1 equal to the width means the polygon begins mid+1 to the right of the image: every pixel centre is more than mid+0.75 from it, so no fill or stroke coverage reaches the image and the mutant's extra pass changes no pixel"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(bounds.y1 >= (double) image->rows) ||",
+   "verdict": "equivalent",
+   "why": "bounds.y1 equal to the height means the polygon begins mid+1 below the image: every pixel centre is more than mid+0.75 from it, so no coverage reaches the image and the mutant's extra pass changes no pixel"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "(bounds.x2 <= 0.0) || (bounds.y2 <= 0.0))",
+   "verdict": "equivalent",
+   "why": "bounds.x2 or y2 equal to 0 means the polygon ends mid+1 left of or above the image: no pixel centre is within mid+0.75 of it, so the mutant's extra pass changes no pixel"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "(bounds.x2 <= 0.0) || (bounds.y2 <= 0.0))",
+   "verdict": "equivalent",
+   "why": "bounds.x2 or y2 equal to 0 means the polygon ends mid+1 left of or above the image: no pixel centre is within mid+0.75 of it, so the mutant's extra pass changes no pixel"
+  },
+  {
+   "at": 67,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?",
+   "verdict": "equivalent",
+   "why": "the mutant's y1 differs from the base's start row only when y1 lies in (rows-0.5, rows): then ceil(y1-0.5) is rows, past y2, and its row loop is empty, while the polygon begins more than mid+1 below the last row's centre, so the base's pass over that row adds no coverage either - the same pixels"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(double) image->rows-1.0 : bounds.y1;",
+   "verdict": "equivalent",
+   "why": "the mutant's y1 differs from the base's start row only when y1 lies in (rows-0.5, rows): then ceil(y1-0.5) is rows, past y2, and its row loop is empty, while the polygon begins more than mid+1 below the last row's centre, so the base's pass over that row adds no coverage either - the same pixels"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(poly_extent.y2-poly_extent.y1+1),1);",
+   "verdict": "equivalent",
+   "why": "only the number of threads for the row loop changes; every row is drawn independently from the cloned edges, so the pixels are the same (and the Mac build has no OpenMP)"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(poly_extent.y2-poly_extent.y1+1),1);",
+   "verdict": "equivalent",
+   "why": "only the number of threads for the row loop changes; every row is drawn independently from the cloned edges, so the pixels are the same (and the Mac build has no OpenMP)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "fill_alpha=fill_alpha >= AntialiasThreshold ? 1.0 : 0.0;",
+   "verdict": "unresolved",
+   "why": "with +antialias, needs a coverage exactly equal to the double 1/3: (sqrt(d)-1)^2 or (sqrt(d)-mid-0.75)^2 would have to round to it, which no geometry tried gives"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/draw.c",
+   "function": "DrawPolygonPrimitive",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "stroke_alpha=stroke_alpha >= AntialiasThreshold ? 1.0 : 0.0;",
+   "verdict": "unresolved",
+   "why": "with +antialias, needs a coverage exactly equal to the double 1/3: (sqrt(d)-1)^2 or (sqrt(d)-mid-0.75)^2 would have to round to it, which no geometry tried gives"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "primitive_info=(PrimitiveInfo *) AcquireCriticalMemory(extent*",
+   "verdict": "unresolved",
+   "why": "reached by the max-memory-request ellipse case; the mutant allocates a few bytes and then zeroes 4296 entries over them, a heap overflow whose effect varies (killed on the Mac only sometimes)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(void) memset(primitive_info,0,extent*sizeof(*primitive_info));",
+   "verdict": "unresolved",
+   "why": "reached by the max-memory-request ellipse case; the mutant zeroes only a few entries of the unwind stack, and nothing visible reads the rest"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/draw.c",
+   "function": "CheckPrimitiveExtent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=(ssize_t) *mvg_info->extent; i < (ssize_t) extent; i++)",
+   "verdict": "unresolved",
+   "why": "the mutant leaves the newly grown primitive entries uninitialised; nothing a case shows reads them before they are written"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/draw.c",
+   "function": "RenderMVGContent",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "status&=CheckPrimitiveExtent(&mvg_info,(double) number_points+",
+   "verdict": "equivalent",
+   "why": "asks for two primitives fewer, but CheckPrimitiveExtent adds PrimitiveExtentPad (4296) entries of slack to every request, so the buffer is never short"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/draw.c",
+   "function": "TraceBezier",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (CheckPrimitiveExtent(mvg_info,(double) control_points+1) == MagickFalse)",
+   "verdict": "equivalent",
+   "why": "asks for two primitives fewer, but CheckPrimitiveExtent adds PrimitiveExtentPad (4296) entries of slack to every request, so the buffer is never short"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/draw.c",
+   "function": "TraceEllipse",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (CheckPrimitiveExtent(mvg_info,coordinates+1) == MagickFalse)",
+   "verdict": "equivalent",
+   "why": "asks for two primitives fewer, but CheckPrimitiveExtent adds PrimitiveExtentPad (4296) entries of slack to every request, so the buffer is never short"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/locale.c",
+   "function": "FormatLocaleStringList",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "string[length-1]='\\0';",
+   "verdict": "equivalent",
+   "why": "vsnprintf returns a negative count only on an encoding error, which no format reaches; setting string[length+1] instead of string[length-1] is then never done"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/image.c",
+   "function": "ClipImagePath",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (SetImageStorageClass(clip_mask,DirectClass,exception) == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "SetImageStorageClass to DirectClass fails only when the pixel cache cannot be allocated"
   }
  ]
 }
