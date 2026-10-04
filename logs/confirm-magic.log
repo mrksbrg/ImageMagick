@@ -1,39 +1,28 @@
 mutate: 27 mutants in MagickCore/magic\.c$, 9 functions
-mutate: baseline over 307 cases in 0s
-  mutants: 25/27 (43s)
-  mutants: 27/27 (43s)
+mutate: baseline over 76 cases in 0s
+  mutants: 25/27 (3s)
+  mutants: 27/27 (3s)
 
-mutate: 27 mutants, 43s
-  killed 0, survived 15 (0 capped), no coverage 12, errors 0
+mutate: 27 mutants, 3s
+  killed 0, survived 4 (0 capped), no coverage 23, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetMagicList                          11      0        0     11
-  CompareMagickInfoExtent                3      0        3      0
+  CompareMagickInfoExtent                3      0        0      3
   MagicComponentTerminus                 3      0        3      0
-  CompareMagic                           2      0        2      0
-  GetMagicInfo                           2      0        2      0
-  GetMagicPatternExtent                  2      0        2      0
-  IsMagicListInstantiated                2      0        2      0
+  CompareMagic                           2      0        0      2
+  GetMagicInfo                           2      0        0      2
+  GetMagicPatternExtent                  2      0        0      2
+  IsMagicListInstantiated                2      0        0      2
   GetMagicInfoList                       1      0        0      1
   MagicComponentGenesis                  1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
-    x  magic.c:181:23 cxx_gt_to_ge               if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)
-    x  magic.c:181:63 cxx_le_to_lt               if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)
-    x  magic.c:184:16 cxx_gt_to_ge               return(delta > INT_MAX ? 0 : (int) delta);
-    x  magic.c:276:38 cxx_sub_to_add             remaining=(MagickOffsetType) length-magic_info->offset;
-    x  magic.c:278:23 cxx_gt_to_ge               while ((remaining > 0) && (isspace(*q) != 0))
-    x  magic.c:321:13 cxx_ne_to_eq               if (magic != (const unsigned char *) NULL)
-       magic.c:343:7 cxx_remove_void_call       UnlockSemaphoreInfo(magic_list_semaphore);
-    x  magic.c:415:16 cxx_gt_to_ge               if (offset > max_offset)
-    x  magic.c:420:18 cxx_gt_to_ge               if (max_offset > (MagickOffsetType) (MAGICK_SSIZE_MAX/2))
-    x  magic.c:677:32 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
-       magic.c:678:9 cxx_remove_void_call       ActivateSemaphoreInfo(&magic_list_semaphore);
     x  magic.c:777:28 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
        magic.c:810:5 cxx_remove_void_call       ActivateSemaphoreInfo(&magic_list_semaphore);
     x  magic.c:815:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&magic_list_semaphore);
     x  magic.c:822:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&magic_cache_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-d09139dff-magic.json
+  full results: build-oracle/work/mutation-confirm-ca57d53bb-magic.json
