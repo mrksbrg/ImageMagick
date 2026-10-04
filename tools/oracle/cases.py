@@ -5416,6 +5416,18 @@ def _windrv_cases():
                 yield _windrv("quantum import %s %d %s" % (t, depth, " ".join(opts)),
                               tuple(["quantum", "import", img(src), t, str(depth), "Unsigned", "LSB", "out.miff"] + opts),
                               ["out.miff"])
+    # matrix.c: MatrixInfo in memory, mapped and on disk (the driver sets the resource limits
+    # itself), set and read back in and out of range, NullMatrix, MatrixToImage; and
+    # GaussJordanElimination over regular, nearly singular, exactly singular and pivoting systems,
+    # and least squares through LeastSquaresAddTerms
+    for w, h in ((1, 1), (4, 3), (7, 5), (2, 9)):
+        for storage in ("memory", "map", "disk"):
+            yield _windrv("matrix %dx%d in %s" % (w, h, storage), ("matrix", "info", str(w), str(h), storage))
+    for n in (1, 2, 3, 4, 6):
+        for kind in ("regular", "singular", "zero", "pivot", "lsq"):
+            for vectors in (1, 3):
+                yield _windrv("gauss-jordan %d %s, %d vectors" % (n, kind, vectors),
+                              ("matrix", "gauss", str(n), kind, str(vectors)))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

@@ -1142,6 +1142,123 @@ static int QuantumCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* matrix.c: MatrixInfo in memory, mapped and on disk; the least-squares helpers */
+extern MagickBooleanType GaussJordanElimination(double **,double **,const size_t,const size_t);
+extern void LeastSquaresAddTerms(double **,double **,const double *,const double *,const size_t,
+  const size_t);
+
+static int MatrixCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* matrix info W H memory|map|disk     fill, read back in and out of range, NullMatrix,
+                                         MatrixToImage
+     matrix gauss N KIND [VECTORS]       KIND regular|singular|pivot|lsq */
+  if ((argc >= 6) && (strcmp(argv[2],"info") == 0))
+    {
+      size_t columns=(size_t) atol(argv[3]), rows=(size_t) atol(argv[4]);
+      MatrixInfo *matrix;
+      ssize_t x, y;
+      double value;
+      Image *image;
+      if (strcmp(argv[5],"disk") == 0)
+        {
+          (void) SetMagickResourceLimit(MemoryResource,0);
+          (void) SetMagickResourceLimit(MapResource,0);
+        }
+      else if (strcmp(argv[5],"map") == 0)
+        (void) SetMagickResourceLimit(MemoryResource,0);
+      matrix=AcquireMatrixInfo(columns,rows,sizeof(double),exception);
+      Report(exception);
+      if (matrix == (MatrixInfo *) NULL)
+        {
+          (void) printf("no matrix\n");
+          return(0);
+        }
+      (void) printf("matrix %.20gx%.20g\n",(double) GetMatrixColumns(matrix),(double) GetMatrixRows(matrix));
+      for (y=0; y < (ssize_t) rows; y++)
+        for (x=0; x < (ssize_t) columns; x++)
+        {
+          value=7.5*x-3.25*y+(x == y ? 100.0 : 0.0);
+          if (SetMatrixElement(matrix,x,y,&value) == MagickFalse)
+            (void) printf("set %.20g,%.20g failed\n",(double) x,(double) y);
+        }
+      for (y=-1; y <= (ssize_t) rows; y++)
+      {
+        for (x=-1; x <= (ssize_t) columns; x++)
+        {
+          value=-999.0;
+          (void) printf(" %d:%.6g",(int) GetMatrixElement(matrix,x,y,&value),value);
+        }
+        (void) printf("\n");
+      }
+      value=1.0;
+      (void) printf("set outside: %d %d %d %d\n",(int) SetMatrixElement(matrix,-1,0,&value),
+        (int) SetMatrixElement(matrix,(ssize_t) columns,0,&value),
+        (int) SetMatrixElement(matrix,0,-1,&value),(int) SetMatrixElement(matrix,0,(ssize_t) rows,&value));
+      image=MatrixToImage(matrix,exception);
+      Describe("image",image,exception);
+      if (image != (Image *) NULL) image=DestroyImage(image);
+      (void) printf("null %d\n",(int) NullMatrix(matrix));
+      value=-1.0;
+      (void) GetMatrixElement(matrix,(ssize_t) columns/2,(ssize_t) rows/2,&value);
+      (void) printf("after null %.6g\n",value);
+      image=MatrixToImage(matrix,exception);
+      Describe("null image",image,exception);
+      if (image != (Image *) NULL) image=DestroyImage(image);
+      Report(exception);
+      matrix=DestroyMatrixInfo(matrix);
+      return(0);
+    }
+  if ((argc >= 5) && (strcmp(argv[2],"gauss") == 0))
+    {
+      size_t n=(size_t) atol(argv[3]), vectors=argc > 5 ? (size_t) atol(argv[5]) : 1, i, j;
+      double **matrix=AcquireMagickMatrix(n,n), **v=AcquireMagickMatrix(vectors,n);
+      MagickBooleanType status;
+      if ((matrix == (double **) NULL) || (v == (double **) NULL))
+        {
+          (void) printf("no matrix\n");
+          return(0);
+        }
+      for (i=0; i < n; i++)
+        for (j=0; j < n; j++)
+          matrix[i][j]=(i == j ? 10.0+i : 1.0/(1.0+i+2.0*j));
+      if (strcmp(argv[4],"singular") == 0)
+        for (j=0; j < n; j++) matrix[n-1][j]=2.0*matrix[0][j];
+      if (strcmp(argv[4],"zero") == 0)  /* rank 2 exactly: a zero pivot, no rounding to hide it */
+        for (i=0; i < n; i++) for (j=0; j < n; j++) matrix[i][j]=(double) (i+j);
+      if (strcmp(argv[4],"pivot") == 0)
+        for (i=0; i < n; i++) matrix[i][i]=(i % 2 == 0) ? 0.0 : 0.001*(i+1);
+      for (i=0; i < vectors; i++)
+        for (j=0; j < n; j++)
+          v[i][j]=1.0+i-0.5*j;
+      if (strcmp(argv[4],"lsq") == 0)
+        {
+          /* fit a line through points with LeastSquaresAddTerms, as the distortions do */
+          double terms[16], results[4];
+          size_t k;
+          for (i=0; i < n; i++) { for (j=0; j < n; j++) matrix[i][j]=0.0; }
+          for (i=0; i < vectors; i++) for (j=0; j < n; j++) v[i][j]=0.0;
+          for (k=0; k < 12; k++)
+          {
+            for (j=0; j < n; j++) terms[j]=pow((double) k,(double) j);
+            for (i=0; i < vectors; i++) results[i]=3.0+2.0*k-0.25*k*k+i;
+            LeastSquaresAddTerms(matrix,v,terms,results,n,vectors);
+          }
+        }
+      status=GaussJordanElimination(matrix,v,n,vectors);
+      (void) printf("gauss %d\n",(int) status);
+      for (i=0; i < vectors; i++)
+      {
+        for (j=0; j < n; j++)
+          (void) printf(" %.9g",v[i][j]);
+        (void) printf("\n");
+      }
+      matrix=RelinquishMagickMatrix(matrix,n);
+      v=RelinquishMagickMatrix(v,vectors);
+      return(0);
+    }
+  return(Fail(exception,"matrix: info W H memory|map|disk | gauss N regular|singular|pivot|lsq [VECTORS]"));
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1167,6 +1284,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"xml") == 0) status=Xml(argc,argv,exception);
   else if (strcmp(argv[1],"blob") == 0) status=Blob(argc,argv,exception);
   else if (strcmp(argv[1],"quantum") == 0) status=QuantumCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"matrix") == 0) status=MatrixCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
