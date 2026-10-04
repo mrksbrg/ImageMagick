@@ -3215,14 +3215,29 @@ GAP_COMMANDS += [
     "-size 40x30 xc:black -fill white -draw 'circle 10,10 10,4' -draw 'rectangle 22,5 35,12' -fill gray -draw 'ellipse 20,22 12,4 20,340' -draw 'line 2,27 12,20' -define minimum-bounding-box:orientation=portrait -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:area] %[minimum-bounding-box:width] %[minimum-bounding-box:height] %[minimum-bounding-box:angle] %[minimum-bounding-box:unrotate]\\n' -write info:",
     "{C}/rose.miff -fuzz 20% -precision 17 -format '%[minimum-bounding-box] %[minimum-bounding-box:area] %[minimum-bounding-box:width] %[minimum-bounding-box:height] %[minimum-bounding-box:angle] %[minimum-bounding-box:unrotate]\\n' -write info:",
 ]
-# type.c: font lookup by family, weight, style and stretch (the result depends on the machine's fonts, the same on both sides of one run)
-GAP_COMMANDS += [
-    "{C}/rose.miff -family Helvetica -pointsize 12 -annotate +5+20 Fam",
-    "{C}/rose.miff -family Helvetica -weight Bold -pointsize 12 -annotate +5+20 Fam",
-    "{C}/rose.miff -family Helvetica -style Italic -pointsize 12 -annotate +5+20 Fam",
-    "{C}/rose.miff -family 'Nonexistent Family' -pointsize 12 -annotate +5+20 Fam",
-    "{C}/rose.miff -family 'Times,Courier' -pointsize 12 -annotate +5+20 Fam",
-]
+# annotate.c / type.c: the family-lookup path (lookup by family/weight/style, a comma-separated
+# family list, a family that is not found). Earlier these queried Helvetica/Times/Courier, which
+# the machine's system font config also defines, so the output depended on the installed fonts
+# (a silent baseline shift when a font package is upgraded, and the flaky, non-portable scoring
+# kills corrected on 2026-10-04). They now use case-local families whose entries live in the
+# case's own type.xml and point at the two corpus fonts, so the result depends only on the corpus:
+# the same code path, and which entry won is visible in the glyphs.
+_FAMTEST_XML = """<typemap>
+  <type name="FamT-R" family="FamTest" style="Normal" weight="400" glyphs="{C}/Generic.ttf"/>
+  <type name="FamT-B" family="FamTest" style="Normal" weight="700" glyphs="{C}/Narrow.ttf"/>
+  <type name="FamT-I" family="FamTest" style="Italic" weight="400" glyphs="{C}/Narrow.ttf"/>
+  <type name="FamT-2" family="SecondFam" style="Normal" weight="400" glyphs="{C}/Narrow.ttf"/>
+</typemap>
+"""
+GAP_STEP_CASES += [("annotate.c family lookup: %s" % label,
+                    [["{C}/rose.miff", "-pointsize", "12"] + q + ["-annotate", "+5+20", "Fam", "out.miff"]],
+                    {".config/ImageMagick/type.xml": _FAMTEST_XML})
+                   for label, q in (
+                       ("FamTest", ["-family", "FamTest"]),
+                       ("FamTest weight Bold", ["-family", "FamTest", "-weight", "Bold"]),
+                       ("FamTest style Italic", ["-family", "FamTest", "-style", "Italic"]),
+                       ("a family that is not found", ["-family", "No Such Family"]),
+                       ("a family list, first missing", ["-family", "Missing,SecondFam"]))]
 # transform.c: tile crops (@) with overlap, offset and gravity, and trims of bordered images with -fuzz and the trim: defines
 GAP_COMMANDS += [
     "{C}/rose.miff -crop 3x2@ +repage",
