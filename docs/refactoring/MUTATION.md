@@ -3054,7 +3054,26 @@ characters on the Mac.
    because the compiler drops the undefined read. It is recorded as unresolved. Proving it
    would need the disassembly, or lldb with developer mode enabled. I did not enable
    developer mode.
-3. **ERDC confirmation.** The Mac numbers above are estimates. The confirm loop picks up
+3. **qsort comparators: a decision.** After tonight, the Mac files' remaining shortfalls
+   (projected from the Mac's kills, pending ERDC) are almost all qsort comparators:
+   - draw.c's StopInfoCompare, locale.c's LocaleInfoCompare and log.c's LogInfoCompare
+   - earlier: mime.c's GetMimeList sort and type.c's tie-breaks
+
+   Their mutants change only how ties or an inconsistent order are resolved. macOS's BSD
+   qsort and glibc resolve those differently, so a kill on one platform is not a kill on the
+   other. With six elements or fewer, both libraries use insertion sort, which never moves
+   elements a comparator calls "equal" or "less". So most of these mutants are unobservable
+   in practice but not provably equivalent. Each such function holds one to three mutants.
+   Options:
+   - (a) accept "unresolved, non-portable qsort tie" as not counted against the gate, which
+     needs a new verdict kind;
+   - (b) leave these functions below the bar, to be refactored only under extra review;
+   - (c) replace qsort with a stable sort in the refactoring itself. That changes behaviour
+     only for ties, so it is not a pure refactoring.
+
+   The decision is the owner's. The remaining Mac-only exception is draw.c's
+   ClonePolygonEdgesTLS (more than one thread), which only ERDC's OpenMP build can measure.
+4. **ERDC confirmation.** The Mac numbers above are estimates. The confirm loop picks up
    each push (configure, log, mime, delegate, draw, image, policy, memory, annotate) and the
    resweep follows. Read the gate from ERDC's `mutation-erdc-confirm-<sha>-*.json` once they
    land.
