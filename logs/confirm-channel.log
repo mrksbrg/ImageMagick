@@ -1,0 +1,25 @@
+mutate: 28 mutants in MagickCore/channel\.c$, 8 functions
+mutate: baseline over 18 cases in 0s
+  mutants: 25/28 (0s)
+  mutants: 28/28 (1s)
+
+mutate: 28 mutants, 1s
+  killed 0, survived 2 (0 capped), no coverage 26, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  CombineImages                         10      0        0     10
+  ChannelFxImage                         6      0        0      6
+  SeparateImage                          5      0        0      5
+  GetImageAlphaChannel                   2      0        0      2
+  SetImageAlphaChannel                   2      0        2      0
+  ChannelImage                           1      0        0      1
+  SeparateImages                         1      0        0      1
+  FlattenPixelInfo                       1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-channel.json
