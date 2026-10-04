@@ -1,73 +1,42 @@
 mutate: 54 mutants in MagickCore/locale\.c$, 19 functions
-mutate: baseline over 1402 cases in 0s
-  mutants: 25/54 (3s)
-  mutants: 50/54 (56s)
-  mutants: 54/54 (57s)
+mutate: baseline over 307 cases in 0s
+  mutants: 25/54 (0s)
+  mutants: 50/54 (42s)
+  mutants: 54/54 (43s)
 
-mutate: 54 mutants, 57s
-  killed 0, survived 44 (0 capped), no coverage 10, errors 0
+mutate: 54 mutants, 43s
+  killed 0, survived 13 (0 capped), no coverage 41, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  LoadLocaleCache                       17      0       17      0
-  IsLocaleTreeInstantiated               7      0        7      0
+  LoadLocaleCache                       17      0        0     17
+  IsLocaleTreeInstantiated               7      0        0      7
   LocaleComponentTerminus                4      0        4      0
-  DestroyLocaleNode                      3      0        3      0
-  GetLocaleOptions                       3      0        3      0
+  DestroyLocaleNode                      3      0        0      3
+  GetLocaleOptions                       3      0        0      3
   LocaleFatalErrorHandler                3      0        0      3
   DestroyCLocale                         2      0        2      0
   FormatLocaleStringList                 2      0        2      0
   GetLocaleInfoList                      2      0        0      2
   GetLocaleList                          2      0        0      2
   AcquireCLocale                         1      0        1      0
-  DestroyLocaleOptions                   1      0        1      0
-  FormatLocaleFileList                   1      0        0      1
+  DestroyLocaleOptions                   1      0        0      1
+  FormatLocaleFileList                   1      0        1      0
   LocaleInfoCompare                      1      0        0      1
   GetLocaleValue                         1      0        0      1
   InterpretLocaleValue                   1      0        1      0
-  ChopLocaleComponents                   1      0        1      0
+  ChopLocaleComponents                   1      0        0      1
   LocaleNCompare                         1      0        1      0
   LocaleComponentGenesis                 1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  locale.c:138:16 cxx_eq_to_ne               if (c_locale == (locale_t) NULL)
-    x  locale.c:183:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
-    x  locale.c:185:14 cxx_ne_to_eq               if (p->tag != (char *) NULL)
-    x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
     x  locale.c:263:16 cxx_ne_to_eq               if (c_locale != (locale_t) NULL)
     x  locale.c:267:5 cxx_remove_void_call       freelocale(c_locale);
-    x  locale.c:305:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
     x  locale.c:463:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
        locale.c:476:18 cxx_sub_to_add             string[length-1]='\0';
-    x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  locale.c:832:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
-    x  locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
-    x  locale.c:926:28 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
-       locale.c:927:9 cxx_remove_void_call       ActivateSemaphoreInfo(&locale_semaphore);
-    x  locale.c:941:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:943:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:945:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:947:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:949:22 cxx_eq_to_ne               if (locale == (char *) NULL)
     x  locale.c:1006:18 cxx_eq_to_ne               if (locale == (locale_t) NULL)
-    x  locale.c:1139:54 cxx_gt_to_ge               for (count=0; (count < (ssize_t) components) && (p > path); p--)
-    x  locale.c:1277:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-    x  locale.c:1277:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-    x  locale.c:1281:22 cxx_ne_to_eq               if (*token != '=')
-    x  locale.c:1284:47 cxx_eq_to_ne               if (LocaleCompare(keyword,"locale") == 0)
-    x  locale.c:1286:47 cxx_ne_to_eq               if (LocaleCompare(locale,token) != 0)
-    x  locale.c:1290:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
-    x  locale.c:1292:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-    x  locale.c:1302:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
-    x  locale.c:1303:29 cxx_ne_to_eq               if (*path != '\0')
-    x  locale.c:1311:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
-       locale.c:1314:42 cxx_add_to_sub             path,locale,depth+1,exception);
-    x  locale.c:1327:24 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
-    x  locale.c:1327:39 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
-    x  locale.c:1331:22 cxx_ne_to_eq               if (*token != '=')
-    x  locale.c:1369:65 cxx_gt_to_ge               while ((isspace((int) ((unsigned char) *q)) != 0) && (q > p))
-    x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
-    x  locale.c:1421:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
        locale.c:1576:13 cxx_eq_to_ne               if (q == (char *) NULL)
     x  locale.c:1678:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
     x  locale.c:1706:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
@@ -76,4 +45,4 @@ mutate: 54 mutants, 57s
     x  locale.c:1715:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&locale_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-1501a027d-locale.json
+  full results: build-oracle/work/mutation-confirm-d09139dff-locale.json
