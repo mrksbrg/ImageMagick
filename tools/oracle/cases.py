@@ -5259,6 +5259,19 @@ GAP_STEP_CASES += [("driver metrics: %s" % label, _driver("metrics", *args), fil
 GAP_STEP_CASES += [("driver memory at the max-memory-request", _driver("memory"),
                     {".config/ImageMagick/policy.xml":
                      '<policymap>\n  <policy domain="system" name="max-memory-request" value="16MiB"/>\n</policymap>\n'})]
+# policy.c through imdriver: IsPathAuthorized over a tree the driver builds in the case directory
+# with symbolic links (a case's files cannot be links): a link to a directory, one in the middle of
+# a path, one to a file; relative, absolute, './', '//' and trailing-separator forms and lengths
+# around MagickPathExtent. With a policy forbidding symlink follow, IsPathContainsSymlink decides.
+_PATHAUTH = ("real/f.txt", "link/f.txt", "flink", "real/slink/g.txt", "real//f.txt", "real/./f.txt",
+             "./link/f.txt", "real/", "link/", "+real/f.txt", "+link/f.txt", "/", "//", "link", "real/sub/",
+             "nosuch/f.txt", "L4085:/f.txt", "L4089:/f.txt", "L4090:/f.txt", "L4091:/f.txt", "L4095:/x",
+             "L4096:/x", "L5000:/x", "link//f.txt")
+GAP_STEP_CASES += [
+    ("driver pathauth, symlinks followed", _driver("pathauth", *_PATHAUTH), {}),
+    ("driver pathauth, symlink follow forbidden", _driver("pathauth", *_PATHAUTH),
+     {".config/ImageMagick/policy.xml":
+      '<policymap>\n  <policy domain="system" name="symlink" rights="none" pattern="follow"/>\n</policymap>\n'})]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

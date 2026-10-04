@@ -23181,6 +23181,26 @@
    "src": "while ((attributes[i] != (char **) NULL) &&",
    "verdict": "equivalent",
    "why": "XMLTreeTagToXML prints DTD default attributes only for the tag of the first ATTLIST (hand-run: a second ATTLIST's defaults never print); a loop that never advances stops at that same first entry"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/policy.c",
+   "function": "IsPathContainsSymlink",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((offset+1) >= (ssize_t) sizeof(partial))",
+   "verdict": "equivalent",
+   "why": "offset is always 0 at this test (the leading separator is the first thing appended), so 1 >= MagickPathExtent, 1 > MagickPathExtent and -1 >= MagickPathExtent are all false"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/policy.c",
+   "function": "IsPathContainsSymlink",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((offset+1) >= (ssize_t) sizeof(partial))",
+   "verdict": "equivalent",
+   "why": "offset is always 0 at this test (the leading separator is the first thing appended), so 1 >= MagickPathExtent, 1 > MagickPathExtent and -1 >= MagickPathExtent are all false"
   }
  ]
 }

@@ -20,9 +20,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include "MagickCore/studio.h"
 #include "MagickCore/MagickCore.h"
 #include "MagickCore/blob-private.h"
+#include "MagickCore/policy-private.h"
 
 static int Fail(ExceptionInfo *exception,const char *what)
 {
@@ -1903,6 +1906,46 @@ static int MetricsCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int PathAuthCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* pathauth PATH...   builds real/f.txt, real/sub/g.txt and the symbolic links link -> real,
+     real/slink -> sub and flink -> real/f.txt in the case directory (a case's files cannot be
+     links), then prints IsPathAuthorized(read) for each PATH. A PATH starting with '+' is made
+     absolute (the current directory prepended), one starting with 'L<n>:' gets an n-character
+     component of 'a' inserted after real/ (path length around MagickPathExtent). */
+  char cwd[MagickPathExtent];
+  int i;
+  FILE *f;
+  (void) exception;
+  (void) mkdir("real",0755); (void) mkdir("real/sub",0755);
+  if ((f=fopen("real/f.txt","w")) != (FILE *) NULL) { (void) fputs("f\n",f); (void) fclose(f); }
+  if ((f=fopen("real/sub/g.txt","w")) != (FILE *) NULL) { (void) fputs("g\n",f); (void) fclose(f); }
+  (void) symlink("real","link"); (void) symlink("sub","real/slink"); (void) symlink("real/f.txt","flink");
+  if (getcwd(cwd,sizeof(cwd)) == (char *) NULL) *cwd='\0';
+  for (i=2; i < argc; i++)
+  {
+    char *path=(char *) AcquireQuantumMemory(3*MagickPathExtent,1);
+    const char *shown=argv[i];
+    if (path == (char *) NULL) return(1);
+    if (*argv[i] == '+')
+      (void) FormatLocaleString(path,3*MagickPathExtent,"%s/%s",cwd,argv[i]+1);
+    else if (strncmp(argv[i],"L",1) == 0 && strchr(argv[i],':') != (char *) NULL)
+      {
+        size_t n=(size_t) atol(argv[i]+1),k;
+        const char *rest=strchr(argv[i],':')+1;
+        (void) CopyMagickString(path,"real/",3*MagickPathExtent);
+        for (k=0; k < n && k+6 < 3*MagickPathExtent; k++) path[5+k]='a';
+        path[5+k]='\0';
+        (void) ConcatenateMagickString(path,rest,3*MagickPathExtent);
+      }
+    else
+      (void) CopyMagickString(path,argv[i],3*MagickPathExtent);
+    (void) printf("%s %d\n",shown,(int) IsPathAuthorized(ReadPolicyRights,path));
+    path=(char *) RelinquishMagickMemory(path);
+  }
+  return(0);
+}
+
 static int MemoryCmd(int argc,char **argv,ExceptionInfo *exception)
 {
   /* memory   allocations exactly at, and one byte over, the policy's max-memory-request (16 MiB at
@@ -2004,6 +2047,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"symlink") == 0) status=SymlinkCmd(argc,argv,exception);
   else if (strcmp(argv[1],"metrics") == 0) status=MetricsCmd(argc,argv,exception);
   else if (strcmp(argv[1],"memory") == 0) status=MemoryCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"pathauth") == 0) status=PathAuthCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
