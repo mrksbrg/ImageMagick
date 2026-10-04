@@ -5204,6 +5204,33 @@ GAP_STEP_CASES += [(label, steps, {}) for label, steps in _DRIVER_CASES]
 # ConfigureFileToStringInfo reads a file (it maps it); the case ships one.
 GAP_STEP_CASES += [("driver string configfile", _driver("string", "configfile", "cf.dat"),
                     {"cf.dat": "hello world\n12345\x01\x02end"})]
+# annotate.c through imdriver: GetTypeMetrics and GetMultilineTypeMetrics, printing the whole
+# TypeMetric. label:, caption: and -annotate size and place text from width/ascent/descent/
+# bounds.x1/bounds.y2 only, and GetMultilineTypeMetrics overwrites height, so RenderFreetype's
+# height, max_advance, initial bounds and underline never reach a command-line output. Also an
+# '@'-prefixed font (the path-policy check, allowed and denied), a font encoding, and Latin-1 text
+# (invalid UTF-8, converted).
+_METRIC_POLICY = {".config/ImageMagick/policy.xml":
+                  '<policymap>\n  <policy domain="path" rights="none" pattern="@*Narrow*"/>\n</policymap>\n'}
+GAP_STEP_CASES += [("driver metrics: %s" % label, _driver("metrics", *args), files)
+                   for label, args, files in (
+    ("Generic 20 Agjy", ("{C}/Generic.ttf", "20", "Agjy"), {}),
+    ("Narrow 20 two lines", ("{C}/Narrow.ttf", "20", "one\ntwo"), {}),
+    ("Generic 14 stroked", ("{C}/Generic.ttf", "14", "Hi", "stroke=3"), {}),
+    ("Generic 12 without antialiasing", ("{C}/Generic.ttf", "12", "AV", "antialias=0"), {}),
+    ("Generic 16 kerning 2", ("{C}/Generic.ttf", "16", "Ab", "kerning=2"), {}),
+    ("Generic 18 right to left", ("{C}/Generic.ttf", "18", "Wq", "direction=rtl"), {}),
+    ("Generic 20 a space only", ("{C}/Generic.ttf", "20", " "), {}),
+    ("Generic 20 no text", ("{C}/Generic.ttf", "20", ""), {}),
+    ("Generic 16 at 144 dpi", ("{C}/Generic.ttf", "16", "Mix", "density=144"), {}),
+    ("Narrow 9 punctuation", ("{C}/Narrow.ttf", "9", ".,;"), {}),
+    ("Generic 30 three descender lines", ("{C}/Generic.ttf", "30", "g\nj\ny"), {}),
+    ("AppleRoman encoding", ("{C}/Generic.ttf", "20", "Abc", "encoding=AppleRoman"), {}),
+    ("AdobeStandard encoding (not in the font)", ("{C}/Generic.ttf", "20", "Ab", "encoding=AdobeStandard"), {}),
+    ("Latin-1 text", ("{C}/Generic.ttf", "20", "x", "texthex=636166e92078"), {}),
+    ("an @ font", ("@{C}/Generic.ttf", "20", "At"), {}),
+    ("an @ font a path policy denies", ("@{C}/Narrow.ttf", "20", "At"), _METRIC_POLICY),
+    ("an @ font a path policy does not deny", ("@{C}/Generic.ttf", "20", "At"), _METRIC_POLICY))]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

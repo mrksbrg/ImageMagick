@@ -23031,6 +23031,16 @@
    "src": "if (~length >= (MagickPathExtent-1))",
    "verdict": "equivalent",
    "why": "the two differ only when ~length is exactly MagickPathExtent-1, a length near SIZE_MAX no string reaches"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (GetUTFCode(p) < 0)",
+   "verdict": "equivalent",
+   "why": "inside a loop whose condition is GetUTFCode(p) != 0, so the code is never 0 here and < 0 and <= 0 agree"
   }
  ]
 }

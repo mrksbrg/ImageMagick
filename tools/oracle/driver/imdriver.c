@@ -1832,6 +1832,77 @@ static int StringCmd(int argc,char **argv,ExceptionInfo *exception)
   return(2);
 }
 
+static void PrintMetrics(const char *what,MagickBooleanType status,const TypeMetric *m)
+{
+  (void) printf("%s %d ppem %.6g,%.6g ascent %.6g descent %.6g width %.6g height %.6g "
+    "max_advance %.6g underline %.6g,%.6g bounds %.6g,%.6g %.6g,%.6g origin %.6g,%.6g\n",what,
+    (int) status,m->pixels_per_em.x,m->pixels_per_em.y,m->ascent,m->descent,m->width,m->height,
+    m->max_advance,m->underline_position,m->underline_thickness,m->bounds.x1,m->bounds.y1,
+    m->bounds.x2,m->bounds.y2,m->origin.x,m->origin.y);
+}
+
+static int MetricsCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* metrics FONT POINTSIZE TEXT [KEY=VALUE...]   GetTypeMetrics and GetMultilineTypeMetrics:
+     the TypeMetric fields that label:, caption: and -annotate never print (RenderFreetype's height,
+     max_advance, bounds, underline). KEY: stroke=WIDTH antialias=0 kerning=K density=D
+     direction=rtl gravity=NAME */
+  ImageInfo *image_info;
+  Image *image;
+  DrawInfo *draw_info;
+  TypeMetric metrics;
+  MagickBooleanType status;
+  int i;
+  if (argc < 5)
+    return(Fail(exception,"metrics FONT POINTSIZE TEXT [KEY=VALUE...]"));
+  image_info=AcquireImageInfo();
+  image=AcquireImage(image_info,exception);
+  draw_info=AcquireDrawInfo();
+  (void) CloneString(&draw_info->font,argv[2]);
+  draw_info->pointsize=atof(argv[3]);
+  (void) CloneString(&draw_info->text,argv[4]);
+  for (i=5; i < argc; i++)
+  {
+    const char *v=strchr(argv[i],'=');
+    if (v == (const char *) NULL) continue;
+    v++;
+    if (strncmp(argv[i],"stroke=",7) == 0)
+      {
+        draw_info->stroke_width=atof(v);
+        (void) QueryColorCompliance("black",AllCompliance,&draw_info->stroke,exception);
+      }
+    else if (strncmp(argv[i],"antialias=",10) == 0)
+      draw_info->text_antialias=atoi(v) != 0 ? MagickTrue : MagickFalse;
+    else if (strncmp(argv[i],"kerning=",8) == 0)
+      draw_info->kerning=atof(v);
+    else if (strncmp(argv[i],"density=",8) == 0)
+      (void) CloneString(&draw_info->density,v);
+    else if (strncmp(argv[i],"direction=",10) == 0)
+      draw_info->direction=strcmp(v,"rtl") == 0 ? RightToLeftDirection : LeftToRightDirection;
+    else if (strncmp(argv[i],"encoding=",9) == 0)
+      (void) CloneString(&draw_info->encoding,v);
+    else if (strncmp(argv[i],"texthex=",8) == 0)
+      {
+        /* raw bytes (Latin-1 text is not valid UTF-8, and an argument cannot carry it intact) */
+        unsigned char bytes[MagickPathExtent];
+        size_t n=FromHex(v,bytes,sizeof(bytes)-1);
+        bytes[n]='\0';
+        (void) CloneString(&draw_info->text,(const char *) bytes);
+      }
+  }
+  (void) memset(&metrics,0,sizeof(metrics));
+  status=GetTypeMetrics(image,draw_info,&metrics,exception);
+  PrintMetrics("single",status,&metrics);
+  (void) memset(&metrics,0,sizeof(metrics));
+  status=GetMultilineTypeMetrics(image,draw_info,&metrics,exception);
+  PrintMetrics("multi",status,&metrics);
+  Report(exception);
+  draw_info=DestroyDrawInfo(draw_info);
+  image=DestroyImage(image);
+  image_info=DestroyImageInfo(image_info);
+  return(0);
+}
+
 static int SymlinkCmd(int argc,char **argv,ExceptionInfo *exception)
 {
   /* symlink SOURCEFILE   AcquireUniqueSymbolicLink to a fresh destination (a symlink, or a copy
@@ -1901,6 +1972,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"blobio") == 0) status=BlobIOCmd(argc,argv,exception);
   else if (strcmp(argv[1],"string") == 0) status=StringCmd(argc,argv,exception);
   else if (strcmp(argv[1],"symlink") == 0) status=SymlinkCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"metrics") == 0) status=MetricsCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
