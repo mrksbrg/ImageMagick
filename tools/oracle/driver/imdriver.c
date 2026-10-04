@@ -1271,6 +1271,60 @@ static int MatrixCmd(int argc,char **argv,ExceptionInfo *exception)
   return(Fail(exception,"matrix: info W H memory|map|disk | gauss N regular|singular|pivot|lsq [VECTORS]"));
 }
 
+/* resample.c: ResamplePixelColor on a grid around and across the image's edges */
+static int ResampleCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* resample IMAGE VIRTUAL-PIXEL FILTER SCALE [interpolate=METHOD]: an elliptical sample at
+     u,v in steps of 0.5 from -8 to the size+8, the ellipse scaled by SCALE (0 = point) */
+  Image *image;
+  ResampleFilter *filter;
+  ssize_t method, type, i;
+  double u, v, scale;
+  PixelInfo pixel;
+  MagickBooleanType status;
+
+  if (argc < 6)
+    return(Fail(exception,"resample: IMAGE VIRTUAL-PIXEL FILTER SCALE"));
+  image=Read(argv[2],exception);
+  if (image == (Image *) NULL)
+    return(Fail(exception,"read"));
+  method=ParseCommandOption(MagickVirtualPixelOptions,MagickFalse,argv[3]);
+  type=ParseCommandOption(MagickFilterOptions,MagickFalse,argv[4]);
+  scale=atof(argv[5]);
+  filter=AcquireResampleFilter(image,exception);
+  if (method >= 0)
+    (void) printf("virtual %d\n",(int) SetResampleFilterVirtualPixelMethod(filter,(VirtualPixelMethod) method));
+  if (type >= 0)
+    SetResampleFilter(filter,(FilterType) type);
+  for (i=6; i < argc; i++)
+    if (strncmp(argv[i],"interpolate=",12) == 0)
+      (void) SetResampleFilterInterpolateMethod(filter,(PixelInterpolateMethod)
+        ParseCommandOption(MagickInterpolateOptions,MagickFalse,argv[i]+12));
+  if (scale > 0.0)
+    ScaleResampleFilter(filter,scale,0.3*scale,-0.2*scale,scale);
+  GetPixelInfo(image,&pixel);
+  for (v=-8.0; v <= (double) image->rows+8.0; v+=0.5)
+  {
+    unsigned long h=2166136261UL;
+    int hits=0;
+    for (u=-8.0; u <= (double) image->columns+8.0; u+=0.5)
+    {
+      unsigned char bytes[64];
+      int n;
+      status=ResamplePixelColor(filter,u,v,&pixel,exception);
+      n=FormatLocaleString((char *) bytes,sizeof(bytes),"%d %.4f %.4f %.4f %.4f;",(int) status,
+        pixel.red,pixel.green,pixel.blue,pixel.alpha);
+      h=(h ^ Fnv(bytes,(size_t) n))*16777619UL & 0xffffffffUL;
+      hits+=(int) status;
+    }
+    (void) printf("v %.1f: %d %08lx\n",v,hits,h);
+  }
+  filter=DestroyResampleFilter(filter);
+  Report(exception);
+  image=DestroyImage(image);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1297,6 +1351,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"blob") == 0) status=Blob(argc,argv,exception);
   else if (strcmp(argv[1],"quantum") == 0) status=QuantumCmd(argc,argv,exception);
   else if (strcmp(argv[1],"matrix") == 0) status=MatrixCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"resample") == 0) status=ResampleCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

@@ -5428,6 +5428,18 @@ def _windrv_cases():
             for vectors in (1, 3):
                 yield _windrv("gauss-jordan %d %s, %d vectors" % (n, kind, vectors),
                               ("matrix", "gauss", str(n), kind, str(vectors)))
+    # resample.c: ResamplePixelColor on a half-pixel grid around and across the edges (the
+    # outside-the-image shortcuts and their boundaries), every virtual pixel method but Random,
+    # point sampling with three interpolations and elliptical filters at three scales
+    for name in ("tiny", "rose"):
+        for vp in ("Background", "Dither", "Edge", "Mirror", "Tile", "Transparent", "Mask", "Black",
+                   "Gray", "White", "HorizontalTile", "VerticalTile", "HorizontalTileEdge", "VerticalTileEdge",
+                   "CheckerTile"):
+            for filt, scale, extra in (("Point", "0", ["interpolate=Bilinear"]), ("Point", "0", ["interpolate=Nearest"]),
+                                       ("Point", "0", ["interpolate=Catrom"]), ("Gaussian", "1", []),
+                                       ("Gaussian", "3", []), ("Lanczos", "1.5", []), ("Box", "0.7", [])):
+                yield _windrv("resample %s %s %s %s %s" % (name, vp, filt, scale, " ".join(extra)),
+                              tuple(["resample", img(name), vp, filt, scale] + extra))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
