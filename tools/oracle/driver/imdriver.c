@@ -1488,6 +1488,21 @@ static size_t ReadRow(const Image *image,const void *pixels,const size_t columns
     (void) printf(" %.4f authentic %d",(double) q[0],(int) GetOneAuthenticPixel((Image *) image,x,0,q,sans));
     (void) printf(" %.4f\n",(double) q[0]);
   }
+  {
+    /* GetVirtualPixels reaches GetVirtualPixelStream: the row, a part of it, and outside it */
+    static const ssize_t at[][4] = { { 0, 0, 0, 1 }, { 3, 0, 5, 1 }, { -2, 0, 4, 1 }, { 0, 1, 2, 1 } };
+    size_t k;
+    for (k=0; k < sizeof(at)/sizeof(*at); k++)
+    {
+      size_t w=at[k][2] == 0 ? columns : (size_t) at[k][2];
+      const Quantum *p=GetVirtualPixels(image,at[k][0],at[k][1],w,(size_t) at[k][3],sans);
+      (void) printf("  virtual pixels %.20g,%.20g %.20g: %s",(double) at[k][0],(double) at[k][1],
+        (double) w,p != (const Quantum *) NULL ? "yes" : "no");
+      if (p != (const Quantum *) NULL)
+        (void) printf(" %08lx",Fnv((const unsigned char *) p,w*GetPixelChannels(image)*sizeof(Quantum)));
+      (void) printf("\n");
+    }
+  }
   v=GetVirtualPixelQueue(image);
   (void) printf("  queue %s meta %s authentic-meta %s\n",v != NULL ? "yes" : "no",
     GetVirtualMetacontent(image) != NULL ? "yes" : "no",
