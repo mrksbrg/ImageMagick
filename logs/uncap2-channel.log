@@ -1,0 +1,17 @@
+mutate: 2 mutants in MagickCore/channel\.c$, 1 functions
+mutate: baseline over 1232 cases in 0s
+  mutants: 2/2 (154s)
+
+mutate: 2 mutants, 154s
+  killed 0, survived 2 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  SetImageAlphaChannel                   2      0        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-channel.json

@@ -1,0 +1,78 @@
+mutate: 54 mutants in MagickCore/geometry\.c$, 8 functions
+mutate: baseline over 12157 cases in 0s
+  mutants: 25/54 (1380s)
+  mutants: 50/54 (1580s)
+  mutants: 54/54 (2235s)
+
+mutate: 54 mutants, 2235s
+  killed 0, survived 54 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  ParseGeometry                         19      0       19      0
+  ParseMetaGeometry                     16      0       16      0
+  GetGeometry                            8      0        8      0
+  ParseGravityGeometry                   6      0        6      0
+  GetPageGeometry                        2      0        2      0
+  IsSceneGeometry                        1      0        1      0
+  SetGeometry                            1      0        1      0
+  SetGeometryInfo                        1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  geometry.c:225:24 cxx_ge_to_gt               if (strlen(geometry) >= (MagickPathExtent-1))
+    x  geometry.c:343:14 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
+    x  geometry.c:343:59 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
+    x  geometry.c:364:14 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
+    x  geometry.c:430:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
+    x  geometry.c:430:68 cxx_eq_to_ne               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
+    x  geometry.c:431:19 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:431:49 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:482:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:508:36 cxx_eq_to_ne               if ((flags & GreaterValue) == 0)
+    x  geometry.c:692:58 cxx_ne_to_eq               if ((pedantic != MagickFalse) && (strchr(geometry,',') != (char *) NULL))
+    x  geometry.c:1153:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1177:50 cxx_ne_to_eq               while (isspace((int) ((unsigned char) *p)) != 0)
+    x  geometry.c:1179:15 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1179:30 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1179:45 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1179:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
+    x  geometry.c:1180:15 cxx_eq_to_ne               (*p == ':'))
+    x  geometry.c:1185:19 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1185:34 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1185:49 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
+    x  geometry.c:1187:22 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+    x  geometry.c:1187:37 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
+    x  geometry.c:1189:20 cxx_eq_to_ne               if (*p == '-')
+    x  geometry.c:1195:17 cxx_ne_to_eq               if (p != q)
+    x  geometry.c:1198:41 cxx_ne_to_eq               if ((flags & ChiNegative) != 0)
+    x  geometry.c:1199:24 cxx_minus_to_noop          value=(-value);
+    x  geometry.c:1229:32 cxx_eq_to_ne               if ((flags & ChiValue) == 0)
+    x  geometry.c:1256:37 cxx_eq_to_ne               if (((flags & SeparatorValue) == 0) && ((flags & SigmaValue) == 0))
+    x  geometry.c:1258:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & RhoValue) == 0))
+    x  geometry.c:1323:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:1386:30 cxx_lt_to_le               if (geometry_ratio < image_ratio)
+    x  geometry.c:1394:28 cxx_ge_to_gt               if (geometry_ratio >= image_ratio)
+    x  geometry.c:1412:29 cxx_lt_to_le               if ((region_info->width < image->columns) &&
+    x  geometry.c:1419:29 cxx_gt_to_ge               if ((region_info->width > image->columns) &&
+    x  geometry.c:1420:30 cxx_gt_to_ge               (region_info->height > image->rows))
+    x  geometry.c:1493:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:1502:3 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
+    x  geometry.c:1540:26 cxx_ge_to_gt               if (geometry_ratio >= image_ratio)
+    x  geometry.c:1579:34 cxx_gt_to_ge               if (scale_factor > ((double) *height/(double) stasis_height))
+    x  geometry.c:1583:32 cxx_lt_to_le               if (scale_factor < ((double) *height/(double) stasis_height))
+    x  geometry.c:1591:51 cxx_div_to_mul             (scale_factor < ((double) *width/(double) stasis_height)))
+    x  geometry.c:1597:43 cxx_ne_to_eq               if (((flags & MinimumValue) != 0) &&
+    x  geometry.c:1598:33 cxx_lt_to_le               (scale_factor < ((double) *height/(double) stasis_width)))
+       geometry.c:1599:46 cxx_div_to_mul             scale_factor=(double) *height/(double) stasis_width;
+    x  geometry.c:1608:24 cxx_lt_to_le               if (stasis_width < *width)
+    x  geometry.c:1610:25 cxx_lt_to_le               if (stasis_height < *height)
+    x  geometry.c:1615:24 cxx_gt_to_ge               if (stasis_width > *width)
+    x  geometry.c:1617:25 cxx_gt_to_ge               if (stasis_height > *height)
+    x  geometry.c:1633:29 cxx_add_to_sub             area=geometry_info.rho+sqrt(MagickEpsilon);
+    x  geometry.c:1639:20 cxx_lt_to_le               if ((scale.x < (double) *width) || (scale.y < (double) *height))
+    x  geometry.c:1639:51 cxx_lt_to_le               if ((scale.x < (double) *width) || (scale.y < (double) *height))
+    x  geometry.c:1795:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:1828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-geometry.json
