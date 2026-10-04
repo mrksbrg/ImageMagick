@@ -1,8 +1,8 @@
 mutate: 22 mutants in MagickCore/coder\.c$, 6 functions
-mutate: baseline over 128 cases in 0s
-  mutants: 22/22 (6s)
+mutate: baseline over 30 cases in 0s
+  mutants: 22/22 (1s)
 
-mutate: 22 mutants, 6s
+mutate: 22 mutants, 1s
   killed 0, survived 9 (0 capped), no coverage 13, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -26,4 +26,4 @@ mutate: 22 mutants, 6s
        coder.c:480:9 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-acf185307-coder.json
+  full results: build-oracle/work/mutation-confirm-af3128576-coder.json
