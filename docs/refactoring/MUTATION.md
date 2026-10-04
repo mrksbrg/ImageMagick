@@ -3061,8 +3061,9 @@ characters on the Mac.
 
    Their mutants change only how ties or an inconsistent order are resolved. macOS's BSD
    qsort and glibc resolve those differently, so a kill on one platform is not a kill on the
-   other. With six elements or fewer, both libraries use insertion sort, which never moves
-   elements a comparator calls "equal" or "less". So most of these mutants are unobservable
+   other. With six elements or fewer, BSD qsort uses insertion sort and glibc uses merge sort or
+   (2.37 and later) insertion sort. None of these ever moves elements a comparator calls
+   "equal" or "less". So most of these mutants are unobservable
    in practice but not provably equivalent. Each such function holds one to three mutants.
    Options:
    - (a) accept "unresolved, non-portable qsort tie" as not counted against the gate, which
