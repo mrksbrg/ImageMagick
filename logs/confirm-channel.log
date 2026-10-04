@@ -1,19 +1,28 @@
 mutate: 28 mutants in MagickCore/channel\.c$, 8 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 10 cases in 0s
   mutants: 25/28 (0s)
-  mutants: 28/28 (0s)
+  mutants: 28/28 (1s)
 
-mutate: 28 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 28, errors 0
+mutate: 28 mutants, 1s
+  killed 2, survived 5 (0 capped), no coverage 21, errors 0
+  mutation score on reached code: 28.6%   overall: 7.1%
 
   function                           total killed survived no-cov
   CombineImages                         10      0        0     10
-  ChannelFxImage                         6      0        0      6
+  ChannelFxImage                         6      2        4      0
   SeparateImage                          5      0        0      5
   GetImageAlphaChannel                   2      0        0      2
   SetImageAlphaChannel                   2      0        0      2
-  ChannelImage                           1      0        0      1
+  ChannelImage                           1      0        1      0
   SeparateImages                         1      0        0      1
   FlattenPixelInfo                       1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-9ae3bdd76-channel.json
+  survivors (equivalent, or a gap in the catalogue):
+       channel.c:181:9 cxx_remove_void_call       SetPixelChannel(destination_image,destination_channel,pixel,q);
+    x  channel.c:234:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:438:17 cxx_post_inc_to_post_dec   channels++;
+    x  channel.c:446:64 cxx_add_to_sub             destination_channel=(PixelChannel) (destination_channel+1);
+    x  channel.c:452:61 cxx_sub_to_add             status=SetImageProgress(source_image,ChannelFxImageTag,p-expression,
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-e7f5bfd63-channel.json

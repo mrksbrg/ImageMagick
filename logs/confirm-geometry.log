@@ -1,48 +1,43 @@
 mutate: 65 mutants in MagickCore/geometry\.c$, 11 functions
-mutate: baseline over 35 cases in 0s
-  mutants: 25/65 (3s)
-  mutants: 50/65 (3s)
-  mutants: 65/65 (4s)
+mutate: baseline over 65 cases in 0s
+  mutants: 25/65 (4s)
+  mutants: 50/65 (5s)
+  mutants: 65/65 (7s)
 
-mutate: 65 mutants, 4s
-  killed 0, survived 33 (0 capped), no coverage 32, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 65 mutants, 7s
+  killed 5, survived 29 (0 capped), no coverage 31, errors 0
+  mutation score on reached code: 14.7%   overall: 7.7%
 
   function                           total killed survived no-cov
-  ParseGeometry                         19      0       19      0
+  ParseGeometry                         19      2       17      0
   ParseMetaGeometry                     17      0        0     17
-  GetGeometry                           10      0       10      0
+  GetGeometry                           10      3        7      0
   ParseGravityGeometry                   6      0        0      6
   ListPagesizes                          4      0        0      4
   ParseAffineGeometry                    3      0        0      3
   GetPageGeometry                        2      0        2      0
   IsSceneGeometry                        1      0        1      0
   ParsePageGeometry                      1      0        0      1
-  SetGeometry                            1      0        0      1
+  SetGeometry                            1      0        1      0
   SetGeometryInfo                        1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  geometry.c:225:24 cxx_ge_to_gt               if (strlen(geometry) >= (MagickPathExtent-1))
     x  geometry.c:343:14 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
-    x  geometry.c:343:59 cxx_eq_to_ne               if ((c == 215) || (*q == 'x') || (*q == 'X') || (*q == ':') ||
     x  geometry.c:364:14 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
     x  geometry.c:364:44 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
-    x  geometry.c:364:59 cxx_eq_to_ne               if ((c == 215) || (*p == 'x') || (*p == 'X') || (*p == ':'))
     x  geometry.c:430:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
-    x  geometry.c:430:68 cxx_eq_to_ne               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
     x  geometry.c:431:19 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
     x  geometry.c:431:49 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
     x  geometry.c:482:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  geometry.c:508:36 cxx_eq_to_ne               if ((flags & GreaterValue) == 0)
     x  geometry.c:692:58 cxx_ne_to_eq               if ((pedantic != MagickFalse) && (strchr(geometry,',') != (char *) NULL))
     x  geometry.c:1153:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
-    x  geometry.c:1177:50 cxx_ne_to_eq               while (isspace((int) ((unsigned char) *p)) != 0)
     x  geometry.c:1179:15 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
     x  geometry.c:1179:30 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
     x  geometry.c:1179:45 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
     x  geometry.c:1179:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
     x  geometry.c:1180:15 cxx_eq_to_ne               (*p == ':'))
-    x  geometry.c:1185:19 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
     x  geometry.c:1185:34 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
     x  geometry.c:1185:49 cxx_eq_to_ne               if ((*p == ',') || (*p == '/') || (*p == ':'))
     x  geometry.c:1187:22 cxx_eq_to_ne               while ((*p == '+') || (*p == '-'))
@@ -54,7 +49,8 @@ mutate: 65 mutants, 4s
     x  geometry.c:1229:32 cxx_eq_to_ne               if ((flags & ChiValue) == 0)
     x  geometry.c:1256:37 cxx_eq_to_ne               if (((flags & SeparatorValue) == 0) && ((flags & SigmaValue) == 0))
     x  geometry.c:1258:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & RhoValue) == 0))
+    x  geometry.c:1795:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  geometry.c:1828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-9ae3bdd76-geometry.json
+  full results: build-oracle/work/mutation-confirm-e7f5bfd63-geometry.json
