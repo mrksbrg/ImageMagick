@@ -15661,6 +15661,176 @@
    "why": "skips a free: a leak, never visible in output"
   },
   {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "AcquireSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "perror(\"unable to initialize mutex attributes\");",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "AcquireSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "_exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "AcquireSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "perror(\"unable to initialize mutex\");",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "AcquireSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "_exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "AcquireSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "perror(\"unable to destroy mutex attributes\");",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "AcquireSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "_exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "ActivateSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "removes a lock, unlock or mutex set-up/tear-down call on the magick mutex; the command line runs these with no competing thread, so no output depends on it (only a race under contention would)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "LockSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "perror(\"unable to lock mutex\");",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "LockSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "_exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "RelinquishSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LockMagickMutex();",
+   "verdict": "unobservable",
+   "why": "removes a lock, unlock or mutex set-up/tear-down call on the magick mutex; the command line runs these with no competing thread, so no output depends on it (only a race under contention would)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "RelinquishSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "perror(\"unable to destroy mutex\");",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "RelinquishSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "_exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "RelinquishSemaphoreMemory",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "free(memory);",
+   "verdict": "unobservable",
+   "why": "leaves the semaphore's block unfreed: a leak, no output changes"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "SemaphoreComponentGenesis",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitializeMagickMutex();",
+   "verdict": "unobservable",
+   "why": "removes a lock, unlock or mutex set-up/tear-down call on the magick mutex; the command line runs these with no competing thread, so no output depends on it (only a race under contention would)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "SemaphoreComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyMagickMutex();",
+   "verdict": "unobservable",
+   "why": "removes a lock, unlock or mutex set-up/tear-down call on the magick mutex; the command line runs these with no competing thread, so no output depends on it (only a race under contention would)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "UnlockSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "perror(\"unable to unlock mutex\");",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/semaphore.c",
+   "function": "UnlockSemaphoreInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "_exit(1);",
+   "verdict": "unobservable",
+   "why": "the fatal path after a pthread mutex call fails (perror, _exit); pthread_mutex_* does not fail on a valid mutex, so no case reaches it without fault injection"
+  },
+  {
    "at": 10,
    "file": "MagickCore/shear.c",
    "function": "CropToFitImage",
