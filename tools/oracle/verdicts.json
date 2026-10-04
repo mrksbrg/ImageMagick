@@ -23101,6 +23101,26 @@
    "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
    "verdict": "unresolved",
    "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((size_t) (q-text+MagickPathExtent) >= extent)",
+   "verdict": "equivalent",
+   "why": "differs only when q-text+MagickPathExtent equals extent exactly; the mutant then grows the buffer one format character later, and the MagickPathExtent bytes still free cover any single expansion (no expansion is that long), so the text is the same"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/log.c",
+   "function": "TranslateEvent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((size_t) (q-text+MagickPathExtent) >= extent)",
+   "verdict": "unresolved",
+   "why": "should make the growth test always true, like the >= to < mutant (killed by the 60-character format), but on the Mac this mutant changes nothing even there: the subtraction seems folded away in the build; left for ERDC"
   }
  ]
 }

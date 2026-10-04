@@ -5355,6 +5355,9 @@ _LOG_FILES2 = (
     ('two log maps in one file', '<logmap>\n  <log events="None" output="stdout" format="first %e"/>\n</logmap>\n<logmap>\n  <log events="None" output="stdout" format="second %e"/>\n</logmap>\n', ('Annotate', '1', '5'), {}),
     ('an event mask that is not one', '<logmap>\n  <log events="Annotate" output="stdout" format="%d %e"/>\n</logmap>\n', ('Nonsense', '1', '4'), {}),
 )
+_LOG_FILES2 += (("a format of 60 plain characters (60 buffer doublings if the growth test is wrong)",
+                 '<logmap>\n  <log events="None" output="stdout" format="%s%%e"/>\n</logmap>\n' % ("x" * 60),
+                 ("Annotate", "1", "5"), {}),)
 GAP_STEP_CASES += [("driver logcfg: %s" % name, _driver("logcfg", *args), dict({"log.xml": xml}, **extra))
                    for name, xml, args, extra in _LOG_FILES2]
 # mime.c GetMimeInfo through imdriver: its byte, short, long and string matching reads mime.xml's
