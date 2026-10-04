@@ -12101,8 +12101,8 @@
    "mutator": "cxx_add_to_sub",
    "nth": 0,
    "src": "depth+1,exception);",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+   "verdict": "unobservable",
+   "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
    "at": 15,
@@ -12111,28 +12111,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (*attribute == *DirectorySeparator)",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*c == ':')",
    "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*p == '\\\\')",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+   "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
    "at": 10,
@@ -12141,18 +12121,8 @@
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ge_to_lt",
-   "nth": 0,
-   "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+   "verdict": "unobservable",
+   "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
    "at": 17,
@@ -12171,8 +12141,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (*path != '\\0')",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+   "verdict": "unobservable",
+   "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
    "at": 14,
@@ -12181,28 +12151,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (attribute != (const char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 1,
-   "src": "if (attribute != (const char *) NULL)",
    "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 3,
-   "src": "if (attribute != (const char *) NULL)",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+   "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
    "at": 14,
@@ -12241,28 +12191,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (file_xml != (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (isdigit((int) ((unsigned char) *p)) != 0)",
    "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
-  },
-  {
-   "at": 25,
-   "file": "MagickCore/mime.c",
-   "function": "LoadMimeCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (mime_info->data_type != StringData)",
-   "verdict": "unobservable",
-   "why": "parses mime.xml's magic-number fields (data, offset, priority, endian), which only GetMimeInfo reads, and nothing on the command line calls GetMimeInfo; -list mime prints none of them"
+   "why": "in LoadMimeCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so base and mutant load nothing either way (the driver's mimecfg cases reach the branch)"
   },
   {
    "at": 14,
@@ -12312,7 +12242,7 @@
    "nth": 0,
    "src": "GetPathComponent(filename,HeadPath,path);",
    "verdict": "unresolved",
-   "why": "the include loop is never entered: a case's own mime.xml with <include file=\"more.xml\"/> next to it lists only its own entries, never the included ones (checked by hand); why GetXMLTreeChild finds no include is not traced"
+   "why": "removing it leaves path uninitialised before the include name is appended, so what is read depends on the stack (undefined behaviour); the Mac's mimecfg include case happens to report an include nested too deeply, which is not a portable kill"
   },
   {
    "at": 0,

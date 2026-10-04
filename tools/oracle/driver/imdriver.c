@@ -2175,6 +2175,40 @@ static int LogCfgCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int MimeCfgCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* mimecfg [name=FILENAME] HEX|-|empty...   with the case directory first on MAGICK_CONFIGURE_PATH
+     (see main), so the case's own mime.xml is parsed first: GetMimeInfo on each byte string (hex;
+     - is a NULL magic, empty a zero length), with the filename set by the last name= (none: NULL).
+     Prints the type and description found (MimeInfo is opaque, so its path cannot be shown). */
+  const char *filename=(const char *) NULL;
+  unsigned char bytes[256];
+  int k;
+  for (k=2; k < argc; k++)
+  {
+    const MimeInfo *info;
+    const unsigned char *magic=bytes;
+    size_t length=0;
+    if (strncmp(argv[k],"name=",5) == 0)
+      {
+        filename=*(argv[k]+5) != '\0' ? argv[k]+5 : (const char *) NULL;
+        continue;
+      }
+    if (strcmp(argv[k],"-") == 0)
+      magic=(const unsigned char *) NULL;
+    else if (strcmp(argv[k],"empty") != 0)
+      length=FromHex(argv[k],bytes,sizeof(bytes));
+    info=GetMimeInfo(filename,magic,length,exception);
+    if (info == (const MimeInfo *) NULL)
+      (void) printf("%s %s: none\n",filename != (const char *) NULL ? filename : "-",argv[k]);
+    else
+      (void) printf("%s %s: %s (%s)\n",filename != (const char *) NULL ? filename : "-",argv[k],
+        GetMimeType(info),GetMimeDescription(info));
+  }
+  Report(exception);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -2185,7 +2219,8 @@ int main(int argc,char **argv)
       (void) fprintf(stderr,"imdriver gradient|mask|getmask|acquire|list|mime ...\n");
       return(2);
     }
-  if ((strcmp(argv[1],"configure") == 0) || (strcmp(argv[1],"logcfg") == 0))
+  if ((strcmp(argv[1],"configure") == 0) || (strcmp(argv[1],"logcfg") == 0) ||
+      (strcmp(argv[1],"mimecfg") == 0))
     {
       char cwd[MagickPathExtent], value[3*MagickPathExtent];
       const char *old=getenv("MAGICK_CONFIGURE_PATH");
@@ -2227,6 +2262,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"nextimage") == 0) status=NextImageCmd(argc,argv,exception);
   else if (strcmp(argv[1],"configure") == 0) status=ConfigureCmd(argc,argv,exception);
   else if (strcmp(argv[1],"logcfg") == 0) status=LogCfgCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"mimecfg") == 0) status=MimeCfgCmd(argc,argv,exception);
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);

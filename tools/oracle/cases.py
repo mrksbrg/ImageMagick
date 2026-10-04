@@ -5332,6 +5332,54 @@ _LOG_FILES = (
      '/>\n</logmap>\n<!-- unclosed', ("Annotate",)))
 GAP_STEP_CASES += [("driver logcfg: %s" % name, _driver("logcfg", *args), {"log.xml": xml})
                    for name, xml, args in _LOG_FILES]
+# mime.c GetMimeInfo through imdriver: its byte, short, long and string matching reads mime.xml's
+# data-type, offset, mask and endian fields, and no command-line case reaches it with an entry the
+# build's mime.xml does not have. With the case directory first on MAGICK_CONFIGURE_PATH the case's
+# mime.xml is parsed first; its entries have priority -100, so a match beats every build entry. Each
+# lookup is a hex byte string, sized at and around the offset+4 (or offset+extent+length) bound;
+# a lookup that misses falls to whichever build entry matches (pattern-only entries match any bytes
+# when no filename is given), and - (a NULL magic) shows the head of the list, where the last match
+# was moved.
+def _mime_xml(*entries, include=""):
+    return "<mimemap>\n" + include + "".join("  <mime %s/>\n" % e for e in entries) + "</mimemap>\n"
+_MIME_P = ' priority="-100"'
+_MIME_FILES = (
+    ("a byte at offset 2",
+     _mime_xml('type="case/byte" description="byte at 2" data-type="byte" offset="2" magic="0x41"' + _MIME_P),
+     ("000041000000", "0000410000", "000041", "000042000000", "-")),
+    ("a byte after a relative and an absolute include",
+     _mime_xml('type="case/byte" description="byte at 2" data-type="byte" offset="2" magic="0x41"' + _MIME_P,
+               include='  <include file="more.xml"/>\n  <include file="/nonexistent/more.xml"/>\n'),
+     ("000041000000", "-")),
+    ("a masked byte",
+     _mime_xml('type="case/bytemask" description="masked byte" data-type="byte" offset="1" magic="0x4F" mask="0x0F"' + _MIME_P),
+     ("000f000000", "004f000000", "000e000000", "000f0000")),
+    ("shorts LSB, MSB, host and masked",
+     _mime_xml('type="case/short-lsb" description="short LSB" data-type="short" offset="1" magic="0x4142" endian="LSB"' + _MIME_P,
+               'type="case/short-msb" description="short MSB" data-type="short" offset="1" magic="0x4344" endian="MSB"' + _MIME_P,
+               'type="case/short-host" description="short host" data-type="short" offset="1" magic="0x4546"' + _MIME_P,
+               'type="case/short-mask" description="short masked" data-type="short" offset="1" magic="0x47FF" mask="0x00FF"' + _MIME_P),
+     ("0042410000", "00424100", "0041420000", "0043440000", "0044430000", "0046450000", "00ff000000", "00ff470000", "-")),
+    ("longs LSB, MSB, host and masked",
+     _mime_xml('type="case/long-lsb" description="long LSB" data-type="long" offset="1" magic="0x41424344" endian="LSB"' + _MIME_P,
+               'type="case/long-msb" description="long MSB" data-type="long" offset="1" magic="0x45464748" endian="MSB"' + _MIME_P,
+               'type="case/long-host" description="long host" data-type="long" offset="1" magic="0x494A4B4C"' + _MIME_P,
+               'type="case/long-mask" description="long masked" data-type="long" offset="1" magic="0x4D4E4FFF" mask="0x000000FF"' + _MIME_P),
+     ("0044434241", "00444342", "0041424344", "0045464748", "0048474645", "004c4b4a49", "00ff000000", "00ff4f4e4d", "-")),
+    ("a string within an extent",
+     _mime_xml('type="case/string" description="ABC within 1:3" magic="ABC" offset="1:3"' + _MIME_P),
+     ("78414243", "7878414243", "78787878414243", "7878787841", "7878787878414243", "787878787841424378",
+      "78787878787841424378", "787878414278", "-")),
+    ("a string with octal and letter escapes",
+     _mime_xml('type="case/escaped" description="escaped string" magic="\\101B\\tC\\nD" offset="0"' + _MIME_P),
+     ("414209430a4400", "414209430a44", "4142094300", "-")),
+    ("priorities and a pattern",
+     _mime_xml('type="case/low" description="priority -100" data-type="byte" offset="0" magic="0x41" priority="-100"',
+               'type="case/high" description="priority -50" data-type="byte" offset="0" magic="0x41" priority="-50"',
+               'type="case/pat" description="a pattern" pattern="*.qqq" priority="-200"'),
+     ("41000000", "-", "name=a.qqq", "41000000", "-", "name=a.rrr", "41000000", "empty")))
+GAP_STEP_CASES += [("driver mimecfg: %s" % name, _driver("mimecfg", *args), {"mime.xml": xml})
+                   for name, xml, args in _MIME_FILES]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default
