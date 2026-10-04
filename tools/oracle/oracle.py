@@ -517,9 +517,28 @@ def library_fingerprint(binary):
     return hashlib.sha256("\n".join(parts).encode()).hexdigest()
 
 
+def program_fingerprint(binary):
+    """The external programs the build's delegates.xml names, as found on the oracle's PATH,
+    by resolved path and size, or absent. Installing or removing one (Inkscape, 2026-10-04)
+    changes what the cases that reach its delegate produce, so it starts a new baseline."""
+    bld = os.path.dirname(os.path.dirname(os.path.abspath(binary)))
+    try:
+        xml = open(os.path.join(bld, "config", "delegates.xml"), errors="replace").read()
+    except OSError:
+        xml = ""
+    names = sorted(set(re.findall(r"&apos;([A-Za-z0-9_.+-]+)&apos;", xml)))
+    path = env_for(binary, "/")["PATH"]
+    parts = []
+    for name in names:
+        found = shutil.which(name, path=path)
+        real = os.path.realpath(found) if found else None
+        parts.append("%s=%s:%d" % (name, real, os.path.getsize(real)) if real else name + "=")
+    return hashlib.sha256("\n".join(parts).encode()).hexdigest()
+
+
 def cache_path(binary, manifest):
-    key = "%s-%s-h%s-l%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
-                             library_fingerprint(binary)[:8])
+    key = "%s-%s-h%s-l%s-p%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
+                                 library_fingerprint(binary)[:8], program_fingerprint(binary)[:8])
     return os.path.join(WORK, "cache", key + ".json")
 
 

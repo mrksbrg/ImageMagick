@@ -2469,3 +2469,16 @@ kills in image.c, annotate.c, locale.c, memory.c, policy.c and configure.c, set 
 The cache key now includes a fingerprint of the shared libraries the binary loads (resolved path
 and size, `oracle.library_fingerprint`), so an upgrade starts a new baseline. Hand runs
 (`stepkill`) compute their baseline in the same session and were not affected.
+
+**Inkscape removed again (2026-10-04, 08:18).** The Mac's determinism sweep that night
+(`selfcheck --repeat 4`, 12,291 cases, mull-macx) found 24 nondeterministic cases: 22 of them
+reach the SVG delegate, and Inkscape left a different fontconfig cache under the case's `HOME`
+on every run; the other two are Windows' `matrix` cases (`-hough-lines` with the matrix on
+disk), which leave differently named temporary files under load. Inkscape was uninstalled; it
+killed nothing. No Mac report written while it was installed credits a kill to the 22 cases
+(their kills in other reports come from ERDC and from before the install), so nothing is
+retracted. Without it, the 24 cases ran 8 times each with no difference. The baseline cache
+key now also includes the external programs `delegates.xml` names, as found on the oracle's
+PATH (`oracle.program_fingerprint`): the Inkscape-era baselines would otherwise have counted
+every mutant the SVG cases meet as killed. The key change starts a new baseline once on every
+machine.
