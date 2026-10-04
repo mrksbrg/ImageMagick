@@ -447,11 +447,16 @@ static int CompareText(const void *a,const void *b)
 
 static void PrintList(LinkedListInfo *list)
 {
-  const void *value;
-  (void) printf("  [%.20g]",(double) GetNumberOfElementsInLinkedList(list));
-  ResetLinkedListIterator(list);
-  while ((value=GetNextValueInLinkedList(list)) != (const void *) NULL)
-    (void) printf(" %s",Text(value));
+  /* through LinkedListToArray, which leaves the list's iterator where the script put it and
+     stops at the end of the chain (a middle insertion counts an element it drops) */
+  size_t n=GetNumberOfElementsInLinkedList(list), i;
+  void **array=(void **) AcquireQuantumMemory(n+1,sizeof(*array));
+  (void) printf("  [%.20g]",(double) n);
+  (void) memset(array,0,(n+1)*sizeof(*array));
+  (void) LinkedListToArray(list,array);
+  for (i=0; (i < n) && (array[i] != (void *) NULL); i++)
+    (void) printf(" %s",Text(array[i]));
+  array=(void **) RelinquishMagickMemory(array);
   (void) printf(" | empty %d last %s\n",(int) IsLinkedListEmpty(list),
     Text(GetLastValueInLinkedList(list)));
 }
@@ -514,13 +519,41 @@ static int List2(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int int_keys=0;  /* splaytree mode:int: keys are small integers, compared as pointers */
+
+static const void *Key(const char *text)
+{
+  return(int_keys != 0 ? (const void *) (size_t) (atol(text)+1) : (const void *) Intern(text));
+}
+
+static const void *Lookup(const char *text)
+{
+  /* a key to look up: a fresh copy of the text, so only a comparison by content finds it */
+  return(int_keys != 0 ? Key(text) : (const void *) ConstantString(text));
+}
+
+static const char *KeyText(const void *key)
+{
+  static char text[32];
+  if (int_keys == 0)
+    return(Text(key));
+  (void) FormatLocaleString(text,sizeof(text),"%ld",(long) ((size_t) key)-1);
+  return(text);
+}
+
+static void *FreedKey(void *key)
+{
+  (void) printf(" freedkey:%s",KeyText(key));
+  return((void *) NULL);
+}
+
 static void PrintTree(SplayTreeInfo *tree)
 {
   const void *key;
   (void) printf("  {%.20g}",(double) GetNumberOfNodesInSplayTree(tree));
   ResetSplayTreeIterator(tree);
   while ((key=GetNextKeyInSplayTree(tree)) != (const void *) NULL)
-    (void) printf(" %s=%s",Text(key),Text(GetValueFromSplayTree(tree,key)));
+    (void) printf(" %s=%s",KeyText(key),Text(GetValueFromSplayTree(tree,key)));
   (void) printf(" | root %s\n",Text(GetRootValueFromSplayTree(tree)));
 }
 
@@ -538,8 +571,10 @@ static int Tree(int argc,char **argv,ExceptionInfo *exception)
       /* mode:free gives the tree relinquish functions; mode:pointer compares keys by address
          (the order of the interned strings), mode:freepointer both */
       const char *mode=argv[2]+5;
-      tree=NewSplayTree(strstr(mode,"pointer") != NULL ? (int (*)(const void *,const void *)) NULL :
-        CompareSplayTreeString,strstr(mode,"free") != NULL ? Freed : (void *(*)(void *)) NULL,
+      int_keys=strstr(mode,"int") != NULL ? 1 : 0;
+      tree=NewSplayTree((strstr(mode,"pointer") != NULL) || (int_keys != 0) ?
+        (int (*)(const void *,const void *)) NULL : CompareSplayTreeString,
+        strstr(mode,"free") != NULL ? FreedKey : (void *(*)(void *)) NULL,
         strstr(mode,"free") != NULL ? Freed : (void *(*)(void *)) NULL);
       i=3;
     }
@@ -556,13 +591,17 @@ static int Tree(int argc,char **argv,ExceptionInfo *exception)
       {
         char *value=strchr(arg,'=');
         if (value != (char *) NULL) *value++='\0';
-        status=AddValueToSplayTree(tree,Intern(arg),Intern(value != NULL ? value : ""));
+        status=AddValueToSplayTree(tree,Key(arg),Intern(value != NULL ? value : ""));
       }
-    else if (strcmp(op,"get") == 0) result=GetValueFromSplayTree(tree,Intern(arg));
-    else if (strcmp(op,"delete") == 0) status=DeleteNodeFromSplayTree(tree,Intern(arg));
+    else if (strcmp(op,"get") == 0) result=GetValueFromSplayTree(tree,Lookup(arg));
+    else if (strcmp(op,"delete") == 0) status=DeleteNodeFromSplayTree(tree,Lookup(arg));
     else if (strcmp(op,"deletevalue") == 0) status=DeleteNodeByValueFromSplayTree(tree,Intern(arg));
-    else if (strcmp(op,"removevalue") == 0) result=RemoveNodeByValueFromSplayTree(tree,Intern(arg));
-    else if (strcmp(op,"remove") == 0) result=RemoveNodeFromSplayTree(tree,Intern(arg));
+    else if (strcmp(op,"removevalue") == 0)
+      {
+        const void *key=RemoveNodeByValueFromSplayTree(tree,Intern(arg));
+        (void) printf("key %s\n",key != (const void *) NULL ? KeyText(key) : "(null)");
+      }
+    else if (strcmp(op,"remove") == 0) result=RemoveNodeFromSplayTree(tree,Lookup(arg));
     else if (strcmp(op,"reset") == 0) ResetSplayTree(tree);
     else if (strcmp(op,"quiet") == 0) { loud=0; continue; }
     else if (strcmp(op,"loud") == 0) { loud=1; continue; }
@@ -572,9 +611,9 @@ static int Tree(int argc,char **argv,ExceptionInfo *exception)
         char key[16], value[16];
         for (j=0; j < n; j++)
         {
-          (void) FormatLocaleString(key,sizeof(key),"k%04ld",j);
+          (void) FormatLocaleString(key,sizeof(key),int_keys != 0 ? "%ld" : "k%04ld",j);
           (void) FormatLocaleString(value,sizeof(value),"v%04ld",j);
-          status=AddValueToSplayTree(tree,Intern(key),Intern(value));
+          status=AddValueToSplayTree(tree,Key(key),Intern(value));
         }
       }
     else if (strcmp(op,"values") == 0)

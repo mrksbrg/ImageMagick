@@ -5250,6 +5250,20 @@ def _windrv_cases():
                                                "add:k=4 removevalue:4 clone"),
         ):
             yield _windrv("splay tree, %s: %s" % (mode, label), tuple(["splaytree", "mode:" + mode] + ops.split()))
+    # trees without a compare function, as profile.c and property.c make them (keys compared as
+    # pointers; here small integers, so the order is the same every run)
+    for mode in ("int", "freeint"):
+        for label, ops in (
+                ("add, delete and remove", "add:50=m add:20=c add:90=x add:10=a add:20=r delete:90 remove:10 "
+                                           "removevalue:r deletevalue:m deletevalue:q removevalue:q get:20 values"),
+                ("reset of a tree with inner nodes", "add:40=d add:20=b add:60=f add:10=a add:30=c add:50=e "
+                                                     "add:70=g get:10 get:70 reset values add:80=q"),
+                ("remove the root and leaves", "add:40=d add:20=b add:60=f remove:40 remove:20 get:60 "
+                                               "deletevalue:f add:11=k removevalue:k get:99 delete:99 remove:99 clone"),
+                ("a chain deep enough to balance", "quiet addrange:1100 loud get:0 get:550 quiet delete:1 "
+                                                   "removevalue:v0002 remove:3 deletevalue:v0004 loud get:5"),
+        ):
+            yield _windrv("splay tree, %s: %s" % (mode, label), tuple(["splaytree", "mode:" + mode] + ops.split()))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
