@@ -2745,7 +2745,11 @@ on all three machines. Until then type.c stays at its adjusted ~84% with this on
 short; its survivors are left `unresolved` (counted against), not written off, because a
 second corpus font would turn most of them into clean kills.
 
-## type.c: a second corpus font makes font selection observable — GetTypeInfoByFamily trusted (Mac, 2026-10-04)
+## type.c: a second corpus font makes font selection observable (Mac, 2026-10-04) — SUPERSEDED, see the correction below
+
+> **Note (correction):** the "trusted" conclusion in this section is wrong; see "Correction:
+> type.c is NOT trusted" further down. The second font and `Narrow.ttf` are real and kept; only
+> the trust claim (which rested on a flaky `Helvetica` kill) is retracted.
 
 The owner approved adding a second font to the frozen corpus (the decision the plateau note
 above asked for). **`Narrow.ttf`** (`tools/oracle/mknarrow.py`) is Generic.ttf with its glyph
