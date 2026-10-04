@@ -1,8 +1,8 @@
 mutate: 2 mutants in MagickCore/client\.c$, 1 functions
-mutate: baseline over 76 cases in 0s
-  mutants: 2/2 (3s)
+mutate: baseline over 128 cases in 0s
+  mutants: 2/2 (6s)
 
-mutate: 2 mutants, 3s
+mutate: 2 mutants, 6s
   killed 0, survived 2 (0 capped), no coverage 0, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -14,4 +14,4 @@ mutate: 2 mutants, 3s
     x  client.c:157:41 cxx_ne_to_eq               if ((path != (char *) NULL) && (*path != '\0'))
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ca57d53bb-client.json
+  full results: build-oracle/work/mutation-confirm-acf185307-client.json
