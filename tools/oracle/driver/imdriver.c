@@ -433,6 +433,13 @@ static void *Same(void *value)
   return(value);
 }
 
+static void *Freed(void *value)
+{
+  /* a tree's relinquish function: reports, frees nothing (the strings are interned) */
+  (void) printf(" freed:%s",Text(value));
+  return((void *) NULL);
+}
+
 static int CompareText(const void *a,const void *b)
 {
   return(strcmp((const char *) a,(const char *) b));
@@ -525,8 +532,20 @@ static int Tree(int argc,char **argv,ExceptionInfo *exception)
   SplayTreeInfo *tree;
   int i, loud=1;
 
-  tree=NewSplayTree(CompareSplayTreeString,(void *(*)(void *)) NULL,(void *(*)(void *)) NULL);
-  for (i=2; i < argc; i++)
+  i=2;
+  if ((argc > 2) && (strncmp(argv[2],"mode:",5) == 0))
+    {
+      /* mode:free gives the tree relinquish functions; mode:pointer compares keys by address
+         (the order of the interned strings), mode:freepointer both */
+      const char *mode=argv[2]+5;
+      tree=NewSplayTree(strstr(mode,"pointer") != NULL ? (int (*)(const void *,const void *)) NULL :
+        CompareSplayTreeString,strstr(mode,"free") != NULL ? Freed : (void *(*)(void *)) NULL,
+        strstr(mode,"free") != NULL ? Freed : (void *(*)(void *)) NULL);
+      i=3;
+    }
+  else
+    tree=NewSplayTree(CompareSplayTreeString,(void *(*)(void *)) NULL,(void *(*)(void *)) NULL);
+  for ( ; i < argc; i++)
   {
     char *op=argv[i], *arg=strchr(op,':');
     const void *result=(const void *) NULL;
@@ -624,10 +643,12 @@ static int View(int argc,char **argv,ExceptionInfo *exception)
       (int) status);
     PrintQuanta(image,q);
   }
-  GetPixelInfo(image,&info);
+  (void) memset(&info,0,sizeof(info));  /* GetOneCacheViewVirtualPixelInfo must fill it in */
   status=GetOneCacheViewVirtualPixelInfo(view,x,y,&info,exception);
-  (void) printf("info %d %.7g %.7g %.7g %.7g\n",(int) status,(double) info.red,(double) info.green,
-    (double) info.blue,(double) info.alpha);
+  (void) printf("info %d %.7g %.7g %.7g %.7g %.7g %s depth %.20g fuzz %.7g alpha %d\n",(int) status,
+    (double) info.red,(double) info.green,(double) info.blue,(double) info.black,(double) info.alpha,
+    CommandOptionToMnemonic(MagickColorspaceOptions,(ssize_t) info.colorspace),(double) info.depth,
+    info.fuzz,(int) info.alpha_trait);
   clone=CloneCacheView(view);
   (void) memset(q,0,sizeof(q));
   status=GetOneCacheViewVirtualPixel(clone,x,y,q,exception);

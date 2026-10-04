@@ -5165,7 +5165,8 @@ GAP_STEP_CASES += [(label, steps, {}) for label, steps in _DRIVER_CASES]
 # so a middle insertion is only ever a script's last step. cache-view.c: the one-pixel getters,
 # with each virtual pixel method but Random, inside and outside the image.
 _WINDRV_TYPES = ("char", "short", "long", "longlong", "float", "double", "quantum")
-_WINDRV_MAPS = [("-", m) for m in ("RGB", "BGR", "RGBA", "BGRA", "RGBP", "BGRP", "I", "ARGB", "OIP")] + \
+_WINDRV_MAPS = [("-", m) for m in ("RGB", "BGR", "RGBA", "BGRA", "RGBP", "BGRP", "I", "ARGB", "OIP",
+                                    "BGRO", "RGBO")] + \
                [("CMYK", m) for m in ("CMYK", "CMYKA", "KYMC")]
 
 
@@ -5222,6 +5223,36 @@ def _windrv_cases():
             ("an empty tree", "get:a delete:a remove:a removevalue:a deletevalue:a values clone reset"),
     ):
         yield _windrv("splay tree: %s" % label, tuple(["splaytree"] + ops.split()))
+    # second wave (2026-10-04, after the first round): iterator checks after each kind of change,
+    # a middle get and removal, trees with relinquish functions. Not kept: keys compared by address
+    # (their order follows heap addresses, which varied in one of four runs) and -debug pixel logs
+    # (LogPixelChannels; stable by hand with -log %e, not under the oracle)
+    for label, ops in (
+            ("iterator at the head, then an insertion at the head", "0 append:a append:b reset insert:0:z next next"),
+            ("iterator at the end, then an append and a tail insertion",
+             "0 append:a next next insert:1:b next insert:2:c next"),
+            ("middle get and removal", "0 append:a append:b append:c append:d append:e get:1 get:3 removeat:2 "
+                                       "removeat:2 get:2 removeat:1"),
+            ("iterator on the removed head, by value and by index",
+             "0 append:a append:b append:c reset remove:a next reset removeat:0 next"),
+            ("iterator on a removed middle element", "0 append:a append:b append:c append:d next next "
+                                                     "removeat:1 next next"),
+            ("iterator on the removed tail", "0 append:a append:b next next removelast next append:c next"),
+    ):
+        yield _windrv("linked list: %s" % label, tuple(["linkedlist"] + ops.split()))
+    for mode in ("free",):
+        for label, ops in (
+                ("add, delete and remove", "add:m=1 add:c=2 add:x=3 add:a=4 add:c=5 delete:x remove:a "
+                                           "removevalue:5 deletevalue:1 deletevalue:9 removevalue:9 values"),
+                ("reset of a tree with inner nodes", "add:d=1 add:b=2 add:f=3 add:a=4 add:c=5 add:e=6 add:g=7 "
+                                                     "get:a get:g reset values add:q=8"),
+                ("remove the root and leaves", "add:d=1 add:b=2 add:f=3 remove:d remove:b get:f deletevalue:3 "
+                                               "add:k=4 removevalue:4 clone"),
+        ):
+            yield _windrv("splay tree, %s: %s" % (mode, label), tuple(["splaytree", "mode:" + mode] + ops.split()))
+    # pixel.c: SortImagePixels (-sort-pixels)
+    for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
+        yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
     for name, x, y in (("rose", 5, 5), ("rose_alpha", -3, 100), ("palette", 69, 45), ("cmyk", 100, -20),
                        ("gray16", 2, 2), ("tiny", 0, 0), ("bilevel", -1, -1)):
         yield _windrv("cache view of %s at %d,%d" % (name, x, y), ("cacheview", "{C}/%s.miff" % name, str(x), str(y)))
