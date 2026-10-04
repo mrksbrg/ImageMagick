@@ -5561,6 +5561,23 @@ def _windrv_cases():
             for meta in ("0", "3", "8"):
                 yield _windrv("cache %s in %s, metacontent %s" % (name, storage, meta),
                               ("cache", img(name), storage, meta))
+    # blob.c: blob input over a file (DiscardBlobBytes, ReadBlobMSBLongLong, ErrorBlob,
+    # ReadBlobString over LF, CRLF and CR endings, a line longer than its 4 KB buffer and a last
+    # line without one, EOFBlob, DuplicateBlob, ImageToFile) and SetBlobExtent on a file opened
+    # for writing
+    blob_texts = {
+        "lines": "ABCDEFGHIJ first\nsecond\r\nthird\rfourth\n\n" + "x" * 5000 + "\nlast no newline",
+        "short": "abc",
+        "empty": "",
+        "crlf": "one\r\ntwo\r\n\r\nthree\r\n",
+    }
+    for name, discard in (("lines", "3"), ("lines", "0"), ("lines", "9000"), ("short", "1"), ("empty", "0"),
+                          ("crlf", "2")):
+        yield _with_inputs(_windrv("blob input over %s, discard %s" % (name, discard),
+                                   ("blobio", "read", "%s.txt" % name, discard), ["copy.out"]),
+                           files={"%s.txt" % name: blob_texts[name]})
+    for extent in ("0", "1", "100", "5000"):
+        yield _windrv("SetBlobExtent %s" % extent, ("blobio", "extent", "e.bin", extent), ["e.bin"])
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

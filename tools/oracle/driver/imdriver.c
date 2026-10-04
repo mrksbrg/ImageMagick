@@ -1674,6 +1674,78 @@ static int CacheCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* blob.c: blob input primitives over a file, SetBlobExtent over a file opened for writing */
+static int BlobIOCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* blobio read FILE DISCARD | blobio extent OUT EXTENT */
+  ImageInfo *image_info=AcquireImageInfo();
+  Image *image=AcquireImage(image_info,exception);
+  MagickBooleanType status;
+  if ((argc == 5) && (strcmp(argv[2],"read") == 0))
+    {
+      char line[MagickPathExtent];
+      int n=0;
+      Image *other;
+      (void) CopyMagickString(image->filename,argv[3],MagickPathExtent);
+      status=OpenBlob(image_info,image,ReadBinaryBlobMode,exception);
+      (void) printf("open %d size %.20g\n",(int) status,(double) GetBlobSize(image));
+      if (status != MagickFalse)
+        {
+          (void) printf("discard %d tell %.20g\n",(int) DiscardBlobBytes(image,(MagickSizeType)
+            atol(argv[4])),(double) TellBlob(image));
+          (void) printf("msb long long %.20g error %d\n",(double) ReadBlobMSBLongLong(image),ErrorBlob(image));
+          while (ReadBlobString(image,line) != (char *) NULL)
+          {
+            (void) printf("line %d: %.20g %08lx\n",n,(double) strlen(line),Fnv((const unsigned char *) line,
+              strlen(line)));
+            if (++n > 100)
+              break;
+          }
+          (void) printf("eof %d error %d\n",EOFBlob(image),ErrorBlob(image));
+          other=AcquireImage(image_info,exception);
+          DuplicateBlob(other,image);
+          (void) printf("duplicate size %.20g\n",(double) GetBlobSize(other));
+          other=DestroyImage(other);
+          (void) CloseBlob(image);
+          status=OpenBlob(image_info,image,ReadBinaryBlobMode,exception);
+          {
+            char copy[MagickPathExtent];
+            (void) CopyMagickString(copy,"copy.out",MagickPathExtent);
+            (void) printf("image to file %d\n",(int) ImageToFile(image,copy,exception));
+          }
+          (void) CloseBlob(image);
+        }
+    }
+  else if ((argc == 5) && (strcmp(argv[2],"extent") == 0))
+    {
+      FILE *file;
+      long size=-1;
+      (void) CopyMagickString(image->filename,argv[3],MagickPathExtent);
+      status=OpenBlob(image_info,image,WriteBinaryBlobMode,exception);
+      if (status != MagickFalse)
+        {
+          (void) printf("extent %d\n",(int) SetBlobExtent(image,(MagickSizeType) atol(argv[4])));
+          (void) WriteBlobString(image,"abc");
+          (void) printf("tell %.20g\n",(double) TellBlob(image));
+          (void) CloseBlob(image);
+        }
+      file=fopen(argv[3],"rb");
+      if (file != (FILE *) NULL)
+        {
+          (void) fseek(file,0,SEEK_END);
+          size=ftell(file);
+          (void) fclose(file);
+        }
+      (void) printf("file size %ld\n",size);
+    }
+  else
+    return(Fail(exception,"blobio: read FILE DISCARD | extent OUT EXTENT"));
+  Report(exception);
+  image=DestroyImage(image);
+  image_info=DestroyImageInfo(image_info);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1706,6 +1778,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"color") == 0) status=ColorCmd(argc,argv,exception);
   else if (strcmp(argv[1],"stream") == 0) status=StreamCmd(argc,argv,exception);
   else if (strcmp(argv[1],"cache") == 0) status=CacheCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"blobio") == 0) status=BlobIOCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
