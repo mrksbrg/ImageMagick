@@ -2976,6 +2976,8 @@ log notes). The driver prints the case's path as `CASE`.
 | log.c | `logcfg` | 8 log.xml shapes (limit at/below/above 1024, unlimited, spaced handlers, events, stealth, include) | 8 kills; 5 include verdicts |
 | mime.c | `mimecfg` | byte/short/long/string patterns, masks, LSB/MSB/host endianness, `offset:extent`, escapes, priorities, a pattern, includes; byte strings sized at and around each `offset+4` bound | all 31 GetMimeInfo survivors; 7 LoadMimeCache mutants whose "unobservable" verdicts were wrong (removed); include `depth` `>=`→`<` |
 | delegate.c | `delegatecfg` | every %-letter as rose:'s fields change (quality 0, units cm, resolution exactly `MagickEpsilon`, rows/columns 0, extent, scenes, alpha), escapes and `&LT;`/`&GT;`/`&AMP;` (the loader decodes only lower case), lookups by decode/encode/mode, lists, multi-line commands, 7 parser shapes, InvokeDelegate of programs that do not exist, ExternalDelegateCommand against a policy that refuses all but a few tokens | 51 of 74 survivors, plus 34 that had verdicts or kinds (42 verdicts removed) |
+| profile.c | `profile` | EXIF, 8BIM and XMP blobs built byte by byte at each bound (`profilecases.py`): IFDs with no room for a next pointer, Exif offsets to 0 / length−2 / length−1, nested IFDs that overlap the Exif IFD's entries at the nesting limit, a 225 KB IFD at offset 0 (0x4949 entries), 8BIM resources of size 0 or ending exactly at the end, clipping paths with ids 1999..2999, XMP resolutions as fractions, a max-profile-size policy | 61 of 98; the rest proven equivalent or leaks |
+| log.c | `logcfg … COUNT LEN [method]` | every reproducible format letter, 5000-character events, file rotation (2 and 3 generations, a file at exactly its limit, append), a log method, console/stderr, an unwritable log file, two maps in one file, a log element in a comment | 49 of 99; copy limits never reached (equivalent), timings unobservable |
 | also tonight | `string`, `symlink`, `metrics`, `memory`, `pathauth`, `nextimage`, `drawinfo` | see the commits and the sections above | string.c, utility.c, annotate.c, memory.c, policy.c, image.c, draw.c |
 
 Two techniques worth keeping:
@@ -2998,6 +3000,18 @@ deleted rather than left standing. New verdicts cover:
 - the include branches (see the FileToXML bug below)
 - a CR-escape branch that StringToList makes unreachable (it splits commands at every CR)
 - the popen output loop, which needs a shell that the sandbox does not have; this one stays **unresolved**
+
+**Another upstream bug: `-list log` names the wrong handlers.** ListLogInfo prints handler
+bit *j* under `LogHandlers[j].name`, but that table is alphabetical (Console, Debug, Event,
+File, ...), not in bit order (Console, Stdout, Stderr, File, ...). So a log with
+`output="stdout"` lists as "Debug" and `stderr` as "Event". Only Console and File come out
+right. The driver's logcfg cases print it as it is.
+
+**Verdict clean-up.** The night removed verdicts on mutants that are now killed, either in
+ERDC's reports or by these cases: log, mime, delegate, profile and configure. The `gap`
+records (verdicts carrying `killed_by`) are kept. Four log.c mutants at line 1440 (the
+buffer-growth test) do not change the Mac's output at all, as if the Mac's Mull build lacked
+them. They have no verdict and are left for ERDC to measure.
 
 **Open items for the owner:**
 
