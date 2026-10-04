@@ -1,29 +1,24 @@
 mutate: 22 mutants in MagickCore/coder\.c$, 6 functions
-mutate: baseline over 30 cases in 0s
-  mutants: 22/22 (1s)
+mutate: baseline over 10 cases in 0s
+  mutants: 22/22 (0s)
 
-mutate: 22 mutants, 1s
-  killed 0, survived 9 (0 capped), no coverage 13, errors 0
+mutate: 22 mutants, 0s
+  killed 0, survived 4 (0 capped), no coverage 18, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetCoderList                          12      0        0     12
-  DestroyCoderNode                       3      0        3      0
+  DestroyCoderNode                       3      0        0      3
   CoderComponentTerminus                 3      0        3      0
-  IsCoderTreeInstantiated                2      0        2      0
+  IsCoderTreeInstantiated                2      0        0      2
   CoderComponentGenesis                  1      0        1      0
   GetCoderInfoList                       1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
-       coder.c:131:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
-       coder.c:133:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
-       coder.c:135:21 cxx_ne_to_eq               if (p->magick != (char *) NULL)
     x  coder.c:209:23 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
     x  coder.c:234:23 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
        coder.c:235:5 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
     x  coder.c:240:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&coder_semaphore);
-    x  coder.c:479:27 cxx_eq_to_ne               if (coder_semaphore == (SemaphoreInfo *) NULL)
-       coder.c:480:9 cxx_remove_void_call       ActivateSemaphoreInfo(&coder_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-af3128576-coder.json
+  full results: build-oracle/work/mutation-confirm-55d582237-coder.json
