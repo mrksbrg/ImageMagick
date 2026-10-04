@@ -1,5 +1,5 @@
 mutate: 186 mutants in MagickCore/annotate\.c$, 19 functions
-mutate: baseline over 77 cases in 0s
+mutate: baseline over 1402 cases in 0s
   mutants: 25/186 (0s)
   mutants: 50/186 (0s)
   mutants: 75/186 (0s)
@@ -7,9 +7,9 @@ mutate: baseline over 77 cases in 0s
   mutants: 125/186 (0s)
   mutants: 150/186 (0s)
   mutants: 175/186 (0s)
-  mutants: 186/186 (4s)
+  mutants: 186/186 (50s)
 
-mutate: 186 mutants, 4s
+mutate: 186 mutants, 50s
   killed 0, survived 4 (0 capped), no coverage 182, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -41,4 +41,4 @@ mutate: 186 mutants, 4s
     x  annotate.c:200:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&annotate_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-annotate.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-annotate.json
