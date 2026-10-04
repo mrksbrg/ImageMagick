@@ -1959,7 +1959,7 @@
    "nth": 0,
    "src": "bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?",
    "verdict": "equivalent",
-   "why": "the mutant's y1 differs from the base's start row only when y1 lies in (rows-0.5, rows): then ceil(y1-0.5) is rows, past y2, and its row loop is empty, while the polygon begins more than mid+1 below the last row's centre, so the base's pass over that row adds no coverage either - the same pixels"
+   "why": "the comparison changes only at equality (y1 == 0, or y1 == rows-1), where both branches give the same value"
   },
   {
    "at": 44,
@@ -2019,7 +2019,7 @@
    "nth": 0,
    "src": "bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?",
    "verdict": "equivalent",
-   "why": "the mutant's y1 differs from the base's start row only when y1 lies in (rows-0.5, rows): then ceil(y1-0.5) is rows, past y2, and its row loop is empty, while the polygon begins more than mid+1 below the last row's centre, so the base's pass over that row adds no coverage either - the same pixels"
+   "why": "the comparison changes only at equality (y1 == 0, or y1 == rows-1), where both branches give the same value"
   },
   {
    "at": 20,
@@ -23039,8 +23039,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "for (i=(ssize_t) *mvg_info->extent; i < (ssize_t) extent; i++)",
-   "verdict": "unresolved",
-   "why": "the mutant leaves the newly grown primitive entries uninitialised; nothing a case shows reads them before they are written"
+   "verdict": "equivalent",
+   "why": "the extra pass sets primitive_info[extent].primitive and .text, which the two lines before the loop already set to the same values"
   },
   {
    "at": 61,
