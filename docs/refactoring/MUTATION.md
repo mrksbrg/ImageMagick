@@ -2564,6 +2564,29 @@ assign the value already there). Driver notes: it uses the QuantumInfo's own buf
 
 Trusted now, Windows: **25 of 36**.
 
+**matrix.c 73 → 99, trusted.** A `matrix` driver command: MatrixInfo in memory, mapped and on
+disk (the driver sets the resource limits itself, so the disk path does not depend on load as
+the command line's `-limit` cases did), set and read in and out of range, NullMatrix,
+MatrixToImage, and the memory, map and disk resources held and released (which makes the
+`RelinquishMagickResource` deletions visible); `MAGICK_SYNCHRONIZE` for the preallocation
+path; GaussJordanElimination over regular, nearly singular, exactly singular (integer entries,
+a zero pivot) and pivoting systems, and least squares through LeastSquaresAddTerms. Seven
+verdicts (a pivot of exactly LDBL_MIN, min/max at equality, clean-up after a failed allocation).
+
+### Owner's decisions (2026-10-04, evening)
+
+1. **`-bench` timings are masked.** `oracle.NORMALISE` gains a rule for the
+   `Performance[n]: Ni ...ips ...e ...u ...` report: the thread count and the iterations stay,
+   the timings are masked. No earlier case used `-bench`, so no recorded result changes. Family
+   `benchgap`: three `-bench` cases, two with `-duration 1000` (ContinueTimer; a duration far
+   longer than the run keeps every iteration). For timer.c's ContinueTimer and AcquireTimerInfo.
+2. **Written off as out of reach:** vms.c (compiled only on VMS), nt-base.c and nt-feature.c
+   (compiled only in a native Windows build; the oracle builds run in WSL, Linux). The X11
+   files (animate.c, display.c, xwindow.c, widget.c) and the OpenCL files (accelerate.c,
+   opencl.c) wait for a later decision on building those variants.
+3. **Written off as out of reach:** distribute-cache.c (the distributed pixel cache needs a TCP
+   cache server, which the oracle does not start).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
