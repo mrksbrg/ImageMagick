@@ -1358,6 +1358,33 @@ static int GlobCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int TokenizeCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* tokenize LINE MAXLEN WHITE BREAKS QUOTES ESCAPE FLAG: Tokenizer until the line ends
+     (ESCAPE "-" for none; FLAG 0 as is, 1 upper case, 2 lower case) */
+  TokenInfo *token_info;
+  char token[256], breaker, quoted;
+  int next=0, status, n=0;
+  size_t length;
+  if (argc != 9)
+    return(Fail(exception,"tokenize: LINE MAXLEN WHITE BREAKS QUOTES ESCAPE FLAG"));
+  length=(size_t) atol(argv[3]);
+  if ((length == 0) || (length > sizeof(token)))
+    length=sizeof(token);
+  token_info=AcquireTokenInfo();
+  (void) memset(token,0,sizeof(token));
+  while ((status=Tokenizer(token_info,(unsigned) atoi(argv[8]),token,length,argv[2],argv[4],argv[5],argv[6],
+           strcmp(argv[7],"-") == 0 ? '\0' : *argv[7],&breaker,&next,&quoted)) == 0)
+  {
+    (void) printf("[%s] breaker %d quoted %d next %d\n",token,(int) breaker,(int) quoted,next);
+    if (++n > 200)
+      break;
+  }
+  (void) printf("status %d next %d\n",status,next);
+  token_info=DestroyTokenInfo(token_info);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1386,6 +1413,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"matrix") == 0) status=MatrixCmd(argc,argv,exception);
   else if (strcmp(argv[1],"resample") == 0) status=ResampleCmd(argc,argv,exception);
   else if (strcmp(argv[1],"glob") == 0) status=GlobCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"tokenize") == 0) status=TokenizeCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

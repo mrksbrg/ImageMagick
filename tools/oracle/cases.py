@@ -5461,6 +5461,24 @@ def _windrv_cases():
                     "[[]*", "a[b", "{a,b"):
         for case in ("exact", "nocase"):
             yield _windrv("glob %r %s" % (pattern, case), tuple(["glob", pattern, case] + exprs))
+    # token.c: Tokenizer directly, with what no caller in ImageMagick passes: a short maximum
+    # token length (StoreToken's truncation), whitespace and escape characters, two quote
+    # characters, upper- and lower-case flags
+    for line, maxlen, white, breaks, quotes, escape, flag in (
+            ("alpha=beta gamma", "5", " ", "=", "\"", "-", "0"),
+            ("alpha=beta gamma", "6", " ", "=", "\"", "-", "1"),
+            ("alpha=beta gamma", "4", " ", "=", "\"", "-", "2"),
+            ('key = "quoted value" next', "64", " ", "=", "\"'", "\\", "0"),
+            ("a\\=b = 'c d' \"e'f\" g\\", "64", " ", "=,", "\"'", "\\", "1"),
+            ("one,two, three ,,four", "3", " \t", ",", "", "-", "0"),
+            ("\\ lead \\\\back x\\", "64", " ", ",", "\"", "\\", "2"),
+            ("'it''s' \"a\"\"b\" x", "64", " ", "", "\"'", "-", "0"),
+            ("tab\tsep\tline", "64", "\t", "", "", "-", "1"),
+            ("abcdefgh=ijklmnop", "8", "", "=", "", "-", "0"),
+            ("abcdefgh=ijklmnop", "9", "", "=", "", "-", "0"),
+            ("", "64", " ", "=", "\"", "-", "0")):
+        yield _windrv("tokenize %r max %s escape %s flag %s" % (line, maxlen, escape, flag),
+                      ("tokenize", line, maxlen, white, breaks, quotes, escape, flag))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
