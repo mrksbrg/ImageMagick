@@ -2540,3 +2540,36 @@ added to the frozen corpus (like `config/sRGB.icm` for ProfileImage), present id
 on all three machines. Until then type.c stays at its adjusted ~84% with this one function
 short; its survivors are left `unresolved` (counted against), not written off, because a
 second corpus font would turn most of them into clean kills.
+
+## type.c: a second corpus font makes font selection observable — GetTypeInfoByFamily trusted (Mac, 2026-10-04)
+
+The owner approved adding a second font to the frozen corpus (the decision the plateau note
+above asked for). **`Narrow.ttf`** (`tools/oracle/mknarrow.py`) is Generic.ttf with its glyph
+outlines and advance widths scaled to 0.6 of their width — a condensed derivative, same
+licence, visibly different glyphs. `oracle.py` copies it into the corpus beside Generic.ttf,
+and `CORPUS_VERSION` (new) is bumped to 2 so every machine with an older cached corpus rebuilds
+it rather than running against a stale one that lacks the font.
+
+The existing `ScoreFamily` scorer cases (which had used a `face="1"` render-fail trick on a
+single glyph file) now point their entries at the two fonts alternately, so *which* `TypeInfo`
+the matcher selects shows directly as different rendered glyphs. Measured against mull-sweep60
+(`mutation-typescore.json`, cases deterministic over 4 selfcheck runs):
+
+- **Killed:** the second-pass style scorers `446`/`447` (the italic/oblique `+25`, all four
+  columns), the stretch `range` computation `458:22` (`sub_to_add`), and the fontmap loop
+  index `473:66` — the selection-logic mutants a single font could never distinguish.
+- **GetTypeInfoByFamily: 46 killed, gate 82% (adjusted 82%)** — over the bar, so **type.c is
+  trusted**.
+
+Remaining survivors, left honestly unresolved (the function already clears the bar without
+them): the first-pass mutants `366`/`369`/`371` (breaking the exact-match pass is masked by
+the scoring pass, which returns the same font because an exact match holds the unique maximum
+score for the corpus's sub-900 weights — very likely equivalent); the stretch divisor `458:65`
+(`/range`→`*range`, a gap: a weight-vs-stretch case with distinct fonts would catch it, but
+`ScoreFamily`'s several weight-400 entries make such a case tie and go nondeterministic, so it
+needs a purpose-built family); and the fontmap/`family==NULL` paths `473:15`, `475`, `429`,
+`430`, `477`, `478`, which route through `courier`/`helvetica`/`symbol` — families the bundled
+Ghostscript config defines ambiguously (the earlier note's splay-order nondeterminism).
+
+The second font also stands to help annotate.c's text-metric survivors; that is the next
+thing to try with it.

@@ -98,6 +98,9 @@ EXTERNAL_DECODE = (".ps", ".eps", ".pdf", ".ai", ".m2v", ".mpg", ".fpx", ".hdf",
                    ".hpgl")  # the hp2xx delegate, run through /bin/sh
 
 FONT = "Generic.ttf"  # copied from PerlMagick/t
+FONT2 = "Narrow.ttf"  # a 0.6x-condensed derivative of Generic.ttf (tools/oracle/mknarrow.py):
+# a second, visually distinct corpus font, so the oracle can see which TypeInfo the font
+# matcher picks (type.c GetTypeInfoByFamily, annotate.c), which one glyph file cannot
 
 
 # Upstream bug (docs/refactoring/ORACLE.md, "Known upstream issues"): the
@@ -3909,18 +3912,20 @@ GAP_COMMANDS += [_SERPENT + "-floodfill +0+0 white", _SERPENT + "-floodfill +29+
 # paint.c: OilPaintImage copies the channels the channel mask leaves out from the centre pixel
 GAP_COMMANDS += ["{C}/rose.miff -channel R -paint 2 +channel",
                  "{C}/rose_alpha.miff -channel RGB -paint 3 +channel"]
-# type.c: GetTypeInfoByFamily scores a family's entries by style, weight and stretch. The
-# corpus has one font, so the entries alternate face="0" and face="1" (which this font lacks,
-# so rendering it fails): which entry won shows in the output and in stderr
+# type.c: GetTypeInfoByFamily scores a family's entries by style, weight and stretch. The glyphs
+# alternate between the two corpus fonts, Generic.ttf and the condensed Narrow.ttf, so which
+# entry the scorer picked shows directly in the rendered glyphs (a single font would render the
+# same whichever entry won). The families resolve within themselves, so the output does not
+# depend on the machine's installed fonts.
 _TYPE_SCORE_XML = "<typemap>\n" + "".join(
-    '  <type name="Score-%s" family="ScoreFamily" style="%s" weight="%s" stretch="%s" face="%d" '
-    'glyphs="{C}/Generic.ttf"/>\n' % (name, style, weight, stretch, face)
-    for name, style, weight, stretch, face in (
-        ("A", "Normal", 400, "Normal", 0), ("B", "Italic", 400, "Normal", 1),
-        ("C", "Oblique", 700, "Condensed", 0), ("D", "Normal", 900, "Expanded", 1),
-        ("E", "Normal", 100, "UltraCondensed", 0), ("F", "Italic", 300, "SemiExpanded", 1),
-        ("G", "Normal", 600, "Normal", 1), ("H", "Normal", 400, "Condensed", 1))) + (
-    '  <type name="Score-Helvetica" family="Helvetica" face="1" glyphs="{C}/Generic.ttf"/>\n'
+    '  <type name="Score-%s" family="ScoreFamily" style="%s" weight="%s" stretch="%s" glyphs="{C}/%s"/>\n'
+    % (name, style, weight, stretch, font)
+    for name, style, weight, stretch, font in (
+        ("A", "Normal", 400, "Normal", "Generic.ttf"), ("B", "Italic", 400, "Normal", "Narrow.ttf"),
+        ("C", "Oblique", 700, "Condensed", "Generic.ttf"), ("D", "Normal", 900, "Expanded", "Narrow.ttf"),
+        ("E", "Normal", 100, "UltraCondensed", "Generic.ttf"), ("F", "Italic", 300, "SemiExpanded", "Narrow.ttf"),
+        ("G", "Normal", 600, "Normal", "Narrow.ttf"), ("H", "Normal", 400, "Condensed", "Narrow.ttf"))) + (
+    '  <type name="Score-Helvetica" family="Helvetica" glyphs="{C}/Narrow.ttf"/>\n'
     "</typemap>\n")
 # label: takes its font from image options, where -style and -stretch do not go (they set the
 # command line's draw state), and magick rejects -stretch: -annotate and MVG reach them all

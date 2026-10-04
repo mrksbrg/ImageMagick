@@ -183,12 +183,21 @@ CORPUS_EXTRAS = {
 }
 
 
+# Bump when the corpus's contents change (a file added or altered), so a machine with an
+# older cached corpus rebuilds it instead of silently running against the stale one. (2):
+# Narrow.ttf added for the font-matching cases.
+CORPUS_VERSION = 2
+
+
 def ensure_corpus(binary):
     """Build the input corpus once and freeze it. Returns the manifest."""
     manifest_path = os.path.join(CORPUS, "manifest.json")
     if os.path.exists(manifest_path):
         with open(manifest_path) as f:
-            return json.load(f)
+            manifest = json.load(f)
+        if manifest.get("version") == CORPUS_VERSION:
+            return manifest
+        shutil.rmtree(CORPUS, ignore_errors=True)  # stale: a file was added or changed
     tmp = CORPUS + ".tmp"
     shutil.rmtree(tmp, ignore_errors=True)
     os.makedirs(os.path.join(tmp, "files"))
@@ -198,7 +207,7 @@ def ensure_corpus(binary):
     files = decode_files()
     copy_decode_files(files, tmp)
     dims = corpus_dims(binary, tmp)
-    manifest = {"digest": freeze(tmp), "dims": dims, "decode_files": files}
+    manifest = {"version": CORPUS_VERSION, "digest": freeze(tmp), "dims": dims, "decode_files": files}
     with open(os.path.join(tmp, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=1)
     os.rename(tmp, CORPUS)
@@ -226,6 +235,8 @@ def make_extra_images(binary, tmp):
 def write_corpus_texts(tmp):
     shutil.copyfile(os.path.join(ROOT, "PerlMagick/t", catalogue.FONT),
                     os.path.join(tmp, catalogue.FONT))
+    shutil.copyfile(os.path.join(ROOT, "tools/oracle", catalogue.FONT2),
+                    os.path.join(tmp, catalogue.FONT2))
     with open(os.path.join(tmp, "draw.mvg"), "w") as f:
         f.write(catalogue.MVG)
     with open(os.path.join(tmp, "draw.svg"), "w") as f:
