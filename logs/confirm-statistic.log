@@ -1,0 +1,44 @@
+mutate: 149 mutants in MagickCore/statistic\.c$, 29 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/149 (0s)
+  mutants: 50/149 (0s)
+  mutants: 75/149 (0s)
+  mutants: 100/149 (0s)
+  mutants: 125/149 (0s)
+  mutants: 149/149 (0s)
+
+mutate: 149 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 149, errors 0
+
+  function                           total killed survived no-cov
+  GetImageMoments                       29      0        0     29
+  GetImageStatistics                    21      0        0     21
+  EvaluateImages                        15      0        0     15
+  GetMedianPixel                         9      0        0      9
+  PolynomialImage                        9      0        0      9
+  AddNodePixelList                       9      0        0      9
+  GetImageRange                          6      0        0      6
+  StatisticImage                         6      0        0      6
+  AcquirePixelTLS                        4      0        0      4
+  ApplyEvaluateOperator                  4      0        0      4
+  EvaluateImage                          4      0        0      4
+  FunctionImage                          4      0        0      4
+  MagickSafeReciprocalLD                 4      0        0      4
+  GetImageExtrema                        3      0        0      3
+  DestroyPixelTLS                        2      0        0      2
+  AcquireImageCanvas                     2      0        0      2
+  ApplyFunction                          2      0        0      2
+  GetImagePerceptualHash                 2      0        0      2
+  DestroyPixelList                       2      0        0      2
+  DestroyPixelListTLS                    2      0        0      2
+  AcquirePixelListTLS                    2      0        0      2
+  EvaluateMax                            1      0        0      1
+  IntensityCompare                       1      0        0      1
+  GetImageEntropy                        1      0        0      1
+  GetImageKurtosis                       1      0        0      1
+  GetImageMean                           1      0        0      1
+  GetImageMedian                         1      0        0      1
+  GetModePixelList                       1      0        0      1
+  ResetPixelList                         1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-statistic.json

@@ -1,0 +1,49 @@
+mutate: 183 mutants in MagickCore/resize\.c$, 32 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/183 (0s)
+  mutants: 50/183 (0s)
+  mutants: 75/183 (0s)
+  mutants: 100/183 (0s)
+  mutants: 125/183 (0s)
+  mutants: 150/183 (0s)
+  mutants: 175/183 (0s)
+  mutants: 183/183 (0s)
+
+mutate: 183 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 183, errors 0
+
+  function                           total killed survived no-cov
+  ScaleImage                            41      0        0     41
+  LiquidRescaleImage                    40      0        0     40
+  AcquireResizeFilter                   17      0        0     17
+  CubicSpline                            9      0        0      9
+  SampleImage                            7      0        0      7
+  ThumbnailImage                         7      0        0      7
+  InterpolativeResizeImage               6      0        0      6
+  VerticalFilter                         6      0        0      6
+  MagicKernelSharp2021                   5      0        0      5
+  BesselOrderOne                         5      0        0      5
+  Fish2X                                 4      0        0      4
+  MagnifyImage                           4      0        0      4
+  HorizontalFilter                       4      0        0      4
+  MagicKernelSharp2013                   3      0        0      3
+  SincFast                               3      0        0      3
+  Quadratic                              2      0        0      2
+  Hq2XHelper                             2      0        0      2
+  DestroyContributionTLS                 2      0        0      2
+  AcquireContributionTLS                 2      0        0      2
+  ResizeImage                            2      0        0      2
+  CubicBC                                1      0        0      1
+  Lagrange                               1      0        0      1
+  Triangle                               1      0        0      1
+  Welch                                  1      0        0      1
+  I0                                     1      0        0      1
+  GetResizeFilterWeight                  1      0        0      1
+  Eagle2X                                1      0        0      1
+  Scale2X                                1      0        0      1
+  Epbx2X                                 1      0        0      1
+  Scale3X                                1      0        0      1
+  MinifyImage                            1      0        0      1
+  ResampleImage                          1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-resize.json

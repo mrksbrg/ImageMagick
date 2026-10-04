@@ -1,0 +1,46 @@
+mutate: 155 mutants in MagickCore/enhance\.c$, 30 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/155 (0s)
+  mutants: 50/155 (0s)
+  mutants: 75/155 (0s)
+  mutants: 100/155 (0s)
+  mutants: 125/155 (0s)
+  mutants: 150/155 (0s)
+  mutants: 155/155 (0s)
+
+mutate: 155 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 155, errors 0
+
+  function                           total killed survived no-cov
+  ContrastStretchImage                  19      0        0     19
+  EqualizeImage                         16      0        0     16
+  CLAHEImage                            12      0        0     12
+  ColorDecisionListImage                 9      0        0      9
+  SigmoidalContrastImage                 9      0        0      9
+  ClutImage                              7      0        0      7
+  HaldClutImage                          7      0        0      7
+  EnhanceImage                           6      0        0      6
+  GammaImage                             6      0        0      6
+  LevelizeImage                          6      0        0      6
+  ModulateImage                          6      0        0      6
+  ClipCLAHEHistogram                     5      0        0      5
+  ContrastImage                          5      0        0      5
+  LevelImage                             5      0        0      5
+  NegateImage                            5      0        0      5
+  WhiteBalanceImage                      5      0        0      5
+  GrayscaleImage                         4      0        0      4
+  MapCLAHEHistogram                      3      0        0      3
+  Contrast                               3      0        0      3
+  AutoGammaImage                         2      0        0      2
+  BrightnessContrastImage                2      0        0      2
+  GenerateCLAHELut                       2      0        0      2
+  LevelImageColors                       2      0        0      2
+  LinearStretchImage                     2      0        0      2
+  InverseScaledSigmoidal                 2      0        0      2
+  GenerateCLAHEHistogram                 1      0        0      1
+  CLAHE                                  1      0        0      1
+  ModulateHSI                            1      0        0      1
+  ModulateLCHab                          1      0        0      1
+  ModulateLCHuv                          1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-enhance.json
