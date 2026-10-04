@@ -10023,6 +10023,16 @@
    "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
   },
   {
+   "at": 0,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyColorCube",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyColorCube(image,node_info->child[i]);",
+   "verdict": "unobservable",
+   "why": "the colour cube's per-node colour lists are not freed (DestroyColorCube not called, or not recursing): a leak when the histogram is done, nothing reads them again"
+  },
+  {
    "at": 31,
    "file": "MagickCore/histogram.c",
    "function": "DestroyHCubeInfo",
@@ -10031,6 +10041,16 @@
    "src": "} while (cube_info->node_queue != (HNodes *) NULL);",
    "verdict": "unobservable",
    "why": "only changes which nodes of the colour tree are freed: a leak, which the oracle does not measure"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/histogram.c",
+   "function": "DestroyHCubeInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyColorCube(image,cube_info->root);",
+   "verdict": "unobservable",
+   "why": "the colour cube's per-node colour lists are not freed (DestroyColorCube not called, or not recursing): a leak when the histogram is done, nothing reads them again"
   },
   {
    "at": 14,
@@ -13520,6 +13540,16 @@
    "src": "DestroyQCubeInfo(cube_info);",
    "verdict": "unobservable",
    "why": "the colour cube is not destroyed: a leak when the quantization is done, nothing reads it again"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeImages",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (maximum_colors > MaxColormapSize)",
+   "verdict": "equivalent",
+   "why": "differs only for maximum_colors exactly MaxColormapSize, where the mutant sets it to MaxColormapSize: the same value"
   },
   {
    "at": 22,
