@@ -1,0 +1,96 @@
+mutate: 98 mutants in MagickCore/string\.c$, 30 functions
+mutate: baseline over 18 cases in 0s
+  mutants: 25/98 (2s)
+  mutants: 50/98 (2s)
+  mutants: 75/98 (2s)
+  mutants: 98/98 (4s)
+
+mutate: 98 mutants, 4s
+  killed 0, survived 49 (0 capped), no coverage 49, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  ConfigureFileToStringInfo             13      0       13      0
+  StringToStrings                       13      0        0     13
+  CopyMagickString                       7      0        7      0
+  EscapeString                           7      0        0      7
+  ConcatenateMagickString                5      0        5      0
+  InterpretSiPrefixValue                 5      0        5      0
+  SubstituteString                       5      0        5      0
+  CloneString                            4      0        4      0
+  ConcatenateStringInfo                  3      0        0      3
+  DestroyStringInfo                      3      0        3      0
+  AcquireString                          2      0        2      0
+  AcquireStringInfo                      2      0        0      2
+  BlobToStringInfo                       2      0        0      2
+  CompareStringInfo                      2      0        0      2
+  ConcatenateString                      2      0        2      0
+  ConstantString                         2      0        2      0
+  DestroyStringList                      2      0        0      2
+  PrintStringInfo                        2      0        0      2
+  SetStringInfoLength                    2      0        0      2
+  StringInfoToDigest                     2      0        0      2
+  StringInfoToString                     2      0        0      2
+  StringToArgv                           2      0        0      2
+  StripMagickString                      2      0        0      2
+  FileToString                           1      0        1      0
+  FileToStringInfo                       1      0        0      1
+  FormatMagickSize                       1      0        0      1
+  SanitizeString                         1      0        0      1
+  SplitStringInfo                        1      0        0      1
+  StringInfoToHexString                  1      0        0      1
+  StringToArrayOfDoubles                 1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  string.c:107:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    x  string.c:114:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    x  string.c:260:24 cxx_ne_to_eq               if (*destination != (char *) NULL)
+    x  string.c:264:20 cxx_eq_to_ne               if (*destination == (char *) NULL)
+    x  string.c:270:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    x  string.c:277:45 cxx_mul_to_div             (void) memcpy(*destination,source,length*sizeof(**destination));
+    x  string.c:415:20 cxx_sub_to_add             count=(size_t) (q-destination);
+    x  string.c:416:11 cxx_sub_to_add             i=length-count;
+       string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
+    x  string.c:429:15 cxx_add_to_sub             return(count+(size_t) (p-source));
+    x  string.c:429:27 cxx_sub_to_add             return(count+(size_t) (p-source));
+    x  string.c:477:15 cxx_lt_to_le               if (~length < source_length)
+    x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    x  string.c:596:15 cxx_lt_to_le               if ((offset < 0) || (offset != (MagickOffsetType) ((ssize_t) offset)))
+       string.c:598:28 cxx_sub_to_add             file=close_utf8(file)-1;
+    x  string.c:603:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
+       string.c:608:28 cxx_sub_to_add             file=close_utf8(file)-1;
+    x  string.c:612:11 cxx_ne_to_eq               if (map != (void *) NULL)
+       string.c:626:19 cxx_lt_to_ge               for (i=0; i < length; i+=(size_t) count)
+       string.c:626:19 cxx_lt_to_le               for (i=0; i < length; i+=(size_t) count)
+       string.c:630:19 cxx_le_to_gt               if (count <= 0)
+       string.c:630:19 cxx_le_to_lt               if (count <= 0)
+       string.c:633:13 cxx_lt_to_ge               if (i < length)
+       string.c:633:13 cxx_lt_to_le               if (i < length)
+       string.c:635:32 cxx_sub_to_add             file=close_utf8(file)-1;
+    x  string.c:641:24 cxx_sub_to_add             file=close_utf8(file)-1;
+    x  string.c:687:15 cxx_ge_to_gt               if (~length >= 1UL)
+    x  string.c:692:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    x  string.c:747:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    x  string.c:747:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    x  string.c:749:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    x  string.c:749:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    x  string.c:757:29 cxx_sub_to_add             return((size_t) (p-source-1));
+    x  string.c:757:36 cxx_sub_to_add             return((size_t) (p-source-1));
+    x  string.c:760:21 cxx_sub_to_add             return((size_t) (p-source));
+    x  string.c:816:26 cxx_ne_to_eq               if (string_info->datum != (unsigned char *) NULL)
+    x  string.c:819:25 cxx_ne_to_eq               if (string_info->name != (char *) NULL)
+    x  string.c:821:25 cxx_ne_to_eq               if (string_info->path != (char *) NULL)
+    x  string.c:973:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  string.c:1321:30 cxx_le_to_lt               if ((*q >= 'E') && (*q <= 'z'))
+    x  string.c:1354:17 cxx_ge_to_gt               if (e >= MagickEpsilon)
+    x  string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
+    x  string.c:1368:30 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
+    x  string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
+    x  string.c:2660:24 cxx_gt_to_ge               if (replace_extent > search_extent)
+    x  string.c:2660:24 cxx_gt_to_le               if (replace_extent > search_extent)
+    x  string.c:2666:31 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
+    x  string.c:2666:46 cxx_sub_to_add             extent=strlen(*string)+replace_extent-search_extent+1;
+    x  string.c:2666:60 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-string.json
