@@ -3001,6 +3001,32 @@ deleted rather than left standing. New verdicts cover:
 - a CR-escape branch that StringToList makes unreachable (it splits commands at every CR)
 - the popen output loop, which needs a shell that the sandbox does not have; this one stays **unresolved**
 
+**draw.c, at two bounds no case had reached.**
+
+- *CheckPrimitiveExtent* refuses an extent above max-memory-request / sizeof(PrimitiveInfo).
+  The policy's floor is 16 MiB. An ellipse of radius 10000 swept to 247.2495° needs exactly
+  that many primitives; the window is 0.0007° wide and was found by bisection, and the case
+  sits in its middle. The resize after the test is then the one that fails, which kills
+  `>` → `>=`.
+- *The x clamp.* Two polygons starting just past the right edge kill it, through a zero-width
+  row request.
+- *Equivalent.* The y clamp (its row loop is simply empty), the bounds tests and the thread
+  count.
+- *The point branch* of DrawPolygonPrimitive (21 mutants) stays **unresolved**. It needs a
+  polygon without edges. A primitive with one coordinate returns at entry, and coincident
+  points keep a moveto and a lineto, so they always form one edge (checked with
+  `-debug draw`).
+- *ClonePolygonEdgesTLS* is only reached with more than one thread. The oracle pins one
+  (`MAGICK_THREAD_LIMIT=1`). A `-limit thread 4` case on a 1024×1024 polygon gives four
+  threads where the build has OpenMP. The Mac's build caps the limit at 1, so only ERDC can
+  measure it.
+
+**locale.c's LocaleInfoCompare stays one function short.** Only one locale.xml can be
+supplied: the current directory is not searched in this uninstalled build, and the build's
+own files carry no messages, since their includes never load. So all entries share one path,
+and the mutant answers "equal" for every pair. Whether qsort then keeps its input order
+differs between macOS and glibc.
+
 **Another upstream bug: `-list log` names the wrong handlers.** ListLogInfo prints handler
 bit *j* under `LogHandlers[j].name`, but that table is alphabetical (Console, Debug, Event,
 File, ...), not in bit order (Console, Stdout, Stderr, File, ...). So a log with
