@@ -5264,6 +5264,39 @@ def _windrv_cases():
                                                    "removevalue:v0002 remove:3 deletevalue:v0004 loud get:5"),
         ):
             yield _windrv("splay tree, %s: %s" % (mode, label), tuple(["splaytree", "mode:" + mode] + ops.split()))
+    # xml-tree.c (third wave): NewXMLTree over documents with attributes, entities, CDATA, a
+    # processing instruction and a comment; a DOCTYPE with entities and an attribute default; a
+    # circular entity (ValidateEntities); characters EncodePredefinedEntities must escape; a
+    # mismatched closing tag. Then navigation, AddChildToXMLTree at offsets, SetXMLTreeContent,
+    # AddPathToXMLTree, and XMLTreeInfoToXML. Not used: an attribute written a="q\"x" (no such
+    # escape in XML) parses into an attribute with no value, on which XMLTreeInfoToXML crashes
+    # (CanonicalXMLContent(NULL), an upstream bug).
+    xml_docs = {
+        "plain": '<?xml version="1.0"?>\n<r a="1 &lt; 2" b="&#65;&#x42;">t &amp; u<b>one</b><b k="v">two'
+                 '<![CDATA[<raw>&]]></b><?pi data?><!-- c --><c/>tail</r>\n',
+        "doctype": '<!DOCTYPE r [ <!ATTLIST b k CDATA "dflt"> <!ENTITY e "x&#65;"> <!ENTITY g "gee"> ]>\n'
+                   '<r>&e; and &g;<b/><b k="z">&g;</b></r>\n',
+        "circular": '<!DOCTYPE r [ <!ENTITY e "&f;"> <!ENTITY f "&e;"> ]>\n<r>&e;</r>\n',
+        "chained": '<!DOCTYPE r [ <!ENTITY e "x"> <!ENTITY f "&e;y"> ]>\n<r>&f;</r>\n',
+        "special": '<r t="a\tb\rc\nd" q="&quot;&apos;&lt;&gt;&amp;">x &gt; y &apos; &quot; z\r\nw\ttab</r>\n',
+        "mismatched": '<r><a></b></r>\n',
+        "nested": '<r><a>1<b>2<c>3</c>4</b>5</a><a>6</a><d/></r>\n',
+    }
+    for name, ops in (
+            ("plain", "print child:b attr:k sibling attr:k attr:zz next top attr:a attr:b"),
+            ("plain", "addchild:n:3 content:a<b>&c\"d'e top addchild:m:0 top print"),
+            ("doctype", "print child:b attr:k sibling attr:k top"),
+            ("circular", "print"), ("chained", "print"), ("special", "print top attr:t attr:q"),
+            ("mismatched", "print"),
+            ("nested", "child:a child:b child:c top child:a sibling next top path:a/b/z:1 path:q/r:0 print"),
+            ("nested", "child:a content:changed top child:d addchild:e:0 content:x\r\ny top print"),
+    ):
+        yield _with_inputs(_windrv("xml %s: %s" % (name, ops), tuple(["xml", "%s.xml" % name] + ops.split())),
+                           files={"%s.xml" % name: xml_docs[name]})
+    for ops in ("addchild:a:0 addchild:b:0 content:hi top child:a sibling print",
+                "path:a/b/c:0 path:a/b/d:5 path:a/e:2 content:<&> top print",
+                "content:t&ext addchild:x:9 addchild:y:1 top print"):
+        yield _windrv("xml from NewXMLTreeTag: %s" % ops, tuple(["xml", "-root"] + ops.split()))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

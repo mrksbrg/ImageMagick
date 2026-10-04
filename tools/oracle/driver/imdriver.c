@@ -11,6 +11,7 @@
     imdriver linkedlist CAPACITY OP...              (append:V insert:I:V sorted:V get:I ...)
     imdriver splaytree OP...                        (add:K=V get:K delete:K remove:K ...)
     imdriver cacheview IMAGE X Y
+    imdriver xml FILE|-TAG OP...                    (print child:T addchild:T:OFF content:X path:A/B:OFF ...)
 
   It is linked against the build under test (build.sh), so a mutant switched on in the
   environment is active here as in magick. Output goes to stdout or to the named file.
@@ -712,6 +713,86 @@ static int View(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* xml-tree.c: MagickPrivate, declared here (the driver links the static library) */
+extern XMLTreeInfo *AddPathToXMLTree(XMLTreeInfo *,const char *,const size_t);
+
+static void PrintNode(const char *what,XMLTreeInfo *node)
+{
+  (void) printf("%s %s",what,node != (XMLTreeInfo *) NULL ? Text(GetXMLTreeTag(node)) : "(none)");
+  if (node != (XMLTreeInfo *) NULL)
+    (void) printf(" [%s]",Text(GetXMLTreeContent(node)));
+  (void) printf("\n");
+}
+
+static int Xml(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* xml FILE|-TAG OP... : parse FILE (or start a tree with NewXMLTreeTag(TAG)), then
+     print child:T sibling next top attr:N addchild:T:OFFSET content:TEXT path:A/B:OFFSET */
+  XMLTreeInfo *top, *cur;
+  int i;
+
+  if (argc < 3)
+    return(Fail(exception,"xml: FILE|-TAG OP..."));
+  if (*argv[2] == '-')
+    top=NewXMLTreeTag(argv[2]+1);
+  else
+    {
+      char *text=FileToString(argv[2],~0UL,exception);
+      if (text == (char *) NULL)
+        return(Fail(exception,"read"));
+      top=NewXMLTree(text,exception);
+      text=DestroyString(text);
+    }
+  Report(exception);
+  if (top == (XMLTreeInfo *) NULL)
+    {
+      (void) printf("no tree\n");
+      return(0);
+    }
+  cur=top;
+  for (i=3; i < argc; i++)
+  {
+    char *op=argv[i], *arg=strchr(op,':');
+    if (arg != (char *) NULL)
+      *arg++='\0';
+    if (strcmp(op,"print") == 0)
+      {
+        char *xml=XMLTreeInfoToXML(top);
+        (void) printf("%s\n",xml != (char *) NULL ? xml : "(null)");
+        if (xml != (char *) NULL) xml=DestroyString(xml);
+        continue;
+      }
+    if (strcmp(op,"child") == 0) cur=GetXMLTreeChild(cur,arg);
+    else if (strcmp(op,"sibling") == 0) cur=GetXMLTreeSibling(cur);
+    else if (strcmp(op,"next") == 0) cur=GetNextXMLTreeTag(cur);
+    else if (strcmp(op,"top") == 0) cur=top;
+    else if (strcmp(op,"attr") == 0)
+      {
+        (void) printf("attr %s = %s\n",arg,Text(GetXMLTreeAttribute(cur,arg)));
+        continue;
+      }
+    else if (strcmp(op,"addchild") == 0)
+      {
+        char *offset=strchr(arg,':');
+        if (offset != (char *) NULL) *offset++='\0';
+        cur=AddChildToXMLTree(cur,arg,offset != NULL ? (size_t) atol(offset) : 0);
+      }
+    else if (strcmp(op,"content") == 0) cur=SetXMLTreeContent(cur,arg);
+    else if (strcmp(op,"path") == 0)
+      {
+        char *offset=strrchr(arg,':');
+        if (offset != (char *) NULL) *offset++='\0';
+        cur=AddPathToXMLTree(top,arg,offset != NULL ? (size_t) atol(offset) : 0);
+      }
+    else { (void) fprintf(stderr,"unknown op %s\n",op); continue; }
+    PrintNode(op,cur);
+    if (cur == (XMLTreeInfo *) NULL)
+      cur=top;
+  }
+  top=DestroyXMLTree(top);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -734,6 +815,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"linkedlist") == 0) status=List2(argc,argv,exception);
   else if (strcmp(argv[1],"splaytree") == 0) status=Tree(argc,argv,exception);
   else if (strcmp(argv[1],"cacheview") == 0) status=View(argc,argv,exception);
+  else if (strcmp(argv[1],"xml") == 0) status=Xml(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
