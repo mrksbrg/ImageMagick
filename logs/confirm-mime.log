@@ -1,10 +1,10 @@
 mutate: 68 mutants in MagickCore/mime\.c$, 11 functions
-mutate: baseline over 307 cases in 0s
+mutate: baseline over 76 cases in 0s
   mutants: 25/68 (0s)
   mutants: 50/68 (0s)
-  mutants: 68/68 (43s)
+  mutants: 68/68 (3s)
 
-mutate: 68 mutants, 43s
+mutate: 68 mutants, 3s
   killed 0, survived 4 (0 capped), no coverage 64, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -28,4 +28,4 @@ mutate: 68 mutants, 43s
     x  mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-d09139dff-mime.json
+  full results: build-oracle/work/mutation-confirm-ca57d53bb-mime.json
