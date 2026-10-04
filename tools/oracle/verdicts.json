@@ -23481,6 +23481,56 @@
    "src": "GetPathComponent(filename,HeadPath,path);",
    "verdict": "unobservable",
    "why": "without it the include path starts from whatever the stack held; FileToXML refuses the result like any other regular file (extent ~0UL, MUTATION.md), so nothing loads either way"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "in LoadLogCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's logcfg cases reach the branch)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "in LoadLogCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's logcfg cases reach the branch)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unobservable",
+   "why": "in LoadLogCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's logcfg cases reach the branch)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unobservable",
+   "why": "in LoadLogCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's logcfg cases reach the branch)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/log.c",
+   "function": "LoadLogCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "path,depth+1,exception);",
+   "verdict": "unobservable",
+   "why": "runs only after an include file loaded, which never happens (FileToXML refuses regular files with extent ~0UL, MUTATION.md)"
   }
  ]
 }

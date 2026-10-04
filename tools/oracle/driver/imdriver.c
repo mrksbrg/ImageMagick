@@ -2136,6 +2136,45 @@ static int ConfigureCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int LogCfgCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* logcfg [EVENTS]   with the case directory first on MAGICK_CONFIGURE_PATH (see main), so the
+     case's own log.xml is parsed first and governs logging: ListLogInfo's section for it (its path
+     printed as CASE), IsEventLogging, then, if EVENTS is given, SetLogEventMask(EVENTS) and one
+     LogMagickEvent each of Annotate and Trace through the case's handlers. */
+  char cwd[MagickPathExtent], line[3*MagickPathExtent];
+  FILE *f;
+  int show=0;
+  if (getcwd(cwd,sizeof(cwd)) == (char *) NULL) *cwd='\0';
+  f=tmpfile();
+  if (f == (FILE *) NULL) return(1);
+  (void) ListLogInfo(f,exception);
+  rewind(f);
+  while (fgets(line,sizeof(line),f) != (char *) NULL)
+  {
+    if (strncmp(line,"Path: ",6) == 0)
+      {
+        show=strstr(line,cwd) != (char *) NULL ? 1 : 0;
+        if (show != 0) (void) printf("Path: CASE\n");
+        continue;
+      }
+    if (show != 0) (void) fputs(line,stdout);
+  }
+  (void) fclose(f);
+  (void) printf("event logging %d\n",(int) IsEventLogging());
+  if (argc > 2)
+    {
+      (void) SetLogEventMask(argv[2]);
+      (void) printf("after mask %s: event logging %d\n",argv[2],(int) IsEventLogging());
+      (void) fflush(stdout);
+      (void) LogMagickEvent(AnnotateEvent,GetMagickModule(),"an annotate event");
+      (void) LogMagickEvent(TraceEvent,GetMagickModule(),"a trace event");
+      (void) fflush(stdout);
+    }
+  Report(exception);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -2146,7 +2185,7 @@ int main(int argc,char **argv)
       (void) fprintf(stderr,"imdriver gradient|mask|getmask|acquire|list|mime ...\n");
       return(2);
     }
-  if (strcmp(argv[1],"configure") == 0)
+  if ((strcmp(argv[1],"configure") == 0) || (strcmp(argv[1],"logcfg") == 0))
     {
       char cwd[MagickPathExtent], value[3*MagickPathExtent];
       const char *old=getenv("MAGICK_CONFIGURE_PATH");
@@ -2187,6 +2226,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"pathauth") == 0) status=PathAuthCmd(argc,argv,exception);
   else if (strcmp(argv[1],"nextimage") == 0) status=NextImageCmd(argc,argv,exception);
   else if (strcmp(argv[1],"configure") == 0) status=ConfigureCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"logcfg") == 0) status=LogCfgCmd(argc,argv,exception);
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);

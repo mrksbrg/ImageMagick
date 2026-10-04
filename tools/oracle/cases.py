@@ -5310,6 +5310,28 @@ _CFG_FILES = {
 }
 GAP_STEP_CASES += [("driver configure: %s" % name, _driver("configure"), {"configure.xml": xml})
                    for name, xml in _CFG_FILES.items()]
+# log.c through imdriver: a case's log.xml is read, but -list log orders it by path among the build's
+# own, so no command-line case can compare it (see the locale cases). With the case directory first
+# on MAGICK_CONFIGURE_PATH the case's log.xml is parsed first and governs logging; the driver prints
+# ListLogInfo's section for it (path as CASE), IsEventLogging, and logs through the case's handler
+# with a format of domain and message only (no times, pids or line numbers).
+def _log_xml(attrs, before=""):
+    return "<logmap>\n" + before + "  <log " + attrs + "/>\n</logmap>\n"
+_LOG_BASE = 'events="None" output="stdout" filename="log-%g.txt" generations="3" format="%d %e"'
+_LOG_FILES = (
+    ("a 2000-byte limit", _log_xml(_LOG_BASE + ' limit="2000"'), ("Annotate",)),
+    ("a limit of exactly 1024", _log_xml(_LOG_BASE + ' limit="1024"'), ()),
+    ("a limit below 1024 (megabytes)", _log_xml(_LOG_BASE + ' limit="500"'), ()),
+    ("an unlimited limit", _log_xml(_LOG_BASE + ' limit="unlimited"'), ()),
+    ("handlers with spaces", _log_xml('events="None" output=" console ,  stdout" format="%d %e"'), ("Trace",)),
+    ("events set in the file", _log_xml('events="Annotate" output="stdout" format="%d %e"'), ("Annotate",)),
+    ("a stealth entry", _log_xml(_LOG_BASE + ' stealth="True"'), ()),
+    ("a DOCTYPE, comments and an include",
+     '<?xml version="1.0"?>\n<!DOCTYPE logmap [\n  <!ATTLIST log events CDATA "x]>y">\n]>\n'
+     '<!-- a > in a comment -->\n<logmap>\n  <include file="more.xml"/>\n  <log ' + _LOG_BASE +
+     '/>\n</logmap>\n<!-- unclosed', ("Annotate",)))
+GAP_STEP_CASES += [("driver logcfg: %s" % name, _driver("logcfg", *args), {"log.xml": xml})
+                   for name, xml, args in _LOG_FILES]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default
