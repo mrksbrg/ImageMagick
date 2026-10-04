@@ -1,8 +1,8 @@
 mutate: 8 mutants in MagickCore/static\.c$, 3 functions
-mutate: baseline over 203 cases in 0s
-  mutants: 8/8 (7s)
+mutate: baseline over 68 cases in 0s
+  mutants: 8/8 (2s)
 
-mutate: 8 mutants, 7s
+mutate: 8 mutants, 2s
   killed 0, survived 2 (0 capped), no coverage 6, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -16,4 +16,4 @@ mutate: 8 mutants, 7s
     x  static.c:373:37 cxx_ne_to_eq               if (MagickModules[i].registered != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6660a942c-static.json
+  full results: build-oracle/work/mutation-confirm-9ae3bdd76-static.json
