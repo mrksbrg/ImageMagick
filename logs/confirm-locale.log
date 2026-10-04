@@ -1,0 +1,48 @@
+mutate: 58 mutants in MagickCore/locale\.c$, 19 functions
+mutate: baseline over 18 cases in 0s
+  mutants: 25/58 (0s)
+  mutants: 50/58 (1s)
+  mutants: 58/58 (1s)
+
+mutate: 58 mutants, 1s
+  killed 0, survived 13 (0 capped), no coverage 45, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  LoadLocaleCache                       19      0        0     19
+  IsLocaleTreeInstantiated               8      0        0      8
+  LocaleComponentTerminus                4      0        4      0
+  DestroyLocaleNode                      3      0        0      3
+  FormatLocaleStringList                 3      0        3      0
+  GetLocaleOptions                       3      0        0      3
+  LocaleFatalErrorHandler                3      0        0      3
+  DestroyCLocale                         2      0        2      0
+  GetLocaleInfoList                      2      0        0      2
+  GetLocaleList                          2      0        0      2
+  AcquireCLocale                         1      0        1      0
+  DestroyLocaleOptions                   1      0        0      1
+  FormatLocaleFileList                   1      0        0      1
+  LocaleInfoCompare                      1      0        0      1
+  GetLocaleValue                         1      0        0      1
+  InterpretLocaleValue                   1      0        1      0
+  ChopLocaleComponents                   1      0        0      1
+  LocaleNCompare                         1      0        1      0
+  LocaleComponentGenesis                 1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  locale.c:138:16 cxx_eq_to_ne               if (c_locale == (locale_t) NULL)
+    x  locale.c:263:16 cxx_ne_to_eq               if (c_locale != (locale_t) NULL)
+    x  locale.c:267:5 cxx_remove_void_call       freelocale(c_locale);
+    x  locale.c:463:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    x  locale.c:475:9 cxx_lt_to_le               if (n < 0)
+       locale.c:476:18 cxx_sub_to_add             string[length-1]='\0';
+    x  locale.c:1006:18 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+       locale.c:1576:13 cxx_eq_to_ne               if (q == (char *) NULL)
+    x  locale.c:1678:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+    x  locale.c:1706:24 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
+       locale.c:1707:5 cxx_remove_void_call       ActivateSemaphoreInfo(&locale_semaphore);
+    x  locale.c:1712:3 cxx_remove_void_call       DestroyCLocale();
+    x  locale.c:1715:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&locale_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-locale.json

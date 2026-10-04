@@ -1,0 +1,87 @@
+mutate: 111 mutants in MagickCore/policy\.c$, 17 functions
+mutate: baseline over 18 cases in 0s
+  mutants: 25/111 (0s)
+  mutants: 50/111 (2s)
+  mutants: 75/111 (2s)
+  mutants: 100/111 (4s)
+  mutants: 111/111 (4s)
+
+mutate: 111 mutants, 4s
+  killed 0, survived 52 (0 capped), no coverage 59, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  IsPathContainsSymlink                 23      0        0     23
+  SetMagickSecurityPolicyValue          20      0        0     20
+  IsRightsAuthorizedByName              14      0       14      0
+  LoadPolicyCache                       14      0       14      0
+  SetMagickSecurityPolicy               10      0        0     10
+  AcquirePolicyCache                     6      0        6      0
+  GetPolicyInfo                          4      0        4      0
+  DestroyPolicyElement                   4      0        4      0
+  PolicyComponentTerminus                4      0        4      0
+  AcquirePolicyString                    3      0        3      0
+  GetPolicyList                          2      0        0      2
+  ValidateSecurityPolicy                 2      0        0      2
+  GetPolicyInfoList                      1      0        0      1
+  GetPolicyValue                         1      0        1      0
+  IsPolicyPathSeparator                  1      0        0      1
+  IsPathAuthorized                       1      0        1      0
+  PolicyComponentGenesis                 1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  policy.c:210:18 cxx_eq_to_ne               if (status == MagickFalse)
+       policy.c:211:9 cxx_remove_void_call       CatchException(exception);
+       policy.c:234:19 cxx_eq_to_ne               p->name == (char *) NULL ? "" : p->name);
+       policy.c:235:9 cxx_remove_void_call       CatchException(exception);
+       policy.c:252:19 cxx_eq_to_ne               p->name == (char *) NULL ? "" : p->name);
+       policy.c:253:9 cxx_remove_void_call       CatchException(exception);
+    x  policy.c:308:25 cxx_ne_to_eq               for (q=policyname; *q != '\0'; q++)
+    x  policy.c:334:3 cxx_remove_void_call       ResetLinkedListIterator(policy_cache);
+       policy.c:338:7 cxx_remove_void_call       UnlockSemaphoreInfo(policy_semaphore);
+       policy.c:339:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+    x  policy.c:472:15 cxx_ge_to_gt               if (~length >= pad)
+    x  policy.c:473:58 cxx_mul_to_div             destination=(char *) AcquireMagickMemory((length+pad)*sizeof(*destination));
+    x  policy.c:477:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    x  policy.c:561:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  policy.c:704:15 cxx_ne_to_eq               if ((status != MagickFalse) && (symlink_follow_allowed == MagickFalse))
+    x  policy.c:817:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+       policy.c:821:12 cxx_eq_to_ne               name == (const char *) NULL ? "undefined" : name,
+       policy.c:823:15 cxx_eq_to_ne               pattern == (const char *) NULL ? "undefined" : pattern);
+       policy.c:829:45 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+    x  policy.c:839:3 cxx_remove_void_call       ResetLinkedListIterator(policy_cache);
+    x  policy.c:852:15 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
+    x  policy.c:852:70 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
+    x  policy.c:872:74 cxx_mul_to_div             canonical_candidate=(char *) AcquireCriticalMemory(length*
+    x  policy.c:890:73 cxx_ne_to_eq               (GlobExpression(canonical_path,policy->pattern,MagickFalse) != MagickFalse))
+    x  policy.c:915:27 cxx_ne_to_eq               if (canonical_directory != (char *) NULL)
+    x  policy.c:917:27 cxx_ne_to_eq               if (canonical_candidate != (char *) NULL)
+    x  policy.c:919:22 cxx_ne_to_eq               if (canonical_path != (char *) NULL)
+    x  policy.c:947:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
+       policy.c:949:33 cxx_eq_to_ne               "  authorized: %s",status == MagickFalse ? "false" : "true");
+    x  policy.c:1091:20 cxx_ne_to_eq               if (p->value != (char *) NULL)
+    x  policy.c:1093:22 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
+    x  policy.c:1095:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
+    x  policy.c:1097:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  policy.c:1197:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  policy.c:1197:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  policy.c:1197:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  policy.c:1201:22 cxx_ne_to_eq               if (*token != '=')
+    x  policy.c:1204:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+    x  policy.c:1206:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  policy.c:1206:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+    x  policy.c:1215:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+    x  policy.c:1216:29 cxx_ne_to_eq               if (*path != '\0')
+    x  policy.c:1219:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+    x  policy.c:1224:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       policy.c:1227:35 cxx_add_to_sub             path,depth+1,exception);
+    x  policy.c:1253:20 cxx_eq_to_ne               if (status == MagickFalse)
+    x  policy.c:1334:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    x  policy.c:1357:24 cxx_eq_to_ne               if (policy_semaphore == (SemaphoreInfo *) NULL)
+    x  policy.c:1382:24 cxx_eq_to_ne               if (policy_semaphore == (SemaphoreInfo *) NULL)
+       policy.c:1383:5 cxx_remove_void_call       ActivateSemaphoreInfo(&policy_semaphore);
+    x  policy.c:1385:20 cxx_ne_to_eq               if (policy_cache != (LinkedListInfo *) NULL)
+    x  policy.c:1388:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&policy_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-policy.json
