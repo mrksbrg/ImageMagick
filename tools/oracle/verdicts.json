@@ -23041,6 +23041,36 @@
    "src": "if (GetUTFCode(p) < 0)",
    "verdict": "equivalent",
    "why": "inside a loop whose condition is GetUTFCode(p) != 0, so the code is never 0 here and < 0 and <= 0 agree"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/annotate.c",
+   "function": "IsEmptyOutline",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "return((outline.n_points == 0) || (outline.n_contours <= 0) ? MagickTrue :",
+   "verdict": "equivalent",
+   "why": "differs only for an outline with points but no contours, which FreeType never produces from a glyf glyph (n_points is the last contour's end point + 1, or 0)"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "stream->size=attributes.st_size >= 0 ? (unsigned long)",
+   "verdict": "equivalent",
+   "why": "st_size is never negative, and at 0 both branches give a stream size of 0"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/annotate.c",
+   "function": "RenderFreetype",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (metrics->origin.x > metrics->width)",
+   "verdict": "equivalent",
+   "why": "at equality the mutant assigns width the value it already holds"
   }
  ]
 }
