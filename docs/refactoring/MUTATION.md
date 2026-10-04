@@ -2510,6 +2510,28 @@ last step.
 
 Trusted now, Windows: **21 of 36** (the 17 above, and these four).
 
+**xml-tree.c, 76 → 99, trusted.** An `xml` driver command parses a document (or starts from
+`NewXMLTreeTag`), walks it (child, sibling, next), adds children at offsets, sets content,
+adds paths, and prints it with `XMLTreeInfoToXML`. Twelve documents: attributes, entities,
+CDATA, processing instructions before, inside and after the root, a DOCTYPE with entities and
+attribute defaults, circular and chained entities, characters to escape, control characters
+(CanonicalXMLContent's base64), a mismatched tag, and items longer than the writers' 4 KB of
+slack (tag and attribute names, a DTD default, processing-instruction targets and content),
+which reach the buffer-growth checks. Four rounds. 14 verdicts: the `>` → `>=` growth checks
+(the buffer grows a byte earlier), three leaks in `DestroyXMLTree_`, an allocation failure,
+and three that follow from two quirks:
+
+- `ValidateEntities`' inner loop skips entities *while* their names match (it should skip while
+  they differ), so any entity value with a delimiter recurses until the depth limit: every
+  entity that refers to another is reported as circular.
+- `XMLTreeTagToXML` prints DTD default attributes only for the tag of the first ATTLIST.
+
+**A second upstream bug.** An attribute written `a="q\"x"` (XML has no backslash escape)
+parses into an attribute with no value, and `XMLTreeInfoToXML` then crashes in
+`CanonicalXMLContent(NULL)`. Malformed input only; no case uses it.
+
+Trusted now, Windows: **22 of 36**.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:

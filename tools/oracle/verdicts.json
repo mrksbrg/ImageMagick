@@ -22511,6 +22511,146 @@
    "src": "p=kernel+id*(ssize_t) image->rows;",
    "verdict": "unobservable",
    "why": "id*rows and id/rows are both 0 for thread 0, and the oracle runs single-threaded"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/xml-tree.c",
+   "function": "AddPathToXMLTree",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (node == (XMLTreeInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "AddChildToXMLTree returns NULL only when an allocation fails; the oracle runs within memory"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyXMLTreeChild(xml_info,depth+1);",
+   "verdict": "unobservable",
+   "why": "leaves the tree's children, ordered list or root data unfreed: a leak, no output changes"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyXMLTreeOrdered(xml_info,depth+1);",
+   "verdict": "unobservable",
+   "why": "leaves the tree's children, ordered list or root data unfreed: a leak, no output changes"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyXMLTreeRoot(xml_info);",
+   "verdict": "unobservable",
+   "why": "leaves the tree's children, ordered list or root data unfreed: a leak, no output changes"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/xml-tree.c",
+   "function": "EncodePredefinedEntities",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((*length+strlen(canonical_content)+MagickPathExtent) > *extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ValidateEntities",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "equivalent",
+   "why": "ValidateEntities recurses into an entity whenever the name after a delimiter does not match its loop's first entity (the loop skips while names match), and every entity value has at least the predefined ones' '&#..;' to recurse into, so any delimiter ends at the depth limit: one level deeper (> for >=), or stopping at another entry of the list, gives the same MagickFalse"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ValidateEntities",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((entities[i] != (char *) NULL) &&",
+   "verdict": "equivalent",
+   "why": "ValidateEntities recurses into an entity whenever the name after a delimiter does not match its loop's first entity (the loop skips while names match), and every entity value has at least the predefined ones' '&#..;' to recurse into, so any delimiter ends at the depth limit: one level deeper (> for >=), or stopping at another entry of the list, gives the same MagickFalse"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeInfoToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((length+strlen(p)+strlen(q)+MagickPathExtent) > extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeInfoToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "if ((length+strlen(p)+strlen(q)+MagickPathExtent) > extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 53,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeTagToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((*length+strlen(xml_info->tag)+MagickPathExtent) > *extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 63,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeTagToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((*length+strlen(xml_info->attributes[i])+MagickPathExtent) > *extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeTagToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((*length+strlen(attributes[i][j])+MagickPathExtent) > *extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 53,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeTagToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "if ((*length+strlen(xml_info->tag)+MagickPathExtent) > *extent)",
+   "verdict": "equivalent",
+   "why": "grows the output buffer when it is exactly full as well: one byte earlier, and the 4 KB of slack (MagickPathExtent) leaves the next write room either way; the text written is the same"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeTagToXML",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((attributes[i] != (char **) NULL) &&",
+   "verdict": "equivalent",
+   "why": "XMLTreeTagToXML prints DTD default attributes only for the tag of the first ATTLIST (hand-run: a second ATTLIST's defaults never print); a loop that never advances stops at that same first entry"
   }
  ]
 }
