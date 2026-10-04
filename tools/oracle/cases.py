@@ -5345,7 +5345,7 @@ def _windrv_cases():
     for expr in ("0=>2", "2<=>0", "1=>0,0=>2", "63=>0", "64=>0", "-1=>0", "foo=>0", "2.5=>1", "|0=>1", ";1=>2"):
         yield _case("optgap", "-channel-fx %s" % expr,
                     [[img("rose"), "-channel-fx", expr] + FLOAT_OUT + ["out.miff"]], ["out.miff"])
-    for spec in ("RGB,sync", "RG,Index", "RGB,bogus", "Red,", "CMY,Black", "K,Sync"):
+    for spec in ("RGB,sync", "RG,Index", "RGB,bogus", "Red,", "CMY,Black", "K,Sync", "Undefined", "RGB,Undefined"):
         yield _case("optgap", "-channel %s -negate" % spec,
                     [[img("cmyk" if "K" in spec or "CMY" in spec else "rose"), "-channel", spec, "-negate"] + FLOAT_OUT
                      + ["out.miff"]], ["out.miff"])

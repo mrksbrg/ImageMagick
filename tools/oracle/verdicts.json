@@ -12225,6 +12225,126 @@
    "why": "copies from a non-NULL montage_info, which only MagickWand and the X11 display pass; the command line always passes NULL and returns at the first test"
   },
   {
+   "at": 24,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (strchr(options,'|') != (char *) NULL)",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 4,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(*p != '\\0'))",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((q-token) >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 63,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((command_info->mnemonic == (const char *) NULL) && (*token != '\\0') &&",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "((strchr(token+1,'-') != (char *) NULL) ||",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(strchr(token+1,'_') != (char *) NULL)))",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((q=strchr(token+1,'-')) != (char *) NULL)",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(void) CopyMagickString(q,q+1,MagickPathExtent-strlen(q));",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "(void) CopyMagickString(q,q+1,MagickPathExtent-strlen(q));",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "for (i=0; option_info[i].mnemonic != (char *) NULL; i++)",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (LocaleCompare(token,option_info[i].mnemonic) == 0)",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/option.c",
+   "function": "GetCommandOptionFlags",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (list == MagickFalse)",
+   "verdict": "equivalent",
+   "why": "the command-line callers (convert, mogrify, identify, compare, composite, montage option loops) pass one option they have already recognised by its exact name (a name with an underscore or a stray dash is rejected as UnrecognizedOption first) with list MagickFalse: there is no '|' or ',' in it, no leading space, it is far shorter than MagickPathExtent, the name is found on the first lookup so the retry without '-' and '_' never runs, and the loop ends after one option either way"
+  },
+  {
    "at": 37,
    "file": "MagickCore/paint.c",
    "function": "GradientImage",
