@@ -2880,3 +2880,28 @@ scoring pass, which returns the same font because an exact match holds the uniqu
 for the corpus's sub-900 weights); `475` and the fontmap/`family==NULL` lines `429`/`430`/`477`/
 `478`. type.c stays **careful, not trusted**; the campaign-wide lesson is that a scoring case must
 use a case-local family, never one the system font config also defines.
+
+## type.c: trusted, honestly this time — two proven-equivalent verdicts close GetTypeInfoByFamily (2026-10-04)
+
+After the correction above, `GetTypeInfoByFamily` stood at gate 78.6% on four real, portable
+font-selection kills, one short of the bar. The gap is closed not with another kill but with two
+**proven-equivalent** verdicts for the first exact-match pass:
+
+- `369` `while (p != NULL)` → `== NULL` (disables the first pass), and
+- `371` `if (p->family == NULL)` → `!=` (makes the first pass skip every real entry).
+
+Both leave the first pass finding nothing, so control falls to the second (scoring) pass. That
+pass returns the same entry the first pass would have: an exact match scores the unique maximum
+`32+16+8=56` (exact style, equal weight, exact stretch), and for the corpus's sub-900 weights
+"scores 56" is exactly the first pass's exact-match test — so the second pass's top scorer is the
+first pass's exact match. Breaking the first pass is therefore masked by the second, and the
+chosen font is unchanged. This holds on both machines (the verdicts apply to ERDC's reports too),
+and every case-local scoring case leaves these two surviving; only the removed flaky Helvetica
+case ever "killed" them. (`366`, the first pass's `ResetSplayTreeIterator`, is left unresolved:
+its equivalence is subtler — it depends on the iterator's position when a family has several
+equal matches — so it is not claimed here.)
+
+With `369`/`371` equivalent, `GetTypeInfoByFamily` is **44 killed, gate 81.5% (adjusted 81%)**
+and **type.c is trusted** (file adjusted 85%). The honest ledger: the second corpus font bought
+four portable kills, and the pass-structure proof the last two; the earlier 82% via a flaky
+Helvetica kill was never real.

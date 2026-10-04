@@ -22921,6 +22921,26 @@
    "src": "while ((attributes[i] != (char **) NULL) &&",
    "verdict": "equivalent",
    "why": "XMLTreeTagToXML prints DTD default attributes only for the tag of the first ATTLIST (hand-run: a second ATTLIST's defaults never print); a loop that never advances stops at that same first entry"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/type.c",
+   "function": "GetTypeInfoByFamily",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (p != (const TypeInfo *) NULL)",
+   "verdict": "equivalent",
+   "why": "the first pass finds the first exact match (family, style exact or request undefined/any, stretch likewise, weight equal); the second pass then scores every family entry and returns the highest, where an exact match scores the unique maximum 32+16+8=56 (exact style +32, equal weight +16, exact stretch +8). For the corpus's sub-900 weights 'scores 56' is exactly the first pass's exact-match test, so the second pass returns the same entry the first pass would; breaking the first pass (this mutant) is therefore masked by the second and the chosen font is unchanged. Verified: every case-local scoring case leaves it surviving (the Mac 'kill' was a flaky Helvetica case among 64 ambiguous system entries, now removed)."
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/type.c",
+   "function": "GetTypeInfoByFamily",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (p->family == (char *) NULL)",
+   "verdict": "equivalent",
+   "why": "the first pass finds the first exact match (family, style exact or request undefined/any, stretch likewise, weight equal); the second pass then scores every family entry and returns the highest, where an exact match scores the unique maximum 32+16+8=56 (exact style +32, equal weight +16, exact stretch +8). For the corpus's sub-900 weights 'scores 56' is exactly the first pass's exact-match test, so the second pass returns the same entry the first pass would; breaking the first pass (this mutant) is therefore masked by the second and the chosen font is unchanged. Verified: every case-local scoring case leaves it surviving (the Mac 'kill' was a flaky Helvetica case among 64 ambiguous system entries, now removed)."
   }
  ]
 }
