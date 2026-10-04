@@ -1,0 +1,31 @@
+mutate: 95 mutants in MagickCore/random\.c$, 10 functions
+mutate: baseline over 18 cases in 0s
+  mutants: 25/95 (0s)
+  mutants: 50/95 (0s)
+  mutants: 75/95 (0s)
+  mutants: 95/95 (1s)
+
+mutate: 95 mutants, 1s
+  killed 0, survived 4 (0 capped), no coverage 91, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GenerateEntropicChaos                 47      0        0     47
+  SetRandomKey                          16      0        0     16
+  AcquireRandomInfo                     13      0        0     13
+  DestroyRandomInfo                      5      0        0      5
+  ReadRandom                             4      0        0      4
+  GetRandomValue                         3      0        0      3
+  RandomComponentTerminus                3      0        3      0
+  IncrementRandomNonce                   2      0        0      2
+  GetRandomKey                           1      0        0      1
+  RandomComponentGenesis                 1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  random.c:806:24 cxx_eq_to_ne               if (random_semaphore == (SemaphoreInfo *) NULL)
+    x  random.c:831:24 cxx_eq_to_ne               if (random_semaphore == (SemaphoreInfo *) NULL)
+       random.c:832:5 cxx_remove_void_call       ActivateSemaphoreInfo(&random_semaphore);
+    x  random.c:833:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&random_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-random.json
