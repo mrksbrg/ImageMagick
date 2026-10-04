@@ -5288,6 +5288,14 @@ def _windrv_cases():
                                                    for i in range(300)) + "</r>\n",
         "pis": '<?a one?><?a two?><?b three?>\n<r>x<?c inside?></r>\n<?d after?><?a three?>\n',
         "control": '<r k="a&#1;b">c&#2;d&#9;e</r>\n',
+        # fifth wave: single items longer than the writers' 4 KB slack (a tag name, an attribute
+        # name, a DTD default attribute, processing instructions); entities with '%' and a
+        # predefined reference (ValidateEntities, hand-run: kills three)
+        "huge": '<?p %s?>\n<?%s x?>\n<!DOCTYPE r [ <!ATTLIST %s %s CDATA "%s"> <!ATTLIST o x CDATA "1"> ]>\n'
+                '<r><%s %s="v"/><%s/><%s>x</%s><o/></r>\n<?z %s?>\n<?%s y?>\n' % (
+                    "q" * 5000, "P" * 5000, "T" * 5000, "N" * 5000, "D" * 50, "T" * 5000, "A" * 5000,
+                    "T" * 5000, "T" * 5000, "T" * 5000, "y" * 5000, "Z" * 5000),
+        "percent": '<!DOCTYPE r [ <!ENTITY e "a%b"> <!ENTITY g "&lt;"> ]>\n<r>&e;&g;</r>\n',
     }
     for name, ops in (
             ("plain", "print child:b attr:k sibling attr:k attr:zz next top attr:a attr:b"),
@@ -5298,7 +5306,7 @@ def _windrv_cases():
             ("nested", "child:a child:b child:c top child:a sibling next top path:a/b/z:1 path:q/r:0 print"),
             ("nested", "child:a content:changed top child:d addchild:e:0 content:x\r\ny top print"),
             ("big", "print"), ("big", "child:e299 attr:k top addchild:z:0 content:%s top print" % ("Z" * 5000)),
-            ("pis", "print"), ("control", "print"),
+            ("pis", "print"), ("control", "print"), ("huge", "print"), ("percent", "print"),
             ("nested", "path:a[1]/b/q:0 path:a[0]/n:2 path:a/b/c/d:0 print"),
     ):
         yield _with_inputs(_windrv("xml %s: %s" % (name, ops), tuple(["xml", "%s.xml" % name] + ops.split())),
