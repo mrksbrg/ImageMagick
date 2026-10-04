@@ -5245,6 +5245,7 @@ GAP_STEP_CASES += [("driver metrics: %s" % label, _driver("metrics", *args), fil
     ("an @ font", ("@{C}/Generic.ttf", "20", "At"), {}),
     ("an @ font a path policy denies", ("@{C}/Narrow.ttf", "20", "At"), _METRIC_POLICY),
     ("an @ font a path policy does not deny", ("@{C}/Generic.ttf", "20", "At"), _METRIC_POLICY),
+    ("an @ font that does not exist", ("@nonexistent.ttf", "20", "At"), {}),
     # Quirk.ttf: kerning pairs (ComplexTextLayout), zero ascender/descender (the sanitised
     # metrics), and no Unicode map or glyph names (the fallback to the first character map)
     ("Quirk 30 kerning pairs", ("{C}/Quirk.ttf", "30", "AVAT"), {}),
@@ -5272,6 +5273,11 @@ GAP_STEP_CASES += [
     ("driver pathauth, symlink follow forbidden", _driver("pathauth", *_PATHAUTH),
      {".config/ImageMagick/policy.xml":
       '<policymap>\n  <policy domain="system" name="symlink" rights="none" pattern="follow"/>\n</policymap>\n'})]
+# image.c through imdriver: AcquireNextImage (the next frame is named from image_info when one is
+# given, shares the image's blob) and DisassociateImageStream (the next frame then has a blob of its
+# own, so closing it leaves the image's stream readable). Coders always pass an image_info naming the
+# same file, so the command line cannot tell either apart.
+GAP_STEP_CASES += [("driver nextimage", _driver("nextimage", "d.bin"), {"d.bin": "ABCDEFGHIJ"})]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

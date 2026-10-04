@@ -1957,6 +1957,45 @@ static int PathAuthCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int NextImageCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* nextimage FILE   image.c: AcquireNextImage (the next frame's name comes from image_info when
+     given, from the image otherwise; it shares the image's blob) and DisassociateImageStream (the
+     next frame gets a blob of its own). Reads FILE as the shared blob. */
+  ImageInfo *image_info, *next_info;
+  Image *image, *next;
+  int c;
+  if (argc != 3) return(Fail(exception,"nextimage FILE"));
+  image_info=AcquireImageInfo();
+  (void) CopyMagickString(image_info->filename,argv[2],MagickPathExtent);
+  image=AcquireImage(image_info,exception);
+  (void) CopyMagickString(image->filename,argv[2],MagickPathExtent);
+  if (OpenBlob(image_info,image,ReadBinaryBlobMode,exception) == MagickFalse)
+    return(Fail(exception,"nextimage: open"));
+  c=ReadBlobByte(image); c=ReadBlobByte(image); c=ReadBlobByte(image);
+  (void) printf("image tell %.20g size %.20g last %d\n",(double) TellBlob(image),(double) GetBlobSize(image),c);
+  next_info=CloneImageInfo(image_info);
+  (void) CopyMagickString(next_info->filename,"from-image-info",MagickPathExtent);
+  AcquireNextImage(next_info,image,exception);
+  next=GetNextImageInList(image);
+  if (next == (Image *) NULL) return(Fail(exception,"nextimage: no next"));
+  (void) printf("next filename %s scene %.20g endian %d tell %.20g size %.20g\n",next->filename,(double) next->scene,
+    (int) next->endian,(double) TellBlob(next),(double) GetBlobSize(next));
+  DisassociateImageStream(next);
+  /* the next frame now has a blob of its own: closing it must leave the image's stream open */
+  (void) CloseBlob(next);
+  c=ReadBlobByte(image);
+  (void) printf("after closing next: image reads %d tell %.20g\n",c,(double) TellBlob(image));
+  /* without an image_info the next frame keeps the image's name */
+  AcquireNextImage((ImageInfo *) NULL,next,exception);
+  if (GetNextImageInList(next) != (Image *) NULL)
+    (void) printf("third filename %s scene %.20g\n",GetNextImageInList(next)->filename,
+      (double) GetNextImageInList(next)->scene);
+  (void) CloseBlob(image);
+  Report(exception);
+  return(0);
+}
+
 static int MemoryCmd(int argc,char **argv,ExceptionInfo *exception)
 {
   /* memory   allocations exactly at, and one byte over, the policy's max-memory-request (16 MiB at
@@ -2059,6 +2098,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"metrics") == 0) status=MetricsCmd(argc,argv,exception);
   else if (strcmp(argv[1],"memory") == 0) status=MemoryCmd(argc,argv,exception);
   else if (strcmp(argv[1],"pathauth") == 0) status=PathAuthCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"nextimage") == 0) status=NextImageCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

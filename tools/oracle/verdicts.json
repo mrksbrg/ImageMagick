@@ -23281,6 +23281,16 @@
    "src": "if (locale == (char *) NULL)",
    "verdict": "unresolved",
    "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/image.c",
+   "function": "CatchImageException",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CatchException(exception);",
+   "verdict": "equivalent",
+   "why": "the exception caught is the one acquired on the line before, still empty: CatchException on it prints nothing and leaves the severity Undefined, so removing the call changes nothing (the function never sees the image's own exceptions in this version)"
   }
  ]
 }
