@@ -23231,6 +23231,56 @@
    "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
    "verdict": "equivalent",
    "why": "if fstat failed the buffer would keep its default size (MagickMaxBufferExtent); the copy loop reads to the end of the file either way, so only the chunk size changes, never the bytes copied"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/locale.c",
+   "function": "IsLocaleTreeInstantiated",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 4,
+   "src": "if (locale == (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
   }
  ]
 }
