@@ -1,22 +1,21 @@
-mutate: 95 mutants in MagickCore/random\.c$, 10 functions
-mutate: baseline over 77 cases in 0s
-  mutants: 25/95 (1s)
-  mutants: 50/95 (3s)
-  mutants: 75/95 (4s)
-  mutants: 95/95 (7s)
+mutate: 75 mutants in MagickCore/random\.c$, 10 functions
+mutate: baseline over 1402 cases in 0s
+  mutants: 25/75 (1s)
+  mutants: 50/75 (1s)
+  mutants: 75/75 (51s)
 
-mutate: 95 mutants, 7s
-  killed 20, survived 68 (0 capped), no coverage 7, errors 0
-  mutation score on reached code: 22.7%   overall: 21.1%
+mutate: 75 mutants, 51s
+  killed 0, survived 68 (0 capped), no coverage 7, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  GenerateEntropicChaos                 47     12       35      0
-  SetRandomKey                          16      3       13      0
-  AcquireRandomInfo                     13      4        9      0
+  GenerateEntropicChaos                 35      0       35      0
+  SetRandomKey                          13      0       13      0
+  AcquireRandomInfo                      9      0        9      0
   DestroyRandomInfo                      5      0        5      0
   ReadRandom                             4      0        0      4
   GetRandomValue                         3      0        0      3
-  RandomComponentTerminus                3      1        2      0
+  RandomComponentTerminus                2      0        2      0
   IncrementRandomNonce                   2      0        2      0
   GetRandomKey                           1      0        1      0
   RandomComponentGenesis                 1      0        1      0
@@ -92,4 +91,4 @@ mutate: 95 mutants, 7s
     x  random.c:936:18 cxx_ne_to_eq               while (i-- != 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-random.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-random.json
