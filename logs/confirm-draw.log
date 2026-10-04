@@ -1,6 +1,6 @@
 mutate: 635 mutants in MagickCore/draw\.c$, 40 functions
-  baseline: 6/6 (0s)
-mutate: baseline over 6 cases in 0s
+  baseline: 19/19 (0s)
+mutate: baseline over 19 cases in 0s
   mutants: 25/635 (0s)
   mutants: 50/635 (0s)
   mutants: 75/635 (0s)
@@ -19,16 +19,16 @@ mutate: baseline over 6 cases in 0s
   mutants: 400/635 (0s)
   mutants: 425/635 (0s)
   mutants: 450/635 (0s)
-  mutants: 475/635 (1s)
-  mutants: 500/635 (1s)
-  mutants: 525/635 (1s)
-  mutants: 550/635 (1s)
-  mutants: 575/635 (1s)
-  mutants: 600/635 (1s)
-  mutants: 625/635 (1s)
-  mutants: 635/635 (1s)
+  mutants: 475/635 (2s)
+  mutants: 500/635 (2s)
+  mutants: 525/635 (2s)
+  mutants: 550/635 (2s)
+  mutants: 575/635 (2s)
+  mutants: 600/635 (2s)
+  mutants: 625/635 (2s)
+  mutants: 635/635 (2s)
 
-mutate: 635 mutants, 1s
+mutate: 635 mutants, 2s
   killed 0, survived 32 (0 capped), no coverage 603, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -109,4 +109,4 @@ mutate: 635 mutants, 1s
     x  draw.c:6271:14 cxx_ne_to_eq               if (option != (const char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-9ae3bdd76-draw.json
+  full results: build-oracle/work/mutation-confirm-e7f5bfd63-draw.json
