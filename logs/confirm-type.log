@@ -1,30 +1,75 @@
 mutate: 62 mutants in MagickCore/type\.c$, 10 functions
-mutate: baseline over 76 cases in 0s
-  mutants: 25/62 (0s)
-  mutants: 50/62 (0s)
-  mutants: 62/62 (3s)
+mutate: baseline over 128 cases in 0s
+  mutants: 25/62 (3s)
+  mutants: 50/62 (5s)
+  mutants: 62/62 (9s)
 
-mutate: 62 mutants, 3s
-  killed 0, survived 4 (0 capped), no coverage 58, errors 0
+mutate: 62 mutants, 9s
+  killed 0, survived 49 (0 capped), no coverage 13, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  GetTypeInfoByFamily                   13      0        0     13
+  GetTypeInfoByFamily                   13      0       13      0
   GetTypeList                           12      0        0     12
-  LoadFontConfigFonts                   12      0        0     12
-  DestroyTypeNode                        9      0        0      9
-  LoadTypeCache                          8      0        0      8
+  LoadFontConfigFonts                   12      0       12      0
+  DestroyTypeNode                        9      0        9      0
+  LoadTypeCache                          8      0        8      0
   TypeComponentTerminus                  3      0        3      0
-  IsTypeTreeInstantiated                 2      0        0      2
-  AcquireTypeCache                       1      0        0      1
+  IsTypeTreeInstantiated                 2      0        2      0
+  AcquireTypeCache                       1      0        1      0
   GetTypeInfoList                        1      0        0      1
   TypeComponentGenesis                   1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
+    x  type.c:169:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  type.c:171:15 cxx_ne_to_eq               if (p->name != (char *) NULL)
+    x  type.c:173:22 cxx_ne_to_eq               if (p->description != (char *) NULL)
+    x  type.c:175:17 cxx_ne_to_eq               if (p->family != (char *) NULL)
+    x  type.c:177:19 cxx_ne_to_eq               if (p->encoding != (char *) NULL)
+    x  type.c:179:18 cxx_ne_to_eq               if (p->foundry != (char *) NULL)
+    x  type.c:181:17 cxx_ne_to_eq               if (p->format != (char *) NULL)
+    x  type.c:183:18 cxx_ne_to_eq               if (p->metrics != (char *) NULL)
+    x  type.c:185:17 cxx_ne_to_eq               if (p->glyphs != (char *) NULL)
+       type.c:235:17 cxx_ne_to_eq               if (xml != (void *) NULL)
+    x  type.c:366:3 cxx_remove_void_call       ResetSplayTreeIterator(type_cache);
+    x  type.c:369:12 cxx_ne_to_eq               while (p != (const TypeInfo *) NULL)
+    x  type.c:371:19 cxx_eq_to_ne               if (p->family == (char *) NULL)
+       type.c:429:47 cxx_ne_to_eq               if ((LocaleCompare(p->family,"arial") != 0) &&
+       type.c:430:51 cxx_ne_to_eq               (LocaleCompare(p->family,"helvetica") != 0))
+    x  type.c:446:19 cxx_eq_to_ne               if (((style == ItalicStyle) || (style == ObliqueStyle)) &&
+    x  type.c:447:51 cxx_eq_to_ne               ((p->style == ItalicStyle) || (p->style == ObliqueStyle)))
+    x  type.c:458:65 cxx_div_to_mul             p->stretch)-(ssize_t) MagickMin(stretch,p->stretch))))/range);
+    x  type.c:473:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) (sizeof(fontmap)/sizeof(fontmap[0])); i++)
+    x  type.c:473:15 cxx_lt_to_le               for (i=0; i < (ssize_t) (sizeof(fontmap)/sizeof(fontmap[0])); i++)
+    x  type.c:475:16 cxx_eq_to_ne               if (family == (const char *) NULL)
+       type.c:477:53 cxx_ne_to_eq               if ((LocaleCompare(fontmap[i].name,"arial") != 0) &&
+       type.c:478:57 cxx_ne_to_eq               (LocaleCompare(fontmap[i].name,"helvetica") != 0))
+    x  type.c:782:11 cxx_remove_void_call       FcPatternDestroy(pattern);
+    x  type.c:784:7 cxx_remove_void_call       FcObjectSetDestroy(object_set);
+       type.c:788:7 cxx_remove_void_call       FcConfigDestroy(font_config);
+    x  type.c:800:5 cxx_remove_void_call       GetPathComponent((const char *) file,ExtensionPath,extension);
+    x  type.c:801:21 cxx_ne_to_eq               if ((*extension != '\0') && (LocaleCompare(extension,"gz") == 0))
+       type.c:815:20 cxx_ne_to_eq               if (family != (FcChar8 *) NULL)
+       type.c:818:21 cxx_eq_to_ne               if ((status == FcResultMatch) && (style != (FcChar8 *) NULL) &&
+       type.c:818:49 cxx_ne_to_eq               if ((status == FcResultMatch) && (style != (FcChar8 *) NULL) &&
+       type.c:819:60 cxx_ne_to_eq               (LocaleCompare((const char *) style,"Regular") != 0))
+    x  type.c:830:16 cxx_eq_to_ne               if (status == FcResultMatch)
+    x  type.c:881:3 cxx_remove_void_call       FcFontSetDestroy(font_set);
+    x  type.c:882:3 cxx_remove_void_call       FcConfigDestroy(font_config);
+    x  type.c:891:26 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
+       type.c:892:9 cxx_remove_void_call       ActivateSemaphoreInfo(&type_semaphore);
+    x  type.c:1094:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  type.c:1183:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  type.c:1210:35 cxx_add_to_sub             path,depth+1,exception);
+    x  type.c:1251:56 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"encoding") == 0)
+    x  type.c:1271:54 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"format") == 0)
+    x  type.c:1276:55 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"foundry") == 0)
+    x  type.c:1281:56 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"fullname") == 0)
+    x  type.c:1363:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
     x  type.c:1386:22 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
     x  type.c:1411:22 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
        type.c:1412:5 cxx_remove_void_call       ActivateSemaphoreInfo(&type_semaphore);
     x  type.c:1417:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&type_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ca57d53bb-type.json
+  full results: build-oracle/work/mutation-confirm-acf185307-type.json

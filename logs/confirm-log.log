@@ -1,14 +1,14 @@
 mutate: 164 mutants in MagickCore/log\.c$, 20 functions
-mutate: baseline over 76 cases in 0s
-  mutants: 25/164 (5s)
-  mutants: 50/164 (5s)
-  mutants: 75/164 (5s)
-  mutants: 100/164 (5s)
-  mutants: 125/164 (5s)
-  mutants: 150/164 (6s)
-  mutants: 164/164 (10s)
+mutate: baseline over 128 cases in 0s
+  mutants: 25/164 (11s)
+  mutants: 50/164 (11s)
+  mutants: 75/164 (11s)
+  mutants: 100/164 (11s)
+  mutants: 125/164 (11s)
+  mutants: 150/164 (11s)
+  mutants: 164/164 (20s)
 
-mutate: 164 mutants, 10s
+mutate: 164 mutants, 20s
   killed 0, survived 39 (0 capped), no coverage 125, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -76,4 +76,4 @@ mutate: 164 mutants, 10s
     x  log.c:1790:46 cxx_post_inc_to_post_dec   for (i=0; *LogHandlers[i].name != '\0'; i++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ca57d53bb-log.json
+  full results: build-oracle/work/mutation-confirm-acf185307-log.json
