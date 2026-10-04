@@ -19331,6 +19331,46 @@
    "why": "only changes the elapsed and user times, which the oracle masks in every output"
   },
   {
+   "at": 30,
+   "file": "MagickCore/token.c",
+   "function": "GlobExpression_",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (GetUTFCode(expression) != 0)",
+   "verdict": "equivalent",
+   "why": "after a match the loops only advance the local expression and pattern pointers to their ends, and the function returns MagickTrue at once: the stores are dead (a loop that stops at once leaves the same return value)"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/token.c",
+   "function": "GlobExpression_",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "while (GetUTFCode(pattern) != 0)",
+   "verdict": "equivalent",
+   "why": "after a match the loops only advance the local expression and pattern pointers to their ends, and the function returns MagickTrue at once: the stores are dead (a loop that stops at once leaves the same return value)"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/token.c",
+   "function": "GlobExpression_",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "while (GetUTFCode(expression) != 0)",
+   "verdict": "equivalent",
+   "why": "after a match the loops only advance the local expression and pattern pointers to their ends, and the function returns MagickTrue at once: the stores are dead (a loop that stops at once leaves the same return value)"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/token.c",
+   "function": "GlobExpression_",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "while (GetUTFCode(pattern) != 0)",
+   "verdict": "equivalent",
+   "why": "after a match the loops only advance the local expression and pattern pointers to their ends, and the function returns MagickTrue at once: the stores are dead (a loop that stops at once leaves the same return value)"
+  },
+  {
    "at": 22,
    "file": "MagickCore/token.c",
    "function": "StoreToken",

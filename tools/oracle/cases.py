@@ -5458,7 +5458,10 @@ def _windrv_cases():
     for pattern in ("", "*", "**", "a*", "*c", "a?c", "?", "a*b*c", "*.png", "*.[pP][nN][gG]", "[a-c]*",
                     "[!a-c]*", "[]a]*", "[a-]*", "{a,b}*", "{abc,x}", "a{b,c}c", "{,a}bc", "a\\*c", "a\\?c",
                     "rose.miff[1]", "x\\[1\\].png", "é*", "?t?.txt", "*b*c*a*", "repeat-*", "*a*b*z",
-                    "[[]*", "a[b", "{a,b"):
+                    "[[]*", "a[b", "{a,b",
+                    # an escaped backslash: the only escape that matches (the others compare the
+                    # backslash itself, an upstream bug)
+                    "a\\\\b", "x\\\\*"):
         for case in ("exact", "nocase"):
             yield _windrv("glob %r %s" % (pattern, case), tuple(["glob", pattern, case] + exprs))
     # token.c: Tokenizer directly, with what no caller in ImageMagick passes: a short maximum
