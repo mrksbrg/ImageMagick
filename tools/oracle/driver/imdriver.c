@@ -1551,6 +1551,94 @@ static int StreamCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* cache.c: the pixel cache in memory or on disk, with metacontent, its getters, a clone, a
+   reshape and DestroyImagePixels */
+extern MagickBooleanType SyncImagePixelCache(Image *,ExceptionInfo *);
+
+static unsigned long HashRows(Image *image,ExceptionInfo *exception)
+{
+  unsigned long h=2166136261UL;
+  ssize_t y;
+  for (y=0; y < (ssize_t) image->rows; y++)
+  {
+    const Quantum *p=GetVirtualPixels(image,0,y,image->columns,1,exception);
+    const void *meta;
+    if (p == (const Quantum *) NULL)
+      return(0);
+    h=(h ^ Fnv((const unsigned char *) p,image->columns*GetPixelChannels(image)*sizeof(Quantum)))*16777619UL & 0xffffffffUL;
+    meta=GetVirtualMetacontent(image);
+    if ((meta != NULL) && (image->metacontent_extent != 0))
+      h=(h ^ Fnv((const unsigned char *) meta,image->columns*image->metacontent_extent))*16777619UL & 0xffffffffUL;
+  }
+  return(h);
+}
+
+static int CacheCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* cache IMAGE memory|disk METACONTENT-EXTENT */
+  Image *image, *clone;
+  MagickSizeType length=0;
+  ssize_t y, x, method;
+  size_t meta;
+  PixelInfo info;
+  if (argc != 5)
+    return(Fail(exception,"cache: IMAGE memory|disk METACONTENT-EXTENT"));
+  if (strcmp(argv[3],"disk") == 0)
+    {
+      (void) SetMagickResourceLimit(MemoryResource,0);
+      (void) SetMagickResourceLimit(MapResource,0);
+    }
+  image=Read(argv[2],exception);
+  if (image == (Image *) NULL)
+    return(Fail(exception,"read"));
+  meta=(size_t) atol(argv[4]);
+  if (meta != 0)
+    {
+      image->metacontent_extent=meta;
+      (void) printf("sync %d\n",(int) SyncImagePixelCache(image,exception));
+      for (y=0; y < (ssize_t) image->rows; y++)
+      {
+        Quantum *q=GetAuthenticPixels(image,0,y,image->columns,1,exception);
+        unsigned char *m=(unsigned char *) GetAuthenticMetacontent(image);
+        size_t k;
+        if (q == (Quantum *) NULL)
+          break;
+        for (k=0; (m != NULL) && (k < image->columns*meta); k++)
+          m[k]=(unsigned char) ((k*13+(size_t) y*7) & 0xff);
+        (void) SyncAuthenticPixels(image,exception);
+      }
+    }
+  (void) printf("rows %08lx\n",HashRows(image,exception));
+  (void) printf("cache pixels %s length %.20g\n",GetPixelCachePixels(image,&length,exception) != NULL ? "yes" : "no",
+    (double) length);
+  for (method=0; method <= (ssize_t) CheckerTileVirtualPixelMethod; method++)
+  {
+    if (method == (ssize_t) RandomVirtualPixelMethod)
+      continue;
+    for (x=-2; x <= (ssize_t) image->columns+1; x+=(ssize_t) image->columns/2+1)
+    {
+      (void) memset(&info,0,sizeof(info));
+      (void) GetOneVirtualPixelInfo(image,(VirtualPixelMethod) method,x,-1,&info,exception);
+      (void) printf("info %s %.20g: %.4f %.4f %.4f %.4f %s\n",CommandOptionToMnemonic(MagickVirtualPixelOptions,
+        method),(double) x,info.red,info.green,info.blue,info.alpha,
+        CommandOptionToMnemonic(MagickColorspaceOptions,(ssize_t) info.colorspace));
+    }
+  }
+  clone=CloneImage(image,0,0,MagickTrue,exception);
+  if (clone != (Image *) NULL)
+    {
+      (void) printf("clone %08lx\n",HashRows(clone,exception));
+      clone=DestroyImage(clone);
+    }
+  (void) printf("reshape %d",(int) ReshapePixelCache(image,image->rows,image->columns,exception));
+  (void) printf(" %.20gx%.20g\n",(double) image->columns,(double) image->rows);
+  DestroyImagePixels(image);  /* the cache's destroy handler: DestroyImagePixelCache */
+  (void) printf("after destroy: cache %s\n",image->cache == NULL ? "gone" : "kept");
+  Report(exception);
+  /* not DestroyImage: it destroys the (now absent) pixels again and asserts; the process ends */
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1582,6 +1670,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"tokenize") == 0) status=TokenizeCmd(argc,argv,exception);
   else if (strcmp(argv[1],"color") == 0) status=ColorCmd(argc,argv,exception);
   else if (strcmp(argv[1],"stream") == 0) status=StreamCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"cache") == 0) status=CacheCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

@@ -5552,6 +5552,15 @@ def _windrv_cases():
     for name, fmt in (("rose", "PNG"), ("rose", "PPM"), ("rose", "GIF"), ("rose", "MIFF"), ("rose_alpha", "PNG"),
                       ("cmyk", "TIFF"), ("anim", "GIF"), ("palette", "BMP")):
         yield _windrv("stream write %s as %s" % (name, fmt), ("stream", "write", img(name), fmt))
+    # cache.c: the pixel cache in memory and on disk (the driver sets the limits), with
+    # metacontent written and read back (Read/WritePixelCacheMetacontent), GetPixelCachePixels,
+    # GetOneVirtualPixelInfo with every virtual pixel method but Random, a clone (on disk,
+    # ClonePixelCacheOnDisk), ReshapePixelCache and DestroyImagePixels
+    for name in ("rose", "rose_alpha", "cmyk", "palette", "tiny"):
+        for storage in ("memory", "disk"):
+            for meta in ("0", "3", "8"):
+                yield _windrv("cache %s in %s, metacontent %s" % (name, storage, meta),
+                              ("cache", img(name), storage, meta))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
