@@ -1,17 +1,17 @@
-mutate: 173 mutants in MagickCore/image\.c$, 44 functions
-  baseline: 10/10 (0s)
-mutate: baseline over 15 cases in 0s
-  mutants: 25/173 (1s)
-  mutants: 50/173 (1s)
-  mutants: 75/173 (1s)
-  mutants: 100/173 (1s)
-  mutants: 125/173 (1s)
-  mutants: 150/173 (1s)
-  mutants: 173/173 (2s)
+mutate: 171 mutants in MagickCore/image\.c$, 43 functions
+  baseline: 13/13 (0s)
+mutate: baseline over 13 cases in 0s
+  mutants: 25/171 (1s)
+  mutants: 50/171 (1s)
+  mutants: 75/171 (1s)
+  mutants: 100/171 (1s)
+  mutants: 125/171 (2s)
+  mutants: 150/171 (2s)
+  mutants: 171/171 (3s)
 
-mutate: 173 mutants, 2s
-  killed 2, survived 55 (0 capped), no coverage 116, errors 0
-  mutation score on reached code: 3.5%   overall: 1.2%
+mutate: 171 mutants, 3s
+  killed 0, survived 59 (0 capped), no coverage 112, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   InterpretImageFilename                13      0        0     13
@@ -26,8 +26,7 @@ mutate: 173 mutants, 2s
   AppendImages                           6      0        0      6
   IsTaintImage                           5      0        0      5
   ModifyImage                            5      0        0      5
-  ResetImagePixels                       5      0        0      5
-  AcquireNextImage                       3      1        2      0
+  ResetImagePixels                       5      0        5      0
   ClipImagePath                          3      0        0      3
   CloneImage                             3      0        0      3
   CloneImageInfo                         3      0        3      0
@@ -36,19 +35,19 @@ mutate: 173 mutants, 2s
   IsImageObject                          3      0        0      3
   SetImageRegionMask                     3      0        0      3
   SmushImages                            3      0        0      3
+  AcquireNextImage                       2      0        0      2
   CatchImageException                    2      0        0      2
   GetImageMask                           2      0        0      2
   IsHighDynamicRangeImage                2      0        0      2
   SetImageAlpha                          2      0        0      2
   SetImageBackgroundColor                2      0        0      2
   CopyImagePixels                        1      0        0      1
-  DisassociateImageStream                1      1        0      0
   GetImageVirtualPixelMethod             1      0        0      1
   IsValidFormatSpecifier                 1      0        0      1
   ReferenceImage                         1      0        0      1
   ResetImagePage                         1      0        0      1
   SetImageStorageClass                   1      0        0      1
-  SetImageExtent                         1      0        0      1
+  SetImageExtent                         1      0        1      0
   SetImageInfoBlob                       1      0        1      0
   SetImageInfoCustomStream               1      0        0      1
   SetImageInfoFile                       1      0        1      0
@@ -72,8 +71,6 @@ mutate: 173 mutants, 2s
     x  image.c:300:64 cxx_add_to_sub             if ((double) image->delay < floor(geometry_info.rho+0.5))
     x  image.c:305:75 cxx_add_to_sub             image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+
     x  image.c:308:77 cxx_add_to_sub             image->ticks_per_second=CastDoubleToSsizeT(floor(geometry_info.sigma+
-    x  image.c:385:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  image.c:395:3 cxx_remove_void_call       DestroyBlob(GetNextImageInList(image));
     x  image.c:976:24 cxx_ne_to_eq               if (image_info->page != (char *) NULL)
     x  image.c:985:31 cxx_ne_to_eq               if (image_info->server_name != (char *) NULL)
     x  image.c:989:27 cxx_ne_to_eq               if (image_info->texture != (char *) NULL)
@@ -99,6 +96,12 @@ mutate: 173 mutants, 2s
     x  image.c:1370:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:1381:19 cxx_ne_to_eq               if (synchronize != (const char *) NULL)
     x  image.c:1391:54 cxx_ne_to_eq               image_info->debug=(GetLogEventMask() & ImageEvent) != 0 ? MagickTrue :
+    x  image.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:2321:14 cxx_ne_to_eq               if (pixels != (void *) NULL)
+    x  image.c:2338:15 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
+    x  image.c:2346:16 cxx_eq_to_ne               if (status == MagickFalse)
+    x  image.c:2356:48 cxx_mul_to_div             (void) memset(q,0,GetPixelChannels(image)*sizeof(Quantum));
+    x  image.c:2731:16 cxx_gt_to_ge               if ((columns > (size_t) MAGICK_SSIZE_MAX) ||
     x  image.c:2890:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:2931:23 cxx_gt_to_ge               if (first > last)
     x  image.c:2933:23 cxx_lt_to_ge               if (first < image_info->scene)
@@ -117,4 +120,4 @@ mutate: 173 mutants, 2s
     x  image.c:4141:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-7b727442d-image.json
+  full results: build-oracle/work/mutation-confirm-cfeecf925-image.json

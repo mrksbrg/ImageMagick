@@ -1,36 +1,33 @@
-mutate: 635 mutants in MagickCore/draw\.c$, 40 functions
-  baseline: 5/5 (0s)
-mutate: baseline over 5 cases in 0s
-  mutants: 25/635 (0s)
-  mutants: 50/635 (0s)
-  mutants: 75/635 (0s)
-  mutants: 100/635 (0s)
-  mutants: 125/635 (0s)
-  mutants: 150/635 (0s)
-  mutants: 175/635 (0s)
-  mutants: 200/635 (0s)
-  mutants: 225/635 (0s)
-  mutants: 250/635 (0s)
-  mutants: 275/635 (0s)
-  mutants: 300/635 (0s)
-  mutants: 325/635 (0s)
-  mutants: 350/635 (0s)
-  mutants: 375/635 (0s)
-  mutants: 400/635 (0s)
-  mutants: 425/635 (0s)
-  mutants: 450/635 (0s)
-  mutants: 475/635 (0s)
-  mutants: 500/635 (0s)
-  mutants: 525/635 (0s)
-  mutants: 550/635 (0s)
-  mutants: 575/635 (0s)
-  mutants: 600/635 (0s)
-  mutants: 625/635 (0s)
-  mutants: 635/635 (0s)
+mutate: 624 mutants in MagickCore/draw\.c$, 40 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/624 (0s)
+  mutants: 50/624 (0s)
+  mutants: 75/624 (0s)
+  mutants: 100/624 (0s)
+  mutants: 125/624 (0s)
+  mutants: 150/624 (0s)
+  mutants: 175/624 (0s)
+  mutants: 200/624 (0s)
+  mutants: 225/624 (0s)
+  mutants: 250/624 (0s)
+  mutants: 275/624 (0s)
+  mutants: 300/624 (0s)
+  mutants: 325/624 (0s)
+  mutants: 350/624 (0s)
+  mutants: 375/624 (0s)
+  mutants: 400/624 (0s)
+  mutants: 425/624 (0s)
+  mutants: 450/624 (0s)
+  mutants: 475/624 (0s)
+  mutants: 500/624 (0s)
+  mutants: 525/624 (0s)
+  mutants: 550/624 (0s)
+  mutants: 575/624 (0s)
+  mutants: 600/624 (0s)
+  mutants: 624/624 (0s)
 
-mutate: 635 mutants, 0s
-  killed 11, survived 21 (0 capped), no coverage 603, errors 0
-  mutation score on reached code: 34.4%   overall: 1.7%
+mutate: 624 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 624, errors 0
 
   function                           total killed survived no-cov
   RenderMVGContent                     142      0        0    142
@@ -45,16 +42,14 @@ mutate: 635 mutants, 0s
   TracePath                             18      0        0     18
   ConvertPathToPolygon                  17      0        0     17
   DrawAffineImage                       16      0        0     16
-  DestroyDrawInfo                       14      0       14      0
+  DestroyDrawInfo                       14      0        0     14
   AffineEdge                            14      0        0     14
   ClonePolygonEdgesTLS                  13      0        0     13
   DrawGradientImage                     12      0        0     12
   CheckPrimitiveExtent                  12      0        0     12
   TraceSquareLinecap                    12      0        0     12
   TraceEllipse                          11      0        0     11
-  GetDrawInfo                            9      5        4      0
   TraceBezier                            9      0        0      9
-  CloneDrawInfo                          8      6        2      0
   LogPolygonInfo                         8      0        0      8
   TraceRoundRectangle                    8      0        0      8
   LogPathInfo                            5      0        0      5
@@ -62,8 +57,10 @@ mutate: 635 mutants, 0s
   DrawClippingMask                       4      0        0      4
   GetMVGMacros                           4      0        0      4
   DrawPatternPath                        4      0        0      4
+  GetDrawInfo                            4      0        0      4
   DrawCompositeMask                      3      0        0      3
   StopInfoCompare                        3      0        0      3
+  CloneDrawInfo                          2      0        0      2
   DestroyPolygonInfo                     2      0        0      2
   DestroyPolygonTLS                      2      0        0      2
   DrawStrokePolygon                      2      0        0      2
@@ -71,31 +68,7 @@ mutate: 635 mutants, 0s
   AcquirePolygonTLS                      1      0        0      1
   DestroyEdge                            1      0        0      1
   DrawRoundLinecap                       1      0        0      1
-  GetAffineMatrix                        1      0        1      0
+  GetAffineMatrix                        1      0        0      1
   TraceRectangle                         1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  draw.c:338:30 cxx_ne_to_eq               if (draw_info->server_name != (char *) NULL)
-    x  draw.c:345:50 cxx_ge_to_gt               for (x=0; fabs(draw_info->dash_pattern[x]) >= MagickEpsilon; x++) ;
-    x  draw.c:975:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  draw.c:977:21 cxx_ne_to_eq               if (draw_info->id != (char *) NULL)
-    x  draw.c:979:28 cxx_ne_to_eq               if (draw_info->primitive != (char *) NULL)
-    x  draw.c:981:23 cxx_ne_to_eq               if (draw_info->text != (char *) NULL)
-    x  draw.c:983:27 cxx_ne_to_eq               if (draw_info->geometry != (char *) NULL)
-    x  draw.c:989:23 cxx_ne_to_eq               if (draw_info->font != (char *) NULL)
-    x  draw.c:991:26 cxx_ne_to_eq               if (draw_info->metrics != (char *) NULL)
-    x  draw.c:993:25 cxx_ne_to_eq               if (draw_info->family != (char *) NULL)
-    x  draw.c:995:27 cxx_ne_to_eq               if (draw_info->encoding != (char *) NULL)
-    x  draw.c:997:26 cxx_ne_to_eq               if (draw_info->density != (char *) NULL)
-    x  draw.c:999:30 cxx_ne_to_eq               if (draw_info->server_name != (char *) NULL)
-    x  draw.c:1002:31 cxx_ne_to_eq               if (draw_info->dash_pattern != (double *) NULL)
-    x  draw.c:1005:33 cxx_ne_to_eq               if (draw_info->gradient.stops != (StopInfo *) NULL)
-    x  draw.c:1008:28 cxx_ne_to_eq               if (draw_info->clip_mask != (char *) NULL)
-    x  draw.c:6130:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  draw.c:6177:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  draw.c:6202:70 cxx_ne_to_eq               draw_info->debug=(GetLogEventMask() & (DrawEvent | AnnotateEvent)) != 0 ?
-    x  draw.c:6210:46 cxx_ge_to_gt               if (fabs(draw_info->image_info->pointsize) >= MagickEpsilon)
-    x  draw.c:6213:42 cxx_ne_to_eq               if (draw_info->image_info->server_name != (char *) NULL)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-7b727442d-draw.json
+  full results: build-oracle/work/mutation-confirm-cfeecf925-draw.json
