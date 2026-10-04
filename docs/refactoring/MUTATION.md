@@ -2614,6 +2614,25 @@ performance trap:** matching is exponential in the number of `*`; `*a*b*a*b*z` a
 Trusted now, Windows: **29 of 36** regular files; vms.c, nt-base.c, nt-feature.c and
 distribute-cache.c written off.
 
+**quantum.c 91 → 100.** The `quantum` driver command reports SetQuantumMetaChannel's and
+SetQuantumPad's status: meta channels -2 to 2 of an image with two, and a pad exactly at the
+overflow guard (MAGICK_SSIZE_MAX over the channel count; one below it crashes on the
+allocation, so no case uses that).
+
+**color.c 85 → 94.** A `color` driver command builds a PixelInfo from doubles, so a channel can
+sit exactly SVGEpsilon (1e-6) from an 8-bit value, which image pixels, 32-bit floats, never
+do: GetColorTuple's IsSVGCompliant `>=` → `>` is killed (the tuple switches from percent to
+value). IsEquivalentAlpha and IsEquivalentIntensity (no caller in ImageMagick) with value pairs
+in the narrow windows where each fuzz mutation changes the answer; IsEquivalentImage. The
+plateau candidate written down earlier is gone.
+
+**distort.c stays at 88%, written down.** MagickRound's `<` → `<=` differs only at exactly x.5.
+It meets x.5 in the Arc angle normalisation (an argument of 270°), where the two roundings
+differ by one whole turn that the following normalisation removes, and per pixel only when
+an angle falls exactly on half a turn. Unresolved, not provably equivalent.
+
+Trusted now, Windows: **31 of 36**. Far: fx.c, cache.c, stream.c, blob.c (86).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
