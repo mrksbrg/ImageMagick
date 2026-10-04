@@ -1,0 +1,96 @@
+mutate: 148 mutants in MagickCore/mime\.c$, 14 functions
+mutate: baseline over 14553 cases in 0s
+  mutants: 25/148 (0s)
+  mutants: 50/148 (1s)
+  mutants: 75/148 (1s)
+  mutants: 100/148 (1s)
+  mutants: 125/148 (2s)
+  mutants: 148/148 (131s)
+
+mutate: 148 mutants, 131s
+  killed 80, survived 63 (4 capped), no coverage 5, errors 0
+  mutation score on reached code: 55.9%   overall: 54.1%
+
+  function                           total killed survived no-cov
+  GetMimeInfo                           47     14       33      0
+  LoadMimeCache                         33     17       16      0
+  ListMimeInfo                          18     18        0      0
+  GetMimeInfoList                       12     11        1      0
+  GetMimeList                           12     10        2      0
+  IsMimeCacheInstantiated                7      5        2      0
+  MimeComponentTerminus                  6      3        3      0
+  DestroyMimeElement                     5      0        5      0
+  MagickToMime                           3      0        0      3
+  AcquireMimeCache                       1      1        0      0
+  MimeInfoCompare                        1      1        0      0
+  GetMimeDescription                     1      0        0      1
+  GetMimeType                            1      0        0      1
+  MimeComponentGenesis                   1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  mime.c:248:42 cxx_eq_to_ne               if (IsMimeCacheInstantiated(exception) == MagickFalse)
+       mime.c:257:7 cxx_remove_void_call       UnlockSemaphoreInfo(mime_semaphore);
+       mime.c:258:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+    x  mime.c:263:12 cxx_ne_to_eq               while (p != (ElementInfo *) NULL)
+       mime.c:271:23 cxx_gt_to_ge               if (q->priority > ((const MimeInfo *) element_info->value)->priority)
+       mime.c:271:23 cxx_gt_to_le               if (q->priority > ((const MimeInfo *) element_info->value)->priority)
+    x  mime.c:287:32 cxx_add_to_sub             if ((size_t) (q->offset+4) > length)
+    x  mime.c:287:36 cxx_gt_to_ge               if ((size_t) (q->offset+4) > length)
+    x  mime.c:287:36 cxx_gt_to_le               if ((size_t) (q->offset+4) > length)
+    x  mime.c:291:21 cxx_eq_to_ne               if (q->mask == 0)
+       mime.c:298:38 cxx_eq_to_ne               if ((q->value & q->mask) == value)
+    x  mime.c:305:32 cxx_add_to_sub             if ((size_t) (q->offset+4) > length)
+    x  mime.c:305:36 cxx_gt_to_ge               if ((size_t) (q->offset+4) > length)
+    x  mime.c:305:36 cxx_gt_to_le               if ((size_t) (q->offset+4) > length)
+    x  mime.c:309:23 cxx_eq_to_ne               if (q->endian == UndefinedEndian)
+    x  mime.c:311:20 cxx_eq_to_ne               if (endian == LSBEndian)
+    x  mime.c:321:21 cxx_eq_to_ne               if (q->mask == 0)
+       mime.c:328:38 cxx_eq_to_ne               if ((q->value & q->mask) == value)
+    x  mime.c:335:32 cxx_add_to_sub             if ((size_t) (q->offset+4) > length)
+    x  mime.c:335:36 cxx_gt_to_ge               if ((size_t) (q->offset+4) > length)
+    x  mime.c:335:36 cxx_gt_to_le               if ((size_t) (q->offset+4) > length)
+    x  mime.c:339:23 cxx_eq_to_ne               if (q->endian == UndefinedEndian)
+    x  mime.c:341:20 cxx_eq_to_ne               if (endian == LSBEndian)
+    x  mime.c:355:21 cxx_eq_to_ne               if (q->mask == 0)
+    x  mime.c:370:21 cxx_le_to_gt               for (i=0; i <= (ssize_t) q->extent; i++)
+    x  mime.c:370:21 cxx_le_to_lt               for (i=0; i <= (ssize_t) q->extent; i++)
+    x  mime.c:370:46 cxx_post_inc_to_post_dec   for (i=0; i <= (ssize_t) q->extent; i++)
+    x  mime.c:372:34 cxx_add_to_sub             if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
+    x  mime.c:372:36 cxx_add_to_sub             if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
+    x  mime.c:372:58 cxx_gt_to_ge               if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
+    x  mime.c:372:58 cxx_gt_to_le               if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
+       mime.c:386:5 cxx_remove_void_call       SetHeadElementInLinkedList(mime_cache,element_info);
+    x  mime.c:388:20 cxx_eq_to_ne               if (element_info == (ElementInfo *) NULL)
+    x  mime.c:458:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:555:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:582:7 cxx_remove_void_call       qsort((void *) aliases,(size_t) i,sizeof(*aliases),MimeCompare);
+    x  mime.c:678:26 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+       mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+       mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+       mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+       mime.c:840:19 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+       mime.c:849:13 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+       mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
+       mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
+       mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       mime.c:861:24 cxx_add_to_sub             depth+1,exception);
+    x  mime.c:879:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:886:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:911:18 cxx_eq_to_ne               if (*p == '\\')
+    x  mime.c:914:55 cxx_ne_to_eq               if (isdigit((int) ((unsigned char) *p)) != 0)
+    x  mime.c:945:34 cxx_ne_to_eq               if (mime_info->data_type != StringData)
+    x  mime.c:959:16 cxx_eq_to_ne               if (*c == ':')
+    x  mime.c:969:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:981:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    xc mime.c:1054:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+    x  mime.c:1084:16 cxx_ne_to_eq               if (p->magic != (unsigned char *) NULL)
+    x  mime.c:1086:18 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
+    x  mime.c:1088:22 cxx_ne_to_eq               if (p->description != (char *) NULL)
+    x  mime.c:1090:15 cxx_ne_to_eq               if (p->type != (char *) NULL)
+    x  mime.c:1092:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    xc mime.c:1100:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+     c mime.c:1101:5 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+    xc mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-mime.json
