@@ -1,15 +1,15 @@
 mutate: 160 mutants in MagickCore/profile\.c$, 31 functions
-mutate: baseline over 64 cases in 0s
+mutate: baseline over 1340 cases in 0s
   mutants: 25/160 (0s)
   mutants: 50/160 (0s)
   mutants: 75/160 (0s)
   mutants: 100/160 (0s)
   mutants: 125/160 (0s)
   mutants: 150/160 (0s)
-  mutants: 160/160 (3s)
+  mutants: 160/160 (47s)
 
-mutate: 160 mutants, 3s
-  killed 0, survived 7 (0 capped), no coverage 153, errors 0
+mutate: 160 mutants, 47s
+  killed 0, survived 6 (0 capped), no coverage 154, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -32,27 +32,26 @@ mutate: 160 mutants, 3s
   ReplaceXMPValue                        3      0        0      3
   TryAccumulate                          3      0        0      3
   SyncXMPProfile                         3      0        0      3
-  AppendImageProfileProperty             2      0        0      2
+  AppendImageProfileProperty             2      0        2      0
   AcquirePixelTLS                        2      0        0      2
   AcquireTransformTLS                    2      0        0      2
   CMSExceptionHandler                    2      0        0      2
   ValidateXMPProfile                     2      0        0      2
-  DeleteImageProfile                     1      0        1      0
+  DeleteImageProfile                     1      0        0      1
   GetImageProfile                        1      0        1      0
-  GetNextImageProfile                    1      0        1      0
+  GetNextImageProfile                    1      0        0      1
   TransformDoublePixels                  1      0        0      1
-  ResetImageProfileIterator              1      0        1      0
+  ResetImageProfileIterator              1      0        0      1
   AcquireProfileStringInfo               1      0        0      1
   ReadProfileMSBShort                    1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
+       profile.c:143:16 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
+       profile.c:143:53 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
     x  profile.c:231:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  profile.c:235:27 cxx_ne_to_eq               if (image->profiles != (void *) NULL)
        profile.c:236:9 cxx_remove_void_call       DestroyImageProfiles(image);
-    x  profile.c:271:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  profile.c:339:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:374:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-profile.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-profile.json
