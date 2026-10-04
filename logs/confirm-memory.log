@@ -1,9 +1,9 @@
 mutate: 43 mutants in MagickCore/memory\.c$, 11 functions
-mutate: baseline over 18 cases in 0s
-  mutants: 25/43 (2s)
-  mutants: 43/43 (3s)
+mutate: baseline over 203 cases in 0s
+  mutants: 25/43 (15s)
+  mutants: 43/43 (22s)
 
-mutate: 43 mutants, 3s
+mutate: 43 mutants, 22s
   killed 0, survived 35 (0 capped), no coverage 8, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -17,8 +17,8 @@ mutate: 43 mutants, 3s
   RelinquishVirtualMemory                2      0        2      0
   AcquireQuantumMemory                   1      0        1      0
   RelinquishAlignedMemory                1      0        1      0
-  ResetMagickMemory                      1      0        0      1
-  ResizeQuantumMemory                    1      0        1      0
+  ResetMagickMemory                      1      0        1      0
+  ResizeQuantumMemory                    1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
     x  memory.c:350:13 cxx_gt_to_ge               (size > GetMaxMemoryRequest()))
@@ -43,7 +43,7 @@ mutate: 43 mutants, 3s
     x  memory.c:1171:56 cxx_ne_to_eq               if (memory_methods.relinquish_aligned_memory_handler != (RelinquishAlignedMemoryHandler) N
     x  memory.c:1280:25 cxx_ne_to_eq               if (memory_info->blob != (void *) NULL)
        memory.c:1293:36 cxx_ne_to_eq               if (*memory_info->filename != '\0')
-    x  memory.c:1490:13 cxx_gt_to_ge               (size > GetMaxMemoryRequest()))
+    x  memory.c:1348:14 cxx_ne_to_eq               while (n-- != 0)
     x  memory.c:1679:15 cxx_eq_to_ne               if ((memory == NULL) || (length == 0))
     x  memory.c:1679:35 cxx_eq_to_ne               if ((memory == NULL) || (length == 0))
     x  memory.c:1691:15 cxx_lt_to_ge               for (i=0; i < passes; i++)
@@ -58,4 +58,4 @@ mutate: 43 mutants, 3s
     x  memory.c:1712:12 cxx_lt_to_le               return(i < passes ? MagickFalse : MagickTrue);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-926d3b9c5-memory.json
+  full results: build-oracle/work/mutation-confirm-6660a942c-memory.json
