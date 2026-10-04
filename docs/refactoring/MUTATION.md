@@ -2573,3 +2573,31 @@ Ghostscript config defines ambiguously (the earlier note's splay-order nondeterm
 
 The second font also stands to help annotate.c's text-metric survivors; that is the next
 thing to try with it.
+
+## annotate.c: RenderFreetype's metric fields are overwritten before the CLI sees them (Mac, 2026-10-04)
+
+A fresh uncapped run of RenderFreetype's 36 open survivors against the whole current catalogue
+(`mutation-rft36.json`, mull-macx) killed **none** — they are genuine gaps, not stale. Reading
+them by hand, with the second font now available, placed the largest group:
+
+**The type-metric fields RenderFreetype computes are not observable from the command line,
+because the multi-line path overwrites them.** `GetMultilineTypeMetrics` (annotate.c:860)
+recomputes `metrics->height` from `ascent-descent` and discards RenderFreetype's
+`metrics->height=…/64.0` (L1811); and `label:`, `caption:` and multi-line `-annotate` all size
+their image through `GetMultilineTypeMetrics`. Confirmed against mull-macx: mutating L1811
+(height `/64`→`*64`), L1813/L1814 (`max_advance`) or L1817/L1818 (the initial `bounds.x2/y2 =
+ascent+descent`, which the glyph loop at L1948/L1950 overwrites for any non-empty text) leaves
+`label:`/`caption:` `%wx%h`, the rendered pixels and `%[caption:pointsize]` all identical. These
+fields reach a caller only through the C/C++ APIs (`GetTypeMetrics` read directly), which are out
+of a command-line oracle's reach, like type.c's `GetImageColorspaceType` and the ICC-name
+helpers. So they are unobservable here, not catalogue gaps — left `unresolved` for now rather
+than written off, pending either a `make check`/driver reader of the metric struct or an audit of
+every `GetTypeMetrics` caller in MagickCore for a field the CLI does surface.
+
+The other RenderFreetype survivors split into: the `@`-file font policy check (L1645/L1646,
+needs a font loaded through `@path` under a path policy), the charmap/`AppleRoman` encoding
+fallbacks (L1714/L1724), the glyph-trace block reached only under `-stroke` (L1953/L1960/L2100),
+the non-antialiased mono opacity rounding `fill_opacity >= 0.5` (L2060, an exact-0.5 edge), and
+the per-glyph bounds min/max guards with their `!= 0` tests (L1944–L1950). Some of these are
+reachable with targeted cases (a stroked `-annotate`, `+antialias`); that is the next pass.
+annotate.c stays untrusted (RenderFreetype at gate 77%); closing it is more than a short sitting.
