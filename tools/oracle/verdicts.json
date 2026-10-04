@@ -3248,8 +3248,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -3258,8 +3258,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 1,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -3268,8 +3268,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 2,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -3278,8 +3278,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 3,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -3288,8 +3288,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 4,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 6,
@@ -3298,8 +3298,8 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (p != (const char *) NULL)",
-   "verdict": "unresolved",
-   "why": "falls back through the locale environment variables (LC_ALL, LC_MESSAGES, LC_CTYPE, LANG); the oracle fixes LC_ALL=C and a case cannot set the environment, so the fallbacks never run: environment-dependent"
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 0,
@@ -4678,16 +4678,6 @@
    "mutator": "cxx_le_to_lt",
    "nth": 0,
    "src": "return((outline.n_points == 0) || (outline.n_contours <= 0) ? MagickTrue :",
-   "verdict": "unresolved",
-   "why": "not killed by the 45 annotate and text cases tried"
-  },
-  {
-   "at": 54,
-   "file": "MagickCore/annotate.c",
-   "function": "IsEmptyOutline",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
-   "src": "return((outline.n_points == 0) || (outline.n_contours <= 0) ? MagickTrue :",
    "verdict": "equivalent",
    "why": "differs only for an outline with points but no contours, which FreeType never produces from a glyf glyph (n_points is the last contour's end point + 1, or 0)"
   },
@@ -4878,8 +4868,8 @@
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "stream->size=attributes.st_size >= 0 ? (unsigned long)",
-   "verdict": "unresolved",
-   "why": "font lookup by family or path; the catalogue names its font by path, and family lookup depends on the machine's fonts"
+   "verdict": "equivalent",
+   "why": "st_size is never negative, and at 0 both branches give a stream size of 0"
   },
   {
    "at": 17,
@@ -4908,8 +4898,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (metrics->origin.x > metrics->width)",
-   "verdict": "unresolved",
-   "why": "not killed by the 45 annotate and text cases tried"
+   "verdict": "equivalent",
+   "why": "at equality the mutant assigns width the value it already holds"
   },
   {
    "at": 37,
@@ -4988,8 +4978,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if (GetUTFCode(p) < 0)",
-   "verdict": "unresolved",
-   "why": "not killed by the 45 annotate and text cases tried"
+   "verdict": "equivalent",
+   "why": "inside a loop whose condition is GetUTFCode(p) != 0, so the code is never 0 here and < 0 and <= 0 agree"
   },
   {
    "at": 26,
@@ -5150,36 +5140,6 @@
    "src": "if (q != (Quantum *) NULL)",
    "verdict": "unresolved",
    "why": "clipping a glyph's bitmap at the image edge; not killed by text crossing each edge"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/annotate.c",
-   "function": "RenderFreetype",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (GetUTFCode(p) < 0)",
-   "verdict": "equivalent",
-   "why": "inside a loop whose condition is GetUTFCode(p) != 0, so the code is never 0 here and < 0 and <= 0 agree"
-  },
-  {
-   "at": 32,
-   "file": "MagickCore/annotate.c",
-   "function": "RenderFreetype",
-   "mutator": "cxx_ge_to_gt",
-   "nth": 0,
-   "src": "stream->size=attributes.st_size >= 0 ? (unsigned long)",
-   "verdict": "equivalent",
-   "why": "st_size is never negative, and at 0 both branches give a stream size of 0"
-  },
-  {
-   "at": 22,
-   "file": "MagickCore/annotate.c",
-   "function": "RenderFreetype",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (metrics->origin.x > metrics->width)",
-   "verdict": "equivalent",
-   "why": "at equality the mutant assigns width the value it already holds"
   },
   {
    "at": 15,
@@ -20337,8 +20297,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))",
-   "verdict": "unresolved",
-   "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
+   "verdict": "equivalent",
+   "why": "a failed (or, mutated, a successful) fstat only leaves the read buffer at MagickMaxBufferExtent instead of the file size; the copy loop reads until end of file either way, so the copy is the same"
   },
   {
    "at": 12,
@@ -20459,16 +20419,6 @@
    "src": "if ((size_t) count != length)",
    "verdict": "unresolved",
    "why": "AcquireUniqueSymbolicLink is reached only from svg.c's svg:decode delegate, whose program (inkscape) is not installed on the Mac, nor working on ERDC, where these mutants were run and survived: the delegate fails whether the link or copy is right, and the MSVG fallback renders the same. A case cannot supply its own delegates.xml (only the build's is read, as with configure.xml). Observable where inkscape is installed"
-  },
-  {
-   "at": 36,
-   "file": "MagickCore/utility.c",
-   "function": "AcquireUniqueSymbolicLink",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))",
-   "verdict": "equivalent",
-   "why": "a failed (or, mutated, a successful) fstat only leaves the read buffer at MagickMaxBufferExtent instead of the file size; the copy loop reads until end of file either way, so the copy is the same"
   },
   {
    "at": 14,
@@ -23239,8 +23189,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -23249,8 +23199,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 1,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -23259,8 +23209,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 2,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -23269,8 +23219,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 3,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 11,
@@ -23279,8 +23229,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 4,
    "src": "if (locale == (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "the locale string chosen here is consumed only by LoadLocaleCache's <include locale=...> filter, and in this build no locale.xml include is ever followed: not the shipped config/locale.xml's (english.xml arrives only through the empty-cache fallback), not a case's own, relative or absolute, with or without a locale attribute (2026-10-04, -debug configure shows no load). So the mutants change nothing observable here; left unresolved until the cause is understood (no debugger on the Mac: developer mode is off). If includes do work under some condition, a driver that sets LC_ALL/LC_MESSAGES/LC_CTYPE/LANG before MagickCoreGenesis kills these."
+   "verdict": "unobservable",
+   "why": "the locale string chosen here is read only by LoadLocaleCache's <include locale=...> filter, and no include in a locale.xml can load a regular file: LoadLocaleCache calls FileToXML(path,~0UL), and FileToXML computes length=MagickMin(offset,(MagickOffsetType) extent) with (MagickOffsetType) ~0UL == -1, so length becomes SIZE_MAX, the allocation guard refuses and it returns NULL (an upstream bug, reproduced 2026-10-04; english.xml arrives only through the empty-cache fallback). Whatever locale is chosen, the same messages load."
   },
   {
    "at": 0,
@@ -23291,6 +23241,36 @@
    "src": "CatchException(exception);",
    "verdict": "equivalent",
    "why": "the exception caught is the one acquired on the line before, still empty: CatchException on it prints nothing and leaves the severity Undefined, so removing the call changes nothing (the function never sees the image's own exceptions in this version)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/policy.c",
+   "function": "IsPathContainsSymlink",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "((i+1) < (ssize_t) sizeof(component)))",
+   "verdict": "unobservable",
+   "why": "lets exactly one more byte past MagickPathExtent at the exact boundary: base and mutant then both report no symlink (the next length test refuses, or lstat of the 4096-character prefix fails with ENAMETOOLONG), so the only difference is a one-byte write past the stack buffer, undefined behaviour no output shows (the Mac's sandboxed run once crashed on it, ERDC's did not)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/policy.c",
+   "function": "IsPathContainsSymlink",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if ((offset+1) >= (ssize_t) sizeof(partial))",
+   "verdict": "unobservable",
+   "why": "lets exactly one more byte past MagickPathExtent at the exact boundary: base and mutant then both report no symlink (the next length test refuses, or lstat of the 4096-character prefix fails with ENAMETOOLONG), so the only difference is a one-byte write past the stack buffer, undefined behaviour no output shows (the Mac's sandboxed run once crashed on it, ERDC's did not)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/policy.c",
+   "function": "IsPathContainsSymlink",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((offset+i) >= (ssize_t) sizeof(partial))",
+   "verdict": "unobservable",
+   "why": "lets exactly one more byte past MagickPathExtent at the exact boundary: base and mutant then both report no symlink (the next length test refuses, or lstat of the 4096-character prefix fails with ENAMETOOLONG), so the only difference is a one-byte write past the stack buffer, undefined behaviour no output shows (the Mac's sandboxed run once crashed on it, ERDC's did not)"
   }
  ]
 }

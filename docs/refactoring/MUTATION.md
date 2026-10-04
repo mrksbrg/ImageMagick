@@ -2920,3 +2920,31 @@ With `369`/`371` equivalent, `GetTypeInfoByFamily` is **44 killed, gate 81.5% (a
 and **type.c is trusted** (file adjusted 85%). The honest ledger: the second corpus font bought
 four portable kills, and the pass-structure proof the last two; the earlier 82% via a flaky
 Helvetica kill was never real.
+
+## Upstream bug: no configuration `<include>` ever loads a file (Mac, 2026-10-04, night)
+
+Found while driving locale.c. **`FileToXML(path,~0UL)` returns NULL for every regular file**, and every
+configuration loader reads its `<include file=...>` through exactly that call: color.c, configure.c,
+delegate.c, locale.c, log.c, mime.c and policy.c (type.c reads its includes another way, which is why
+the type.xml include case works). For a seekable file FileToXML computes
+
+    length=(size_t) MagickMin(offset,(MagickOffsetType) extent);
+
+and `(MagickOffsetType) ~0UL` is `-1`, so the minimum is -1, `length` becomes SIZE_MAX, the
+`~length >= MagickPathExtent-1` allocation guard refuses, and the function returns NULL. Reproduced in
+isolation (a five-line C program with the same macro and types) and through the driver
+(`GetPathComponent` gives the right directory; FileToXML of the existing file returns NULL), and seen
+in `-debug configure`: the shipped `config/locale.xml`'s `<include locale="C" file="english.xml"/>` is
+never followed; english.xml arrives only through AcquireLocaleSplayTree's empty-cache fallback.
+
+Consequences, as the code behaves today:
+- non-English locale files can never load, whatever LANG/LC_ALL say;
+- **a policy.xml that includes another policy file silently ignores it** (a site policy split across
+  files does not apply), and likewise for delegates, colours, logs, mime types and configure options;
+- the include branches of all seven loaders are reached but can never load anything, so their mutants,
+  and anything whose only effect is the locale string the include filter reads (IsLocaleTreeInstantiated's
+  environment fallbacks), are unobservable. Those verdicts cite this bug.
+
+Only a non-seekable file (a FIFO) takes FileToXML's other branch, which works; no case can make one.
+**For the owner:** this is a real upstream defect (likely worth reporting); the campaign keeps the
+behaviour as it is. If it is ever fixed, the verdicts that cite it must be revisited.
