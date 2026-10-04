@@ -1,25 +1,25 @@
 mutate: 121 mutants in MagickCore/utility\.c$, 17 functions
-mutate: baseline over 203 cases in 0s
+mutate: baseline over 68 cases in 0s
   mutants: 25/121 (0s)
-  mutants: 50/121 (0s)
-  mutants: 75/121 (0s)
-  mutants: 100/121 (0s)
-  mutants: 121/121 (10s)
+  mutants: 50/121 (1s)
+  mutants: 75/121 (1s)
+  mutants: 100/121 (1s)
+  mutants: 121/121 (4s)
 
-mutate: 121 mutants, 10s
-  killed 0, survived 17 (0 capped), no coverage 104, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 121 mutants, 4s
+  killed 14, survived 41 (0 capped), no coverage 66, errors 0
+  mutation score on reached code: 25.5%   overall: 11.6%
 
   function                           total killed survived no-cov
   ShredFile                             23      0        0     23
-  ExpandFilenames                       17      0        0     17
-  GetPathComponents                     17      0        0     17
+  ExpandFilenames                       17      0       17      0
+  GetPathComponents                     17     14        3      0
   GetPathComponent                      13      0       13      0
   AcquireUniqueSymbolicLink             12      0        0     12
   Base64Decode                           7      0        0      7
   GetExecutionPath                       5      0        0      5
   MagickDelay                            5      0        0      5
-  Base64Encode                           4      0        0      4
+  Base64Encode                           4      0        4      0
   ChopPathComponents                     4      0        0      4
   ListFiles                              4      0        0      4
   GetMagickPageSize                      3      0        3      0
@@ -30,6 +30,27 @@ mutate: 121 mutants, 10s
   IsPathAccessible                       1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
+    x  utility.c:529:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  utility.c:532:51 cxx_div_to_mul             encode=(char *) AcquireQuantumMemory(blob_length/3+4,4*sizeof(*encode));
+    x  utility.c:562:58 cxx_add_to_sub             encode[i++]=Base64[(int) (((code[1] & 0x0f) << 2)+(code[2] >> 6))];
+    x  utility.c:566:11 cxx_post_inc_to_post_dec   encode[i++]='\0';
+    x  utility.c:796:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  utility.c:829:20 cxx_gt_to_ge               if (parameters > 0)
+    x  utility.c:834:36 cxx_post_inc_to_post_dec   for (j=0; j < parameters; j++)
+    x  utility.c:847:5 cxx_remove_void_call       GetPathComponent(option,MagickPath,magick);
+    x  utility.c:894:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (length-1); j++)
+    x  utility.c:894:40 cxx_sub_to_add             for (j=0; j < (ssize_t) (length-1); j++)
+    x  utility.c:914:24 cxx_add_to_sub             *number_arguments+count+(ssize_t) number_files+1),sizeof(*vector));
+    x  utility.c:914:53 cxx_add_to_sub             *number_arguments+count+(ssize_t) number_files+1),sizeof(*vector));
+       utility.c:917:21 cxx_lt_to_ge               for (j=0; j < (ssize_t) number_files; j++)
+       utility.c:917:21 cxx_lt_to_le               for (j=0; j < (ssize_t) number_files; j++)
+       utility.c:917:48 cxx_post_inc_to_post_dec   for (j=0; j < (ssize_t) number_files; j++)
+    x  utility.c:952:28 cxx_ge_to_gt               if (strlen(filename) >= (MagickPathExtent-1))
+    x  utility.c:974:33 cxx_ge_to_gt               if (strlen(file_path) >= (MagickPathExtent-1))
+    x  utility.c:988:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       utility.c:994:19 cxx_lt_to_ge               for (i=1; i < count; i++)
+       utility.c:994:19 cxx_lt_to_le               for (i=1; i < count; i++)
+       utility.c:994:29 cxx_post_inc_to_post_dec   for (i=1; i < count; i++)
     x  utility.c:1178:17 cxx_gt_to_ge               if (page_size > 0)
     x  utility.c:1185:17 cxx_le_to_gt               if (page_size <= 0)
     x  utility.c:1185:17 cxx_le_to_lt               if (page_size <= 0)
@@ -46,7 +67,10 @@ mutate: 121 mutants, 10s
     x  utility.c:1404:51 cxx_gt_to_ge               for (p=component+(strlen(component)-1); p > component; p--)
     x  utility.c:1434:49 cxx_gt_to_ge               for (p=component+strlen(component)-1; p > component; p--)
     x  utility.c:1445:52 cxx_lt_to_le               if ((subimage_length != 0) && (magick_length < subimage_offset))
+       utility.c:1517:21 cxx_lt_to_ge               for (j=0; j < i; j++)
+       utility.c:1517:21 cxx_lt_to_le               for (j=0; j < i; j++)
+       utility.c:1517:27 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
     x  utility.c:1673:14 cxx_eq_to_ne               if (status == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6660a942c-utility.json
+  full results: build-oracle/work/mutation-confirm-9ae3bdd76-utility.json

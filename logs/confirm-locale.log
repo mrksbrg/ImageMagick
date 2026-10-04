@@ -1,19 +1,19 @@
 mutate: 58 mutants in MagickCore/locale\.c$, 19 functions
-mutate: baseline over 203 cases in 0s
-  mutants: 25/58 (1s)
-  mutants: 50/58 (9s)
-  mutants: 58/58 (9s)
+mutate: baseline over 68 cases in 0s
+  mutants: 25/58 (0s)
+  mutants: 50/58 (3s)
+  mutants: 58/58 (3s)
 
-mutate: 58 mutants, 9s
-  killed 0, survived 48 (0 capped), no coverage 10, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 58 mutants, 3s
+  killed 1, survived 47 (0 capped), no coverage 10, errors 0
+  mutation score on reached code: 2.1%   overall: 1.7%
 
   function                           total killed survived no-cov
   LoadLocaleCache                       19      0       19      0
   IsLocaleTreeInstantiated               8      0        8      0
   LocaleComponentTerminus                4      0        4      0
   DestroyLocaleNode                      3      0        3      0
-  FormatLocaleStringList                 3      0        3      0
+  FormatLocaleStringList                 3      1        2      0
   GetLocaleOptions                       3      0        3      0
   LocaleFatalErrorHandler                3      0        0      3
   DestroyCLocale                         2      0        2      0
@@ -38,7 +38,6 @@ mutate: 58 mutants, 9s
     x  locale.c:267:5 cxx_remove_void_call       freelocale(c_locale);
     x  locale.c:305:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:463:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
-    x  locale.c:475:9 cxx_lt_to_le               if (n < 0)
        locale.c:476:18 cxx_sub_to_add             string[length-1]='\0';
     x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:832:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
@@ -80,4 +79,4 @@ mutate: 58 mutants, 9s
     x  locale.c:1715:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&locale_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6660a942c-locale.json
+  full results: build-oracle/work/mutation-confirm-9ae3bdd76-locale.json
