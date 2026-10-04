@@ -1,15 +1,58 @@
 mutate: 60 mutants in MagickCore/identify\.c$, 3 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 3 cases in 0s
   mutants: 25/60 (0s)
   mutants: 50/60 (0s)
   mutants: 60/60 (0s)
 
 mutate: 60 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 60, errors 0
+  killed 14, survived 39 (0 capped), no coverage 7, errors 0
+  mutation score on reached code: 26.4%   overall: 23.3%
 
   function                           total killed survived no-cov
-  IdentifyImage                         53      0        0     53
+  IdentifyImage                         53     14       39      0
   GetLocationStatistics                  6      0        0      6
   PrintChannelLocations                  1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-9ae3bdd76-identify.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  identify.c:543:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  identify.c:635:3 cxx_remove_void_call       GetTimerInfo(&image->timer);
+    x  identify.c:652:34 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:652:63 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:681:33 cxx_le_to_lt               if (image->total_colors <= image->colors)
+    x  identify.c:699:38 cxx_div_to_mul             (unsigned long) (elapsed_time/60.0),(unsigned long) floor(fmod(
+    x  identify.c:700:66 cxx_sub_to_add             elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-
+    x  identify.c:771:30 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:771:59 cxx_ne_to_eq               if ((image->magick_columns != 0) || (image->magick_rows != 0))
+    x  identify.c:888:24 cxx_le_to_lt               if (image->depth <= MAGICKCORE_QUANTUM_DEPTH)
+    x  identify.c:959:26 cxx_div_to_mul             "Read mask",1.0/scale,channel_statistics);
+    x  identify.c:962:27 cxx_div_to_mul             "Write mask",1.0/scale,channel_statistics);
+       identify.c:965:31 cxx_div_to_mul             "Composite mask",1.0/scale,channel_statistics);
+       identify.c:1116:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1116:23 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+       identify.c:1116:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  identify.c:1178:15 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  identify.c:1219:11 cxx_remove_void_call       GetPixelInfo(image,&pixel);
+    x  identify.c:1313:26 cxx_ne_to_eq               if ((image->page.width != 0) || (image->page.height != 0) ||
+    x  identify.c:1313:55 cxx_ne_to_eq               if ((image->page.width != 0) || (image->page.height != 0) ||
+    x  identify.c:1314:22 cxx_ne_to_eq               (image->page.x != 0) || (image->page.y != 0))
+    x  identify.c:1371:34 cxx_lt_to_le               ((size_t) (q-d+1) < sizeof(image_info->filename)))
+    x  identify.c:1409:25 cxx_gt_to_ge               if (strlen(value) > 80)
+    x  identify.c:1503:51 cxx_sub_to_add             for (i=0; i < (ssize_t) profile_length-5; i+=(ssize_t) length)
+    x  identify.c:1661:22 cxx_gt_to_ge               if (strlen(buffer) > 1)
+    x  identify.c:1668:20 cxx_gt_to_ge               if (elapsed_time > MagickEpsilon)
+    x  identify.c:1670:72 cxx_mul_to_div             (void) FormatMagickSize((MagickSizeType) ((double) image->columns*
+    x  identify.c:1671:20 cxx_div_to_mul             image->rows/elapsed_time+0.5),MagickFalse,"P",MagickPathExtent,buffer);
+    x  identify.c:1671:33 cxx_add_to_sub             image->rows/elapsed_time+0.5),MagickFalse,"P",MagickPathExtent,buffer);
+       identify.c:1685:14 cxx_remove_void_call       (void) GetMagickUTCTime(&image->ttl,&timestamp);
+       identify.c:1689:19 cxx_eq_to_ne               if (seconds == 0)
+       identify.c:1692:31 cxx_div_to_mul             ceil((double) (seconds/(3600*24))),
+       identify.c:1693:33 cxx_rem_to_div             ceil((double) ((seconds % (24*3600))/3600)),
+       identify.c:1693:45 cxx_div_to_mul             ceil((double) ((seconds % (24*3600))/3600)),
+       identify.c:1694:33 cxx_rem_to_div             ceil((double) ((seconds % 3600)/60)),
+       identify.c:1694:40 cxx_div_to_mul             ceil((double) ((seconds % 3600)/60)),
+       identify.c:1695:41 cxx_rem_to_div             ceil((double) ((seconds % 3600) % 60)),expired,iso8601);
+    x  identify.c:1699:34 cxx_div_to_mul             (unsigned long) (elapsed_time/60.0),(unsigned long) ceil(fmod(elapsed_time,
+    x  identify.c:1700:35 cxx_mul_to_div             60.0)),(unsigned long) (1000.0*(elapsed_time-floor(elapsed_time))));
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-e7f5bfd63-identify.json
