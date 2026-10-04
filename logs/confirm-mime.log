@@ -1,31 +1,48 @@
 mutate: 68 mutants in MagickCore/mime\.c$, 11 functions
-mutate: baseline over 57 cases in 0s
+mutate: baseline over 38 cases in 0s
   mutants: 25/68 (0s)
-  mutants: 50/68 (0s)
-  mutants: 68/68 (3s)
+  mutants: 50/68 (1s)
+  mutants: 68/68 (130s)
 
-mutate: 68 mutants, 3s
-  killed 0, survived 4 (0 capped), no coverage 64, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 68 mutants, 130s
+  killed 41, survived 21 (0 capped), no coverage 6, errors 0
+  mutation score on reached code: 66.1%   overall: 60.3%
 
   function                           total killed survived no-cov
-  GetMimeInfo                           33      0        0     33
-  LoadMimeCache                         16      0        0     16
-  DestroyMimeElement                     5      0        0      5
+  GetMimeInfo                           33     33        0      0
+  LoadMimeCache                         16      8        8      0
+  DestroyMimeElement                     5      0        5      0
   MagickToMime                           3      0        0      3
   MimeComponentTerminus                  3      0        3      0
   GetMimeList                            2      0        0      2
-  IsMimeCacheInstantiated                2      0        0      2
+  IsMimeCacheInstantiated                2      0        2      0
   GetMimeInfoList                        1      0        0      1
-  GetMimeDescription                     1      0        0      1
-  GetMimeType                            1      0        0      1
+  GetMimeDescription                     1      0        1      0
+  GetMimeType                            1      0        1      0
   MimeComponentGenesis                   1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
+    x  mime.c:615:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:646:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:678:26 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+       mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
+    x  mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
+    x  mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
+    x  mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+       mime.c:861:24 cxx_add_to_sub             depth+1,exception);
+    x  mime.c:969:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:981:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
     x  mime.c:1054:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
+    x  mime.c:1084:16 cxx_ne_to_eq               if (p->magic != (unsigned char *) NULL)
+    x  mime.c:1086:18 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
+    x  mime.c:1088:22 cxx_ne_to_eq               if (p->description != (char *) NULL)
+    x  mime.c:1090:15 cxx_ne_to_eq               if (p->type != (char *) NULL)
+    x  mime.c:1092:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
     x  mime.c:1100:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
        mime.c:1101:5 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
     x  mime.c:1106:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&mime_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e34c65b55-mime.json
+  full results: build-oracle/work/mutation-confirm-7b727442d-mime.json
