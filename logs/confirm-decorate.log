@@ -1,0 +1,13 @@
+mutate: 16 mutants in MagickCore/decorate\.c$, 3 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 16/16 (0s)
+
+mutate: 16 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 16, errors 0
+
+  function                           total killed survived no-cov
+  RaiseImage                            10      0        0     10
+  FrameImage                             5      0        0      5
+  BorderImage                            1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-decorate.json

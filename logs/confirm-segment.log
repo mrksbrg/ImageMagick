@@ -1,0 +1,24 @@
+mutate: 137 mutants in MagickCore/segment\.c$, 9 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/137 (0s)
+  mutants: 50/137 (0s)
+  mutants: 75/137 (0s)
+  mutants: 100/137 (0s)
+  mutants: 125/137 (0s)
+  mutants: 137/137 (0s)
+
+mutate: 137 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 137, errors 0
+
+  function                           total killed survived no-cov
+  GetImageDynamicThreshold              83      0        0     83
+  OptimalTau                            18      0        0     18
+  Classify                              16      0        0     16
+  ConsolidateCrossings                   7      0        0      7
+  SegmentImage                           4      0        0      4
+  FreeNodes                              3      0        0      3
+  DefineRegion                           2      0        0      2
+  InitializeIntervalTree                 2      0        0      2
+  ScaleSpace                             2      0        0      2
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-segment.json
