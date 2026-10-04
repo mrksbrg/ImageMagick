@@ -987,6 +987,145 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* quantum-import.c, quantum-export.c: ImportQuantumPixels and ExportQuantumPixels per row */
+static const struct { const char *name; QuantumType type; } quantum_types[] = {
+  { "alpha", AlphaQuantum }, { "bgra", BGRAQuantum }, { "bgro", BGROQuantum }, { "bgr", BGRQuantum },
+  { "black", BlackQuantum }, { "blue", BlueQuantum }, { "cbycra", CbYCrAQuantum },
+  { "cbycr", CbYCrQuantum }, { "cbycry", CbYCrYQuantum }, { "cmyka", CMYKAQuantum },
+  { "cmyko", CMYKOQuantum }, { "cmyk", CMYKQuantum }, { "cyan", CyanQuantum },
+  { "grayalpha", GrayAlphaQuantum }, { "gray", GrayQuantum }, { "green", GreenQuantum },
+  { "indexalpha", IndexAlphaQuantum }, { "index", IndexQuantum }, { "magenta", MagentaQuantum },
+  { "opacity", OpacityQuantum }, { "red", RedQuantum }, { "rgba", RGBAQuantum },
+  { "rgbo", RGBOQuantum }, { "rgbpad", RGBPadQuantum }, { "rgb", RGBQuantum },
+  { "yellow", YellowQuantum }, { "multispectral", MultispectralQuantum }, { NULL, UndefinedQuantum } };
+
+static QuantumInfo *SetupQuantum(const ImageInfo *image_info,Image *image,char **argv,int argc,
+  int first)
+{
+  /* argv[first..]: DEPTH FORMAT ENDIAN [pack] [minwhite] [pad=N] [scale=X] [alpha=TYPE] */
+  QuantumInfo *quantum_info;
+  ssize_t format=ParseCommandOption(MagickQuantumFormatOptions,MagickFalse,argv[first+1]);
+  ssize_t endian=ParseCommandOption(MagickEndianOptions,MagickFalse,argv[first+2]);
+  int i;
+  for (i=first+3; i < argc; i++)  /* meta channels first: the QuantumInfo is sized for them */
+    if ((strncmp(argv[i],"meta=",5) == 0) && (image->number_meta_channels != (size_t) atol(argv[i]+5)))
+      {
+        ExceptionInfo *sans=AcquireExceptionInfo();
+        ssize_t x, y, j;
+        (void) SetPixelMetaChannels(image,(size_t) atol(argv[i]+5),sans);
+        for (y=0; y < (ssize_t) image->rows; y++)  /* the new channels start uninitialised */
+        {
+          Quantum *q=GetAuthenticPixels(image,0,y,image->columns,1,sans);
+          if (q == (Quantum *) NULL)
+            break;
+          for (x=0; x < (ssize_t) image->columns; x++)
+          {
+            for (j=0; j < (ssize_t) image->number_meta_channels; j++)
+              q[GetPixelChannelOffset(image,(PixelChannel) (MetaPixelChannels+j))]=
+                (Quantum) (GetPixelRed(image,q)/(j+2));
+            q+=GetPixelChannels(image);
+          }
+          (void) SyncAuthenticPixels(image,sans);
+        }
+        sans=DestroyExceptionInfo(sans);
+      }
+  quantum_info=AcquireQuantumInfo(image_info,image);
+  if (format >= 0)
+    (void) SetQuantumFormat(image,quantum_info,(QuantumFormatType) format);
+  (void) SetQuantumDepth(image,quantum_info,(size_t) atol(argv[first]));
+  if (endian >= 0)
+    (void) SetQuantumEndian(image,quantum_info,(EndianType) endian);
+  for (i=first+3; i < argc; i++)
+  {
+    if (strcmp(argv[i],"pack") == 0) SetQuantumPack(quantum_info,MagickTrue);
+    else if (strcmp(argv[i],"nopack") == 0) SetQuantumPack(quantum_info,MagickFalse);
+    else if (strcmp(argv[i],"minwhite") == 0) SetQuantumMinIsWhite(quantum_info,MagickTrue);
+    else if (strncmp(argv[i],"pad=",4) == 0) (void) SetQuantumPad(image,quantum_info,(size_t) atol(argv[i]+4));
+    else if (strncmp(argv[i],"scale=",6) == 0) SetQuantumScale(quantum_info,atof(argv[i]+6));
+    else if (strcmp(argv[i],"disassociated") == 0) SetQuantumAlphaType(quantum_info,DisassociatedQuantumAlpha);
+  }
+  return(quantum_info);
+}
+
+static int QuantumCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* quantum export IMAGE TYPE DEPTH FORMAT ENDIAN [opts]          print each row's bytes
+     quantum roundtrip IMAGE TYPE DEPTH FORMAT ENDIAN OUT [opts]   export, import into a clone
+     quantum import IMAGE TYPE DEPTH FORMAT ENDIAN OUT [opts]      import a byte pattern
+     The first 3 rows of IMAGE. */
+  ImageInfo *image_info;
+  Image *image, *target=(Image *) NULL;
+  QuantumInfo *quantum_info, *target_info=(QuantumInfo *) NULL;
+  QuantumType type=UndefinedQuantum;
+  unsigned char *pixels;
+  size_t extent, n, rows, k;
+  ssize_t y;
+  int i, mode, first;
+
+  if (argc < 8)
+    return(Fail(exception,"quantum: export|roundtrip|import IMAGE TYPE DEPTH FORMAT ENDIAN [OUT] [opts]"));
+  mode=strcmp(argv[2],"export") == 0 ? 0 : strcmp(argv[2],"roundtrip") == 0 ? 1 : 2;
+  for (i=0; quantum_types[i].name != NULL; i++)
+    if (strcmp(quantum_types[i].name,argv[4]) == 0)
+      type=quantum_types[i].type;
+  image=Read(argv[3],exception);
+  if (image == (Image *) NULL)
+    return(Fail(exception,"read"));
+  image_info=AcquireImageInfo();
+  first=5;
+  quantum_info=SetupQuantum(image_info,image,argv,argc,first);
+  extent=GetQuantumExtent(image,quantum_info,type);
+  (void) printf("type %s depth %.20g extent %.20g\n",argv[4],(double) atol(argv[5]),(double) extent);
+  pixels=GetQuantumPixels(quantum_info);  /* the buffer the library sizes for itself, as the coders use it */
+  rows=image->rows < 3 ? image->rows : 3;
+  if (mode != 0)
+    {
+      target=CloneImage(image,0,0,MagickTrue,exception);
+      target_info=SetupQuantum(image_info,target,argv,argc,first);
+    }
+  for (y=0; y < (ssize_t) rows; y++)
+  {
+    (void) memset(pixels,0,extent);
+    if (mode == 2)
+      for (k=0; k < extent; k++)
+        pixels[k]=(unsigned char) ((k*37+11+(size_t) y*101) & 0xff);
+    else
+      {
+        if (GetVirtualPixels(image,0,y,image->columns,1,exception) == (const Quantum *) NULL)
+          break;
+        n=ExportQuantumPixels(image,(CacheView *) NULL,quantum_info,type,pixels,exception);
+        (void) printf("row %.20g: %.20g bytes %08lx\n",(double) y,(double) n,Fnv(pixels,n));
+      }
+    if (mode != 0)
+      {
+        if (QueueAuthenticPixels(target,0,y,target->columns,1,exception) == (Quantum *) NULL)
+          break;
+        n=ImportQuantumPixels(target,(CacheView *) NULL,target_info,type,pixels,exception);
+        (void) SyncAuthenticPixels(target,exception);
+        (void) printf("import row %.20g: %.20g bytes\n",(double) y,(double) n);
+      }
+  }
+  Report(exception);
+  if (target != (Image *) NULL)
+    {
+      Image *crop;
+      RectangleInfo geometry={ target->columns, rows, 0, 0 };
+      crop=CropImage(target,&geometry,exception);
+      if (crop != (Image *) NULL)
+        {
+          (void) Write(crop,argv[8],exception);
+          crop=DestroyImage(crop);
+        }
+      target_info=DestroyQuantumInfo(target_info);
+      target=DestroyImage(target);
+    }
+  pixels=(unsigned char *) NULL;
+  quantum_info=DestroyQuantumInfo(quantum_info);
+  image_info=DestroyImageInfo(image_info);
+  image=DestroyImage(image);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1011,6 +1150,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"cacheview") == 0) status=View(argc,argv,exception);
   else if (strcmp(argv[1],"xml") == 0) status=Xml(argc,argv,exception);
   else if (strcmp(argv[1],"blob") == 0) status=Blob(argc,argv,exception);
+  else if (strcmp(argv[1],"quantum") == 0) status=QuantumCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

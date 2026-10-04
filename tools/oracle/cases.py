@@ -5353,6 +5353,46 @@ def _windrv_cases():
         yield _case("optgap", "convert %s" % opt[0], [["convert", img("rose")] + opt + FLOAT_OUT + ["out.miff"]],
                     ["out.miff"])
     yield _case("optgap", "identify -verbose -auto_orient", [["identify", "-format", "%wx%h\\n", "-auto_orient", img("rose")]], [])
+    # quantum-import.c, quantum-export.c: every quantum type over every depth, through
+    # ExportQuantumPixels (each row's bytes) and ImportQuantumPixels (a byte pattern for unsigned
+    # formats, a round trip for floating point), the first three rows; MSB order, min-is-white,
+    # unpacked and padded variants
+    quantum_sources = dict([(t, "rose_alpha") for t in (
+        "rgb", "bgr", "rgba", "bgra", "rgbo", "bgro", "rgbpad", "red", "green", "blue", "alpha", "opacity",
+        "gray", "grayalpha", "cbycr", "cbycra", "cbycry")] +
+        [(t, "cmyk") for t in ("cmyk", "cmyka", "cmyko", "cyan", "magenta", "yellow", "black")] +
+        [("index", "palette"), ("indexalpha", "palette"), ("multispectral", "rose")])
+    for t, src in sorted(quantum_sources.items()):
+        extra = ["meta=2"] if t == "multispectral" else []
+        for depth in (1, 2, 4, 8, 10, 12, 16, 24, 32, 64):
+            yield _windrv("quantum export %s %d unsigned" % (t, depth),
+                          tuple(["quantum", "export", img(src), t, str(depth), "Unsigned", "LSB"] + extra))
+            yield _windrv("quantum import %s %d unsigned" % (t, depth),
+                          tuple(["quantum", "import", img(src), t, str(depth), "Unsigned", "LSB", "out.miff"] + extra),
+                          ["out.miff"])
+        for depth in (16, 24, 32, 64):
+            yield _windrv("quantum export %s %d float" % (t, depth),
+                          tuple(["quantum", "export", img(src), t, str(depth), "FloatingPoint", "LSB"] + extra))
+            yield _windrv("quantum round trip %s %d float" % (t, depth),
+                          tuple(["quantum", "roundtrip", img(src), t, str(depth), "FloatingPoint", "LSB", "out.miff"]
+                                + extra), ["out.miff"])
+        for depth, fmt in ((16, "Unsigned"), (32, "Unsigned"), (64, "Unsigned"), (32, "FloatingPoint")):
+            yield _windrv("quantum export %s %d %s MSB" % (t, depth, fmt),
+                          tuple(["quantum", "export", img(src), t, str(depth), fmt, "MSB"] + extra))
+    for t, src in (("gray", "rose"), ("index", "palette"), ("grayalpha", "rose_alpha")):
+        for depth in (1, 8, 16):
+            for mode, out in (("export", []), ("import", ["out.miff"])):
+                yield _windrv("quantum %s %s %d min-is-white" % (mode, t, depth),
+                              tuple(["quantum", mode, img(src), t, str(depth), "Unsigned", "LSB"] + out + ["minwhite"]),
+                              out)
+    for t, src in (("rgb", "rose"), ("gray", "rose"), ("cmyk", "cmyk"), ("rgba", "rose_alpha")):
+        for opts in (["nopack"], ["pad=2"], ["pad=5", "nopack"]):
+            for depth in (10, 12):
+                yield _windrv("quantum export %s %d %s" % (t, depth, " ".join(opts)),
+                              tuple(["quantum", "export", img(src), t, str(depth), "Unsigned", "LSB"] + opts))
+                yield _windrv("quantum import %s %d %s" % (t, depth, " ".join(opts)),
+                              tuple(["quantum", "import", img(src), t, str(depth), "Unsigned", "LSB", "out.miff"] + opts),
+                              ["out.miff"])
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])
