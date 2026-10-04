@@ -2650,6 +2650,21 @@ falls back to the ordinary pixel cache.
 
 Trusted now, Windows: **33 of 36**. Far: fx.c, cache.c, blob.c (86).
 
+**cache.c 81 → 100, trusted.** First a rerun of its survivors against all windrv cases (the
+cache-view and stream commands reach much of it: 65 killed, 86%). Then a `cache` driver
+command: the pixel cache in memory and on disk, metacontent (`metacontent_extent` set on the
+image, then SyncImagePixelCache) written and read back by rows and through a region narrower
+than a row and several rows high (only such a region makes the cache copy it, Read/
+WritePixelCacheMetacontent), GetPixelCachePixels, GetOneAuthenticPixel (which calls
+GetAuthenticPixelsCache directly), GetOneVirtualPixelInfo with every virtual pixel method, a
+clone that is then written (the copy on write; on disk ClonePixelCacheOnDisk),
+ReshapePixelCache and DestroyImagePixels. One verdict (ApplyPixelCompositeMask: TransparentAlpha
+is 0, so `alpha-TransparentAlpha` and `alpha+TransparentAlpha` are equal). Written down:
+DestroyImagePixelCache is installed only by GetPixelCacheMethods, whose one caller (ReadStream)
+replaces it with DestroyPixelStream at once.
+
+Trusted now, Windows: **34 of 36**. Left: fx.c (91) and blob.c (87).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
