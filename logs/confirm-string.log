@@ -1,29 +1,27 @@
-mutate: 87 mutants in MagickCore/string\.c$, 30 functions
-  baseline: 16/16 (0s)
-mutate: baseline over 57 cases in 0s
-  mutants: 25/87 (2s)
-  mutants: 50/87 (5s)
-  mutants: 75/87 (6s)
-  mutants: 87/87 (6s)
+mutate: 81 mutants in MagickCore/string\.c$, 29 functions
+  baseline: 23/23 (0s)
+mutate: baseline over 38 cases in 0s
+  mutants: 25/81 (2s)
+  mutants: 50/81 (2s)
+  mutants: 75/81 (3s)
+  mutants: 81/81 (4s)
 
-mutate: 87 mutants, 6s
-  killed 6, survived 53 (0 capped), no coverage 28, errors 0
-  mutation score on reached code: 10.2%   overall: 6.9%
+mutate: 81 mutants, 4s
+  killed 0, survived 52 (0 capped), no coverage 29, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   StringToStrings                       13      0       13      0
   ConfigureFileToStringInfo              9      0        9      0
-  EscapeString                           7      1        6      0
+  EscapeString                           6      0        0      6
   CopyMagickString                       5      0        5      0
   InterpretSiPrefixValue                 5      0        5      0
-  SubstituteString                       5      0        0      5
-  ConcatenateMagickString                4      3        1      0
+  SubstituteString                       5      0        5      0
   ConcatenateStringInfo                  3      0        0      3
   DestroyStringInfo                      3      0        3      0
   AcquireString                          2      0        2      0
   AcquireStringInfo                      2      0        2      0
   BlobToStringInfo                       2      0        0      2
-  CompareStringInfo                      2      1        1      0
   ConcatenateString                      2      0        2      0
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
@@ -33,11 +31,12 @@ mutate: 87 mutants, 6s
   StringToArgv                           2      0        0      2
   StripMagickString                      2      0        0      2
   CloneString                            1      0        1      0
+  CompareStringInfo                      1      0        0      1
+  ConcatenateMagickString                1      0        1      0
   ConstantString                         1      0        1      0
   FileToString                           1      0        0      1
   FileToStringInfo                       1      0        0      1
-  FormatMagickSize                       1      0        0      1
-  SanitizeString                         1      1        0      0
+  FormatMagickSize                       1      0        1      0
   SplitStringInfo                        1      0        0      1
   StringInfoToHexString                  1      0        0      1
   StringToArrayOfDoubles                 1      0        0      1
@@ -48,7 +47,6 @@ mutate: 87 mutants, 6s
     x  string.c:160:28 cxx_ge_to_gt               if (~string_info->length >= (MagickPathExtent-1))
     x  string.c:165:63 cxx_mul_to_div             (void) memset(string_info->datum,0,(length+MagickPathExtent)*
     x  string.c:260:24 cxx_ne_to_eq               if (*destination != (char *) NULL)
-    x  string.c:362:25 cxx_lt_to_le               return(target->length < source->length ? -1 : 1);
        string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
     x  string.c:477:15 cxx_lt_to_le               if (~length < source_length)
     x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
@@ -70,12 +68,7 @@ mutate: 87 mutants, 6s
     x  string.c:816:26 cxx_ne_to_eq               if (string_info->datum != (unsigned char *) NULL)
     x  string.c:819:25 cxx_ne_to_eq               if (string_info->name != (char *) NULL)
     x  string.c:821:25 cxx_ne_to_eq               if (string_info->path != (char *) NULL)
-    x  string.c:907:21 cxx_ne_to_eq               for (p=source; *p != '\0'; p++)
-    x  string.c:909:13 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
-    x  string.c:909:29 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
-    x  string.c:911:21 cxx_lt_to_le               if (~length < 1)
-    x  string.c:913:15 cxx_post_inc_to_post_dec   length++;
-    x  string.c:918:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
+    x  string.c:1117:21 cxx_ge_to_gt               for (i=0; (extent >= bytes) && (units[i+1] != (const char *) NULL); i++)
     x  string.c:1321:30 cxx_le_to_lt               if ((*q >= 'E') && (*q <= 'z'))
     x  string.c:1354:17 cxx_ge_to_gt               if (e >= MagickEpsilon)
     x  string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
@@ -96,6 +89,11 @@ mutate: 87 mutants, 6s
        string.c:2486:27 cxx_lt_to_ge               for (j=0; j < i; j++)
        string.c:2486:27 cxx_lt_to_le               for (j=0; j < i; j++)
        string.c:2486:33 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
+    x  string.c:2660:24 cxx_gt_to_ge               if (replace_extent > search_extent)
+    x  string.c:2660:24 cxx_gt_to_le               if (replace_extent > search_extent)
+    x  string.c:2666:31 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
+    x  string.c:2666:46 cxx_sub_to_add             extent=strlen(*string)+replace_extent-search_extent+1;
+    x  string.c:2666:60 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e34c65b55-string.json
+  full results: build-oracle/work/mutation-confirm-7b727442d-string.json

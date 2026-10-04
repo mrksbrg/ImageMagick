@@ -1,37 +1,35 @@
-mutate: 186 mutants in MagickCore/annotate\.c$, 19 functions
-mutate: baseline over 57 cases in 0s
-  mutants: 25/186 (2s)
-  mutants: 50/186 (3s)
-  mutants: 75/186 (4s)
-  mutants: 100/186 (4s)
-  mutants: 125/186 (4s)
-  mutants: 150/186 (4s)
-  mutants: 175/186 (5s)
-  mutants: 186/186 (5s)
+mutate: 164 mutants in MagickCore/annotate\.c$, 18 functions
+mutate: baseline over 38 cases in 0s
+  mutants: 25/164 (0s)
+  mutants: 50/164 (0s)
+  mutants: 75/164 (0s)
+  mutants: 100/164 (0s)
+  mutants: 125/164 (0s)
+  mutants: 150/164 (0s)
+  mutants: 164/164 (2s)
 
-mutate: 186 mutants, 5s
-  killed 22, survived 61 (0 capped), no coverage 103, errors 0
-  mutation score on reached code: 26.5%   overall: 11.8%
+mutate: 164 mutants, 2s
+  killed 1, survived 59 (0 capped), no coverage 104, errors 0
+  mutation score on reached code: 1.7%   overall: 0.6%
 
   function                           total killed survived no-cov
   RenderPostscript                      81      0        0     81
-  RenderFreetype                        56     16       40      0
+  RenderFreetype                        40      0       40      0
   RenderType                             7      0        7      0
   IsValidPostscriptFontname              7      0        0      7
   AnnotateImage                          5      0        0      5
-  ComplexTextLayout                      5      5        0      0
   FormatMagickCaption                    4      0        0      4
-  GetMultilineTypeMetrics                4      1        3      0
   RenderX11                              4      0        0      4
   AnnotateComponentTerminus              3      0        3      0
+  GetMultilineTypeMetrics                3      0        3      0
   GetTypeMetrics                         2      0        2      0
   AnnotateComponentGenesis               1      0        1      0
   ReplaceSpaceWithNewline                1      0        0      1
-  FreetypeCloseStream                    1      0        1      0
+  FreetypeCloseStream                    1      1        0      0
   FreetypeReadStream                     1      0        1      0
   IsEmptyOutline                         1      0        0      1
   FreetypeAlloc                          1      0        1      0
-  FreetypeRealloc                        1      0        1      0
+  FreetypeRealloc                        1      0        0      1
   FreetypeInit                           1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
@@ -51,14 +49,12 @@ mutate: 186 mutants, 5s
        annotate.c:1071:34 cxx_ne_to_eq               if (IsPathAccessible(font) != MagickFalse)
     x  annotate.c:1097:21 cxx_eq_to_ne               if (type_info == (const TypeInfo *) NULL)
     x  annotate.c:1109:26 cxx_ne_to_eq               if (type_info->metrics != (char *) NULL)
-    x  annotate.c:1333:12 cxx_ne_to_eq               if (file != (FILE *) NULL)
     x  annotate.c:1350:14 cxx_gt_to_ge               if (offset > stream->size)
     x  annotate.c:1447:14 cxx_le_to_lt               if (extent <= 0)
-    x  annotate.c:1460:14 cxx_le_to_lt               if (extent <= 0)
     x  annotate.c:1513:7 cxx_remove_void_call       FT_Set_Default_Properties(*alibrary);
        annotate.c:1667:21 cxx_ne_to_eq               if (type_info != (const TypeInfo *) NULL)
     x  annotate.c:1692:37 cxx_ge_to_gt               stream->size=attributes.st_size >= 0 ? (unsigned long)
-       annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
     x  annotate.c:1709:27 cxx_ne_to_eq               if ((draw_info->metrics != (char *) NULL) &&
     x  annotate.c:1710:45 cxx_ne_to_eq               (IsPathAccessible(draw_info->metrics) != MagickFalse))
     x  annotate.c:1758:11 cxx_remove_void_call       FreetypeDone(memory,library,stream);
@@ -98,4 +94,4 @@ mutate: 186 mutants, 5s
     x  annotate.c:2156:3 cxx_remove_void_call       FreetypeDone(memory,library,stream);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e34c65b55-annotate.json
+  full results: build-oracle/work/mutation-confirm-7b727442d-annotate.json
