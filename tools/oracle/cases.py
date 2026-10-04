@@ -5245,6 +5245,12 @@ GAP_STEP_CASES += [("driver metrics: %s" % label, _driver("metrics", *args), fil
     ("Quirk 20 no kerning pair", ("{C}/Quirk.ttf", "20", "Hello"), {}),
     ("Quirk 20 two kerned lines", ("{C}/Quirk.ttf", "20", "AV\nTo"), {}),
     ("Quirk 30 Latin-1 text", ("{C}/Quirk.ttf", "30", "x", "texthex=e9e8fc"), {}))]
+# memory.c through imdriver: allocations exactly at and one byte over the max-memory-request a
+# policy sets (raised to 16 MiB at least), through AcquireQuantumMemory, ResizeQuantumMemory and
+# AcquireAlignedMemory. A command-line case would need a 16 MiB input to meet that boundary.
+GAP_STEP_CASES += [("driver memory at the max-memory-request", _driver("memory"),
+                    {".config/ImageMagick/policy.xml":
+                     '<policymap>\n  <policy domain="system" name="max-memory-request" value="16MiB"/>\n</policymap>\n'})]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

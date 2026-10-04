@@ -1903,6 +1903,36 @@ static int MetricsCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static int MemoryCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* memory   allocations exactly at, and one byte over, the policy's max-memory-request (16 MiB at
+     least): the boundary a command-line case would need a 16 MiB input to touch. */
+  size_t max=GetMaxMemoryRequest(),sizes[2];
+  int i;
+  (void) argc; (void) argv; (void) exception;
+  (void) printf("max %.20g\n",(double) max);
+  if (max > ((size_t) 64*1024*1024))
+    {
+      (void) printf("no limit set\n");
+      return(0);
+    }
+  sizes[0]=max; sizes[1]=max+1;
+  for (i=0; i < 2; i++)
+  {
+    void *p=AcquireQuantumMemory(sizes[i],1),*q,*r;
+    (void) printf("acquire %s %s\n",i == 0 ? "at" : "over",p != NULL ? "ok" : "refused");
+    if (p != NULL) p=RelinquishMagickMemory(p);
+    q=AcquireQuantumMemory(16,1);
+    q=ResizeQuantumMemory(q,sizes[i],1);
+    (void) printf("resize %s %s\n",i == 0 ? "at" : "over",q != NULL ? "ok" : "refused");
+    if (q != NULL) q=RelinquishMagickMemory(q);
+    r=AcquireAlignedMemory(sizes[i],1);
+    (void) printf("aligned %s %s\n",i == 0 ? "at" : "over",r != NULL ? "ok" : "refused");
+    if (r != NULL) r=RelinquishAlignedMemory(r);
+  }
+  return(0);
+}
+
 static int SymlinkCmd(int argc,char **argv,ExceptionInfo *exception)
 {
   /* symlink SOURCEFILE   AcquireUniqueSymbolicLink to a fresh destination (a symlink, or a copy
@@ -1973,6 +2003,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"string") == 0) status=StringCmd(argc,argv,exception);
   else if (strcmp(argv[1],"symlink") == 0) status=SymlinkCmd(argc,argv,exception);
   else if (strcmp(argv[1],"metrics") == 0) status=MetricsCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"memory") == 0) status=MemoryCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
