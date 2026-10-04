@@ -1007,6 +1007,13 @@ static QuantumInfo *SetupQuantum(const ImageInfo *image_info,Image *image,char *
   ssize_t format=ParseCommandOption(MagickQuantumFormatOptions,MagickFalse,argv[first+1]);
   ssize_t endian=ParseCommandOption(MagickEndianOptions,MagickFalse,argv[first+2]);
   int i;
+  for (i=first+3; i < argc; i++)  /* an alpha channel for a palette image, before the QuantumInfo */
+    if ((strcmp(argv[i],"alpha") == 0) && (image->alpha_trait == UndefinedPixelTrait))
+      {
+        ExceptionInfo *sans=AcquireExceptionInfo();
+        (void) SetImageAlphaChannel(image,OpaqueAlphaChannel,sans);
+        sans=DestroyExceptionInfo(sans);
+      }
   for (i=first+3; i < argc; i++)  /* meta channels first: the QuantumInfo is sized for them */
     if ((strncmp(argv[i],"meta=",5) == 0) && (image->number_meta_channels != (size_t) atol(argv[i]+5)))
       {
@@ -1083,6 +1090,14 @@ static int QuantumCmd(int argc,char **argv,ExceptionInfo *exception)
     {
       target=CloneImage(image,0,0,MagickTrue,exception);
       target_info=SetupQuantum(image_info,target,argv,argc,first);
+      for (y=0; y < (ssize_t) target->rows; y++)  /* blank, so a skipped import shows */
+      {
+        Quantum *q=GetAuthenticPixels(target,0,y,target->columns,1,exception);
+        if (q == (Quantum *) NULL)
+          break;
+        (void) memset(q,0,target->columns*GetPixelChannels(target)*sizeof(*q));
+        (void) SyncAuthenticPixels(target,exception);
+      }
     }
   for (y=0; y < (ssize_t) rows; y++)
   {

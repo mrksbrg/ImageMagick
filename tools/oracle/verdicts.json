@@ -13832,6 +13832,46 @@
    "why": "only the colormap's allocated size changes: unshrunk when DefineImageColormap found fewer colours, resized to its own size when not; nothing reads past colors"
   },
   {
+   "at": 17,
+   "file": "MagickCore/quantum-export.c",
+   "function": "PopQuantumPixel",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (quantum_bits > quantum_info->state.bits)",
+   "verdict": "equivalent",
+   "why": "clamps the bits written to the bits left in the byte (at equality the clamp assigns the value it already has), and sets i to 0 when it went negative (at i == 0 setting it to 0 changes nothing)"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/quantum-export.c",
+   "function": "PopQuantumPixel",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (i < 0)",
+   "verdict": "equivalent",
+   "why": "clamps the bits written to the bits left in the byte (at equality the clamp assigns the value it already has), and sets i to 0 when it went negative (at i == 0 setting it to 0 changes nothing)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/quantum-import.c",
+   "function": "PushQuantumPixel",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (quantum_bits > quantum_info->state.bits)",
+   "verdict": "equivalent",
+   "why": "clamps the bits taken to the bits left in the byte: at equality the clamp assigns the value it already has; and quantum_bits is at most 8 (state.bits starts at 8), so quantum_bits < 64 and <= 64 are both always true"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/quantum-import.c",
+   "function": "PushQuantumPixel",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (quantum_bits < 64)",
+   "verdict": "equivalent",
+   "why": "clamps the bits taken to the bits left in the byte: at equality the clamp assigns the value it already has; and quantum_bits is at most 8 (state.bits starts at 8), so quantum_bits < 64 and <= 64 are both always true"
+  },
+  {
    "at": 0,
    "file": "MagickCore/quantum.c",
    "function": "DestroyQuantumInfo",

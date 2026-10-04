@@ -5390,6 +5390,18 @@ def _windrv_cases():
                 yield _windrv("quantum import %s %d %s" % (t, depth, opts[0]),
                               tuple(["quantum", "import", img(src), t, str(depth), "Unsigned", "LSB", "out.miff"]
                                     + opts + extra), ["out.miff"])
+    # third wave (after the round trip's target was blanked): index+alpha and opacity types on a
+    # palette image given an alpha channel, at every depth, all three ways
+    for t in ("indexalpha", "index", "opacity", "alpha"):
+        for depth in (1, 2, 4, 8, 16, 32):
+            for mode, fmt, out in (("export", "Unsigned", []), ("import", "Unsigned", ["out.miff"]),
+                                   ("roundtrip", "Unsigned", ["out.miff"])):
+                yield _windrv("quantum %s %s %d of a palette image with alpha" % (mode, t, depth),
+                              tuple(["quantum", mode, img("palette"), t, str(depth), fmt, "LSB"] + out + ["alpha"]), out)
+        for depth in (16, 24, 32, 64):
+            yield _windrv("quantum round trip %s %d float of a palette image with alpha" % (t, depth),
+                          tuple(["quantum", "roundtrip", img("palette"), t, str(depth), "FloatingPoint", "LSB", "out.miff",
+                                 "alpha"]), ["out.miff"])
     for t, src in (("gray", "rose"), ("index", "palette"), ("grayalpha", "rose_alpha"), ("indexalpha", "palette")):
         for depth in (1, 8, 16):
             for mode, out in (("export", []), ("import", ["out.miff"])):
