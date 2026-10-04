@@ -1,10 +1,10 @@
 mutate: 56 mutants in MagickCore/configure\.c$, 12 functions
-mutate: baseline over 13 cases in 0s
+mutate: baseline over 52 cases in 0s
   mutants: 25/56 (0s)
-  mutants: 50/56 (1s)
-  mutants: 56/56 (1s)
+  mutants: 50/56 (9s)
+  mutants: 56/56 (9s)
 
-mutate: 56 mutants, 1s
+mutate: 56 mutants, 9s
   killed 0, survived 10 (0 capped), no coverage 46, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -35,4 +35,4 @@ mutate: 56 mutants, 1s
     x  configure.c:906:14 cxx_ne_to_eq               if (home != (char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-cfeecf925-configure.json
+  full results: build-oracle/work/mutation-confirm-656676901-configure.json

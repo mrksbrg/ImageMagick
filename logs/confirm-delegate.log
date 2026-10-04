@@ -1,114 +1,40 @@
-mutate: 175 mutants in MagickCore/delegate\.c$, 20 functions
-mutate: baseline over 13 cases in 0s
-  mutants: 25/175 (1s)
-  mutants: 50/175 (1s)
-  mutants: 75/175 (1s)
-  mutants: 100/175 (1s)
-  mutants: 125/175 (1s)
-  mutants: 150/175 (2s)
-  mutants: 175/175 (132s)
+mutate: 89 mutants in MagickCore/delegate\.c$, 19 functions
+mutate: baseline over 52 cases in 0s
+  mutants: 25/89 (0s)
+  mutants: 50/89 (0s)
+  mutants: 75/89 (0s)
+  mutants: 89/89 (8s)
 
-mutate: 175 mutants, 132s
-  killed 86, survived 74 (0 capped), no coverage 15, errors 0
-  mutation score on reached code: 53.8%   overall: 49.1%
+mutate: 89 mutants, 8s
+  killed 0, survived 4 (0 capped), no coverage 85, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  InvokeDelegate                        28     12       16      0
-  GetMagickPropertyLetter               24     20        4      0
-  ExternalDelegateCommand               21      7       14      0
-  IsExecutableToken                     18     13        5      0
-  InterpretDelegateProperties           15     10        5      0
+  InvokeDelegate                        16      0        0     16
   GetDelegateList                       15      0        0     15
-  LoadDelegateCache                     15      8        7      0
-  GetDelegateInfo                        8      7        1      0
-  GetDelegateCommand                     6      4        2      0
-  DestroyDelegate                        4      0        4      0
-  GetDelegateInfoList                    4      2        2      0
-  CopyDelegateFile                       4      1        3      0
+  ExternalDelegateCommand               14      0        0     14
+  LoadDelegateCache                      7      0        0      7
+  IsExecutableToken                      5      0        0      5
+  InterpretDelegateProperties            5      0        0      5
+  DestroyDelegate                        4      0        0      4
+  GetMagickPropertyLetter                4      0        0      4
   DelegateComponentTerminus              3      0        3      0
-  DelegateInfoCompare                    2      2        0      0
-  IsDelegateCacheInstantiated            2      0        2      0
-  ListDelegateInfo                       2      0        2      0
+  CopyDelegateFile                       3      0        0      3
+  GetDelegateCommand                     2      0        0      2
+  GetDelegateInfoList                    2      0        0      2
+  IsDelegateCacheInstantiated            2      0        0      2
+  ListDelegateInfo                       2      0        0      2
   DelegateComponentGenesis               1      0        1      0
-  GetDelegateCommands                    1      0        1      0
-  GetDelegateMode                        1      0        1      0
-  GetDelegateThreadSupport               1      0        1      0
+  GetDelegateCommands                    1      0        0      1
+  GetDelegateInfo                        1      0        0      1
+  GetDelegateMode                        1      0        0      1
+  GetDelegateThreadSupport               1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
     x  delegate.c:269:26 cxx_eq_to_ne               if (delegate_semaphore == (SemaphoreInfo *) NULL)
-    x  delegate.c:299:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
-    x  delegate.c:303:17 cxx_ne_to_eq               if (p->encode != (char *) NULL)
-    x  delegate.c:305:19 cxx_ne_to_eq               if (p->commands != (char *) NULL)
-    x  delegate.c:308:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->semaphore);
     x  delegate.c:315:26 cxx_eq_to_ne               if (delegate_semaphore == (SemaphoreInfo *) NULL)
        delegate.c:316:5 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
     x  delegate.c:321:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&delegate_semaphore);
-    x  delegate.c:375:14 cxx_ge_to_gt               if (length >= 3)
-    x  delegate.c:375:14 cxx_ge_to_lt               if (length >= 3)
-    x  delegate.c:377:53 cxx_eq_to_ne               if ((isalpha((int) *token) != 0) && (token[1] == ':') &&
-    x  delegate.c:378:22 cxx_eq_to_ne               ((token[2] == '\\') || (token[2] == '/')))
-    x  delegate.c:378:44 cxx_eq_to_ne               ((token[2] == '\\') || (token[2] == '/')))
-    x  delegate.c:420:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) number_arguments; i++)
-    x  delegate.c:420:19 cxx_lt_to_le               for (i=0; i < (ssize_t) number_arguments; i++)
-    x  delegate.c:427:15 cxx_lt_to_le               for (i=1; i < (ssize_t) number_arguments; i++)
-    x  delegate.c:439:21 cxx_lt_to_ge               for (j=0; j < (ssize_t) number_arguments; j++)
-    x  delegate.c:439:21 cxx_lt_to_le               for (j=0; j < (ssize_t) number_arguments; j++)
-    x  delegate.c:470:26 cxx_lt_to_ge               while ((offset < MagickPathExtent) &&
-    x  delegate.c:470:26 cxx_lt_to_le               while ((offset < MagickPathExtent) &&
-    x  delegate.c:471:63 cxx_sub_to_add             (fgets(message+offset,(int) (MagickPathExtent-offset),file) != NULL))
-    x  delegate.c:471:78 cxx_ne_to_eq               (fgets(message+offset,(int) (MagickPathExtent-offset),file) != NULL))
-    x  delegate.c:554:14 cxx_lt_to_le               if (status < 0)
-    x  delegate.c:556:20 cxx_ne_to_eq               if ((message != (char *) NULL) && (*message != '\0'))
-    x  delegate.c:556:51 cxx_ne_to_eq               if ((message != (char *) NULL) && (*message != '\0'))
-    x  delegate.c:564:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) number_arguments; i++)
-    x  delegate.c:564:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_arguments; i++)
-    x  delegate.c:632:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:632:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:635:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:635:65 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1022:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1022:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1025:20 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1025:64 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-       delegate.c:1076:20 cxx_eq_to_ne               if (*p == '\n') /* return-newline EOL */
-    x  delegate.c:1173:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1198:25 cxx_ne_to_eq               for (i=0; commands[i] != (char *) NULL; i++)
-    x  delegate.c:1228:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1292:29 cxx_gt_to_ge               if (delegate_info->mode > 0)
-    x  delegate.c:1401:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1407:52 cxx_add_to_sub             GetNumberOfElementsInLinkedList(delegate_cache)+1UL,sizeof(*delegates));
-    x  delegate.c:1560:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1596:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1628:30 cxx_eq_to_ne               if (delegate_semaphore == (SemaphoreInfo *) NULL)
-       delegate.c:1629:9 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
-    x  delegate.c:1696:18 cxx_eq_to_ne               if ((overwrite == MagickFalse) &&
-    x  delegate.c:1697:51 cxx_ne_to_eq               (GetPathAttributes(destination,&attributes) != MagickFalse))
-    x  delegate.c:1719:39 cxx_eq_to_ne               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
-    x  delegate.c:1774:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1777:15 cxx_ne_to_eq               if ((decode != (const char *) NULL) &&
-    x  delegate.c:1780:15 cxx_ne_to_eq               if ((encode != (const char *) NULL) &&
-       delegate.c:1804:25 cxx_ne_to_eq               if (temporary != MagickFalse)
-       delegate.c:1840:25 cxx_ne_to_eq               if (temporary != MagickFalse)
-    x  delegate.c:1876:32 cxx_ne_to_eq               if (clone_info->adjoin != MagickFalse)
-       delegate.c:1888:21 cxx_ne_to_eq               if (temporary != MagickFalse)
-    x  delegate.c:1900:44 cxx_post_inc_to_post_dec   for (i=0; commands[i] != (char *) NULL; i++)
-    x  delegate.c:1928:34 cxx_ne_to_eq               if (delegate_info->spawn != MagickFalse)
-       delegate.c:1937:29 cxx_gt_to_ge               while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))
-       delegate.c:1937:29 cxx_gt_to_le               while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))
-       delegate.c:1937:72 cxx_eq_to_ne               while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))
-       delegate.c:1938:22 cxx_remove_void_call       (void) MagickDelay(100);  /* sleep 0.1 seconds */
-    x  delegate.c:1942:42 cxx_ne_to_eq               if (IsPathAccessible(input_filename) != MagickFalse)
-    x  delegate.c:1956:31 cxx_ne_to_eq               if (image_info->temporary != MagickFalse)
-    x  delegate.c:1975:23 cxx_ne_to_eq               for ( ; commands[i] != (char *) NULL; i++)
-    x  delegate.c:2063:46 cxx_post_inc_to_post_dec   for (j=1; commands[j] != (char *) NULL; j++)
-    x  delegate.c:2065:27 cxx_ne_to_eq               for (j=0; commands[j] != (char *) NULL; j++)
-    x  delegate.c:2203:22 cxx_ne_to_eq               if (*token != '=')
-    x  delegate.c:2206:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
-    x  delegate.c:2208:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-    x  delegate.c:2218:29 cxx_ne_to_eq               if (*path != '\0')
-    x  delegate.c:2221:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
-    x  delegate.c:2296:41 cxx_ne_to_eq               if (delegate_info->commands != (char *) NULL)
-    x  delegate.c:2372:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-cfeecf925-delegate.json
+  full results: build-oracle/work/mutation-confirm-656676901-delegate.json
