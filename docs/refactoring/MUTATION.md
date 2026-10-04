@@ -2499,3 +2499,44 @@ rejects. So the four are **unobservable**, not catalogue gaps: dropping the resi
 latent out-of-bounds write that a differential output oracle cannot deterministically
 see. With them reclassified, `GetICCProperty` is 100% and property.c is trusted (adjusted
 87%). This is a verdict change only, so it needs no ERDC rerun.
+
+## type.c: GetTypeInfoByFamily stays one function short — font selection is not reproducibly observable (Mac, 2026-10-04)
+
+`GetTypeInfoByFamily` is the one function under the bar (gate ~79%). Its survivors are the
+font-matching logic: the first-pass exact-match loop (`while (p != NULL)`, `if (p->family
+== NULL)`, the `ResetSplayTreeIterator`), the second-pass scorer (the italic/oblique
+`+25`, the stretch `/range` divisor) and the fontmap substitution loop (`fixed`→`courier`,
+`wingdings`→`symbol`, ...). I tried to kill them with a type.xml of the case's own that
+adds `courier`/`helvetica`/`symbol` families and requests `-family fixed` etc.
+
+**They are not reproducibly killable here, for two reasons, both verified by hand against
+mull-sweep60:**
+
+1. **One glyph file.** Every entry in a case's type.xml points at the single corpus font
+   `Generic.ttf`, so whichever `TypeInfo` the matcher picks renders identical glyphs and
+   metrics. Only *whether a font is found at all* changes output; *which* same-glyph font
+   is chosen does not. So the scorer mutants (italic/oblique, stretch divisor) are
+   unobservable with the frozen corpus.
+2. **Substitution routes through ambiguous system families.** The only find-vs-not-found
+   channel is the fontmap substitution (`-family fixed` → `courier`). But `courier`,
+   `helvetica` and `symbol` are also defined, with several entries each, by the build's
+   bundled `type-ghostscript.xml` (on `MAGICK_CONFIGURE_PATH`), which a case cannot
+   suppress. The type cache is a splay tree that **rebalances on every access**, so
+   `GetNextValueInSplayTree`'s order — and thus which of the ambiguous courier entries is
+   returned — varies from run to run. The base render of `-family fixed label:Ab` was
+   nondeterministic (two stdout hashes over 8 runs): an unstable case the harness rejects
+   (cf. the Inkscape and matrix cases). A first, hopeful reading that this case "killed"
+   eleven survivors was an artefact of diffing against that flaky base; repeating it showed
+   only the default-font fallback (`473` loop bound to `>=`, `475` family-NULL test) gives
+   a *stable* distinct hash, and even those can't be used while the base is unstable.
+
+The logic that *would* distinguish the choices — real, visually different fonts — exists
+only in the system Ghostscript/URW config, which is not part of the reproducible corpus and
+differs across the three machines (which is why the cases use `Generic.ttf` alone).
+
+**So GetTypeInfoByFamily plateaus below the bar, and this is an owner decision, not a
+catalogue gap:** making font *selection* observable needs a second, visually distinct font
+added to the frozen corpus (like `config/sRGB.icm` for ProfileImage), present identically
+on all three machines. Until then type.c stays at its adjusted ~84% with this one function
+short; its survivors are left `unresolved` (counted against), not written off, because a
+second corpus font would turn most of them into clean kills.
