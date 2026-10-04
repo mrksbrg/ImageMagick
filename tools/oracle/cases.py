@@ -4790,7 +4790,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _quantum_gap7_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(), _fx_gap12_cases(), _cache_gap3_cases(), _token_gap_cases(), _quantum_gap8_cases(), _fx_gap13_cases(), _quantum_gap9_cases(), _quantum_gap10_cases(), _morph_gap5_cases(), _fx_gap14_cases(), _color_gap3_cases(), _quantize_gap11_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(), _fx_gap12_cases(), _cache_gap3_cases(), _token_gap_cases(), _quantum_gap8_cases(), _fx_gap13_cases(), _quantum_gap9_cases(), _quantum_gap10_cases(), _morph_gap5_cases(), _fx_gap14_cases(), _color_gap3_cases(), _quantize_gap11_cases(), _windrv_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
@@ -5152,6 +5152,79 @@ _DRIVER_CASES += [("driver %s list %r" % (kind, pattern), _driver("list", kind, 
                                         ("locale", "Magick/*"), ("mime", "*"), ("mime", "image/*"), ("mime", "*nope*"))]
 _DRIVER_CASES += [("driver mime of %s" % name, _driver("mime", "{C}/%s" % name)) for name in ("rose.miff", "bilevel.miff")]
 GAP_STEP_CASES += [(label, steps, {}) for label, steps in _DRIVER_CASES]
+
+
+# Windows files through imdriver (2026-10-04). pixel.c: ExportImagePixels and ImportImagePixels
+# with every storage type, over the maps with a fast path (RGB, BGR, RGBA, BGRA, RGBP, BGRP, I)
+# and the generic loop (ARGB, OIP; CMYK, CMYKA and KYMC on a CMYK image), into and from a region,
+# plus the refusals (an unknown channel, CMYK of an RGB image, a region outside the image).
+# linked-list.c and splay-tree.c: scripts of every operation (the driver interns its strings, so a
+# removal by value finds what was stored); a 1100-node ascending chain makes the splay tree
+# balance itself past depth 1024. InsertValueInLinkedList at a middle index drops the new element
+# but counts it (upstream bug), after which RemoveLastElementFromLinkedList walks off the list,
+# so a middle insertion is only ever a script's last step. cache-view.c: the one-pixel getters,
+# with each virtual pixel method but Random, inside and outside the image.
+_WINDRV_TYPES = ("char", "short", "long", "longlong", "float", "double", "quantum")
+_WINDRV_MAPS = [("-", m) for m in ("RGB", "BGR", "RGBA", "BGRA", "RGBP", "BGRP", "I", "ARGB", "OIP")] + \
+               [("CMYK", m) for m in ("CMYK", "CMYKA", "KYMC")]
+
+
+def _windrv(label, args, outputs=()):
+    return _case("windrv", label, _driver(*args), list(outputs))
+
+
+def _windrv_cases():
+    for t in _WINDRV_TYPES:
+        for cs, m in _WINDRV_MAPS:
+            yield _windrv("export %s %s%s" % (m, t, "" if cs == "-" else " of a CMYK image"),
+                          ("pixels", "export", "{C}/rose_alpha.miff", cs, m, t, "4x3+20+15"))
+            yield _windrv("import %s %s%s" % (m, t, "" if cs == "-" else " into a CMYK image"),
+                          ("pixels", "import", "{C}/rose_alpha.miff", cs, m, t, "4x3+20+15", "out.miff"),
+                          ["out.miff"])
+        yield _windrv("export RGB %s of the whole image" % t,
+                      ("pixels", "export", "{C}/tiny.miff", "-", "RGB", t, "1x1"))
+    for direction in ("export", "import"):
+        extra = ["out.miff"] if direction == "import" else []
+        for label, cs, m, geometry in (("an unknown channel", "-", "RGBX", "2x2"),
+                                       ("CMYK of an RGB image", "-", "CMYK", "2x2"),
+                                       ("a region outside the image", "-", "RGB", "4x3+68+44"),
+                                       ("a gray image as I", "-", "I", "3x2+1+1")):
+            yield _windrv("%s refused or not: %s" % (direction, label),
+                          tuple(["pixels", direction, "{C}/gray16.miff" if "gray" in label else "{C}/rose.miff",
+                                 cs, m, "char", geometry] + extra), extra)
+    for label, ops in (
+            ("append, iterate, get and remove at each end",
+             "3 append:a append:b append:c append:d get:0 get:2 get:5 next next reset next removeat:0 "
+             "removeat:1 removeat:7 removelast removelast removelast removelast"),
+            ("insert at the head and the tail, remove by value",
+             "0 insert:0:b insert:0:a insert:2:c insert:9:x remove:b remove:zz remove:a remove:c remove:a"),
+            ("sorted insertion with replacement, array, clear",
+             "0 sorted:m sorted:c sorted:x sorted:c sorted:a sorted:z array clear array append:q array"),
+            ("iterator across removals", "0 append:a append:b append:c next remove:b next next reset "
+                                         "next removeat:0 next removelast next"),
+            ("removal of the iterator's element", "0 append:a append:b append:c next next remove:b next "
+                                                  "reset next next removelast next"),
+            ("a middle insertion, last", "0 append:a append:b append:c insert:1:m"),
+            ("a middle insertion further in, last", "0 append:a append:b append:c append:d insert:3:m"),
+            ("empty list operations", "0 get:0 next removelast removeat:0 remove:a array clear"),
+    ):
+        yield _windrv("linked list: %s" % label, tuple(["linkedlist"] + ops.split()))
+    for label, ops in (
+            ("add, get, delete and remove", "add:m=1 add:c=2 add:x=3 add:a=4 add:z=5 add:c=6 get:c get:q "
+                                            "delete:x delete:q remove:a remove:q removevalue:5 removevalue:9 "
+                                            "deletevalue:1 deletevalue:9 values clone reset values"),
+            ("removal by value of an inner node", "add:d=1 add:b=2 add:f=3 add:a=4 add:c=5 add:e=6 add:g=7 "
+                                                  "removevalue:2 deletevalue:6 removevalue:1 values"),
+            ("a chain deep enough to balance", "quiet addrange:1100 loud get:k0000 get:k0550 get:k1099 "
+                                               "quiet delete:k0001 removevalue:v0002 remove:k0003 loud get:k0004"),
+            ("a balanced tree, deleted by value", "quiet addrange:1100 get:k0000 deletevalue:v0500 "
+                                                  "removevalue:v1099 loud remove:k0000 get:k0001"),
+            ("an empty tree", "get:a delete:a remove:a removevalue:a deletevalue:a values clone reset"),
+    ):
+        yield _windrv("splay tree: %s" % label, tuple(["splaytree"] + ops.split()))
+    for name, x, y in (("rose", 5, 5), ("rose_alpha", -3, 100), ("palette", 69, 45), ("cmyk", 100, -20),
+                       ("gray16", 2, 2), ("tiny", 0, 0), ("bilevel", -1, -1)):
+        yield _windrv("cache view of %s at %d,%d" % (name, x, y), ("cacheview", "{C}/%s.miff" % name, str(x), str(y)))
 # delegate.c: PostScript read back through Ghostscript (the owner allowed external programs,
 # 2026-10-03; gs from Homebrew, on the oracle's PATH), and PostScript written as EPS. Where gs is
 # missing the read fails alike in every run. Inkscape's SVG output and Graphviz's (dot) vary
