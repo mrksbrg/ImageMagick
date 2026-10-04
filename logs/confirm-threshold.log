@@ -1,0 +1,33 @@
+mutate: 106 mutants in MagickCore/threshold\.c$, 19 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/106 (0s)
+  mutants: 50/106 (0s)
+  mutants: 75/106 (0s)
+  mutants: 100/106 (0s)
+  mutants: 106/106 (0s)
+
+mutate: 106 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 106, errors 0
+
+  function                           total killed survived no-cov
+  TriangleThreshold                     13      0        0     13
+  RangeThresholdImage                   11      0        0     11
+  OrderedDitherImage                    10      0        0     10
+  AdaptiveThresholdImage                 8      0        0      8
+  KapurThreshold                         8      0        0      8
+  ColorThresholdImage                    7      0        0      7
+  ClampImage                             6      0        0      6
+  PerceptibleImage                       6      0        0      6
+  OTSUThreshold                          5      0        0      5
+  BilevelImage                           5      0        0      5
+  BlackThresholdImage                    5      0        0      5
+  RandomThresholdImage                   5      0        0      5
+  WhiteThresholdImage                    5      0        0      5
+  GetThresholdMapFile                    4      0        0      4
+  DestroyThresholdMap                    3      0        0      3
+  AutoThresholdImage                     2      0        0      2
+  GetThresholdMap                        1      0        0      1
+  ListThresholdMaps                      1      0        0      1
+  PerceptibleThreshold                   1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-threshold.json
