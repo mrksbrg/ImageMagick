@@ -1,14 +1,14 @@
 mutate: 160 mutants in MagickCore/profile\.c$, 31 functions
-mutate: baseline over 1340 cases in 0s
+mutate: baseline over 303 cases in 0s
   mutants: 25/160 (0s)
   mutants: 50/160 (0s)
   mutants: 75/160 (0s)
   mutants: 100/160 (0s)
   mutants: 125/160 (0s)
   mutants: 150/160 (0s)
-  mutants: 160/160 (47s)
+  mutants: 160/160 (41s)
 
-mutate: 160 mutants, 47s
+mutate: 160 mutants, 41s
   killed 0, survived 6 (0 capped), no coverage 154, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -54,4 +54,4 @@ mutate: 160 mutants, 47s
     x  profile.c:339:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-1501a027d-profile.json
+  full results: build-oracle/work/mutation-confirm-d09139dff-profile.json
