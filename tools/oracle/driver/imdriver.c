@@ -1996,6 +1996,62 @@ static int NextImageCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static void PrintDrawInfo(const char *what,const DrawInfo *d)
+{
+  size_t i;
+  (void) printf("%s encoding %s family %s fill %g,%g,%g,%g stroke %g,%g,%g,%g undercolor %g,%g,%g,%g "
+    "gravity %d interline %g interword %g kerning %g stroke_width %g style %d weight %.20g word_break %d "
+    "direction %d\n",what,d->encoding ? d->encoding : "-",d->family ? d->family : "-",
+    d->fill.red,d->fill.green,d->fill.blue,d->fill.alpha,d->stroke.red,d->stroke.green,d->stroke.blue,
+    d->stroke.alpha,d->undercolor.red,d->undercolor.green,d->undercolor.blue,d->undercolor.alpha,
+    (int) d->gravity,d->interline_spacing,d->interword_spacing,d->kerning,d->stroke_width,(int) d->style,
+    (double) d->weight,(int) d->word_break,(int) d->direction);
+  (void) printf("%s id %s primitive %s metrics %s clip_mask %s stops %.20g",what,d->id ? d->id : "-",
+    d->primitive ? d->primitive : "-",d->metrics ? d->metrics : "-",d->clip_mask ? d->clip_mask : "-",
+    (double) d->gradient.number_stops);
+  for (i=0; (d->gradient.stops != (StopInfo *) NULL) && (i < d->gradient.number_stops); i++)
+    (void) printf(" %g:%g,%g,%g",d->gradient.stops[i].offset,d->gradient.stops[i].color.red,
+      d->gradient.stops[i].color.green,d->gradient.stops[i].color.blue);
+  (void) printf("\n");
+}
+
+static int DrawInfoCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* drawinfo [KEY=VALUE...]   draw.c: GetDrawInfo from image options (encoding, family, fill,
+     gravity, interline-spacing, interword-spacing, kerning, stroke, strokewidth, style, undercolor,
+     weight, word-break, direction), then CloneDrawInfo of a draw info with an id, a primitive, a
+     metrics file, a clip mask and two gradient stops; both printed. */
+  ImageInfo *image_info=AcquireImageInfo();
+  DrawInfo *draw_info, *clone;
+  int i;
+  for (i=2; i < argc; i++)
+  {
+    char key[MagickPathExtent];
+    const char *v=strchr(argv[i],'=');
+    if (v == (const char *) NULL) continue;
+    (void) CopyMagickString(key,argv[i],(size_t) (v-argv[i])+1);
+    (void) SetImageOption(image_info,key,v+1);
+  }
+  draw_info=CloneDrawInfo(image_info,(DrawInfo *) NULL);
+  PrintDrawInfo("get",draw_info);
+  (void) CloneString(&draw_info->id,"shape-1");
+  (void) CloneString(&draw_info->primitive,"circle 5,5 5,8");
+  (void) CloneString(&draw_info->metrics,"metrics.afm");
+  (void) CloneString(&draw_info->clip_mask,"clip-1");
+  draw_info->gradient.number_stops=2;
+  draw_info->gradient.stops=(StopInfo *) AcquireQuantumMemory(2,sizeof(*draw_info->gradient.stops));
+  (void) memset(draw_info->gradient.stops,0,2*sizeof(*draw_info->gradient.stops));
+  draw_info->gradient.stops[0].offset=0.25; draw_info->gradient.stops[0].color.red=QuantumRange;
+  draw_info->gradient.stops[1].offset=0.75; draw_info->gradient.stops[1].color.blue=QuantumRange;
+  clone=CloneDrawInfo(image_info,draw_info);
+  PrintDrawInfo("clone",clone);
+  clone=DestroyDrawInfo(clone);
+  draw_info=DestroyDrawInfo(draw_info);
+  image_info=DestroyImageInfo(image_info);
+  Report(exception);
+  return(0);
+}
+
 static int MemoryCmd(int argc,char **argv,ExceptionInfo *exception)
 {
   /* memory   allocations exactly at, and one byte over, the policy's max-memory-request (16 MiB at
@@ -2099,6 +2155,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"memory") == 0) status=MemoryCmd(argc,argv,exception);
   else if (strcmp(argv[1],"pathauth") == 0) status=PathAuthCmd(argc,argv,exception);
   else if (strcmp(argv[1],"nextimage") == 0) status=NextImageCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();

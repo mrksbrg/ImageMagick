@@ -5278,6 +5278,16 @@ GAP_STEP_CASES += [
 # own, so closing it leaves the image's stream readable). Coders always pass an image_info naming the
 # same file, so the command line cannot tell either apart.
 GAP_STEP_CASES += [("driver nextimage", _driver("nextimage", "d.bin"), {"d.bin": "ABCDEFGHIJ"})]
+# draw.c through imdriver: GetDrawInfo from image options and CloneDrawInfo of a draw info with an
+# id, a primitive, a metrics file, a clip mask and gradient stops, both printed field by field. The
+# command line clones draw infos whose id, metrics and clip mask are unset, and sets few of the
+# options GetDrawInfo reads.
+_DRAWINFO_OPTIONS = ("encoding=AppleRoman", "family=Serif", "fill=red", "gravity=East", "interline-spacing=3",
+                     "interword-spacing=2", "kerning=1.5", "stroke=blue", "strokewidth=2.5", "style=Italic",
+                     "undercolor=yellow", "weight=Bold", "word-break=break-all", "direction=right-to-left")
+GAP_STEP_CASES += [("driver drawinfo: %s" % label, _driver("drawinfo", *args), {}) for label, args in (
+    ("no options", ()), ("every option", _DRAWINFO_OPTIONS), ("a numeric weight", ("weight=650",)),
+    ("a weight that is no name or number", ("weight=nonsense",)))]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default
