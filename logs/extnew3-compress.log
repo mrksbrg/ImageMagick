@@ -1,0 +1,19 @@
+mutate: 41 mutants in MagickCore/compress\.c$, 8 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/41 (0s)
+  mutants: 41/41 (0s)
+
+mutate: 41 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 41, errors 0
+
+  function                           total killed survived no-cov
+  HuffmanDecodeImage                    15      0        0     15
+  HuffmanEncodeImage                    14      0        0     14
+  PackbitsEncodeImage                    4      0        0      4
+  LZWEncodeImage                         3      0        0      3
+  Ascii85Encode                          2      0        0      2
+  Ascii85Initialize                      1      0        0      1
+  Ascii85Flush                           1      0        0      1
+  ZLIBEncodeImage                        1      0        0      1
+
+  full results: build-oracle/work/mutation-extnew3-compress.json
