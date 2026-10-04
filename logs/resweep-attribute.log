@@ -1,0 +1,169 @@
+mutate: 532 mutants in MagickCore/attribute\.c$, 24 functions
+  baseline: 500/12195 (2s)
+  baseline: 1000/12195 (4s)
+  baseline: 1500/12195 (5s)
+  baseline: 2000/12195 (7s)
+  baseline: 2500/12195 (9s)
+  baseline: 3000/12195 (12s)
+  baseline: 3500/12195 (14s)
+  baseline: 4000/12195 (15s)
+  baseline: 4500/12195 (17s)
+  baseline: 5000/12195 (19s)
+  baseline: 5500/12195 (21s)
+  baseline: 6000/12195 (23s)
+  baseline: 6500/12195 (24s)
+  baseline: 7000/12195 (26s)
+  baseline: 7500/12195 (33s)
+  baseline: 8000/12195 (36s)
+  baseline: 8500/12195 (38s)
+  baseline: 9000/12195 (40s)
+  baseline: 9500/12195 (41s)
+  baseline: 10000/12195 (43s)
+  baseline: 10500/12195 (44s)
+  baseline: 11000/12195 (46s)
+  baseline: 11500/12195 (47s)
+  baseline: 12000/12195 (49s)
+  baseline: 12195/12195 (50s)
+mutate: baseline over 13787 cases in 52s
+  mutants: 25/532 (0s)
+  mutants: 50/532 (1s)
+  mutants: 75/532 (1s)
+  mutants: 100/532 (8s)
+  mutants: 125/532 (9s)
+  mutants: 150/532 (9s)
+  mutants: 175/532 (9s)
+  mutants: 200/532 (12s)
+  mutants: 225/532 (17s)
+  mutants: 250/532 (18s)
+  mutants: 275/532 (20s)
+  mutants: 300/532 (21s)
+  mutants: 325/532 (24s)
+  mutants: 350/532 (25s)
+  mutants: 375/532 (29s)
+  mutants: 400/532 (44s)
+  mutants: 425/532 (45s)
+  mutants: 450/532 (46s)
+  mutants: 475/532 (75s)
+  mutants: 500/532 (97s)
+  mutants: 525/532 (142s)
+  mutants: 532/532 (204s)
+
+mutate: 532 mutants, 204s
+  killed 439, survived 85 (25 capped), no coverage 8, errors 0
+  mutation score on reached code: 83.8%   overall: 82.5%
+
+  function                           total killed survived no-cov
+  GetImageMinimumBoundingBox            91     85        6      0
+  GetImageBoundingBox                   69     51       18      0
+  FloydSteinbergImageDepth              58     44       14      0
+  GetImageDepth                         49     39       10      0
+  GetEdgeBoundingBox                    27     20        7      0
+  GetEdgeBackgroundColor                27     27        0      0
+  SetImageDepth                         27     14       13      0
+  GetImageConvexHull                    25     21        4      0
+  SetImageType                          25     23        2      0
+  GetEdgeBackgroundCensus               21     17        4      0
+  TraceConvexHull                       21     20        1      0
+  IdentifyImageGray                     17     16        1      0
+  IdentifyImageMonochrome               13     12        1      0
+  IsImageOpaque                         11     10        1      0
+  GetImageQuantumDepth                   9      9        0      0
+  getProjection                          8      7        1      0
+  getFeretDiameter                       8      7        1      0
+  GetImageType                           8      0        0      8
+  IdentifyImageType                      6      5        1      0
+  LexicographicalOrder                   5      5        0      0
+  getDistance                            3      3        0      0
+  getAngle                               2      2        0      0
+  IsImageGray                            1      1        0      0
+  IsImageMonochrome                      1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  attribute.c:181:70 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,0,1,1,
+    x  attribute.c:188:70 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,(ssize_t) image->columns-1,
+    x  attribute.c:189:30 cxx_sub_to_add             (ssize_t) image->rows-1,1,1,exception);
+    x  attribute.c:195:69 cxx_sub_to_add             p=GetCacheViewVirtualPixels(image_view,0,(ssize_t) image->rows-1,1,1,
+    x  attribute.c:279:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:303:29 cxx_lt_to_le               for ( ; background_census < percent_background;
+    x  attribute.c:308:43 cxx_lt_to_le               if (fabs(edge.left-background_census) < MagickEpsilon)
+    x  attribute.c:326:44 cxx_lt_to_le               if (fabs(edge.right-background_census) < MagickEpsilon)
+    x  attribute.c:344:22 cxx_sub_to_add             if (fabs(edge.top-background_census) < MagickEpsilon)
+    x  attribute.c:344:42 cxx_lt_to_le               if (fabs(edge.top-background_census) < MagickEpsilon)
+    x  attribute.c:362:45 cxx_lt_to_le               if (fabs(edge.bottom-background_census) < MagickEpsilon)
+    x  attribute.c:418:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:457:3 cxx_remove_void_call       GetPixelInfo(image,&target[0]);
+    x  attribute.c:466:3 cxx_remove_void_call       GetPixelInfo(image,&target[1]);
+    x  attribute.c:471:3 cxx_remove_void_call       GetPixelInfo(image,&target[2]);
+    x  attribute.c:476:3 cxx_remove_void_call       GetPixelInfo(image,&target[3]);
+    x  attribute.c:482:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
+    x  attribute.c:517:14 cxx_lt_to_le               if ((x < bounding_box.x) &&
+    x  attribute.c:520:14 cxx_gt_to_ge               if ((x > (ssize_t) bounding_box.width) &&
+    x  attribute.c:523:14 cxx_lt_to_le               if ((y < bounding_box.y) &&
+    x  attribute.c:526:14 cxx_gt_to_ge               if ((y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:529:14 cxx_lt_to_ge               if ((x < (ssize_t) bounding_box.width) &&
+    x  attribute.c:529:14 cxx_lt_to_le               if ((x < (ssize_t) bounding_box.width) &&
+    x  attribute.c:530:14 cxx_gt_to_ge               (y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:530:14 cxx_gt_to_le               (y > (ssize_t) bounding_box.height) &&
+    x  attribute.c:542:26 cxx_lt_to_le               if (bounding_box.x < bounds.x)
+    x  attribute.c:544:26 cxx_lt_to_le               if (bounding_box.y < bounds.y)
+    x  attribute.c:546:30 cxx_gt_to_ge               if (bounding_box.width > bounds.width)
+    x  attribute.c:548:31 cxx_gt_to_ge               if (bounding_box.height > bounds.height)
+    x  attribute.c:757:11 cxx_add_to_sub             demark=n+1;
+    x  attribute.c:800:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:806:16 cxx_mul_to_div             image->rows*sizeof(*monotone_chain));
+       attribute.c:810:25 cxx_ne_to_eq               if (monotone_info != (MemoryInfo *) NULL)
+       attribute.c:812:25 cxx_ne_to_eq               if (vertices_info != (MemoryInfo *) NULL)
+    xc attribute.c:916:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:924:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    xc attribute.c:961:19 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
+    xc attribute.c:961:48 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
+     c attribute.c:962:19 cxx_lt_to_ge               if (depth < current_depth[i])
+     c attribute.c:962:19 cxx_lt_to_le               if (depth < current_depth[i])
+    xc attribute.c:1106:15 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
+    xc attribute.c:1106:44 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
+     c attribute.c:1107:15 cxx_lt_to_ge               if (depth < current_depth[i])
+     c attribute.c:1107:15 cxx_lt_to_le               if (depth < current_depth[i])
+    x  attribute.c:1185:16 cxx_lt_to_le               if (distance < MagickEpsilon)
+    x  attribute.c:1199:16 cxx_lt_to_le               if (distance < MagickEpsilon)
+    x  attribute.c:1233:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1248:45 cxx_add_to_sub             caliper_info.width=(double) image->columns+image->rows;
+    x  attribute.c:1353:15 cxx_lt_to_le               for (i=1; i < 4; i++)
+    x  attribute.c:1380:31 cxx_lt_to_le               if (bounding_box[i].x < point.x)
+    x  attribute.c:1382:31 cxx_lt_to_le               if (bounding_box[i].y < point.y)
+    x  attribute.c:1390:19 cxx_lt_to_le               for (i=0; i < 4; i++)
+    xc attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1671:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:1752:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1882:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1983:31 cxx_mul_to_div             (void) memset(distortion,0,3*image->columns*channels*sizeof(*distortion));
+    x  attribute.c:1983:46 cxx_mul_to_div             (void) memset(distortion,0,3*image->columns*channels*sizeof(*distortion));
+    x  attribute.c:1983:55 cxx_mul_to_div             (void) memset(distortion,0,3*image->columns*channels*sizeof(*distortion));
+    x  attribute.c:2007:40 cxx_mul_to_div             u=(y % 3)*(ssize_t) (image->columns*channels);
+    x  attribute.c:2047:15 cxx_add_to_sub             if ((y+1) < (ssize_t) image->rows)
+    x  attribute.c:2047:19 cxx_lt_to_ge               if ((y+1) < (ssize_t) image->rows)
+    x  attribute.c:2047:19 cxx_lt_to_le               if ((y+1) < (ssize_t) image->rows)
+    x  attribute.c:2053:52 cxx_mul_to_div             distortion[v-(ssize_t) channels]+=3.0*error/16.0;
+    x  attribute.c:2053:58 cxx_div_to_mul             distortion[v-(ssize_t) channels]+=3.0*error/16.0;
+    x  attribute.c:2054:31 cxx_mul_to_div             distortion[v]+=5.0*error/16.0;
+    x  attribute.c:2054:37 cxx_div_to_mul             distortion[v]+=5.0*error/16.0;
+    x  attribute.c:2056:52 cxx_mul_to_div             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
+    x  attribute.c:2056:58 cxx_div_to_mul             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
+    x  attribute.c:2071:14 cxx_ne_to_eq               if (status != MagickFalse)
+    xc attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:2108:28 cxx_eq_to_ne               if (image->storage_class == PseudoClass)
+    xc attribute.c:2117:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2117:47 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) image->colors; i++)
+    xc attribute.c:2119:59 cxx_ne_to_eq               if ((GetPixelRedTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2122:61 cxx_ne_to_eq               if ((GetPixelGreenTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2125:60 cxx_ne_to_eq               if ((GetPixelBlueTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2128:61 cxx_ne_to_eq               if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+    xc attribute.c:2233:17 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
+    xc attribute.c:2238:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    xc attribute.c:2238:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    xc attribute.c:2248:41 cxx_eq_to_ne               if ((traits & UpdatePixelTrait) == 0)
+    x  attribute.c:2315:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:2388:57 cxx_eq_to_ne               if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-attribute.json

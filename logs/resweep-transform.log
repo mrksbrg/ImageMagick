@@ -1,0 +1,184 @@
+mutate: 639 mutants in MagickCore/transform\.c$, 18 functions
+  baseline: 500/1576 (2s)
+  baseline: 1000/1576 (4s)
+  baseline: 1500/1576 (5s)
+  baseline: 1576/1576 (12s)
+mutate: baseline over 1576 cases in 12s
+  mutants: 25/639 (0s)
+  mutants: 50/639 (1s)
+  mutants: 75/639 (1s)
+  mutants: 100/639 (1s)
+  mutants: 125/639 (3s)
+  mutants: 150/639 (17s)
+  mutants: 175/639 (23s)
+  mutants: 200/639 (37s)
+  mutants: 225/639 (43s)
+  mutants: 250/639 (51s)
+  mutants: 275/639 (53s)
+  mutants: 300/639 (55s)
+  mutants: 325/639 (61s)
+  mutants: 350/639 (67s)
+  mutants: 375/639 (75s)
+  mutants: 400/639 (78s)
+  mutants: 425/639 (82s)
+  mutants: 450/639 (86s)
+  mutants: 475/639 (89s)
+  mutants: 500/639 (91s)
+  mutants: 525/639 (93s)
+  mutants: 550/639 (95s)
+  mutants: 575/639 (96s)
+  mutants: 600/639 (101s)
+  mutants: 625/639 (137s)
+  mutants: 639/639 (224s)
+
+mutate: 639 mutants, 224s
+  killed 469, survived 123 (18 capped), no coverage 47, errors 0
+  mutation score on reached code: 79.2%   overall: 73.4%
+
+  function                           total killed survived no-cov
+  SpliceImage                          102     77       25      0
+  ChopImage                             86     73       13      0
+  CropImage                             85     67       18      0
+  CropImageToTiles                      83     66       17      0
+  TrimImage                             44     29       15      0
+  TransverseImage                       33     27        6      0
+  FlipImage                             29     23        6      0
+  FlopImage                             28     22        6      0
+  TransposeImage                        28     22        6      0
+  ConsolidateCMYKImages                 24      0        0     24
+  ExcerptImage                          23      0        0     23
+  CopyImageRegion                       19     19        0      0
+  RollImage                             19     14        5      0
+  ShaveImage                            15     14        1      0
+  ExtentImage                            8      7        1      0
+  TransformImage                         8      4        4      0
+  PixelRoundOffset                       4      4        0      0
+  AutoOrientImage                        1      1        0      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  transform.c:224:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:232:41 cxx_gt_to_ge               if ((extent.x+(ssize_t) extent.width) > (ssize_t) image->columns)
+    x  transform.c:234:42 cxx_gt_to_ge               if ((extent.y+(ssize_t) extent.height) > (ssize_t) image->rows)
+    x  transform.c:236:16 cxx_lt_to_le               if (extent.x < 0)
+    x  transform.c:241:16 cxx_lt_to_le               if (extent.y < 0)
+    x  transform.c:246:21 cxx_ge_to_gt               if ((extent.width >= image->columns) || (extent.height >= image->rows))
+    x  transform.c:246:58 cxx_ge_to_gt               if ((extent.width >= image->columns) || (extent.height >= image->rows))
+    x  transform.c:307:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:315:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:317:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:373:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:381:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:383:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    xc transform.c:578:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc transform.c:616:15 cxx_lt_to_le               if ((page.x < 0) && (bounding_box.x >= 0))
+    xc transform.c:616:39 cxx_ge_to_gt               if ((page.x < 0) && (bounding_box.x >= 0))
+    xc transform.c:625:18 cxx_lt_to_le               if (page.x < 0)
+    xc transform.c:628:15 cxx_lt_to_le               if ((page.y < 0) && (bounding_box.y >= 0))
+    xc transform.c:628:39 cxx_ge_to_gt               if ((page.y < 0) && (bounding_box.y >= 0))
+    xc transform.c:638:18 cxx_lt_to_le               if (page.y < 0)
+    xc transform.c:641:37 cxx_gt_to_ge               if ((page.x+(ssize_t) page.width) > (ssize_t) image->columns)
+    xc transform.c:643:45 cxx_gt_to_ge               if ((geometry->width != 0) && (page.width > geometry->width))
+    xc transform.c:645:38 cxx_gt_to_ge               if ((page.y+(ssize_t) page.height) > (ssize_t) image->rows)
+    xc transform.c:647:47 cxx_gt_to_ge               if ((geometry->height != 0) && (page.height > geometry->height))
+    xc transform.c:667:17 cxx_gt_to_ge               if ((offset.x > (ssize_t) image->page.width) ||
+    xc transform.c:668:17 cxx_gt_to_ge               (offset.y > (ssize_t) image->page.height))
+    xc transform.c:728:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+     c transform.c:736:17 cxx_post_inc_to_post_dec   progress++;
+     c transform.c:738:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    xc transform.c:745:14 cxx_ne_to_eq               if (status != MagickFalse)
+    xc transform.c:754:7 cxx_remove_void_call       AppendImageProfileProperty(crop_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:815:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:843:55 cxx_lt_to_le               width=(size_t) ((ssize_t) width-(geometry.x < 0 ? -1 : 1)*geometry.x);
+    x  transform.c:844:57 cxx_lt_to_le               height=(size_t) ((ssize_t) height-(geometry.y < 0 ? -1 : 1)*
+    x  transform.c:849:55 cxx_lt_to_le               width=(size_t) ((ssize_t) width+(geometry.x < 0 ? -1 : 1)*geometry.x);
+    x  transform.c:850:57 cxx_lt_to_le               height=(size_t) ((ssize_t) height+(geometry.y < 0 ? -1 : 1)*
+    x  transform.c:855:19 cxx_lt_to_le               if (delta.x < 1.0)
+    x  transform.c:857:19 cxx_lt_to_le               if (delta.y < 1.0)
+    x  transform.c:864:27 cxx_gt_to_ge               (geometry.y > 0 ? 0 : geometry.y)));
+    x  transform.c:867:27 cxx_lt_to_le               (geometry.y < 0 ? 0 : geometry.y)));
+    x  transform.c:872:27 cxx_gt_to_ge               (geometry.y > 0 ? geometry.y : 0)));
+    x  transform.c:884:29 cxx_gt_to_ge               (geometry.x > 0 ? 0 : geometry.x)));
+    x  transform.c:887:29 cxx_lt_to_le               (geometry.x < 0 ? 0 : geometry.x)));
+    x  transform.c:892:29 cxx_gt_to_ge               (geometry.x > 0 ? geometry.x : 0)));
+    x  transform.c:895:29 cxx_lt_to_le               (geometry.x < 0 ? geometry.x : 0)));
+    x  transform.c:904:7 cxx_remove_void_call       ClearMagickException(exception);
+    x  transform.c:923:23 cxx_gt_to_ge               if ((image->columns > geometry.width) || (image->rows > geometry.height))
+    x  transform.c:923:57 cxx_gt_to_ge               if ((image->columns > geometry.width) || (image->rows > geometry.height))
+    x  transform.c:1158:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:1230:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:1288:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:1296:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:1298:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:1308:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:1315:7 cxx_remove_void_call       AppendImageProfileProperty(flip_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:1375:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:1434:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:1442:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:1444:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:1454:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:1461:7 cxx_remove_void_call       AppendImageProfileProperty(flop_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:1596:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:1603:19 cxx_lt_to_le               while (offset.x < 0)
+    x  transform.c:1605:19 cxx_ge_to_gt               while (offset.x >= (ssize_t) image->columns)
+    x  transform.c:1607:19 cxx_lt_to_le               while (offset.y < 0)
+    x  transform.c:1609:19 cxx_ge_to_gt               while (offset.y >= (ssize_t) image->rows)
+    x  transform.c:1681:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:1760:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:1779:34 cxx_eq_to_ne               (splice_image->alpha_trait == UndefinedPixelTrait))
+    x  transform.c:1875:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  transform.c:1885:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:1886:7 cxx_remove_void_call       SetPixelGreen(splice_image,GetPixelGreen(image,p),q);
+    x  transform.c:1887:7 cxx_remove_void_call       SetPixelBlue(splice_image,GetPixelBlue(image,p),q);
+    x  transform.c:1899:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  transform.c:1909:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:1910:7 cxx_remove_void_call       SetPixelGreen(splice_image,GetPixelGreen(image,p),q);
+    x  transform.c:1911:7 cxx_remove_void_call       SetPixelBlue(splice_image,GetPixelBlue(image,p),q);
+    x  transform.c:1918:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:1926:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:1929:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:1937:64 cxx_lt_to_le               for (y=splice_geometry.y+(ssize_t) splice_geometry.height; y < (ssize_t) splice_image->row
+    x  transform.c:1950:12 cxx_lt_to_le               if ((y < 0) || (y >= (ssize_t) splice_image->rows))
+    x  transform.c:1950:23 cxx_ge_to_gt               if ((y < 0) || (y >= (ssize_t) splice_image->rows))
+    x  transform.c:1966:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  transform.c:1976:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:1977:7 cxx_remove_void_call       SetPixelGreen(splice_image,GetPixelGreen(image,p),q);
+    x  transform.c:1978:7 cxx_remove_void_call       SetPixelBlue(splice_image,GetPixelBlue(image,p),q);
+    x  transform.c:1990:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  transform.c:2000:7 cxx_remove_void_call       SetPixelRed(splice_image,GetPixelRed(image,p),q);
+    x  transform.c:2009:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:2017:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:2020:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:2090:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       transform.c:2102:22 cxx_eq_to_ne               if (crop_image == (Image *) NULL)
+    x  transform.c:2120:33 cxx_eq_to_ne               if ((transform_image->columns == geometry.width) &&
+    x  transform.c:2121:30 cxx_eq_to_ne               (transform_image->rows == geometry.height))
+    x  transform.c:2185:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:2245:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:2253:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:2255:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:2266:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:2274:7 cxx_remove_void_call       AppendImageProfileProperty(transpose_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:2334:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:2398:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       transform.c:2406:17 cxx_post_inc_to_post_dec   progress++;
+       transform.c:2408:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  transform.c:2423:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  transform.c:2431:7 cxx_remove_void_call       AppendImageProfileProperty(transverse_image,"hdrgm","hdrgm:Transform",
+    x  transform.c:2478:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  transform.c:2510:27 cxx_lt_to_le               if ((geometry.width < minSize.width) ||
+    x  transform.c:2511:28 cxx_lt_to_le               (geometry.height < minSize.height))
+    x  transform.c:2513:37 cxx_lt_to_le               minSize.x=(geometry.width < minSize.width) ? (ssize_t)
+    x  transform.c:2515:38 cxx_lt_to_le               minSize.y=(geometry.height < minSize.height) ? (ssize_t)
+    x  transform.c:2568:30 cxx_lt_to_le               if (geometry.width < minSize.width)
+    x  transform.c:2570:31 cxx_lt_to_le               if (geometry.height < minSize.height)
+    x  transform.c:2572:30 cxx_gt_to_ge               if (geometry.width > image->columns)
+    x  transform.c:2574:31 cxx_gt_to_ge               if (geometry.height > image->rows)
+    x  transform.c:2576:26 cxx_lt_to_le               if (geometry.x < 0)
+    x  transform.c:2578:53 cxx_gt_to_ge               if ((geometry.x+(ssize_t) geometry.width) > (ssize_t) image->columns)
+    x  transform.c:2580:26 cxx_lt_to_le               if (geometry.y < 0)
+    x  transform.c:2582:54 cxx_gt_to_ge               if ((geometry.y+(ssize_t) geometry.height) > (ssize_t) image->rows)
+    x  transform.c:2593:30 cxx_eq_to_ne               if (trim_image->page.x == 0)
+    x  transform.c:2595:30 cxx_eq_to_ne               if (trim_image->page.y == 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-transform.json
