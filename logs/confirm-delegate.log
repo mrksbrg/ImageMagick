@@ -1,0 +1,45 @@
+mutate: 184 mutants in MagickCore/delegate\.c$, 20 functions
+mutate: baseline over 18 cases in 0s
+  mutants: 25/184 (0s)
+  mutants: 50/184 (0s)
+  mutants: 75/184 (0s)
+  mutants: 100/184 (0s)
+  mutants: 125/184 (0s)
+  mutants: 150/184 (0s)
+  mutants: 175/184 (0s)
+  mutants: 184/184 (1s)
+
+mutate: 184 mutants, 1s
+  killed 0, survived 4 (0 capped), no coverage 180, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  InvokeDelegate                        29      0        0     29
+  GetMagickPropertyLetter               24      0        0     24
+  ExternalDelegateCommand               21      0        0     21
+  LoadDelegateCache                     21      0        0     21
+  IsExecutableToken                     18      0        0     18
+  InterpretDelegateProperties           15      0        0     15
+  GetDelegateList                       15      0        0     15
+  GetDelegateInfo                        9      0        0      9
+  GetDelegateCommand                     6      0        0      6
+  DestroyDelegate                        5      0        0      5
+  GetDelegateInfoList                    4      0        0      4
+  CopyDelegateFile                       4      0        0      4
+  DelegateComponentTerminus              3      0        3      0
+  DelegateInfoCompare                    2      0        0      2
+  IsDelegateCacheInstantiated            2      0        0      2
+  ListDelegateInfo                       2      0        0      2
+  DelegateComponentGenesis               1      0        1      0
+  GetDelegateCommands                    1      0        0      1
+  GetDelegateMode                        1      0        0      1
+  GetDelegateThreadSupport               1      0        0      1
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  delegate.c:269:26 cxx_eq_to_ne               if (delegate_semaphore == (SemaphoreInfo *) NULL)
+    x  delegate.c:315:26 cxx_eq_to_ne               if (delegate_semaphore == (SemaphoreInfo *) NULL)
+       delegate.c:316:5 cxx_remove_void_call       ActivateSemaphoreInfo(&delegate_semaphore);
+    x  delegate.c:321:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&delegate_semaphore);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-delegate.json
