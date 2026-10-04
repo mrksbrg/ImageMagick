@@ -1846,7 +1846,12 @@ static int SymlinkCmd(int argc,char **argv,ExceptionInfo *exception)
   (void) printf("status %d\n",(int) status);
   if (status != MagickFalse)
     {
-      FILE *f=fopen(destination,"rb");
+      struct stat link_attributes;
+      FILE *f;
+      /* a symbolic link where policy allows one, a copy otherwise: the function's own contract */
+      (void) printf("link %d\n",(lstat(destination,&link_attributes) == 0) &&
+        S_ISLNK(link_attributes.st_mode) ? 1 : 0);
+      f=fopen(destination,"rb");
       if (f != (FILE *) NULL)
         {
           int c; size_t sum=0,n=0;

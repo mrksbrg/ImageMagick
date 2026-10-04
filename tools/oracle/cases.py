@@ -5202,6 +5202,12 @@ GAP_STEP_CASES += [
      {"src.dat": "symlink test content 12345",
       ".config/ImageMagick/policy.xml":
           '<policymap>\n  <policy domain="system" name="symlink" rights="none" pattern="follow"/>\n'
+          '</policymap>\n'}),
+    # an empty source: the copy sizes its buffer from fstat's st_size only when it is > 0
+    ("driver symlink, copy path of an empty file", _driver("symlink", "src.dat"),
+     {"src.dat": "",
+      ".config/ImageMagick/policy.xml":
+          '<policymap>\n  <policy domain="system" name="symlink" rights="none" pattern="follow"/>\n'
           '</policymap>\n'})]
 
 
