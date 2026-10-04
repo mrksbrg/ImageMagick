@@ -101,6 +101,8 @@ FONT = "Generic.ttf"  # copied from PerlMagick/t
 FONT2 = "Narrow.ttf"  # a 0.6x-condensed derivative of Generic.ttf (tools/oracle/mknarrow.py):
 # a second, visually distinct corpus font, so the oracle can see which TypeInfo the font
 # matcher picks (type.c GetTypeInfoByFamily, annotate.c), which one glyph file cannot
+FONT3 = "Quirk.ttf"  # Generic.ttf with a 'kern' table, zero ascender/descender and only a Mac Roman
+# character map (tools/oracle/mkquirk.py): RenderFreetype's and ComplexTextLayout's other branches
 
 
 # Upstream bug (docs/refactoring/ORACLE.md, "Known upstream issues"): the
@@ -5230,7 +5232,15 @@ GAP_STEP_CASES += [("driver metrics: %s" % label, _driver("metrics", *args), fil
     ("Latin-1 text", ("{C}/Generic.ttf", "20", "x", "texthex=636166e92078"), {}),
     ("an @ font", ("@{C}/Generic.ttf", "20", "At"), {}),
     ("an @ font a path policy denies", ("@{C}/Narrow.ttf", "20", "At"), _METRIC_POLICY),
-    ("an @ font a path policy does not deny", ("@{C}/Generic.ttf", "20", "At"), _METRIC_POLICY))]
+    ("an @ font a path policy does not deny", ("@{C}/Generic.ttf", "20", "At"), _METRIC_POLICY),
+    # Quirk.ttf: kerning pairs (ComplexTextLayout), zero ascender/descender (the sanitised
+    # metrics), and no Unicode map or glyph names (the fallback to the first character map)
+    ("Quirk 30 kerning pairs", ("{C}/Quirk.ttf", "30", "AVAT"), {}),
+    ("Quirk 30 kerning pairs right to left", ("{C}/Quirk.ttf", "30", "AVAT", "direction=rtl"), {}),
+    ("Quirk 30 more kerning pairs", ("{C}/Quirk.ttf", "30", "ToWaLT"), {}),
+    ("Quirk 20 no kerning pair", ("{C}/Quirk.ttf", "20", "Hello"), {}),
+    ("Quirk 20 two kerned lines", ("{C}/Quirk.ttf", "20", "AV\nTo"), {}),
+    ("Quirk 30 Latin-1 text", ("{C}/Quirk.ttf", "30", "x", "texthex=e9e8fc"), {}))]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

@@ -189,8 +189,9 @@ CORPUS_EXTRAS = {
 
 # Bump when the corpus's contents change (a file added or altered), so a machine with an
 # older cached corpus rebuilds it instead of silently running against the stale one. (2):
-# Narrow.ttf added for the font-matching cases.
-CORPUS_VERSION = 2
+# Narrow.ttf added for the font-matching cases. (3): Quirk.ttf (kerning, buggy metrics, no
+# Unicode character map) for annotate.c's RenderFreetype and ComplexTextLayout.
+CORPUS_VERSION = 3
 
 
 def ensure_corpus(binary):
@@ -203,7 +204,7 @@ def ensure_corpus(binary):
         # guard against a corpus left half-built (e.g. a crash or a race on the shared dir): a
         # stale corpus that still answered would silently fail the cases that need the new file.
         fonts_present = all(os.path.exists(os.path.join(CORPUS, fn))
-                            for fn in (catalogue.FONT, catalogue.FONT2))
+                            for fn in (catalogue.FONT, catalogue.FONT2, catalogue.FONT3))
         if manifest.get("version") == CORPUS_VERSION and fonts_present:
             return manifest
         shutil.rmtree(CORPUS, ignore_errors=True)  # stale: a file was added, changed or missing
@@ -244,8 +245,8 @@ def make_extra_images(binary, tmp):
 def write_corpus_texts(tmp):
     shutil.copyfile(os.path.join(ROOT, "PerlMagick/t", catalogue.FONT),
                     os.path.join(tmp, catalogue.FONT))
-    shutil.copyfile(os.path.join(ROOT, "tools/oracle", catalogue.FONT2),
-                    os.path.join(tmp, catalogue.FONT2))
+    for font in (catalogue.FONT2, catalogue.FONT3):
+        shutil.copyfile(os.path.join(ROOT, "tools/oracle", font), os.path.join(tmp, font))
     with open(os.path.join(tmp, "draw.mvg"), "w") as f:
         f.write(catalogue.MVG)
     with open(os.path.join(tmp, "draw.svg"), "w") as f:
