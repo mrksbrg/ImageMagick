@@ -199,9 +199,14 @@ def ensure_corpus(binary):
     if os.path.exists(manifest_path):
         with open(manifest_path) as f:
             manifest = json.load(f)
-        if manifest.get("version") == CORPUS_VERSION:
+        # The version guards against an added or changed file; the font check is a belt-and-braces
+        # guard against a corpus left half-built (e.g. a crash or a race on the shared dir): a
+        # stale corpus that still answered would silently fail the cases that need the new file.
+        fonts_present = all(os.path.exists(os.path.join(CORPUS, fn))
+                            for fn in (catalogue.FONT, catalogue.FONT2))
+        if manifest.get("version") == CORPUS_VERSION and fonts_present:
             return manifest
-        shutil.rmtree(CORPUS, ignore_errors=True)  # stale: a file was added or changed
+        shutil.rmtree(CORPUS, ignore_errors=True)  # stale: a file was added, changed or missing
     tmp = CORPUS + ".tmp"
     shutil.rmtree(tmp, ignore_errors=True)
     os.makedirs(os.path.join(tmp, "files"))
