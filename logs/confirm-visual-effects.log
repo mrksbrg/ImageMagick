@@ -1,0 +1,38 @@
+mutate: 175 mutants in MagickCore/visual-effects\.c$, 22 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/175 (0s)
+  mutants: 50/175 (0s)
+  mutants: 75/175 (0s)
+  mutants: 100/175 (0s)
+  mutants: 125/175 (0s)
+  mutants: 150/175 (0s)
+  mutants: 175/175 (0s)
+
+mutate: 175 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 175, errors 0
+
+  function                           total killed survived no-cov
+  PlasmaImageProxy                      35      0        0     35
+  ColorMatrixImage                      18      0        0     18
+  ImplodeImage                          12      0        0     12
+  MorphImages                           12      0        0     12
+  SwirlImage                            11      0        0     11
+  TintImage                             11      0        0     11
+  SepiaToneImage                        10      0        0     10
+  SteganoImage                          10      0        0     10
+  WaveletDenoiseImage                   10      0        0     10
+  BlueShiftImage                         8      0        0      8
+  ColorizeImage                          7      0        0      7
+  StereoAnaglyphImage                    7      0        0      7
+  AddNoiseImage                          5      0        0      5
+  SolarizeImage                          5      0        0      5
+  WaveImage                              4      0        0      4
+  PolaroidImage                          3      0        0      3
+  VignetteImage                          2      0        0      2
+  CharcoalImage                          1      0        0      1
+  PlasmaImage                            1      0        0      1
+  ShadowImage                            1      0        0      1
+  SketchImage                            1      0        0      1
+  HatTransform                           1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-visual-effects.json
