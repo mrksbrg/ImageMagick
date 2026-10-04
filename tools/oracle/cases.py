@@ -5450,6 +5450,17 @@ def _windrv_cases():
     for args in (["-bench", "2"], ["-bench", "3", "-duration", "1000"], ["-bench", "2", "-concurrent", "-duration", "1000"]):
         yield _case("benchgap", "rose %s -negate" % " ".join(args),
                     [args + [img("rose"), "-negate"] + FLOAT_OUT + ["out.miff"]], ["out.miff"])
+    # token.c: GlobExpression directly: '*', '?', '[...]' sets and ranges with '-' and '!',
+    # '{a,b}' alternatives, '\\' escapes, the subimage check, case folding, UTF-8, an empty
+    # pattern and expression, and a pattern of many '*' over a long expression (the recursion)
+    exprs = ["", "a", "abc", "ABC", "abcabc", "a.png", "a.PNG", "x[1].png", "rose.miff", "b-c", "a*c", "a?c",
+             "été.txt", "{x}", "a\\b", "zzz", "repeat:40:ab"]
+    for pattern in ("", "*", "**", "a*", "*c", "a?c", "?", "a*b*c", "*.png", "*.[pP][nN][gG]", "[a-c]*",
+                    "[!a-c]*", "[]a]*", "[a-]*", "{a,b}*", "{abc,x}", "a{b,c}c", "{,a}bc", "a\\*c", "a\\?c",
+                    "rose.miff[1]", "x\\[1\\].png", "é*", "?t?.txt", "*b*c*a*", "repeat-*", "*a*b*z",
+                    "[[]*", "a[b", "{a,b"):
+        for case in ("exact", "nocase"):
+            yield _windrv("glob %r %s" % (pattern, case), tuple(["glob", pattern, case] + exprs))
     # pixel.c: SortImagePixels (-sort-pixels)
     for name in ("rose", "rose_alpha", "gray16", "cmyk", "tiny", "palette"):
         yield _op("windrv", "%s -sort-pixels" % name, [img(name)], ["-sort-pixels"])

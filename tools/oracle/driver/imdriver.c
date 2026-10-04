@@ -1327,6 +1327,37 @@ static int ResampleCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/* token.c: GlobExpression over a pattern and expressions */
+static int GlobCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* glob PATTERN CASE EXPRESSION...  (CASE: exact|nocase) prints 1/0 per expression;
+     an expression "repeat:N:TEXT" is TEXT repeated N times */
+  int i;
+  MagickBooleanType nocase;
+  if (argc < 5)
+    return(Fail(exception,"glob: PATTERN exact|nocase EXPRESSION..."));
+  nocase=strcmp(argv[3],"nocase") == 0 ? MagickTrue : MagickFalse;
+  for (i=4; i < argc; i++)
+  {
+    char *expression=argv[i];
+    char *built=(char *) NULL;
+    if (strncmp(expression,"repeat:",7) == 0)
+      {
+        size_t n=(size_t) atol(expression+7), k;
+        const char *text=strchr(expression+7,':');
+        text=text != NULL ? text+1 : "";
+        built=(char *) AcquireQuantumMemory(n*strlen(text)+1,1);
+        *built='\0';
+        for (k=0; k < n; k++) (void) strcat(built,text);
+        expression=built;
+      }
+    (void) printf("%d %s\n",(int) GlobExpression(expression,argv[2],nocase),
+      built != NULL ? argv[i] : expression);
+    if (built != NULL) built=(char *) RelinquishMagickMemory(built);
+  }
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -1354,6 +1385,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"quantum") == 0) status=QuantumCmd(argc,argv,exception);
   else if (strcmp(argv[1],"matrix") == 0) status=MatrixCmd(argc,argv,exception);
   else if (strcmp(argv[1],"resample") == 0) status=ResampleCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"glob") == 0) status=GlobCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
