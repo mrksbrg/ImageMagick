@@ -213,13 +213,13 @@
   },
   {
    "at": 11,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "file": "MagickCore/delegate.c",
    "function": "LoadDelegateCache",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (*token == *DirectorySeparator)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+   "verdict": "unobservable",
+   "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so a wrong path loads nothing either way (the driver's delegatecfg cases reach the branch)"
   },
   {
    "at": 53,
@@ -253,13 +253,13 @@
   },
   {
    "at": 10,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "file": "MagickCore/delegate.c",
    "function": "LoadDelegateCache",
    "mutator": "cxx_ge_to_gt",
    "nth": 0,
    "src": "if (depth >= MagickMaxRecursionDepth)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+   "verdict": "unobservable",
+   "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so the depth never reaches the limit (the driver's delegatecfg cases reach the branch)"
   },
   {
    "at": 10,
@@ -273,23 +273,23 @@
   },
   {
    "at": 10,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "file": "MagickCore/delegate.c",
    "function": "LoadDelegateCache",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (*path != '\\0')",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+   "verdict": "unobservable",
+   "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'), so a wrong path loads nothing either way (the driver's delegatecfg cases reach the branch)"
   },
   {
    "at": 11,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
+   "file": "MagickCore/delegate.c",
    "function": "LoadDelegateCache",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (*token != '=')",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
+   "verdict": "unobservable",
+   "why": "in LoadDelegateCache's <include> branch, which can never load a file: it reads the include through FileToXML(path,~0UL), which refuses every regular file ((MagickOffsetType) ~0UL is -1, see MUTATION.md, 'Upstream bug: no configuration <include> ever loads a file'). Base and mutant end at the same '/>' and load nothing either way (the driver's delegatecfg cases reach the branch)"
   },
   {
    "at": 13,
@@ -298,36 +298,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if (file_xml != (char *) NULL)",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
-   "at": 16,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
-   "at": 39,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
-  },
-  {
-   "at": 55,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
    "verdict": "unresolved",
    "why": "LoadDelegateCache only ever parses the build's own delegates.xml: a case's delegates.xml (in $HOME/.config/ImageMagick) is searched for but not read (-list delegate shows only the build's path), and the build's file has no include element and no thread-support attribute, so these lines cannot be reached from a case"
   },
@@ -7454,16 +7424,6 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 49,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((i != 1) && (IsExecutableToken(arguments[i]) == MagickFalse))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 18,
    "file": "MagickCore/delegate.c",
    "function": "ExternalDelegateCommand",
@@ -7514,26 +7474,6 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 35,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(strpbrk(sanitize_command,\"&;<>|\") != (char *) NULL))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((asynchronous != MagickFalse) ||",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 46,
    "file": "MagickCore/delegate.c",
    "function": "ExternalDelegateCommand",
@@ -7542,46 +7482,6 @@
    "src": "if ((asynchronous == MagickFalse) && (message !=  (char *) NULL))",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((i != 1) && (IsExecutableToken(arguments[i]) == MagickFalse))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 17,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (asynchronous != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/delegate.c",
-   "function": "ExternalDelegateCommand",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (message != (char *) NULL)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 30,
-   "file": "MagickCore/delegate.c",
-   "function": "GetDelegateInfo",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare(decode,\"*\") == 0)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
   },
   {
    "at": 48,
@@ -7602,106 +7502,6 @@
    "src": "if (delegate_info->mode > 0)",
    "verdict": "unresolved",
    "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/delegate.c",
-   "function": "GetDelegateInfo",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "if (delegate_info->mode < 0)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 59,
-   "file": "MagickCore/delegate.c",
-   "function": "GetDelegateInfoList",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(GlobExpression(delegate_info->decode,pattern,MagickFalse) != MagickFalse ||",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 58,
-   "file": "MagickCore/delegate.c",
-   "function": "GetDelegateInfoList",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "GlobExpression(delegate_info->encode,pattern,MagickFalse) != MagickFalse))",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*p == '\\0') || (*p == '\\'') || (*p == '\"'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 24,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*p == '\\0') || (*p == '\\'') || (*p == '\"'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*p == '\\0') || (*p == '\\'') || (*p == '\"'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*p == '%')",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (number != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 44,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((isspace((int) ((unsigned char) *p)) != 0) && (*p != '\\0'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 57,
-   "file": "MagickCore/delegate.c",
-   "function": "InterpretDelegateProperties",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((isspace((int) ((unsigned char) *p)) != 0) && (*p != '\\0'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
    "at": 56,
@@ -7734,32 +7534,12 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 28,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "temporary=(*image->filename == '\\0') ? MagickTrue : MagickFalse;",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 9,
    "file": "MagickCore/delegate.c",
    "function": "InvokeDelegate",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "((encode != (const char *) NULL) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "(delegate_info->decode != (char *) NULL))))",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -7784,16 +7564,6 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 16,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "for (p=image; p != (Image *) NULL; p=GetNextImageInList(p))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 12,
    "file": "MagickCore/delegate.c",
    "function": "InvokeDelegate",
@@ -7804,52 +7574,12 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 25,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((delegate_info->mode != 0) && (((decode != (const char *) NULL) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 44,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((delegate_info->mode != 0) && (((decode != (const char *) NULL) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 12,
    "file": "MagickCore/delegate.c",
    "function": "InvokeDelegate",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "if ((encode != (const char *) NULL) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 44,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((strcmp(input_filename,output_filename) != 0) &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 15,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((temporary != MagickFalse) && (AcquireUniqueFilename(image->filename) ==",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -7870,16 +7600,6 @@
    "mutator": "cxx_ne_to_eq",
    "nth": 1,
    "src": "if (IsPathAccessible(input_filename) != MagickFalse)",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 33,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (LocaleCompare(magick,\"NULL\") != 0)",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -7924,16 +7644,6 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 56,
-   "file": "MagickCore/delegate.c",
-   "function": "InvokeDelegate",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "magick=InterpretImageProperties(image_info,image,decode != (char *) NULL ?",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 39,
    "file": "MagickCore/delegate.c",
    "function": "InvokeDelegate",
@@ -7974,82 +7684,12 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 12,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*token == '\\'') || (*token == '\"'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 32,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*token == '\\'') || (*token == '\"'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 46,
    "file": "MagickCore/delegate.c",
    "function": "IsExecutableToken",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if ((isalpha((int) *token) != 0) && (token[1] == ':') &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((token == (const char *) NULL) || (*token == '\\0'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((token == (const char *) NULL) || (*token == '\\0'))",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*token == '%')",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*token == '-')",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*token == '/')",
    "verdict": "unobservable",
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
@@ -8074,64 +7714,14 @@
    "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
   },
   {
-   "at": 27,
-   "file": "MagickCore/delegate.c",
-   "function": "IsExecutableToken",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if ((isalpha((int) *token) != 0) && (token[1] == ':') &&",
-   "verdict": "unobservable",
-   "why": "builds or runs an external program's command; the oracle blocks every program launch (sandbox) and the command is not printed, even with -verbose, so the output is the same failure either way"
-  },
-  {
    "at": 22,
    "file": "MagickCore/delegate.c",
    "function": "ListDelegateInfo",
    "mutator": "cxx_ne_to_eq",
    "nth": 0,
    "src": "for (j=0; commands[j] != (char *) NULL; j++)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 41,
-   "file": "MagickCore/delegate.c",
-   "function": "ListDelegateInfo",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "for (j=1; commands[j] != (char *) NULL; j++)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 20,
-   "file": "MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_add_to_sub",
-   "nth": 0,
-   "src": "extent=strlen(token)+MagickPathExtent;",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*q == quote)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (bracket_depth > 0)",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
+   "verdict": "unobservable",
+   "why": "frees the command lines after -list delegate prints them; the mutant leaks them, which nothing observes"
   },
   {
    "at": 14,
@@ -8142,16 +7732,6 @@
    "src": "return(status != 0 ? MagickTrue : MagickFalse);",
    "verdict": "unobservable",
    "why": "the status LoadDelegateCache returns, which its callers do not pass on to the CLI"
-  },
-  {
-   "at": 33,
-   "file": "MagickCore/delegate.c",
-   "function": "LoadDelegateCache",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
-   "verdict": "unresolved",
-   "why": "parsing delegates.xml or selecting a delegate; not killed by -list delegate and the delegate-using cases"
   },
   {
    "at": 46,
@@ -23461,6 +23041,206 @@
    "src": "path,depth+1,exception);",
    "verdict": "unobservable",
    "why": "runs only after an include file loaded, which never happens (FileToXML refuses regular files with extent ~0UL, MUTATION.md)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/delegate.c",
+   "function": "DestroyDelegate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&p->semaphore);",
+   "verdict": "unobservable",
+   "why": "removing it leaks a thread-support semaphore when the delegate cache is destroyed at shutdown; nothing reads it afterwards"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/delegate.c",
+   "function": "DelegateComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ActivateSemaphoreInfo(&delegate_semaphore);",
+   "verdict": "unobservable",
+   "why": "runs only when the delegate semaphore was never created; DelegateComponentGenesis creates it at start-up"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) number_arguments; i++)",
+   "verdict": "unobservable",
+   "why": "frees nothing for an empty command (the driver's ext='' case reaches it): a leak of the argument strings, which nothing observes"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) number_arguments; i++)",
+   "verdict": "unobservable",
+   "why": "frees one more argument for an empty command (the driver's ext='' case reaches it), arguments[argc], which StringToArgv sets to NULL; DestroyString(NULL) is a no-op"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j=0; j < (ssize_t) number_arguments; j++)",
+   "verdict": "unobservable",
+   "why": "frees nothing when a policy refuses a token (the driver's ext cases reach it): a leak of the argument strings, which nothing observes"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (j=0; j < (ssize_t) number_arguments; j++)",
+   "verdict": "unobservable",
+   "why": "frees nothing when a policy refuses a token (the driver's ext cases reach it): a leak of the argument strings, which nothing observes"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "while ((offset < MagickPathExtent) &&",
+   "verdict": "unresolved",
+   "why": "reads a delegate's output through popen, which needs /bin/sh; the oracle's sandbox has no shell (Linux) or forbids running one (macOS), so no case can make a program write output here"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "while ((offset < MagickPathExtent) &&",
+   "verdict": "unresolved",
+   "why": "reads a delegate's output through popen, which needs /bin/sh; the oracle's sandbox has no shell (Linux) or forbids running one (macOS), so no case can make a program write output here"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(fgets(message+offset,(int) (MagickPathExtent-offset),file) != NULL))",
+   "verdict": "unresolved",
+   "why": "reads a delegate's output through popen, which needs /bin/sh; the oracle's sandbox has no shell (Linux) or forbids running one (macOS), so no case can make a program write output here"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(fgets(message+offset,(int) (MagickPathExtent-offset),file) != NULL))",
+   "verdict": "unresolved",
+   "why": "reads a delegate's output through popen, which needs /bin/sh; the oracle's sandbox has no shell (Linux) or forbids running one (macOS), so no case can make a program write output here"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((message != (char *) NULL) && (*message != '\\0'))",
+   "verdict": "unresolved",
+   "why": "reached by the driver's 'ext=@SELF selfkill' (a child killed by a signal, status -1, no message buffer); the mutant would read *message through a NULL pointer, yet on the Mac base and mutant print the same, presumably because the compiler drops the undefined read; not proven"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/delegate.c",
+   "function": "ExternalDelegateCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((message != (char *) NULL) && (*message != '\\0'))",
+   "verdict": "unresolved",
+   "why": "needs a negative status with a message buffer: popen and pclose failing, which the oracle's sandbox (no shell) does not produce deterministically"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/delegate.c",
+   "function": "InterpretDelegateProperties",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*p == '\\n') /* return-newline EOL */",
+   "verdict": "unobservable",
+   "why": "the branch for a backslash before a carriage return is never taken: GetDelegateCommand and InvokeDelegate split the commands with StringToList, which breaks lines at every carriage return, so a line never holds one"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (temporary != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "runs only when AcquireUniqueFilename fails for the output (no temporary file can be created)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (temporary != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "runs only when InterpretImageProperties returns NULL, which it does only when memory runs out"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 4,
+   "src": "if (temporary != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "runs only when StringToList returns NULL, which it does only when memory runs out"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))",
+   "verdict": "unobservable",
+   "why": "the wait for a spawned delegate's input to disappear (at most 2 s); the mutants change only how long it waits, which the oracle does not compare"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))",
+   "verdict": "unobservable",
+   "why": "the wait for a spawned delegate's input to disappear (at most 2 s); the mutants change only how long it waits, which the oracle does not compare"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))",
+   "verdict": "unobservable",
+   "why": "the wait for a spawned delegate's input to disappear (at most 2 s); the mutants change only how long it waits, which the oracle does not compare"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/delegate.c",
+   "function": "InvokeDelegate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "(void) MagickDelay(100);  /* sleep 0.1 seconds */",
+   "verdict": "unobservable",
+   "why": "the wait for a spawned delegate's input to disappear (at most 2 s); removing the 0.1 s delay changes only how long it waits, which the oracle does not compare"
   }
  ]
 }

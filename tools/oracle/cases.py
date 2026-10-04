@@ -5380,6 +5380,57 @@ _MIME_FILES = (
      ("41000000", "-", "name=a.qqq", "41000000", "-", "name=a.rrr", "41000000", "empty")))
 GAP_STEP_CASES += [("driver mimecfg: %s" % name, _driver("mimecfg", *args), {"mime.xml": xml})
                    for name, xml, args in _MIME_FILES]
+# delegate.c through imdriver: the command line reads a case's delegates.xml but only after the
+# build's, and runs no delegate the oracle's sandbox would let start. With the case directory first
+# on MAGICK_CONFIGURE_PATH, delegatecfg parses the case's delegates.xml first and runs ops in order:
+# GetDelegateInfo and GetDelegateCommand (the %-letters expanded for rose:, its fields set by the
+# ops in between), the lists, InvokeDelegate of programs that do not exist (status, the files left
+# behind), and ExternalDelegateCommand against a case policy that refuses every token but a few:
+# which tokens IsExecutableToken hands to the policy shows in which are refused. @SELF is the
+# driver itself, whose selfkill command dies by a signal (status -1). No case starts a shell.
+_DELEGATE_FILES = (
+    ('property letters as image fields change',
+     {'delegates.xml': '<delegatemap>\n  <delegate decode="caseletters" command="&quot;%a|%b|%d|%e|%f|%g|%h|%i|%m|%n|%o|%p|%q|%r|%s|%t|%u|%w|%x|%y|%z|%A|%C|%D|%F|%G|%H|%I|%M|%O|%P|%Q|%S|%T|%U|%W|%X|%Y|%~|%%&quot;"/>\n</delegatemap>\n'},
+     ('cmd=caseletters', 'quality=75', 'units=2', 'xres=0', 'yres=0', 'cmd=caseletters', 'xres=eps', 'yres=eps', 'extent=1234', 'rows=0', 'columns=0', 'scenes=3', 'alpha=1', 'file=c/d.tar.gz', 'cmd=caseletters', 'units=1', 'quality=0', 'cmd=caseletters')),
+    ('escapes, entities and percents',
+     {'delegates.xml': '<delegatemap>\n  <delegate decode="caseesc" command="a\\rb\\nc\\\\d\\x &LT;&GT;&AMP;&amp;amp;lt; 5%x %% end%"/>\n  <delegate decode="caseq" command="q%\'x %&quot;y"/>\n  <delegate decode="casews" command="   "/>\n</delegatemap>\n'},
+     ('cmd=caseesc', 'cmd=caseq', 'cmd=casews', 'cmd=nosuchdelegate')),
+    ('lookups by decode, encode and mode, lists',
+     {'delegates.xml': '<delegatemap>\n  <delegate decode="case-d" command="dec"/>\n  <delegate encode="case-e" command="enc"/>\n  <delegate decode="case-x" encode="case-y" command="bi"/>\n  <delegate decode="case-m" encode="case-n" mode="bi" command="mode bi"/>\n  <delegate decode="case-s" stealth="True" spawn="True" thread-support="False" command="s"/>\n  <delegate decode="case-r" encode="case-q" mode="encode" command="mode encode"/>\n  <delegate encode="case-e3" command="e3"/>\n  <delegate encode="case-e1" command="e1"/>\n  <delegate encode="case-e2" command="e2"/>\n  <delegate decode="case-d3" encode="z" command="d3"/>\n  <delegate decode="case-d1" command="d1"/>\n</delegatemap>\n'},
+     ('info=case-d,', 'info=,case-e', 'info=case-x,case-y', 'info=*,case-y', 'info=case-x,*', 'info=case-w,case-y', 'info=case-x,case-w', 'info=case-m,case-n', 'info=case-z,case-n', 'info=*,*', 'info=case-s,', 'info=*,*', 'info=case-r,case-q', 'info=nope,case-q', 'info=*,*', 'list=case-*', 'list=case-e*', 'list=z', 'listinfo')),
+    ('a multi-line command',
+     {'delegates.xml': '<delegatemap>\n  <delegate decode="case-ml" command="first\nsecond\nthird"/>\n  <delegate decode="case-ml2" encode="o" command="only"/>\n</delegatemap>\n'},
+     ('listinfo', 'cmd=case-ml')),
+    ('a DOCTYPE, comments and an include',
+     {'delegates.xml': '<?xml version="1.0"?>\n<!DOCTYPE delegatemap [\n  <!ATTLIST delegate decode CDATA "x]>y" command CDATA \'a>b\'>\n]>\n<!-- a comment with a > inside -->\n<delegatemap>\n  <include file="more.xml"/>\n  <delegate decode="case-s1" command="one"/>\n</delegatemap>\n'},
+     ('info=case-s1,', 'listinfo')),
+    ('a stray bracket',
+     {'delegates.xml': '<!DOCTYPE delegatemap SYSTEM "t" ]>\n<delegatemap>\n  <delegate decode="case-s2" command="two"/>\n</delegatemap>\n'},
+     ('info=case-s2,',)),
+    ('nested brackets in a DOCTYPE',
+     {'delegates.xml': '<!DOCTYPE delegatemap [ [ ] <!ENTITY e "]>"> ]>\n<delegatemap>\n  <delegate decode="case-s3" command="three"/>\n</delegatemap>\n'},
+     ('info=case-s3,',)),
+    ('a comment with -> inside, one never closed',
+     {'delegates.xml': '<delegatemap>\n  <!-- c - d -> <delegate decode="case-hidden" command="h"/> -->\n  <delegate decode="case-s4" command="four"/>\n</delegatemap>\n<!-- never closed '},
+     ('info=case-s4,', 'info=case-hidden,')),
+    ('includes, relative, absolute and empty',
+     {'delegates.xml': '<delegatemap>\n  <include junk file="more.xml" />\n  <include file="/nonexistent/more.xml"/>\n  <include/>\n  <delegate decode="case-s5" command="five"/>\n</delegatemap>\n', 'more.xml': '<delegatemap>\n  <delegate decode="case-more" command="more"/>\n</delegatemap>\n'},
+     ('info=case-s5,', 'info=case-more,')),
+    ('a delegate inside a quoted SYSTEM id and inside a comment',
+     {'delegates.xml': '<!DOCTYPE delegatemap SYSTEM \'x> <delegate decode="case-ghost" command="g"/> \'>\n<delegatemap>\n  <!-- <delegate decode="case-ghost2" command="g2"/> -->\n  <delegate decode="case-s6" command="six"/>\n</delegatemap>\n'},
+     ('info=case-ghost,', 'info=case-ghost2,', 'info=case-s6,')),
+    ('an include inside an open delegate',
+     {'delegates.xml': '<delegatemap>\n  <delegate decode="case-inc" <include file="more.xml"/> command="after"/>\n  <delegate decode="case-inc2" <include file = "more.xml" /> command="after2"/>\n</delegatemap>\n'},
+     ('info=case-inc,', 'info=case-inc2,')),
+    ('InvokeDelegate of programs that do not exist',
+     {'case-f:out.dat': 'kept', 'delegates.xml': '<delegatemap>\n  <delegate decode="case-a" command="nosuch %i %o"/>\n  <delegate decode="case-b" encode="ppm" command="nosuch %i"/>\n  <delegate decode="case-c" encode="null" command="nosuch %i"/>\n  <delegate encode="case-e" command="nosuch %o"/>\n  <delegate decode="case-f" encode="nosuchformat" command="nosuch %i"/>\n</delegatemap>\n'},
+     ('invoke=case-a,', 'invoke=nosuchdelegate,', 'invoke=case-b,ppm', 'invoke=case-c,null', 'invoke=,case-e', 'invoke=,nosuchenc', 'invoke=case-f,nosuchformat')),
+    ('ExternalDelegateCommand against a delegate policy',
+     {'delegates.xml': '<delegatemap>\n  <delegate decode="case-d" command="dec"/>\n</delegatemap>\n', '.config/ImageMagick/policy.xml': '<policymap>\n  <policy domain="delegate" rights="none" pattern="*"/>\n  <policy domain="delegate" rights="execute" pattern="nosuch"/>\n  <policy domain="delegate" rights="execute" pattern="*imdriver"/>\n  <policy domain="delegate" rights="execute" pattern="selfkill"/>\n</policymap>\n'},
+     ('ext=nosuch ./', 'ext=nosuch ./x', 'ext=nosuch .\\\\x', 'ext=nosuch .x', 'ext=nosuch -x', 'ext=nosuch %x', 'ext=nosuch x9', 'ext=nosuch ?:/x', 'ext=nosuch a:/x', 'ext=nosuch a:\\\\x', 'ext=nosuch /x', 'extv=nosuch .y', "ext=''", "ext=''  b", 'ext=@SELF selfkill', 'ext=forbidden')),
+)
+GAP_STEP_CASES += [("driver delegatecfg: %s" % name, _driver("delegatecfg", *args), files)
+                   for name, files, args in _DELEGATE_FILES]
 # utility.c AcquireUniqueSymbolicLink through imdriver: it is reached only by a delegate, and its
 # copy path (when symlinks are forbidden by policy, or shred is set) by no command-line case. The
 # driver calls it and reads the destination back (= the source either way). Two cases: the default

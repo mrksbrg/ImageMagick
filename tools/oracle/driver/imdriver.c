@@ -17,6 +17,7 @@
   It is linked against the build under test (build.sh), so a mutant switched on in the
   environment is active here as in magick. Output goes to stdout or to the named file.
 */
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +27,7 @@
 #include "MagickCore/MagickCore.h"
 #include "MagickCore/blob-private.h"
 #include "MagickCore/policy-private.h"
+#include "MagickCore/utility-private.h"
 
 static int Fail(ExceptionInfo *exception,const char *what)
 {
@@ -2209,6 +2211,207 @@ static int MimeCfgCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static void ReplaceAll(char *text,size_t size,const char *from,const char *to)
+{
+  /* replaces every occurrence of from in text (NUL-terminated, size bytes) by to */
+  char *p, *copy;
+  size_t n=strlen(from);
+  if ((n == 0) || (strstr(text,from) == (char *) NULL)) return;
+  copy=AcquireString(text);
+  *text='\0';
+  for (p=copy; *p != '\0'; )
+  {
+    if (strncmp(p,from,n) == 0) { (void) ConcatenateMagickString(text,to,size); p+=n; continue; }
+    { char c[2]; c[0]=(*p++); c[1]='\0'; (void) ConcatenateMagickString(text,c,size); }
+  }
+  copy=DestroyString(copy);
+}
+
+static void DelegateReport(ExceptionInfo *exception,const char *self,const char *cwd)
+{
+  /* the exception's severity, reason and description, with the driver's own path shown as
+     IMDRIVER and the case directory as CASE (both name the machine), then cleared */
+  char text[3*MagickPathExtent];
+  if (exception->severity == UndefinedException) return;
+  (void) snprintf(text,sizeof(text),"exception %d %s (%s)",(int) exception->severity,
+    exception->reason != NULL ? exception->reason : "",exception->description != NULL ?
+    exception->description : "");
+  ReplaceAll(text,sizeof(text),self,"IMDRIVER");
+  if (*cwd != '\0') ReplaceAll(text,sizeof(text),cwd,"CASE");
+  (void) printf("%s\n",text);
+  ClearMagickException(exception);
+}
+
+static int CompareNames(const void *x,const void *y)
+{
+  return(strcmp(*(char * const *) x,*(char * const *) y));
+}
+
+static void PrintDelegate(const DelegateInfo *info)
+{
+  (void) printf("  decode %s encode %s mode %.20g thread %d spawn %d stealth %d commands \"%s\"\n",
+    info->decode != NULL ? info->decode : "(null)",info->encode != NULL ? info->encode : "(null)",
+    (double) GetDelegateMode(info),(int) GetDelegateThreadSupport(info),(int) info->spawn,
+    (int) info->stealth,GetDelegateCommands(info) != NULL ? GetDelegateCommands(info) : "(null)");
+}
+
+static int DelegateCfgCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  /* delegatecfg OP...   with the case directory first on MAGICK_CONFIGURE_PATH (see main), so the
+     case's own delegates.xml is parsed first. OPs, in order:
+       info=DECODE,ENCODE   GetDelegateInfo (an empty name is NULL), printed field by field
+       cmd=DECODE,ENCODE    GetDelegateCommand on the current image (rose:, filename a/b/rose.miff)
+       list=PATTERN         GetDelegateInfoList, the case's own entries only
+       listinfo             ListDelegateInfo, the case's section only (its path printed as CASE)
+       ext=COMMAND          ExternalDelegateCommand(synchronous,quiet,COMMAND,no message), with
+       extv=COMMAND         @SELF replaced by this driver's path (extv: verbose)
+       invoke=DECODE,ENCODE InvokeDelegate on in.dat to out.dat (see below)
+       quality= units= xres= yres= rows= columns= extent= scenes= alpha= file=   set the image's
+                            (or, for scenes, the image_info's) field, for cmd's property letters
+     After each op any exception is printed and cleared. */
+  char cwd[MagickPathExtent], self[MagickPathExtent];
+  Image *image;
+  ImageInfo *image_info;
+  int k;
+  if (getcwd(cwd,sizeof(cwd)) == (char *) NULL) *cwd='\0';
+  if (realpath(argv[0],self) == (char *) NULL) (void) CopyMagickString(self,argv[0],sizeof(self));
+  image_info=AcquireImageInfo();
+  (void) CopyMagickString(image_info->filename,"rose:",MagickPathExtent);
+  image=ReadImage(image_info,exception);
+  if (image == (Image *) NULL) return(Fail(exception,"delegatecfg: rose:"));
+  (void) CopyMagickString(image->magick_filename,"a/b/rose.miff",MagickPathExtent);
+  (void) CopyMagickString(image_info->filename,"out.png",MagickPathExtent);
+  for (k=2; k < argc; k++)
+  {
+    char name[MagickPathExtent], *value, *comma;
+    (void) CopyMagickString(name,argv[k],sizeof(name));
+    value=strchr(name,'=');
+    if (value != (char *) NULL) *value++='\0'; else value=name+strlen(name);
+    (void) printf("%s\n",argv[k]);
+    if ((strcmp(name,"info") == 0) || (strcmp(name,"cmd") == 0))
+      {
+        const char *decode=value, *encode="";
+        comma=strchr(value,',');
+        if (comma != (char *) NULL) { *comma='\0'; encode=comma+1; }
+        if (*decode == '\0') decode=(const char *) NULL;
+        if (*encode == '\0') encode=(const char *) NULL;
+        if (*name == 'i')
+          {
+            const DelegateInfo *info=GetDelegateInfo(decode,encode,exception);
+            if (info == (const DelegateInfo *) NULL) (void) printf("  none\n");
+            else PrintDelegate(info);
+          }
+        else
+          {
+            char *command=GetDelegateCommand(image_info,image,decode,encode,exception);
+            (void) printf("  command %s\n",command != (char *) NULL ? command : "(null)");
+            if (command != (char *) NULL) command=DestroyString(command);
+          }
+      }
+    else if (strcmp(name,"invoke") == 0)
+      {
+        /* InvokeDelegate on the image named in.dat (an existing file, written here) and the output
+           out.dat; prints the status, whether each file still exists, and whether the image's
+           filename and magick came back changed (not the names: they are unique temporary ones) */
+        const char *decode=value, *encode="";
+        FILE *f=fopen("in.dat","wb");
+        MagickBooleanType status;
+        if (f != (FILE *) NULL) { (void) fputs("input",f); (void) fclose(f); }
+        comma=strchr(value,',');
+        if (comma != (char *) NULL) { *comma='\0'; encode=comma+1; }
+        if (*decode == '\0') decode=(const char *) NULL;
+        if (*encode == '\0') encode=(const char *) NULL;
+        (void) CopyMagickString(image->filename,"in.dat",MagickPathExtent);
+        (void) CopyMagickString(image->magick,"ROSE",MagickPathExtent);
+        (void) CopyMagickString(image_info->filename,"out.dat",MagickPathExtent);
+        status=InvokeDelegate(image_info,image,decode,encode,exception);
+        (void) printf("  status %d in.dat %d out.dat %d filename %s magick %s\n",(int) status,
+          access("in.dat",F_OK) == 0 ? 1 : 0,access("out.dat",F_OK) == 0 ? 1 : 0,
+          strcmp(image->filename,"in.dat") == 0 ? "in.dat" : "changed",image->magick);
+        (void) remove("out.dat");
+        {
+          /* and the files left in the case directory, by name (the case directory is the
+             temporary path too) */
+          char **names;
+          size_t n=0, j;
+          names=ListFiles(".","*",&n);
+          if (names != (char **) NULL)
+            {
+              qsort(names,n,sizeof(*names),CompareNames);
+              (void) printf("  files");
+              for (j=0; j < n; j++)
+              {
+                /* a temporary file left behind has a unique name: shown as magick-TMP, removed */
+                if (strncmp(names[j],"magick-",7) == 0)
+                  { (void) printf(" magick-TMP"); (void) remove(names[j]); }
+                else
+                  (void) printf(" %s",names[j]);
+                names[j]=DestroyString(names[j]);
+              }
+              (void) printf("\n");
+              names=(char **) RelinquishMagickMemory(names);
+            }
+        }
+      }
+    else if (strcmp(name,"list") == 0)
+      {
+        size_t n=0, j;
+        const DelegateInfo **list=GetDelegateInfoList(value,&n,exception);
+        for (j=0; j < n; j++)
+          if (strstr(list[j]->path,cwd) != (char *) NULL) PrintDelegate(list[j]);
+        if (list != (const DelegateInfo **) NULL)
+          list=(const DelegateInfo **) RelinquishMagickMemory((void *) list);
+      }
+    else if (strcmp(name,"listinfo") == 0)
+      {
+        char line[3*MagickPathExtent];
+        int show=0;
+        FILE *f=tmpfile();
+        if (f == (FILE *) NULL) return(1);
+        (void) ListDelegateInfo(f,exception);
+        rewind(f);
+        while (fgets(line,sizeof(line),f) != (char *) NULL)
+        {
+          if (strncmp(line,"Path: ",6) == 0)
+            {
+              show=strstr(line,cwd) != (char *) NULL ? 1 : 0;
+              if (show != 0) (void) printf("Path: CASE\n");
+              continue;
+            }
+          if (show != 0) (void) fputs(line,stdout);
+        }
+        (void) fclose(f);
+      }
+    else if ((strcmp(name,"ext") == 0) || (strcmp(name,"extv") == 0))
+      {
+        char command[3*MagickPathExtent];
+        int status;
+        (void) CopyMagickString(command,value,sizeof(command));
+        ReplaceAll(command,sizeof(command),"@SELF",self);
+        (void) fflush(stdout);
+        status=ExternalDelegateCommand(MagickFalse,name[3] == 'v' ? MagickTrue : MagickFalse,command,
+          (char *) NULL,exception);
+        (void) printf("  status %d\n",status);
+      }
+    else if (strcmp(name,"quality") == 0) image->quality=(size_t) atol(value);
+    else if (strcmp(name,"units") == 0) image->units=(ResolutionType) atoi(value);
+    else if (strcmp(name,"xres") == 0) image->resolution.x=strcmp(value,"eps") == 0 ? MagickEpsilon : atof(value);
+    else if (strcmp(name,"yres") == 0) image->resolution.y=strcmp(value,"eps") == 0 ? MagickEpsilon : atof(value);
+    else if (strcmp(name,"rows") == 0) image->rows=(size_t) atol(value);
+    else if (strcmp(name,"columns") == 0) image->columns=(size_t) atol(value);
+    else if (strcmp(name,"extent") == 0) image->extent=(MagickSizeType) atol(value);
+    else if (strcmp(name,"scenes") == 0) image_info->number_scenes=(size_t) atol(value);
+    else if (strcmp(name,"alpha") == 0) image->alpha_trait=atoi(value) != 0 ? BlendPixelTrait : UndefinedPixelTrait;
+    else if (strcmp(name,"file") == 0) (void) CopyMagickString(image->magick_filename,value,MagickPathExtent);
+    else (void) printf("  unknown op\n");
+    (void) fflush(stdout);
+    DelegateReport(exception,self,cwd);
+  }
+  image=DestroyImage(image);
+  image_info=DestroyImageInfo(image_info);
+  return(0);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -2220,7 +2423,7 @@ int main(int argc,char **argv)
       return(2);
     }
   if ((strcmp(argv[1],"configure") == 0) || (strcmp(argv[1],"logcfg") == 0) ||
-      (strcmp(argv[1],"mimecfg") == 0))
+      (strcmp(argv[1],"mimecfg") == 0) || (strcmp(argv[1],"delegatecfg") == 0))
     {
       char cwd[MagickPathExtent], value[3*MagickPathExtent];
       const char *old=getenv("MAGICK_CONFIGURE_PATH");
@@ -2263,6 +2466,8 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"configure") == 0) status=ConfigureCmd(argc,argv,exception);
   else if (strcmp(argv[1],"logcfg") == 0) status=LogCfgCmd(argc,argv,exception);
   else if (strcmp(argv[1],"mimecfg") == 0) status=MimeCfgCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"delegatecfg") == 0) status=DelegateCfgCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"selfkill") == 0) { (void) raise(SIGKILL); status=0; }
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
