@@ -1,0 +1,24 @@
+mutate: 84 mutants in MagickCore/layer\.c$, 11 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/84 (0s)
+  mutants: 50/84 (0s)
+  mutants: 75/84 (0s)
+  mutants: 84/84 (0s)
+
+mutate: 84 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 84, errors 0
+
+  function                           total killed survived no-cov
+  OptimizeLayerFrames                   18      0        0     18
+  MergeImageLayers                      15      0        0     15
+  DisposeImages                         14      0        0     14
+  CompareImagesBounds                   12      0        0     12
+  CoalesceImages                         9      0        0      9
+  OptimizeImageTransparency              6      0        0      6
+  IsBoundsCleared                        5      0        0      5
+  CompositeLayers                        2      0        0      2
+  CompareImagesLayers                    1      0        0      1
+  RemoveDuplicateLayers                  1      0        0      1
+  RemoveZeroDelayLayers                  1      0        0      1
+
+  full results: build-oracle/work/mutation-extnew3-layer.json
