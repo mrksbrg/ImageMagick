@@ -11315,6 +11315,36 @@
    "why": "UnregisterMagickInfo runs only at shutdown (UnregisterStaticModules, from MagickCoreTerminus): without the lock, the iterator reset or the unlock, an entry may stay registered or a semaphore stay locked as the process exits; nothing reads them"
   },
   {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMagickMatrix",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j=0; j < i; j++)",
+   "verdict": "unobservable",
+   "why": "frees the rows already allocated when a later row cannot be: only after an allocation fails, and the oracle runs within memory"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMagickMatrix",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (j=0; j < i; j++)",
+   "verdict": "unobservable",
+   "why": "frees the rows already allocated when a later row cannot be: only after an allocation fails, and the oracle runs within memory"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMagickMatrix",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (j=0; j < i; j++)",
+   "verdict": "unobservable",
+   "why": "frees the rows already allocated when a later row cannot be: only after an allocation fails, and the oracle runs within memory"
+  },
+  {
    "at": 6,
    "file": "MagickCore/matrix.c",
    "function": "EdgeX",
