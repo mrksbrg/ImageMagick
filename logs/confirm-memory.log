@@ -1,52 +1,29 @@
-mutate: 36 mutants in MagickCore/memory\.c$, 11 functions
-mutate: baseline over 57 cases in 0s
-  mutants: 25/36 (2s)
-  mutants: 36/36 (3s)
+mutate: 33 mutants in MagickCore/memory\.c$, 9 functions
+mutate: baseline over 38 cases in 0s
+  mutants: 25/33 (0s)
+  mutants: 33/33 (2s)
 
-mutate: 36 mutants, 3s
-  killed 3, survived 26 (0 capped), no coverage 7, errors 0
-  mutation score on reached code: 10.3%   overall: 8.3%
+mutate: 33 mutants, 2s
+  killed 0, survived 5 (0 capped), no coverage 28, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  ShredMagickMemory                     11      0       11      0
-  AcquireVirtualMemory                   8      0        8      0
+  ShredMagickMemory                     11      0        0     11
+  AcquireVirtualMemory                   8      0        0      8
   CopyMagickMemory                       4      0        0      4
   SetMagickMemoryMethods                 3      0        0      3
-  AcquireAlignedMemory                   2      1        1      0
   AcquireCriticalMemory                  2      0        2      0
-  RelinquishVirtualMemory                2      0        2      0
-  AcquireQuantumMemory                   1      1        0      0
+  RelinquishVirtualMemory                2      0        0      2
+  AcquireAlignedMemory                   1      0        1      0
   RelinquishAlignedMemory                1      0        1      0
   ResetMagickMemory                      1      0        1      0
-  ResizeQuantumMemory                    1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  memory.c:355:53 cxx_ne_to_eq               if (memory_methods.acquire_aligned_memory_handler != (AcquireAlignedMemoryHandler) NULL)
        memory.c:625:3 cxx_remove_void_call       MagickCoreTerminus();
        memory.c:626:3 cxx_remove_void_call       _exit(EXIT_FAILURE);
-    x  memory.c:736:29 cxx_ne_to_eq               if (memory_info->blob != NULL)
-       memory.c:758:20 cxx_ne_to_eq               if (file != -1)
-       memory.c:764:27 cxx_eq_to_ne               if ((offset == (MagickOffsetType) (size-1)) &&
-       memory.c:764:54 cxx_sub_to_add             if ((offset == (MagickOffsetType) (size-1)) &&
-       memory.c:765:37 cxx_eq_to_ne               (write(file,"",1) == 1))
-       memory.c:770:71 cxx_eq_to_ne               if (posix_fallocate(file,0,(MagickOffsetType) size) == 0)
-       memory.c:773:41 cxx_ne_to_eq               if (memory_info->blob != NULL)
-    x  memory.c:786:25 cxx_eq_to_ne               if (memory_info->blob == NULL)
     x  memory.c:1171:56 cxx_ne_to_eq               if (memory_methods.relinquish_aligned_memory_handler != (RelinquishAlignedMemoryHandler) N
-    x  memory.c:1280:25 cxx_ne_to_eq               if (memory_info->blob != (void *) NULL)
-       memory.c:1293:36 cxx_ne_to_eq               if (*memory_info->filename != '\0')
     x  memory.c:1348:14 cxx_ne_to_eq               while (n-- != 0)
-    x  memory.c:1679:15 cxx_eq_to_ne               if ((memory == NULL) || (length == 0))
-    x  memory.c:1679:35 cxx_eq_to_ne               if ((memory == NULL) || (length == 0))
-    x  memory.c:1691:15 cxx_lt_to_ge               for (i=0; i < passes; i++)
-    x  memory.c:1699:17 cxx_lt_to_ge               for (j=0; j < length; j+=quantum)
-    x  memory.c:1699:17 cxx_lt_to_le               for (j=0; j < length; j+=quantum)
-    x  memory.c:1701:13 cxx_ne_to_eq               if (i != 0)
-    x  memory.c:1702:9 cxx_remove_void_call       SetRandomKey(random_info,quantum,GetStringInfoDatum(key));
-    x  memory.c:1707:11 cxx_lt_to_ge               if (j < length)
-    x  memory.c:1707:11 cxx_lt_to_le               if (j < length)
-    x  memory.c:1712:12 cxx_lt_to_ge               return(i < passes ? MagickFalse : MagickTrue);
-    x  memory.c:1712:12 cxx_lt_to_le               return(i < passes ? MagickFalse : MagickTrue);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e34c65b55-memory.json
+  full results: build-oracle/work/mutation-confirm-7b727442d-memory.json
