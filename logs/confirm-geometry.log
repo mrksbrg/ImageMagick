@@ -1,10 +1,10 @@
 mutate: 60 mutants in MagickCore/geometry\.c$, 11 functions
-mutate: baseline over 1340 cases in 0s
+mutate: baseline over 303 cases in 0s
   mutants: 25/60 (0s)
-  mutants: 50/60 (89s)
-  mutants: 60/60 (90s)
+  mutants: 50/60 (48s)
+  mutants: 60/60 (48s)
 
-mutate: 60 mutants, 90s
+mutate: 60 mutants, 48s
   killed 0, survived 28 (0 capped), no coverage 32, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -52,4 +52,4 @@ mutate: 60 mutants, 90s
     x  geometry.c:1828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-1501a027d-geometry.json
+  full results: build-oracle/work/mutation-confirm-d09139dff-geometry.json
