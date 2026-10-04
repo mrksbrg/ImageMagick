@@ -19101,6 +19101,106 @@
    "why": "only changes the elapsed and user times, which the oracle masks in every output"
   },
   {
+   "at": 22,
+   "file": "MagickCore/token.c",
+   "function": "StoreToken",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (token_info->state == IN_QUOTE)",
+   "verdict": "equivalent",
+   "why": "every caller passes flag 0, so the case switch after it leaves the character as stored: returning early in IN_QUOTE or not gives the same token"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (line[(*next)+1] == '\\0')",
+   "verdict": "equivalent",
+   "why": "the escape branch is dead: every caller (annotate.c, mogrify.c, operation.c, meta.c) passes escape '\\0', and the loop stops at the line's NUL, so c == escape never holds"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (line[(*next)+1] == '\\0')",
+   "verdict": "equivalent",
+   "why": "the escape branch is dead: every caller (annotate.c, mogrify.c, operation.c, meta.c) passes escape '\\0', and the loop stops at the line's NUL, so c == escape never holds"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "(*next)++;",
+   "verdict": "equivalent",
+   "why": "the escape branch is dead: every caller (annotate.c, mogrify.c, operation.c, meta.c) passes escape '\\0', and the loop stops at the line's NUL, so c == escape never holds"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "(*next)++;",
+   "verdict": "equivalent",
+   "why": "the escape branch is dead: every caller (annotate.c, mogrify.c, operation.c, meta.c) passes escape '\\0', and the loop stops at the line's NUL, so c == escape never holds"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "StoreToken(token_info,token,max_token_length,c);",
+   "verdict": "equivalent",
+   "why": "the escape branch is dead: every caller (annotate.c, mogrify.c, operation.c, meta.c) passes escape '\\0', and the loop stops at the line's NUL, so c == escape never holds"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "StoreToken(token_info,token,max_token_length,c);",
+   "verdict": "equivalent",
+   "why": "the escape branch is dead: every caller (annotate.c, mogrify.c, operation.c, meta.c) passes escape '\\0', and the loop stops at the line's NUL, so c == escape never holds"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "StoreToken(token_info,token,max_token_length,c);",
+   "verdict": "equivalent",
+   "why": "every caller passes an empty whitespace set, so sindex(c,white) is always -1: the IN_QUOTE whitespace branch is dead and i > 0 is as false as i >= 0"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 2,
+   "src": "if (i >= 0)",
+   "verdict": "equivalent",
+   "why": "every caller passes an empty whitespace set, so sindex(c,white) is always -1: the IN_QUOTE whitespace branch is dead and i > 0 is as false as i >= 0"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/token.c",
+   "function": "Tokenizer",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "StoreToken(token_info,token,max_token_length,c);",
+   "verdict": "equivalent",
+   "why": "every caller's quote set is empty or the single character '\"', so a quote character inside a quote is always the opening one: the branch storing a different quote is dead"
+  },
+  {
    "at": 36,
    "file": "MagickCore/transform.c",
    "function": "CropImage",
