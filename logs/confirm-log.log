@@ -1,38 +1,38 @@
 mutate: 159 mutants in MagickCore/log\.c$, 20 functions
-mutate: baseline over 13 cases in 0s
-  mutants: 25/159 (1s)
-  mutants: 50/159 (1s)
-  mutants: 75/159 (1s)
-  mutants: 100/159 (1s)
-  mutants: 125/159 (1s)
-  mutants: 150/159 (2s)
-  mutants: 159/159 (2s)
+mutate: baseline over 52 cases in 0s
+  mutants: 25/159 (10s)
+  mutants: 50/159 (12s)
+  mutants: 75/159 (14s)
+  mutants: 100/159 (15s)
+  mutants: 125/159 (16s)
+  mutants: 150/159 (19s)
+  mutants: 159/159 (24s)
 
-mutate: 159 mutants, 2s
-  killed 0, survived 39 (0 capped), no coverage 120, errors 0
+mutate: 159 mutants, 24s
+  killed 0, survived 135 (0 capped), no coverage 24, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  TranslateEvent                        49      0        0     49
-  LogMagickEventList                    28      0        0     28
+  TranslateEvent                        49      0       49      0
+  LogMagickEventList                    28      0       28      0
   LoadLogCache                          18      0       18      0
   GetLogList                            12      0        0     12
   CloseMagickLog                         6      0        0      6
   GetLogInfo                             6      0        6      0
-  FormatLogFilename                      5      0        0      5
-  SetLogEventMask                        5      0        0      5
+  FormatLogFilename                      5      0        5      0
+  SetLogEventMask                        5      0        5      0
   SetLogFormat                           4      0        0      4
-  GetLogInfoList                         3      0        0      3
+  GetLogInfoList                         3      0        3      0
   IsLogCacheInstantiated                 3      0        3      0
   DestroyLogElement                      3      0        3      0
   LogComponentTerminus                   3      0        3      0
-  SetLogMethod                           3      0        0      3
+  SetLogMethod                           3      0        3      0
   AcquireLogCache                        2      0        2      0
   CheckEventLogging                      2      0        2      0
-  ListLogInfo                            2      0        0      2
+  ListLogInfo                            2      0        2      0
   ParseLogHandlers                       2      0        2      0
   SetLogName                             2      0        0      2
-  LogInfoCompare                         1      0        0      1
+  LogInfoCompare                         1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  log.c:327:5 cxx_remove_void_call       GetTimerInfo((TimerInfo *) &log_info->timer);
@@ -43,11 +43,17 @@ mutate: 159 mutants, 2s
        log.c:467:12 cxx_ne_to_eq               while (p != (ElementInfo *) NULL)
        log.c:477:5 cxx_remove_void_call       SetHeadElementInLinkedList(log_cache,p);
        log.c:478:3 cxx_remove_void_call       UnlockSemaphoreInfo(log_semaphore);
+    x  log.c:521:44 cxx_eq_to_ne               if (LocaleCompare((*p)->path,(*q)->path) == 0)
+    x  log.c:544:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  log.c:550:47 cxx_add_to_sub             GetNumberOfElementsInLinkedList(log_cache)+1UL,sizeof(*preferences));
+    x  log.c:571:7 cxx_remove_void_call       qsort((void *) preferences,(size_t) i,sizeof(*preferences),LogInfoCompare);
     x  log.c:725:36 cxx_ne_to_eq               if (IsLinkedListEmpty(log_cache) != MagickFalse)
     x  log.c:733:24 cxx_ne_to_eq               event_logging=(p != (ElementInfo *) NULL) &&
     x  log.c:743:25 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
        log.c:744:9 cxx_remove_void_call       ActivateSemaphoreInfo(&log_semaphore);
     x  log.c:749:11 cxx_remove_void_call       CheckEventLogging();
+    x  log.c:837:15 cxx_eq_to_ne               if ((path == (const char *) NULL) ||
+    x  log.c:843:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (8*sizeof(LogHandlerType)); j++)
     x  log.c:977:55 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
     x  log.c:991:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
     x  log.c:1000:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
@@ -72,8 +78,98 @@ mutate: 159 mutants, 2s
     x  log.c:1230:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
     x  log.c:1233:17 cxx_ne_to_eq               if (log_cache != (LinkedListInfo *) NULL)
     x  log.c:1237:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&log_semaphore);
+    x  log.c:1288:33 cxx_ne_to_eq               for (p=log_info->filename; *p != '\0'; p++)
+    x  log.c:1300:12 cxx_ne_to_eq               if (*p != '%')
+    x  log.c:1306:12 cxx_eq_to_ne               if (*p == '\0')
+    x  log.c:1322:35 cxx_eq_to_ne               if (log_info->generations == 0)
+    x  log.c:1329:23 cxx_rem_to_div             (generation % log_info->generations));
+    x  log.c:1397:16 cxx_eq_to_ne               if (log_info == (LogInfo *) NULL)
+    x  log.c:1402:24 cxx_eq_to_ne               if (log_info->format == (char *) NULL)
+    x  log.c:1404:23 cxx_add_to_sub             extent=strlen(event)+MagickPathExtent;
+    x  log.c:1405:45 cxx_eq_to_ne               if (LocaleCompare(log_info->format,"xml") == 0)
+       log.c:1426:59 cxx_div_to_mul             "</entry>",timestamp,(unsigned long) (elapsed_time/60.0),
+       log.c:1428:33 cxx_sub_to_add             (1000000.0*(elapsed_time-floor(elapsed_time))+0.5),user_time,
+    x  log.c:1437:31 cxx_ne_to_eq               for (p=log_info->format; *p != '\0'; p++)
+    x  log.c:1440:20 cxx_sub_to_add             if ((size_t) (q-text+MagickPathExtent) >= extent)
+    x  log.c:1440:25 cxx_add_to_sub             if ((size_t) (q-text+MagickPathExtent) >= extent)
+    x  log.c:1440:44 cxx_ge_to_gt               if ((size_t) (q-text+MagickPathExtent) >= extent)
+    x  log.c:1440:44 cxx_ge_to_lt               if ((size_t) (q-text+MagickPathExtent) >= extent)
+    x  log.c:1444:18 cxx_eq_to_ne               if (text == (char *) NULL)
+    x  log.c:1468:13 cxx_eq_to_ne               if ((*p == '\\') && (*(p+1) == 'r'))
+    x  log.c:1468:33 cxx_eq_to_ne               if ((*p == '\\') && (*(p+1) == 'r'))
+    x  log.c:1474:13 cxx_eq_to_ne               if ((*p == '\\') && (*(p+1) == 'n'))
+    x  log.c:1474:33 cxx_eq_to_ne               if ((*p == '\\') && (*(p+1) == 'n'))
+    x  log.c:1480:12 cxx_ne_to_eq               if (*p != '%')
+    x  log.c:1486:12 cxx_eq_to_ne               if (*p == '\0')
+    x  log.c:1492:65 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetClientName(),extent-(q-text));
+    x  log.c:1492:68 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetClientName(),extent-(q-text));
+    x  log.c:1497:56 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,domain,extent-(q-text));
+    x  log.c:1497:59 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,domain,extent-(q-text));
+    x  log.c:1502:55 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,event,extent-(q-text));
+    x  log.c:1502:58 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,event,extent-(q-text));
+    x  log.c:1507:58 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,function,extent-(q-text));
+    x  log.c:1507:61 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,function,extent-(q-text));
+       log.c:1512:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+       log.c:1512:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+    x  log.c:1518:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+    x  log.c:1518:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+    x  log.c:1527:43 cxx_gt_to_ge               for (r=module+strlen(module)-1; r > module; r--)
+    x  log.c:1527:43 cxx_gt_to_le               for (r=module+strlen(module)-1; r > module; r--)
+    x  log.c:1528:18 cxx_eq_to_ne               if (*r == *DirectorySeparator)
+    x  log.c:1533:51 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,r,extent-(q-text));
+    x  log.c:1533:54 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,r,extent-(q-text));
+    x  log.c:1538:62 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetLogName(),extent-(q-text));
+    x  log.c:1538:65 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetLogName(),extent-(q-text));
+       log.c:1543:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+       log.c:1543:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+       log.c:1549:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%lu:%02lu.%03lu",
+       log.c:1549:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%lu:%02lu.%03lu",
+       log.c:1550:40 cxx_div_to_mul             (unsigned long) (elapsed_time/60.0),(unsigned long) floor(fmod(
+       log.c:1551:68 cxx_sub_to_add             elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-floor(
+       log.c:1557:55 cxx_sub_to_add             q+=(ptrdiff_t) FormatMagickTime(seconds,extent-(q-text),q);
+       log.c:1557:58 cxx_sub_to_add             q+=(ptrdiff_t) FormatMagickTime(seconds,extent-(q-text),q);
+       log.c:1562:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%0.3fu",user_time);
+       log.c:1562:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%0.3fu",user_time);
+    x  log.c:1567:70 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,MagickLibVersionText,extent-(q-text));
+    x  log.c:1567:73 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,MagickLibVersionText,extent-(q-text));
+    x  log.c:1610:16 cxx_eq_to_ne               if (log_info == (LogInfo *) NULL)
+    x  log.c:1622:9 cxx_lt_to_ge               if (n < 0)
+    x  log.c:1622:9 cxx_lt_to_le               if (n < 0)
+    x  log.c:1625:12 cxx_eq_to_ne               if (text == (char *) NULL)
+       log.c:1628:7 cxx_remove_void_call       UnlockSemaphoreInfo(log_info->event_semaphore);
+    x  log.c:1631:49 cxx_ne_to_eq               if ((log_info->handler_mask & ConsoleHandler) != 0)
+    x  log.c:1636:47 cxx_ne_to_eq               if ((log_info->handler_mask & DebugHandler) != 0)
+    x  log.c:1643:47 cxx_ne_to_eq               if ((log_info->handler_mask & EventHandler) != 0)
+    x  log.c:1649:46 cxx_ne_to_eq               if ((log_info->handler_mask & FileHandler) != 0)
+    x  log.c:1655:26 cxx_ne_to_eq               if (log_info->file != (FILE *) NULL)
+    x  log.c:1657:29 cxx_gt_to_ge               if (file_info.st_size > (MagickOffsetType) log_info->limit)
+    x  log.c:1657:29 cxx_gt_to_le               if (file_info.st_size > (MagickOffsetType) log_info->limit)
+    x  log.c:1668:49 cxx_sub_to_add             for (i=(ssize_t) log_info->generations-1; i > 0; i--)
+    x  log.c:1668:55 cxx_gt_to_ge               for (i=(ssize_t) log_info->generations-1; i > 0; i--)
+    x  log.c:1668:55 cxx_gt_to_le               for (i=(ssize_t) log_info->generations-1; i > 0; i--)
+    x  log.c:1677:13 cxx_remove_void_call       FormatLogFilename(log_info,i-1,old_filename);
+    x  log.c:1677:41 cxx_sub_to_add             FormatLogFilename(log_info,i-1,old_filename);
+    x  log.c:1678:13 cxx_remove_void_call       FormatLogFilename(log_info,i,new_filename);
+    x  log.c:1683:26 cxx_eq_to_ne               if (log_info->file == (FILE *) NULL)
+    x  log.c:1688:11 cxx_remove_void_call       FormatLogFilename(log_info,0,log_filename);
+    x  log.c:1691:30 cxx_eq_to_ne               if (log_info->file == (FILE *) NULL)
+    x  log.c:1693:15 cxx_remove_void_call       UnlockSemaphoreInfo(log_info->event_semaphore);
+    x  log.c:1696:32 cxx_eq_to_ne               if (log_info->append == MagickFalse)
+    x  log.c:1707:48 cxx_ne_to_eq               if ((log_info->handler_mask & MethodHandler) != 0)
+    x  log.c:1709:28 cxx_ne_to_eq               if (log_info->method != (MagickLogMethod) NULL)
+    x  log.c:1712:48 cxx_ne_to_eq               if ((log_info->handler_mask & StdoutHandler) != 0)
+    x  log.c:1717:48 cxx_ne_to_eq               if ((log_info->handler_mask & StderrHandler) != 0)
+    x  log.c:1724:3 cxx_remove_void_call       UnlockSemaphoreInfo(log_info->event_semaphore);
     x  log.c:1787:16 cxx_ne_to_eq               while ((*p != '\0') && ((isspace((int) ((unsigned char) *p)) != 0) ||
     x  log.c:1790:46 cxx_post_inc_to_post_dec   for (i=0; *LogHandlers[i].name != '\0'; i++)
+    x  log.c:1848:16 cxx_eq_to_ne               if (log_info == (LogInfo *) NULL)
+    x  log.c:1851:3 cxx_remove_void_call       LockSemaphoreInfo(log_semaphore);
+    x  log.c:1853:14 cxx_eq_to_ne               if (option == -1)
+    x  log.c:1857:3 cxx_remove_void_call       CheckEventLogging();
+    x  log.c:1858:3 cxx_remove_void_call       UnlockSemaphoreInfo(log_semaphore);
+    x  log.c:1938:16 cxx_eq_to_ne               if (log_info == (LogInfo *) NULL)
+    x  log.c:1940:3 cxx_remove_void_call       LockSemaphoreInfo(log_semaphore);
+    x  log.c:1945:3 cxx_remove_void_call       UnlockSemaphoreInfo(log_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-cfeecf925-log.json
+  full results: build-oracle/work/mutation-confirm-656676901-log.json
