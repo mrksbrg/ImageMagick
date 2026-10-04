@@ -2467,6 +2467,49 @@ from `MagickSignalHandler`); exception.c's `SetErrorHandler` (animate.c, display
 - option.c, resample.c, xml-tree.c, quantum.c: gaps; linked-list.c and cache-view.c: one or two
   functions each that a case could reach, the rest API only.
 
+### pixel.c, linked-list.c, splay-tree.c and cache-view.c through imdriver (Windows, 2026-10-04, 16:00)
+
+The Mac's C driver (above) now has four Windows commands, and the family `windrv` 254 cases:
+`pixels export|import` (ExportImagePixels and ImportImagePixels with every storage type, over
+the maps with a fast path, including char's BGRO and RGBO, and the generic loop, CMYK maps of a
+CMYK image, into and from a region, and the refusals); `linkedlist` and `splaytree` scripts of
+every operation (strings are interned, so a removal by value finds what a step stored; trees
+with relinquish functions, and without a compare function keyed by small integers, as
+profile.c and property.c make them; a 1100-node ascending chain makes the tree balance itself
+past depth 1024); `cacheview` (the one-pixel getters with every virtual pixel method but
+Random, a PixelInfo the getter must fill in itself). Plus `-sort-pixels`, which no case used.
+
+Uncapped statement-deletion rounds (three; the second and third after reading what survived):
+
+| file | before | after |
+|---|---|---|
+| pixel.c (2624 mutants) | 48% | 99% |
+| linked-list.c | 42% | 100% |
+| splay-tree.c | 55% | 100% |
+| cache-view.c | 37% | 100% |
+
+All four are **trusted**. pixel.c's two functions under the bar are written down:
+`LogPixelChannels` (logging; with `-log %e` its `-debug pixel` output is stable by hand but not
+under the oracle, so no case uses it) and `ClonePixelInfo` (API only, not in the driver).
+Functions the driver reaches no longer count as "API only": they are measured like any other.
+
+**Pitfalls on the way.** (1) The WSL base build had no `imdriver` at all, so the Mac's
+driver cases had never run here; it is now built into the base, coverage and `mull-sdl-win`
+builds. (2) The driver printed the list through the list's own iterator after every step, so
+every `next` in a script returned NULL; it now prints through `LinkedListToArray`. (3)
+`mutate.py` resumes a report of the same name, so a round rerun under the same family must have
+its earlier report renamed first (here `windrv1`, `windrv2`), or it resumes the old result.
+
+**An upstream bug.** `InsertValueInLinkedList` at a middle index (0 < index < elements) loses
+the new element: after the walk it does `next=next->next; element->next=next;`, which links the
+element *after* the new one and drops it, but still counts it (`elements++`). The list then
+holds one element fewer than it reports; `RemoveLastElementFromLinkedList`, which walks to the
+element before the tail, can then run off the end. No caller in ImageMagick inserts at a middle
+index, so the command line never sees it. The cases insert at a middle index only as a script's
+last step.
+
+Trusted now, Windows: **21 of 36** (the 17 above, and these four).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
