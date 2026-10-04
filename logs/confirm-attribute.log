@@ -1,48 +1,30 @@
 mutate: 82 mutants in MagickCore/attribute\.c$, 17 functions
-mutate: baseline over 12 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/82 (0s)
   mutants: 50/82 (0s)
   mutants: 75/82 (0s)
-  mutants: 82/82 (1s)
+  mutants: 82/82 (0s)
 
-mutate: 82 mutants, 1s
-  killed 0, survived 14 (0 capped), no coverage 68, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 82 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 82, errors 0
 
   function                           total killed survived no-cov
   GetImageBoundingBox                   18      0        0     18
   FloydSteinbergImageDepth              14      0        0     14
-  GetImageDepth                         10      0       10      0
+  GetImageDepth                         10      0        0     10
   GetImageType                           8      0        0      8
   GetEdgeBoundingBox                     7      0        0      7
   GetImageMinimumBoundingBox             6      0        0      6
   GetEdgeBackgroundCensus                4      0        0      4
   GetImageConvexHull                     4      0        0      4
   SetImageDepth                          2      0        0      2
-  SetImageType                           2      0        2      0
+  SetImageType                           2      0        0      2
   TraceConvexHull                        1      0        0      1
   getProjection                          1      0        0      1
   getFeretDiameter                       1      0        0      1
-  IdentifyImageGray                      1      0        1      0
+  IdentifyImageGray                      1      0        0      1
   IdentifyImageMonochrome                1      0        0      1
   IdentifyImageType                      1      0        0      1
-  IsImageOpaque                          1      0        1      0
+  IsImageOpaque                          1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  attribute.c:916:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  attribute.c:924:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
-    x  attribute.c:961:19 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
-    x  attribute.c:961:48 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
-       attribute.c:962:19 cxx_lt_to_ge               if (depth < current_depth[i])
-       attribute.c:962:19 cxx_lt_to_le               if (depth < current_depth[i])
-    x  attribute.c:1106:15 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
-    x  attribute.c:1106:44 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
-       attribute.c:1107:15 cxx_lt_to_ge               if (depth < current_depth[i])
-       attribute.c:1107:15 cxx_lt_to_le               if (depth < current_depth[i])
-    x  attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  attribute.c:1882:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  attribute.c:2315:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  attribute.c:2388:57 cxx_eq_to_ne               if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-acf185307-attribute.json
+  full results: build-oracle/work/mutation-confirm-af3128576-attribute.json
