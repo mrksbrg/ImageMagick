@@ -1,0 +1,14 @@
+mutate: 6 mutants in MagickCore/version\.c$, 4 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 6/6 (0s)
+
+mutate: 6 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 6, errors 0
+
+  function                           total killed survived no-cov
+  GetMagickHomeURL                       3      0        0      3
+  GetMagickQuantumRange                  1      0        0      1
+  CRC32                                  1      0        0      1
+  GetMagickVersion                       1      0        0      1
+
+  full results: build-oracle/work/mutation-confirm-926d3b9c5-version.json
