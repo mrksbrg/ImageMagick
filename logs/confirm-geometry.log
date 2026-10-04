@@ -1,24 +1,24 @@
-mutate: 65 mutants in MagickCore/geometry\.c$, 11 functions
-mutate: baseline over 65 cases in 0s
-  mutants: 25/65 (4s)
-  mutants: 50/65 (5s)
-  mutants: 65/65 (7s)
+mutate: 60 mutants in MagickCore/geometry\.c$, 11 functions
+mutate: baseline over 1340 cases in 0s
+  mutants: 25/60 (0s)
+  mutants: 50/60 (89s)
+  mutants: 60/60 (90s)
 
-mutate: 65 mutants, 7s
-  killed 5, survived 29 (0 capped), no coverage 31, errors 0
-  mutation score on reached code: 14.7%   overall: 7.7%
+mutate: 60 mutants, 90s
+  killed 0, survived 28 (0 capped), no coverage 32, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  ParseGeometry                         19      2       17      0
+  ParseGeometry                         17      0       17      0
   ParseMetaGeometry                     17      0        0     17
-  GetGeometry                           10      3        7      0
+  GetGeometry                            7      0        7      0
   ParseGravityGeometry                   6      0        0      6
   ListPagesizes                          4      0        0      4
   ParseAffineGeometry                    3      0        0      3
   GetPageGeometry                        2      0        2      0
   IsSceneGeometry                        1      0        1      0
   ParsePageGeometry                      1      0        0      1
-  SetGeometry                            1      0        1      0
+  SetGeometry                            1      0        0      1
   SetGeometryInfo                        1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
@@ -49,8 +49,7 @@ mutate: 65 mutants, 7s
     x  geometry.c:1229:32 cxx_eq_to_ne               if ((flags & ChiValue) == 0)
     x  geometry.c:1256:37 cxx_eq_to_ne               if (((flags & SeparatorValue) == 0) && ((flags & SigmaValue) == 0))
     x  geometry.c:1258:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & RhoValue) == 0))
-    x  geometry.c:1795:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  geometry.c:1828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-geometry.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-geometry.json

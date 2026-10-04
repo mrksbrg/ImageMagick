@@ -1,28 +1,25 @@
-mutate: 28 mutants in MagickCore/channel\.c$, 8 functions
-mutate: baseline over 10 cases in 0s
-  mutants: 25/28 (0s)
-  mutants: 28/28 (1s)
+mutate: 26 mutants in MagickCore/channel\.c$, 8 functions
+mutate: baseline over 88 cases in 0s
+  mutants: 25/26 (3s)
+  mutants: 26/26 (3s)
 
-mutate: 28 mutants, 1s
-  killed 2, survived 5 (0 capped), no coverage 21, errors 0
-  mutation score on reached code: 28.6%   overall: 7.1%
+mutate: 26 mutants, 3s
+  killed 0, survived 2 (0 capped), no coverage 24, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   CombineImages                         10      0        0     10
-  ChannelFxImage                         6      2        4      0
   SeparateImage                          5      0        0      5
+  ChannelFxImage                         4      0        0      4
   GetImageAlphaChannel                   2      0        0      2
-  SetImageAlphaChannel                   2      0        0      2
-  ChannelImage                           1      0        1      0
+  SetImageAlphaChannel                   2      0        2      0
+  ChannelImage                           1      0        0      1
   SeparateImages                         1      0        0      1
   FlattenPixelInfo                       1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
-       channel.c:181:9 cxx_remove_void_call       SetPixelChannel(destination_image,destination_channel,pixel,q);
-    x  channel.c:234:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  channel.c:438:17 cxx_post_inc_to_post_dec   channels++;
-    x  channel.c:446:64 cxx_add_to_sub             destination_channel=(PixelChannel) (destination_channel+1);
-    x  channel.c:452:61 cxx_sub_to_add             status=SetImageProgress(source_image,ChannelFxImageTag,p-expression,
+    x  channel.c:1007:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e7f5bfd63-channel.json
+  full results: build-oracle/work/mutation-confirm-1501a027d-channel.json
