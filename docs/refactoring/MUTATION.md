@@ -2587,6 +2587,33 @@ verdicts (a pivot of exactly LDBL_MIN, min/max at equality, clean-up after a fai
 3. **Written off as out of reach:** distribute-cache.c (the distributed pixel cache needs a TCP
    cache server, which the oracle does not start).
 
+### resample.c, timer.c and token.c trusted (Windows, 2026-10-04, night)
+
+**resample.c 77 → 87.** A `resample` driver command: ResamplePixelColor on a half-pixel grid
+from 8 (and, second wave, 40) pixels outside the image to 8 or 40 beyond it, with 15 virtual
+pixel methods (not Random, which varies between runs), point sampling with three
+interpolations and elliptical filters at three scales. The 40 survivors left sit in the
+outside-the-image shortcuts, one per line; every function is above the bar.
+
+**timer.c 85 → 100**, with the `benchgap` cases the owner's decision allowed: the verdicts
+already written for ContinueTimer and AcquireTimerInfo count once a case reaches them.
+
+**token.c 85 → 94.** `glob` and `tokenize` driver commands: GlobExpression over 32 patterns
+(wildcards, sets, ranges, alternatives, escapes, subimage, UTF-8, case folding) against 17
+expressions, and Tokenizer with what no caller passes (a short maximum token length, which
+reaches StoreToken's truncation; whitespace and escape characters; two quote characters; the
+case flags). Four verdicts: GlobExpression_'s loops that advance local pointers just before
+`return(MagickTrue)`.
+
+**A fourth upstream bug.** GlobExpression_'s `'\\'` case advances past the backslash and falls
+through to the default case, which compares `pc`, still the backslash, with the expression's
+character: an escaped character never matches (`a\*c` does not match `a*c`). **And a
+performance trap:** matching is exponential in the number of `*`; `*a*b*a*b*z` against a
+600-character expression ran for over ten minutes. The cases keep expressions short.
+
+Trusted now, Windows: **29 of 36** regular files; vms.c, nt-base.c, nt-feature.c and
+distribute-cache.c written off.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
