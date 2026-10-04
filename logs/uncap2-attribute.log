@@ -1,0 +1,22 @@
+mutate: 4 mutants in MagickCore/attribute\.c$, 4 functions
+mutate: baseline over 11737 cases in 0s
+  mutants: 4/4 (660s)
+
+mutate: 4 mutants, 660s
+  killed 0, survived 4 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
+
+  function                           total killed survived no-cov
+  GetImageQuantumDepth                   1      0        1      0
+  IdentifyImageGray                      1      0        1      0
+  IdentifyImageType                      1      0        1      0
+  SetImageDepth                          1      0        1      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  attribute.c:1478:19 cxx_le_to_lt               if (depth <= 64)
+    x  attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:1752:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-uncap2-attribute.json
