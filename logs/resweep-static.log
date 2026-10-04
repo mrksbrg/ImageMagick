@@ -1,0 +1,22 @@
+mutate: 21 mutants in MagickCore/static\.c$, 4 functions
+  baseline: 284/284 (1s)
+mutate: baseline over 14723 cases in 2s
+  mutants: 21/21 (20s)
+
+mutate: 21 mutants, 20s
+  killed 13, survived 3 (2 capped), no coverage 5, errors 0
+  mutation score on reached code: 81.2%   overall: 61.9%
+
+  function                           total killed survived no-cov
+  RegisterStaticModule                   7      7        0      0
+  RegisterStaticModules                  5      4        1      0
+  UnregisterStaticModule                 5      0        0      5
+  UnregisterStaticModules                4      2        2      0
+
+  survivors (equivalent, or a gap in the catalogue):
+    x  static.c:287:15 cxx_lt_to_le               for (i=0; i < (ssize_t) extent; i++)
+    xc static.c:371:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) extent; i++)
+    xc static.c:373:37 cxx_ne_to_eq               if (MagickModules[i].registered != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-resweep-static.json
