@@ -18781,6 +18781,56 @@
    "why": "every -white-threshold case gives one value, for which sigma equals rho"
   },
   {
+   "at": 0,
+   "file": "MagickCore/timer.c",
+   "function": "AcquireTimerInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetTimerInfo(timer_info);",
+   "verdict": "unobservable",
+   "why": "AcquireTimerInfo runs only for -bench (magick-cli.c): an uninitialised stopwatch changes only the timing figures it prints, which vary from run to run and which the oracle masks"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/timer.c",
+   "function": "ContinueTimer",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (time_info->state == UndefinedTimerState)",
+   "verdict": "unobservable",
+   "why": "ContinueTimer runs only for -bench (magick-cli.c) and log timestamps (log.c): it only changes the user and elapsed time figures, which vary from run to run and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/timer.c",
+   "function": "ContinueTimer",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (time_info->state == StoppedTimerState)",
+   "verdict": "unobservable",
+   "why": "ContinueTimer runs only for -bench (magick-cli.c) and log timestamps (log.c): it only changes the user and elapsed time figures, which vary from run to run and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/timer.c",
+   "function": "ContinueTimer",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "time_info->user.total-=time_info->user.stop-time_info->user.start;",
+   "verdict": "unobservable",
+   "why": "ContinueTimer runs only for -bench (magick-cli.c) and log timestamps (log.c): it only changes the user and elapsed time figures, which vary from run to run and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/timer.c",
+   "function": "ContinueTimer",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "time_info->elapsed.total-=time_info->elapsed.stop-",
+   "verdict": "unobservable",
+   "why": "ContinueTimer runs only for -bench (magick-cli.c) and log timestamps (log.c): it only changes the user and elapsed time figures, which vary from run to run and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
    "at": 44,
    "file": "MagickCore/timer.c",
    "function": "FormatMagickTime",
@@ -18829,6 +18879,16 @@
    "src": "StopTimer(time_info);",
    "verdict": "unobservable",
    "why": "the timer is not stopped before its total is read or reset: only the user and elapsed time figures change, which vary from run to run anyway and which the oracle masks (oracle.NORMALISE, 'user time', 'elapsed time')"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/timer.c",
+   "function": "IsSourceDataEpochSet",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitializeEpoch();",
+   "verdict": "unobservable",
+   "why": "InitializeEpoch reads SOURCE_DATE_EPOCH, which the oracle never sets: magick_epoch stays 0 with or without the call, so the answer is the same"
   },
   {
    "at": 0,
