@@ -2482,3 +2482,20 @@ key now also includes the external programs `delegates.xml` names, as found on t
 PATH (`oracle.program_fingerprint`): the Inkscape-era baselines would otherwise have counted
 every mutant the SVG cases meet as killed. The key change starts a new baseline once on every
 machine.
+
+## property.c: trusted (Mac, 2026-10-04)
+
+`GetICCProperty` was the one function under the bar (gate 75%), held by four
+`cxx_remove_void_call` survivors that delete the `SetStringInfoLength(info,extent+1)`
+resize before each `cmsGetProfileInfoASCII` write (description, manufacturer, model,
+copyright). `info` comes from `AcquireStringInfo(0)`, whose datum already holds
+`MagickPathExtent` zeroed bytes, so lcms's text fits that slack without the resize and
+the output is byte-identical; only a tag longer than the slack overflows. Crafted ICC
+profiles carrying a 28 KB desc/dmnd/dmdd/cprt tag (every byte < 0x80, so they fit a text
+case file) were hand-run against mull-macx: removing any of the four resizes left output
+and exit code identical over 10 runs each. A single abort seen on one early run did not
+reproduce — heap-layout UB, not an observable kill, the flaky-kill class the harness
+rejects. So the four are **unobservable**, not catalogue gaps: dropping the resize is a
+latent out-of-bounds write that a differential output oracle cannot deterministically
+see. With them reclassified, `GetICCProperty` is 100% and property.c is trusted (adjusted
+87%). This is a verdict change only, so it needs no ERDC rerun.

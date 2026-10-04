@@ -3788,8 +3788,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 0,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "unobservable",
+   "why": "info comes from AcquireStringInfo(0), whose datum already holds MagickPathExtent bytes: without the resize lcms writes the text into that slack, so a tag no longer than the slack is byte-identical, and a longer one only overflows. Tested on mull-macx with crafted ICC profiles carrying a 28 KB desc/dmnd/dmdd/cprt tag (every byte < 0x80): removing any of the four resizes leaves output and exit code identical over 10 runs each; the overflow is out-of-bounds UB that a differential output oracle cannot deterministically observe (a lone abort seen once did not reproduce). Unobservable, not a catalogue gap"
   },
   {
    "at": 0,
@@ -3798,8 +3798,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 1,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "unobservable",
+   "why": "info comes from AcquireStringInfo(0), whose datum already holds MagickPathExtent bytes: without the resize lcms writes the text into that slack, so a tag no longer than the slack is byte-identical, and a longer one only overflows. Tested on mull-macx with crafted ICC profiles carrying a 28 KB desc/dmnd/dmdd/cprt tag (every byte < 0x80): removing any of the four resizes leaves output and exit code identical over 10 runs each; the overflow is out-of-bounds UB that a differential output oracle cannot deterministically observe (a lone abort seen once did not reproduce). Unobservable, not a catalogue gap"
   },
   {
    "at": 0,
@@ -3808,8 +3808,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 2,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "unobservable",
+   "why": "info comes from AcquireStringInfo(0), whose datum already holds MagickPathExtent bytes: without the resize lcms writes the text into that slack, so a tag no longer than the slack is byte-identical, and a longer one only overflows. Tested on mull-macx with crafted ICC profiles carrying a 28 KB desc/dmnd/dmdd/cprt tag (every byte < 0x80): removing any of the four resizes leaves output and exit code identical over 10 runs each; the overflow is out-of-bounds UB that a differential output oracle cannot deterministically observe (a lone abort seen once did not reproduce). Unobservable, not a catalogue gap"
   },
   {
    "at": 0,
@@ -3818,8 +3818,8 @@
    "mutator": "cxx_remove_void_call",
    "nth": 3,
    "src": "SetStringInfoLength(info,extent+1);",
-   "verdict": "unresolved",
-   "why": "info comes from AcquireStringInfo(0), whose buffer already holds MagickPathExtent bytes: without the resize (or one byte short) lcms still writes the text into that slack, so only an ICC text tag longer than MagickPathExtent could show it, as an overflow; no profile in the corpus has one"
+   "verdict": "unobservable",
+   "why": "info comes from AcquireStringInfo(0), whose datum already holds MagickPathExtent bytes: without the resize lcms writes the text into that slack, so a tag no longer than the slack is byte-identical, and a longer one only overflows. Tested on mull-macx with crafted ICC profiles carrying a 28 KB desc/dmnd/dmdd/cprt tag (every byte < 0x80): removing any of the four resizes leaves output and exit code identical over 10 runs each; the overflow is out-of-bounds UB that a differential output oracle cannot deterministically observe (a lone abort seen once did not reproduce). Unobservable, not a catalogue gap"
   },
   {
    "at": 50,
