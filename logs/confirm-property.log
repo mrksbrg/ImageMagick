@@ -1,35 +1,35 @@
 mutate: 154 mutants in MagickCore/property\.c$, 20 functions
-mutate: baseline over 34 cases in 0s
-  mutants: 25/154 (3s)
-  mutants: 50/154 (3s)
-  mutants: 75/154 (5s)
-  mutants: 100/154 (6s)
-  mutants: 125/154 (6s)
-  mutants: 150/154 (7s)
-  mutants: 154/154 (7s)
+mutate: baseline over 65 cases in 0s
+  mutants: 25/154 (4s)
+  mutants: 50/154 (5s)
+  mutants: 75/154 (8s)
+  mutants: 100/154 (9s)
+  mutants: 125/154 (10s)
+  mutants: 150/154 (12s)
+  mutants: 154/154 (12s)
 
-mutate: 154 mutants, 7s
-  killed 0, survived 107 (0 capped), no coverage 47, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 154 mutants, 12s
+  killed 15, survived 93 (0 capped), no coverage 46, errors 0
+  mutation score on reached code: 13.9%   overall: 9.7%
 
   function                           total killed survived no-cov
-  GetEXIFProperty                       31      0       31      0
+  GetEXIFProperty                       31      6       25      0
   InterpretImageProperties              24      0       24      0
   GetMagickProperty                     22      0        0     22
   SetImageProperty                      16      0       16      0
   Get8BIMProperty                        9      0        0      9
-  GetICCProperty                         9      0        9      0
+  GetICCProperty                         9      4        5      0
   GetMagickPropertyLetter                9      0        9      0
-  GetIPTCProperty                        6      0        6      0
+  GetIPTCProperty                        6      2        4      0
   TracePSClippath                        6      0        0      6
-  GetImageProperty                       4      0        4      0
+  GetImageProperty                       4      2        2      0
   CloneImageProperties                   3      0        3      0
   DefineImageProperty                    3      0        0      3
   TraceSVGClippath                       3      0        0      3
   GetXMPProperty                         2      0        2      0
   RemoveImageProperty                    2      0        0      2
-  DeleteImageProperty                    1      0        0      1
-  DestroyImageProperties                 1      0        1      0
+  DeleteImageProperty                    1      0        1      0
+  DestroyImageProperties                 1      1        0      0
   ReadPropertyMSBShort                   1      0        0      1
   GetNextImageProperty                   1      0        1      0
   ResetImagePropertyIterator             1      0        1      0
@@ -38,16 +38,12 @@ mutate: 154 mutants, 7s
     x  property.c:156:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  property.c:210:29 cxx_ne_to_eq               if (image->properties != (void *) NULL)
     x  property.c:211:9 cxx_remove_void_call       DestroyImageProperties(image);
-    x  property.c:333:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  property.c:299:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  property.c:463:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
     x  property.c:463:55 cxx_sub_to_add             for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
     x  property.c:481:56 cxx_sub_to_add             size_t remaining = GetStringInfoLength(profile)-(i+5);
-    x  property.c:481:59 cxx_add_to_sub             size_t remaining = GetStringInfoLength(profile)-(i+5);
-    x  property.c:483:21 cxx_ge_to_gt               if (~length >= 1)
     x  property.c:504:21 cxx_ne_to_eq               if (attribute != (char *) NULL)
-    x  property.c:1318:24 cxx_le_to_lt               if (strlen(property) <= 5)
     x  property.c:1401:14 cxx_lt_to_le               if (length < 6)
-    x  property.c:1420:14 cxx_lt_to_le               if (length < 16)
     x  property.c:1437:15 cxx_lt_to_le               if ((offset < 0) || (size_t) offset >= length)
     x  property.c:1437:39 cxx_ge_to_gt               if ((offset < 0) || (size_t) offset >= length)
     x  property.c:1460:20 cxx_lt_to_le               if ((directory < exif) || (directory > (exif+length-2)))
@@ -55,14 +51,10 @@ mutate: 154 mutants, 7s
     x  property.c:1466:19 cxx_lt_to_le               for ( ; entry < number_entries; entry++)
     x  property.c:1480:13 cxx_gt_to_ge               if (q > (exif+length-12))
     x  property.c:1488:18 cxx_ge_to_gt               if (format >= (sizeof(tag_bytes)/sizeof(*tag_bytes)))
-    x  property.c:1493:22 cxx_lt_to_le               if (components < 0)
-    x  property.c:1509:27 cxx_lt_to_le               if ((dir_offset < 0) || (size_t) dir_offset >= length)
     x  property.c:1509:55 cxx_ge_to_gt               if ((dir_offset < 0) || (size_t) dir_offset >= length)
-    x  property.c:1511:59 cxx_lt_to_le               if (((size_t) dir_offset+(size_t) number_bytes) < (size_t) dir_offset)
     x  property.c:1513:35 cxx_add_to_sub             if ((size_t) (dir_offset+(ssize_t) number_bytes) > length)
     x  property.c:1523:18 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-tag_bytes[format])))
     x  property.c:1523:46 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-tag_bytes[format])))
-    x  property.c:1532:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
     x  property.c:1533:74 cxx_add_to_sub             value=(char *) AcquireQuantumMemory((size_t) number_bytes+1UL,
     x  property.c:1619:22 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-number_bytes)))
     x  property.c:1619:50 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-number_bytes)))
@@ -78,19 +70,13 @@ mutate: 154 mutants, 7s
     x  property.c:1731:28 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
     x  property.c:1764:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 128)
     x  property.c:1789:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
-    x  property.c:1789:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
-    x  property.c:1800:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
     x  property.c:1800:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
-    x  property.c:1811:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
     x  property.c:1811:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
     x  property.c:1822:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
-    x  property.c:1822:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
     x  property.c:1876:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 17)
     x  property.c:1933:43 cxx_le_to_lt               if ((xmp_namespace_length <= 2) ||
-    x  property.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  property.c:2324:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
     x  property.c:2324:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
-    x  property.c:2325:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
     x  property.c:2515:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     x  property.c:2515:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     x  property.c:2518:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) &&
@@ -144,4 +130,4 @@ mutate: 154 mutants, 7s
     x  property.c:4814:20 cxx_lt_to_le               if (type < 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-9ae3bdd76-property.json
+  full results: build-oracle/work/mutation-confirm-e7f5bfd63-property.json
