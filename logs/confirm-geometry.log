@@ -1,11 +1,11 @@
 mutate: 60 mutants in MagickCore/geometry\.c$, 11 functions
-mutate: baseline over 34 cases in 0s
+mutate: baseline over 11 cases in 0s
   mutants: 25/60 (0s)
-  mutants: 50/60 (7s)
-  mutants: 60/60 (9s)
+  mutants: 50/60 (1s)
+  mutants: 60/60 (1s)
 
-mutate: 60 mutants, 9s
-  killed 0, survived 26 (0 capped), no coverage 34, errors 0
+mutate: 60 mutants, 1s
+  killed 0, survived 28 (0 capped), no coverage 32, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -15,7 +15,7 @@ mutate: 60 mutants, 9s
   ParseGravityGeometry                   6      0        0      6
   ListPagesizes                          4      0        0      4
   ParseAffineGeometry                    3      0        0      3
-  GetPageGeometry                        2      0        0      2
+  GetPageGeometry                        2      0        2      0
   IsSceneGeometry                        1      0        1      0
   ParsePageGeometry                      1      0        0      1
   SetGeometry                            1      0        0      1
@@ -29,6 +29,8 @@ mutate: 60 mutants, 9s
     x  geometry.c:430:37 cxx_ne_to_eq               if (((flags & SeparatorValue) != 0) && ((flags & WidthValue) == 0) &&
     x  geometry.c:431:19 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
     x  geometry.c:431:49 cxx_ne_to_eq               (height != (size_t *) NULL) && (width != (size_t *) NULL))
+    x  geometry.c:482:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  geometry.c:508:36 cxx_eq_to_ne               if ((flags & GreaterValue) == 0)
     x  geometry.c:692:58 cxx_ne_to_eq               if ((pedantic != MagickFalse) && (strchr(geometry,',') != (char *) NULL))
     x  geometry.c:1153:60 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
     x  geometry.c:1179:15 cxx_eq_to_ne               if ((*p == '+') || (*p == '-') || (*p == ',') || (*p == '/') ||
@@ -50,4 +52,4 @@ mutate: 60 mutants, 9s
     x  geometry.c:1828:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-656676901-geometry.json
+  full results: build-oracle/work/mutation-confirm-310d2a3b3-geometry.json
