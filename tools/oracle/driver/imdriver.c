@@ -971,8 +971,9 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
           if (back != (Image *) NULL) back=DestroyImageList(back);
           back=PingBlob(image_info,blob,length,exception);
           if (back != (Image *) NULL)
-            (void) printf("ping: %.20gx%.20g %s %s %s frames %.20g\n",(double) back->columns,(double) back->rows,
-              back->magick,back->filename,back->magick_filename,(double) GetImageListLength(back));
+            (void) printf("ping: %.20gx%.20g %s %s %s frames %.20g blob %.20g\n",(double) back->columns,
+              (double) back->rows,back->magick,back->filename,back->magick_filename,(double) GetImageListLength(back),
+              (double) GetBlobSize(back));  /* PingBlob detaches the caller's blob */
           if (back != (Image *) NULL) back=DestroyImageList(back);
           blob=RelinquishMagickMemory(blob);
         }
@@ -1733,7 +1734,7 @@ static int BlobIOCmd(int argc,char **argv,ExceptionInfo *exception)
           DuplicateBlob(other,image);
           (void) printf("duplicate size %.20g\n",(double) GetBlobSize(other));
           other=DestroyImage(other);
-          (void) CloseBlob(image);
+          (void) printf("close %d\n",(int) CloseBlob(image));  /* reports a blob error status */
           status=OpenBlob(image_info,image,ReadBinaryBlobMode,exception);
           {
             char copy[MagickPathExtent];

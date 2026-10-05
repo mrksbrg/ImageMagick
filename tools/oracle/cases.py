@@ -5916,9 +5916,14 @@ def _windrv_cases():
         "short": "abc",
         "empty": "",
         "crlf": "one\r\ntwo\r\n\r\nthree\r\n",
+        # a last line without a newline after a CRLF line: the strip clears the '\n' but leaves
+        # the '\r' in the buffer, just past the last line's end (ReadBlobString's i-1 -> i+1);
+        # 8 bytes first for ReadBlobMSBLongLong
+        "stale": "12345678abc\r\nzz",
+        "stalecr": "12345678ab\r\nz",
     }
     for name, discard in (("lines", "3"), ("lines", "0"), ("lines", "9000"), ("short", "1"), ("empty", "0"),
-                          ("crlf", "2")):
+                          ("crlf", "2"), ("stale", "0"), ("stalecr", "0")):
         yield _with_inputs(_windrv("blob input over %s, discard %s" % (name, discard),
                                    ("blobio", "read", "%s.txt" % name, discard), ["copy.out"]),
                            files={"%s.txt" % name: blob_texts[name]})
