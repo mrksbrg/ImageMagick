@@ -1,34 +1,35 @@
 mutate: 86 mutants in MagickCore/utility\.c$, 17 functions
-mutate: baseline over 52 cases in 0s
-  mutants: 25/86 (0s)
-  mutants: 50/86 (7s)
-  mutants: 75/86 (9s)
-  mutants: 86/86 (15s)
+mutate: baseline over 23 cases in 0s
+  mutants: 25/86 (1s)
+  mutants: 50/86 (1s)
+  mutants: 75/86 (3s)
+  mutants: 86/86 (4s)
 
-mutate: 86 mutants, 15s
-  killed 0, survived 35 (0 capped), no coverage 51, errors 0
+mutate: 86 mutants, 4s
+  killed 0, survived 50 (0 capped), no coverage 36, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ExpandFilenames                       17      0       17      0
-  ShredFile                             17      0        0     17
+  ShredFile                             17      0       17      0
   GetPathComponent                      11      0       11      0
   Base64Decode                           7      0        0      7
   GetExecutionPath                       5      0        0      5
   MagickDelay                            5      0        0      5
   Base64Encode                           4      0        0      4
   ChopPathComponents                     4      0        0      4
-  ListFiles                              4      0        4      0
+  ListFiles                              4      0        0      4
   GetPathComponents                      3      0        0      3
   ExpandFilename                         2      0        0      2
   GetMagickPageSize                      2      0        2      0
   AcquireUniqueFilename                  1      0        0      1
   AcquireUniqueSymbolicLink              1      0        0      1
-  AppendImageFormat                      1      0        0      1
-  GetPathTemplate                        1      0        0      1
+  AppendImageFormat                      1      0        1      0
+  GetPathTemplate                        1      0        1      0
   IsPathAccessible                       1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
+    x  utility.c:297:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  utility.c:796:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  utility.c:829:20 cxx_gt_to_ge               if (parameters > 0)
     x  utility.c:834:36 cxx_post_inc_to_post_dec   for (j=0; j < parameters; j++)
@@ -59,11 +60,25 @@ mutate: 86 mutants, 15s
     x  utility.c:1404:44 cxx_sub_to_add             for (p=component+(strlen(component)-1); p > component; p--)
     x  utility.c:1404:51 cxx_gt_to_ge               for (p=component+(strlen(component)-1); p > component; p--)
     x  utility.c:1434:49 cxx_gt_to_ge               for (p=component+strlen(component)-1; p > component; p--)
+    x  utility.c:1613:34 cxx_sub_to_add             if (directory[strlen(directory)-1] == *DirectorySeparator)
     x  utility.c:1673:14 cxx_eq_to_ne               if (status == MagickFalse)
-    x  utility.c:1799:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  utility.c:1839:29 cxx_ge_to_gt               if (*number_entries >= max_entries)
-    x  utility.c:1839:29 cxx_ge_to_lt               if (*number_entries >= max_entries)
-       utility.c:1847:26 cxx_eq_to_ne               if (filelist == (char **) NULL)
+    x  utility.c:2043:47 cxx_eq_to_ne               if ((path == (const char *) NULL) || (*path == '\0'))
+    x  utility.c:2045:14 cxx_eq_to_ne               if (passes == -1)
+    x  utility.c:2053:12 cxx_eq_to_ne               if (file == -1)
+    x  utility.c:2056:61 cxx_gt_to_le               if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))
+    x  utility.c:2061:15 cxx_lt_to_ge               for (i=0; i < passes; i++)
+    x  utility.c:2061:15 cxx_lt_to_le               for (i=0; i < passes; i++)
+    x  utility.c:2069:32 cxx_lt_to_ge               if (lseek(file,0,SEEK_SET) < 0)
+    x  utility.c:2069:32 cxx_lt_to_le               if (lseek(file,0,SEEK_SET) < 0)
+    x  utility.c:2071:17 cxx_lt_to_ge               for (j=0; j < (MagickOffsetType) length; j+=count)
+    x  utility.c:2071:17 cxx_lt_to_le               for (j=0; j < (MagickOffsetType) length; j+=count)
+    x  utility.c:2073:13 cxx_ne_to_eq               if (i != 0)
+    x  utility.c:2074:9 cxx_remove_void_call       SetRandomKey(random_info,quantum,GetStringInfoDatum(key));
+    x  utility.c:2077:17 cxx_le_to_lt               if (count <= 0)
+    x  utility.c:2080:11 cxx_lt_to_le               if (j < (MagickOffsetType) length)
+    x  utility.c:2086:18 cxx_eq_to_ne               return((status == -1 || i < passes) ? MagickFalse : MagickTrue);
+    x  utility.c:2086:29 cxx_lt_to_ge               return((status == -1 || i < passes) ? MagickFalse : MagickTrue);
+    x  utility.c:2086:29 cxx_lt_to_le               return((status == -1 || i < passes) ? MagickFalse : MagickTrue);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-656676901-utility.json
+  full results: build-oracle/work/mutation-confirm-310d2a3b3-utility.json
