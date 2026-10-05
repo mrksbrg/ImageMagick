@@ -1,5 +1,6 @@
 mutate: 89 mutants in MagickCore/profile\.c$, 22 functions
-mutate: baseline over 58 cases in 0s
+  baseline: 40/40 (0s)
+mutate: baseline over 58 cases in 1s
   mutants: 25/89 (0s)
   mutants: 50/89 (0s)
   mutants: 75/89 (2s)
@@ -89,4 +90,4 @@ mutate: 89 mutants, 4s
     x  profile.c:2815:58 cxx_gt_to_ge               if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-profile.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-profile.json

@@ -1,5 +1,6 @@
 mutate: 93 mutants in MagickCore/image\.c$, 27 functions
-mutate: baseline over 288 cases in 0s
+  baseline: 261/261 (1s)
+mutate: baseline over 285 cases in 1s
   mutants: 25/93 (0s)
   mutants: 50/93 (0s)
   mutants: 75/93 (0s)
@@ -55,4 +56,4 @@ mutate: 93 mutants, 7s
     x  image.c:4110:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-image.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-image.json
