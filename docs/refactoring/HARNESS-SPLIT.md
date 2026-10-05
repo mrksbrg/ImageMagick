@@ -42,6 +42,19 @@ mutants times the share not yet killed or explained (strict figure, from the Lin
 of 2026-09-30 after its capped rerun): about 4,000 mutants per side. Related files stay
 with one owner. Files only one machine can build go to that machine.
 
+**Update (project owner, 2026-10-05): ownership is a split of work, not of capability.**
+The Mac now builds X11 and OpenCL as well (`build-oracle/x11cl`). Only `nt-base.c`,
+`nt-feature.c` (native Windows) and `vms.c` build on neither, and they stay written off.
+
+- **Labels.** "Mac" and "Windows" below say who did a file's harness work. What still
+  matters per file is which machine **measured** it.
+- **Platform differences** are handled per mutant, not per file: glibc against BSD qsort,
+  and `MALLOC_PERTURB_` hiding uninitialised reads on Linux. See
+  `tools/oracle/platform-kills/`.
+- **The X11 and OpenCL files** go to the Windows desktop as task
+  [`tasks/W01-x11-opencl.md`](tasks/W01-x11-opencl.md): Xvfb, a newer pocl, and the
+  likely upstream OpenCL bind bug.
+
 ## Mac: 48 files
 
 Fixed: the Phase 1 files with verdicts already (`resize.c`, `compare.c`, `enhance.c`,
@@ -286,3 +299,25 @@ Both machines commit to `refactoring-setup`. To keep merges clean:
 > Also new: case files may sit in subdirectories, so a case can bring its own
 > `.config/ImageMagick/policy.xml` or `type.xml` (`MUTATION.md`, *Configuration of the
 > case's own*).
+
+## Message for the Windows agent (2026-10-05)
+
+> The project owner has given you the X11 and OpenCL files: pull `refactoring-setup` and
+> follow [`docs/refactoring/tasks/W01-x11-opencl.md`](tasks/W01-x11-opencl.md).
+>
+> In short:
+> - Xvfb for the four X11 files.
+> - A newer pocl and a pinned device for `accelerate.c` and `opencl.c`.
+> - Check the likely upstream bug described there (OpenCL never binds when the build finds
+>   the OpenCL header).
+> - Then the usual: cases, a Mull build, survivors, verdicts.
+>
+> Still the harness phase: no changes to ImageMagick's sources. Also new since your last
+> pull:
+> - `tools/oracle/platform-kills/`, read by `gate.py`.
+> - `HARNESS_VERSION` 10: `-list configure`'s toolchain lines are normalised.
+> - Rebuild baseline and candidate together after a library upgrade.
+> - Four of your `blob writeimages … adjoin` cases (GIF, TIFF, PPM, MIFF) hash 4096 bytes of
+>   `image_info->blob` after WriteImages has outgrown the caller's buffer. They differ from
+>   run to run on the Mac (Linux's `MALLOC_PERTURB_` masks it). Hash only the written
+>   length, and check whether the blob pointer is still live.

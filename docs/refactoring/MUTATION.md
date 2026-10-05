@@ -3239,3 +3239,37 @@ checked with the oracle on the Mac.
   the Mac.**
 
 With these, **all 48 Mac files are trusted.**
+
+## Upstream bug (likely): OpenCL never binds when the OpenCL header is found (Mac, 2026-10-05)
+
+`BindOpenCLFunctions` (opencl.c) has two branches.
+- **Without `MAGICKCORE_HAVE_OPENCL_CL_H`:** it opens `libOpenCL.so` with `lt_dlopen` and
+  binds each function by name.
+- **With the header:** `#define BIND(X) openCL_library->X= &X;` binds the linked symbols
+  directly, but never sets `openCL_library->library`.
+
+The test after the `#endif`, `if (openCL_library->library == (void*) NULL)
+return(MagickFalse);`, applies to both branches. It reads a field of memory
+`AcquireMagickMemory` left uninitialised.
+
+**On the Mac:**
+- The build finds `OpenCL/cl.h` and links `-framework OpenCL`.
+- The field reads NULL, so the bind fails and OpenCL stays off without a message.
+- Apple's OpenCL lists one platform (OpenCL 1.2) with one device, the M1 Pro GPU, to a
+  direct test program.
+- ImageMagick, with `MAGICK_OCL_DEVICE=true` and `SetOpenCLEnabled(MagickTrue)`, lists
+  0 devices, and its output equals the CPU path.
+
+**On WSL** the Windows desktop got as far as compiling kernels (`VERIFICATION.md`, item 6).
+That build took the other branch or met non-zero garbage; task W01 finds out which.
+
+**Status:**
+- Not verified by patching, since this phase makes no source changes.
+- If confirmed, accelerate.c and opencl.c are dead code in any build that finds the
+  header.
+- Like the FileToXML include bug, it is worth reporting upstream (the owner's decision).
+
+**Ownership.** The Mac/Windows split of files was a split of work, not of capability
+(owner, 2026-10-05). The Mac builds X11 and OpenCL too (`build-oracle/x11cl`), and only
+`nt-base.c`, `nt-feature.c` and `vms.c` build on neither. The X11 and OpenCL files go to the
+Windows desktop as task `tasks/W01-x11-opencl.md`.
