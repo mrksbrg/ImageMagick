@@ -7,7 +7,7 @@
   "col": 38,
   "function": "magic.c:CompareMagickInfoExtent",
   "status": "killed",
-  "cases": 127,
+  "cases": 131,
   "killer": "info/224fabff42",
   "why": "stdout differs"
  },
@@ -19,7 +19,7 @@
   "col": 18,
   "function": "magic.c:CompareMagickInfoExtent",
   "status": "killed",
-  "cases": 127,
+  "cases": 131,
   "killer": "info/224fabff42",
   "why": "stdout differs"
  },
@@ -55,7 +55,7 @@
   "col": 23,
   "function": "magic.c:CompareMagickInfoExtent",
   "status": "killed",
-  "cases": 127,
+  "cases": 131,
   "killer": "info/224fabff42",
   "why": "stdout differs"
  },
@@ -67,7 +67,7 @@
   "col": 63,
   "function": "magic.c:CompareMagickInfoExtent",
   "status": "killed",
-  "cases": 127,
+  "cases": 131,
   "killer": "info/224fabff42",
   "why": "stdout differs"
  },
@@ -91,7 +91,7 @@
   "col": 25,
   "function": "magic.c:CompareMagickInfoExtent",
   "status": "killed",
-  "cases": 127,
+  "cases": 131,
   "killer": "info/224fabff42",
   "why": "stdout differs"
  },
@@ -115,7 +115,7 @@
   "col": 16,
   "function": "magic.c:CompareMagickInfoExtent",
   "status": "killed",
-  "cases": 127,
+  "cases": 131,
   "killer": "info/224fabff42",
   "why": "stdout differs"
  },
@@ -127,9 +127,9 @@
   "col": 15,
   "function": "magic.c:AcquireMagicList",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:203:15:203:16",
@@ -139,9 +139,9 @@
   "col": 15,
   "function": "magic.c:AcquireMagicList",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:203:66:203:68",
@@ -235,7 +235,7 @@
   "col": 44,
   "function": "magic.c:CompareMagic",
   "status": "killed",
-  "cases": 29,
+  "cases": 27,
   "killer": "gaps/23b0344767",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -259,9 +259,9 @@
   "col": 18,
   "function": "magic.c:CompareMagic",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:284:55:284:57",
@@ -283,9 +283,9 @@
   "col": 19,
   "function": "magic.c:IsMagicCacheInstantiated",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:293:33:293:35",
@@ -331,9 +331,9 @@
   "col": 23,
   "function": "magic.c:IsMagicCacheInstantiated",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:298:7:298:49",
@@ -355,9 +355,9 @@
   "col": 22,
   "function": "magic.c:IsMagicCacheInstantiated",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:313:42:313:44",
@@ -367,9 +367,9 @@
   "col": 42,
   "function": "GetMagicInfo",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:315:34:315:36",
@@ -379,9 +379,9 @@
   "col": 34,
   "function": "GetMagicInfo",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:321:13:321:15",
@@ -427,7 +427,7 @@
   "col": 51,
   "function": "GetMagicInfo",
   "status": "killed",
-  "cases": 92,
+  "cases": 21,
   "killer": "gaps/f42fa67617",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
@@ -451,9 +451,9 @@
   "col": 13,
   "function": "GetMagicInfo",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:339:3:339:42",
@@ -511,9 +511,9 @@
   "col": 12,
   "function": "GetMagicInfo",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:351:47:351:49",
@@ -547,9 +547,9 @@
   "col": 9,
   "function": "GetMagicInfo",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:360:7:360:47",
@@ -583,9 +583,9 @@
   "col": 15,
   "function": "GetMagicPatternExtent",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:404:60:404:62",
@@ -595,9 +595,9 @@
   "col": 60,
   "function": "GetMagicPatternExtent",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:406:3:406:42",
@@ -619,9 +619,9 @@
   "col": 24,
   "function": "GetMagicPatternExtent",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:414:30:414:31",
@@ -655,9 +655,9 @@
   "col": 16,
   "function": "GetMagicPatternExtent",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:419:3:419:44",
@@ -691,9 +691,9 @@
   "col": 18,
   "function": "GetMagicPatternExtent",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:489:24:489:26",
@@ -957,9 +957,9 @@
   "col": 18,
   "function": "magic.c:IsMagicListInstantiated",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:677:32:677:34",
@@ -1005,9 +1005,9 @@
   "col": 22,
   "function": "magic.c:IsMagicListInstantiated",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:682:7:682:48",
@@ -1029,9 +1029,9 @@
   "col": 21,
   "function": "magic.c:IsMagicListInstantiated",
   "status": "killed",
-  "cases": 29,
-  "killer": "gaps/23b0344767",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 23,
+  "killer": "decode/cf8a042b7c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:726:12:726:14",
@@ -1222,8 +1222,8 @@
   "function": "MagicComponentTerminus",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:812:18:812:20",
@@ -1233,9 +1233,9 @@
   "col": 18,
   "function": "MagicComponentTerminus",
   "status": "killed",
-  "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
+  "cases": 2,
+  "killer": "mvg/7e4bad791d",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:814:3:814:44",
@@ -1246,8 +1246,8 @@
   "function": "MagicComponentTerminus",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:815:3:815:49",
@@ -1269,9 +1269,9 @@
   "col": 29,
   "function": "MagicComponentTerminus",
   "status": "killed",
-  "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
+  "cases": 2,
+  "killer": "mvg/7e4bad791d",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:817:5:817:50",
@@ -1281,9 +1281,9 @@
   "col": 5,
   "function": "MagicComponentTerminus",
   "status": "killed",
-  "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
+  "cases": 2,
+  "killer": "mvg/7e4bad791d",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:818:3:818:43",
@@ -1294,8 +1294,8 @@
   "function": "MagicComponentTerminus",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:819:19:819:21",
@@ -1305,9 +1305,9 @@
   "col": 19,
   "function": "MagicComponentTerminus",
   "status": "killed",
-  "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
+  "cases": 2,
+  "killer": "mvg/7e4bad791d",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:821:3:821:45",
@@ -1318,8 +1318,8 @@
   "function": "MagicComponentTerminus",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/magic.c:822:3:822:50",

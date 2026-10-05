@@ -55,9 +55,9 @@
   "col": 15,
   "function": "coder.c:AcquireCoderCache",
   "status": "killed",
-  "cases": 23,
-  "killer": "gen/ebc3db8343",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 24,
+  "killer": "gaps/f42fa67617",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:158:15:158:16",
@@ -67,7 +67,7 @@
   "col": 15,
   "function": "coder.c:AcquireCoderCache",
   "status": "killed",
-  "cases": 112,
+  "cases": 117,
   "killer": "info/5766d53f68",
   "why": "stdout differs"
  },
@@ -91,9 +91,9 @@
   "col": 20,
   "function": "coder.c:AcquireCoderCache",
   "status": "killed",
-  "cases": 23,
-  "killer": "gen/ebc3db8343",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 24,
+  "killer": "gaps/f42fa67617",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:182:16:182:18",
@@ -103,7 +103,7 @@
   "col": 16,
   "function": "coder.c:AcquireCoderCache",
   "status": "killed",
-  "cases": 112,
+  "cases": 117,
   "killer": "info/5766d53f68",
   "why": "exit status [0] -> [1]; stderr differs"
  },
@@ -152,8 +152,8 @@
   "function": "CoderComponentTerminus",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:237:19:237:21",
@@ -163,7 +163,7 @@
   "col": 19,
   "function": "CoderComponentTerminus",
   "status": "killed",
-  "cases": 1,
+  "cases": 5,
   "killer": "windrv/3f1ce096a0",
   "why": "exit status [1] -> [-6]; stdout differs"
  },
@@ -176,8 +176,8 @@
   "function": "CoderComponentTerminus",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "draw/20f4646909",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:240:3:240:44",
@@ -199,9 +199,9 @@
   "col": 42,
   "function": "GetCoderInfo",
   "status": "killed",
-  "cases": 23,
-  "killer": "gen/ebc3db8343",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 24,
+  "killer": "gaps/f42fa67617",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:274:13:274:15",
@@ -511,9 +511,9 @@
   "col": 19,
   "function": "coder.c:IsCoderTreeInstantiated",
   "status": "killed",
-  "cases": 23,
-  "killer": "gen/ebc3db8343",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 24,
+  "killer": "gaps/f42fa67617",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:479:27:479:29",
@@ -559,9 +559,9 @@
   "col": 23,
   "function": "coder.c:IsCoderTreeInstantiated",
   "status": "killed",
-  "cases": 23,
-  "killer": "gen/ebc3db8343",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 24,
+  "killer": "gaps/f42fa67617",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:484:7:484:43",
@@ -583,9 +583,9 @@
   "col": 22,
   "function": "coder.c:IsCoderTreeInstantiated",
   "status": "killed",
-  "cases": 23,
-  "killer": "gen/ebc3db8343",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "cases": 24,
+  "killer": "gaps/f42fa67617",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/coder.c:531:12:531:14",
