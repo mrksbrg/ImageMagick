@@ -1,12 +1,11 @@
-mutate: 62 mutants in MagickCore/type\.c$, 10 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/62 (0s)
-  mutants: 50/62 (0s)
-  mutants: 62/62 (8s)
+mutate: 58 mutants in MagickCore/type\.c$, 8 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 25/58 (0s)
+  mutants: 50/58 (0s)
+  mutants: 58/58 (0s)
 
-mutate: 62 mutants, 8s
-  killed 4, survived 0 (0 capped), no coverage 58, errors 0
-  mutation score on reached code: 100.0%   overall: 6.5%
+mutate: 58 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 58, errors 0
 
   function                           total killed survived no-cov
   GetTypeInfoByFamily                   13      0        0     13
@@ -14,10 +13,8 @@ mutate: 62 mutants, 8s
   LoadFontConfigFonts                   12      0        0     12
   DestroyTypeNode                        9      0        0      9
   LoadTypeCache                          8      0        0      8
-  TypeComponentTerminus                  3      3        0      0
   IsTypeTreeInstantiated                 2      0        0      2
   AcquireTypeCache                       1      0        0      1
   GetTypeInfoList                        1      0        0      1
-  TypeComponentGenesis                   1      1        0      0
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-type.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-type.json

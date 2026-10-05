@@ -1,38 +1,23 @@
-mutate: 159 mutants in MagickCore/log\.c$, 20 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/159 (17s)
-  mutants: 50/159 (17s)
-  mutants: 75/159 (19s)
-  mutants: 100/159 (21s)
-  mutants: 125/159 (22s)
-  mutants: 150/159 (28s)
-  mutants: 159/159 (152s)
+mutate: 64 mutants in MagickCore/log\.c$, 9 functions
+mutate: baseline over 27 cases in 0s
+  mutants: 25/64 (2s)
+  mutants: 50/64 (2s)
+  mutants: 64/64 (3s)
 
-mutate: 159 mutants, 152s
-  killed 95, survived 40 (0 capped), no coverage 24, errors 0
-  mutation score on reached code: 70.4%   overall: 59.7%
+mutate: 64 mutants, 3s
+  killed 0, survived 40 (0 capped), no coverage 24, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  TranslateEvent                        49     18       31      0
-  LogMagickEventList                    28     23        5      0
-  LoadLogCache                          18     18        0      0
+  TranslateEvent                        31      0       31      0
   GetLogList                            12      0        0     12
   CloseMagickLog                         6      0        0      6
-  GetLogInfo                             6      6        0      0
-  FormatLogFilename                      5      5        0      0
-  SetLogEventMask                        5      5        0      0
+  LogMagickEventList                     5      0        5      0
   SetLogFormat                           4      0        0      4
-  GetLogInfoList                         3      1        2      0
-  IsLogCacheInstantiated                 3      3        0      0
-  DestroyLogElement                      3      3        0      0
-  LogComponentTerminus                   3      3        0      0
-  SetLogMethod                           3      3        0      0
-  AcquireLogCache                        2      2        0      0
-  CheckEventLogging                      2      2        0      0
-  ListLogInfo                            2      1        1      0
-  ParseLogHandlers                       2      2        0      0
+  GetLogInfoList                         2      0        2      0
   SetLogName                             2      0        0      2
   LogInfoCompare                         1      0        1      0
+  ListLogInfo                            1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  log.c:521:44 cxx_eq_to_ne               if (LocaleCompare((*p)->path,(*q)->path) == 0)
@@ -77,4 +62,4 @@ mutate: 159 mutants, 152s
     x  log.c:1643:47 cxx_ne_to_eq               if ((log_info->handler_mask & EventHandler) != 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-log.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-log.json
