@@ -1,21 +1,8 @@
 mutate: 350 mutants in MagickCore/utility\.c$, 20 functions
-mutate: baseline over 14563 cases in 0s
-  mutants: 25/350 (1s)
-  mutants: 50/350 (2s)
-  mutants: 75/350 (2s)
-  mutants: 100/350 (4s)
-  mutants: 125/350 (23s)
-  mutants: 150/350 (63s)
-  mutants: 175/350 (72s)
-  mutants: 200/350 (77s)
-  mutants: 225/350 (82s)
-  mutants: 250/350 (84s)
-  mutants: 275/350 (87s)
-  mutants: 300/350 (90s)
-  mutants: 325/350 (95s)
-  mutants: 350/350 (134s)
+mutate: baseline over 14723 cases in 0s
+mutate: resuming, 350 mutants already done
 
-mutate: 350 mutants, 134s
+mutate: 350 mutants, 0s
   killed 268, survived 68 (35 capped), no coverage 14, errors 0
   mutation score on reached code: 79.8%   overall: 76.6%
 
@@ -46,15 +33,15 @@ mutate: 350 mutants, 134s
     x  utility.c:189:16 cxx_eq_to_ne               if (passes == -1)
     x  utility.c:191:17 cxx_eq_to_ne               if ((passes == 0) && (status != MagickFalse))
     x  utility.c:191:34 cxx_ne_to_eq               if ((passes == 0) && (status != MagickFalse))
-       utility.c:221:24 cxx_eq_to_ne               if (destination_file == -1)
-       utility.c:224:19 cxx_eq_to_ne               if (source_file == -1)
-       utility.c:231:39 cxx_eq_to_ne               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
-       utility.c:231:68 cxx_gt_to_ge               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
-       utility.c:231:68 cxx_gt_to_le               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
-       utility.c:234:14 cxx_eq_to_ne               if (buffer == (unsigned char *) NULL)
-       utility.c:245:15 cxx_le_to_gt               if (count <= 0)
-       utility.c:245:15 cxx_le_to_lt               if (count <= 0)
-       utility.c:249:24 cxx_ne_to_eq               if ((size_t) count != length)
+    x  utility.c:221:24 cxx_eq_to_ne               if (destination_file == -1)
+    x  utility.c:224:19 cxx_eq_to_ne               if (source_file == -1)
+    x  utility.c:231:39 cxx_eq_to_ne               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
+    x  utility.c:231:68 cxx_gt_to_ge               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
+    x  utility.c:231:68 cxx_gt_to_le               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
+    x  utility.c:234:14 cxx_eq_to_ne               if (buffer == (unsigned char *) NULL)
+    x  utility.c:245:15 cxx_le_to_gt               if (count <= 0)
+    x  utility.c:245:15 cxx_le_to_lt               if (count <= 0)
+    x  utility.c:249:24 cxx_ne_to_eq               if ((size_t) count != length)
     x  utility.c:372:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  utility.c:375:67 cxx_div_to_mul             decode=(unsigned char *) AcquireQuantumMemory((strlen(source)+3)/4,
     x  utility.c:397:37 cxx_sub_to_add             decode[i]=(unsigned char)((q-Base64) << 2);
