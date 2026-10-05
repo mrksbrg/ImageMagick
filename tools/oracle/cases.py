@@ -5925,6 +5925,12 @@ def _windrv_cases():
         for sync in ("", "sync"):
             yield _windrv("SetBlobExtent %s after %s bytes%s" % (extent, prewrite, ", synchronized" if sync else ""),
                           tuple(["blobio", "extent", "e.bin", extent, prewrite] + ([sync] if sync else [])), ["e.bin"])
+    # third wave: synchronized through ImageInfo (the environment variable is read when the
+    # ImageInfo is made, before the driver could set it), and closed right after the extent
+    for prewrite, extent in (("10", "5"), ("10", "11"), ("0", "1"), ("10", "300")):
+        for opts in (["nowrite"], ["sync"], ["sync", "nowrite"]):
+            yield _windrv("SetBlobExtent %s after %s bytes, %s" % (extent, prewrite, " ".join(opts)),
+                          tuple(["blobio", "extent", "e.bin", extent, prewrite] + opts), ["e.bin"])
     yield _with_inputs(_windrv("FileToImage of an empty file", ("blob", "filetoimage", "empty.txt", "o.txt"), ["o.txt"]),
                        files={"empty.txt": ""})
     # pixel.c: SortImagePixels (-sort-pixels)

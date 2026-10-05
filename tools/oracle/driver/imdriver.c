@@ -1728,8 +1728,14 @@ static int BlobIOCmd(int argc,char **argv,ExceptionInfo *exception)
          is set; sync sets MAGICK_SYNCHRONIZE (the posix_fallocate path) */
       FILE *file;
       long size=-1;
-      if ((argc > 6) && (strcmp(argv[6],"sync") == 0))
-        (void) setenv("MAGICK_SYNCHRONIZE","true",1);
+      int i, nowrite=0;
+      for (i=6; i < argc; i++)
+      {
+        if (strcmp(argv[i],"sync") == 0)
+          image_info->synchronize=MagickTrue;  /* OpenBlob copies it to the blob */
+        if (strcmp(argv[i],"nowrite") == 0)
+          nowrite=1;  /* close right after SetBlobExtent: the extent alone sizes the file */
+      }
       (void) CopyMagickString(image->filename,argv[3],MagickPathExtent);
       status=OpenBlob(image_info,image,WriteBinaryBlobMode,exception);
       if ((status != MagickFalse) && (argc > 5))
@@ -1742,7 +1748,8 @@ static int BlobIOCmd(int argc,char **argv,ExceptionInfo *exception)
       if (status != MagickFalse)
         {
           (void) printf("extent %d\n",(int) SetBlobExtent(image,(MagickSizeType) atol(argv[4])));
-          (void) WriteBlobString(image,"abc");
+          if (nowrite == 0)
+            (void) WriteBlobString(image,"abc");
           (void) printf("tell %.20g\n",(double) TellBlob(image));
           (void) CloseBlob(image);
         }

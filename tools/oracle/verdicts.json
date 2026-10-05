@@ -23221,6 +23221,16 @@
    "src": "if (pfxrt->usedValStack <= 0) {",
    "verdict": "equivalent",
    "why": "the value stack is sized twice the deepest operator stack (at least MinValStackSize) and the RPN the translator builds never pops more than it pushed, so usedValStack never reaches numValStack nor pops at 0: the bounds' equality cases do not occur"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "DuplicateBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyBlob(image);",
+   "verdict": "unobservable",
+   "why": "DuplicateBlob drops the image's own blob before sharing the duplicate's: without it the old blob is not freed, a leak; the image then refers to the duplicate's blob either way"
   }
  ]
 }
