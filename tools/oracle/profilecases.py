@@ -188,4 +188,8 @@ V['exif-level']=['geom=70x50','orient=6']+sum((['set=exif:'+H(lvl('II',d)),'sync
 
 V['strip']=['set=iptc:'+H(b'\x1c\x02\x05ab'),'set=icc:'+H(b'qq'),'set=xmp:'+H(b'<x/>'),'set=exif:'+H(std('II')),'strip=exif','strip=i*','strip=!xmp','strip=*']
 
+# RemoveImageProfile of a profile that came from an 8BIM block: the profile goes, and so does
+# its resource in the block (WriteTo8BimProfile with no profile)
+V['remove']=['set=8bim:'+H(res8(0x7777,b'q'*20)+res8(0x404,b'\x1c\x02\x05abcd')+res8(0x7778,b'zzzz')),'remove=iptc','remove=iptc','remove=8bim','remove=8bim']
+
 CASES = [(name, args, FILES.get(name, {})) for name, args in V.items()]

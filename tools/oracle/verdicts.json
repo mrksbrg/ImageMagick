@@ -413,113 +413,113 @@
   },
   {
    "at": 20,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (polygon_info[i] == (PolygonInfo *) NULL)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 27,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (polygon_info[i]->edges == (EdgeInfo *) NULL)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 37,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (polygon_info[i]->edges[j].points == (PointInfo *) NULL)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 12,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
    "src": "for (j=0; j < (ssize_t) polygon_info[i]->number_edges; j++)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 12,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_lt_to_ge",
    "nth": 1,
    "src": "for (j=0; j < (ssize_t) polygon_info[i]->number_edges; j++)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 12,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "for (j=0; j < (ssize_t) polygon_info[i]->number_edges; j++)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 12,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_lt_to_le",
    "nth": 1,
    "src": "for (j=0; j < (ssize_t) polygon_info[i]->number_edges; j++)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 24,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_mul_to_div",
    "nth": 0,
    "src": "edge_info->number_points*sizeof(*edge_info->points));",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 29,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_mul_to_div",
    "nth": 0,
    "src": "polygon_info[0]->number_edges*sizeof(*edge_info));",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 56,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "for (j=0; j < (ssize_t) polygon_info[i]->number_edges; j++)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 56,
-   "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/draw.c",
+   "file": "MagickCore/draw.c",
    "function": "ClonePolygonEdgesTLS",
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 1,
    "src": "for (j=0; j < (ssize_t) polygon_info[i]->number_edges; j++)",
-   "verdict": "unresolved",
-   "why": "inside the loop that clones the polygon's edges for each thread past the first (for i=1; i < number_threads): the oracle fixes MAGICK_THREAD_LIMIT=1, so it never runs; a multi-threaded run could show it"
+   "verdict": "unobservable",
+   "why": "the per-thread copies are made only for more than one thread, and the oracle runs every case with OMP_NUM_THREADS=1 (for determinism): SetMagickResourceLimit caps the thread limit at GetOpenMPMaximumThreads(), so even -limit thread 4 gives one thread (tried on ERDC)"
   },
   {
    "at": 12,
