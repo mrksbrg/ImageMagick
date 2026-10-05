@@ -1,30 +1,19 @@
-mutate: 89 mutants in MagickCore/policy\.c$, 15 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/89 (44s)
-  mutants: 50/89 (45s)
-  mutants: 75/89 (69s)
-  mutants: 89/89 (86s)
+mutate: 45 mutants in MagickCore/policy\.c$, 6 functions
+mutate: baseline over 3 cases in 0s
+  mutants: 25/45 (0s)
+  mutants: 45/45 (0s)
 
-mutate: 89 mutants, 86s
-  killed 44, survived 12 (0 capped), no coverage 33, errors 0
-  mutation score on reached code: 78.6%   overall: 49.4%
+mutate: 45 mutants, 0s
+  killed 0, survived 12 (0 capped), no coverage 33, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   SetMagickSecurityPolicyValue          20      0        0     20
-  IsRightsAuthorizedByName              12     12        0      0
   IsPathContainsSymlink                 10      0       10      0
-  LoadPolicyCache                       10     10        0      0
   SetMagickSecurityPolicy               10      0        0     10
-  AcquirePolicyCache                     6      6        0      0
-  GetPolicyInfo                          4      4        0      0
-  PolicyComponentTerminus                4      4        0      0
-  AcquirePolicyString                    3      3        0      0
-  DestroyPolicyElement                   3      3        0      0
   GetPolicyList                          2      0        2      0
   ValidateSecurityPolicy                 2      0        0      2
   GetPolicyInfoList                      1      0        0      1
-  GetPolicyValue                         1      1        0      0
-  PolicyComponentGenesis                 1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  policy.c:496:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -41,4 +30,4 @@ mutate: 89 mutants, 86s
     x  policy.c:689:35 cxx_ne_to_eq               if (IsPolicyPathSeparator(*p) != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-policy.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-policy.json

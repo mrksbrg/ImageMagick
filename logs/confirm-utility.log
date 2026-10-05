@@ -1,18 +1,15 @@
-mutate: 86 mutants in MagickCore/utility\.c$, 17 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/86 (2s)
-  mutants: 50/86 (3s)
-  mutants: 75/86 (27s)
-  mutants: 86/86 (28s)
+mutate: 51 mutants in MagickCore/utility\.c$, 9 functions
+mutate: baseline over 40 cases in 0s
+  mutants: 25/51 (0s)
+  mutants: 50/51 (2s)
+  mutants: 51/51 (2s)
 
-mutate: 86 mutants, 28s
-  killed 35, survived 28 (0 capped), no coverage 23, errors 0
-  mutation score on reached code: 55.6%   overall: 40.7%
+mutate: 51 mutants, 2s
+  killed 0, survived 28 (0 capped), no coverage 23, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ExpandFilenames                       17      0       17      0
-  ShredFile                             17     17        0      0
-  GetPathComponent                      11     11        0      0
   Base64Decode                           7      0        0      7
   GetExecutionPath                       5      0        0      5
   MagickDelay                            5      0        0      5
@@ -21,12 +18,6 @@ mutate: 86 mutants, 28s
   ListFiles                              4      0        4      0
   GetPathComponents                      3      0        3      0
   ExpandFilename                         2      0        0      2
-  GetMagickPageSize                      2      2        0      0
-  AcquireUniqueFilename                  1      1        0      0
-  AcquireUniqueSymbolicLink              1      1        0      0
-  AppendImageFormat                      1      1        0      0
-  GetPathTemplate                        1      1        0      0
-  IsPathAccessible                       1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  utility.c:529:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -59,4 +50,4 @@ mutate: 86 mutants, 28s
        utility.c:1847:26 cxx_eq_to_ne               if (filelist == (char **) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-utility.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-utility.json
