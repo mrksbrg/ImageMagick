@@ -5934,6 +5934,14 @@ def _windrv_cases():
         for opts in (["nowrite"], ["sync"], ["sync", "nowrite"]):
             yield _windrv("SetBlobExtent %s after %s bytes, %s" % (extent, prewrite, " ".join(opts)),
                           tuple(["blobio", "extent", "e.bin", extent, prewrite] + opts), ["e.bin"])
+    # fourth wave: ReadBlobString through zlib (a text image written as .gz) and DiscardBlobBytes
+    # over more than one chunk of a large file
+    yield _case("windrv", "blob input over a gzip text file",
+                [["-size", "3x2", "xc:red", "txt:t.txt.gz"], ["@driver", "blobio", "read", "t.txt.gz", "2"]], ["copy.out"])
+    big = "".join("line %05d %s\n" % (i, "y" * 50) for i in range(1000))
+    for discard in ("20000", "40000", "61999"):
+        yield _with_inputs(_windrv("blob input over a 62000-byte file, discard %s" % discard,
+                                   ("blobio", "read", "big.txt", discard), ["copy.out"]), files={"big.txt": big})
     yield _with_inputs(_windrv("FileToImage of an empty file", ("blob", "filetoimage", "empty.txt", "o.txt"), ["o.txt"]),
                        files={"empty.txt": ""})
     # pixel.c: SortImagePixels (-sort-pixels)

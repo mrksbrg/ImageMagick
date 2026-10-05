@@ -23231,6 +23231,136 @@
    "src": "DestroyBlob(image);",
    "verdict": "unobservable",
    "why": "DuplicateBlob drops the image's own blob before sharing the duplicate's: without it the old blob is not freed, a leak; the image then refers to the duplicate's blob either way"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (extent != (MagickSizeType) ((off_t) extent))",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "if (offset < 0)",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "if (offset < 0)",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if ((MagickSizeType) offset >= extent)",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 1,
+   "src": "if ((MagickSizeType) offset >= extent)",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "offset=SeekBlob(image,(MagickOffsetType) extent-1,SEEK_SET);",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (blob_info->synchronize != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if ((file == -1) || (offset < 0))",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "if ((file == -1) || (offset < 0))",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if ((file == -1) || (offset < 0))",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(void) posix_fallocate(file,offset,(MagickOffsetType) extent-",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (count != 1)",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MapResource,blob_info->length);",
+   "verdict": "unobservable",
+   "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
   }
  ]
 }
