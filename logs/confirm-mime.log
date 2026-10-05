@@ -1,41 +1,19 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 23 mutants in MagickCore/mime\.c$, 8 functions
-mutate: baseline over 13 cases in 0s
-  mutants: 23/23 (1s)
+mutate: baseline over 0 cases in 0s
+  mutants: 23/23 (0s)
 
-mutate: 23 mutants, 1s
-  killed 0, survived 19 (0 capped), no coverage 4, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 23 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 23, errors 0
 
   function                           total killed survived no-cov
-  LoadMimeCache                          8      0        8      0
-  DestroyMimeElement                     5      0        5      0
+  LoadMimeCache                          8      0        0      8
+  DestroyMimeElement                     5      0        0      5
   MagickToMime                           3      0        0      3
-  GetMimeList                            2      0        2      0
-  IsMimeCacheInstantiated                2      0        2      0
+  GetMimeList                            2      0        0      2
+  IsMimeCacheInstantiated                2      0        0      2
   GetMimeInfoList                        1      0        0      1
-  GetMimeDescription                     1      0        1      0
-  GetMimeType                            1      0        1      0
+  GetMimeDescription                     1      0        0      1
+  GetMimeType                            1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  mime.c:555:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  mime.c:582:7 cxx_remove_void_call       qsort((void *) aliases,(size_t) i,sizeof(*aliases),MimeCompare);
-    x  mime.c:615:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  mime.c:646:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  mime.c:678:26 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
-       mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
-    x  mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-    x  mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-    x  mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
-    x  mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
-    x  mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
-       mime.c:861:24 cxx_add_to_sub             depth+1,exception);
-    x  mime.c:969:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-    x  mime.c:981:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
-    x  mime.c:1084:16 cxx_ne_to_eq               if (p->magic != (unsigned char *) NULL)
-    x  mime.c:1086:18 cxx_ne_to_eq               if (p->pattern != (char *) NULL)
-    x  mime.c:1088:22 cxx_ne_to_eq               if (p->description != (char *) NULL)
-    x  mime.c:1090:15 cxx_ne_to_eq               if (p->type != (char *) NULL)
-    x  mime.c:1092:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-5170fb874-mime.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-mime.json
