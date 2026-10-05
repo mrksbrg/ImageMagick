@@ -7,8 +7,8 @@
   "col": 19,
   "function": "policy.c:AcquirePolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -18,10 +18,10 @@
   "line": 210,
   "col": 18,
   "function": "policy.c:AcquirePolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:211:9:211:34",
@@ -30,10 +30,10 @@
   "line": 211,
   "col": 9,
   "function": "policy.c:AcquirePolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:220:15:220:16",
@@ -43,8 +43,8 @@
   "col": 15,
   "function": "policy.c:AcquirePolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -55,8 +55,8 @@
   "col": 15,
   "function": "policy.c:AcquirePolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -69,7 +69,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:230:21:230:23",
@@ -90,10 +90,10 @@
   "line": 234,
   "col": 19,
   "function": "policy.c:AcquirePolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:235:9:235:34",
@@ -102,10 +102,10 @@
   "line": 235,
   "col": 9,
   "function": "policy.c:AcquirePolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:248:16:248:18",
@@ -126,10 +126,10 @@
   "line": 252,
   "col": 19,
   "function": "policy.c:AcquirePolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:253:9:253:34",
@@ -138,10 +138,10 @@
   "line": 253,
   "col": 9,
   "function": "policy.c:AcquirePolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:300:44:300:46",
@@ -151,8 +151,8 @@
   "col": 44,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -163,8 +163,8 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -174,10 +174,10 @@
   "line": 308,
   "col": 25,
   "function": "policy.c:GetPolicyInfo",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:310:45:310:47",
@@ -187,8 +187,8 @@
   "col": 45,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -199,8 +199,8 @@
   "col": 25,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -211,8 +211,8 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -234,10 +234,10 @@
   "line": 334,
   "col": 3,
   "function": "policy.c:GetPolicyInfo",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:336:13:336:15",
@@ -247,8 +247,8 @@
   "col": 13,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -259,8 +259,8 @@
   "col": 65,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -270,10 +270,10 @@
   "line": 338,
   "col": 7,
   "function": "policy.c:GetPolicyInfo",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:339:13:339:15",
@@ -282,10 +282,10 @@
   "line": 339,
   "col": 13,
   "function": "policy.c:GetPolicyInfo",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:343:12:343:14",
@@ -295,8 +295,8 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -306,10 +306,10 @@
   "line": 346,
   "col": 17,
   "function": "policy.c:GetPolicyInfo",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:346:62:346:64",
@@ -319,8 +319,8 @@
   "col": 62,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -331,8 +331,8 @@
   "col": 50,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -355,8 +355,8 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -392,7 +392,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -404,7 +404,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "exit status [1] -> [-6]; stderr differs"
  },
  {
@@ -416,7 +416,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -428,7 +428,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stderr differs"
  },
  {
@@ -440,7 +440,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -452,7 +452,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -464,7 +464,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -476,7 +476,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
  },
  {
@@ -488,7 +488,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "exit status [1] -> ['timeout']; stdout differs; stderr differs"
  },
  {
@@ -500,7 +500,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -511,8 +511,8 @@
   "col": 14,
   "function": "policy.c:AcquirePolicyString",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -522,10 +522,10 @@
   "line": 472,
   "col": 15,
   "function": "policy.c:AcquirePolicyString",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ge_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:472:15:472:17",
@@ -558,10 +558,10 @@
   "line": 473,
   "col": 58,
   "function": "policy.c:AcquirePolicyString",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:474:19:474:21",
@@ -583,8 +583,8 @@
   "col": 14,
   "function": "policy.c:AcquirePolicyString",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -594,10 +594,10 @@
   "line": 477,
   "col": 44,
   "function": "policy.c:AcquirePolicyString",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:496:24:496:26",
@@ -606,10 +606,8 @@
   "line": 496,
   "col": 24,
   "function": "GetPolicyList",
-  "status": "survived",
-  "cases": 2,
-  "capped": false,
-  "line_executed": true
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:499:44:499:46",
@@ -618,10 +616,8 @@
   "line": 499,
   "col": 44,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 2,
-  "killer": "gaps/3babda0f49",
-  "why": "stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:502:50:502:51",
@@ -630,10 +626,8 @@
   "line": 502,
   "col": 50,
   "function": "GetPolicyList",
-  "status": "survived",
-  "cases": 2,
-  "capped": false,
-  "line_executed": true
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:503:16:503:18",
@@ -642,10 +636,8 @@
   "line": 503,
   "col": 16,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 2,
-  "killer": "gaps/3babda0f49",
-  "why": "stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:505:3:505:38",
@@ -654,10 +646,8 @@
   "line": 505,
   "col": 3,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 1,
-  "killer": "gaps/7eee9921fd",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:507:15:507:17",
@@ -666,10 +656,8 @@
   "line": 507,
   "col": 15,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 2,
-  "killer": "gaps/3babda0f49",
-  "why": "stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:513:26:513:28",
@@ -678,10 +666,8 @@
   "line": 513,
   "col": 26,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 2,
-  "killer": "gaps/3babda0f49",
-  "why": "stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:514:59:514:61",
@@ -690,10 +676,8 @@
   "line": 514,
   "col": 59,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 1,
-  "killer": "gaps/7eee9921fd",
-  "why": "stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:515:17:515:19",
@@ -702,10 +686,8 @@
   "line": 515,
   "col": 17,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 2,
-  "killer": "gaps/3babda0f49",
-  "why": "exit status [0] -> [-11]; stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:518:3:518:40",
@@ -714,10 +696,8 @@
   "line": 518,
   "col": 3,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 1,
-  "killer": "gaps/7eee9921fd",
-  "why": "exit status [0] -> ['timeout']; stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:519:9:519:11",
@@ -726,10 +706,8 @@
   "line": 519,
   "col": 9,
   "function": "GetPolicyList",
-  "status": "killed",
-  "cases": 2,
-  "killer": "gaps/3babda0f49",
-  "why": "stdout differs"
+  "status": "no-coverage",
+  "cases": 0
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:561:24:561:26",
@@ -738,10 +716,10 @@
   "line": 561,
   "col": 24,
   "function": "GetPolicyValue",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:566:19:566:21",
@@ -762,10 +740,10 @@
   "line": 569,
   "col": 14,
   "function": "GetPolicyValue",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:569:49:569:51",
@@ -774,10 +752,10 @@
   "line": 569,
   "col": 49,
   "function": "GetPolicyValue",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:607:12:607:14",
@@ -786,10 +764,10 @@
   "line": 607,
   "col": 12,
   "function": "policy.c:IsPolicyPathSeparator",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:621:12:621:14",
@@ -798,10 +776,10 @@
   "line": 621,
   "col": 12,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:625:33:625:35",
@@ -810,10 +788,10 @@
   "line": 625,
   "col": 33,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:630:18:630:19",
@@ -823,9 +801,9 @@
   "col": 18,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
-  "line_executed": true
+  "line_executed": false
  },
  {
   "id": "cxx_ge_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:630:22:630:24",
@@ -835,9 +813,9 @@
   "col": 22,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
-  "line_executed": true
+  "line_executed": false
  },
  {
   "id": "cxx_ge_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:630:22:630:24",
@@ -846,10 +824,10 @@
   "line": 630,
   "col": 22,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": false
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:632:21:632:23",
@@ -858,10 +836,10 @@
   "line": 632,
   "col": 21,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": false
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:636:13:636:15",
@@ -870,10 +848,10 @@
   "line": 636,
   "col": 13,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "exit status [0] -> ['timeout']; stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:647:16:647:18",
@@ -907,7 +885,7 @@
   "col": 15,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -931,7 +909,7 @@
   "col": 19,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -954,10 +932,10 @@
   "line": 651,
   "col": 11,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:656:39:656:41",
@@ -978,10 +956,10 @@
   "line": 660,
   "col": 17,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_gt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:660:17:660:18",
@@ -990,10 +968,10 @@
   "line": 660,
   "col": 17,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:660:40:660:41",
@@ -1003,7 +981,7 @@
   "col": 40,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -1014,10 +992,10 @@
   "line": 660,
   "col": 44,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:665:20:665:21",
@@ -1027,7 +1005,7 @@
   "col": 20,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -1039,7 +1017,7 @@
   "col": 24,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -1050,10 +1028,10 @@
   "line": 665,
   "col": 24,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:667:23:667:25",
@@ -1062,10 +1040,10 @@
   "line": 667,
   "col": 23,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:673:16:673:17",
@@ -1075,7 +1053,7 @@
   "col": 16,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -1087,7 +1065,7 @@
   "col": 20,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -1098,10 +1076,10 @@
   "line": 673,
   "col": 20,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:678:12:678:14",
@@ -1110,10 +1088,10 @@
   "line": 678,
   "col": 12,
   "function": "policy.c:IsPathContainsSymlink",
-  "status": "killed",
-  "cases": 3,
-  "killer": "gaps/a901937b36",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:683:38:683:40",
@@ -1135,7 +1113,7 @@
   "col": 35,
   "function": "policy.c:IsPathContainsSymlink",
   "status": "survived",
-  "cases": 3,
+  "cases": 2,
   "capped": false,
   "line_executed": true
  },
@@ -1159,9 +1137,9 @@
   "col": 30,
   "function": "IsPathAuthorized",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "cases": 60,
+  "killer": "encode/f9fae4edea",
+  "why": "stderr differs; enc.svg missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:703:29:703:31",
@@ -1170,10 +1148,10 @@
   "line": 703,
   "col": 29,
   "function": "IsPathAuthorized",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:704:15:704:17",
@@ -1182,10 +1160,10 @@
   "line": 704,
   "col": 15,
   "function": "IsPathAuthorized",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:704:58:704:60",
@@ -1195,9 +1173,9 @@
   "col": 58,
   "function": "IsPathAuthorized",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "cases": 60,
+  "killer": "encode/f9fae4edea",
+  "why": "stderr differs; enc.svg missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:706:34:706:36",
@@ -1206,10 +1184,10 @@
   "line": 706,
   "col": 34,
   "function": "IsPathAuthorized",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:707:40:707:42",
@@ -1218,10 +1196,10 @@
   "line": 707,
   "col": 40,
   "function": "IsPathAuthorized",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:710:14:710:16",
@@ -1230,10 +1208,10 @@
   "line": 710,
   "col": 14,
   "function": "IsPathAuthorized",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:740:20:740:22",
@@ -1243,8 +1221,8 @@
   "col": 20,
   "function": "policy.c:IsPolicyCacheInstantiated",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -1291,8 +1269,8 @@
   "col": 24,
   "function": "policy.c:IsPolicyCacheInstantiated",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -1315,8 +1293,8 @@
   "col": 23,
   "function": "policy.c:IsPolicyCacheInstantiated",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -1326,10 +1304,10 @@
   "line": 817,
   "col": 41,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:821:12:821:14",
@@ -1338,10 +1316,10 @@
   "line": 821,
   "col": 12,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:823:15:823:17",
@@ -1350,10 +1328,10 @@
   "line": 823,
   "col": 15,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:827:14:827:16",
@@ -1362,10 +1340,10 @@
   "line": 827,
   "col": 14,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:829:45:829:47",
@@ -1374,10 +1352,10 @@
   "line": 829,
   "col": 45,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:838:3:838:38",
@@ -1398,10 +1376,10 @@
   "line": 839,
   "col": 3,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:841:13:841:15",
@@ -1410,10 +1388,10 @@
   "line": 841,
   "col": 13,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:850:24:850:26",
@@ -1434,10 +1412,10 @@
   "line": 852,
   "col": 15,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:852:70:852:72",
@@ -1446,10 +1424,10 @@
   "line": 852,
   "col": 70,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:855:24:855:26",
@@ -1458,10 +1436,10 @@
   "line": 855,
   "col": 24,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:857:31:857:33",
@@ -1470,10 +1448,10 @@
   "line": 857,
   "col": 31,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:863:13:863:57",
@@ -1482,10 +1460,10 @@
   "line": 863,
   "col": 13,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:864:13:864:56",
@@ -1494,10 +1472,10 @@
   "line": 864,
   "col": 13,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:866:38:866:40",
@@ -1506,10 +1484,10 @@
   "line": 866,
   "col": 38,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:866:70:866:72",
@@ -1518,10 +1496,10 @@
   "line": 866,
   "col": 70,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:871:51:871:52",
@@ -1530,10 +1508,10 @@
   "line": 871,
   "col": 51,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:871:68:871:69",
@@ -1542,10 +1520,10 @@
   "line": 871,
   "col": 68,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:872:74:872:75",
@@ -1554,10 +1532,10 @@
   "line": 872,
   "col": 74,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:874:41:874:43",
@@ -1566,10 +1544,10 @@
   "line": 874,
   "col": 41,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:883:34:883:36",
@@ -1578,10 +1556,10 @@
   "line": 883,
   "col": 34,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:883:62:883:64",
@@ -1590,10 +1568,10 @@
   "line": 883,
   "col": 62,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:885:34:885:36",
@@ -1602,10 +1580,10 @@
   "line": 885,
   "col": 34,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:885:62:885:64",
@@ -1614,10 +1592,10 @@
   "line": 885,
   "col": 62,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:887:29:887:31",
@@ -1626,10 +1604,10 @@
   "line": 887,
   "col": 29,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:887:57:887:59",
@@ -1638,10 +1616,10 @@
   "line": 887,
   "col": 57,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:889:29:889:31",
@@ -1650,10 +1628,10 @@
   "line": 889,
   "col": 29,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:890:73:890:75",
@@ -1662,10 +1640,10 @@
   "line": 890,
   "col": 73,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:893:36:893:38",
@@ -1674,10 +1652,10 @@
   "line": 893,
   "col": 36,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:894:80:894:82",
@@ -1686,10 +1664,10 @@
   "line": 894,
   "col": 80,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:897:37:897:39",
@@ -1698,10 +1676,10 @@
   "line": 897,
   "col": 37,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:898:81:898:83",
@@ -1710,10 +1688,10 @@
   "line": 898,
   "col": 81,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:901:15:901:17",
@@ -1722,10 +1700,10 @@
   "line": 901,
   "col": 15,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:905:27:905:29",
@@ -1734,10 +1712,10 @@
   "line": 905,
   "col": 27,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:914:3:914:40",
@@ -1758,10 +1736,10 @@
   "line": 915,
   "col": 27,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:917:27:917:29",
@@ -1770,10 +1748,10 @@
   "line": 917,
   "col": 27,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:919:22:919:24",
@@ -1782,10 +1760,10 @@
   "line": 919,
   "col": 22,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:925:19:925:21",
@@ -1794,10 +1772,10 @@
   "line": 925,
   "col": 19,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:927:40:927:42",
@@ -1806,10 +1784,10 @@
   "line": 927,
   "col": 40,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:928:50:928:52",
@@ -1818,10 +1796,10 @@
   "line": 928,
   "col": 50,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:930:41:930:43",
@@ -1830,10 +1808,10 @@
   "line": 930,
   "col": 41,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:931:51:931:53",
@@ -1842,10 +1820,10 @@
   "line": 931,
   "col": 51,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:933:43:933:45",
@@ -1854,10 +1832,10 @@
   "line": 933,
   "col": 43,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:934:53:934:55",
@@ -1866,10 +1844,10 @@
   "line": 934,
   "col": 53,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:940:29:940:31",
@@ -1878,10 +1856,10 @@
   "line": 940,
   "col": 29,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:944:44:944:46",
@@ -1890,10 +1868,10 @@
   "line": 944,
   "col": 44,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:947:41:947:43",
@@ -1902,10 +1880,10 @@
   "line": 947,
   "col": 41,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:949:33:949:35",
@@ -1914,10 +1892,10 @@
   "line": 949,
   "col": 33,
   "function": "IsRightsAuthorizedByName",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1002:12:1002:14",
@@ -1928,7 +1906,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
  },
  {
@@ -1940,7 +1918,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -1952,7 +1930,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -1964,7 +1942,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
  },
  {
@@ -1976,7 +1954,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
  },
  {
@@ -1988,7 +1966,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -1999,7 +1977,7 @@
   "col": 16,
   "function": "ListPolicyInfo",
   "status": "killed",
-  "cases": 3,
+  "cases": 4,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -2012,7 +1990,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2024,7 +2002,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2036,7 +2014,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2048,7 +2026,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2060,7 +2038,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2072,7 +2050,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2084,7 +2062,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2096,7 +2074,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2108,7 +2086,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2120,7 +2098,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2132,7 +2110,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2144,7 +2122,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "xmlgap/98a93a8f53",
+  "killer": "xmlgap/e2ac1bd50f",
   "why": "stdout differs"
  },
  {
@@ -2166,10 +2144,10 @@
   "line": 1091,
   "col": 20,
   "function": "policy.c:DestroyPolicyElement",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1093:22:1093:24",
@@ -2178,10 +2156,10 @@
   "line": 1093,
   "col": 22,
   "function": "policy.c:DestroyPolicyElement",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1095:19:1095:21",
@@ -2190,10 +2168,10 @@
   "line": 1095,
   "col": 19,
   "function": "policy.c:DestroyPolicyElement",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1097:19:1097:21",
@@ -2202,10 +2180,10 @@
   "line": 1097,
   "col": 19,
   "function": "policy.c:DestroyPolicyElement",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1129:14:1129:16",
@@ -2215,8 +2193,8 @@
   "col": 14,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2227,8 +2205,8 @@
   "col": 23,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2239,8 +2217,8 @@
   "col": 21,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2251,8 +2229,8 @@
   "col": 16,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2263,8 +2241,8 @@
   "col": 47,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2275,8 +2253,8 @@
   "col": 20,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2287,8 +2265,8 @@
   "col": 21,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2298,10 +2276,10 @@
   "line": 1157,
   "col": 22,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1162:23:1162:25",
@@ -2311,8 +2289,8 @@
   "col": 23,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2323,8 +2301,8 @@
   "col": 38,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2335,8 +2313,8 @@
   "col": 24,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2347,8 +2325,8 @@
   "col": 32,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2359,8 +2337,8 @@
   "col": 26,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2370,10 +2348,10 @@
   "line": 1170,
   "col": 41,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_gt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1170:41:1170:42",
@@ -2383,8 +2361,8 @@
   "col": 41,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2395,8 +2373,8 @@
   "col": 29,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2407,8 +2385,8 @@
   "col": 55,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2419,8 +2397,8 @@
   "col": 42,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2455,8 +2433,8 @@
   "col": 43,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2466,10 +2444,10 @@
   "line": 1197,
   "col": 25,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1197:48:1197:50",
@@ -2478,10 +2456,10 @@
   "line": 1197,
   "col": 48,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1197:64:1197:66",
@@ -2490,10 +2468,10 @@
   "line": 1197,
   "col": 64,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1201:22:1201:24",
@@ -2502,10 +2480,10 @@
   "line": 1201,
   "col": 22,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1204:45:1204:47",
@@ -2514,10 +2492,10 @@
   "line": 1204,
   "col": 45,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ge_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1206:25:1206:27",
@@ -2526,10 +2504,10 @@
   "line": 1206,
   "col": 25,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ge_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1206:25:1206:27",
@@ -2538,10 +2516,10 @@
   "line": 1206,
   "col": 25,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1215:19:1215:59",
@@ -2550,10 +2528,10 @@
   "line": 1215,
   "col": 19,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1216:29:1216:31",
@@ -2562,10 +2540,10 @@
   "line": 1216,
   "col": 29,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1219:30:1219:32",
@@ -2574,10 +2552,10 @@
   "line": 1219,
   "col": 30,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1224:32:1224:34",
@@ -2586,10 +2564,10 @@
   "line": 1224,
   "col": 32,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1227:35:1227:36",
@@ -2598,10 +2576,10 @@
   "line": 1227,
   "col": 35,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1235:42:1235:44",
@@ -2611,8 +2589,8 @@
   "col": 42,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2623,8 +2601,8 @@
   "col": 21,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2635,8 +2613,8 @@
   "col": 38,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2647,8 +2625,8 @@
   "col": 45,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2658,10 +2636,10 @@
   "line": 1253,
   "col": 20,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1261:16:1261:18",
@@ -2671,8 +2649,8 @@
   "col": 16,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 35,
+  "killer": "info/fe877508d2",
   "why": "stdout differs"
  },
  {
@@ -2683,8 +2661,8 @@
   "col": 54,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2695,8 +2673,8 @@
   "col": 52,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2707,8 +2685,8 @@
   "col": 55,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2718,10 +2696,10 @@
   "line": 1301,
   "col": 54,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1312:55:1312:57",
@@ -2731,8 +2709,8 @@
   "col": 55,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2743,8 +2721,8 @@
   "col": 53,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
+  "cases": 249,
+  "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
  {
@@ -2754,10 +2732,10 @@
   "line": 1334,
   "col": 17,
   "function": "policy.c:LoadPolicyCache",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1357:24:1357:26",
@@ -2766,10 +2744,10 @@
   "line": 1357,
   "col": 24,
   "function": "PolicyComponentGenesis",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1382:24:1382:26",
@@ -2778,10 +2756,10 @@
   "line": 1382,
   "col": 24,
   "function": "PolicyComponentTerminus",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1383:5:1383:45",
@@ -2790,10 +2768,10 @@
   "line": 1383,
   "col": 5,
   "function": "PolicyComponentTerminus",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1384:3:1384:38",
@@ -2814,10 +2792,10 @@
   "line": 1385,
   "col": 20,
   "function": "PolicyComponentTerminus",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1387:3:1387:40",
@@ -2838,10 +2816,10 @@
   "line": 1388,
   "col": 3,
   "function": "PolicyComponentTerminus",
-  "status": "killed",
-  "cases": 2,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:1430:16:1430:18",
