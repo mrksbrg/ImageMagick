@@ -5479,6 +5479,34 @@ GAP_STEP_CASES += [
      [["-size", "8x8", "xc:white", "-fill", "red", "-stroke", "blue", "-strokewidth", "0",
        "-draw", "polygon %s,2 %s,2 %s,5" % (x, x2, x3), "txt:-"]], {})
     for x, x2, x3 in (("8", "11", "9"), ("8.75", "11.75", "9.75"))]
+# qsort comparators (draw.c StopInfoCompare, locale.c LocaleInfoCompare, log.c LogInfoCompare):
+# their mutants only change how ties, or an order the mutant makes inconsistent, come out of
+# qsort. With seven or more elements macOS's BSD qsort partitions and reorders such ties, so
+# these cases kill them on the Mac; glibc may not (owner's decision, 2026-10-05: a Mac kill
+# counts for these, and their refactoring is checked on the Mac). Eight gradient stops with
+# repeated offsets, eight with offsets exactly MagickEpsilon apart; twelve locale messages in
+# one file; eight log maps in one file (the driver lists the case's section).
+def _gradient(stops):
+    return ("push defs push gradient g linear 0,0 39,0 " +
+            " ".join("stop-color %s %s" % (c, o) for c, o in stops) +
+            " pop gradient pop defs fill url(#g) rectangle 0,0 39,3")
+GAP_STEP_CASES += [
+    ("draw a gradient of eight stops with repeated offsets (StopInfoCompare)",
+     [["-size", "40x4", "xc:white", "-draw", _gradient(
+         [("red", "0.5"), ("lime", "0.5"), ("blue", "0.2"), ("yellow", "0.5"), ("cyan", "0.8"),
+          ("magenta", "0.5"), ("black", "0.2"), ("orange", "0.8")]), "txt:-"]], {}),
+    ("draw a gradient of eight stops MagickEpsilon apart (StopInfoCompare)",
+     [["-size", "40x4", "xc:white", "-draw", _gradient(
+         [("red", "0"), ("blue", "1e-12"), ("lime", "0.5"), ("black", "0"), ("yellow", "1e-12"),
+          ("cyan", "0.5"), ("pink", "1"), ("navy", "1")]), "txt:-"]], {}),
+    ("locale.xml of the case's own with twelve messages, listed (LocaleInfoCompare)", [["-list", "locale"]],
+     {".config/ImageMagick/locale.xml": '<?xml version="1.0"?>\n<localemap>\n  <locale name="C">\n' +
+      "".join('    <Message name="M%03d">text %d</Message>\n' % (k, k) for k in range(12)) +
+      '  </locale>\n</localemap>\n'}),
+    ("driver logcfg: eight log maps in one file (LogInfoCompare)", _driver("logcfg"),
+     {"log.xml": "".join('<logmap>\n  <log events="None" output="stdout" format="m%d %%e"/>\n</logmap>\n' % k
+                         for k in range(8))}),
+]
 # profile.c through imdriver: SetImageProfile, SyncImageProfiles, Update8BIMClipPath and the rest
 # on blobs built byte by byte at each bound (profilecases.py says which); the profiles' bytes are
 # printed after every op. The command line reaches these functions only with whole files.

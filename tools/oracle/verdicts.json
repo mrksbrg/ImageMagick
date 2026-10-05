@@ -2332,26 +2332,6 @@
    "why": "graphic_context->viewbox is set (from the viewbox keyword, or the image page) and cloned, but nothing in draw.c or elsewhere reads it, so how it is computed cannot show"
   },
   {
-   "at": 40,
-   "file": "MagickCore/draw.c",
-   "function": "StopInfoCompare",
-   "mutator": "cxx_le_to_gt",
-   "nth": 0,
-   "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
-   "verdict": "unresolved",
-   "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/draw.c",
-   "function": "StopInfoCompare",
-   "mutator": "cxx_sub_to_add",
-   "nth": 0,
-   "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
-   "verdict": "unresolved",
-   "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
-  },
-  {
    "at": 51,
    "file": "../../../../../../../Users/mrksbrg/Documents/Code/refactoring_cases/ImageMagick/MagickCore/image.c",
    "function": "AcquireImage",
@@ -3400,16 +3380,6 @@
    "src": "DestroyCLocale();",
    "verdict": "unobservable",
    "why": "frees the C locale object at shutdown: without it, it leaks"
-  },
-  {
-   "at": 41,
-   "file": "MagickCore/locale.c",
-   "function": "LocaleInfoCompare",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare((*p)->path,(*q)->path) == 0)",
-   "verdict": "unresolved",
-   "why": "a qsort comparator: the mutant orders entries from different files by tag and entries from one file not at all, an inconsistent order whose result differs between macOS's and glibc's qsort (not a portable kill)"
   },
   {
    "at": 22,
@@ -22583,16 +22553,6 @@
    "why": "the search by name is never reached: GetLogInfo is static and every caller passes \"*\""
   },
   {
-   "at": 41,
-   "file": "MagickCore/log.c",
-   "function": "LogInfoCompare",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (LocaleCompare((*p)->path,(*q)->path) == 0)",
-   "verdict": "unresolved",
-   "why": "a qsort comparator: only the order of log maps sharing a path would change, and qsort orders ties differently on macOS and glibc (not a portable kill)"
-  },
-  {
    "at": 0,
    "file": "MagickCore/log.c",
    "function": "GetLogInfoList",
@@ -23091,16 +23051,6 @@
    "src": "if (SetImageStorageClass(clip_mask,DirectClass,exception) == MagickFalse)",
    "verdict": "unobservable",
    "why": "SetImageStorageClass to DirectClass fails only when the pixel cache cannot be allocated"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/draw.c",
-   "function": "StopInfoCompare",
-   "mutator": "cxx_le_to_lt",
-   "nth": 0,
-   "src": "if (fabs(stop_1->offset-stop_2->offset) <= MagickEpsilon)",
-   "verdict": "unresolved",
-   "why": "a qsort comparator reached only when the first stop's offset is not greater: both mutants turn some 'less' answers into 'equal', which leaves two stops in place exactly as 'less' does; with three or more stops the outcome depends on how the platform's qsort treats an inconsistent order (macOS and glibc differ), so no portable kill"
   },
   {
    "at": 39,

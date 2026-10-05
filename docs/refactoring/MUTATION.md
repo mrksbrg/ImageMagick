@@ -3213,3 +3213,28 @@ session's `blob writeimages … adjoin` cases (GIF, TIFF, PPM, MIFF). They hash 
 hashed bytes are not defined. They differ from run to run on the Mac (Linux masks it with
 `MALLOC_PERTURB_`). That session should hash only the written length, and check whether
 `image_info->blob` still points at live memory.
+
+### qsort comparators killed on the Mac: draw.c, locale.c and log.c trusted (2026-10-05, morning)
+
+Owner's decision: a kill on the Mac counts for these comparators, and their refactoring is
+checked with the oracle on the Mac.
+
+- *Why the Mac kills them.* Their mutants only change how ties (or an order the mutant makes
+  inconsistent) leave qsort. With seven or more elements, macOS's BSD qsort partitions and
+  reorders such ties.
+- *Determinism.* A given C library sorts the same way every time, so a Mac kill is
+  repeatable on the Mac.
+- *The four cases:*
+  - a gradient of eight stops with repeated offsets;
+  - a gradient of eight stops MagickEpsilon apart;
+  - twelve messages in a case's locale.xml;
+  - eight log maps in one log.xml.
+- *Result.* They kill all five mutants of StopInfoCompare, LocaleInfoCompare and
+  LogInfoCompare, run through the oracle's own case runner on the Mac's Mull build. The
+  kills are in `build-oracle/work/mutation-probe-macqsort-{draw,locale,log}.json`, marked
+  `platform: macOS (BSD qsort)`.
+- *Rule.* ERDC may report these mutants as survivors, but a recorded kill stands in the
+  gate. **A function trusted only through a Mac kill must have its refactoring checked on
+  the Mac.**
+
+With these, **all 48 Mac files are trusted.**
