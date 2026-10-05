@@ -5020,6 +5020,17 @@ _XEV_MENU_ITEMS = ([("View", it, _XEV_VIEW, r) for it, r in (("Half Size", None)
                                                         ("Vignette...", "0x5"), ("Wave...", "5x30"))])
 GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(menu, item, items, reply),
                        ["display", img("rose")]) for menu, item, items, reply in _XEV_MENU_ITEMS]
+# Widgets grabbed themselves, without the @ before the grab that the image-window cases get: the
+# confirmation display asks before quitting when its resources say so (XConfirmWidget), and Help
+# > Overview's text view (XTextViewWidget), closed with its Dismiss button. Help > Browse
+# Documentation would start xdg-open, and About Display never settles: left out. Each entry:
+# label, script, files.
+_XEV_CONFIRM = {".displayrc": "display.confirmExit: True\n", ".magickrc": "display.confirmExit: True\n"}
+GAP_XEVENTS_WIDGET_CASES = [
+    ("xevents display quit, confirmed", "map key:q map grab:out.ppm key:Return", _XEV_CONFIRM),
+    ("xevents display help overview",
+     "map click:20,20 map click:65,388 map click:40,12 map grab:out.ppm click:397,607 use:1 key:q", {}),
+]
 # label, steps, environment. MAGICK_OCL_DEVICE=false starts with OpenCL off but still gets the
 # fixed device profile (oracle.py, seed_opencl_profile): without one, switching OpenCL on runs
 # ImageMagick's device benchmark, whose scores and choice vary from run to run.
@@ -5068,6 +5079,9 @@ def _gap_x11_opencl_cases():
     for label, script, args in GAP_XEVENTS_CASES:
         yield _with_run(_case("xevents", label, [["@xevents", script.replace("grab:", "key:at grab:")] + args],
                               ["out.ppm"]), env=_XEV_ENV, x11=True)
+    for label, script, files in GAP_XEVENTS_WIDGET_CASES:
+        yield _with_run(_with_inputs(_case("xevents", label, [["@xevents", script, "display", img("rose")]],
+                                           ["out.ppm"]), files=files or None), env=_XEV_ENV, x11=True)
     for label, script, args, names in GAP_XEVENTS_FILE_CASES:
         copies = [[img(n), "-strip", "%s.miff" % n] for n in names]
         yield _with_run(_case("xevents", label, copies + [["@xevents", script.replace("grab:", "key:at grab:")] + args],
