@@ -23121,6 +23121,106 @@
    "src": "if ((size_t) (q-text+MagickPathExtent) >= extent)",
    "verdict": "unresolved",
    "why": "should make the growth test always true, like the >= to < mutant (killed by the 60-character format), but on the Mac this mutant changes nothing even there: the subtraction seems folded away in the build; left for ERDC"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/fx.c",
+   "function": "InitFx",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "for ( ; i > 0; i--) {",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/fx.c",
+   "function": "InitFx",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "for ( ; i > 0; i--) {",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/fx.c",
+   "function": "InitFx",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "pimg = &pfx->Imgs[i-1];",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "for (t2 = t-1; t2 >= 0; t2--) {",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "for (t2 = t-1; t2 >= 0; t2--) {",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "for (t2 = t-1; t2 >= 0; t2--) {",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/fx.c",
+   "function": "AcquireFxInfoPrivate",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyFxRt (&pfx->fxrts[t2]);",
+   "verdict": "unobservable",
+   "why": "frees what was set up so far after AcquireVirtualCacheView or AllocFxRt fails: only after an allocation failure, and the oracle runs within memory"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/fx.c",
+   "function": "AddUserSymbol",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (++pfx->usedUserSymbols >= pfx->numUserSymbols) {",
+   "verdict": "equivalent",
+   "why": "the test follows the increment and the entry written is usedUserSymbols-1: when usedUserSymbols equals numUserSymbols that index is still inside the table, so growing one symbol later writes the same entry"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/fx.c",
+   "function": "PushVal",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (pfxrt->usedValStack >=pfxrt->numValStack) {",
+   "verdict": "equivalent",
+   "why": "the value stack is sized twice the deepest operator stack (at least MinValStackSize) and the RPN the translator builds never pops more than it pushed, so usedValStack never reaches numValStack nor pops at 0: the bounds' equality cases do not occur"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/fx.c",
+   "function": "PopVal",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (pfxrt->usedValStack <= 0) {",
+   "verdict": "equivalent",
+   "why": "the value stack is sized twice the deepest operator stack (at least MinValStackSize) and the RPN the translator builds never pops more than it pushed, so usedValStack never reaches numValStack nor pops at 0: the bounds' equality cases do not occur"
   }
  ]
 }

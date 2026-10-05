@@ -2511,7 +2511,11 @@ _FX_GAP15 = ["p {2,3}.r", "u [1]", "abs (u)", "u .r", "max (u, v)", "rand ()", "
              "u;", "%[fx:%[fx:0.25]]", "#", "u[2]",
              # third batch: spaces where only TranslateExpression's, the after-operator and
              # the after-unary-prefix SkipSpaces skip them (hand-run, one kill each)
-             "( )", "u+( )", "a= 1;a", "- "]
+             "( )", "u+( )", "a= 1;a", "- ",
+             # fourth batch: unary prefixes nested deeper than the operator stack's later top,
+             # then a user symbol after a binary operator (TopOprIsUnaryPrefix reads the slot
+             # the earlier, deeper prefixes left; hand-run: killed)
+             "zz=0.5; (-(-(-zz))) + zz * zz", "zz=0.5; -(-(-(-zz))) * zz + zz", "zz=0.5; (!(!(!zz))) - zz*zz"]
 
 
 def _fx_gap15_cases():
