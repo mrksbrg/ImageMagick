@@ -1,14 +1,14 @@
-mutate: 41 mutants in MagickCore/identify\.c$, 3 functions
+mutate: 35 mutants in MagickCore/identify\.c$, 3 functions
 mutate: baseline over 3 cases in 0s
-  mutants: 25/41 (0s)
-  mutants: 41/41 (0s)
+  mutants: 25/35 (0s)
+  mutants: 35/35 (0s)
 
-mutate: 41 mutants, 0s
-  killed 6, survived 28 (0 capped), no coverage 7, errors 0
-  mutation score on reached code: 17.6%   overall: 14.6%
+mutate: 35 mutants, 0s
+  killed 4, survived 24 (0 capped), no coverage 7, errors 0
+  mutation score on reached code: 14.3%   overall: 11.4%
 
   function                           total killed survived no-cov
-  IdentifyImage                         34      6       28      0
+  IdentifyImage                         28      4       24      0
   GetLocationStatistics                  6      0        0      6
   PrintChannelLocations                  1      0        0      1
 
@@ -23,24 +23,20 @@ mutate: 41 mutants, 0s
     x  identify.c:959:26 cxx_div_to_mul             "Read mask",1.0/scale,channel_statistics);
        identify.c:965:31 cxx_div_to_mul             "Composite mask",1.0/scale,channel_statistics);
        identify.c:1116:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-       identify.c:1116:61 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
     x  identify.c:1178:15 cxx_remove_void_call       GetPixelInfo(image,&pixel);
     x  identify.c:1313:55 cxx_ne_to_eq               if ((image->page.width != 0) || (image->page.height != 0) ||
     x  identify.c:1314:22 cxx_ne_to_eq               (image->page.x != 0) || (image->page.y != 0))
     x  identify.c:1371:34 cxx_lt_to_le               ((size_t) (q-d+1) < sizeof(image_info->filename)))
-    x  identify.c:1503:51 cxx_sub_to_add             for (i=0; i < (ssize_t) profile_length-5; i+=(ssize_t) length)
     x  identify.c:1661:22 cxx_gt_to_ge               if (strlen(buffer) > 1)
     x  identify.c:1670:72 cxx_mul_to_div             (void) FormatMagickSize((MagickSizeType) ((double) image->columns*
     x  identify.c:1671:20 cxx_div_to_mul             image->rows/elapsed_time+0.5),MagickFalse,"P",MagickPathExtent,buffer);
     x  identify.c:1671:33 cxx_add_to_sub             image->rows/elapsed_time+0.5),MagickFalse,"P",MagickPathExtent,buffer);
        identify.c:1685:14 cxx_remove_void_call       (void) GetMagickUTCTime(&image->ttl,&timestamp);
-       identify.c:1692:31 cxx_div_to_mul             ceil((double) (seconds/(3600*24))),
        identify.c:1693:33 cxx_rem_to_div             ceil((double) ((seconds % (24*3600))/3600)),
        identify.c:1693:45 cxx_div_to_mul             ceil((double) ((seconds % (24*3600))/3600)),
        identify.c:1694:33 cxx_rem_to_div             ceil((double) ((seconds % 3600)/60)),
-       identify.c:1694:40 cxx_div_to_mul             ceil((double) ((seconds % 3600)/60)),
        identify.c:1695:41 cxx_rem_to_div             ceil((double) ((seconds % 3600) % 60)),expired,iso8601);
     x  identify.c:1700:35 cxx_mul_to_div             60.0)),(unsigned long) (1000.0*(elapsed_time-floor(elapsed_time))));
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-identify.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-identify.json
