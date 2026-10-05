@@ -1,19 +1,50 @@
 mutate: 778 mutants in MagickCore/property\.c$, 28 functions
-mutate: baseline over 14460 cases in 0s
-mutate: resuming, 778 mutants already done
+mutate: baseline over 14463 cases in 0s
+  mutants: 25/778 (1s)
+  mutants: 50/778 (1s)
+  mutants: 75/778 (2s)
+  mutants: 100/778 (3s)
+  mutants: 125/778 (4s)
+  mutants: 150/778 (5s)
+  mutants: 175/778 (6s)
+  mutants: 200/778 (7s)
+  mutants: 225/778 (7s)
+  mutants: 250/778 (8s)
+  mutants: 275/778 (9s)
+  mutants: 300/778 (9s)
+  mutants: 325/778 (10s)
+  mutants: 350/778 (10s)
+  mutants: 375/778 (10s)
+  mutants: 400/778 (11s)
+  mutants: 425/778 (35s)
+  mutants: 450/778 (50s)
+  mutants: 475/778 (68s)
+  mutants: 500/778 (74s)
+  mutants: 525/778 (78s)
+  mutants: 550/778 (80s)
+  mutants: 575/778 (85s)
+  mutants: 600/778 (98s)
+  mutants: 625/778 (131s)
+  mutants: 650/778 (161s)
+  mutants: 675/778 (177s)
+  mutants: 700/778 (181s)
+  mutants: 725/778 (183s)
+  mutants: 750/778 (186s)
+  mutants: 775/778 (204s)
+  mutants: 778/778 (205s)
 
-mutate: 778 mutants, 0s
-  killed 609, survived 164 (123 capped), no coverage 5, errors 0
-  mutation score on reached code: 78.8%   overall: 78.3%
+mutate: 778 mutants, 205s
+  killed 665, survived 108 (67 capped), no coverage 5, errors 0
+  mutation score on reached code: 86.0%   overall: 85.5%
 
   function                           total killed survived no-cov
   GetEXIFProperty                      158    158        0      0
   GetMagickProperty                    124    102       22      0
   InterpretImageProperties             111     60       51      0
-  SetImageProperty                      83     29       54      0
+  SetImageProperty                      83     83        0      0
   Get8BIMProperty                       60     51        9      0
   TracePSClippath                       41     35        6      0
-  GetMagickPropertyLetter               35     19       16      0
+  GetMagickPropertyLetter               35     21       14      0
   GetXMPProperty                        30     30        0      0
   TraceSVGClippath                      27     24        3      0
   GetImageProperty                      26     26        0      0
@@ -69,8 +100,6 @@ mutate: 778 mutants, 0s
      c property.c:2775:53 cxx_eq_to_ne               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
     xc property.c:2800:25 cxx_eq_to_ne               (image->quality == 0 ? 92 : image->quality));
     xc property.c:2816:36 cxx_eq_to_ne               (image_info->number_scenes == 0 ? 2147483647 :
-    xc property.c:2879:27 cxx_ne_to_eq               if ((image->columns != 0) && (image->rows != 0))
-    xc property.c:2879:49 cxx_ne_to_eq               if ((image->columns != 0) && (image->rows != 0))
     xc property.c:2892:17 cxx_ne_to_eq               if (image != (Image *) NULL)
     x  property.c:2920:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     x  property.c:2920:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
@@ -147,60 +176,6 @@ mutate: 778 mutants, 0s
     xc property.c:4290:55 cxx_ne_to_eq               if ((property_info != image_info) && (property_info != (ImageInfo *) NULL))
      c property.c:4294:26 cxx_ne_to_eq               if (interpret_text != (char *) NULL)
     xc property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc property.c:4427:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc property.c:4434:24 cxx_le_to_lt               if (strlen(property) <= 1)
-    xc property.c:4444:24 cxx_gt_to_ge               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
-    xc property.c:4444:24 cxx_gt_to_le               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
-    xc property.c:4444:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
-    xc property.c:4444:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
-    xc property.c:4445:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
-    xc property.c:4475:48 cxx_eq_to_ne               if (LocaleCompare("background",property) == 0)
-    xc property.c:4500:26 cxx_lt_to_ge               if (colorspace < 0)
-    xc property.c:4500:26 cxx_lt_to_le               if (colorspace < 0)
-    xc property.c:4510:23 cxx_lt_to_ge               if (compose < 0)
-    xc property.c:4510:23 cxx_lt_to_le               if (compose < 0)
-    xc property.c:4522:27 cxx_lt_to_ge               if (compression < 0)
-    xc property.c:4522:27 cxx_lt_to_le               if (compression < 0)
-    xc property.c:4538:38 cxx_ne_to_eq               if ((flags & GreaterValue) != 0)
-    xc property.c:4540:32 cxx_gt_to_ge               if (image->delay > (size_t) floor(geometry_info.rho+0.5))
-    xc property.c:4540:32 cxx_gt_to_le               if (image->delay > (size_t) floor(geometry_info.rho+0.5))
-    xc property.c:4540:66 cxx_add_to_sub             if (image->delay > (size_t) floor(geometry_info.rho+0.5))
-    xc property.c:4541:62 cxx_add_to_sub             image->delay=(size_t) floor(geometry_info.rho+0.5);
-    xc property.c:4544:37 cxx_ne_to_eq               if ((flags & LessValue) != 0)
-    xc property.c:4546:43 cxx_lt_to_ge               if ((double) image->delay < floor(geometry_info.rho+0.5))
-    xc property.c:4546:43 cxx_lt_to_le               if ((double) image->delay < floor(geometry_info.rho+0.5))
-    xc property.c:4546:68 cxx_add_to_sub             if ((double) image->delay < floor(geometry_info.rho+0.5))
-    xc property.c:4548:40 cxx_add_to_sub             geometry_info.sigma+0.5));
-    xc property.c:4551:60 cxx_add_to_sub             image->delay=(size_t) floor(geometry_info.rho+0.5);
-    xc property.c:4552:36 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
-    xc property.c:4554:34 cxx_add_to_sub             geometry_info.sigma+0.5));
-    xc property.c:4569:34 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
-    xc property.c:4572:36 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
-    xc property.c:4587:23 cxx_lt_to_ge               if (dispose < 0)
-    xc property.c:4587:23 cxx_lt_to_le               if (dispose < 0)
-    xc property.c:4622:43 cxx_eq_to_ne               if (LocaleCompare("gamma",property) == 0)
-    xc property.c:4627:45 cxx_eq_to_ne               if (LocaleCompare("gravity",property) == 0)
-    xc property.c:4633:23 cxx_lt_to_ge               if (gravity < 0)
-    xc property.c:4633:23 cxx_lt_to_le               if (gravity < 0)
-    xc property.c:4661:25 cxx_lt_to_ge               if (intensity < 0)
-    xc property.c:4661:25 cxx_lt_to_le               if (intensity < 0)
-    xc property.c:4673:32 cxx_lt_to_ge               if (rendering_intent < 0)
-    xc property.c:4673:32 cxx_lt_to_le               if (rendering_intent < 0)
-    xc property.c:4685:27 cxx_lt_to_ge               if (interpolate < 0)
-    xc property.c:4685:27 cxx_lt_to_le               if (interpolate < 0)
-    xc property.c:4703:46 cxx_eq_to_ne               if (LocaleCompare("kurtosis",property) == 0)
-    xc property.c:4735:44 cxx_eq_to_ne               if (LocaleCompare("opaque",property) == 0)
-    xc property.c:4745:42 cxx_eq_to_ne               if (LocaleCompare("page",property) == 0)
-    xc property.c:4769:54 cxx_eq_to_ne               if (LocaleCompare("rendering-intent",property) == 0)
-    xc property.c:4776:32 cxx_lt_to_ge               if (rendering_intent < 0)
-    xc property.c:4776:32 cxx_lt_to_le               if (rendering_intent < 0)
-    xc property.c:4814:20 cxx_lt_to_ge               if (type < 0)
-    xc property.c:4814:20 cxx_lt_to_le               if (type < 0)
-    xc property.c:4824:43 cxx_eq_to_ne               if (LocaleCompare("units",property) == 0)
-    xc property.c:4830:21 cxx_lt_to_ge               if (units < 0)
-    xc property.c:4830:21 cxx_lt_to_le               if (units < 0)
-    xc property.c:4840:45 cxx_eq_to_ne               if (LocaleCompare("version",property) == 0)
-    xc property.c:4851:43 cxx_eq_to_ne               if (LocaleCompare("width",property) == 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
   full results: build-oracle/work/mutation-resweep-property.json
