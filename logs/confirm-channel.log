@@ -1,9 +1,10 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 26 mutants in MagickCore/channel\.c$, 8 functions
-mutate: baseline over 90 cases in 0s
-  mutants: 25/26 (3s)
-  mutants: 26/26 (3s)
+mutate: baseline over 13 cases in 0s
+  mutants: 25/26 (1s)
+  mutants: 26/26 (1s)
 
-mutate: 26 mutants, 3s
+mutate: 26 mutants, 1s
   killed 0, survived 2 (0 capped), no coverage 24, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -22,4 +23,4 @@ mutate: 26 mutants, 3s
     x  channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-channel.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-channel.json
