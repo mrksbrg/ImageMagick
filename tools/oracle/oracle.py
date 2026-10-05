@@ -34,6 +34,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -530,6 +531,35 @@ def driver_path(binary):
     return os.path.join(os.path.dirname(binary), "imdriver")
 
 
+# A step that drives an X client with synthetic key presses: ["@xevents", SCRIPT, magick args...]
+# runs `xevents SCRIPT -- magick args...` (driver/xevents.c), for display's commands and widgets.
+XEVENTS_STEP = "@xevents"
+XEVENTS = os.path.join(OUT, "xevents", "xevents")
+
+
+XEVENTS_LOCK = threading.Lock()  # the oracle's workers are threads
+
+
+def xevents_path():
+    """xevents, compiled from driver/xevents.c when missing or older than it; None where it
+    cannot be built (no Xlib or XTEST headers): the step then fails alike in every run."""
+    src = os.path.join(ROOT, "tools", "oracle", "driver", "xevents.c")
+    with XEVENTS_LOCK:
+        if os.path.exists(XEVENTS) and os.path.getmtime(XEVENTS) >= os.path.getmtime(src):
+            return XEVENTS
+        os.makedirs(os.path.dirname(XEVENTS), exist_ok=True)
+        fd, tmp = tempfile.mkstemp(dir=os.path.dirname(XEVENTS))  # other processes may build too
+        os.close(fd)
+        r = subprocess.run(["cc", "-O2", "-o", tmp, src, "-lX11", "-lXtst"],
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if r.returncode != 0:
+            os.remove(tmp)
+            return None
+        os.chmod(tmp, 0o755)
+        os.replace(tmp, XEVENTS)
+        return XEVENTS
+
+
 def command_line(binary, argv):
     """The full command for one expanded step, wrapper and seed included."""
     if argv and argv[0] == DRIVER_STEP:
@@ -538,13 +568,22 @@ def command_line(binary, argv):
         if not os.path.exists(driver_path(binary)):
             return WRAPPER + [binary, "-imdriver-not-built"]
         return WRAPPER + [driver_path(binary)] + argv[1:]
+    if argv and argv[0] == XEVENTS_STEP:
+        helper = xevents_path()
+        if helper is None:
+            return WRAPPER + [binary, "-xevents-not-built"]
+        return WRAPPER + [helper, argv[1], "--"] + magick_line(binary, argv[2:])
+    return WRAPPER + magick_line(binary, argv)
+
+
+def magick_line(binary, argv):
     # Every random generator is seeded; unseeded ones read /dev/urandom.
     # conjure takes `-key value` script variables, not options, so MSL
     # cases must avoid random operators instead.
     if argv and argv[0] in UNSEEDED:
-        return WRAPPER + [binary] + argv
+        return [binary] + argv
     at = 1 if argv and argv[0] in SUBCOMMANDS else 0
-    return WRAPPER + [binary] + argv[:at] + ["-seed", "1"] + argv[at:]
+    return [binary] + argv[:at] + ["-seed", "1"] + argv[at:]
 
 
 def run_step(argv, d, stdin_path, **run_options):

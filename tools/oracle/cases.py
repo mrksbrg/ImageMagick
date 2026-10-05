@@ -4931,6 +4931,31 @@ for _screen in ("640x480x8", "640x480x16", "640x480x15", "640x480x30", "640x480x
 GAP_X11_SCREEN_CASES += [
     ("x11 driver animate", [["@driver", "animate", img("rose"), img("rose_alpha"), img("gray16")]], {}, True),
     ("x11 driver animate, one frame", [["@driver", "animate", img("tall")]], {}, True)]
+# Round 3 (W01): display's interactive commands, driven with synthetic key presses through
+# xevents (driver/xevents.c; the oracle's @xevents step). Each script waits for display's window
+# (map), presses the command's key, answers a dialog where there is one (map, ctrl+u to clear
+# the preset reply, the reply, Return), grabs the image window and quits (q). Each entry: label,
+# script, magick arguments.
+# Left out, each for a reason measured: t (trim), F5 (add noise: a menu), s (shear) and asterisk
+# (rotate) leave a widget open that q does not close; F13 has no key on this keymap; numbersign
+# and space (next image) replace the window under the script; plus (zoom) opens a magnifier that
+# q does not close; question (image information) shows text that differs between the sandbox
+# and a plain run.
+_XEV_KEYS = ["slash", "backslash", "h", "equal", "asciitilde", "period", "N", "C", "Z",
+             "less", "greater", "minus", "at", "F2"]
+_XEV_DIALOGS = [("F3", "0x1"), ("F4", "3"), ("F6", "0x1"), ("F7", "0x2"), ("F8", "50%"),
+                ("F9", "2"), ("F10", "3"), ("F11", "30x30"), ("F12", "5x5"),
+                ("H", "120"), ("S", "150"), ("L", "80"), ("G", "1.6"), ("percent", "60x40")]
+GAP_XEVENTS_CASES = [("xevents display key %s" % k, "map key:%s grab:out.ppm key:q" % k,
+                      ["display", img("rose")]) for k in _XEV_KEYS]
+GAP_XEVENTS_CASES += [("xevents display key %s, reply %s" % (k, reply),
+                       "map key:%s map key:ctrl+u type:%s key:Return grab:out.ppm key:q" % (k, reply),
+                       ["display", img("rose")]) for k, reply in _XEV_DIALOGS]
+GAP_XEVENTS_CASES += [
+    ("xevents display undo after negate", "map key:asciitilde key:ctrl+z grab:out.ppm key:q", ["display", img("rose")]),
+    ("xevents display several commands", "map key:slash key:h key:equal key:asciitilde key:period grab:out.ppm key:q",
+     ["display", img("rose_alpha")]),
+]
 # label, steps, environment. MAGICK_OCL_DEVICE=false starts with OpenCL off but still gets the
 # fixed device profile (oracle.py, seed_opencl_profile): without one, switching OpenCL on runs
 # ImageMagick's device benchmark, whose scores and choice vary from run to run.
@@ -4972,6 +4997,8 @@ def _gap_x11_opencl_cases():
                         x11=screen)
     for label, steps, env in GAP_OPENCL_DRIVER_CASES:
         yield _with_run(_case("gaps", label, steps, []), env=env)
+    for label, script, args in GAP_XEVENTS_CASES:
+        yield _with_run(_case("gaps", label, [["@xevents", script] + args], ["out.ppm"]), x11=True)
 
 
 def _gap_image_cases(entries):
