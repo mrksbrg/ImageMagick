@@ -2665,6 +2665,36 @@ replaces it with DestroyPixelStream at once.
 
 Trusted now, Windows: **34 of 36**. Left: fx.c (91) and blob.c (87).
 
+### Confirmation sweep with the grown catalogue (Windows, night of 2026-10-04/05)
+
+A fresh statement-deletion sweep of all 36 regular Windows files against the whole catalogue
+(14,600 cases, with yesterday's driver families), `mull-sdl-win`, capped at 1500 cases per
+mutant, in up to four instances (22:35 to 07:13; reports `mutation-sweep1005*-<file>.json`).
+Before it, a determinism selfcheck of the whole catalogue: 14,553 cases, 4 runs each, none
+nondeterministic.
+
+**No trusted file lost its trust**, and several gained: monitor 92 → 100, signature 82 → 98,
+resource 97 → 99, option 88 → 90, registry 88 → 91, exception 91 → 93, quantize 92 → 95.
+Merged adjusted scores: quantum-import, quantum-export, cache, quantum, timer, monitor,
+splay-tree, linked-list, cache-view, semaphore 100; matrix, xml-tree, stream, pixel, resource 99;
+signature 98; quantize 95; token, color 94; exception 93; histogram, fx 92; constitute, registry
+91; option, colorspace 90; gem, blob 89; distort, feature, morphology 88; resample, prepress 87;
+composite, montage 84; magick 78 (its three functions under the bar written down).
+
+**fx.c, overnight.** A correction first: last evening's hand-runs built the mutant ids with a
+guessed end column (start + 1), which matches no mutant, so every mutant read "same". With the
+ids from the report, targeted expressions kill: a space between a token and its bracket or
+qualifier (`abs (u)`, `u [1]`, `p {2,3}`, `u .r`: PeekChar's SkipSpaces), empty brackets `( )`,
+a spaced assignment `a= 1;a`, a lone unary minus `- `, `epoch( %[date:x])` (PeekStr's
+SkipSpaces), a trailing `;`, a nested `%[fx:%[fx:0.25]]`, a bare `#`, and `u[2]` of two images
+(family `fxgap15`, 20 cases). Eleven verdicts: `severity >= ErrorException` against `>` (no code
+in ImageMagick raises exactly ErrorException, 400; fx raises OptionError, 410), GetPixelInfo
+before QueryColorCompliance and InterpolatePixelInfo (both initialise the colour themselves),
+and the SkipSpaces in GetOperand, GetOperator, TranslateStatement and TranslateStatementList
+(each caller has already skipped). **blob.c:** SetBlobExtent below, at and above what is
+already written, and with MAGICK_SYNCHRONIZE; FileToImage of an empty file (a zero buffer
+size); three verdicts (a failing fstat only changes the copy's chunk size).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
