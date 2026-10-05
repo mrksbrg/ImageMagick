@@ -1,10 +1,10 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 34 mutants in MagickCore/list\.c$, 14 functions
-mutate: baseline over 488 cases in 0s
+mutate: baseline over 479 cases in 0s
   mutants: 25/34 (0s)
-  mutants: 34/34 (82s)
+  mutants: 34/34 (77s)
 
-mutate: 34 mutants, 82s
+mutate: 34 mutants, 77s
   killed 0, survived 5 (0 capped), no coverage 29, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -32,4 +32,4 @@ mutate: 34 mutants, 82s
     x  list.c:1256:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6278a30a1-list.json
+  full results: build-oracle/work/mutation-confirm-ec8ded5ae-list.json
