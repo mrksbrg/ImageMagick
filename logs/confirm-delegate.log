@@ -1,11 +1,11 @@
 mutate: 89 mutants in MagickCore/delegate\.c$, 19 functions
-mutate: baseline over 52 cases in 0s
+mutate: baseline over 23 cases in 0s
   mutants: 25/89 (0s)
   mutants: 50/89 (0s)
   mutants: 75/89 (0s)
-  mutants: 89/89 (8s)
+  mutants: 89/89 (2s)
 
-mutate: 89 mutants, 8s
+mutate: 89 mutants, 2s
   killed 0, survived 4 (0 capped), no coverage 85, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -37,4 +37,4 @@ mutate: 89 mutants, 8s
     x  delegate.c:321:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&delegate_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-656676901-delegate.json
+  full results: build-oracle/work/mutation-confirm-310d2a3b3-delegate.json
