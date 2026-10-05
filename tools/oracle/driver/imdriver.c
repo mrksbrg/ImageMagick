@@ -2168,6 +2168,16 @@ static int ConfigureCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+static FILE *ScratchFile(void)
+{
+  /* a scratch file in the case directory, not one in /tmp: ERDC's landlock sandbox lets a case
+     write only under build-oracle/, so a temporary file cannot be created there (logcfg and
+     delegatecfg's listinfo then failed alike on base and mutant, killing nothing) */
+  FILE *f=fopen("imdriver-scratch.txt","w+b");
+  if (f != (FILE *) NULL) (void) remove("imdriver-scratch.txt");
+  return(f);
+}
+
 static int CompareNames(const void *,const void *);
 
 static void PrintLogMethod(const LogEventType type,const char *text)
@@ -2185,7 +2195,7 @@ static int LogCfgCmd(int argc,char **argv,ExceptionInfo *exception)
   FILE *f;
   int show=0;
   if (getcwd(cwd,sizeof(cwd)) == (char *) NULL) *cwd='\0';
-  f=tmpfile();
+  f=ScratchFile();
   if (f == (FILE *) NULL) return(1);
   (void) ListLogInfo(f,exception);
   rewind(f);
@@ -2447,7 +2457,7 @@ static int DelegateCfgCmd(int argc,char **argv,ExceptionInfo *exception)
       {
         char line[3*MagickPathExtent];
         int show=0;
-        FILE *f=tmpfile();
+        FILE *f=ScratchFile();
         if (f == (FILE *) NULL) return(1);
         (void) ListDelegateInfo(f,exception);
         rewind(f);
