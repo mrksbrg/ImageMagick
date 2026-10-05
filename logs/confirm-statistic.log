@@ -1,14 +1,16 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 149 mutants in MagickCore/statistic\.c$, 29 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 42 cases in 0s
   mutants: 25/149 (0s)
   mutants: 50/149 (0s)
   mutants: 75/149 (0s)
   mutants: 100/149 (0s)
   mutants: 125/149 (0s)
-  mutants: 149/149 (0s)
+  mutants: 149/149 (4s)
 
-mutate: 149 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 149, errors 0
+mutate: 149 mutants, 4s
+  killed 0, survived 6 (0 capped), no coverage 143, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetImageMoments                       29      0        0     29
@@ -22,12 +24,12 @@ mutate: 149 mutants, 0s
   AcquirePixelTLS                        4      0        0      4
   ApplyEvaluateOperator                  4      0        0      4
   EvaluateImage                          4      0        0      4
-  FunctionImage                          4      0        0      4
+  FunctionImage                          4      0        4      0
   MagickSafeReciprocalLD                 4      0        0      4
   GetImageExtrema                        3      0        0      3
   DestroyPixelTLS                        2      0        0      2
   AcquireImageCanvas                     2      0        0      2
-  ApplyFunction                          2      0        0      2
+  ApplyFunction                          2      0        2      0
   GetImagePerceptualHash                 2      0        0      2
   DestroyPixelList                       2      0        0      2
   DestroyPixelListTLS                    2      0        0      2
@@ -41,4 +43,13 @@ mutate: 149 mutants, 0s
   GetModePixelList                       1      0        0      1
   ResetPixelList                         1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-statistic.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  statistic.c:1034:18 cxx_le_to_lt               if (result <= -1.0)
+    x  statistic.c:1037:20 cxx_ge_to_gt               if (result >= 1.0)
+    x  statistic.c:1091:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  statistic.c:1141:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       statistic.c:1149:17 cxx_post_inc_to_post_dec   progress++;
+       statistic.c:1151:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-6278a30a1-statistic.json

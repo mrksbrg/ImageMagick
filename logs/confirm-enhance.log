@@ -1,20 +1,21 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 155 mutants in MagickCore/enhance\.c$, 30 functions
-mutate: baseline over 3 cases in 0s
+mutate: baseline over 171 cases in 0s
   mutants: 25/155 (0s)
   mutants: 50/155 (0s)
   mutants: 75/155 (0s)
-  mutants: 100/155 (0s)
-  mutants: 125/155 (0s)
-  mutants: 150/155 (0s)
-  mutants: 155/155 (0s)
+  mutants: 100/155 (6s)
+  mutants: 125/155 (7s)
+  mutants: 150/155 (12s)
+  mutants: 155/155 (13s)
 
-mutate: 155 mutants, 0s
-  killed 0, survived 5 (0 capped), no coverage 150, errors 0
+mutate: 155 mutants, 13s
+  killed 0, survived 34 (0 capped), no coverage 121, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ContrastStretchImage                  19      0        0     19
-  EqualizeImage                         16      0        0     16
+  EqualizeImage                         16      0       16      0
   CLAHEImage                            12      0        0     12
   ColorDecisionListImage                 9      0        0      9
   SigmoidalContrastImage                 9      0        0      9
@@ -23,15 +24,15 @@ mutate: 155 mutants, 0s
   EnhanceImage                           6      0        0      6
   GammaImage                             6      0        0      6
   LevelizeImage                          6      0        0      6
-  ModulateImage                          6      0        0      6
+  ModulateImage                          6      0        6      0
   ClipCLAHEHistogram                     5      0        0      5
-  ContrastImage                          5      0        0      5
+  ContrastImage                          5      0        5      0
   LevelImage                             5      0        0      5
-  NegateImage                            5      0        5      0
+  NegateImage                            5      0        0      5
   WhiteBalanceImage                      5      0        0      5
-  GrayscaleImage                         4      0        0      4
+  GrayscaleImage                         4      0        4      0
   MapCLAHEHistogram                      3      0        0      3
-  Contrast                               3      0        0      3
+  Contrast                               3      0        3      0
   AutoGammaImage                         2      0        0      2
   BrightnessContrastImage                2      0        0      2
   GenerateCLAHELut                       2      0        0      2
@@ -45,11 +46,40 @@ mutate: 155 mutants, 0s
   ModulateLCHuv                          1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
-    x  enhance.c:3975:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  enhance.c:3978:17 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
-    x  enhance.c:4045:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
-       enhance.c:4050:21 cxx_post_inc_to_post_dec   progress++;
-       enhance.c:4052:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  enhance.c:1396:18 cxx_mul_to_div             brightness+=0.5*sign*(0.5*(sin((double) (MagickPI*(brightness-0.5)))+1.0)-
+    x  enhance.c:1398:18 cxx_gt_to_ge               if (brightness > 1.0)
+    x  enhance.c:1401:20 cxx_lt_to_le               if (brightness < 0.0)
+    x  enhance.c:1435:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  enhance.c:1443:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  enhance.c:1503:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:1511:17 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:1513:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  enhance.c:2089:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       enhance.c:2099:15 cxx_ne_to_eq               if (map != (double *) NULL)
+       enhance.c:2101:21 cxx_ne_to_eq               if (histogram != (double *) NULL)
+       enhance.c:2103:24 cxx_ne_to_eq               if (equalize_map != (double *) NULL)
+    x  enhance.c:2142:49 cxx_post_inc_to_post_dec   ClampToQuantum(intensity))+(size_t) i]++;
+    x  enhance.c:2166:42 cxx_mul_to_div             (void) memset(equalize_map,0,(MaxMap+1)*GetPixelChannels(image)*
+    x  enhance.c:2166:66 cxx_mul_to_div             (void) memset(equalize_map,0,(MaxMap+1)*GetPixelChannels(image)*
+    x  enhance.c:2193:19 cxx_lt_to_le               for (j=0; j < (ssize_t) image->colors; j++)
+    x  enhance.c:2202:56 cxx_add_to_sub             ClampToQuantum(image->colormap[j].red))+channel];
+    x  enhance.c:2222:61 cxx_ne_to_eq               if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+    x  enhance.c:2226:32 cxx_ne_to_eq               if (black[channel] != white[channel])
+    x  enhance.c:2228:40 cxx_mul_to_div             GetPixelChannels(image)*ScaleQuantumToMap(
+    x  enhance.c:2229:58 cxx_add_to_sub             ClampToQuantum(image->colormap[j].alpha))+channel];
+    x  enhance.c:2276:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:2284:17 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:2286:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  enhance.c:2506:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  enhance.c:2645:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:2653:17 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:2655:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  enhance.c:3690:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  enhance.c:3715:27 cxx_lt_to_le               if (illuminant_type < 0)
+    x  enhance.c:3724:17 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  enhance.c:3907:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:3915:17 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:3917:21 cxx_eq_to_ne               if (proceed == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-enhance.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-enhance.json
