@@ -1,34 +1,23 @@
-mutate: 89 mutants in MagickCore/delegate\.c$, 19 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/89 (0s)
-  mutants: 50/89 (1s)
-  mutants: 75/89 (1s)
-  mutants: 89/89 (11s)
+mutate: 50 mutants in MagickCore/delegate\.c$, 10 functions
+mutate: baseline over 15 cases in 0s
+  mutants: 25/50 (0s)
+  mutants: 50/50 (10s)
 
-mutate: 89 mutants, 11s
-  killed 39, survived 35 (0 capped), no coverage 15, errors 0
-  mutation score on reached code: 52.7%   overall: 43.8%
+mutate: 50 mutants, 10s
+  killed 0, survived 35 (0 capped), no coverage 15, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   InvokeDelegate                        16      0       16      0
   GetDelegateList                       15      0        0     15
-  ExternalDelegateCommand               14     14        0      0
-  LoadDelegateCache                      7      7        0      0
-  IsExecutableToken                      5      5        0      0
   InterpretDelegateProperties            5      0        5      0
-  DestroyDelegate                        4      4        0      0
   GetMagickPropertyLetter                4      0        4      0
-  DelegateComponentTerminus              3      3        0      0
   CopyDelegateFile                       3      0        3      0
   GetDelegateCommand                     2      0        2      0
   GetDelegateInfoList                    2      0        2      0
-  IsDelegateCacheInstantiated            2      2        0      0
-  ListDelegateInfo                       2      1        1      0
-  DelegateComponentGenesis               1      1        0      0
-  GetDelegateCommands                    1      1        0      0
-  GetDelegateInfo                        1      1        0      0
   GetDelegateMode                        1      0        1      0
   GetDelegateThreadSupport               1      0        1      0
+  ListDelegateInfo                       1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  delegate.c:632:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
@@ -68,4 +57,4 @@ mutate: 89 mutants, 11s
     x  delegate.c:2065:27 cxx_ne_to_eq               for (j=0; commands[j] != (char *) NULL; j++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-delegate.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-delegate.json

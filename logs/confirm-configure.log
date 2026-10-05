@@ -1,12 +1,11 @@
-mutate: 56 mutants in MagickCore/configure\.c$, 12 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/56 (0s)
-  mutants: 50/56 (9s)
-  mutants: 56/56 (9s)
+mutate: 46 mutants in MagickCore/configure\.c$, 8 functions
+mutate: baseline over 7 cases in 0s
+  mutants: 25/46 (0s)
+  mutants: 46/46 (0s)
 
-mutate: 56 mutants, 9s
-  killed 10, survived 18 (0 capped), no coverage 28, errors 0
-  mutation score on reached code: 35.7%   overall: 17.9%
+mutate: 46 mutants, 0s
+  killed 0, survived 18 (0 capped), no coverage 28, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetConfigureList                      12      0        0     12
@@ -14,11 +13,7 @@ mutate: 56 mutants, 9s
   GetConfigureInfo                      11      0        0     11
   GetConfigureOption                     4      0        0      4
   DestroyConfigureElement                3      0        3      0
-  ConfigureComponentTerminus             3      3        0      0
-  GetConfigureOptions                    3      3        0      0
-  GetConfigurePaths                      3      3        0      0
   IsConfigureCacheInstantiated           2      0        2      0
-  ConfigureComponentGenesis              1      1        0      0
   GetConfigureInfoList                   1      0        1      0
   GetConfigureValue                      1      0        0      1
 
@@ -43,4 +38,4 @@ mutate: 56 mutants, 9s
        configure.c:1279:44 cxx_add_to_sub             file_xml,path,depth+1,exception);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-configure.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-configure.json

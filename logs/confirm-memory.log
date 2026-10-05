@@ -1,21 +1,12 @@
-mutate: 33 mutants in MagickCore/memory\.c$, 9 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/33 (13s)
-  mutants: 33/33 (16s)
+mutate: 7 mutants in MagickCore/memory\.c$, 2 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 7/7 (0s)
 
-mutate: 33 mutants, 16s
-  killed 26, survived 0 (0 capped), no coverage 7, errors 0
-  mutation score on reached code: 100.0%   overall: 78.8%
+mutate: 7 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 7, errors 0
 
   function                           total killed survived no-cov
-  ShredMagickMemory                     11     11        0      0
-  AcquireVirtualMemory                   8      8        0      0
   CopyMagickMemory                       4      0        0      4
   SetMagickMemoryMethods                 3      0        0      3
-  AcquireCriticalMemory                  2      2        0      0
-  RelinquishVirtualMemory                2      2        0      0
-  AcquireAlignedMemory                   1      1        0      0
-  RelinquishAlignedMemory                1      1        0      0
-  ResetMagickMemory                      1      1        0      0
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-memory.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-memory.json
