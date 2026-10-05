@@ -1,5 +1,5 @@
 mutate: 106 mutants in MagickCore/threshold\.c$, 19 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 2 cases in 0s
   mutants: 25/106 (0s)
   mutants: 50/106 (0s)
   mutants: 75/106 (0s)
@@ -7,7 +7,8 @@ mutate: baseline over 0 cases in 0s
   mutants: 106/106 (0s)
 
 mutate: 106 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 106, errors 0
+  killed 0, survived 5 (0 capped), no coverage 101, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   TriangleThreshold                     13      0        0     13
@@ -19,7 +20,7 @@ mutate: 106 mutants, 0s
   ClampImage                             6      0        0      6
   PerceptibleImage                       6      0        0      6
   OTSUThreshold                          5      0        0      5
-  BilevelImage                           5      0        0      5
+  BilevelImage                           5      0        5      0
   BlackThresholdImage                    5      0        0      5
   RandomThresholdImage                   5      0        0      5
   WhiteThresholdImage                    5      0        0      5
@@ -30,4 +31,12 @@ mutate: 106 mutants, 0s
   ListThresholdMaps                      1      0        0      1
   PerceptibleThreshold                   1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-310d2a3b3-threshold.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  threshold.c:824:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  threshold.c:879:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       threshold.c:887:17 cxx_post_inc_to_post_dec   progress++;
+       threshold.c:888:66 cxx_post_inc_to_post_dec   proceed=SetImageProgress(image,ThresholdImageTag,progress++,
+       threshold.c:890:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-8810b1471-threshold.json
