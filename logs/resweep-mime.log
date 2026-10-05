@@ -1,13 +1,8 @@
 mutate: 148 mutants in MagickCore/mime\.c$, 14 functions
-mutate: baseline over 14553 cases in 0s
-  mutants: 25/148 (0s)
-  mutants: 50/148 (1s)
-  mutants: 75/148 (1s)
-  mutants: 100/148 (1s)
-  mutants: 125/148 (2s)
-  mutants: 148/148 (131s)
+mutate: baseline over 14723 cases in 0s
+mutate: resuming, 148 mutants already done
 
-mutate: 148 mutants, 131s
+mutate: 148 mutants, 0s
   killed 80, survived 63 (4 capped), no coverage 5, errors 0
   mutation score on reached code: 55.9%   overall: 54.1%
 
@@ -29,23 +24,23 @@ mutate: 148 mutants, 131s
 
   survivors (equivalent, or a gap in the catalogue):
     x  mime.c:248:42 cxx_eq_to_ne               if (IsMimeCacheInstantiated(exception) == MagickFalse)
-       mime.c:257:7 cxx_remove_void_call       UnlockSemaphoreInfo(mime_semaphore);
-       mime.c:258:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
+    x  mime.c:257:7 cxx_remove_void_call       UnlockSemaphoreInfo(mime_semaphore);
+    x  mime.c:258:13 cxx_ne_to_eq               if (p != (ElementInfo *) NULL)
     x  mime.c:263:12 cxx_ne_to_eq               while (p != (ElementInfo *) NULL)
-       mime.c:271:23 cxx_gt_to_ge               if (q->priority > ((const MimeInfo *) element_info->value)->priority)
-       mime.c:271:23 cxx_gt_to_le               if (q->priority > ((const MimeInfo *) element_info->value)->priority)
+    x  mime.c:271:23 cxx_gt_to_ge               if (q->priority > ((const MimeInfo *) element_info->value)->priority)
+    x  mime.c:271:23 cxx_gt_to_le               if (q->priority > ((const MimeInfo *) element_info->value)->priority)
     x  mime.c:287:32 cxx_add_to_sub             if ((size_t) (q->offset+4) > length)
     x  mime.c:287:36 cxx_gt_to_ge               if ((size_t) (q->offset+4) > length)
     x  mime.c:287:36 cxx_gt_to_le               if ((size_t) (q->offset+4) > length)
     x  mime.c:291:21 cxx_eq_to_ne               if (q->mask == 0)
-       mime.c:298:38 cxx_eq_to_ne               if ((q->value & q->mask) == value)
+    x  mime.c:298:38 cxx_eq_to_ne               if ((q->value & q->mask) == value)
     x  mime.c:305:32 cxx_add_to_sub             if ((size_t) (q->offset+4) > length)
     x  mime.c:305:36 cxx_gt_to_ge               if ((size_t) (q->offset+4) > length)
     x  mime.c:305:36 cxx_gt_to_le               if ((size_t) (q->offset+4) > length)
     x  mime.c:309:23 cxx_eq_to_ne               if (q->endian == UndefinedEndian)
     x  mime.c:311:20 cxx_eq_to_ne               if (endian == LSBEndian)
     x  mime.c:321:21 cxx_eq_to_ne               if (q->mask == 0)
-       mime.c:328:38 cxx_eq_to_ne               if ((q->value & q->mask) == value)
+    x  mime.c:328:38 cxx_eq_to_ne               if ((q->value & q->mask) == value)
     x  mime.c:335:32 cxx_add_to_sub             if ((size_t) (q->offset+4) > length)
     x  mime.c:335:36 cxx_gt_to_ge               if ((size_t) (q->offset+4) > length)
     x  mime.c:335:36 cxx_gt_to_le               if ((size_t) (q->offset+4) > length)
@@ -59,20 +54,20 @@ mutate: 148 mutants, 131s
     x  mime.c:372:36 cxx_add_to_sub             if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
     x  mime.c:372:58 cxx_gt_to_ge               if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
     x  mime.c:372:58 cxx_gt_to_le               if ((size_t) (q->offset+i+(ssize_t) q->length) > length)
-       mime.c:386:5 cxx_remove_void_call       SetHeadElementInLinkedList(mime_cache,element_info);
+    x  mime.c:386:5 cxx_remove_void_call       SetHeadElementInLinkedList(mime_cache,element_info);
     x  mime.c:388:20 cxx_eq_to_ne               if (element_info == (ElementInfo *) NULL)
     x  mime.c:458:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  mime.c:555:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  mime.c:582:7 cxx_remove_void_call       qsort((void *) aliases,(size_t) i,sizeof(*aliases),MimeCompare);
     x  mime.c:678:26 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
        mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
-       mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-       mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-       mime.c:840:19 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
-       mime.c:849:13 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
-       mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
-       mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
-       mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+    x  mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  mime.c:840:19 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+    x  mime.c:849:13 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+    x  mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
+    x  mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
+    x  mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
        mime.c:861:24 cxx_add_to_sub             depth+1,exception);
     x  mime.c:879:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
     x  mime.c:886:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)

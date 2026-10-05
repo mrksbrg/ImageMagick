@@ -1,18 +1,8 @@
 mutate: 269 mutants in MagickCore/policy\.c$, 19 functions
-mutate: baseline over 14553 cases in 0s
-  mutants: 25/269 (11s)
-  mutants: 50/269 (27s)
-  mutants: 75/269 (34s)
-  mutants: 100/269 (49s)
-  mutants: 125/269 (103s)
-  mutants: 150/269 (110s)
-  mutants: 175/269 (132s)
-  mutants: 200/269 (153s)
-  mutants: 225/269 (163s)
-  mutants: 250/269 (176s)
-  mutants: 269/269 (214s)
+mutate: baseline over 14723 cases in 0s
+mutate: resuming, 269 mutants already done
 
-mutate: 269 mutants, 214s
+mutate: 269 mutants, 0s
   killed 142, survived 95 (68 capped), no coverage 32, errors 0
   mutation score on reached code: 59.9%   overall: 52.8%
 
@@ -55,10 +45,10 @@ mutate: 269 mutants, 214s
     x  policy.c:607:12 cxx_eq_to_ne               return(c == *DirectorySeparator ? MagickTrue : MagickFalse);
     x  policy.c:621:12 cxx_eq_to_ne               if (path == (const char *) NULL)
     x  policy.c:625:33 cxx_ne_to_eq               if (IsPolicyPathSeparator(*p) != MagickFalse)
-       policy.c:630:18 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
-       policy.c:630:22 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-       policy.c:630:22 cxx_ge_to_lt               if ((offset+1) >= (ssize_t) sizeof(partial))
-       policy.c:632:21 cxx_post_inc_to_post_dec   partial[offset++]=(*DirectorySeparator);
+    x  policy.c:630:18 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
+    x  policy.c:630:22 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
+    x  policy.c:630:22 cxx_ge_to_lt               if ((offset+1) >= (ssize_t) sizeof(partial))
+    x  policy.c:632:21 cxx_post_inc_to_post_dec   partial[offset++]=(*DirectorySeparator);
     x  policy.c:636:13 cxx_ne_to_eq               while (*p != '\0')
     x  policy.c:648:15 cxx_add_to_sub             ((i+1) < (ssize_t) sizeof(component)))
     x  policy.c:648:19 cxx_lt_to_le               ((i+1) < (ssize_t) sizeof(component)))
