@@ -1,11 +1,12 @@
 mutate: 1 mutants in MagickCore/thread\.c$, 1 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 10 cases in 0s
   mutants: 1/1 (0s)
 
 mutate: 1 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 1, errors 0
+  killed 1, survived 0 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 100.0%   overall: 100.0%
 
   function                           total killed survived no-cov
-  SetMagickThreadValue                   1      0        0      1
+  SetMagickThreadValue                   1      1        0      0
 
-  full results: build-oracle/work/mutation-confirm-310d2a3b3-thread.json
+  full results: build-oracle/work/mutation-confirm-8810b1471-thread.json

@@ -1,14 +1,19 @@
 mutate: 6 mutants in MagickCore/version\.c$, 4 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 6 cases in 0s
   mutants: 6/6 (0s)
 
 mutate: 6 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 6, errors 0
+  killed 0, survived 1 (0 capped), no coverage 5, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetMagickHomeURL                       3      0        0      3
   GetMagickQuantumRange                  1      0        0      1
-  CRC32                                  1      0        0      1
+  CRC32                                  1      0        1      0
   GetMagickVersion                       1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-310d2a3b3-version.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  version.c:544:19 cxx_lt_to_le               for (j=0; j < 256; j++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-8810b1471-version.json
