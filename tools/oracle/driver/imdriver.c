@@ -940,17 +940,21 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
     {
       /* WriteImages into a memory blob given in image_info->blob, frame by frame (adjoin off):
          SyncBlobStream promotes each later frame's buffer onto the list's owner */
-      size_t extent=4096;
-      void *memory=AcquireQuantumMemory(extent,1);
+      /* WriteImages works on a clone of image_info, so image_info->blob and ->length are not
+         updated, and a buffer the output outgrows is reallocated under the caller (its pointer
+         then dangles). So: a buffer it never outgrows (1 MB, zeroed), and only the bytes up to
+         the last one written are hashed. */
+      size_t extent=1048576, written=0;
+      unsigned char *memory=(unsigned char *) AcquireQuantumMemory(extent,1);
       MagickBooleanType status;
       (void) memset(memory,0,extent);
       image_info->adjoin=(argc > 6) && (strcmp(argv[6],"adjoin") == 0) ? MagickTrue : MagickFalse;
       SetImageInfoBlob(image_info,memory,extent);
       status=WriteImages(image_info,images,image_info->filename,exception);
-      (void) printf("writeimages %d blob %s length %.20g\n",(int) status,image_info->blob != NULL ? "yes" : "no",
-        (double) image_info->length);
-      if ((image_info->blob != NULL) && (image_info->length != 0))
-        (void) printf("bytes %08lx\n",Fnv((const unsigned char *) image_info->blob,image_info->length));
+      for (written=extent; (written > 0) && (memory[written-1] == 0); written--) ;
+      (void) printf("writeimages %d, in the caller's buffer: %s, %.20g bytes up to the last written %08lx\n",
+        (int) status,image_info->blob == (void *) memory ? "yes" : "no",(double) written,
+        Fnv(memory,written));
       Report(exception);
     }
   else if (strcmp(argv[2],"toblob") == 0)
