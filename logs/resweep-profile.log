@@ -1,54 +1,8 @@
 mutate: 549 mutants in MagickCore/profile\.c$, 44 functions
-  baseline: 500/12199 (2s)
-  baseline: 1000/12199 (3s)
-  baseline: 1500/12199 (5s)
-  baseline: 2000/12199 (6s)
-  baseline: 2500/12199 (8s)
-  baseline: 3000/12199 (10s)
-  baseline: 3500/12199 (13s)
-  baseline: 4000/12199 (14s)
-  baseline: 4500/12199 (15s)
-  baseline: 5000/12199 (17s)
-  baseline: 5500/12199 (19s)
-  baseline: 6000/12199 (21s)
-  baseline: 6500/12199 (23s)
-  baseline: 7000/12199 (24s)
-  baseline: 7500/12199 (26s)
-  baseline: 8000/12199 (27s)
-  baseline: 8500/12199 (29s)
-  baseline: 9000/12199 (32s)
-  baseline: 9500/12199 (34s)
-  baseline: 10000/12199 (36s)
-  baseline: 10500/12199 (37s)
-  baseline: 11000/12199 (39s)
-  baseline: 11500/12199 (40s)
-  baseline: 12000/12199 (42s)
-  baseline: 12199/12199 (42s)
-mutate: baseline over 14313 cases in 43s
-  mutants: 25/549 (1s)
-  mutants: 50/549 (2s)
-  mutants: 75/549 (2s)
-  mutants: 100/549 (6s)
-  mutants: 125/549 (17s)
-  mutants: 150/549 (18s)
-  mutants: 175/549 (24s)
-  mutants: 200/549 (34s)
-  mutants: 225/549 (39s)
-  mutants: 250/549 (43s)
-  mutants: 275/549 (47s)
-  mutants: 300/549 (54s)
-  mutants: 325/549 (56s)
-  mutants: 350/549 (58s)
-  mutants: 375/549 (59s)
-  mutants: 400/549 (62s)
-  mutants: 425/549 (65s)
-  mutants: 450/549 (66s)
-  mutants: 475/549 (66s)
-  mutants: 500/549 (67s)
-  mutants: 525/549 (73s)
-  mutants: 549/549 (203s)
+mutate: baseline over 14421 cases in 0s
+mutate: resuming, 549 mutants already done
 
-mutate: 549 mutants, 203s
+mutate: 549 mutants, 0s
   killed 389, survived 135 (9 capped), no coverage 25, errors 0
   mutation score on reached code: 74.2%   overall: 70.9%
 
@@ -99,8 +53,8 @@ mutate: 549 mutants, 203s
   WriteProfileShort                      1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
-     c profile.c:143:16 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
-     c profile.c:143:53 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
+    xc profile.c:143:16 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
+    xc profile.c:143:53 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
     xc profile.c:231:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc profile.c:235:27 cxx_ne_to_eq               if (image->profiles != (void *) NULL)
      c profile.c:236:9 cxx_remove_void_call       DestroyImageProfiles(image);
@@ -153,16 +107,16 @@ mutate: 549 mutants, 203s
     x  profile.c:1964:75 cxx_eq_to_ne               if (((LocaleCompare(name, "exif") == 0) || (LocaleCompare(name, "app1") == 0)) &&
     x  profile.c:1965:37 cxx_gt_to_ge               (GetStringInfoLength(profile) > 2))
     x  profile.c:1965:37 cxx_gt_to_le               (GetStringInfoLength(profile) > 2))
-       profile.c:1981:28 cxx_ne_to_eq               if (exif_profile != (StringInfo *) NULL)
-       profile.c:1983:15 cxx_remove_void_call       SetStringInfoDatum(exif_profile,profile_start);
-       profile.c:1984:15 cxx_remove_void_call       ConcatenateStringInfo(exif_profile,profile);
-       profile.c:1985:15 cxx_remove_void_call       SetStringInfoLength(profile,GetStringInfoLength(exif_profile));
-       profile.c:1986:15 cxx_remove_void_call       SetStringInfo(profile,exif_profile);
-       profile.c:2009:16 cxx_eq_to_ne               if (document == (xmlDocPtr) NULL)
-       profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
+    x  profile.c:1981:28 cxx_ne_to_eq               if (exif_profile != (StringInfo *) NULL)
+    x  profile.c:1983:15 cxx_remove_void_call       SetStringInfoDatum(exif_profile,profile_start);
+    x  profile.c:1984:15 cxx_remove_void_call       ConcatenateStringInfo(exif_profile,profile);
+    x  profile.c:1985:15 cxx_remove_void_call       SetStringInfoLength(profile,GetStringInfoLength(exif_profile));
+    x  profile.c:1986:15 cxx_remove_void_call       SetStringInfo(profile,exif_profile);
+    x  profile.c:2009:16 cxx_eq_to_ne               if (document == (xmlDocPtr) NULL)
+    x  profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
     x  profile.c:2043:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  profile.c:2046:32 cxx_gt_to_ge               if ((length == 0) || (length > GetMaxProfileSize()))
-       profile.c:2048:18 cxx_ne_to_eq               if (length != 0)
+    x  profile.c:2048:18 cxx_ne_to_eq               if (length != 0)
     x  profile.c:2056:34 cxx_eq_to_ne               if ((LocaleCompare(name,"xmp") == 0) &&
     x  profile.c:2071:15 cxx_gt_to_ge               if ((length > 4) && (LocaleCompare(key,"app1") == 0) &&
     x  profile.c:2097:14 cxx_gt_to_ge               if (length > GetMaxProfileSize())
@@ -170,7 +124,7 @@ mutate: 549 mutants, 203s
     x  profile.c:2311:35 cxx_le_to_lt               if ((format == 3) && (dimension <= MAGICK_USHORT_MAX))
     x  profile.c:2316:17 cxx_gt_to_ge               if (dimension > UINT32_MAX)
     x  profile.c:2318:14 cxx_eq_to_ne               if (format == 3)
-       profile.c:2319:5 cxx_remove_void_call       WriteProfileShort(endian,4,entry+2);
+    x  profile.c:2319:5 cxx_remove_void_call       WriteProfileShort(endian,4,entry+2);
     x  profile.c:2372:14 cxx_lt_to_le               if (length < 16)
     x  profile.c:2393:18 cxx_lt_to_le               if (length < 16)
     x  profile.c:2411:15 cxx_lt_to_le               if ((offset < 0) || ((size_t) offset >= length))

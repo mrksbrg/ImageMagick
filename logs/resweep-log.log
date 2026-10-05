@@ -1,19 +1,8 @@
 mutate: 255 mutants in MagickCore/log\.c$, 22 functions
-  baseline: 10/10 (0s)
-mutate: baseline over 14553 cases in 1s
-  mutants: 25/255 (1s)
-  mutants: 50/255 (2s)
-  mutants: 75/255 (19s)
-  mutants: 100/255 (47s)
-  mutants: 125/255 (57s)
-  mutants: 150/255 (57s)
-  mutants: 175/255 (57s)
-  mutants: 200/255 (57s)
-  mutants: 225/255 (63s)
-  mutants: 250/255 (90s)
-  mutants: 255/255 (132s)
+mutate: baseline over 14723 cases in 0s
+mutate: resuming, 255 mutants already done
 
-mutate: 255 mutants, 132s
+mutate: 255 mutants, 0s
   killed 85, survived 51 (45 capped), no coverage 119, errors 0
   mutation score on reached code: 62.5%   overall: 33.3%
 
@@ -64,18 +53,18 @@ mutate: 255 mutants, 132s
     x  log.c:837:15 cxx_eq_to_ne               if ((path == (const char *) NULL) ||
     x  log.c:843:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (8*sizeof(LogHandlerType)); j++)
     xc log.c:956:20 cxx_ne_to_eq               for ( ; *q != '\0'; q++)
-     c log.c:960:22 cxx_eq_to_ne               if (*q == quote)
+    xc log.c:960:22 cxx_eq_to_ne               if (*q == quote)
     xc log.c:973:41 cxx_gt_to_ge               if (bracket_depth > 0)
     xc log.c:977:29 cxx_eq_to_ne               if ((*q == '>') && (bracket_depth == 0))
     xc log.c:991:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
     xc log.c:991:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
-     c log.c:1000:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-     c log.c:1000:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-     c log.c:1007:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
-     c log.c:1009:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
-     c log.c:1018:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
-     c log.c:1022:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
-     c log.c:1027:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+    xc log.c:1000:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    xc log.c:1000:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    xc log.c:1007:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+    xc log.c:1009:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
+    xc log.c:1018:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
+    xc log.c:1022:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+    xc log.c:1027:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
      c log.c:1030:35 cxx_add_to_sub             path,depth+1,exception);
     xc log.c:1046:9 cxx_remove_void_call       GetTimerInfo((TimerInfo *) &log_info->timer);
     xc log.c:1055:20 cxx_eq_to_ne               if (status == MagickFalse)
@@ -86,7 +75,7 @@ mutate: 255 mutants, 132s
     xc log.c:1177:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
     xc log.c:1216:17 cxx_ne_to_eq               if (p->format != (char *) NULL)
     xc log.c:1220:19 cxx_ne_to_eq               if (p->filename != (char *) NULL)
-     c log.c:1223:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->event_semaphore);
+    xc log.c:1223:5 cxx_remove_void_call       RelinquishSemaphoreInfo(&p->event_semaphore);
     xc log.c:1230:21 cxx_eq_to_ne               if (log_semaphore == (SemaphoreInfo *) NULL)
      c log.c:1231:5 cxx_remove_void_call       ActivateSemaphoreInfo(&log_semaphore);
     xc log.c:1233:17 cxx_ne_to_eq               if (log_cache != (LinkedListInfo *) NULL)
