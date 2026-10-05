@@ -1,32 +1,8 @@
 mutate: 605 mutants in MagickCore/annotate\.c$, 23 functions
-mutate: baseline over 14553 cases in 0s
-  mutants: 25/605 (1s)
-  mutants: 50/605 (2s)
-  mutants: 75/605 (5s)
-  mutants: 100/605 (8s)
-  mutants: 125/605 (9s)
-  mutants: 150/605 (13s)
-  mutants: 175/605 (14s)
-  mutants: 200/605 (16s)
-  mutants: 225/605 (21s)
-  mutants: 250/605 (50s)
-  mutants: 275/605 (60s)
-  mutants: 300/605 (83s)
-  mutants: 325/605 (166s)
-  mutants: 350/605 (196s)
-  mutants: 375/605 (255s)
-  mutants: 400/605 (316s)
-  mutants: 425/605 (328s)
-  mutants: 450/605 (338s)
-  mutants: 475/605 (395s)
-  mutants: 500/605 (402s)
-  mutants: 525/605 (402s)
-  mutants: 550/605 (402s)
-  mutants: 575/605 (402s)
-  mutants: 600/605 (496s)
-  mutants: 605/605 (498s)
+mutate: baseline over 14723 cases in 0s
+mutate: resuming, 605 mutants already done
 
-mutate: 605 mutants, 498s
+mutate: 605 mutants, 0s
   killed 419, survived 94 (4 capped), no coverage 92, errors 0
   mutation score on reached code: 81.7%   overall: 69.3%
 
@@ -99,7 +75,7 @@ mutate: 605 mutants, 498s
     x  annotate.c:1646:78 cxx_eq_to_ne               (IsRightsAuthorized(PathPolicyDomain,ReadPolicyRights,draw_info->font) == MagickFalse))
        annotate.c:1667:21 cxx_ne_to_eq               if (type_info != (const TypeInfo *) NULL)
     x  annotate.c:1692:37 cxx_ge_to_gt               stream->size=attributes.st_size >= 0 ? (unsigned long)
-       annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
     x  annotate.c:1709:27 cxx_ne_to_eq               if ((draw_info->metrics != (char *) NULL) &&
     x  annotate.c:1710:45 cxx_ne_to_eq               (IsPathAccessible(draw_info->metrics) != MagickFalse))
     x  annotate.c:1714:18 cxx_ne_to_eq               if ((ft_status != 0) && (face->num_charmaps != 0))
@@ -107,8 +83,8 @@ mutate: 605 mutants, 498s
     x  annotate.c:1724:48 cxx_eq_to_ne               if (LocaleCompare(encoding,"AppleRoman") == 0)
     x  annotate.c:1758:11 cxx_remove_void_call       FreetypeDone(memory,library,stream);
        annotate.c:1790:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
-       annotate.c:1805:41 cxx_eq_to_ne               if (face->size->metrics.descender == 0)
-       annotate.c:1806:52 cxx_div_to_mul             metrics->descent=face->size->metrics.y_ppem/-3.5;
+    x  annotate.c:1805:41 cxx_eq_to_ne               if (face->size->metrics.descender == 0)
+    x  annotate.c:1806:52 cxx_div_to_mul             metrics->descent=face->size->metrics.y_ppem/-3.5;
     x  annotate.c:1811:54 cxx_div_to_mul             metrics->height=(double) face->size->metrics.height/64.0;
     x  annotate.c:1813:39 cxx_gt_to_ge               if (face->size->metrics.max_advance > MagickEpsilon)
     x  annotate.c:1813:39 cxx_gt_to_le               if (face->size->metrics.max_advance > MagickEpsilon)
@@ -123,7 +99,7 @@ mutate: 605 mutants, 498s
     x  annotate.c:1843:25 cxx_eq_to_ne               if (draw_info->render == MagickFalse)
     x  annotate.c:1881:32 cxx_ne_to_eq               if (image->storage_class != DirectClass)
     x  annotate.c:1887:23 cxx_lt_to_le               if (GetUTFCode(p) < 0)
-       annotate.c:1895:16 cxx_ne_to_eq               if (utf8 != (unsigned char *) NULL)
+    x  annotate.c:1895:16 cxx_ne_to_eq               if (utf8 != (unsigned char *) NULL)
     x  annotate.c:1926:21 cxx_ne_to_eq               if (glyph.image != (FT_Glyph) NULL)
     x  annotate.c:1928:9 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
     x  annotate.c:1944:22 cxx_lt_to_le               if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))
