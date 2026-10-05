@@ -1,61 +1,22 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 50 mutants in MagickCore/delegate\.c$, 10 functions
-  baseline: 6/6 (0s)
-mutate: baseline over 15 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/50 (0s)
-  mutants: 50/50 (10s)
+  mutants: 50/50 (0s)
 
-mutate: 50 mutants, 10s
-  killed 0, survived 35 (0 capped), no coverage 15, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 50 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 50, errors 0
 
   function                           total killed survived no-cov
-  InvokeDelegate                        16      0       16      0
+  InvokeDelegate                        16      0        0     16
   GetDelegateList                       15      0        0     15
-  InterpretDelegateProperties            5      0        5      0
-  GetMagickPropertyLetter                4      0        4      0
-  CopyDelegateFile                       3      0        3      0
-  GetDelegateCommand                     2      0        2      0
-  GetDelegateInfoList                    2      0        2      0
-  GetDelegateMode                        1      0        1      0
-  GetDelegateThreadSupport               1      0        1      0
-  ListDelegateInfo                       1      0        1      0
+  InterpretDelegateProperties            5      0        0      5
+  GetMagickPropertyLetter                4      0        0      4
+  CopyDelegateFile                       3      0        0      3
+  GetDelegateCommand                     2      0        0      2
+  GetDelegateInfoList                    2      0        0      2
+  GetDelegateMode                        1      0        0      1
+  GetDelegateThreadSupport               1      0        0      1
+  ListDelegateInfo                       1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  delegate.c:632:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:632:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:635:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:635:65 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1022:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1022:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1025:20 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-    x  delegate.c:1025:64 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
-       delegate.c:1076:20 cxx_eq_to_ne               if (*p == '\n') /* return-newline EOL */
-    x  delegate.c:1173:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1198:25 cxx_ne_to_eq               for (i=0; commands[i] != (char *) NULL; i++)
-    x  delegate.c:1401:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1407:52 cxx_add_to_sub             GetNumberOfElementsInLinkedList(delegate_cache)+1UL,sizeof(*delegates));
-    x  delegate.c:1560:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1596:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1696:18 cxx_eq_to_ne               if ((overwrite == MagickFalse) &&
-    x  delegate.c:1697:51 cxx_ne_to_eq               (GetPathAttributes(destination,&attributes) != MagickFalse))
-    x  delegate.c:1719:39 cxx_eq_to_ne               if ((fstat(source_file,&attributes) == 0) && (attributes.st_size > 0))
-    x  delegate.c:1774:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  delegate.c:1777:15 cxx_ne_to_eq               if ((decode != (const char *) NULL) &&
-    x  delegate.c:1780:15 cxx_ne_to_eq               if ((encode != (const char *) NULL) &&
-       delegate.c:1804:25 cxx_ne_to_eq               if (temporary != MagickFalse)
-       delegate.c:1840:25 cxx_ne_to_eq               if (temporary != MagickFalse)
-    x  delegate.c:1876:32 cxx_ne_to_eq               if (clone_info->adjoin != MagickFalse)
-       delegate.c:1888:21 cxx_ne_to_eq               if (temporary != MagickFalse)
-    x  delegate.c:1900:44 cxx_post_inc_to_post_dec   for (i=0; commands[i] != (char *) NULL; i++)
-    x  delegate.c:1928:34 cxx_ne_to_eq               if (delegate_info->spawn != MagickFalse)
-       delegate.c:1937:29 cxx_gt_to_ge               while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))
-       delegate.c:1937:29 cxx_gt_to_le               while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))
-       delegate.c:1937:72 cxx_eq_to_ne               while ((count-- > 0) && (access_utf8(image->filename,F_OK) == 0))
-       delegate.c:1938:22 cxx_remove_void_call       (void) MagickDelay(100);  /* sleep 0.1 seconds */
-    x  delegate.c:1942:42 cxx_ne_to_eq               if (IsPathAccessible(input_filename) != MagickFalse)
-    x  delegate.c:1956:31 cxx_ne_to_eq               if (image_info->temporary != MagickFalse)
-    x  delegate.c:1975:23 cxx_ne_to_eq               for ( ; commands[i] != (char *) NULL; i++)
-    x  delegate.c:2065:27 cxx_ne_to_eq               for (j=0; commands[j] != (char *) NULL; j++)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-5170fb874-delegate.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-delegate.json
