@@ -5047,28 +5047,30 @@ def _gap_cases():
 
 
 def _gap_x11_opencl_cases():
+    # Families of their own (x11, opencl, xevents), not gaps: mutate.py's case cap gives every
+    # family a share, and these slow cases lost to cheap CPU-only ones within gaps (W01).
     for label, steps, files in GAP_X11_CASES:
-        yield _with_run(_with_inputs(_case("gaps", label, steps, ["out.ppm"]), files=files or None),
+        yield _with_run(_with_inputs(_case("x11", label, steps, ["out.ppm"]), files=files or None),
                         x11=True)
     for label, steps, files in GAP_OPENCL_CASES:
-        yield _with_run(_with_inputs(_case("gaps", label, steps, ["out.miff"]), files=files or None),
+        yield _with_run(_with_inputs(_case("opencl", label, steps, ["out.miff"]), files=files or None),
                         env=_OCL_ENV)
     for label, env in GAP_OPENCL_DEVICE_CASES:
-        yield _with_run(_case("gaps", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
+        yield _with_run(_case("opencl", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
                               ["out.miff"]), env=env)
     for label, steps, files, screen in GAP_X11_SCREEN_CASES:
-        yield _with_run(_with_inputs(_case("gaps", label, steps, ["out.ppm"]), files=files or None),
+        yield _with_run(_with_inputs(_case("x11", label, steps, ["out.ppm"]), files=files or None),
                         x11=screen)
     for label, steps, env in GAP_OPENCL_DRIVER_CASES:
-        yield _with_run(_case("gaps", label, steps, []), env=env)
+        yield _with_run(_case("opencl", label, steps, []), env=env)
     # @ (Refresh) repaints the whole image window before each grab: display repaints a window it
     # has just resized from an Expose that may arrive before or after it swaps in the new image.
     for label, script, args in GAP_XEVENTS_CASES:
-        yield _with_run(_case("gaps", label, [["@xevents", script.replace("grab:", "key:at grab:")] + args],
+        yield _with_run(_case("xevents", label, [["@xevents", script.replace("grab:", "key:at grab:")] + args],
                               ["out.ppm"]), env=_XEV_ENV, x11=True)
     for label, script, args, names in GAP_XEVENTS_FILE_CASES:
         copies = [[img(n), "-strip", "%s.miff" % n] for n in names]
-        yield _with_run(_case("gaps", label, copies + [["@xevents", script.replace("grab:", "key:at grab:")] + args],
+        yield _with_run(_case("xevents", label, copies + [["@xevents", script.replace("grab:", "key:at grab:")] + args],
                               ["out.ppm"]), env=_XEV_ENV, x11=True)
 
 
