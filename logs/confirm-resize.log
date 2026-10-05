@@ -1,18 +1,18 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
-mutate: 183 mutants in MagickCore/resize\.c$, 32 functions
+mutate: 181 mutants in MagickCore/resize\.c$, 32 functions
 mutate: baseline over 73 cases in 0s
-  mutants: 25/183 (0s)
-  mutants: 50/183 (0s)
-  mutants: 75/183 (0s)
-  mutants: 100/183 (16s)
-  mutants: 125/183 (16s)
-  mutants: 150/183 (16s)
-  mutants: 175/183 (18s)
-  mutants: 183/183 (27s)
+  mutants: 25/181 (0s)
+  mutants: 50/181 (0s)
+  mutants: 75/181 (0s)
+  mutants: 100/181 (16s)
+  mutants: 125/181 (16s)
+  mutants: 150/181 (16s)
+  mutants: 175/181 (19s)
+  mutants: 181/181 (26s)
 
-mutate: 183 mutants, 27s
-  killed 2, survived 43 (0 capped), no coverage 138, errors 0
-  mutation score on reached code: 4.4%   overall: 1.1%
+mutate: 181 mutants, 26s
+  killed 0, survived 43 (0 capped), no coverage 138, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ScaleImage                            41      0        0     41
@@ -22,14 +22,14 @@ mutate: 183 mutants, 27s
   SampleImage                            7      0        0      7
   ThumbnailImage                         7      0        7      0
   InterpolativeResizeImage               6      0        0      6
-  VerticalFilter                         6      1        5      0
   MagicKernelSharp2021                   5      0        0      5
   BesselOrderOne                         5      0        0      5
+  VerticalFilter                         5      0        5      0
   Fish2X                                 4      0        0      4
   MagnifyImage                           4      0        0      4
-  HorizontalFilter                       4      1        3      0
   MagicKernelSharp2013                   3      0        0      3
   SincFast                               3      0        3      0
+  HorizontalFilter                       3      0        3      0
   Quadratic                              2      0        0      2
   Hq2XHelper                             2      0        0      2
   DestroyContributionTLS                 2      0        2      0
@@ -94,4 +94,4 @@ mutate: 183 mutants, 27s
     x  resize.c:4692:17 cxx_ne_to_eq               if (mime_type != (const char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6278a30a1-resize.json
+  full results: build-oracle/work/mutation-confirm-ec8ded5ae-resize.json

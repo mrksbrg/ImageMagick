@@ -6,9 +6,9 @@ mutate: baseline over 42 cases in 0s
   mutants: 75/149 (0s)
   mutants: 100/149 (0s)
   mutants: 125/149 (0s)
-  mutants: 149/149 (4s)
+  mutants: 149/149 (3s)
 
-mutate: 149 mutants, 4s
+mutate: 149 mutants, 3s
   killed 0, survived 6 (0 capped), no coverage 143, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -52,4 +52,4 @@ mutate: 149 mutants, 4s
        statistic.c:1151:21 cxx_eq_to_ne               if (proceed == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6278a30a1-statistic.json
+  full results: build-oracle/work/mutation-confirm-ec8ded5ae-statistic.json
