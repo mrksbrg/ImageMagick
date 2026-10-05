@@ -1,0 +1,4 @@
+/home/jovyan/sysroot/usr/bin/ld: utilities/imdriver.o: in function `OpenCLCmd':
+/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/driver/imdriver.c:2690:(.text+0xb33b): undefined reference to `GetOpenCLDeviceVendorName'
+/home/jovyan/sysroot/usr/bin/ld: /home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/driver/imdriver.c:2690:(.text+0xb34d): undefined reference to `GetOpenCLDeviceVendorName'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
