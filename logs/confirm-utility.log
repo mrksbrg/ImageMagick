@@ -1,5 +1,6 @@
 mutate: 51 mutants in MagickCore/utility\.c$, 9 functions
-mutate: baseline over 40 cases in 0s
+  baseline: 1/1 (0s)
+mutate: baseline over 38 cases in 0s
   mutants: 25/51 (0s)
   mutants: 50/51 (2s)
   mutants: 51/51 (2s)
@@ -50,4 +51,4 @@ mutate: 51 mutants, 2s
        utility.c:1847:26 cxx_eq_to_ne               if (filelist == (char **) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-utility.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-utility.json

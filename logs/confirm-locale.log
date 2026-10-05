@@ -1,23 +1,24 @@
-mutate: 38 mutants in MagickCore/locale\.c$, 12 functions
-mutate: baseline over 114 cases in 0s
-  mutants: 25/38 (7s)
-  mutants: 38/38 (7s)
+mutate: 32 mutants in MagickCore/locale\.c$, 12 functions
+  baseline: 12/12 (0s)
+mutate: baseline over 113 cases in 0s
+  mutants: 25/32 (6s)
+  mutants: 32/32 (6s)
 
-mutate: 38 mutants, 7s
-  killed 6, survived 28 (0 capped), no coverage 4, errors 0
-  mutation score on reached code: 17.6%   overall: 15.8%
+mutate: 32 mutants, 6s
+  killed 3, survived 22 (0 capped), no coverage 7, errors 0
+  mutation score on reached code: 12.0%   overall: 9.4%
 
   function                           total killed survived no-cov
-  LoadLocaleCache                       14      3       11      0
-  IsLocaleTreeInstantiated               7      2        5      0
+  LoadLocaleCache                       11      2        9      0
+  IsLocaleTreeInstantiated               5      1        4      0
   GetLocaleOptions                       3      0        3      0
   LocaleFatalErrorHandler                3      0        0      3
-  DestroyLocaleNode                      2      1        1      0
-  GetLocaleInfoList                      2      0        2      0
+  GetLocaleInfoList                      2      0        0      2
   GetLocaleList                          2      0        2      0
+  DestroyLocaleNode                      1      0        1      0
   DestroyLocaleOptions                   1      0        1      0
   FormatLocaleFileList                   1      0        1      0
-  LocaleInfoCompare                      1      0        1      0
+  LocaleInfoCompare                      1      0        0      1
   GetLocaleValue                         1      0        0      1
   ChopLocaleComponents                   1      0        1      0
 
@@ -25,9 +26,6 @@ mutate: 38 mutants, 7s
     x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
     x  locale.c:305:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
-    x  locale.c:585:44 cxx_eq_to_ne               if (LocaleCompare((*p)->path,(*q)->path) == 0)
-    x  locale.c:611:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  locale.c:635:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleInfoCompare);
     x  locale.c:707:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:727:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleTagCompare);
     x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -36,14 +34,11 @@ mutate: 38 mutants, 7s
     x  locale.c:926:28 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
        locale.c:927:9 cxx_remove_void_call       ActivateSemaphoreInfo(&locale_semaphore);
     x  locale.c:941:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:943:22 cxx_eq_to_ne               if (locale == (char *) NULL)
     x  locale.c:949:22 cxx_eq_to_ne               if (locale == (char *) NULL)
     x  locale.c:1139:54 cxx_gt_to_ge               for (count=0; (count < (ssize_t) components) && (p > path); p--)
     x  locale.c:1277:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-    x  locale.c:1277:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
     x  locale.c:1284:47 cxx_eq_to_ne               if (LocaleCompare(keyword,"locale") == 0)
     x  locale.c:1290:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
-    x  locale.c:1311:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
        locale.c:1314:42 cxx_add_to_sub             path,locale,depth+1,exception);
     x  locale.c:1327:24 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
     x  locale.c:1327:39 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
@@ -52,4 +47,4 @@ mutate: 38 mutants, 7s
     x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-locale.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-locale.json
