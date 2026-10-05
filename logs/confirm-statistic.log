@@ -1,21 +1,20 @@
 mutate: 149 mutants in MagickCore/statistic\.c$, 29 functions
-mutate: baseline over 3 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/149 (0s)
   mutants: 50/149 (0s)
   mutants: 75/149 (0s)
   mutants: 100/149 (0s)
   mutants: 125/149 (0s)
-  mutants: 149/149 (1s)
+  mutants: 149/149 (0s)
 
-mutate: 149 mutants, 1s
-  killed 0, survived 34 (0 capped), no coverage 115, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 149 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 149, errors 0
 
   function                           total killed survived no-cov
   GetImageMoments                       29      0        0     29
-  GetImageStatistics                    21      0       21      0
+  GetImageStatistics                    21      0        0     21
   EvaluateImages                        15      0        0     15
-  GetMedianPixel                         9      0        9      0
+  GetMedianPixel                         9      0        0      9
   PolynomialImage                        9      0        0      9
   AddNodePixelList                       9      0        0      9
   GetImageRange                          6      0        0      6
@@ -24,7 +23,7 @@ mutate: 149 mutants, 1s
   ApplyEvaluateOperator                  4      0        0      4
   EvaluateImage                          4      0        0      4
   FunctionImage                          4      0        0      4
-  MagickSafeReciprocalLD                 4      0        4      0
+  MagickSafeReciprocalLD                 4      0        0      4
   GetImageExtrema                        3      0        0      3
   DestroyPixelTLS                        2      0        0      2
   AcquireImageCanvas                     2      0        0      2
@@ -42,41 +41,4 @@ mutate: 149 mutants, 1s
   GetModePixelList                       1      0        0      1
   ResetPixelList                         1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  statistic.c:1977:14 cxx_add_to_sub             l = low+1,
-    x  statistic.c:1985:25 cxx_gt_to_ge               if (pixels[low] > pixels[high])
-    x  statistic.c:1989:21 cxx_gt_to_ge               if (pixels[mid] > pixels[high])
-    x  statistic.c:1991:21 cxx_gt_to_ge               if (pixels[low] > pixels[high])
-    x  statistic.c:1993:21 cxx_gt_to_ge               if (pixels[mid] > pixels[low])
-    x  statistic.c:1998:34 cxx_gt_to_ge               do l++; while (pixels[low] > pixels[l]);
-    x  statistic.c:2000:13 cxx_lt_to_le               if (h < l)
-    x  statistic.c:2005:11 cxx_le_to_lt               if (h <= median)
-    x  statistic.c:2007:11 cxx_ge_to_gt               if (h >= median)
-    x  statistic.c:2020:10 cxx_lt_to_le               sign=x < 0.0 ? -1.0 : 1.0;
-    x  statistic.c:2021:12 cxx_mul_to_div             if ((sign*x) >= MagickEpsilon)
-    x  statistic.c:2021:16 cxx_ge_to_gt               if ((sign*x) >= MagickEpsilon)
-    x  statistic.c:2023:14 cxx_div_to_mul             return(sign/MagickEpsilon);
-    x  statistic.c:2060:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-       statistic.c:2069:21 cxx_ne_to_eq               if (histogram != (double *) NULL)
-       statistic.c:2071:30 cxx_ne_to_eq               if (channel_statistics != (ChannelStatistics *) NULL)
-    x  statistic.c:2080:15 cxx_le_to_lt               for (i=0; i <= (ssize_t) MaxPixelChannels; i++)
-    x  statistic.c:2138:31 cxx_gt_to_ge               if (cs->depth > channel_statistics[CompositePixelChannel].depth)
-    x  statistic.c:2138:31 cxx_gt_to_le               if (cs->depth > channel_statistics[CompositePixelChannel].depth)
-    x  statistic.c:2145:27 cxx_lt_to_le               if ((double) p[i] < cs->minima)
-    x  statistic.c:2147:27 cxx_gt_to_ge               if ((double) p[i] > cs->maxima)
-    x  statistic.c:2158:37 cxx_mul_to_div             cs->sum_cubed+=(double) p[i]*(double) p[i]*(double) p[i];
-    x  statistic.c:2159:44 cxx_mul_to_div             cs->sum_fourth_power+=(double) p[i]*(double) p[i]*(double) p[i]*
-    x  statistic.c:2159:58 cxx_mul_to_div             cs->sum_fourth_power+=(double) p[i]*(double) p[i]*(double) p[i]*
-    x  statistic.c:2188:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
-    x  statistic.c:2205:22 cxx_gt_to_ge               if (cs->area > 1.0)
-    x  statistic.c:2218:22 cxx_gt_to_ge               if (cs->area > 1.0)
-       statistic.c:2222:55 cxx_div_to_mul             cs->standard_deviation=(double) sqrtl(cs->M2/((long double)
-    x  statistic.c:2224:44 cxx_mul_to_div             cs->variance=cs->standard_deviation*cs->standard_deviation;
-    x  statistic.c:2247:18 cxx_gt_to_ge               if (cs->area > 0.0)
-    x  statistic.c:2247:18 cxx_gt_to_le               if (cs->area > 0.0)
-    x  statistic.c:2274:75 cxx_div_to_mul             channel_statistics[CompositePixelChannel].entropy+=((double) entropy/
-    x  statistic.c:2351:27 cxx_lt_to_le               if (cs_comp->maxima < cs->maxima)
-    x  statistic.c:2353:27 cxx_gt_to_ge               if (cs_comp->minima > cs->minima)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-310d2a3b3-statistic.json
+  full results: build-oracle/work/mutation-confirm-8810b1471-statistic.json
