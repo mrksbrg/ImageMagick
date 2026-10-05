@@ -3231,8 +3231,9 @@ checked with the oracle on the Mac.
   - eight log maps in one log.xml.
 - *Result.* They kill all five mutants of StopInfoCompare, LocaleInfoCompare and
   LogInfoCompare, run through the oracle's own case runner on the Mac's Mull build. The
-  kills are in `build-oracle/work/mutation-probe-macqsort-{draw,locale,log}.json`, marked
-  `platform: macOS (BSD qsort)`.
+  kills are committed in `tools/oracle/platform-kills/macos-qsort.json`, marked
+  `platform: macOS (BSD qsort)`. `gate.py` applies them after the merged reports, on every
+  machine, so ERDC's gate counts them too.
 - *Rule.* ERDC may report these mutants as survivors, but a recorded kill stands in the
   gate. **A function trusted only through a Mac kill must have its refactoring checked on
   the Mac.**

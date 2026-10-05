@@ -9,7 +9,8 @@ Reports are mutate.py's mutation-*.json, merged in the order given: a later
 report replaces the earlier result of the same mutant, so pass the full run
 first and its reruns after it (uncapped, or against new cases only). A kill
 stands, though: a rerun limited with --cases runs a few cases, and its
-"survived" says only that those did not kill the mutant.
+"survived" says only that those did not kill the mutant. Kills that only one platform makes
+(tools/oracle/platform-kills/) are applied last; see platform_kills().
 
 Each survivor is sorted by classify.py. Three figures are printed for every
 function and file:
@@ -82,14 +83,47 @@ def replaces(result, earlier):
     return earlier["status"] != "killed" and result["status"] != "no-coverage"
 
 
+# Kills only one platform makes (tools/oracle/platform-kills/*.json): a mutant whose effect shows
+# under one C library only, e.g. a qsort comparator's tie order (BSD qsort reorders ties, glibc
+# may not). Owner's decision, 2026-10-05: such a kill counts, and a function trusted through
+# one must have its refactoring checked on that platform. Each entry is a mutate.py result with
+# a "platform" field; it is matched by mutator and source position, not by the machine's path.
+PLATFORM_KILLS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "platform-kills")
+
+
+def position_key(result_id):
+    """mutator:MagickCore/file.c:line:col:line:col, without the checkout's path."""
+    mutator, _, rest = result_id.partition(":")
+    return mutator + ":" + rest[rest.rfind("MagickCore/"):] if "MagickCore/" in rest else result_id
+
+
+def platform_kills():
+    kills = {}
+    if os.path.isdir(PLATFORM_KILLS):
+        for name in sorted(os.listdir(PLATFORM_KILLS)):
+            if name.endswith(".json"):
+                with open(os.path.join(PLATFORM_KILLS, name)) as f:
+                    for result in json.load(f):
+                        if result.get("status") == "killed":
+                            kills[position_key(result["id"])] = result
+    return kills
+
+
 def merged(reports):
-    """The results of all reports, a later report winning for the same mutant (see replaces)."""
+    """The results of all reports, a later report winning for the same mutant (see replaces),
+    then the platform kills applied to the mutants among them."""
     by_id = {}
     for path in reports:
         with open(path) as f:
             for result in map(honest, json.load(f)):
                 if replaces(result, by_id.get(result["id"])):
                     by_id[result["id"]] = result
+    kills = platform_kills()
+    for result_id, result in by_id.items():
+        kill = kills.get(position_key(result_id))
+        if kill is not None and result["status"] != "killed":
+            by_id[result_id] = dict(result, status="killed", killer=kill.get("killer"),
+                                    platform=kill.get("platform"))
     return list(by_id.values())
 
 
