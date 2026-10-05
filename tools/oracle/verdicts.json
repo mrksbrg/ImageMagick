@@ -23361,6 +23361,76 @@
    "src": "RelinquishMagickResource(MapResource,blob_info->length);",
    "verdict": "unobservable",
    "why": "SetBlobExtent's branch for a memory-mapped blob: OpenBlob maps a blob only when reading a file in a format with blob support (and closes its FILE), writers open files unmapped, and no reader extends its blob, so the branch is never entered"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "DiscardBlobBytes",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (count == 0)",
+   "verdict": "equivalent",
+   "why": "at the end of the file (count 0) the mutant does not break at once but falls through to count=0 and the errno test, which breaks as well (errno does not hold EINTR there): DiscardBlobBytes returns the same"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "DiscardBlobBytes",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (errno != EINTR)",
+   "verdict": "unobservable",
+   "why": "the retry after a read interrupted by a signal (EINTR); the oracle's reads are not interrupted"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/blob.c",
+   "function": "ImageToBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((status == MagickFalse) && (image->blob->extent == 0))",
+   "verdict": "unobservable",
+   "why": "frees the caller's preallocated blob after a write that failed without producing any data: memory only, after a failure the output already reports"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/blob.c",
+   "function": "ImageToBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((status == MagickFalse) && (image->blob->extent == 0))",
+   "verdict": "unobservable",
+   "why": "frees the caller's preallocated blob after a write that failed without producing any data: memory only, after a failure the output already reports"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "ImagesToBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "else if ((status == MagickFalse) && (images->blob->extent == 0))",
+   "verdict": "unobservable",
+   "why": "frees the caller's preallocated blob after a write that failed without producing any data: memory only, after a failure the output already reports"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/blob.c",
+   "function": "ImagesToBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "else if ((status == MagickFalse) && (images->blob->extent == 0))",
+   "verdict": "unobservable",
+   "why": "frees the caller's preallocated blob after a write that failed without producing any data: memory only, after a failure the output already reports"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/blob.c",
+   "function": "ImagesToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blob != (void *) NULL)",
+   "verdict": "equivalent",
+   "why": "skips only the final ResizeQuantumMemory that trims the returned blob to its length; the bytes and the length reported are the same"
   }
  ]
 }
