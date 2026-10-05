@@ -27,9 +27,9 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import oracle  # noqa: E402
 
-MAP = os.path.join(oracle.WORK, "casemap.json")
+MAP = os.path.join(oracle.WORK, "casemap%s.json" % oracle.WIDE)
 PROFDATA = oracle.llvm_tool("llvm-profdata")
-RAW = os.path.join(oracle.WORK, "casemap-raw")
+RAW = os.path.join(oracle.WORK, "casemap-raw" + oracle.WIDE)
 
 
 def catalogue_digest(cases):

@@ -33,6 +33,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -47,7 +48,10 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "10"        # bump when normalisation or execution changes
+HARNESS_VERSION = "11"        # bump when normalisation or execution changes
+# WIDE=1, as for build.sh: the builds with X11 and OpenCL (base-wide, cov-wide, ...), with a
+# case map and line coverage of their own (casemap-wide.json, oracle-wide.profdata, ...).
+WIDE = "-wide" if os.environ.get("WIDE") else ""
 
 LISTS = ["Colorspace", "Compose", "Distort", "Filter", "Interpolate",
          "VirtualPixel", "Morphology", "Kernel", "Evaluate", "Statistic",
@@ -91,6 +95,10 @@ def env_for(binary, case_dir, extra_env=None):
         "MAGICK_TEMPORARY_PATH": case_dir,
         "MAGICK_THREAD_LIMIT": "1", "OMP_NUM_THREADS": "1",
         "SOURCE_DATE_EPOCH": str(FIXED_MTIME),
+        # OpenCL (see seed_opencl_profile); inert unless a case sets MAGICK_OCL_DEVICE.
+        "MAGICK_OPENCL_CACHE_DIR": os.path.join(case_dir, OPENCL_CACHE),
+        "POCL_CACHE_DIR": os.path.join(WORK, "pocl-cache"),
+        "POCL_WORK_GROUP_METHOD": "cbs",  # pocl 5.0's default methods abort on ImageMagick's kernels
     }
     if not MACOS:
         # Some paths read heap memory they never wrote (single-channel raw
@@ -100,8 +108,108 @@ def env_for(binary, case_dir, extra_env=None):
         env["MALLOC_PERTURB_"] = "165"
     if "LLVM_PROFILE_FILE" in os.environ:
         env["LLVM_PROFILE_FILE"] = os.environ["LLVM_PROFILE_FILE"]
-    env.update(extra_env or {})  # per-case profiles, Mull mutant switches
+    for name, value in (extra_env or {}).items():  # per-case profiles, Mull mutant switches
+        if value is None:  # a case may remove a variable: X11 cases drop SOURCE_DATE_EPOCH
+            env.pop(name, None)
+        else:
+            env[name] = value
     return env
+
+
+# ---------------------------------------------------------------------------
+# X11 and OpenCL, for the builds configured with them (build.sh wide)
+# ---------------------------------------------------------------------------
+# An X11 case ("x11": True) gets an X server of its own, so that what one case draws on the
+# root window cannot reach another running beside it. Xvfb runs with a fixed screen and no
+# window manager. Its socket goes into X11_SOCKETS, mounted over /tmp/.X11-unix for Xvfb and
+# for the mutation sandbox (mutate.py), whose network namespace hides the abstract socket;
+# under WSLg /tmp/.X11-unix is read-only anyway. Displays from :100 up, so that a client whose
+# server is gone cannot fall through to a real desktop on :0.
+X11_SOCKETS = os.path.join(WORK, "x11")
+XVFB_SCREEN = "640x480x24"
+
+
+def start_xvfb():
+    """(process, display) of a new Xvfb, or None where Xvfb or bwrap is missing: the case
+    then fails alike on both sides (UnableToOpenXServer)."""
+    if not (shutil.which("Xvfb") and shutil.which("bwrap")):
+        return None
+    os.makedirs(X11_SOCKETS, exist_ok=True)
+    first = os.getpid() * 37
+    for k in range(64):
+        display = ":%d" % (100 + (first + k) % 800)
+        ready_r, ready_w = os.pipe()
+        # Xvfb's lock file in /tmp refuses a display already in use; it then exits at once.
+        p = subprocess.Popen(["bwrap", "--dev-bind", "/", "/", "--bind", X11_SOCKETS,
+                              "/tmp/.X11-unix", "--die-with-parent", "Xvfb", display,
+                              "-displayfd", str(ready_w), "-nolisten", "tcp",
+                              "-screen", "0", XVFB_SCREEN],
+                             pass_fds=(ready_w,), stdin=subprocess.DEVNULL,
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        os.close(ready_w)
+        with os.fdopen(ready_r) as ready:
+            if ready.readline().strip():
+                return p, display
+        p.wait()
+    raise RuntimeError("no free display for Xvfb")
+
+
+def stop_xvfb(xvfb):
+    if xvfb is not None:
+        xvfb[0].terminate()
+        try:
+            xvfb[0].wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            xvfb[0].kill()
+            xvfb[0].wait()
+
+
+# An OpenCL case sets "env": {"MAGICK_OCL_DEVICE": "CPU"}. pocl, the CPU implementation, is
+# not under test: its kernel cache (POCL_CACHE_DIR) is shared and stays warm. ImageMagick's
+# own cache, compiled kernels and the device profile, goes into OPENCL_CACHE in the case
+# directory and is removed before the files are compared. MAGICK_OCL_DEVICE alone does not
+# pin the device: without a profile ImageMagick times the OpenCL device against its CPU path
+# and disables the device when the CPU path wins, which varies from run to run. So every
+# case starts from a profile in which the OpenCL devices win.
+OPENCL_CACHE = ".opencl"
+OPENCL_PROFILE = os.path.join(WORK, "opencl-profile.xml")  # delete after a pocl upgrade
+
+
+def opencl_profile(binary):
+    """This machine's device profile with every OpenCL device scored best, or None where
+    binary finds no OpenCL device. Made once from a run that benchmarks the devices; the
+    device's name, version, clock and units must match for ImageMagick to use the score."""
+    if not os.path.exists(OPENCL_PROFILE):
+        os.makedirs(WORK, exist_ok=True)
+        tmp = tempfile.mkdtemp(dir=WORK, prefix="opencl-")
+        try:
+            subprocess.run([binary, "rose:", "-blur", "0x1", "null:"], cwd=tmp,
+                           env=env_for(binary, tmp, {"MAGICK_OCL_DEVICE": "CPU"}),
+                           stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL, timeout=300)
+            with open(os.path.join(tmp, OPENCL_CACHE, "ImageMagick",
+                                   "ImagemagickOpenCLDeviceProfile.xml")) as f:
+                xml = f.read()
+        except (OSError, subprocess.TimeoutExpired):
+            return None
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+        xml = re.sub(r'(<device name="CPU" score=")[^"]*', r"\g<1>1e+06", xml)
+        xml = re.sub(r'(<device platform=[^>]* score=")[^"]*', r"\g<1>1", xml)
+        with tempfile.NamedTemporaryFile("w", dir=WORK, delete=False) as f:
+            f.write(xml)
+        os.replace(f.name, OPENCL_PROFILE)  # parallel cases may race to write the same
+    with open(OPENCL_PROFILE) as f:
+        return f.read()
+
+
+def seed_opencl_profile(binary, d):
+    xml = opencl_profile(binary)
+    path = os.path.join(d, OPENCL_CACHE, "ImageMagick", "ImagemagickOpenCLDeviceProfile.xml")
+    if xml is not None and not os.path.exists(path):  # a case may bring a profile of its own
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as f:
+            f.write(xml)
 
 
 def source_dir_of(build_dir):
@@ -126,6 +234,8 @@ NORMALISE = [
      rb"\1BUILDSTAMP"),
     # Temporary file names are random.
     (re.compile(rb"magick-[A-Za-z0-9_-]{8,}"), rb"magick-TMPFILE"),
+    # pocl reports each kernel it compiles, so only while its cache is cold (OpenCL cases).
+    (re.compile(rb"(?m)^\[SubCFG\] Form SubCFGs in \w+\n"), rb""),
     # Timing lines in identify -verbose, info:, json:, yaml:.
     (re.compile(rb"(?im)^(\s*(elapsed time|user time|pixels per second)\s*:).*$"), rb"\1 TIME"),
     (re.compile(rb'(?i)("?(elapsedTime|userTime|pixelsPerSecond)"?\s*:\s*)"?[^",\n]*"?'),
@@ -153,7 +263,7 @@ BUILD_TREE_RE = re.compile(re.escape(OUT.encode()) +
 UNSEEDED = ("conjure", "-version", "-list")
 # Subcommands take their options after the subcommand name.
 SUBCOMMANDS = ("compare", "identify", "montage", "composite", "conjure", "stream",
-               "convert", "mogrify")
+               "convert", "mogrify", "display", "animate", "import")
 
 
 def normalise(data, case_dir=None):
@@ -365,15 +475,26 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
     # inheriting the driver's stdin would make results depend on how it was run.
     stdin_path = os.path.join(d, expand([case["stdin"]], manifest)[0]) if case.get("stdin") \
         else os.devnull
+    env = dict(case.get("env", {}), **(extra_env or {}))
+    if env.get("MAGICK_OCL_DEVICE"):
+        seed_opencl_profile(binary, d)
     started = time.time()
-    for step in case["steps"]:
-        fix_dates(d)
-        argv = command_line(binary, expand(step, manifest))
-        rc, step_out, step_err = run_step(argv, d, stdin_path, env=env_for(binary, d, extra_env),
-                                          timeout=timeout or TIMEOUT)
-        rcs.append(rc)
-        outs.append(step_out)
-        errs.append(step_err)
+    xvfb = start_xvfb() if case.get("x11") else None
+    if xvfb is not None:
+        # display and animate advance on GetMagickTime(), which a fixed epoch stops.
+        env.update(DISPLAY=xvfb[1], SOURCE_DATE_EPOCH=None)
+    try:
+        for step in case["steps"]:
+            fix_dates(d)
+            argv = command_line(binary, expand(step, manifest))
+            rc, step_out, step_err = run_step(argv, d, stdin_path, env=env_for(binary, d, env),
+                                              timeout=timeout or TIMEOUT)
+            rcs.append(rc)
+            outs.append(step_out)
+            errs.append(step_err)
+    finally:
+        stop_xvfb(xvfb)
+    shutil.rmtree(os.path.join(d, OPENCL_CACHE), ignore_errors=True)
     files = case_files(d)
     out, err = b"\n".join(outs), b"\n".join(errs)
     return {"rc": rcs, "out": digest(out), "err": digest(err), "files": files,

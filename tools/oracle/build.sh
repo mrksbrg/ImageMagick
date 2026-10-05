@@ -9,10 +9,8 @@
 #                                          files, in build-oracle/mull-<name>;
 #                                          defaults plus statement deletion,
 #                                          MULL_MUTATORS="..." to choose others
-#   tools/oracle/build.sh wide             candidate with X11 and OpenCL as well:
-#                                          a compile check for display.c,
-#                                          xwindow.c, widget.c, animate.c,
-#                                          accelerate.c and opencl.c
+#   tools/oracle/build.sh wide             candidate with X11 and OpenCL as well,
+#                                          in build-oracle/wide (WIDE=1 cand)
 #   tools/oracle/build.sh win              on Windows, from MSYS2 UCRT64: gcc,
 #                                          compiles nt-base.c, nt-feature.c and
 #                                          the Windows branches (needs a checkout
@@ -22,6 +20,12 @@
 # (apart from coverage instrumentation), so any difference in output comes
 # from the source and not from the build. Prints the path of the built binary
 # on the last line of stdout.
+#
+# WIDE=1 before any flavour adds X11 and OpenCL (--with-x --enable-opencl), for
+# display.c, xwindow.c, widget.c, animate.c, accelerate.c and opencl.c, in
+# build directories of their own: base-wide/<sha>, cand-wide, cov-wide (mull:
+# give it a name of its own). The oracle runs their cases under Xvfb and pocl
+# (oracle.py, start_xvfb and seed_opencl_profile).
 #
 # Builds live under build-oracle/, which .git/info/exclude keeps out of git.
 # A baseline is built once per commit and then reused; the candidate build is
@@ -42,7 +46,14 @@ JOBS=${JOBS:-$(sysctl -n hw.ncpu 2>/dev/null || nproc)}
 #  --disable-openmp   thread scheduling must not be able to change results
 #  --disable-shared   one self-contained binary, no libtool wrapper scripts
 CONFIG_FLAGS=(--disable-shared --enable-static --disable-openmp --without-perl
-              --disable-docs --without-x)
+              --disable-docs)
+SUFFIX=""
+if [ -n "${WIDE:-}" ]; then
+  CONFIG_FLAGS+=(--with-x --enable-opencl)
+  SUFFIX=-wide
+else
+  CONFIG_FLAGS+=(--without-x)
+fi
 OPT_CFLAGS="-O2 -g"
 # Ubuntu's libraw_r.pc links with -fopenmp, which clang resolves to libomp;
 # LibRaw itself is built against GCC's libgomp, so link that one instead.
@@ -81,7 +92,7 @@ case "${1:-}" in
     ref=${2:?usage: build.sh base <git-ref>}
     sha=$(git -C "$ROOT" rev-parse --verify "$ref^{commit}")
     src="$OUT/src/$sha"
-    bld="$OUT/base/$sha"
+    bld="$OUT/base$SUFFIX/$sha"
     if [ ! -x "$bld/utilities/magick" ]; then
       if [ ! -d "$src" ]; then
         git -C "$ROOT" worktree add --detach "$src" "$sha" > /dev/null 2>&1
@@ -95,12 +106,12 @@ case "${1:-}" in
     echo "$bld/utilities/magick"
     ;;
   cand)
-    configure_and_make "$ROOT" "$OUT/cand" ""
-    echo "$OUT/cand/utilities/magick"
+    configure_and_make "$ROOT" "$OUT/cand$SUFFIX" ""
+    echo "$OUT/cand$SUFFIX/utilities/magick"
     ;;
   cov)
-    configure_and_make "$ROOT" "$OUT/cov" "-fprofile-instr-generate -fcoverage-mapping"
-    echo "$OUT/cov/utilities/magick"
+    configure_and_make "$ROOT" "$OUT/cov$SUFFIX" "-fprofile-instr-generate -fcoverage-mapping"
+    echo "$OUT/cov$SUFFIX/utilities/magick"
     ;;
   mull)
     # Mutants compiled into the binary, each behind its own switch, for the
@@ -148,8 +159,7 @@ case "${1:-}" in
     echo "$bld/utilities/magick"
     ;;
   wide)
-    # Not an oracle build: no case reaches X11 code without an X server, and
-    # OpenCL aborts inside pocl 5.0 (docs/refactoring/VERIFICATION.md).
+    # The candidate of WIDE=1, under its first name.
     configure_and_make "$ROOT" "$OUT/wide" "" --with-x --enable-opencl
     echo "$OUT/wide/utilities/magick"
     ;;

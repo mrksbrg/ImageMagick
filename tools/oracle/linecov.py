@@ -22,9 +22,9 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import oracle  # noqa: E402
 
-PROF = os.path.join(oracle.OUT, "prof")
-PROFDATA = os.path.join(oracle.OUT, "oracle.profdata")
-LCOV = os.path.join(oracle.OUT, "oracle.lcov")
+PROF = os.path.join(oracle.OUT, "prof" + oracle.WIDE)
+PROFDATA = os.path.join(oracle.OUT, "oracle%s.profdata" % oracle.WIDE)
+LCOV = os.path.join(oracle.OUT, "oracle%s.lcov" % oracle.WIDE)
 
 
 def main():

@@ -474,10 +474,14 @@ def _each(lists, listname):
     return [v for v in lists.get(listname, []) if v.lower() != "undefined"]
 
 
-def _case_id(family, steps, files=None, stdin=None):
+def _case_id(family, steps, files=None, stdin=None, env=None, x11=False):
     key = steps if not files else [steps, sorted(files.items())]
     if stdin:
         key = [key, "stdin", stdin]
+    if env:
+        key = [key, "env", sorted(env.items())]
+    if x11:
+        key = [key, "x11"]
     ident = hashlib.sha1(json.dumps(key).encode()).hexdigest()[:10]
     return "%s/%s" % (family, ident)
 
@@ -491,11 +495,25 @@ def _with_inputs(case, files=None, stdin=None):
     """`files` maps a name to text written into the case directory first;
     `stdin` names a file (corpus paths as `{C}/...`) fed to every step.
     Both are part of the case's id."""
-    case["id"] = _case_id(case["family"], case["steps"], files, stdin)
+    case["id"] = _case_id(case["family"], case["steps"], files, stdin, case.get("env"),
+                          case.get("x11", False))
     if files:
         case["files"] = files
     if stdin:
         case["stdin"] = stdin
+    return case
+
+
+def _with_run(case, env=None, x11=False):
+    """`env` adds variables to every step's environment (None removes one), e.g.
+    MAGICK_OCL_DEVICE for OpenCL; `x11` gives the case an X server of its own (oracle.py,
+    start_xvfb). Both are part of the case's id."""
+    if env:
+        case["env"] = env
+    if x11:
+        case["x11"] = True
+    case["id"] = _case_id(case["family"], case["steps"], case.get("files"), case.get("stdin"),
+                          env, x11)
     return case
 
 
@@ -4763,6 +4781,127 @@ GAP_CONVERT_CASES = [
 ]
 
 
+# X11 (display.c, animate.c, xwindow.c, widget.c; W01, 2026-10-05). Each case gets an Xvfb of its
+# own (oracle.py, start_xvfb), 640x480x24, no window manager. A window's content is gone when
+# display exits, so what a case can compare is what stays on the root window, read back with
+# `import -window root` (or the x: coder), plus exit status and stderr. display and x: leave on
+# their own only with a delay set and -loop 1 (their timer runs on GetMagickTime, so the oracle
+# drops SOURCE_DATE_EPOCH for these cases). PPM out: import's images carry today's date.
+_X11_GRAB = ["import", "-window", "root", "ppm:out.ppm"]
+_X11_SHOW = ["-delay", "1", "-loop", "1"]
+GAP_X11_CASES = [("x11 import of the bare root window", [_X11_GRAB], {}),
+                 ("x11 x:root read", [["x:root", "ppm:out.ppm"]], {})]
+GAP_X11_CASES += [("x11 display -window root: %s" % name,
+                   [["display", "-window", "root", img(name)], _X11_GRAB], {})
+                  for name in UNARY_INPUTS]
+GAP_X11_CASES += [("x11 display -window root %s" % opts,
+                   [["display", "-window", "root"] + _split(opts) + [img("rose")], _X11_GRAB], {})
+                  for opts in ("-geometry +30+40", "-resize 300x200", "-colors 8", "-monochrome",
+                               "-dither None -colors 8", "-visual TrueColor", "-visual DirectColor",
+                               "-visual PseudoColor", "-visual StaticGray", "-gamma 2.2",
+                               "-map best", "-map default", "-map gray", "-colormap private",
+                               "-shared-memory", "+shared-memory", "-contrast", "-sharpen 0x1",
+                               "-crop 30x20+5+5", "-page 640x480+100+100", "-backdrop",
+                               "-border 5 -bordercolor red", "-gravity center",
+                               "-geometry 600x400+0+0")]
+GAP_X11_CASES += [("x11 animate -window root: %s" % " ".join(names),
+                   [["animate", "-window", "root"] + _X11_SHOW + [img(n) for n in names], _X11_GRAB], {})
+                  for names in (("rose",), ("rose", "rose_alpha"), ("palette", "gray16", "cmyk"))]
+GAP_X11_CASES += [("x11 import %s" % opts,
+                   [["display", "-window", "root", img("rose")],
+                    ["import", "-window", "root"] + _split(opts) + ["ppm:out.ppm"]], {})
+                  for opts in ("-crop 64x64+0+0", "-screen", "-silent", "-frame", "-descend",
+                               "-border", "-colors 16", "-monochrome", "-snaps 2", "-depth 4",
+                               "-negate", "-resize 50%", "-quality 50", "-trim", "-geometry +5+5")]
+GAP_X11_CASES += [("x11 x: window: %s" % args,
+                   [_X11_SHOW[:2] + _split(args) + _X11_SHOW[2:] + ["x:"]], {})
+                  for args in ("{C}/rose.miff", "{C}/palette.miff", "{C}/rose_alpha.miff",
+                               "{C}/rose.miff {C}/gray16.miff", "{C}/tall.miff", "{C}/tiny.miff",
+                               "{C}/cmyk.miff -resize 700x500")]
+GAP_X11_CASES += [("x11 display window %s" % opts,
+                   [["display"] + _X11_SHOW + _split(opts) + [img("rose")]], {})
+                  for opts in ("", "-title Rose", "-name rosewin", "-geometry 200x150+10+10",
+                               "-backdrop", "-immutable", "-colormap private", "-visual DirectColor",
+                               "-iconic", "-borderwidth 3", "-monochrome", "-dither None",
+                               "-magnify 3", "-coalesce", "-flatten",
+                               "-window-group 1", "-use-pixmap", "-cache 16", "-quantize gray")]
+GAP_X11_CASES += [("x11 animate window %s" % opts,
+                   [["animate"] + _X11_SHOW + _split(opts) + [img("rose"), img("rose_alpha")]], {})
+                  for opts in ("", "-title Roses", "-geometry +20+20", "-backdrop", "-pause 0",
+                               "-colormap private", "-visual DirectColor", "-monochrome",
+                               "-colors 8", "-immutable", "-borderwidth 2")]
+# X resources: there is no -xrm; display, animate and import read ~/.<client>rc, and HOME is
+# the case directory.
+_X11_RESOURCES = {
+    "backdrop and colors": "*backdrop: True\n*background: blue\n*foreground: yellow\n*borderColor: red\n",
+    "visual and map": "*visual: DirectColor\n*map: best\n*colormap: Private\n",
+    "gamma and quantum": "*gammaCorrect: True\n*displayGamma: 2.2\n*quantum: 2\n",
+    "geometry and gravity": "*geometry: 300x200+40+40\n*gravity: south\n*borderWidth: 4\n",
+    "misc flags": "*iconic: True\n*immutable: True\n*usePixmap: True\n*sharedMemory: False\n"
+                  "*confirmExit: False\n*displayWarnings: False\n",
+    "delay and pause": "*delay: 1\n*pause: 0\n*undoCache: 4\n*magnify: 2\n",
+}
+for _rname, _rtext in _X11_RESOURCES.items():
+    for _client, _steps in (("display", [["display", "-window", "root", img("rose")], _X11_GRAB]),
+                            ("animate", [["animate", "-window", "root"] + _X11_SHOW + [img("rose")], _X11_GRAB]),
+                            ("display", [["display"] + _X11_SHOW + [img("rose")]])):
+        GAP_X11_CASES.append(("x11 resources %s: %s" % (_rname, " ".join(_steps[0][:3])), _steps,
+                              {".%src" % _client: _rtext, ".magickrc": _rtext}))
+
+# OpenCL (accelerate.c, opencl.c; W01): MAGICK_OCL_DEVICE=CPU through pocl, from a fixed device
+# profile (oracle.py, seed_opencl_profile). Each operator over inputs the kernels take (RGB,
+# RGBA, gray) and inputs accelerate.c hands back to the CPU path (palette, CMYK, a mask, a
+# virtual-pixel method, a channel subset), so both sides of every check are compared.
+_OCL_INPUTS = ["rose", "rose_alpha", "gray16", "palette", "cmyk", "tiny", "tall"]
+_OCL_OPS = ["-blur 0x2", "-blur 3x1", "-despeckle", "-local-contrast 10x20", "-local-contrast 4x80",
+            "-motion-blur 0x3+30", "-motion-blur 5x2+200", "-rotational-blur 10", "-rotational-blur 45",
+            "-unsharp 0x1", "-unsharp 2x1+1+0.05", "-contrast", "+contrast", "-equalize",
+            "-grayscale Rec601Luma", "-grayscale Rec709Luminance", "-grayscale Average",
+            "-grayscale Brightness", "-grayscale Lightness", "-grayscale RMS", "-grayscale MS",
+            "-grayscale Rec601Luminance", "-grayscale Rec709Luma",
+            "-modulate 110,80,90", "-modulate 90,120,40 -define modulate:colorspace=HSB",
+            "-modulate 100,150 -define modulate:colorspace=HSL",
+            "-modulate 100,100,150 -define modulate:colorspace=HWB",
+            "-resize 50%", "-resize 230%", "-resize 37x41!", "-filter Lanczos -resize 160%",
+            "-filter Point -resize 77%", "-filter Box -resize 300x20!", "-filter Gaussian -resize 20x300!",
+            "-thumbnail 30x30", "-function polynomial 1,-0.2,0.1", "-function sinusoid 3,90",
+            "-function arcsin 1", "-function arctan 1,2", "-wavelet-denoise 5%",
+            "-wavelet-denoise 10%x0.2"]
+_OCL_ENV = {"MAGICK_OCL_DEVICE": "CPU"}
+
+
+def _ocl_step(inputs, op):
+    """One step: inputs, then op, written as floating-point MIFF. -contrast runs only in
+    convert's syntax (magick's warns that -level replaced it and skips it)."""
+    pre = ["convert"] if op.lstrip("-+").startswith("contrast") else []
+    return [pre + inputs + _split(op) + FLOAT_OUT + ["out.miff"]]
+
+
+GAP_OPENCL_CASES = [("opencl %s %s" % (name, op), _ocl_step([img(name)], op), {})
+                    for op in _OCL_OPS for name in _OCL_INPUTS]
+GAP_OPENCL_CASES += [("opencl rose %s %s" % (pre, op),
+                      _ocl_step([img("rose")] + _fmt(pre), op), {})
+                     for pre in ("-virtual-pixel Edge", "-virtual-pixel Black", "-channel R",
+                                 "-channel RGBA", "-channel Gray", "-colorspace Lab",
+                                 "-colorspace RGB", "-colorspace LinearGray", "-alpha set -channel A",
+                                 "-write-mask {C}/bilevel.miff", "-read-mask {C}/bilevel.miff",
+                                 "-intensity Rec709Luminance", "-intensity Rec601Luma",
+                                 "-size 300x200 xc:gray +swap -composite")
+                     for op in ("-blur 0x2", "-unsharp 0x1", "-equalize", "-contrast", "-modulate 110,80,90",
+                                "-resize 150%", "-grayscale Rec709Luma", "-local-contrast 10x20",
+                                "-motion-blur 0x3+30", "-function polynomial 1,0", "-despeckle",
+                                "-rotational-blur 10", "-wavelet-denoise 5%")]
+GAP_OPENCL_CASES += [("opencl large %s" % op,
+                      _ocl_step(["-seed", "7", "-size", "700x500", "plasma:"], op), {})
+                     for op in ("-blur 0x8", "-resize 33%", "-resize 180%", "-unsharp 5x3", "-equalize",
+                                "-local-contrast 30x40", "-motion-blur 0x12+75", "-wavelet-denoise 8%",
+                                "-despeckle", "-rotational-blur 5", "-modulate 80,120,60", "-contrast")]
+# The device choice: GPU finds none (the CPU path), true takes the profile's best device, false
+# leaves OpenCL off. Each entry: label, environment.
+GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
+                           for dev in ("GPU", "true", "false")]
+
+
 def _gap_cases():
     yield from _gap_image_cases(GAP_CASES)
     yield from _gap_plain_cases()
@@ -4771,6 +4910,19 @@ def _gap_cases():
     yield from _gap_command_cases()
     yield from _gap_convert_cases()
     yield from _gap_step_cases()
+    yield from _gap_x11_opencl_cases()
+
+
+def _gap_x11_opencl_cases():
+    for label, steps, files in GAP_X11_CASES:
+        yield _with_run(_with_inputs(_case("gaps", label, steps, ["out.ppm"]), files=files or None),
+                        x11=True)
+    for label, steps, files in GAP_OPENCL_CASES:
+        yield _with_run(_with_inputs(_case("gaps", label, steps, ["out.miff"]), files=files or None),
+                        env=_OCL_ENV)
+    for label, env in GAP_OPENCL_DEVICE_CASES:
+        yield _with_run(_case("gaps", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
+                              ["out.miff"]), env=env)
 
 
 def _gap_image_cases(entries):

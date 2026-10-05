@@ -3273,3 +3273,76 @@ That build took the other branch or met non-zero garbage; task W01 finds out whi
 (owner, 2026-10-05). The Mac builds X11 and OpenCL too (`build-oracle/x11cl`), and only
 `nt-base.c`, `nt-feature.c` and `vms.c` build on neither. The X11 and OpenCL files go to the
 Windows desktop as task `tasks/W01-x11-opencl.md`.
+
+## W01: X11 and OpenCL under the oracle (Windows, 2026-10-05)
+
+**The bind bug: WSL takes the other branch, so its figures are reproducible.** The wide
+build's `config.h` has `HAVE_CL_CL_H 1` but no `HAVE_OPENCL_CL_H` (that is the Apple
+spelling, `OpenCL/cl.h`). `BindOpenCLFunctions` therefore opens `libOpenCL.so` with
+`lt_dlopen` and sets `openCL_library->library`. The uninitialised read happens only on a
+build that finds `OpenCL/cl.h`, which on these machines means the Mac. That fits the Mac's
+symptom and leaves the Mac's diagnosis standing.
+
+**pocl 5.0 works with the cbs work-group method.** The abort in `VERIFICATION.md` item 6
+(`region_entry_barrier != NULL`) comes from pocl's default `loops`/`loopvec` methods.
+`POCL_WORK_GROUP_METHOD=cbs` compiles and runs every ImageMagick kernel. The output
+matches from run to run, and two cold runs differ only in MIFF `date:` properties. pocl 6
+was not built: the reason to try it is gone.
+
+**What the oracle does now** (`HARNESS_VERSION` 11):
+- `WIDE=1` selects X11+OpenCL builds for every flavour (`build.sh`: `base-wide/<sha>`,
+  `cand-wide`, `cov-wide`, and `build.sh wide` as before). casemap.py, linecov.py and
+  mutate.py then use `casemap-wide.json`, `oracle-wide.profdata` and `oracle-wide.lcov`,
+  so the regular map is never overwritten.
+- A case may carry `env` (variables for every step; `None` removes one) and `x11`. Both are
+  part of its id (`cases._with_run`).
+- **X11 cases.** Each gets its own Xvfb (`oracle.start_xvfb`): `-screen 0 640x480x24`, no
+  window manager, displays from `:100` up, so that a client whose server has gone cannot
+  reach WSLg's `:0`.
+  - The socket goes into `build-oracle/work/x11`, mounted over `/tmp/.X11-unix`. WSLg
+    mounts the real one read-only, and the mutation sandbox's network namespace hides
+    abstract sockets.
+  - `SOURCE_DATE_EPOCH` is dropped for these cases. `display` and `x:` leave by
+    themselves only with a delay and `-loop 1`, and their timer compares `GetMagickTime()`,
+    which a fixed epoch stops: with it they never exit.
+  - `display`, `animate` and `import` join `SUBCOMMANDS`, so that `-seed` goes after the
+    subcommand name.
+- **OpenCL cases** set `MAGICK_OCL_DEVICE=CPU`. Pinning the device is not enough on its own.
+  Without a device profile, `AutoSelectOpenCLDevices` benchmarks the OpenCL device against
+  ImageMagick's own CPU path and disables the device when the CPU path is faster, and
+  which one wins depends on timing.
+  - `seed_opencl_profile` therefore writes this machine's profile, with the OpenCL device
+    scored best, into `MAGICK_OPENCL_CACHE_DIR` (in the case directory). The directory is
+    removed before the files are compared.
+  - pocl's own kernel cache is shared (`build-oracle/work/pocl-cache`). pocl's
+    `[SubCFG] Form SubCFGs in <kernel>` lines, which appear only while that cache is cold,
+    are normalised away.
+- **The bwrap sandbox** additionally gets `/sys` read-only (hwloc reads the CPU
+  topology), `/usr/bin/ld` (pocl links every kernel with it; it is a linker, not a shell)
+  and the X socket directory.
+
+**Cases** (`GAP_X11_CASES`, `GAP_OPENCL_CASES`, `GAP_OPENCL_DEVICE_CASES`): 592.
+- **X11 (108).**
+  - `display -window root` over every input and 24 option sets, then
+    `import -window root`.
+  - `animate -window root`.
+  - `import` with 15 option sets.
+  - `x:root` reads, and `x:` windows.
+  - `display` and `animate` windows with 20 and 11 option sets.
+  - X resources through `~/.displayrc`, `~/.animaterc` and `~/.magickrc`, since there is no
+    `-xrm` option.
+  - `-update` leaves out: it waits for the file to change.
+- **OpenCL (484).**
+  - 41 operators over 7 inputs (`rose_alpha` reaches the RGBA-only kernels: despeckle,
+    local contrast, modulate, motion blur).
+  - 13 operators after 14 settings that send accelerate.c back to the CPU path (virtual
+    pixel, channel, colorspace, masks, intensity).
+  - 12 on a 700x500 image.
+  - The device choices `GPU`, `true` and `false`.
+- `AccelerateContrastStretchImage` has no caller and stays out of reach.
+
+**selfcheck**, on `build-oracle/wide`, `--repeat 4`:
+- **The whole catalogue, 13603 cases:** 1 nondeterministic. It was a writeimages-adjoin
+  case on a driver built from a clone behind `5170fb874`; after the pull, 2297 windrv cases
+  gave 0. The new cases are also clean from a cold pocl cache.
+- **`wide` is therefore an oracle build** from now on, through `WIDE=1`.

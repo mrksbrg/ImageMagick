@@ -17,7 +17,7 @@ evidence*) and [`../../AGENTS.md`](../../AGENTS.md) since step 1.
 | Build | Where | Configuration | Job | Differential oracle |
 | --- | --- | --- | --- | --- |
 | **Oracle build** | WSL | `tools/oracle/build.sh base / cand / cov / mull`: static, no OpenMP, `--without-x`, OpenCL off | behaviour proof and mutation testing | **yes**: 9,745 cases, `selfcheck --repeat 4` reports 0 nondeterministic |
-| **Wide build** | WSL, `build-oracle/wide` | the same, plus `--with-x --enable-opencl --enable-deprecated` | compile check for the X11 and OpenCL files | not yet: no case reaches X11 code without an X server, and OpenCL aborts inside `pocl` (below) |
+| **Wide build** | WSL, `build-oracle/wide` | the same, plus `--with-x --enable-opencl --enable-deprecated` | compile check for the X11 and OpenCL files | yes, since 2026-10-05, as `WIDE=1` (`base-wide`, `cov-wide`): X11 cases under Xvfb, OpenCL under pocl (`MUTATION.md`, *W01*) |
 | **Windows build** | Windows, MSYS2 UCRT64, a clone with LF line endings | `--disable-shared --disable-openmp --without-modules`, no delegate libraries | compile check for the Windows-only files and branches | later: once `oracle.py` runs on Windows (step 4) |
 
 One full oracle today, possibly two later, and one build that only compiles. The GitHub
@@ -163,7 +163,7 @@ The share of each group over all 441 functions is not measured yet (step 2).
 | 3 | Prototype the machine-code comparison on the refactorings in `night1-refactoring`; report how often it matches | prototype done: 18 of 42 identical, 16 of 16 planted slips caught (above). Next: a tool in `tools/`, run by `verify_step.sh` |
 | 4 | Run `oracle.py` on Windows, base against candidate as `magick.exe` builds, so that `nt-base.c` becomes oracle-verified | open |
 | 5 | Add `wide` (and `win`) to `build.sh`, so the compile checks are one command like the others; find what `deprecate.c` needs | done: `build.sh wide` (69 s in WSL) and `build.sh win` (169 s in MSYS2, LF clone). `deprecate.c` compiles in every build: `--enable-deprecated` excludes the deprecated API, and nothing in `magick` calls the rest, so the linker drops it |
-| 6 | OpenCL at runtime: `pocl` 5.0 (Ubuntu 24.04) aborts compiling ImageMagick's kernels (`Assertion 'region_entry_barrier != NULL' failed`); try a newer `pocl`. If it works and `selfcheck` is clean, `accelerate.c` can be oracle-verified | open |
+| 6 | OpenCL at runtime: `pocl` 5.0 (Ubuntu 24.04) aborts compiling ImageMagick's kernels (`Assertion 'region_entry_barrier != NULL' failed`); try a newer `pocl`. If it works and `selfcheck` is clean, `accelerate.c` can be oracle-verified | done (2026-10-05): `POCL_WORK_GROUP_METHOD=cbs` avoids the abort; the oracle runs OpenCL and X11 cases under `WIDE=1` (`MUTATION.md`, *W01*) |
 | 7 | X11 at runtime: under Xvfb, see which paths of `display.c`, `animate.c` and `xwindow.c` non-interactive commands reach (`import -window root`, ...) | open |
 | 8 | Rerun the capped survivors of `colorspace.c` and `morphology.c` uncapped, classify them, and put both files through the gate | `colorspace.c` done: 82% overall, 5 functions ready, the two big ones careful (see `MUTATION.md`, *Linux*); `morphology.c` done: 70% overall. After 109 cases for the gaps: `colorspace.c` 88%, `morphology.c` 77% (`MUTATION.md`) |
 | 9 | A sampled mutation sweep over all compiled MagickCore files on Linux, for the trend figure | done: 4,506 mutants; after rerunning the 190 capped survivors uncapped (175 killed), 73.8% killed, 92.3% on executed lines, gate 89.7%, strict 75.6% (`MUTATION.md`, *Linux sweep*) |

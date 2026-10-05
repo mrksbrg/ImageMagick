@@ -76,7 +76,7 @@ MUTANT_TIMEOUT_MAX = 60
 # false kills; a timeout is therefore rerun once with this limit before it
 # counts. A mutant that really loops forever costs this much, once.
 MUTANT_TIMEOUT_CONFIRM = 120
-LCOV = os.path.join(oracle.OUT, "oracle.lcov")
+LCOV = os.path.join(oracle.OUT, "oracle%s.lcov" % oracle.WIDE)
 
 
 def _source_order(m):
@@ -109,8 +109,8 @@ def list_mutants(binary, file_regex):
 def function_ranges(file_regex):
     """(name, file, first line, last line) for every function in the matching
     files, from the coverage build's mapping."""
-    cov_bin = os.path.join(oracle.OUT, "cov", "utilities", "magick")
-    prof = os.path.join(oracle.OUT, "oracle.profdata")
+    cov_bin = os.path.join(oracle.OUT, "cov" + oracle.WIDE, "utilities", "magick")
+    prof = os.path.join(oracle.OUT, "oracle%s.profdata" % oracle.WIDE)
     out = subprocess.run([LLVM_COV, "export", "-skip-expansions", cov_bin,
                           "-instr-profile=" + prof], stdout=subprocess.PIPE,
                          stderr=subprocess.DEVNULL, check=True).stdout
@@ -202,8 +202,15 @@ def bwrap_sandbox(out):
     args += ["--ro-bind", "/usr/share", "/usr/share", "--ro-bind", "/etc", "/etc"]
     if os.path.isdir("/var/cache/fontconfig"):  # without it every case rebuilds the font cache
         args += ["--ro-bind", "/var/cache/fontconfig", "/var/cache/fontconfig"]
+    # pocl (OpenCL on the CPU) reads the CPU topology in /sys and links each kernel with ld,
+    # which is a linker, not a shell: no delegate command line can run through it.
+    args += ["--ro-bind", "/sys", "/sys"]
+    if os.path.exists("/usr/bin/ld"):
+        args += ["--ro-bind", os.path.realpath("/usr/bin/ld"), "/usr/bin/ld"]
+    os.makedirs(oracle.X11_SOCKETS, exist_ok=True)  # the X11 cases' servers (oracle.start_xvfb)
     return args + ["--dev", "/dev", "--proc", "/proc", "--tmpfs", "/tmp",
-                   "--ro-bind", root, root, "--bind", out, out, "--"]
+                   "--ro-bind", root, root, "--bind", out, out,
+                   "--bind", oracle.X11_SOCKETS, "/tmp/.X11-unix", "--"]
 
 
 def landlock_sandbox(out):
