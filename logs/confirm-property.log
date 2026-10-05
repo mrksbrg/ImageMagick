@@ -1,13 +1,13 @@
 mutate: 139 mutants in MagickCore/property\.c$, 19 functions
-mutate: baseline over 34 cases in 0s
-  mutants: 25/139 (10s)
-  mutants: 50/139 (10s)
-  mutants: 75/139 (14s)
-  mutants: 100/139 (18s)
-  mutants: 125/139 (24s)
-  mutants: 139/139 (29s)
+mutate: baseline over 11 cases in 0s
+  mutants: 25/139 (1s)
+  mutants: 50/139 (1s)
+  mutants: 75/139 (2s)
+  mutants: 100/139 (2s)
+  mutants: 125/139 (3s)
+  mutants: 139/139 (3s)
 
-mutate: 139 mutants, 29s
+mutate: 139 mutants, 3s
   killed 0, survived 91 (0 capped), no coverage 48, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -126,4 +126,4 @@ mutate: 139 mutants, 29s
     x  property.c:4814:20 cxx_lt_to_le               if (type < 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-656676901-property.json
+  full results: build-oracle/work/mutation-confirm-310d2a3b3-property.json
