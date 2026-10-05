@@ -1,13 +1,13 @@
-mutate: 96 mutants in MagickCore/profile\.c$, 25 functions
-mutate: baseline over 2061 cases in 0s
-  mutants: 25/96 (0s)
-  mutants: 50/96 (0s)
-  mutants: 75/96 (1s)
-  mutants: 96/96 (22s)
+mutate: 89 mutants in MagickCore/profile\.c$, 22 functions
+mutate: baseline over 58 cases in 0s
+  mutants: 25/89 (0s)
+  mutants: 50/89 (0s)
+  mutants: 75/89 (2s)
+  mutants: 89/89 (4s)
 
-mutate: 96 mutants, 22s
-  killed 7, survived 53 (0 capped), no coverage 36, errors 0
-  mutation score on reached code: 11.7%   overall: 7.3%
+mutate: 89 mutants, 4s
+  killed 0, survived 53 (0 capped), no coverage 36, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   TransformQuantumPixels                22      0        0     22
@@ -15,9 +15,7 @@ mutate: 96 mutants, 22s
   SyncExifProfile                       10      0       10      0
   GetXMPNumeratorAndDenominator          6      0        6      0
   DestroyPixelTLS                        4      0        0      4
-  CloneImageProfiles                     3      3        0      0
   DestroyTransformTLS                    3      0        0      3
-  RemoveImageProfile                     3      2        1      0
   WriteTo8BimProfile                     3      0        3      0
   GetProfilesFromResourceBlock           3      0        3      0
   ReplaceXMPValue                        3      0        3      0
@@ -28,10 +26,9 @@ mutate: 96 mutants, 22s
   GetXMPOffsets                          2      0        2      0
   TryAccumulate                          2      0        2      0
   SyncXMPProfile                         2      0        2      0
-  DeleteImageProfile                     1      1        0      0
-  GetImageProfile                        1      1        0      0
   GetNextImageProfile                    1      0        1      0
   TransformDoublePixels                  1      0        0      1
+  RemoveImageProfile                     1      0        1      0
   ResetImageProfileIterator              1      0        1      0
   ValidateXMPProfile                     1      0        1      0
   SetImageProfileInternal                1      0        1      0
@@ -92,4 +89,4 @@ mutate: 96 mutants, 22s
     x  profile.c:2815:58 cxx_gt_to_ge               if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-profile.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-profile.json

@@ -1,35 +1,23 @@
-mutate: 171 mutants in MagickCore/image\.c$, 43 functions
-mutate: baseline over 2163 cases in 0s
-  mutants: 25/171 (44s)
-  mutants: 50/171 (45s)
-  mutants: 75/171 (45s)
-  mutants: 100/171 (46s)
-  mutants: 125/171 (88s)
-  mutants: 150/171 (88s)
-  mutants: 171/171 (109s)
+mutate: 93 mutants in MagickCore/image\.c$, 27 functions
+mutate: baseline over 288 cases in 0s
+  mutants: 25/93 (0s)
+  mutants: 50/93 (0s)
+  mutants: 75/93 (0s)
+  mutants: 93/93 (7s)
 
-mutate: 171 mutants, 109s
-  killed 78, survived 14 (0 capped), no coverage 79, errors 0
-  mutation score on reached code: 84.8%   overall: 45.6%
+mutate: 93 mutants, 7s
+  killed 0, survived 14 (0 capped), no coverage 79, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  InterpretImageFilename                13     13        0      0
-  SetImageInfo                          13     13        0      0
-  AcquireImage                          12     12        0      0
   NewMagickImage                        12      0        0     12
   SetImageColor                         11      0        0     11
-  DestroyImage                          10     10        0      0
-  DestroyImageInfo                       9      9        0      0
   SmushXGap                              9      0        0      9
   SmushYGap                              9      0        0      9
   AppendImages                           6      0        0      6
   IsTaintImage                           5      0        0      5
   ModifyImage                            5      0        0      5
-  ResetImagePixels                       5      5        0      0
   ClipImagePath                          3      0        0      3
-  CloneImage                             3      3        0      0
-  CloneImageInfo                         3      3        0      0
-  GetImageInfo                           3      3        0      0
   GetImageReferenceCount                 3      0        0      3
   IsImageObject                          3      0        0      3
   SetImageRegionMask                     3      0        0      3
@@ -41,21 +29,14 @@ mutate: 171 mutants, 109s
   SetImageAlpha                          2      0        2      0
   SetImageBackgroundColor                2      0        2      0
   CopyImagePixels                        1      0        0      1
-  GetImageVirtualPixelMethod             1      1        0      0
-  IsValidFormatSpecifier                 1      1        0      0
-  ReferenceImage                         1      1        0      0
   ResetImagePage                         1      0        0      1
   SetImageStorageClass                   1      0        1      0
-  SetImageExtent                         1      1        0      0
-  SetImageInfoBlob                       1      1        0      0
   SetImageInfoCustomStream               1      0        0      1
-  SetImageInfoFile                       1      1        0      0
   SetImageMask                           1      0        1      0
   SetImageVirtualPixelMethod             1      0        0      1
   StripImage                             1      0        0      1
   SyncImage                              1      0        1      0
   SyncImagesSettings                     1      0        1      0
-  SyncImageSettings                      1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  image.c:385:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -74,4 +55,4 @@ mutate: 171 mutants, 109s
     x  image.c:4110:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-image.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-image.json
