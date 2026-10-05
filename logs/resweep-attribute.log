@@ -1,31 +1,32 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 532 mutants in MagickCore/attribute\.c$, 24 functions
-mutate: baseline over 13817 cases in 0s
+mutate: baseline over 12323 cases in 0s
   mutants: 25/532 (1s)
   mutants: 50/532 (1s)
-  mutants: 75/532 (2s)
-  mutants: 100/532 (8s)
-  mutants: 125/532 (9s)
-  mutants: 150/532 (9s)
-  mutants: 175/532 (9s)
-  mutants: 200/532 (13s)
-  mutants: 225/532 (17s)
-  mutants: 250/532 (20s)
-  mutants: 275/532 (21s)
-  mutants: 300/532 (24s)
-  mutants: 325/532 (27s)
-  mutants: 350/532 (29s)
-  mutants: 375/532 (30s)
-  mutants: 400/532 (42s)
-  mutants: 425/532 (43s)
-  mutants: 450/532 (44s)
+  mutants: 75/532 (3s)
+  mutants: 100/532 (7s)
+  mutants: 125/532 (10s)
+  mutants: 150/532 (10s)
+  mutants: 175/532 (11s)
+  mutants: 200/532 (11s)
+  mutants: 225/532 (13s)
+  mutants: 250/532 (16s)
+  mutants: 275/532 (18s)
+  mutants: 300/532 (20s)
+  mutants: 325/532 (23s)
+  mutants: 350/532 (24s)
+  mutants: 375/532 (42s)
+  mutants: 400/532 (50s)
+  mutants: 425/532 (50s)
+  mutants: 450/532 (51s)
   mutants: 475/532 (81s)
-  mutants: 500/532 (101s)
-  mutants: 525/532 (143s)
-  mutants: 532/532 (203s)
+  mutants: 500/532 (102s)
+  mutants: 525/532 (142s)
+  mutants: 532/532 (222s)
 
-mutate: 532 mutants, 203s
-  killed 439, survived 85 (25 capped), no coverage 8, errors 0
-  mutation score on reached code: 83.8%   overall: 82.5%
+mutate: 532 mutants, 222s
+  killed 437, survived 87 (17 capped), no coverage 8, errors 0
+  mutation score on reached code: 83.4%   overall: 82.1%
 
   function                           total killed survived no-cov
   GetImageMinimumBoundingBox            91     85        6      0
@@ -34,15 +35,15 @@ mutate: 532 mutants, 203s
   GetImageDepth                         49     39       10      0
   GetEdgeBoundingBox                    27     20        7      0
   GetEdgeBackgroundColor                27     27        0      0
-  SetImageDepth                         27     13       14      0
+  SetImageDepth                         27     14       13      0
   GetImageConvexHull                    25     21        4      0
   SetImageType                          25     23        2      0
   GetEdgeBackgroundCensus               21     17        4      0
   TraceConvexHull                       21     20        1      0
-  IdentifyImageGray                     17     17        0      0
+  IdentifyImageGray                     17     16        1      0
   IdentifyImageMonochrome               13     12        1      0
   IsImageOpaque                         11     10        1      0
-  GetImageQuantumDepth                   9      9        0      0
+  GetImageQuantumDepth                   9      7        2      0
   getProjection                          8      7        1      0
   getFeretDiameter                       8      7        1      0
   GetImageType                           8      0        0      8
@@ -88,16 +89,16 @@ mutate: 532 mutants, 203s
     x  attribute.c:806:16 cxx_mul_to_div             image->rows*sizeof(*monotone_chain));
        attribute.c:810:25 cxx_ne_to_eq               if (monotone_info != (MemoryInfo *) NULL)
        attribute.c:812:25 cxx_ne_to_eq               if (vertices_info != (MemoryInfo *) NULL)
-    xc attribute.c:916:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc attribute.c:924:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
-    xc attribute.c:961:19 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
-    xc attribute.c:961:48 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
-     c attribute.c:962:19 cxx_lt_to_ge               if (depth < current_depth[i])
-     c attribute.c:962:19 cxx_lt_to_le               if (depth < current_depth[i])
-    xc attribute.c:1106:15 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
-    xc attribute.c:1106:44 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
-     c attribute.c:1107:15 cxx_lt_to_ge               if (depth < current_depth[i])
-     c attribute.c:1107:15 cxx_lt_to_le               if (depth < current_depth[i])
+    x  attribute.c:916:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:924:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
+    x  attribute.c:961:19 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
+    x  attribute.c:961:48 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
+       attribute.c:962:19 cxx_lt_to_ge               if (depth < current_depth[i])
+       attribute.c:962:19 cxx_lt_to_le               if (depth < current_depth[i])
+    x  attribute.c:1106:15 cxx_lt_to_ge               for (i=1; i < (ssize_t) number_threads; i++)
+    x  attribute.c:1106:44 cxx_post_inc_to_post_dec   for (i=1; i < (ssize_t) number_threads; i++)
+       attribute.c:1107:15 cxx_lt_to_ge               if (depth < current_depth[i])
+       attribute.c:1107:15 cxx_lt_to_le               if (depth < current_depth[i])
     x  attribute.c:1185:16 cxx_lt_to_le               if (distance < MagickEpsilon)
     x  attribute.c:1199:16 cxx_lt_to_le               if (distance < MagickEpsilon)
     x  attribute.c:1233:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -106,6 +107,9 @@ mutate: 532 mutants, 203s
     x  attribute.c:1380:31 cxx_lt_to_le               if (bounding_box[i].x < point.x)
     x  attribute.c:1382:31 cxx_lt_to_le               if (bounding_box[i].y < point.y)
     x  attribute.c:1390:19 cxx_lt_to_le               for (i=0; i < 4; i++)
+    xc attribute.c:1478:19 cxx_le_to_gt               if (depth <= 64)
+    xc attribute.c:1478:19 cxx_le_to_lt               if (depth <= 64)
+    xc attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  attribute.c:1671:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc attribute.c:1752:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  attribute.c:1882:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -124,7 +128,6 @@ mutate: 532 mutants, 203s
     x  attribute.c:2056:58 cxx_div_to_mul             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
     x  attribute.c:2071:14 cxx_ne_to_eq               if (status != MagickFalse)
     xc attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc attribute.c:2098:13 cxx_ge_to_gt               if (depth >= MAGICKCORE_QUANTUM_DEPTH)
     xc attribute.c:2108:28 cxx_eq_to_ne               if (image->storage_class == PseudoClass)
     xc attribute.c:2117:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->colors; i++)
     xc attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
