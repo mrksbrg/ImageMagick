@@ -1279,9 +1279,9 @@
   "col": 45,
   "function": "segment.c:Classify",
   "status": "killed",
-  "cases": 27,
-  "killer": "mogrify/b2a10af37b",
-  "why": "work.miff differs"
+  "cases": 2,
+  "killer": "unary/c7b6ca0e15",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:626:90:626:91",
@@ -1303,9 +1303,9 @@
   "col": 47,
   "function": "segment.c:Classify",
   "status": "killed",
-  "cases": 27,
-  "killer": "mogrify/b2a10af37b",
-  "why": "work.miff differs"
+  "cases": 2,
+  "killer": "unary/c7b6ca0e15",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:627:94:627:95",
@@ -4115,7 +4115,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:1555:47:1555:48",
@@ -5303,7 +5303,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_le_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:1909:15:1909:17",
