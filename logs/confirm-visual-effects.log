@@ -1,20 +1,20 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
-mutate: 175 mutants in MagickCore/visual-effects\.c$, 22 functions
+mutate: 174 mutants in MagickCore/visual-effects\.c$, 22 functions
 mutate: baseline over 40 cases in 0s
-  mutants: 25/175 (0s)
-  mutants: 50/175 (0s)
-  mutants: 75/175 (36s)
-  mutants: 100/175 (36s)
-  mutants: 125/175 (36s)
-  mutants: 150/175 (42s)
-  mutants: 175/175 (86s)
+  mutants: 25/174 (0s)
+  mutants: 50/174 (0s)
+  mutants: 75/174 (36s)
+  mutants: 100/174 (36s)
+  mutants: 125/174 (36s)
+  mutants: 150/174 (42s)
+  mutants: 174/174 (85s)
 
-mutate: 175 mutants, 86s
-  killed 1, survived 46 (0 capped), no coverage 128, errors 0
-  mutation score on reached code: 2.1%   overall: 0.6%
+mutate: 174 mutants, 85s
+  killed 0, survived 46 (0 capped), no coverage 128, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  PlasmaImageProxy                      35      1       34      0
+  PlasmaImageProxy                      34      0       34      0
   ColorMatrixImage                      18      0        0     18
   ImplodeImage                          12      0        0     12
   MorphImages                           12      0        0     12
@@ -86,4 +86,4 @@ mutate: 175 mutants, 86s
        visual-effects.c:3778:21 cxx_eq_to_ne               if (proceed == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6278a30a1-visual-effects.json
+  full results: build-oracle/work/mutation-confirm-ec8ded5ae-visual-effects.json
