@@ -3161,3 +3161,55 @@ characters on the Mac.
    each push (configure, log, mime, delegate, draw, image, policy, memory, annotate) and the
    resweep follows. Read the gate from ERDC's `mutation-erdc-confirm-<sha>-*.json` once they
    land.
+
+### Harness fixes found by checking the night's work against ERDC and a full run (Mac, 2026-10-05, morning)
+
+**ERDC's landlock sandbox and /tmp.**
+- *Symptom.* ERDC killed no log.c mutant through the new log cases, while the Mac killed
+  most of them.
+- *Cause.* The owner ran the case on ERDC outside the sandbox, and there the mutant does
+  change the output. Under mutate.py, landlock lets a case write only under `build-oracle/`.
+  `logcfg` and `delegatecfg listinfo` listed through `tmpfile()` (in /tmp), so they returned
+  early on base and mutant alike. The Mac's sandbox allows /tmp, which hid it.
+- *Fix.* The driver now writes a scratch file in the case directory and unlinks it at once.
+
+**The confirm loop never reran a case whose driver changed.**
+- Driver cases keep their ids when `imdriver.c` changes.
+- `erdc/new-cases.py` now counts every driver case as new when `imdriver.c` changed since
+  the last round.
+- The loop also wakes on changes to `profilecases.py` and `imdriver.c`, not only
+  `cases.py`.
+- ERDC runs a copy of the loop scripts from `setup/`, so they need recopying and a restart.
+
+**The re-sweep replayed its first pass.**
+- A fresh pass removed the finished `mutation-resweep-*.json` reports but not the
+  `.partial.jsonl` logs.
+- mutate.py resumes from those logs, so every pass after the first only replayed old
+  results. That is why ERDC reported TranslateEvent as unreached.
+- No kill was lost, because gate.py keeps a kill.
+
+**A cached baseline kept an old imdriver.** `build.sh base` skipped the driver rebuild when the
+baseline itself was cached. In a real `oracle.py run`, 84 of 88 new driver cases diverged
+(the baseline ran an older driver without the new commands).
+
+**Build drift between baseline and candidate.**
+- `-list configure` prints the compiler flags and libraries a build was configured with,
+  including Homebrew's versioned include paths.
+- `-list format` prints the Pango version compiled in.
+- A Homebrew upgrade between configuring the two builds made both diverge.
+- The toolchain lines of `-list configure` are now normalised (HARNESS_VERSION 10), and both
+  Mac builds were rebuilt against today's Homebrew.
+- *Rule:* after a Homebrew upgrade, rebuild the baseline and the candidate together.
+
+**ClonePolygonEdgesTLS cannot be reached under the oracle.**
+- The oracle sets `OMP_NUM_THREADS=1` for determinism.
+- SetMagickResourceLimit caps even `-limit thread 4` at `GetOpenMPMaximumThreads()`, so the
+  four-thread case gave one thread on ERDC too. It was removed, and the function's body is
+  recorded as unobservable.
+
+**Full run, both Mac builds rebuilt:** 14,768 cases, 4 diverge. All four are the Windows
+session's `blob writeimages … adjoin` cases (GIF, TIFF, PPM, MIFF). They hash 4096 bytes of
+`image_info->blob` after WriteImages has outgrown the caller's 4096-byte buffer, so the
+hashed bytes are not defined. They differ from run to run on the Mac (Linux masks it with
+`MALLOC_PERTURB_`). That session should hash only the written length, and check whether
+`image_info->blob` still points at live memory.
