@@ -2130,6 +2130,10 @@ and `DestroyQCubeInfo`'s frees (3, unobservable: leaks only).
 The `quantizegap6` round froze WSL: mutants that stop pruning grew the tree until six of them
 filled 8 GB. `mutate.py` now takes `ORACLE_MEM_GB=N` (off unless set), an address-space cap per
 run. A capped mutant fails to allocate and is killed, as it would be at the timeout.
+(2026-10-06: the cap was set on `mutate.py` itself and inherited, so it also capped the driver.
+At 24 jobs the driver's threads passed 2 GB and 2176 mutants of the W01 run came back as
+`error: MemoryError()`. It is now a `prlimit` prefix on each case command, outside the sandbox,
+so only the children are capped; the baseline cache key leaves the prefix out.)
 
 **`quantize.c`: adjusted 85% to 91%, reach 100%, every function at 80% or more, trusted.**
 Open survivors, by line:

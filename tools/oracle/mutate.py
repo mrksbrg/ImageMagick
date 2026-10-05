@@ -76,6 +76,7 @@ MUTANT_TIMEOUT_MAX = 60
 # false kills; a timeout is therefore rerun once with this limit before it
 # counts. A mutant that really loops forever costs this much, once.
 MUTANT_TIMEOUT_CONFIRM = 120
+SANDBOX = []  # sandbox(binary), set in main(); oracle.WRAPPER adds the memory cap's prefix
 LCOV = os.path.join(oracle.OUT, "oracle%s.lcov" % oracle.WIDE)
 
 
@@ -289,9 +290,19 @@ def _limit_memory():
     # stops pruning quantize.c's colour tree grew it without bound, and six at
     # once froze an 8 GB WSL). Such a mutant then fails to allocate, and is
     # killed, as it would be at the timeout. Off unless set.
+    # Returns a command prefix: prlimit caps the child only. A limit set here
+    # would cap this process too, and at 24 jobs its threads (a stack and a
+    # malloc arena each, beside the casemap) passed 2 GB: 2176 mutants of the
+    # W01 run came back as MemoryError (2026-10-05). Without prlimit, fall back
+    # to that, so keep -j low.
     gb = os.environ.get("ORACLE_MEM_GB")
-    if gb:
-        resource.setrlimit(resource.RLIMIT_AS, (int(gb) << 30, resource.getrlimit(resource.RLIMIT_AS)[1]))
+    if not gb:
+        return []
+    if shutil.which("prlimit"):
+        return ["prlimit", "--as=%d" % (int(gb) << 30), "--"]
+    print("mutate: no prlimit, so ORACLE_MEM_GB caps this process as well", file=sys.stderr)
+    resource.setrlimit(resource.RLIMIT_AS, (int(gb) << 30, resource.getrlimit(resource.RLIMIT_AS)[1]))
+    return []
 
 
 def _in_function(m, function):
@@ -377,8 +388,9 @@ class _Run:
         Kept per binary, catalogue and way of running (the wrapper), so a
         resumed run does not spend minutes recomputing it. The wrapper is in
         the key because adding the sandbox changed two cases' stderr, and a
-        cache from before it turned those into 28 false kills."""
-        wrap = hashlib.sha1(json.dumps(oracle.WRAPPER).encode()).hexdigest()[:8]
+        cache from before it turned those into 28 false kills. The memory cap's
+        prefix is not: it caps the same children as the limit it replaced."""
+        wrap = hashlib.sha1(json.dumps(SANDBOX).encode()).hexdigest()[:8]
         cache_file = (oracle.cache_path(self.binary, self.manifest).replace(".json", "")
                       + "-mull-%s.json" % wrap)
         base = _cached_baseline(cache_file)
@@ -501,9 +513,10 @@ def main():
     binary = os.path.abspath(args.bin or os.path.join(oracle.OUT, "mull-" + slug,
                                                       "utilities", "magick"))
     base_bin = oracle.build("base", "origin/main")  # only for the corpus and option lists
-    oracle.WRAPPER = sandbox(binary)  # baseline and mutants alike
+    global SANDBOX
+    SANDBOX = sandbox(binary)
     _limit_file_size()
-    _limit_memory()
+    oracle.WRAPPER = _limit_memory() + SANDBOX  # baseline and mutants alike
     manifest, cases = oracle.load_cases(base_bin)
     run = _Run(binary, slug, manifest, {c["id"]: c for c in cases})
     run.max_cases, run.jobs = args.max_cases, args.jobs
