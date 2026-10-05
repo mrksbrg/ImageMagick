@@ -1,5 +1,5 @@
 mutate: 34 mutants in MagickCore/list\.c$, 14 functions
-mutate: baseline over 20 cases in 0s
+mutate: baseline over 18 cases in 0s
   mutants: 25/34 (0s)
   mutants: 34/34 (1s)
 
@@ -28,4 +28,4 @@ mutate: 34 mutants, 1s
     x  list.c:1195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-list.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-list.json
