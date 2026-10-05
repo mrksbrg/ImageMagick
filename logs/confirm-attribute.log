@@ -1,13 +1,13 @@
-mutate: 82 mutants in MagickCore/attribute\.c$, 17 functions
-mutate: baseline over 53 cases in 0s
-  mutants: 25/82 (0s)
-  mutants: 50/82 (0s)
-  mutants: 75/82 (1s)
-  mutants: 82/82 (1s)
+mutate: 81 mutants in MagickCore/attribute\.c$, 16 functions
+mutate: baseline over 24 cases in 0s
+  mutants: 25/81 (0s)
+  mutants: 50/81 (0s)
+  mutants: 75/81 (1s)
+  mutants: 81/81 (1s)
 
-mutate: 82 mutants, 1s
-  killed 1, survived 13 (0 capped), no coverage 68, errors 0
-  mutation score on reached code: 7.1%   overall: 1.2%
+mutate: 81 mutants, 1s
+  killed 0, survived 13 (0 capped), no coverage 68, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetImageBoundingBox                   18      0        0     18
@@ -23,7 +23,6 @@ mutate: 82 mutants, 1s
   TraceConvexHull                        1      0        0      1
   getProjection                          1      0        0      1
   getFeretDiameter                       1      0        0      1
-  IdentifyImageGray                      1      1        0      0
   IdentifyImageMonochrome                1      0        0      1
   IdentifyImageType                      1      0        0      1
   IsImageOpaque                          1      0        1      0
@@ -44,4 +43,4 @@ mutate: 82 mutants, 1s
     x  attribute.c:2388:57 cxx_eq_to_ne               if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-attribute.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-attribute.json
