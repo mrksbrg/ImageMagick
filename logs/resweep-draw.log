@@ -1,22 +1,123 @@
 mutate: 2544 mutants in MagickCore/draw\.c$, 50 functions
 mutate: baseline over 12339 cases in 0s
-mutate: resuming, 2544 mutants already done
+  mutants: 25/2544 (1s)
+  mutants: 50/2544 (1s)
+  mutants: 75/2544 (2s)
+  mutants: 100/2544 (33s)
+  mutants: 125/2544 (34s)
+  mutants: 150/2544 (145s)
+  mutants: 175/2544 (147s)
+  mutants: 200/2544 (148s)
+  mutants: 225/2544 (149s)
+  mutants: 250/2544 (149s)
+  mutants: 275/2544 (150s)
+  mutants: 300/2544 (150s)
+  mutants: 325/2544 (150s)
+  mutants: 350/2544 (150s)
+  mutants: 375/2544 (150s)
+  mutants: 400/2544 (151s)
+  mutants: 425/2544 (151s)
+  mutants: 450/2544 (151s)
+  mutants: 475/2544 (152s)
+  mutants: 500/2544 (153s)
+  mutants: 525/2544 (157s)
+  mutants: 550/2544 (160s)
+  mutants: 575/2544 (162s)
+  mutants: 600/2544 (164s)
+  mutants: 625/2544 (166s)
+  mutants: 650/2544 (279s)
+  mutants: 675/2544 (300s)
+  mutants: 700/2544 (348s)
+  mutants: 725/2544 (351s)
+  mutants: 750/2544 (352s)
+  mutants: 775/2544 (356s)
+  mutants: 800/2544 (365s)
+  mutants: 825/2544 (368s)
+  mutants: 850/2544 (371s)
+  mutants: 875/2544 (475s)
+  mutants: 900/2544 (543s)
+  mutants: 925/2544 (556s)
+  mutants: 950/2544 (558s)
+  mutants: 975/2544 (566s)
+  mutants: 1000/2544 (568s)
+  mutants: 1025/2544 (572s)
+  mutants: 1050/2544 (648s)
+  mutants: 1075/2544 (741s)
+  mutants: 1100/2544 (773s)
+  mutants: 1125/2544 (927s)
+  mutants: 1150/2544 (937s)
+  mutants: 1175/2544 (940s)
+  mutants: 1200/2544 (947s)
+  mutants: 1225/2544 (962s)
+  mutants: 1250/2544 (1059s)
+  mutants: 1275/2544 (1140s)
+  mutants: 1300/2544 (1143s)
+  mutants: 1325/2544 (1144s)
+  mutants: 1350/2544 (1147s)
+  mutants: 1375/2544 (1333s)
+  mutants: 1400/2544 (1335s)
+  mutants: 1425/2544 (1337s)
+  mutants: 1450/2544 (1346s)
+  mutants: 1475/2544 (1531s)
+  mutants: 1500/2544 (1538s)
+  mutants: 1525/2544 (1554s)
+  mutants: 1550/2544 (1726s)
+  mutants: 1575/2544 (1733s)
+  mutants: 1600/2544 (1739s)
+  mutants: 1625/2544 (1744s)
+  mutants: 1650/2544 (1748s)
+  mutants: 1675/2544 (1759s)
+  mutants: 1700/2544 (1818s)
+  mutants: 1725/2544 (1846s)
+  mutants: 1750/2544 (1849s)
+  mutants: 1775/2544 (1852s)
+  mutants: 1800/2544 (1854s)
+  mutants: 1825/2544 (1855s)
+  mutants: 1850/2544 (1856s)
+  mutants: 1875/2544 (1857s)
+  mutants: 1900/2544 (1865s)
+  mutants: 1925/2544 (1868s)
+  mutants: 1950/2544 (1898s)
+  mutants: 1975/2544 (1909s)
+  mutants: 2000/2544 (1909s)
+  mutants: 2025/2544 (1910s)
+  mutants: 2050/2544 (1911s)
+  mutants: 2075/2544 (1911s)
+  mutants: 2100/2544 (1912s)
+  mutants: 2125/2544 (1913s)
+  mutants: 2150/2544 (1914s)
+  mutants: 2175/2544 (1915s)
+  mutants: 2200/2544 (1916s)
+  mutants: 2225/2544 (1916s)
+  mutants: 2250/2544 (1916s)
+  mutants: 2275/2544 (1918s)
+  mutants: 2300/2544 (1920s)
+  mutants: 2325/2544 (1921s)
+  mutants: 2350/2544 (1922s)
+  mutants: 2375/2544 (1924s)
+  mutants: 2400/2544 (1926s)
+  mutants: 2425/2544 (1928s)
+  mutants: 2450/2544 (1931s)
+  mutants: 2475/2544 (1934s)
+  mutants: 2500/2544 (1937s)
+  mutants: 2525/2544 (1938s)
+  mutants: 2544/2544 (2044s)
 
-mutate: 2544 mutants, 0s
-  killed 1902, survived 550 (337 capped), no coverage 92, errors 0
-  mutation score on reached code: 77.6%   overall: 74.8%
+mutate: 2544 mutants, 2044s
+  killed 1909, survived 543 (330 capped), no coverage 92, errors 0
+  mutation score on reached code: 77.9%   overall: 75.0%
 
   function                           total killed survived no-cov
-  RenderMVGContent                     614    470      144      0
+  RenderMVGContent                     614    472      142      0
   TraceStrokePolygon                   283    227       56      0
   TracePath                            185    167       18      0
   TraceArcPath                         159    141       18      0
   GetFillAlpha                         133    110       23      0
   DrawPrimitive                        126     99       27      0
-  DrawPolygonPrimitive                 114     66       48      0
+  DrawPolygonPrimitive                 114     68       46      0
   DrawGradientImage                    107     95       12      0
   DrawDashPolygon                       85     64       21      0
-  ConvertPathToPolygon                  73     57       16      0
+  ConvertPathToPolygon                  73     56       17      0
   DrawAffineImage                       61     45       16      0
   DrawBoundingRectangles                59      0        0     59
   AffineEdge                            54     40       14      0
@@ -28,7 +129,7 @@ mutate: 2544 mutants, 0s
   ConvertPrimitiveToPath                27     22        5      0
   GetMVGMacros                          24     20        4      0
   GetStopColorOffset                    23     23        0      0
-  CheckPrimitiveExtent                  23     11       12      0
+  CheckPrimitiveExtent                  23     15        8      0
   GetDrawInfo                           23     11       12      0
   LogPrimitiveInfo                      20      0        0     20
   DestroyDrawInfo                       19      5       14      0
@@ -83,6 +184,7 @@ mutate: 2544 mutants, 0s
     xc draw.c:680:23 cxx_lt_to_le               if (direction < 0)
     xc draw.c:686:40 cxx_add_to_sub             polygon_info->number_edges=edge+1;
     xc draw.c:721:17 cxx_lt_to_le               if (point.x < bounds.x1)
+    xc draw.c:723:17 cxx_gt_to_ge               if (point.x > bounds.x2)
     xc draw.c:750:68 cxx_gt_to_ge               polygon_info->edges[edge].direction=(ssize_t) (direction > 0);
     xc draw.c:751:25 cxx_lt_to_le               if (direction < 0)
     xc draw.c:772:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) polygon_info->number_edges; i++)
@@ -183,12 +285,8 @@ mutate: 2544 mutants, 0s
     xc draw.c:2305:58 cxx_add_to_sub             proposed_extent=mvg_info->offset+pad+PrimitiveExtentPad+1.0;
     xc draw.c:2306:24 cxx_le_to_lt               if ((proposed_extent <= 0.0) || (proposed_extent > (double) MAGICK_SIZE_MAX))
     xc draw.c:2306:52 cxx_gt_to_ge               if ((proposed_extent <= 0.0) || (proposed_extent > (double) MAGICK_SIZE_MAX))
-    xc draw.c:2309:14 cxx_le_to_gt               if (extent <= *mvg_info->extent)
     xc draw.c:2309:14 cxx_le_to_lt               if (extent <= *mvg_info->extent)
-    xc draw.c:2311:14 cxx_gt_to_ge               if (extent > (GetMaxMemoryRequest()/sizeof(PrimitiveInfo)))
     xc draw.c:2311:38 cxx_div_to_mul             if (extent > (GetMaxMemoryRequest()/sizeof(PrimitiveInfo)))
-    xc draw.c:2314:37 cxx_add_to_sub             *mvg_info->primitive_info,extent+1,sizeof(PrimitiveInfo));
-    xc draw.c:2321:68 cxx_mul_to_div             primitive_info=(PrimitiveInfo *) AcquireCriticalMemory(extent*
     xc draw.c:2323:44 cxx_mul_to_div             (void) memset(primitive_info,0,extent*sizeof(*primitive_info));
     xc draw.c:2336:41 cxx_lt_to_ge               for (i=(ssize_t) *mvg_info->extent; i < (ssize_t) extent; i++)
     xc draw.c:2336:41 cxx_lt_to_le               for (i=(ssize_t) *mvg_info->extent; i < (ssize_t) extent; i++)
@@ -221,7 +319,6 @@ mutate: 2544 mutants, 0s
      c draw.c:2938:51 cxx_eq_to_ne               if (LocaleCompare("currentColor",keyword) == 0)
     xc draw.c:3049:48 cxx_eq_to_ne               if (graphic_context[n]->compliance == SVGCompliance)
     xc draw.c:3053:48 cxx_ne_to_eq               if (graphic_context[n]->fill.alpha != (double) TransparentAlpha)
-    xc draw.c:3137:24 cxx_eq_to_ne               if (weight == -1)
     xc draw.c:3237:54 cxx_mul_to_div             graphic_context[n]->kerning=metrics.width*
     xc draw.c:3302:48 cxx_eq_to_ne               if (graphic_context[n]->compliance == SVGCompliance)
     xc draw.c:3312:48 cxx_ne_to_eq               if (graphic_context[n]->fill.alpha != (double) TransparentAlpha)
@@ -340,7 +437,6 @@ mutate: 2544 mutants, 0s
     xc draw.c:4671:13 cxx_ne_to_eq               if (stops != (StopInfo *) NULL)
     xc draw.c:4673:13 cxx_ge_to_gt               for ( ; n >= 0; n--)
     xc draw.c:4673:13 cxx_ge_to_lt               for ( ; n >= 0; n--)
-    xc draw.c:4676:55 cxx_lt_to_le               if ((status == MagickFalse) && (exception->severity < ErrorException))
     x  draw.c:4753:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  draw.c:4772:24 cxx_ne_to_eq               if (draw_info->debug != MagickFalse)
     x  draw.c:4782:12 cxx_ne_to_eq               if (type != (const char *) NULL)
@@ -397,8 +493,6 @@ mutate: 2544 mutants, 0s
     xc draw.c:5206:40 cxx_le_to_lt               (bounds.x2 <= 0.0) || (bounds.y2 <= 0.0))
     xc draw.c:5211:23 cxx_lt_to_le               bounds.x1=bounds.x1 < 0.0 ? 0.0 : bounds.x1 >= (double) image->columns-1.0 ?
     xc draw.c:5211:47 cxx_ge_to_gt               bounds.x1=bounds.x1 < 0.0 ? 0.0 : bounds.x1 >= (double) image->columns-1.0 ?
-    xc draw.c:5211:73 cxx_sub_to_add             bounds.x1=bounds.x1 < 0.0 ? 0.0 : bounds.x1 >= (double) image->columns-1.0 ?
-    xc draw.c:5212:28 cxx_sub_to_add             (double) image->columns-1.0 : bounds.x1;
     xc draw.c:5213:23 cxx_lt_to_le               bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?
     xc draw.c:5213:47 cxx_ge_to_gt               bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?
     xc draw.c:5213:70 cxx_sub_to_add             bounds.y1=bounds.y1 < 0.0 ? 0.0 : bounds.y1 >= (double) image->rows-1.0 ?

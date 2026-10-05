@@ -1,20 +1,44 @@
 mutate: 605 mutants in MagickCore/annotate\.c$, 23 functions
 mutate: baseline over 14762 cases in 0s
-mutate: resuming, 605 mutants already done
+  mutants: 25/605 (1s)
+  mutants: 50/605 (2s)
+  mutants: 75/605 (6s)
+  mutants: 100/605 (9s)
+  mutants: 125/605 (14s)
+  mutants: 150/605 (17s)
+  mutants: 175/605 (21s)
+  mutants: 200/605 (25s)
+  mutants: 225/605 (28s)
+  mutants: 250/605 (48s)
+  mutants: 275/605 (49s)
+  mutants: 300/605 (52s)
+  mutants: 325/605 (108s)
+  mutants: 350/605 (115s)
+  mutants: 375/605 (143s)
+  mutants: 400/605 (176s)
+  mutants: 425/605 (228s)
+  mutants: 450/605 (244s)
+  mutants: 475/605 (275s)
+  mutants: 500/605 (286s)
+  mutants: 525/605 (286s)
+  mutants: 550/605 (286s)
+  mutants: 575/605 (286s)
+  mutants: 600/605 (389s)
+  mutants: 605/605 (400s)
 
-mutate: 605 mutants, 0s
-  killed 419, survived 94 (4 capped), no coverage 92, errors 0
-  mutation score on reached code: 81.7%   overall: 69.3%
+mutate: 605 mutants, 400s
+  killed 446, survived 67 (0 capped), no coverage 92, errors 0
+  mutation score on reached code: 86.9%   overall: 73.7%
 
   function                           total killed survived no-cov
-  RenderFreetype                       192    136       56      0
+  RenderFreetype                       192    152       40      0
   AnnotateImage                        175    170        5      0
   RenderPostscript                      81      0        0     81
   FormatMagickCaption                   30     26        4      0
   RenderType                            27     20        7      0
-  GetMultilineTypeMetrics               18     14        4      0
+  GetMultilineTypeMetrics               18     15        3      0
   TraceCubicBezier                      12     12        0      0
-  ComplexTextLayout                     11      6        5      0
+  ComplexTextLayout                     11     11        0      0
   TraceQuadraticBezier                   8      8        0      0
   ReplaceSpaceWithNewline                7      6        1      0
   IsValidPostscriptFontname              7      0        0      7
@@ -23,19 +47,15 @@ mutate: 605 mutants, 0s
   TraceLineTo                            4      4        0      0
   TraceMoveTo                            4      4        0      0
   RenderX11                              4      0        0      4
-  AnnotateComponentTerminus              3      0        3      0
+  AnnotateComponentTerminus              3      3        0      0
   IsEmptyOutline                         3      2        1      0
   FreetypeInit                           3      2        1      0
   GetTypeMetrics                         2      0        2      0
   FreetypeAlloc                          2      1        1      0
-  AnnotateComponentGenesis               1      0        1      0
-  FreetypeCloseStream                    1      0        1      0
+  AnnotateComponentGenesis               1      1        0      0
+  FreetypeCloseStream                    1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
-    xc annotate.c:173:26 cxx_eq_to_ne               if (annotate_semaphore == (SemaphoreInfo *) NULL)
-    xc annotate.c:198:26 cxx_eq_to_ne               if (annotate_semaphore == (SemaphoreInfo *) NULL)
-     c annotate.c:199:5 cxx_remove_void_call       ActivateSemaphoreInfo(&annotate_semaphore);
-    xc annotate.c:200:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&annotate_semaphore);
     x  annotate.c:271:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  annotate.c:315:3 cxx_remove_void_call       SetGeometryInfo(&geometry_info);
     x  annotate.c:357:44 cxx_mul_to_div             offset.y=annotate_info->affine.ty+i*annotate_info->affine.sy*height;
@@ -47,7 +67,6 @@ mutate: 605 mutants, 0s
     x  annotate.c:698:18 cxx_gt_to_ge               if ((n > 0) && ((*caption)[n-1] != '\n'))
     x  annotate.c:705:74 cxx_add_to_sub             (void) ConcatenateMagickString(target,"\n",strlen(*caption)+1);
     x  annotate.c:800:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  annotate.c:849:26 cxx_gt_to_ge               if (extent.width > metrics->width)
     x  annotate.c:867:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) count; i++)
     x  annotate.c:867:15 cxx_lt_to_le               for (i=0; i < (ssize_t) count; i++)
     x  annotate.c:933:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -59,38 +78,19 @@ mutate: 605 mutants, 0s
        annotate.c:1071:34 cxx_ne_to_eq               if (IsPathAccessible(font) != MagickFalse)
     x  annotate.c:1097:21 cxx_eq_to_ne               if (type_info == (const TypeInfo *) NULL)
     x  annotate.c:1109:26 cxx_ne_to_eq               if (type_info->metrics != (char *) NULL)
-    x  annotate.c:1301:31 cxx_ne_to_eq               if (((*grapheme)[i].index != 0) && (last_glyph != 0))
-    x  annotate.c:1301:52 cxx_ne_to_eq               if (((*grapheme)[i].index != 0) && (last_glyph != 0))
-    x  annotate.c:1313:27 cxx_eq_to_ne               if (ft_status == 0)
-    x  annotate.c:1314:28 cxx_sub_to_add             (*grapheme)[i-1].x_advance+=(FT_Pos) ((draw_info->direction ==
-    x  annotate.c:1314:75 cxx_eq_to_ne               (*grapheme)[i-1].x_advance+=(FT_Pos) ((draw_info->direction ==
-    x  annotate.c:1333:12 cxx_ne_to_eq               if (file != (FILE *) NULL)
     x  annotate.c:1350:14 cxx_gt_to_ge               if (offset > stream->size)
     x  annotate.c:1363:57 cxx_le_to_lt               return((outline.n_points == 0) || (outline.n_contours <= 0) ? MagickTrue :
     x  annotate.c:1447:14 cxx_le_to_lt               if (extent <= 0)
     x  annotate.c:1460:14 cxx_le_to_lt               if (extent <= 0)
     x  annotate.c:1513:7 cxx_remove_void_call       FT_Set_Default_Properties(*alibrary);
-    x  annotate.c:1645:24 cxx_ne_to_eq               if ((draw_info->font != (char *) NULL) && (*draw_info->font == '@') &&
-    x  annotate.c:1645:63 cxx_eq_to_ne               if ((draw_info->font != (char *) NULL) && (*draw_info->font == '@') &&
-    x  annotate.c:1646:78 cxx_eq_to_ne               (IsRightsAuthorized(PathPolicyDomain,ReadPolicyRights,draw_info->font) == MagickFalse))
        annotate.c:1667:21 cxx_ne_to_eq               if (type_info != (const TypeInfo *) NULL)
     x  annotate.c:1692:37 cxx_ge_to_gt               stream->size=attributes.st_size >= 0 ? (unsigned long)
     x  annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
     x  annotate.c:1709:27 cxx_ne_to_eq               if ((draw_info->metrics != (char *) NULL) &&
     x  annotate.c:1710:45 cxx_ne_to_eq               (IsPathAccessible(draw_info->metrics) != MagickFalse))
-    x  annotate.c:1714:18 cxx_ne_to_eq               if ((ft_status != 0) && (face->num_charmaps != 0))
-    x  annotate.c:1714:47 cxx_ne_to_eq               if ((ft_status != 0) && (face->num_charmaps != 0))
-    x  annotate.c:1724:48 cxx_eq_to_ne               if (LocaleCompare(encoding,"AppleRoman") == 0)
     x  annotate.c:1758:11 cxx_remove_void_call       FreetypeDone(memory,library,stream);
        annotate.c:1790:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
-    x  annotate.c:1805:41 cxx_eq_to_ne               if (face->size->metrics.descender == 0)
-    x  annotate.c:1806:52 cxx_div_to_mul             metrics->descent=face->size->metrics.y_ppem/-3.5;
-    x  annotate.c:1811:54 cxx_div_to_mul             metrics->height=(double) face->size->metrics.height/64.0;
     x  annotate.c:1813:39 cxx_gt_to_ge               if (face->size->metrics.max_advance > MagickEpsilon)
-    x  annotate.c:1813:39 cxx_gt_to_le               if (face->size->metrics.max_advance > MagickEpsilon)
-    x  annotate.c:1814:66 cxx_div_to_mul             metrics->max_advance=(double) face->size->metrics.max_advance/64.0;
-    x  annotate.c:1817:37 cxx_add_to_sub             metrics->bounds.x2=metrics->ascent+metrics->descent;
-    x  annotate.c:1818:37 cxx_add_to_sub             metrics->bounds.y2=metrics->ascent+metrics->descent;
     x  annotate.c:1829:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
     x  annotate.c:1835:24 cxx_ne_to_eq               if (draw_info->debug != MagickFalse)
        annotate.c:1838:23 cxx_ne_to_eq               draw_info->font != (char *) NULL ? draw_info->font : "none",
@@ -99,13 +99,10 @@ mutate: 605 mutants, 0s
     x  annotate.c:1843:25 cxx_eq_to_ne               if (draw_info->render == MagickFalse)
     x  annotate.c:1881:32 cxx_ne_to_eq               if (image->storage_class != DirectClass)
     x  annotate.c:1887:23 cxx_lt_to_le               if (GetUTFCode(p) < 0)
-    x  annotate.c:1895:16 cxx_ne_to_eq               if (utf8 != (unsigned char *) NULL)
     x  annotate.c:1926:21 cxx_ne_to_eq               if (glyph.image != (FT_Glyph) NULL)
     x  annotate.c:1928:9 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
     x  annotate.c:1944:22 cxx_lt_to_le               if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))
-    x  annotate.c:1946:22 cxx_lt_to_ge               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
     x  annotate.c:1946:22 cxx_lt_to_le               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
-    x  annotate.c:1946:60 cxx_ne_to_eq               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
     x  annotate.c:1948:22 cxx_gt_to_ge               if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))
     x  annotate.c:1950:22 cxx_gt_to_ge               if ((bounds.yMax > metrics->bounds.y2) && (bounds.yMax != 0))
     x  annotate.c:1953:37 cxx_ne_to_eq               (draw_info->stroke_pattern != (Image *) NULL)) &&
