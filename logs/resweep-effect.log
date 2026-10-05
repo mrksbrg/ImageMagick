@@ -1,10 +1,59 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 1193 mutants in MagickCore/effect\.c$, 25 functions
-mutate: baseline over 421 cases in 0s
-mutate: resuming, 1193 mutants already done
+  baseline: 418/418 (8s)
+mutate: baseline over 588 cases in 8s
+  mutants: 25/1193 (0s)
+  mutants: 50/1193 (0s)
+  mutants: 75/1193 (1s)
+  mutants: 100/1193 (2s)
+  mutants: 125/1193 (2s)
+  mutants: 150/1193 (2s)
+  mutants: 175/1193 (3s)
+  mutants: 200/1193 (3s)
+  mutants: 225/1193 (3s)
+  mutants: 250/1193 (4s)
+  mutants: 275/1193 (4s)
+  mutants: 300/1193 (5s)
+  mutants: 325/1193 (5s)
+  mutants: 350/1193 (6s)
+  mutants: 375/1193 (6s)
+  mutants: 400/1193 (6s)
+  mutants: 425/1193 (7s)
+  mutants: 450/1193 (7s)
+  mutants: 475/1193 (8s)
+  mutants: 500/1193 (10s)
+  mutants: 525/1193 (12s)
+  mutants: 550/1193 (16s)
+  mutants: 575/1193 (16s)
+  mutants: 600/1193 (17s)
+  mutants: 625/1193 (17s)
+  mutants: 650/1193 (18s)
+  mutants: 675/1193 (18s)
+  mutants: 700/1193 (19s)
+  mutants: 725/1193 (20s)
+  mutants: 750/1193 (25s)
+  mutants: 775/1193 (52s)
+  mutants: 800/1193 (138s)
+  mutants: 825/1193 (217s)
+  mutants: 850/1193 (232s)
+  mutants: 875/1193 (238s)
+  mutants: 900/1193 (252s)
+  mutants: 925/1193 (253s)
+  mutants: 950/1193 (255s)
+  mutants: 975/1193 (256s)
+  mutants: 1000/1193 (258s)
+  mutants: 1025/1193 (260s)
+  mutants: 1050/1193 (261s)
+  mutants: 1075/1193 (262s)
+  mutants: 1100/1193 (263s)
+  mutants: 1125/1193 (266s)
+  mutants: 1150/1193 (266s)
+  mutants: 1175/1193 (270s)
+  mutants: 1193/1193 (396s)
 
-mutate: 1193 mutants, 0s
-  killed 1004, survived 189 (0 capped), no coverage 0, errors 0
-  mutation score on reached code: 84.2%   overall: 84.2%
+mutate: 1193 mutants, 396s
+  killed 1006, survived 187 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.3%   overall: 84.3%
 
   function                           total killed survived no-cov
   SelectiveBlurImage                   115     91       24      0
@@ -21,7 +70,7 @@ mutate: 1193 mutants, 0s
   MotionBlurImage                       55     48        7      0
   EmbossImage                           41     37        4      0
   SharpenImage                          37     31        6      0
-  UnsharpMaskImage                      29     22        7      0
+  UnsharpMaskImage                      29     24        5      0
   SpreadImage                           19     15        4      0
   GetMotionBlurKernel                   15     12        3      0
   EdgeImage                             12     11        1      0
@@ -147,7 +196,7 @@ mutate: 1193 mutants, 0s
     x  effect.c:2353:21 cxx_div_to_mul             MagickSigma)))/(MagickSQ2PI*MagickSigma));
     x  effect.c:2353:34 cxx_mul_to_div             MagickSigma)))/(MagickSQ2PI*MagickSigma));
     x  effect.c:2400:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-       effect.c:2513:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+    x  effect.c:2513:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
     x  effect.c:2520:25 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
     x  effect.c:2535:21 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
     x  effect.c:2557:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
@@ -166,7 +215,7 @@ mutate: 1193 mutants, 0s
     x  effect.c:3184:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
        effect.c:3208:21 cxx_ne_to_eq               if (cos_theta != (double *) NULL)
        effect.c:3210:21 cxx_ne_to_eq               if (sin_theta != (double *) NULL)
-       effect.c:3309:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+    x  effect.c:3309:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
     x  effect.c:3361:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
        effect.c:3369:17 cxx_post_inc_to_post_dec   progress++;
        effect.c:3371:21 cxx_eq_to_ne               if (proceed == MagickFalse)
@@ -217,9 +266,7 @@ mutate: 1193 mutants, 0s
        effect.c:4217:17 cxx_post_inc_to_post_dec   progress++;
        effect.c:4219:21 cxx_eq_to_ne               if (proceed == MagickFalse)
     x  effect.c:4299:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  effect.c:4312:42 cxx_mul_to_div             quantum_threshold=(double) QuantumRange*threshold;
-       effect.c:4370:13 cxx_remove_void_call       SetPixelChannel(unsharp_image,channel,p[i],q);
-    x  effect.c:4374:29 cxx_lt_to_le               if (fabs(2.0*pixel) < quantum_threshold)
+    x  effect.c:4370:13 cxx_remove_void_call       SetPixelChannel(unsharp_image,channel,p[i],q);
     x  effect.c:4385:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
        effect.c:4393:17 cxx_post_inc_to_post_dec   progress++;
        effect.c:4395:21 cxx_eq_to_ne               if (proceed == MagickFalse)
