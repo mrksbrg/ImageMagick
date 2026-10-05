@@ -3425,6 +3425,7 @@ inside the sandbox.
 | Print, Browse Documentation | they start `lpr` and `xdg-open` |
 | About Display | it never settles |
 | `display -remote` with no window | it waits for one |
+| import's window selection by click (`XSelectWindow`, `XGetSubwindow`, `XClientWindow`) | it calls `XGrabServer`, so the server serves no other client, synthetic events included, until the click |
 | animate's window content | frames advance in `XDelay` sleeps that hold keys back, so a grab's frame depends on timing |
 | `AccelerateUnsharpMaskImage` | upstream commented out its call ("This kernel appears to be broken") |
 | `AccelerateContrastStretchImage` | no caller |
