@@ -43,9 +43,9 @@
   "col": 15,
   "function": "RegisterStaticModule",
   "status": "killed",
-  "cases": 10,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "cases": 26,
+  "killer": "preview/0f9731f50e",
+  "why": "exit status [0] -> [-6]; preview:out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/static.c:242:36:242:38",
@@ -214,8 +214,8 @@
   "function": "UnregisterStaticModules",
   "status": "killed",
   "cases": 1,
-  "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]"
+  "killer": "windrv/3f1ce096a0",
+  "why": "exit status [1] -> [-6]; stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/static.c:371:36:371:38",
@@ -226,8 +226,8 @@
   "function": "UnregisterStaticModules",
   "status": "killed",
   "cases": 1,
-  "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]"
+  "killer": "windrv/3f1ce096a0",
+  "why": "exit status [1] -> [-6]; stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/static.c:373:37:373:39",

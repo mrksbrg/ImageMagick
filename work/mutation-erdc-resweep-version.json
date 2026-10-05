@@ -7,7 +7,7 @@
   "col": 18,
   "function": "GetMagickDelegates",
   "status": "killed",
-  "cases": 4,
+  "cases": 1,
   "killer": "gaps/2857e5295a",
   "why": "stdout differs"
  },
@@ -50,8 +50,8 @@
   "function": "GetMagickQuantumDepth",
   "status": "killed",
   "cases": 1,
-  "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [27]; stderr differs; out.miff missing in candidate"
+  "killer": "windrv/3f1ce096a0",
+  "why": "exit status [1] -> [27]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:464:13:464:15",
@@ -72,8 +72,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:544:19:544:20",
@@ -84,8 +84,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:544:19:544:20",
@@ -95,7 +95,7 @@
   "col": 19,
   "function": "version.c:CRC32",
   "status": "survived",
-  "cases": 12,
+  "cases": 6,
   "capped": false,
   "line_executed": true
  },
@@ -108,8 +108,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:550:21:550:22",
@@ -120,8 +120,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:550:21:550:22",
@@ -132,8 +132,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:550:27:550:29",
@@ -144,8 +144,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "exit status [0] -> ['timeout']; stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "exit status [0] -> ['timeout']; out.cache missing in candidate; out.mpc differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:557:15:557:16",
@@ -156,8 +156,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:557:15:557:16",
@@ -168,8 +168,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:557:36:557:38",
@@ -180,8 +180,8 @@
   "function": "version.c:CRC32",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "exit status [0] -> [-11]; stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "exit status [0] -> [-6]; out.cache missing in candidate; out.mpc differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:592:3:592:72",
@@ -192,8 +192,8 @@
   "function": "GetMagickSignature",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:592:42:592:43",
@@ -204,8 +204,8 @@
   "function": "GetMagickSignature",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "exit status [0] -> [1]; stderr differs; out.cache missing in candidate; out.mpc differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:593:13:593:15",
@@ -216,8 +216,8 @@
   "function": "GetMagickSignature",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:594:5:594:41",
@@ -228,8 +228,8 @@
   "function": "GetMagickSignature",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/5ddd5339c0",
-  "why": "stdout differs"
+  "killer": "cachegap2/7396819c3c",
+  "why": "out.mpc differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/version.c:625:15:625:17",
@@ -239,8 +239,8 @@
   "col": 15,
   "function": "GetMagickVersion",
   "status": "survived",
-  "cases": 214,
-  "capped": false,
+  "cases": 300,
+  "capped": true,
   "line_executed": true
  },
  {
@@ -252,7 +252,7 @@
   "function": "ListMagickVersion",
   "status": "killed",
   "cases": 1,
-  "killer": "info/972cc1ab8e",
+  "killer": "windrv/3f1ce096a0",
   "why": "stdout differs"
  }
 ]
