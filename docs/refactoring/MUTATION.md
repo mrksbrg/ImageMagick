@@ -2707,6 +2707,47 @@ it pushed, so the equality cases never occur). No fx.c function is under the bar
 
 Trusted now, Windows: **35 of 36**. Left: blob.c (89).
 
+**blob.c 74 → 97, trusted (2026-10-05, morning).** After the `blob` and `blobio` driver
+commands of yesterday, seven rounds:
+
+- SetBlobExtent below, at and above what is already written, closed right after (the extent
+  alone sizes the file), and synchronized through `image_info->synchronize` (the driver had set
+  MAGICK_SYNCHRONIZE after the ImageInfo had read it); its branch for a memory-mapped blob is
+  never entered (OpenBlob maps only files it reads, and no reader extends its blob): verdicts.
+- MAT (no blob support, read back) and PDF of one to three pages (pages to one file) through
+  ImageToBlob's and ImagesToBlob's temporary-file routes; PS, EPS and PS2 pinged back through
+  Ghostscript from a temporary file. PDF and PostScript carry the date, so only their length is
+  printed.
+- WriteImages into a caller's memory blob (`image_info->blob`), frame by frame and adjoined:
+  SyncBlobStream's hand-over of each later frame's buffer to the list's owner (21 killed).
+  **Possibly a sixth upstream bug, not analysed:** with adjoin off, MIFF, PNG, TIFF, PPM and BMP
+  corrupt the heap (`realloc(): invalid next size`, `double free or corruption`); no case uses them.
+- ReadBlobString through zlib (a `.gz` text image) and CloseBlob's status after reading, which
+  shows its error checks; a last line after a CRLF line, whose `\r` the strip leaves in the
+  buffer just past the line's end (`string[i-1]` → `string[i+1]`).
+- DiscardBlobBytes over several chunks of a 62 KB file; FileToImage of an empty file.
+- Verdicts: frees after a failed write, the final trim of a returned blob, EOF and EINTR in
+  DiscardBlobBytes, the map-resource bookkeeping in ResetDisassociatedBlobStorage, the pinged
+  image's exempt reference to the caller's blob, a leak in DuplicateBlob, fstat failing (only
+  the chunk size changes).
+
+Written down: ThrowBlobException (only after an I/O error on the blob) and AttachCustomStream
+(no caller in ImageMagick).
+
+## All 36 regular Windows files trusted (2026-10-05)
+
+Every function of the 36 regular Windows files is at 80% adjusted or written down as out of
+reach, with statement deletion among the operators. Written off by the owner: vms.c, nt-base.c,
+nt-feature.c, distribute-cache.c. Waiting for a decision on building them: animate.c,
+display.c, xwindow.c, widget.c (X11) and accelerate.c, opencl.c (OpenCL). deprecate.c has no
+mutants in the regular build.
+
+Two days' upstream findings, none in a path the command line takes with valid input: a middle
+insertion that drops its element (InsertValueInLinkedList), a crash on an attribute with no
+value (XMLTreeInfoToXML), an invalid free (WriteHTMLImage through ImageToBlob), glob escapes that
+never match (GlobExpression_) and its exponential matching, a cache method never installed
+(SetPixelCacheMethods), and the unanalysed heap corruption above.
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
