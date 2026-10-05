@@ -1,11 +1,11 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 51 mutants in MagickCore/utility\.c$, 9 functions
-mutate: baseline over 515 cases in 0s
+mutate: baseline over 506 cases in 0s
   mutants: 25/51 (0s)
-  mutants: 50/51 (94s)
-  mutants: 51/51 (94s)
+  mutants: 50/51 (93s)
+  mutants: 51/51 (93s)
 
-mutate: 51 mutants, 94s
+mutate: 51 mutants, 93s
   killed 0, survived 17 (0 capped), no coverage 34, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -40,4 +40,4 @@ mutate: 51 mutants, 94s
        utility.c:994:29 cxx_post_inc_to_post_dec   for (i=1; i < count; i++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6278a30a1-utility.json
+  full results: build-oracle/work/mutation-confirm-ec8ded5ae-utility.json

@@ -1,11 +1,11 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 29 mutants in MagickCore/locale\.c$, 12 functions
   baseline: 220/220 (1s)
-mutate: baseline over 2737 cases in 2s
-  mutants: 25/29 (254s)
-  mutants: 29/29 (257s)
+mutate: baseline over 330 cases in 2s
+  mutants: 25/29 (71s)
+  mutants: 29/29 (75s)
 
-mutate: 29 mutants, 257s
+mutate: 29 mutants, 75s
   killed 0, survived 20 (0 capped), no coverage 9, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -46,4 +46,4 @@ mutate: 29 mutants, 257s
     x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-6278a30a1-locale.json
+  full results: build-oracle/work/mutation-confirm-ec8ded5ae-locale.json
