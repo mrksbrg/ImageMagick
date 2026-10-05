@@ -1,8 +1,8 @@
 mutate: 14 mutants in MagickCore/artifact\.c$, 9 functions
-mutate: baseline over 34 cases in 0s
-  mutants: 14/14 (8s)
+mutate: baseline over 23 cases in 0s
+  mutants: 14/14 (2s)
 
-mutate: 14 mutants, 8s
+mutate: 14 mutants, 2s
   killed 0, survived 7 (0 capped), no coverage 7, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -27,4 +27,4 @@ mutate: 14 mutants, 8s
     x  artifact.c:472:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-656676901-artifact.json
+  full results: build-oracle/work/mutation-confirm-310d2a3b3-artifact.json
