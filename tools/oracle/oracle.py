@@ -47,7 +47,7 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "9"        # bump when normalisation or execution changes
+HARNESS_VERSION = "10"        # bump when normalisation or execution changes
 
 LISTS = ["Colorspace", "Compose", "Distort", "Filter", "Interpolate",
          "VirtualPixel", "Morphology", "Kernel", "Evaluate", "Statistic",
@@ -136,6 +136,12 @@ NORMALISE = [
      rb"\1 TIMEips TIMEe TIMEu TIME"),
     # User and elapsed time closing a plain identify / info: line.
     (re.compile(rb"\b[0-9]+\.[0-9]+u [0-9]+:[0-9]+\.[0-9]+"), rb"TIMEu TIME"),
+    # -list configure's toolchain lines: the compiler flags and libraries a build was configured
+    # with, include paths of the installed Homebrew versions among them. Base and candidate
+    # configured on different days differ there (a library upgraded in between), which says
+    # nothing about ImageMagick; DELEGATES, FEATURES and the rest stay compared.
+    (re.compile(rb"(?m)^(CC|CFLAGS|CONFIGURE|CPPFLAGS|CXX|CXXFLAGS|DEFS|DISTCHECK_CONFIG_FLAGS|"
+                rb"LDFLAGS|LIBS|PCFLAGS)( +)\S.*$"), rb"\1\2BUILDFLAGS"),
     # The PDF writer dates its output from the file ctime, not SOURCE_DATE_EPOCH.
     (re.compile(rb"/(CreationDate|ModDate) \(D:[0-9]+[^)]*\)"), rb"/\1 (D:DATE)"),
     (re.compile(rb"<xmp:(CreateDate|ModifyDate|MetadataDate)>[^<]*<"), rb"<xmp:\1>DATE<"),
