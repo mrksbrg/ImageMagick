@@ -951,7 +951,8 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
           if (back != (Image *) NULL) back=DestroyImageList(back);
           back=PingBlob(image_info,blob,length,exception);
           if (back != (Image *) NULL)
-            (void) printf("ping: %.20gx%.20g\n",(double) back->columns,(double) back->rows);
+            (void) printf("ping: %.20gx%.20g %s %s %s frames %.20g\n",(double) back->columns,(double) back->rows,
+              back->magick,back->filename,back->magick_filename,(double) GetImageListLength(back));
           if (back != (Image *) NULL) back=DestroyImageList(back);
           blob=RelinquishMagickMemory(blob);
         }

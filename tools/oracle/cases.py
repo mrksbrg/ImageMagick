@@ -5687,11 +5687,14 @@ def _windrv_cases():
                               # (not HTML: WriteHTMLImage through ImageToBlob frees an invalid pointer
                               # in DestroyImageInfo, an upstream crash; not JSON: it varies between runs)
                               ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "SHTML", 1),
-                              ("rose", "INFO", 1), ("rose", "VICAR", 1)):
+                              ("rose", "INFO", 1), ("rose", "VICAR", 1),
+                              # MAT: no blob support, but read back: the temporary-file route both ways
+                              ("rose", "MAT", 1), ("rose", "MAT", 2), ("rose_alpha", "MAT", 1)):
         yield _windrv("blob of %d %s %s" % (frames, name, fmt), ("blob", "toblob", img(name), fmt, str(frames)))
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
                               ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2),
-                              ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1), ("rose", "INFO", 1)):
+                              ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1), ("rose", "INFO", 1),
+                              ("rose", "MAT", 1), ("rose", "MAT", 2)):
         for seekable in ("1", "0"):
             yield _windrv("custom stream of %d %s %s%s" % (frames, name, fmt, "" if seekable == "1" else ", no seek"),
                           ("blob", "custom", img(name), fmt, str(frames), seekable))
