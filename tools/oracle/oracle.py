@@ -485,8 +485,14 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
     x11 = case.get("x11")
     xvfb = start_xvfb(x11 if isinstance(x11, str) else XVFB_SCREEN) if x11 else None
     if xvfb is not None:
-        # display and animate advance on GetMagickTime(), which a fixed epoch stops.
-        env.update(DISPLAY=xvfb[1], SOURCE_DATE_EPOCH=None)
+        env["DISPLAY"] = xvfb[1]
+        # display and animate advance on GetMagickTime(), which a fixed epoch stops, so X11 cases
+        # drop it, unless the case sets it itself: display also handles ConfigureNotify only once
+        # GetMagickTime() has moved on from the event (its "stasis"), so under a running clock a
+        # resized window is repainted or not depending on a second boundary. The interactive
+        # cases (xevents, no delays) keep the fixed epoch for that reason.
+        if "SOURCE_DATE_EPOCH" not in case.get("env", {}):
+            env["SOURCE_DATE_EPOCH"] = None
     try:
         for step in case["steps"]:
             fix_dates(d)

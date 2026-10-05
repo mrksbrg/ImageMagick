@@ -4941,6 +4941,9 @@ GAP_X11_SCREEN_CASES += [
 # and space (next image) replace the window under the script; plus (zoom) opens a magnifier that
 # q does not close; question (image information) shows text that differs between the sandbox
 # and a plain run.
+# The fixed epoch the oracle sets for every other case (oracle.FIXED_MTIME), kept here: display
+# repaints a resized window depending on GetMagickTime() (oracle.py, run_case).
+_XEV_ENV = {"SOURCE_DATE_EPOCH": "1000000000"}
 _XEV_KEYS = ["slash", "backslash", "h", "equal", "asciitilde", "period", "N", "C", "Z",
              "less", "greater", "minus", "at", "F2"]
 _XEV_DIALOGS = [("F3", "0x1"), ("F4", "3"), ("F6", "0x1"), ("F7", "0x2"), ("F8", "50%"),
@@ -4959,19 +4962,64 @@ GAP_XEVENTS_CASES += [
 # The file browser (ctrl+s, ctrl+o) starts in the image's directory, so these cases first copy
 # their input into the case directory: a save then cannot land in the corpus. Keys reach the
 # browser's text field only with the pointer over it (point:170,355); Right and BackSpace clear
-# the preset name. Print (ctrl+p) would start lpr, and New leaves a widget open: left out; so do
-# saves as MIFF and PNG (today's date in them: X11 cases run without SOURCE_DATE_EPOCH) and JPEG
-# (its quality dialog never settles). The copies are stripped of their date properties for the
-# same reason. Each entry: label, script, magick arguments, files copied in first.
+# the preset name. Print (ctrl+p) would start lpr, and New leaves a widget open: left out; so does
+# a save as JPEG (its quality dialog never settles). The copies are stripped of their date
+# properties. Each entry: label, script, magick arguments, files copied in first.
 _XEV_FIELD = "map point:170,355 key:Right*16 key:BackSpace*16 type:"
 GAP_XEVENTS_FILE_CASES = [("xevents display save as %s" % ext,
                            "map key:ctrl+s " + _XEV_FIELD + "out.%s key:Return%s key:q" % (ext, extra),
                            ["display", "rose.miff"], ["rose"])
-                          for ext, extra in (("gif", ""), ("ppm", ""), ("tiff", ""))]
+                          for ext, extra in (("gif", ""), ("ppm", ""), ("tiff", ""), ("png", ""), ("miff", ""))]
 GAP_XEVENTS_FILE_CASES += [
     ("xevents display open palette.miff", "map key:ctrl+o " + _XEV_FIELD + "palette.miff key:Return grab:out.ppm key:q",
      ["display", "rose.miff"], ["rose", "palette"]),
 ]
+# display's menus: a click on the image opens the Commands widget, a click on its button opens a
+# menu, a click on an item runs the command (positions measured on the default font: buttons 32
+# pixels apart from y=101, items 20.2 apart from y=12, the last one below a separator). The
+# widget stays open, so use:1 points the grab and q back at the image window. Left out, measured:
+# Emboss, Reduce Noise, Add Noise, Preferences and Show Preview leave a widget open that q does
+# not close, and so do Roll, Contrast Stretch, Sigmoidal Contrast, Segment, Oil Paint, Charcoal
+# Draw, Add Border and Add Frame after their reply; Show Histogram leaves a temporary file with a
+# random name in the case directory; Quantize, Show Matte and Background wait on a timer that the
+# fixed epoch stops.
+_XEV_MENUS = ["File", "Edit", "View", "Transform", "Enhance", "Effects", "F/X", "Image Edit",
+              "Miscellany", "Help"]
+
+
+def _xev_menu(menu, item, items, reply=None, after=""):
+    i = items.index(item)
+    y = 12 + 20.2 * i + (5 if i == len(items) - 1 else 0)
+    script = "map click:20,20 map click:65,%d map click:40,%d" % (101 + 32 * _XEV_MENUS.index(menu), y)
+    if reply is not None:
+        script += " map key:ctrl+u type:%s key:Return" % reply
+    return script + after + " use:1 grab:out.ppm key:q"
+
+
+_XEV_VIEW = ["Half Size", "Original Size", "Double Size", "Resize...", "Apply", "Refresh", "Restore"]
+_XEV_ENHANCE = ["Hue...", "Saturation...", "Brightness...", "Gamma...", "Spiff", "Dull",
+                "Contrast Stretch...", "Sigmoidal Contrast...", "Normalize", "Equalize", "Negate",
+                "Grayscale", "Map...", "Quantize..."]
+_XEV_EFFECTS = ["Despeckle", "Emboss", "Reduce Noise", "Add Noise...", "Sharpen...", "Blur...",
+                "Threshold...", "Edge Detect...", "Spread...", "Shade...", "Raise...", "Segment..."]
+_XEV_FX = ["Solarize...", "Sepia Tone...", "Swirl...", "Implode...", "Vignette...", "Wave...",
+           "Oil Paint...", "Charcoal Draw..."]
+_XEV_EDIT = ["Annotate...", "Draw...", "Color...", "Matte...", "Composite...", "Add Border...",
+             "Add Frame...", "Comment...", "Launch...", "Region of Interest..."]
+_XEV_MISC = ["Image Info", "Zoom Image", "Show Preview...", "Show Histogram", "Show Matte",
+             "Background...", "Slide Show...", "Preferences..."]
+_XEV_TRANSFORM = ["Crop", "Chop", "Flop", "Flip", "Rotate Right", "Rotate Left", "Rotate...", "Shear...",
+                  "Roll...", "Trim Edges"]
+_XEV_MENU_ITEMS = ([("View", it, _XEV_VIEW, r) for it, r in (("Half Size", None), ("Resize...", "60x40"),
+                                                           ("Restore", None), ("Double Size", None))] +
+                   [("Transform", it, _XEV_TRANSFORM, r) for it, r in (("Flip", None),)] +
+                   [("Enhance", it, _XEV_ENHANCE, r) for it, r in (("Spiff", None), ("Dull", None),
+                                                                 ("Hue...", "120"))] +
+                   [("F/X", it, _XEV_FX, r) for it, r in (("Solarize...", "50%"), ("Sepia Tone...", "80%"),
+                                                        ("Swirl...", "60"), ("Implode...", "0.5"),
+                                                        ("Vignette...", "0x5"), ("Wave...", "5x30"))])
+GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(menu, item, items, reply),
+                       ["display", img("rose")]) for menu, item, items, reply in _XEV_MENU_ITEMS]
 # label, steps, environment. MAGICK_OCL_DEVICE=false starts with OpenCL off but still gets the
 # fixed device profile (oracle.py, seed_opencl_profile): without one, switching OpenCL on runs
 # ImageMagick's device benchmark, whose scores and choice vary from run to run.
@@ -5013,11 +5061,15 @@ def _gap_x11_opencl_cases():
                         x11=screen)
     for label, steps, env in GAP_OPENCL_DRIVER_CASES:
         yield _with_run(_case("gaps", label, steps, []), env=env)
+    # @ (Refresh) repaints the whole image window before each grab: display repaints a window it
+    # has just resized from an Expose that may arrive before or after it swaps in the new image.
     for label, script, args in GAP_XEVENTS_CASES:
-        yield _with_run(_case("gaps", label, [["@xevents", script] + args], ["out.ppm"]), x11=True)
+        yield _with_run(_case("gaps", label, [["@xevents", script.replace("grab:", "key:at grab:")] + args],
+                              ["out.ppm"]), env=_XEV_ENV, x11=True)
     for label, script, args, names in GAP_XEVENTS_FILE_CASES:
         copies = [[img(n), "-strip", "%s.miff" % n] for n in names]
-        yield _with_run(_case("gaps", label, copies + [["@xevents", script] + args], ["out.ppm"]), x11=True)
+        yield _with_run(_case("gaps", label, copies + [["@xevents", script.replace("grab:", "key:at grab:")] + args],
+                              ["out.ppm"]), env=_XEV_ENV, x11=True)
 
 
 def _gap_image_cases(entries):

@@ -9,6 +9,8 @@
     type:TEXT     type TEXT, one key per character ('_' stands for a space)
     point:X,Y     move the pointer to X,Y in the focused window (widgets read the pointer)
     click:X,Y     move it there and click the first button
+    use:N         keep the focus on the Nth window waited for (1: the first) until the next map,
+                  e.g. the image window while display's Commands widget stays open
     grab:FILE     write the focused window's pixels as PPM (24-bit TrueColor screens)
   After every key the helper waits until the client is idle: blocked in poll or select with
   nothing unread on its X connection (pidfd_getfd + FIONREAD), so the case does not depend on
@@ -40,7 +42,7 @@ static Display *dpy;
 static pid_t child;
 static int pidfd = -1, xfd = -1;
 static Window focus = None, mapped[64];
-static int nmapped = 0;
+static int nmapped = 0, pinned = -1;
 
 static void Nap(long ms)
 {
@@ -113,11 +115,11 @@ static void WaitIdle(void)
   double end = Now() + 20;
   int calm = 0;
   XSync(dpy, False);
-  while (calm < 3)  /* three looks in a row, 5 ms apart */
+  while (calm < 4)  /* four looks in a row, 10 ms apart */
   {
     if (Now() > end) Fail("client never became idle");
     calm = Idle() ? calm + 1 : 0;
-    Nap(5);
+    Nap(10);
   }
 }
 
@@ -135,25 +137,13 @@ static int Viewable(Window w)
   return XGetWindowAttributes(dpy, w, &a) && (a.map_state == IsViewable);
 }
 
-/* The top-level windows that are mapped now (a widget window exists unmapped from the start). */
-static Window *Toplevels(unsigned int *n)
-{
-  Window root, parent, *kids = NULL;
-  unsigned int i, k = 0;
-  if (!XQueryTree(dpy, DefaultRootWindow(dpy), &root, &parent, &kids, n)) *n = 0;
-  for (i = 0; i < *n; i++)
-    if (Viewable(kids[i])) kids[k++] = kids[i];
-  *n = k;
-  return kids;
-}
-
 /* Focus the newest window this script waited for that is still mapped: a dialog while it is
    open, the window under it once it closes. No window manager does this here. */
 static void Refocus(void)
 {
   int i;
   for (i = nmapped - 1; i >= 0; i--)
-    if (Viewable(mapped[i]))
+    if (((pinned < 0) || (i == pinned)) && Viewable(mapped[i]))
     {
       if (mapped[i] != focus)
       {
@@ -168,32 +158,35 @@ static void Refocus(void)
     }
 }
 
-/* Wait for a top-level window that was not mapped at the last look, and focus it. */
-static void Map(Window *before, unsigned int nbefore)
+/* Wait for the next top-level window to be mapped (a MapNotify on the root, which this client
+   selects before the client starts: widget.c maps the same window as a menu, then as a dialog),
+   one still mapped once the client is idle, and focus it. */
+static void Map(void)
 {
   double end = Now() + 20;
   for (;;)
   {
-    unsigned int n, i, j;
-    Window *now = Toplevels(&n), found = None;
-    for (i = 0; (i < n) && (found == None); i++)
+    while (XPending(dpy))
     {
-      int old = 0;
-      for (j = 0; j < nbefore; j++) if (before[j] == now[i]) old = 1;
-      if (!old && Viewable(now[i])) found = now[i];
-    }
-    if (now) XFree(now);
-    if (found != None)
-      WaitIdle();  /* a window still mapped once the client is idle, not a passing one */
-    if ((found != None) && Viewable(found))
-    {
-      if (nmapped < 64) mapped[nmapped++] = found;
-      Refocus();
-      WaitIdle();
-      return;
+      XEvent e;
+      XNextEvent(dpy, &e);
+      if ((e.type == MapNotify) && (e.xmap.event == DefaultRootWindow(dpy)))
+      {
+        Window w = e.xmap.window;
+        WaitIdle();  /* a window still mapped once the client is idle, not a passing one */
+        if (Viewable(w))
+        {
+          if (nmapped < 64) mapped[nmapped++] = w;
+          pinned = -1;
+          Refocus();
+          WaitIdle();
+          return;
+        }
+      }
     }
     if (Now() > end) Fail("no new window");
     Nap(10);
+    XSync(dpy, False);
   }
 }
 
@@ -245,12 +238,13 @@ static void Type(const char *text)
 
 static int SameImage(XImage *a, XImage *b)
 {
-  return a && b && (a->height == b->height) && (a->bytes_per_line == b->bytes_per_line) &&
+  return a && b && (a->width == b->width) && (a->height == b->height) &&
+    (a->bytes_per_line == b->bytes_per_line) &&
     (memcmp(a->data, b->data, (size_t) a->height * a->bytes_per_line) == 0);
 }
 
-/* The server may not yet have drawn what the idle client sent it, so the window is read until
-   three reads in a row agree. */
+/* The server may not yet have drawn (or resized) what the idle client sent it, so the window is
+   read, size and pixels, until four reads in a row, 30 ms apart, agree (the server may still owe the client an Expose). */
 static void Point(const char *xy)
 {
   int x = 0, y = 0;
@@ -269,21 +263,22 @@ static void Grab(const char *file)
   double end = Now() + 20;
   Refocus();
   if ((focus == None) || !XGetWindowAttributes(dpy, focus, &a)) Fail("nothing to grab");
-  while (same < 2)
+  while (same < 3)
   {
     if (Now() > end) Fail("the window never settled");
     WaitIdle();
-    Nap(10);
+    Nap(30);
+    if (!XGetWindowAttributes(dpy, focus, &a)) Fail("the window went away");
     im = XGetImage(dpy, focus, 0, 0, a.width, a.height, AllPlanes, ZPixmap);
-    if (im == NULL) Fail("XGetImage");
+    if (im == NULL) { same = 0; continue; }  /* resized between the two requests */
     same = SameImage(im, last) ? same + 1 : 0;
     if (last) XDestroyImage(last);
     last = im;
   }
   if ((f = fopen(file, "wb")) == NULL) Fail("cannot write the grab");
-  fprintf(f, "P6\n%d %d\n255\n", a.width, a.height);
-  for (y = 0; y < a.height; y++)
-    for (x = 0; x < a.width; x++)
+  fprintf(f, "P6\n%d %d\n255\n", im->width, im->height);
+  for (y = 0; y < im->height; y++)
+    for (x = 0; x < im->width; x++)
     {
       unsigned long p = XGetPixel(im, x, y);
       fputc((int) ((p >> 16) & 0xff), f); fputc((int) ((p >> 8) & 0xff), f); fputc((int) (p & 0xff), f);
@@ -296,15 +291,14 @@ static void Grab(const char *file)
 int main(int argc, char **argv)
 {
   int i, sep = -1, status = 0, ev, er, mj, mn;
-  unsigned int nbefore;
-  Window *before;
   double end;
   for (i = 1; i < argc; i++) if (strcmp(argv[i], "--") == 0) { sep = i; break; }
   if ((sep < 2) || (sep + 1 >= argc)) { fprintf(stderr, "usage: xevents SCRIPT -- COMMAND [ARGS...]\n"); return 2; }
   if ((dpy = XOpenDisplay(NULL)) == NULL) { fprintf(stderr, "xevents: no X server\n"); return 125; }
   if (!XTestQueryExtension(dpy, &ev, &er, &mj, &mn)) Fail("no XTEST");
   XSetErrorHandler(IgnoreError);
-  before = Toplevels(&nbefore);
+  XSelectInput(dpy, DefaultRootWindow(dpy), SubstructureNotifyMask);
+  XSync(dpy, False);
   fflush(stdout);
   if ((child = fork()) == 0) { execv(argv[sep + 1], argv + sep + 1); _exit(127); }
   for (i = 1; i < sep; i++)
@@ -312,11 +306,12 @@ int main(int argc, char **argv)
     char *script = strdup(argv[i]), *save = NULL, *tok;
     for (tok = strtok_r(script, " ", &save); tok; tok = strtok_r(NULL, " ", &save))
     {
-      if (strcmp(tok, "map") == 0) { Map(before, nbefore); if (before) XFree(before); before = Toplevels(&nbefore); }
+      if (strcmp(tok, "map") == 0) Map();
       else if (strncmp(tok, "key:", 4) == 0) Key(tok + 4);
       else if (strncmp(tok, "type:", 5) == 0) Type(tok + 5);
       else if (strncmp(tok, "grab:", 5) == 0) Grab(tok + 5);
       else if (strncmp(tok, "point:", 6) == 0) Point(tok + 6);
+      else if (strncmp(tok, "use:", 4) == 0) { pinned = atoi(tok + 4) - 1; Refocus(); }
       else if (strncmp(tok, "click:", 6) == 0) { Point(tok + 6); XTestFakeButtonEvent(dpy, 1, True, CurrentTime);
         XTestFakeButtonEvent(dpy, 1, False, CurrentTime); WaitIdle(); }
       else Fail("unknown action");
