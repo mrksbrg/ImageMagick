@@ -124,12 +124,14 @@ def env_for(binary, case_dir, extra_env=None):
 # window manager. Its socket goes into X11_SOCKETS, mounted over /tmp/.X11-unix for Xvfb and
 # for the mutation sandbox (mutate.py), whose network namespace hides the abstract socket;
 # under WSLg /tmp/.X11-unix is read-only anyway. Displays from :100 up, so that a client whose
-# server is gone cannot fall through to a real desktop on :0.
+# server is gone cannot fall through to a real desktop on :0. "x11" may name another screen,
+# e.g. "640x480x8" for an 8-bit PseudoColor root visual, and Xvfb options after it, e.g.
+# "640x480x8 -cc 0" for StaticGray (this Xvfb starts no screen of depth 1, 4 or 12).
 X11_SOCKETS = os.path.join(WORK, "x11")
 XVFB_SCREEN = "640x480x24"
 
 
-def start_xvfb():
+def start_xvfb(screen=XVFB_SCREEN):
     """(process, display) of a new Xvfb, or None where Xvfb or bwrap is missing: the case
     then fails alike on both sides (UnableToOpenXServer)."""
     if not (shutil.which("Xvfb") and shutil.which("bwrap")):
@@ -143,7 +145,7 @@ def start_xvfb():
         p = subprocess.Popen(["bwrap", "--dev-bind", "/", "/", "--bind", X11_SOCKETS,
                               "/tmp/.X11-unix", "--die-with-parent", "Xvfb", display,
                               "-displayfd", str(ready_w), "-nolisten", "tcp",
-                              "-screen", "0", XVFB_SCREEN],
+                              "-screen", "0"] + screen.split(),
                              pass_fds=(ready_w,), stdin=subprocess.DEVNULL,
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         os.close(ready_w)
@@ -151,7 +153,7 @@ def start_xvfb():
             if ready.readline().strip():
                 return p, display
         p.wait()
-    raise RuntimeError("no free display for Xvfb")
+    raise RuntimeError("Xvfb did not start with the screen %s" % screen)
 
 
 def stop_xvfb(xvfb):
@@ -479,7 +481,8 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
     if env.get("MAGICK_OCL_DEVICE"):
         seed_opencl_profile(binary, d)
     started = time.time()
-    xvfb = start_xvfb() if case.get("x11") else None
+    x11 = case.get("x11")
+    xvfb = start_xvfb(x11 if isinstance(x11, str) else XVFB_SCREEN) if x11 else None
     if xvfb is not None:
         # display and animate advance on GetMagickTime(), which a fixed epoch stops.
         env.update(DISPLAY=xvfb[1], SOURCE_DATE_EPOCH=None)

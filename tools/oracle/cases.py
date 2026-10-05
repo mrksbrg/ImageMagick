@@ -481,7 +481,7 @@ def _case_id(family, steps, files=None, stdin=None, env=None, x11=False):
     if env:
         key = [key, "env", sorted(env.items())]
     if x11:
-        key = [key, "x11"]
+        key = [key, "x11"] if x11 is True else [key, "x11", x11]
     ident = hashlib.sha1(json.dumps(key).encode()).hexdigest()[:10]
     return "%s/%s" % (family, ident)
 
@@ -507,11 +507,12 @@ def _with_inputs(case, files=None, stdin=None):
 def _with_run(case, env=None, x11=False):
     """`env` adds variables to every step's environment (None removes one), e.g.
     MAGICK_OCL_DEVICE for OpenCL; `x11` gives the case an X server of its own (oracle.py,
-    start_xvfb). Both are part of the case's id."""
+    start_xvfb), True for the default screen or a screen like "640x480x8". Both are part of
+    the case's id."""
     if env:
         case["env"] = env
     if x11:
-        case["x11"] = True
+        case["x11"] = x11
     case["id"] = _case_id(case["family"], case["steps"], case.get("files"), case.get("stdin"),
                           env, x11)
     return case
@@ -4900,6 +4901,49 @@ GAP_OPENCL_CASES += [("opencl large %s" % op,
 # leaves OpenCL off. Each entry: label, environment.
 GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
                            for dev in ("GPU", "true", "false")]
+# Round 2 (W01): other screens, for xwindow.c's colormap, dither and visual paths (8-bit
+# PseudoColor, StaticGray, GrayScale and StaticColor; 15-, 16- and 30-bit TrueColor; 24-bit
+# DirectColor); AnimateImages and opencl.c's API through imdriver. (`display -remote` with no
+# window to receive the command waits for one: out of reach.) Each entry: label, steps,
+# files, screen.
+GAP_X11_SCREEN_CASES = []
+for _screen in ("640x480x8", "640x480x16", "640x480x15", "640x480x30", "640x480x8 -cc 0",
+                "640x480x8 -cc 1", "640x480x8 -cc 2", "640x480x24 -cc 5"):
+    GAP_X11_SCREEN_CASES += [("x11 %s display -window root: %s" % (_screen, name),
+                              [["display", "-window", "root", img(name)], _X11_GRAB], {}, _screen)
+                             for name in ("rose", "palette", "rose_alpha", "gray16")]
+    GAP_X11_SCREEN_CASES += [("x11 %s display -window root %s" % (_screen, opts),
+                              [["display", "-window", "root"] + _split(opts) + [img("rose")], _X11_GRAB],
+                              {}, _screen)
+                             for opts in ("-map best", "-map gray", "-colormap private", "-colors 16",
+                                          "-monochrome", "-visual StaticColor", "-visual GrayScale",
+                                          "-dither None")]
+    GAP_X11_SCREEN_CASES += [
+        ("x11 %s x: window" % _screen, [_X11_SHOW[:2] + [img("rose")] + _X11_SHOW[2:] + ["x:"]], {}, _screen),
+        ("x11 %s display window -colormap private" % _screen,
+         [["display"] + _X11_SHOW + ["-colormap", "private", img("palette")]], {}, _screen),
+        ("x11 %s animate window" % _screen,
+         [["animate"] + _X11_SHOW + [img("rose"), img("palette")]], {}, _screen),
+        ("x11 %s import -colors 8" % _screen,
+         [["display", "-window", "root", img("palette")],
+          ["import", "-window", "root", "-colors", "8", "ppm:out.ppm"]], {}, _screen),
+        ("x11 %s driver animate" % _screen, [["@driver", "animate", img("rose"), img("palette")]], {}, _screen)]
+GAP_X11_SCREEN_CASES += [
+    ("x11 driver animate", [["@driver", "animate", img("rose"), img("rose_alpha"), img("gray16")]], {}, True),
+    ("x11 driver animate, one frame", [["@driver", "animate", img("tall")]], {}, True)]
+# label, steps, environment. MAGICK_OCL_DEVICE=false starts with OpenCL off but still gets the
+# fixed device profile (oracle.py, seed_opencl_profile): without one, switching OpenCL on runs
+# ImageMagick's device benchmark, whose scores and choice vary from run to run.
+GAP_OPENCL_DRIVER_CASES = [("opencl driver %s" % " ".join(args), [["@driver", "opencl"] + list(args)], env)
+                           for args in (("list",), ("list", img("rose")), ("off", img("rose")),
+                                        ("on", img("rose")), ("deviceoff", img("rose")),
+                                        ("profile", img("rose")), ("profile", img("rose_alpha")),
+                                        ("profile", img("palette")))
+                           for env in (_OCL_ENV, {"MAGICK_OCL_DEVICE": "GPU"})]
+GAP_OPENCL_DRIVER_CASES += [("opencl driver, OpenCL off: list", [["@driver", "opencl", "list"]],
+                             {"MAGICK_OCL_DEVICE": "false"}),
+                            ("opencl driver, OpenCL off: on", [["@driver", "opencl", "on", img("rose")]],
+                             {"MAGICK_OCL_DEVICE": "false"})]
 
 
 def _gap_cases():
@@ -4923,6 +4967,11 @@ def _gap_x11_opencl_cases():
     for label, env in GAP_OPENCL_DEVICE_CASES:
         yield _with_run(_case("gaps", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
                               ["out.miff"]), env=env)
+    for label, steps, files, screen in GAP_X11_SCREEN_CASES:
+        yield _with_run(_with_inputs(_case("gaps", label, steps, ["out.ppm"]), files=files or None),
+                        x11=screen)
+    for label, steps, env in GAP_OPENCL_DRIVER_CASES:
+        yield _with_run(_case("gaps", label, steps, []), env=env)
 
 
 def _gap_image_cases(entries):

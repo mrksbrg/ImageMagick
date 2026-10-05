@@ -2668,6 +2668,106 @@ static int ProfileCmd(int argc,char **argv,ExceptionInfo *exception)
   return(0);
 }
 
+/*
+  opencl MODE [IMAGE]: opencl.c's public API, which no command calls (W01). Lists the devices as
+  GetOpenCLDevices reports them, then by MODE switches OpenCL off (off) or on (on), switches every
+  device off (deviceoff), or turns kernel profiling on (profile); with IMAGE, blurs it and prints
+  the result's signature, and under profile the kernels each device ran (names and counts only:
+  the times vary). Run it with MAGICK_OCL_DEVICE set (the case's env) for the devices to exist.
+*/
+static int OpenCLCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  const char *mode=(argc > 2) ? argv[2] : "list";
+  MagickCLDevice *devices;
+  size_t i, n=0;
+
+  printf("enabled at start %d\n",(int) GetOpenCLEnabled());
+  devices=GetOpenCLDevices(&n,exception);
+  printf("devices %.20g\n",(double) n);
+  for (i=0; i < n; i++)
+    printf("device %.20g: %s | %s | %s | type %d | enabled %d | score %g\n",(double) i,
+      GetOpenCLDeviceName(devices[i]) != (const char *) NULL ? GetOpenCLDeviceName(devices[i]) : "(null)",
+      GetOpenCLDeviceVendorName(devices[i]) != (const char *) NULL ? GetOpenCLDeviceVendorName(devices[i]) : "(null)",
+      GetOpenCLDeviceVersion(devices[i]) != (const char *) NULL ? GetOpenCLDeviceVersion(devices[i]) : "(null)",
+      (int) GetOpenCLDeviceType(devices[i]),(int) GetOpenCLDeviceEnabled(devices[i]),
+      GetOpenCLDeviceBenchmarkScore(devices[i]));
+  if (strcmp(mode,"off") == 0)
+    printf("set off: %d\n",(int) SetOpenCLEnabled(MagickFalse));
+  else if (strcmp(mode,"on") == 0)
+    printf("set on: %d\n",(int) SetOpenCLEnabled(MagickTrue));
+  for (i=0; i < n; i++)
+    if (strcmp(mode,"deviceoff") == 0)
+      SetOpenCLDeviceEnabled(devices[i],MagickFalse);
+    else if (strcmp(mode,"profile") == 0)
+      SetOpenCLKernelProfileEnabled(devices[i],MagickTrue);
+  if (argc > 3)
+    {
+      ImageInfo *image_info=AcquireImageInfo();
+      Image *image, *blurred;
+      (void) CopyMagickString(image_info->filename,argv[3],MagickPathExtent);
+      image=ReadImage(image_info,exception);
+      blurred=(image != (Image *) NULL) ? BlurImage(image,0.0,2.0,exception) : (Image *) NULL;
+      if (blurred != (Image *) NULL)
+        {
+          (void) SignatureImage(blurred,exception);
+          printf("blur %s\n",GetImageProperty(blurred,"signature",exception));
+          blurred=DestroyImage(blurred);
+        }
+      if (image != (Image *) NULL)
+        image=DestroyImage(image);
+      image_info=DestroyImageInfo(image_info);
+    }
+  if (strcmp(mode,"profile") == 0)
+    for (i=0; i < n; i++)
+    {
+      size_t j, m=0;
+      const KernelProfileRecord *records=GetOpenCLKernelProfileRecords(devices[i],&m);
+      printf("device %.20g profile records %.20g\n",(double) i,(double) m);
+      for (j=0; (records != (const KernelProfileRecord *) NULL) && (j < m); j++)
+        printf("  %s count %lu\n",records[j]->kernel_name,records[j]->count);
+      SetOpenCLKernelProfileEnabled(devices[i],MagickFalse);
+    }
+  printf("enabled at end %d\n",(int) GetOpenCLEnabled());
+  return(0);
+}
+
+/*
+  animate IMAGE...: AnimateImages, which only the wand API's MagickAnimateImages calls (W01). Each
+  frame gets a delay of one tick and the list one iteration, so the animation ends by itself.
+  Needs an X server (an x11 case).
+*/
+static int AnimateCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  ImageInfo *image_info=AcquireImageInfo();
+  Image *images=NewImageList(), *p;
+  MagickBooleanType status;
+  int i;
+
+  for (i=2; i < argc; i++)
+  {
+    (void) CopyMagickString(image_info->filename,argv[i],MagickPathExtent);
+    p=ReadImage(image_info,exception);
+    if (p != (Image *) NULL)
+      AppendImageToList(&images,p);
+  }
+  if (images == (Image *) NULL)
+    {
+      printf("animate: no images\n");
+      image_info=DestroyImageInfo(image_info);
+      return(1);
+    }
+  for (p=images; p != (Image *) NULL; p=GetNextImageInList(p))
+  {
+    p->delay=1;
+    p->iterations=1;
+  }
+  status=AnimateImages(image_info,images,exception);
+  printf("animate %d, frames %.20g\n",(int) status,(double) GetImageListLength(images));
+  images=DestroyImageList(images);
+  image_info=DestroyImageInfo(image_info);
+  return(status != MagickFalse ? 0 : 1);
+}
+
 int main(int argc,char **argv)
 {
   ExceptionInfo *exception;
@@ -2726,6 +2826,8 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"delegatecfg") == 0) status=DelegateCfgCmd(argc,argv,exception);
   else if (strcmp(argv[1],"selfkill") == 0) { (void) raise(SIGKILL); status=0; }
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"opencl") == 0) status=OpenCLCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"animate") == 0) status=AnimateCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);
   MagickCoreTerminus();
