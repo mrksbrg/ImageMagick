@@ -88,6 +88,10 @@ case "${1:-}" in
       fi
       configure_and_make "$src" "$bld" ""
     fi
+    # a cached baseline still needs today's imdriver (driver/build.sh rebuilds it only when
+    # driver/imdriver.c or the library is newer), or every new driver command fails on it
+    "$ROOT/tools/oracle/driver/build.sh" "$bld" > /dev/null 2>> "$bld/make.log" \
+      || echo "imdriver not built, see $bld/make.log" >&2
     echo "$bld/utilities/magick"
     ;;
   cand)
