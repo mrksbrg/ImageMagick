@@ -883,9 +883,9 @@
   "col": 14,
   "function": "DestroyImageList",
   "status": "killed",
-  "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
+  "cases": 3,
+  "killer": "identify/15d9590616",
+  "why": "exit status [0] -> [-6]"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:491:24:491:26",
@@ -919,7 +919,7 @@
   "col": 5,
   "function": "DestroyImageList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "draw/20f4646909",
   "why": "exit status [0] -> ['timeout']"
  },
@@ -1135,9 +1135,9 @@
   "col": 30,
   "function": "GetImageIndexInList",
   "status": "killed",
-  "cases": 4,
-  "killer": "sequence/38217af604",
-  "why": "out.miff differs"
+  "cases": 2,
+  "killer": "gaps/5936d60f4e",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:689:50:689:52",
@@ -1147,9 +1147,9 @@
   "col": 50,
   "function": "GetImageIndexInList",
   "status": "killed",
-  "cases": 4,
-  "killer": "sequence/38217af604",
-  "why": "out.miff differs"
+  "cases": 2,
+  "killer": "gaps/5936d60f4e",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:725:14:725:16",
@@ -1159,7 +1159,7 @@
   "col": 14,
   "function": "GetImageListLength",
   "status": "killed",
-  "cases": 25,
+  "cases": 21,
   "killer": "preview/0f9731f50e",
   "why": "exit status [0] -> [-9]; preview:out.miff missing in candidate"
  },
@@ -1183,7 +1183,7 @@
   "col": 20,
   "function": "GetImageListLength",
   "status": "killed",
-  "cases": 25,
+  "cases": 21,
   "killer": "preview/0f9731f50e",
   "why": "exit status [0] -> [-9]; preview:out.miff missing in candidate"
  },
@@ -1195,7 +1195,7 @@
   "col": 6,
   "function": "GetImageListLength",
   "status": "killed",
-  "cases": 25,
+  "cases": 21,
   "killer": "preview/0f9731f50e",
   "why": "stderr differs; preview:out.miff differs"
  },
@@ -1231,7 +1231,7 @@
   "col": 14,
   "function": "GetNextImageInList",
   "status": "killed",
-  "cases": 13,
+  "cases": 21,
   "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
@@ -1255,7 +1255,7 @@
   "col": 14,
   "function": "GetPreviousImageInList",
   "status": "killed",
-  "cases": 40,
+  "cases": 27,
   "killer": "token/35ea92b6c2",
   "why": "frame5.miff differs"
  },
@@ -1459,7 +1459,7 @@
   "col": 23,
   "function": "RemoveImageFromList",
   "status": "killed",
-  "cases": 13,
+  "cases": 21,
   "killer": "sequence/27f5475e4a",
   "why": "exit status [1] -> [-6]; stderr differs"
  },
@@ -1471,7 +1471,7 @@
   "col": 19,
   "function": "RemoveImageFromList",
   "status": "killed",
-  "cases": 13,
+  "cases": 21,
   "killer": "sequence/27f5475e4a",
   "why": "exit status [1] -> [-6]; stderr differs"
  },
@@ -1494,10 +1494,10 @@
   "line": 1095,
   "col": 24,
   "function": "RemoveFirstImageFromList",
-  "status": "killed",
-  "cases": 142,
-  "killer": "multi/915e8468d5",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:1099:26:1099:28",
@@ -2001,8 +2001,8 @@
   "col": 28,
   "function": "SyncNextImageInList",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/788de8d750",
+  "cases": 4,
+  "killer": "gaps/f26e249984",
   "why": "out.miff differs"
  }
 ]

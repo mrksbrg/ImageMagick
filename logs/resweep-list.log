@@ -1,39 +1,17 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 170 mutants in MagickCore/list\.c$, 27 functions
-  baseline: 500/10733 (2s)
-  baseline: 1000/10733 (4s)
-  baseline: 1500/10733 (5s)
-  baseline: 2000/10733 (7s)
-  baseline: 2500/10733 (10s)
-  baseline: 3000/10733 (12s)
-  baseline: 3500/10733 (14s)
-  baseline: 4000/10733 (16s)
-  baseline: 4500/10733 (17s)
-  baseline: 5000/10733 (20s)
-  baseline: 5500/10733 (22s)
-  baseline: 6000/10733 (23s)
-  baseline: 6500/10733 (25s)
-  baseline: 7000/10733 (27s)
-  baseline: 7500/10733 (29s)
-  baseline: 8000/10733 (32s)
-  baseline: 8500/10733 (35s)
-  baseline: 9000/10733 (36s)
-  baseline: 9500/10733 (38s)
-  baseline: 10000/10733 (40s)
-  baseline: 10500/10733 (41s)
-  baseline: 10733/10733 (42s)
-mutate: baseline over 15346 cases in 43s
+mutate: baseline over 15346 cases in 0s
   mutants: 25/170 (1s)
   mutants: 50/170 (1s)
   mutants: 75/170 (2s)
   mutants: 100/170 (6s)
-  mutants: 125/170 (8s)
-  mutants: 150/170 (41s)
-  mutants: 170/170 (138s)
+  mutants: 125/170 (9s)
+  mutants: 150/170 (44s)
+  mutants: 170/170 (139s)
 
-mutate: 170 mutants, 138s
-  killed 128, survived 25 (12 capped), no coverage 17, errors 0
-  mutation score on reached code: 83.7%   overall: 75.3%
+mutate: 170 mutants, 139s
+  killed 127, survived 26 (13 capped), no coverage 17, errors 0
+  mutation score on reached code: 83.0%   overall: 74.7%
 
   function                           total killed survived no-cov
   CloneImages                           33     28        5      0
@@ -46,7 +24,7 @@ mutate: 170 mutants, 138s
   RemoveImageFromList                    6      5        1      0
   SyncNextImageInList                    6      4        2      0
   DuplicateImages                        5      4        1      0
-  RemoveFirstImageFromList               5      5        0      0
+  RemoveFirstImageFromList               5      4        1      0
   RemoveLastImageFromList                5      4        1      0
   DestroyImageList                       4      2        2      0
   GetImageListLength                     4      3        1      0
@@ -84,6 +62,7 @@ mutate: 170 mutants, 138s
     xc list.c:880:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  list.c:934:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc list.c:1036:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc list.c:1095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  list.c:1146:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  list.c:1195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc list.c:1256:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
