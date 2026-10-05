@@ -941,8 +941,11 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
       Image *back;
       blob=frames > 1 ? ImagesToBlob(image_info,images,&length,exception) :
         ImageToBlob(image_info,images,&length,exception);
-      (void) printf("blob %.20g bytes %08lx\n",(double) length,
-        blob != NULL ? Fnv((const unsigned char *) blob,length) : 0UL);
+      if ((argc > 6) && (strcmp(argv[6],"nohash") == 0))  /* formats that write the date (PDF) */
+        (void) printf("blob %.20g bytes\n",(double) length);
+      else
+        (void) printf("blob %.20g bytes %08lx\n",(double) length,
+          blob != NULL ? Fnv((const unsigned char *) blob,length) : 0UL);
       Report(exception);
       if (blob != (void *) NULL)
         {

@@ -5681,6 +5681,10 @@ def _windrv_cases():
                               # MAT: no blob support, but read back: the temporary-file route both ways
                               ("rose", "MAT", 1), ("rose", "MAT", 2), ("rose_alpha", "MAT", 1)):
         yield _windrv("blob of %d %s %s" % (frames, name, fmt), ("blob", "toblob", img(name), fmt, str(frames)))
+    # PDF: no blob support and several pages to one file, so ImagesToBlob's temporary-file route
+    # for a list; the bytes carry the date, so only the length is printed
+    for name, frames in (("rose", "1"), ("rose", "2"), ("rose_alpha", "3")):
+        yield _windrv("blob of %s %s PDF, length only" % (frames, name), ("blob", "toblob", img(name), "PDF", frames, "nohash"))
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
                               ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2),
                               ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1), ("rose", "INFO", 1),
