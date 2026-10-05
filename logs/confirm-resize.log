@@ -1,5 +1,6 @@
 mutate: 183 mutants in MagickCore/resize\.c$, 32 functions
-mutate: baseline over 303 cases in 0s
+  baseline: 285/285 (2s)
+mutate: baseline over 303 cases in 3s
   mutants: 25/183 (0s)
   mutants: 50/183 (0s)
   mutants: 75/183 (0s)
@@ -7,9 +8,9 @@ mutate: baseline over 303 cases in 0s
   mutants: 125/183 (5s)
   mutants: 150/183 (5s)
   mutants: 175/183 (44s)
-  mutants: 183/183 (44s)
+  mutants: 183/183 (45s)
 
-mutate: 183 mutants, 44s
+mutate: 183 mutants, 45s
   killed 0, survived 57 (0 capped), no coverage 126, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -107,4 +108,4 @@ mutate: 183 mutants, 44s
     x  resize.c:4692:17 cxx_ne_to_eq               if (mime_type != (const char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-resize.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-resize.json
