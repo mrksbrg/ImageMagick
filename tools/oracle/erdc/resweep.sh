@@ -57,7 +57,9 @@ while true; do
     git pull -q
     if [ -f $SETUP/resweep.at ] && ! git diff --quiet "$(cat $SETUP/resweep.at)" HEAD -- tools/oracle/cases.py 2>/dev/null; then
       echo "$(date +%H:%M) resweep: cases changed since last pass, starting fresh"
-      rm -f $W/mutation-resweep-*.json
+      # and their partial logs, or mutate.py resumes from them and the new pass only replays
+      # the old one (every pass after the first did, until 2026-10-05)
+      rm -f $W/mutation-resweep-*.json $W/mutation-resweep-*.partial.jsonl $W/mutation-resweep-*.started
     else
       sleep 1800
     fi
