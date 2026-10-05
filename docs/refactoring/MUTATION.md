@@ -2695,6 +2695,18 @@ and the SkipSpaces in GetOperand, GetOperator, TranslateStatement and TranslateS
 already written, and with MAGICK_SYNCHRONIZE; FileToImage of an empty file (a zero buffer
 size); three verdicts (a failing fstat only changes the copy's chunk size).
 
+**fx.c 91 → 94, trusted (morning of 2026-10-05).** A fourth `fxgap15` batch: unary prefixes
+nested deeper than the operator stack's later top, then a user symbol after a binary operator
+(`(-(-(-zz))) + zz * zz`), which kills TopOprIsUnaryPrefix's `usedOprStack-1` → `+1` (it then
+reads the slot the deeper prefixes left). Ten more verdicts: InitFx's and
+AcquireFxInfoPrivate's clean-up after AcquireVirtualCacheView or AllocFxRt fails (allocation
+failure only), AddUserSymbol's `++used >= num` → `>` (the entry written is `used-1`, still inside
+the table, so growing a symbol later writes the same entry), and PushVal's and PopVal's bounds
+(the value stack is twice the deepest operator stack and the translated RPN never pops more than
+it pushed, so the equality cases never occur). No fx.c function is under the bar.
+
+Trusted now, Windows: **35 of 36**. Left: blob.c (89).
+
 ## How to use this in the campaign
 
 - **Before refactoring a function**, run its mutants:
