@@ -1,10 +1,15 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 113 mutants in MagickCore/magic\.c$, 13 functions
-mutate: baseline over 14762 cases in 0s
-mutate: resuming, 113 mutants already done
+mutate: baseline over 15566 cases in 0s
+  mutants: 25/113 (13s)
+  mutants: 50/113 (19s)
+  mutants: 75/113 (36s)
+  mutants: 100/113 (55s)
+  mutants: 113/113 (156s)
 
-mutate: 113 mutants, 0s
-  killed 81, survived 21 (20 capped), no coverage 11, errors 0
-  mutation score on reached code: 79.4%   overall: 71.7%
+mutate: 113 mutants, 156s
+  killed 78, survived 24 (23 capped), no coverage 11, errors 0
+  mutation score on reached code: 76.5%   overall: 69.0%
 
   function                           total killed survived no-cov
   GetMagicInfo                          18     15        3      0
@@ -14,9 +19,9 @@ mutate: 113 mutants, 0s
   GetMagicList                          11      0        0     11
   CompareMagickInfoExtent               10      6        4      0
   GetMagicPatternExtent                 10      7        3      0
-  CompareMagic                           8      5        3      0
+  CompareMagic                           8      3        5      0
   IsMagicCacheInstantiated               7      7        0      0
-  IsMagicListInstantiated                7      6        1      0
+  IsMagicListInstantiated                7      5        2      0
   AcquireMagicList                       5      5        0      0
   GetMagicName                           1      0        1      0
   MagicComponentGenesis                  1      0        1      0
@@ -26,7 +31,9 @@ mutate: 113 mutants, 0s
     xc magic.c:181:23 cxx_gt_to_ge               if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)
     xc magic.c:181:63 cxx_le_to_lt               if ((ma->offset > mb->offset ? ma->offset : mb->offset) <= 10)
     xc magic.c:184:16 cxx_gt_to_ge               return(delta > INT_MAX ? 0 : (int) delta);
+    xc magic.c:276:38 cxx_sub_to_add             remaining=(MagickOffsetType) length-magic_info->offset;
     xc magic.c:277:31 cxx_ne_to_eq               if (magic_info->skip_spaces != MagickFalse)
+    xc magic.c:278:23 cxx_gt_to_ge               while ((remaining > 0) && (isspace(*q) != 0))
     xc magic.c:278:23 cxx_gt_to_le               while ((remaining > 0) && (isspace(*q) != 0))
     xc magic.c:283:18 cxx_ge_to_gt               if ((remaining >= (MagickOffsetType) magic_info->length) &&
     xc magic.c:321:13 cxx_ne_to_eq               if (magic != (const unsigned char *) NULL)
@@ -38,6 +45,7 @@ mutate: 113 mutants, 0s
     x  magic.c:489:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc magic.c:645:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc magic.c:677:32 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
+     c magic.c:678:9 cxx_remove_void_call       ActivateSemaphoreInfo(&magic_list_semaphore);
     xc magic.c:777:28 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
     xc magic.c:809:28 cxx_eq_to_ne               if (magic_list_semaphore == (SemaphoreInfo *) NULL)
      c magic.c:810:5 cxx_remove_void_call       ActivateSemaphoreInfo(&magic_list_semaphore);
