@@ -1,12 +1,12 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 51 mutants in MagickCore/utility\.c$, 9 functions
-  baseline: 1/1 (0s)
-mutate: baseline over 38 cases in 0s
+mutate: baseline over 515 cases in 0s
   mutants: 25/51 (0s)
-  mutants: 50/51 (2s)
-  mutants: 51/51 (2s)
+  mutants: 50/51 (94s)
+  mutants: 51/51 (94s)
 
-mutate: 51 mutants, 2s
-  killed 0, survived 28 (0 capped), no coverage 23, errors 0
+mutate: 51 mutants, 94s
+  killed 0, survived 17 (0 capped), no coverage 34, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -14,17 +14,13 @@ mutate: 51 mutants, 2s
   Base64Decode                           7      0        0      7
   GetExecutionPath                       5      0        0      5
   MagickDelay                            5      0        0      5
-  Base64Encode                           4      0        4      0
+  Base64Encode                           4      0        0      4
   ChopPathComponents                     4      0        0      4
-  ListFiles                              4      0        4      0
-  GetPathComponents                      3      0        3      0
+  ListFiles                              4      0        0      4
+  GetPathComponents                      3      0        0      3
   ExpandFilename                         2      0        0      2
 
   survivors (equivalent, or a gap in the catalogue):
-    x  utility.c:529:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  utility.c:532:51 cxx_div_to_mul             encode=(char *) AcquireQuantumMemory(blob_length/3+4,4*sizeof(*encode));
-    x  utility.c:562:58 cxx_add_to_sub             encode[i++]=Base64[(int) (((code[1] & 0x0f) << 2)+(code[2] >> 6))];
-    x  utility.c:566:11 cxx_post_inc_to_post_dec   encode[i++]='\0';
     x  utility.c:796:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  utility.c:829:20 cxx_gt_to_ge               if (parameters > 0)
     x  utility.c:834:36 cxx_post_inc_to_post_dec   for (j=0; j < parameters; j++)
@@ -42,13 +38,6 @@ mutate: 51 mutants, 2s
        utility.c:994:19 cxx_lt_to_ge               for (i=1; i < count; i++)
        utility.c:994:19 cxx_lt_to_le               for (i=1; i < count; i++)
        utility.c:994:29 cxx_post_inc_to_post_dec   for (i=1; i < count; i++)
-       utility.c:1517:21 cxx_lt_to_ge               for (j=0; j < i; j++)
-       utility.c:1517:21 cxx_lt_to_le               for (j=0; j < i; j++)
-       utility.c:1517:27 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
-    x  utility.c:1799:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  utility.c:1839:29 cxx_ge_to_gt               if (*number_entries >= max_entries)
-    x  utility.c:1839:29 cxx_ge_to_lt               if (*number_entries >= max_entries)
-       utility.c:1847:26 cxx_eq_to_ne               if (filelist == (char **) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-utility.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-utility.json

@@ -1,20 +1,21 @@
-mutate: 32 mutants in MagickCore/locale\.c$, 12 functions
-  baseline: 12/12 (0s)
-mutate: baseline over 113 cases in 0s
-  mutants: 25/32 (6s)
-  mutants: 32/32 (6s)
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
+mutate: 29 mutants in MagickCore/locale\.c$, 12 functions
+  baseline: 220/220 (1s)
+mutate: baseline over 2737 cases in 2s
+  mutants: 25/29 (254s)
+  mutants: 29/29 (257s)
 
-mutate: 32 mutants, 6s
-  killed 3, survived 22 (0 capped), no coverage 7, errors 0
-  mutation score on reached code: 12.0%   overall: 9.4%
+mutate: 29 mutants, 257s
+  killed 0, survived 20 (0 capped), no coverage 9, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  LoadLocaleCache                       11      2        9      0
-  IsLocaleTreeInstantiated               5      1        4      0
+  LoadLocaleCache                        9      0        9      0
+  IsLocaleTreeInstantiated               4      0        4      0
   GetLocaleOptions                       3      0        3      0
   LocaleFatalErrorHandler                3      0        0      3
   GetLocaleInfoList                      2      0        0      2
-  GetLocaleList                          2      0        2      0
+  GetLocaleList                          2      0        0      2
   DestroyLocaleNode                      1      0        1      0
   DestroyLocaleOptions                   1      0        1      0
   FormatLocaleFileList                   1      0        1      0
@@ -26,8 +27,6 @@ mutate: 32 mutants, 6s
     x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
     x  locale.c:305:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
-    x  locale.c:707:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  locale.c:727:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleTagCompare);
     x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:832:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
     x  locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
@@ -47,4 +46,4 @@ mutate: 32 mutants, 6s
     x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-locale.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-locale.json

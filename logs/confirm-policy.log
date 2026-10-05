@@ -1,34 +1,18 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 45 mutants in MagickCore/policy\.c$, 6 functions
-  baseline: 3/3 (0s)
-mutate: baseline over 3 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/45 (0s)
   mutants: 45/45 (0s)
 
 mutate: 45 mutants, 0s
-  killed 0, survived 12 (0 capped), no coverage 33, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+  killed 0, survived 0 (0 capped), no coverage 45, errors 0
 
   function                           total killed survived no-cov
   SetMagickSecurityPolicyValue          20      0        0     20
-  IsPathContainsSymlink                 10      0       10      0
+  IsPathContainsSymlink                 10      0        0     10
   SetMagickSecurityPolicy               10      0        0     10
-  GetPolicyList                          2      0        2      0
+  GetPolicyList                          2      0        0      2
   ValidateSecurityPolicy                 2      0        0      2
   GetPolicyInfoList                      1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  policy.c:496:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  policy.c:502:50 cxx_add_to_sub             GetNumberOfElementsInLinkedList(policy_cache)+1UL,sizeof(*policies));
-    x  policy.c:630:18 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:630:22 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:648:15 cxx_add_to_sub             ((i+1) < (ssize_t) sizeof(component)))
-    x  policy.c:648:19 cxx_lt_to_le               ((i+1) < (ssize_t) sizeof(component)))
-    x  policy.c:660:40 cxx_sub_to_add             if ((offset > 0) && (partial[offset-1] != *DirectorySeparator))
-    x  policy.c:665:20 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:665:24 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:673:16 cxx_add_to_sub             if ((offset+i) >= (ssize_t) sizeof(partial))
-    x  policy.c:673:20 cxx_ge_to_gt               if ((offset+i) >= (ssize_t) sizeof(partial))
-    x  policy.c:689:35 cxx_ne_to_eq               if (IsPolicyPathSeparator(*p) != MagickFalse)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-5170fb874-policy.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-policy.json
