@@ -1,17 +1,12 @@
-mutate: 22 mutants in MagickCore/coder\.c$, 6 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 22/22 (8s)
+mutate: 13 mutants in MagickCore/coder\.c$, 2 functions
+mutate: baseline over 0 cases in 0s
+  mutants: 13/13 (0s)
 
-mutate: 22 mutants, 8s
-  killed 9, survived 0 (0 capped), no coverage 13, errors 0
-  mutation score on reached code: 100.0%   overall: 40.9%
+mutate: 13 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 13, errors 0
 
   function                           total killed survived no-cov
   GetCoderList                          12      0        0     12
-  DestroyCoderNode                       3      3        0      0
-  CoderComponentTerminus                 3      3        0      0
-  IsCoderTreeInstantiated                2      2        0      0
-  CoderComponentGenesis                  1      1        0      0
   GetCoderInfoList                       1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-coder.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-coder.json
