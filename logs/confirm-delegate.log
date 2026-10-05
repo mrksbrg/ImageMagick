@@ -1,4 +1,5 @@
 mutate: 50 mutants in MagickCore/delegate\.c$, 10 functions
+  baseline: 6/6 (0s)
 mutate: baseline over 15 cases in 0s
   mutants: 25/50 (0s)
   mutants: 50/50 (10s)
@@ -57,4 +58,4 @@ mutate: 50 mutants, 10s
     x  delegate.c:2065:27 cxx_ne_to_eq               for (j=0; commands[j] != (char *) NULL; j++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-delegate.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-delegate.json
