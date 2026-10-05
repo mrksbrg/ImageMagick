@@ -1,33 +1,39 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 616 mutants in MagickCore/draw\.c$, 40 functions
-  baseline: 52/52 (0s)
-mutate: baseline over 52 cases in 1s
+  baseline: 500/2987 (3s)
+  baseline: 1000/2987 (5s)
+  baseline: 1500/2987 (7s)
+  baseline: 2000/2987 (9s)
+  baseline: 2500/2987 (12s)
+  baseline: 2987/2987 (15s)
+mutate: baseline over 2987 cases in 15s
   mutants: 25/616 (0s)
   mutants: 50/616 (0s)
   mutants: 75/616 (0s)
   mutants: 100/616 (0s)
   mutants: 125/616 (0s)
   mutants: 150/616 (0s)
-  mutants: 175/616 (1s)
-  mutants: 200/616 (1s)
-  mutants: 225/616 (1s)
-  mutants: 250/616 (1s)
-  mutants: 275/616 (1s)
-  mutants: 300/616 (1s)
-  mutants: 325/616 (1s)
-  mutants: 350/616 (1s)
-  mutants: 375/616 (1s)
-  mutants: 400/616 (1s)
-  mutants: 425/616 (1s)
-  mutants: 450/616 (1s)
-  mutants: 475/616 (1s)
-  mutants: 500/616 (1s)
-  mutants: 525/616 (1s)
-  mutants: 550/616 (1s)
-  mutants: 575/616 (1s)
-  mutants: 600/616 (4s)
-  mutants: 616/616 (4s)
+  mutants: 175/616 (50s)
+  mutants: 200/616 (50s)
+  mutants: 225/616 (50s)
+  mutants: 250/616 (50s)
+  mutants: 275/616 (50s)
+  mutants: 300/616 (50s)
+  mutants: 325/616 (50s)
+  mutants: 350/616 (50s)
+  mutants: 375/616 (50s)
+  mutants: 400/616 (50s)
+  mutants: 425/616 (50s)
+  mutants: 450/616 (50s)
+  mutants: 475/616 (51s)
+  mutants: 500/616 (51s)
+  mutants: 525/616 (51s)
+  mutants: 550/616 (51s)
+  mutants: 575/616 (51s)
+  mutants: 600/616 (324s)
+  mutants: 616/616 (370s)
 
-mutate: 616 mutants, 4s
+mutate: 616 mutants, 370s
   killed 0, survived 35 (0 capped), no coverage 581, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -96,14 +102,14 @@ mutate: 616 mutants, 4s
     x  draw.c:2053:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  draw.c:2064:3 cxx_remove_void_call       GetPixelInfo(image,&zero);
     x  draw.c:2109:7 cxx_remove_void_call       GetPixelInfoPixel(image,q,&pixel);
-    x  draw.c:2150:22 cxx_lt_to_le               if (offset < 0.0)
-    x  draw.c:2157:24 cxx_lt_to_le               if (offset < gradient->stops[i].offset)
-    x  draw.c:2196:37 cxx_lt_to_le               antialias=(repeat < length) && ((repeat+1.0) > length) ?
-    x  draw.c:2196:64 cxx_gt_to_ge               antialias=(repeat < length) && ((repeat+1.0) > length) ?
+       draw.c:2150:22 cxx_lt_to_le               if (offset < 0.0)
+       draw.c:2157:24 cxx_lt_to_le               if (offset < gradient->stops[i].offset)
+       draw.c:2196:37 cxx_lt_to_le               antialias=(repeat < length) && ((repeat+1.0) > length) ?
+       draw.c:2196:64 cxx_gt_to_ge               antialias=(repeat < length) && ((repeat+1.0) > length) ?
        draw.c:2204:44 cxx_sub_to_add             repeat=gradient->radius-fmod(-repeat,gradient->radius);
        draw.c:2204:50 cxx_minus_to_noop          repeat=gradient->radius-fmod(-repeat,gradient->radius);
-    x  draw.c:2207:40 cxx_gt_to_ge               antialias=repeat+1.0 > gradient->radius ? MagickTrue :
-    x  draw.c:2213:24 cxx_lt_to_le               if (offset < gradient->stops[i].offset)
+       draw.c:2207:40 cxx_gt_to_ge               antialias=repeat+1.0 > gradient->radius ? MagickTrue :
+       draw.c:2213:24 cxx_lt_to_le               if (offset < gradient->stops[i].offset)
     x  draw.c:6130:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  draw.c:6177:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  draw.c:6202:70 cxx_ne_to_eq               draw_info->debug=(GetLogEventMask() & (DrawEvent | AnnotateEvent)) != 0 ?
@@ -111,4 +117,4 @@ mutate: 616 mutants, 4s
     x  draw.c:6213:42 cxx_ne_to_eq               if (draw_info->image_info->server_name != (char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-draw.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-draw.json

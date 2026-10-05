@@ -1,13 +1,13 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 93 mutants in MagickCore/image\.c$, 27 functions
-  baseline: 261/261 (1s)
-mutate: baseline over 285 cases in 1s
+mutate: baseline over 515 cases in 0s
   mutants: 25/93 (0s)
   mutants: 50/93 (0s)
   mutants: 75/93 (0s)
-  mutants: 93/93 (7s)
+  mutants: 93/93 (83s)
 
-mutate: 93 mutants, 7s
-  killed 0, survived 14 (0 capped), no coverage 79, errors 0
+mutate: 93 mutants, 83s
+  killed 0, survived 11 (0 capped), no coverage 82, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -23,9 +23,9 @@ mutate: 93 mutants, 7s
   IsImageObject                          3      0        0      3
   SetImageRegionMask                     3      0        0      3
   SmushImages                            3      0        0      3
-  AcquireNextImage                       2      0        2      0
+  AcquireNextImage                       2      0        0      2
   CatchImageException                    2      0        0      2
-  GetImageMask                           2      0        2      0
+  GetImageMask                           2      0        0      2
   IsHighDynamicRangeImage                2      0        2      0
   SetImageAlpha                          2      0        2      0
   SetImageBackgroundColor                2      0        2      0
@@ -34,16 +34,12 @@ mutate: 93 mutants, 7s
   SetImageStorageClass                   1      0        1      0
   SetImageInfoCustomStream               1      0        0      1
   SetImageMask                           1      0        1      0
-  SetImageVirtualPixelMethod             1      0        0      1
+  SetImageVirtualPixelMethod             1      0        1      0
   StripImage                             1      0        0      1
   SyncImage                              1      0        1      0
   SyncImagesSettings                     1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
-    x  image.c:385:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  image.c:395:3 cxx_remove_void_call       DestroyBlob(GetNextImageInList(image));
-    x  image.c:1469:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  image.c:1526:17 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
     x  image.c:1883:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:1890:15 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
     x  image.c:2411:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -52,8 +48,9 @@ mutate: 93 mutants, 7s
     x  image.c:2502:47 cxx_eq_to_ne               ((image->alpha_trait & BlendPixelTrait) == 0))
     x  image.c:2691:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:3307:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  image.c:3609:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:4012:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:4110:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-image.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-image.json
