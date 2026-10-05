@@ -5693,6 +5693,10 @@ def _windrv_cases():
     # for a list; the bytes carry the date, so only the length is printed
     for name, frames in (("rose", "1"), ("rose", "2"), ("rose_alpha", "3")):
         yield _windrv("blob of %s %s PDF, length only" % (frames, name), ("blob", "toblob", img(name), "PDF", frames, "nohash"))
+    # PostScript: no blob support, pinged back through Ghostscript from a temporary file
+    # (PingBlob's restore of names after a successful ping); the bytes carry the date
+    for fmt in ("PS", "EPS", "PS2"):
+        yield _windrv("blob of 1 rose %s, length only" % fmt, ("blob", "toblob", img("rose"), fmt, "1", "nohash"))
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
                               ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2),
                               ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1), ("rose", "INFO", 1),

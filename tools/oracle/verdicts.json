@@ -23431,6 +23431,36 @@
    "src": "if (blob != (void *) NULL)",
    "verdict": "equivalent",
    "why": "skips only the final ResizeQuantumMemory that trims the returned blob to its length; the bytes and the length reported are the same"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/blob.c",
+   "function": "ResetDisassociatedBlobStorage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blob_info->mapped != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "the branch only returns a mapped blob's length to the map-resource counter (RelinquishMagickResource) and clears the flag; the counter is bookkeeping that nothing prints and no limit reaches in a run"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "ResetDisassociatedBlobStorage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MapResource,blob_info->length);",
+   "verdict": "unobservable",
+   "why": "the branch only returns a mapped blob's length to the map-resource counter (RelinquishMagickResource) and clears the flag; the counter is bookkeeping that nothing prints and no limit reaches in a run"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "PingBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (image != (Image *) NULL)",
+   "verdict": "equivalent",
+   "why": "the pinged image keeps a reference to the caller's blob, which was attached exempt and is never freed by ImageMagick; the image's size, attributes and names are the same"
   }
  ]
 }
