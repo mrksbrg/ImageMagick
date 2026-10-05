@@ -5681,6 +5681,14 @@ def _windrv_cases():
                               # MAT: no blob support, but read back: the temporary-file route both ways
                               ("rose", "MAT", 1), ("rose", "MAT", 2), ("rose_alpha", "MAT", 1)):
         yield _windrv("blob of %d %s %s" % (frames, name, fmt), ("blob", "toblob", img(name), fmt, str(frames)))
+    # WriteImages into a caller's memory blob (image_info->blob), frame by frame: SyncBlobStream
+    # hands each later frame's buffer to the list's owner. Not used: adjoin off for MIFF, PNG,
+    # TIFF, PPM and BMP, which corrupts the heap (realloc(): invalid next size; double free)
+    for fmt, frames, adjoin in (("GIF", "3", "noadjoin"), ("GIF", "3", "adjoin"), ("JPEG", "3", "noadjoin"),
+                                ("JPEG", "2", "adjoin"), ("TIFF", "3", "adjoin"), ("PPM", "2", "adjoin"),
+                                ("MIFF", "2", "adjoin"), ("GIF", "1", "noadjoin")):
+        yield _windrv("WriteImages of %s rose as %s into a caller's blob, %s" % (frames, fmt, adjoin),
+                      ("blob", "writeimages", img("rose"), fmt, frames, adjoin))
     # PDF: no blob support and several pages to one file, so ImagesToBlob's temporary-file route
     # for a list; the bytes carry the date, so only the length is printed
     for name, frames in (("rose", "1"), ("rose", "2"), ("rose_alpha", "3")):

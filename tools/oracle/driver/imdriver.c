@@ -936,7 +936,24 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
   image_info=AcquireImageInfo();
   (void) CopyMagickString(image_info->magick,argv[4],MagickPathExtent);
   (void) FormatLocaleString(image_info->filename,MagickPathExtent,"%s:",argv[4]);
-  if (strcmp(argv[2],"toblob") == 0)
+  if (strcmp(argv[2],"writeimages") == 0)
+    {
+      /* WriteImages into a memory blob given in image_info->blob, frame by frame (adjoin off):
+         SyncBlobStream promotes each later frame's buffer onto the list's owner */
+      size_t extent=4096;
+      void *memory=AcquireQuantumMemory(extent,1);
+      MagickBooleanType status;
+      (void) memset(memory,0,extent);
+      image_info->adjoin=(argc > 6) && (strcmp(argv[6],"adjoin") == 0) ? MagickTrue : MagickFalse;
+      SetImageInfoBlob(image_info,memory,extent);
+      status=WriteImages(image_info,images,image_info->filename,exception);
+      (void) printf("writeimages %d blob %s length %.20g\n",(int) status,image_info->blob != NULL ? "yes" : "no",
+        (double) image_info->length);
+      if ((image_info->blob != NULL) && (image_info->length != 0))
+        (void) printf("bytes %08lx\n",Fnv((const unsigned char *) image_info->blob,image_info->length));
+      Report(exception);
+    }
+  else if (strcmp(argv[2],"toblob") == 0)
     {
       Image *back;
       blob=frames > 1 ? ImagesToBlob(image_info,images,&length,exception) :
