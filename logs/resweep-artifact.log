@@ -1,14 +1,16 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 27 mutants in MagickCore/artifact\.c$, 9 functions
-mutate: baseline over 14460 cases in 0s
-mutate: resuming, 27 mutants already done
+mutate: baseline over 12826 cases in 0s
+  mutants: 25/27 (22s)
+  mutants: 27/27 (23s)
 
-mutate: 27 mutants, 0s
-  killed 14, survived 8 (6 capped), no coverage 5, errors 0
-  mutation score on reached code: 63.6%   overall: 51.9%
+mutate: 27 mutants, 23s
+  killed 13, survived 9 (7 capped), no coverage 5, errors 0
+  mutation score on reached code: 59.1%   overall: 48.1%
 
   function                           total killed survived no-cov
   GetImageArtifact                       6      5        1      0
-  CloneImageArtifacts                    4      2        2      0
+  CloneImageArtifacts                    4      1        3      0
   DefineImageArtifact                    3      0        0      3
   ResetImageArtifactIterator             3      2        1      0
   SetImageArtifact                       3      2        1      0
@@ -19,6 +21,7 @@ mutate: 27 mutants, 0s
 
   survivors (equivalent, or a gap in the catalogue):
     xc artifact.c:124:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc artifact.c:132:28 cxx_ne_to_eq               if (image->artifacts != (void *) NULL)
     xc artifact.c:133:9 cxx_remove_void_call       DestroyImageArtifacts(image);
     xc artifact.c:219:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc artifact.c:253:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)

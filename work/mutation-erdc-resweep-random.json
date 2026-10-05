@@ -8,8 +8,8 @@
   "function": "AcquireRandomInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:185:3:185:38",
@@ -30,10 +30,10 @@
   "line": 188,
   "col": 3,
   "function": "AcquireRandomInfo",
-  "status": "killed",
-  "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:204:13:204:15",
@@ -44,8 +44,8 @@
   "function": "AcquireRandomInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:206:3:206:51",
@@ -152,8 +152,8 @@
   "function": "AcquireRandomInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:220:3:220:55",
@@ -199,8 +199,8 @@
   "col": 31,
   "function": "AcquireRandomInfo",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/9961ced834",
+  "cases": 2,
+  "killer": "gen/ebc3db8343",
   "why": "out.miff differs"
  },
  {
@@ -211,8 +211,8 @@
   "col": 7,
   "function": "AcquireRandomInfo",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/9961ced834",
+  "cases": 2,
+  "killer": "gen/ebc3db8343",
   "why": "out.miff differs"
  },
  {
@@ -223,8 +223,8 @@
   "col": 7,
   "function": "AcquireRandomInfo",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/9961ced834",
+  "cases": 2,
+  "killer": "gen/ebc3db8343",
   "why": "out.miff differs"
  },
  {
@@ -235,8 +235,8 @@
   "col": 7,
   "function": "AcquireRandomInfo",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/9961ced834",
+  "cases": 2,
+  "killer": "gen/ebc3db8343",
   "why": "out.miff differs"
  },
  {
@@ -260,8 +260,8 @@
   "function": "DestroyRandomInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:285:30:285:32",
@@ -308,8 +308,8 @@
   "function": "DestroyRandomInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:295:3:295:51",
@@ -318,10 +318,10 @@
   "line": 295,
   "col": 3,
   "function": "DestroyRandomInfo",
-  "status": "killed",
-  "cases": 18,
-  "killer": "windrv/602f2ac888",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:335:25:335:27",
@@ -372,8 +372,8 @@
   "function": "random.c:GenerateEntropicChaos",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:393:5:393:50",
@@ -408,8 +408,8 @@
   "function": "random.c:GenerateEntropicChaos",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:403:3:403:55",
@@ -598,10 +598,10 @@
   "line": 434,
   "col": 9,
   "function": "random.c:GenerateEntropicChaos",
-  "status": "killed",
-  "cases": 5,
-  "killer": "windrv/cd7aa550d8",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:445:55:445:57",
@@ -670,10 +670,10 @@
   "line": 467,
   "col": 3,
   "function": "random.c:GenerateEntropicChaos",
-  "status": "killed",
-  "cases": 5,
-  "killer": "windrv/cd7aa550d8",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:468:3:468:59",
@@ -718,10 +718,10 @@
   "line": 483,
   "col": 3,
   "function": "random.c:GenerateEntropicChaos",
-  "status": "killed",
-  "cases": 5,
-  "killer": "windrv/cd7aa550d8",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:484:3:484:59",
@@ -754,10 +754,10 @@
   "line": 531,
   "col": 17,
   "function": "random.c:GenerateEntropicChaos",
-  "status": "killed",
-  "cases": 18,
-  "killer": "windrv/602f2ac888",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:539:30:539:32",
@@ -790,10 +790,10 @@
   "line": 541,
   "col": 11,
   "function": "random.c:GenerateEntropicChaos",
-  "status": "killed",
-  "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:542:11:542:65",
@@ -934,10 +934,10 @@
   "line": 582,
   "col": 13,
   "function": "random.c:GenerateEntropicChaos",
-  "status": "killed",
-  "cases": 5,
-  "killer": "windrv/cd7aa550d8",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:588:3:588:46",
@@ -960,7 +960,7 @@
   "function": "GetPseudoRandomValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/9961ced834",
+  "killer": "gen/ebc3db8343",
   "why": "out.miff differs"
  },
  {
@@ -972,7 +972,7 @@
   "function": "GetPseudoRandomValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/9961ced834",
+  "killer": "gen/ebc3db8343",
   "why": "out.miff differs"
  },
  {
@@ -1024,10 +1024,10 @@
   "line": 806,
   "col": 24,
   "function": "RandomComponentGenesis",
-  "status": "killed",
-  "cases": 11,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:831:24:831:26",
@@ -1048,10 +1048,10 @@
   "line": 832,
   "col": 5,
   "function": "RandomComponentTerminus",
-  "status": "killed",
-  "cases": 11,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": false
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:833:3:833:45",
@@ -1086,8 +1086,8 @@
   "function": "random.c:IncrementRandomNonce",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:875:13:875:15",
@@ -1110,8 +1110,8 @@
   "function": "random.c:IncrementRandomNonce",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:898:14:898:16",
@@ -1120,10 +1120,10 @@
   "line": 898,
   "col": 14,
   "function": "SetRandomKey",
-  "status": "killed",
-  "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:905:3:905:44",
@@ -1134,8 +1134,8 @@
   "function": "SetRandomKey",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:909:18:909:20",
@@ -1193,9 +1193,9 @@
   "col": 12,
   "function": "SetRandomKey",
   "status": "killed",
-  "cases": 133,
+  "cases": 103,
   "killer": "gaps/b0b255df3b",
-  "why": "exit status [0] -> ['timeout']; magick-DATJjBE6WPl6_1AAnb1ju2BFkXJoIUtr only in candidate; magick-M5InvHOvgXka3etD2cvuRuIWdakYkzLr only in candidate; magick-mwLqrlantL84WMEMKutiVz6yqV3Eq8cQ only in ca"
+  "why": "exit status [0] -> ['timeout']; magick--Kh3NWoHf-mXSCPX3yY4wxjJKQZOydpN only in candidate; magick-GPsZDdTnVosRZz7-VYazcuIgnxJUpaew only in candidate; magick-PwMQxe6ZuJuTlV7O1GF8bloCb5yslBKM only in ca"
  },
  {
   "id": "cxx_ge_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:916:12:916:14",
@@ -1206,8 +1206,8 @@
   "function": "SetRandomKey",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> [-11]; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:918:5:918:40",
@@ -1228,10 +1228,10 @@
   "line": 919,
   "col": 5,
   "function": "SetRandomKey",
-  "status": "killed",
-  "cases": 4,
-  "killer": "windrv/cd7aa550d8",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:920:5:920:38",
@@ -1264,10 +1264,10 @@
   "line": 927,
   "col": 9,
   "function": "SetRandomKey",
-  "status": "killed",
-  "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:929:7:929:42",
@@ -1288,10 +1288,10 @@
   "line": 930,
   "col": 7,
   "function": "SetRandomKey",
-  "status": "killed",
-  "cases": 10,
-  "killer": "windrv/602f2ac888",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:931:7:931:40",
@@ -1300,10 +1300,10 @@
   "line": 931,
   "col": 7,
   "function": "SetRandomKey",
-  "status": "killed",
-  "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:932:7:932:47",
@@ -1336,10 +1336,10 @@
   "line": 936,
   "col": 18,
   "function": "SetRandomKey",
-  "status": "killed",
-  "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "stdout differs"
+  "status": "survived",
+  "cases": 300,
+  "capped": true,
+  "line_executed": true
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/random.c:939:3:939:46",
@@ -1350,7 +1350,7 @@
   "function": "SetRandomKey",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/64fdd3e389",
-  "why": "exit status [0] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "info/d333f9b818",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  }
 ]
