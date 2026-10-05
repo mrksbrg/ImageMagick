@@ -1,64 +1,65 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 778 mutants in MagickCore/property\.c$, 28 functions
-mutate: baseline over 14463 cases in 0s
-  mutants: 25/778 (1s)
-  mutants: 50/778 (1s)
-  mutants: 75/778 (2s)
-  mutants: 100/778 (3s)
-  mutants: 125/778 (4s)
-  mutants: 150/778 (5s)
-  mutants: 175/778 (6s)
-  mutants: 200/778 (7s)
-  mutants: 225/778 (7s)
-  mutants: 250/778 (8s)
-  mutants: 275/778 (9s)
-  mutants: 300/778 (9s)
-  mutants: 325/778 (10s)
-  mutants: 350/778 (10s)
-  mutants: 375/778 (10s)
-  mutants: 400/778 (11s)
-  mutants: 425/778 (35s)
-  mutants: 450/778 (50s)
-  mutants: 475/778 (68s)
-  mutants: 500/778 (74s)
-  mutants: 525/778 (78s)
-  mutants: 550/778 (80s)
-  mutants: 575/778 (85s)
-  mutants: 600/778 (98s)
-  mutants: 625/778 (131s)
-  mutants: 650/778 (161s)
-  mutants: 675/778 (177s)
-  mutants: 700/778 (181s)
-  mutants: 725/778 (183s)
-  mutants: 750/778 (186s)
-  mutants: 775/778 (204s)
-  mutants: 778/778 (205s)
+mutate: baseline over 12826 cases in 0s
+  mutants: 25/778 (23s)
+  mutants: 50/778 (25s)
+  mutants: 75/778 (38s)
+  mutants: 100/778 (67s)
+  mutants: 125/778 (124s)
+  mutants: 150/778 (139s)
+  mutants: 175/778 (172s)
+  mutants: 200/778 (204s)
+  mutants: 225/778 (231s)
+  mutants: 250/778 (266s)
+  mutants: 275/778 (290s)
+  mutants: 300/778 (322s)
+  mutants: 325/778 (326s)
+  mutants: 350/778 (328s)
+  mutants: 375/778 (338s)
+  mutants: 400/778 (371s)
+  mutants: 425/778 (399s)
+  mutants: 450/778 (414s)
+  mutants: 475/778 (431s)
+  mutants: 500/778 (436s)
+  mutants: 525/778 (438s)
+  mutants: 550/778 (442s)
+  mutants: 575/778 (449s)
+  mutants: 600/778 (458s)
+  mutants: 625/778 (504s)
+  mutants: 650/778 (549s)
+  mutants: 675/778 (565s)
+  mutants: 700/778 (613s)
+  mutants: 725/778 (641s)
+  mutants: 750/778 (677s)
+  mutants: 775/778 (706s)
+  mutants: 778/778 (708s)
 
-mutate: 778 mutants, 205s
-  killed 665, survived 108 (67 capped), no coverage 5, errors 0
-  mutation score on reached code: 86.0%   overall: 85.5%
+mutate: 778 mutants, 708s
+  killed 517, survived 256 (215 capped), no coverage 5, errors 0
+  mutation score on reached code: 66.9%   overall: 66.5%
 
   function                           total killed survived no-cov
-  GetEXIFProperty                      158    158        0      0
+  GetEXIFProperty                      158     98       60      0
   GetMagickProperty                    124    102       22      0
   InterpretImageProperties             111     60       51      0
-  SetImageProperty                      83     83        0      0
+  SetImageProperty                      83     29       54      0
   Get8BIMProperty                       60     51        9      0
   TracePSClippath                       41     35        6      0
   GetMagickPropertyLetter               35     21       14      0
-  GetXMPProperty                        30     30        0      0
+  GetXMPProperty                        30     28        2      0
   TraceSVGClippath                      27     24        3      0
-  GetImageProperty                      26     26        0      0
-  GetIPTCProperty                       21     21        0      0
-  GetICCProperty                        21     21        0      0
+  GetImageProperty                      26     22        4      0
+  GetIPTCProperty                       21     11       10      0
+  GetICCProperty                        21      8       13      0
   ReadPropertyMSBLong                    5      5        0      0
   ReadPropertyMSBShort                   5      4        1      0
-  CloneImageProperties                   4      4        0      0
+  CloneImageProperties                   4      1        3      0
   TraceBezierCurve                       4      4        0      0
   DefineImageProperty                    3      0        0      3
   SkipXMPValue                           3      3        0      0
   ResetImagePropertyIterator             3      2        1      0
-  DeleteImageProperty                    2      2        0      0
-  DestroyImageProperties                 2      2        0      0
+  DeleteImageProperty                    2      1        1      0
+  DestroyImageProperties                 2      1        1      0
   ReadPropertyByte                       2      2        0      0
   GetNextImageProperty                   2      1        1      0
   RemoveImageProperty                    2      0        0      2
@@ -68,6 +69,21 @@ mutate: 778 mutants, 205s
   ReadPropertyUnsignedShort              1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
+    xc property.c:156:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc property.c:210:29 cxx_ne_to_eq               if (image->properties != (void *) NULL)
+    xc property.c:211:9 cxx_remove_void_call       DestroyImageProperties(image);
+    xc property.c:299:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc property.c:333:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc property.c:455:15 cxx_eq_to_ne               if (profile == (StringInfo *) NULL)
+    xc property.c:463:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
+    xc property.c:463:55 cxx_sub_to_add             for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
+    xc property.c:469:10 cxx_post_inc_to_post_dec   i++;
+    xc property.c:481:56 cxx_sub_to_add             size_t remaining = GetStringInfoLength(profile)-(i+5);
+    xc property.c:481:59 cxx_add_to_sub             size_t remaining = GetStringInfoLength(profile)-(i+5);
+    xc property.c:483:21 cxx_ge_to_gt               if (~length >= 1)
+    xc property.c:484:55 cxx_add_to_sub             message=(char *) AcquireQuantumMemory(length+1UL,sizeof(*message));
+    xc property.c:500:46 cxx_add_to_sub             i+=(((size_t) p[3] << 8) | (size_t) p[4])+5;
+    xc property.c:504:21 cxx_ne_to_eq               if (attribute != (char *) NULL)
     x  property.c:590:15 cxx_lt_to_le               if (*length < 2)
     x  property.c:672:27 cxx_ne_to_eq               if (macroman_resource != (char *) NULL)
     x  property.c:674:18 cxx_ne_to_eq               if (resource != (char *) NULL)
@@ -78,6 +94,81 @@ mutate: 778 mutants, 205s
     x  property.c:734:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(count,(ssize_t) length));
     x  property.c:756:25 cxx_ne_to_eq               if (macroman_resource != (char *) NULL)
     x  property.c:758:16 cxx_ne_to_eq               if (resource != (char *) NULL)
+    xc property.c:1318:24 cxx_le_to_lt               if (strlen(property) <= 5)
+    xc property.c:1351:26 cxx_eq_to_ne               tag=(*(property+5) == '@') ? 1UL : 0UL;
+    xc property.c:1354:13 cxx_ne_to_eq               if (n != 4)
+    xc property.c:1362:27 cxx_sub_to_add             for (i=(ssize_t) n-1L; i >= 0; i--)
+    xc property.c:1362:34 cxx_ge_to_gt               for (i=(ssize_t) n-1L; i >= 0; i--)
+    xc property.c:1362:34 cxx_ge_to_lt               for (i=(ssize_t) n-1L; i >= 0; i--)
+    xc property.c:1366:18 cxx_ge_to_gt               if ((c >= '0') && (c <= '9'))
+    xc property.c:1366:18 cxx_ge_to_lt               if ((c >= '0') && (c <= '9'))
+    xc property.c:1366:32 cxx_le_to_gt               if ((c >= '0') && (c <= '9'))
+    xc property.c:1366:32 cxx_le_to_lt               if ((c >= '0') && (c <= '9'))
+    xc property.c:1367:29 cxx_sub_to_add             tag|=(size_t) (c-'0');
+    xc property.c:1369:20 cxx_ge_to_gt               if ((c >= 'A') && (c <= 'F'))
+    xc property.c:1369:20 cxx_ge_to_lt               if ((c >= 'A') && (c <= 'F'))
+    xc property.c:1369:34 cxx_le_to_gt               if ((c >= 'A') && (c <= 'F'))
+    xc property.c:1369:34 cxx_le_to_lt               if ((c >= 'A') && (c <= 'F'))
+    xc property.c:1370:31 cxx_sub_to_add             tag|=(size_t) (c-('A'-10));
+    xc property.c:1372:22 cxx_ge_to_gt               if ((c >= 'a') && (c <= 'f'))
+    xc property.c:1372:22 cxx_ge_to_lt               if ((c >= 'a') && (c <= 'f'))
+    xc property.c:1372:36 cxx_le_to_gt               if ((c >= 'a') && (c <= 'f'))
+    xc property.c:1372:36 cxx_le_to_lt               if ((c >= 'a') && (c <= 'f'))
+    xc property.c:1373:33 cxx_sub_to_add             tag|=(size_t) (c-('a'-10));
+    xc property.c:1377:26 cxx_ne_to_eq               } while (*property != '\0');
+    xc property.c:1385:20 cxx_post_inc_to_post_dec   for (i=0; ; i++)
+    xc property.c:1387:28 cxx_eq_to_ne               if (EXIFTag[i].tag == 0)
+    xc property.c:1401:14 cxx_lt_to_le               if (length < 6)
+    xc property.c:1420:14 cxx_lt_to_le               if (length < 16)
+    xc property.c:1427:12 cxx_eq_to_ne               if (id == 0x4D4D)
+    xc property.c:1437:15 cxx_lt_to_le               if ((offset < 0) || (size_t) offset >= length)
+    xc property.c:1437:39 cxx_ge_to_gt               if ((offset < 0) || (size_t) offset >= length)
+    xc property.c:1460:20 cxx_lt_to_le               if ((directory < exif) || (directory > (exif+length-2)))
+    xc property.c:1460:42 cxx_gt_to_ge               if ((directory < exif) || (directory > (exif+length-2)))
+    xc property.c:1466:19 cxx_lt_to_le               for ( ; entry < number_entries; entry++)
+    xc property.c:1480:13 cxx_gt_to_ge               if (q > (exif+length-12))
+    xc property.c:1488:18 cxx_ge_to_gt               if (format >= (sizeof(tag_bytes)/sizeof(*tag_bytes)))
+    xc property.c:1493:22 cxx_lt_to_le               if (components < 0)
+    xc property.c:1509:27 cxx_lt_to_le               if ((dir_offset < 0) || (size_t) dir_offset >= length)
+    xc property.c:1509:55 cxx_ge_to_gt               if ((dir_offset < 0) || (size_t) dir_offset >= length)
+    xc property.c:1511:59 cxx_lt_to_le               if (((size_t) dir_offset+(size_t) number_bytes) < (size_t) dir_offset)
+    xc property.c:1513:35 cxx_add_to_sub             if ((size_t) (dir_offset+(ssize_t) number_bytes) > length)
+    xc property.c:1523:18 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-tag_bytes[format])))
+    xc property.c:1523:46 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-tag_bytes[format])))
+    xc property.c:1532:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
+    xc property.c:1533:74 cxx_add_to_sub             value=(char *) AcquireQuantumMemory((size_t) number_bytes+1UL,
+    xc property.c:1619:22 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-number_bytes)))
+    xc property.c:1619:36 cxx_gt_to_ge               if ((p < exif) || (p > (exif+length-number_bytes)))
+    xc property.c:1619:50 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-number_bytes)))
+    xc property.c:1622:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
+    xc property.c:1623:74 cxx_add_to_sub             value=(char *) AcquireQuantumMemory((size_t) number_bytes+1UL,
+    xc property.c:1670:33 cxx_lt_to_ge               if (tag_value < 0x10000)
+    xc property.c:1670:33 cxx_lt_to_le               if (tag_value < 0x10000)
+    xc property.c:1674:35 cxx_lt_to_ge               if (tag_value < 0x20000)
+    xc property.c:1674:35 cxx_lt_to_le               if (tag_value < 0x20000)
+    xc property.c:1683:29 cxx_eq_to_ne               if (level == 2)
+    xc property.c:1701:39 cxx_lt_to_le               if (((size_t) tag_offset1 < length) &&
+    xc property.c:1702:24 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
+    xc property.c:1717:29 cxx_lt_to_le               for (i=0; i < level; i++)
+    xc property.c:1726:37 cxx_mul_to_div             if ((directory+2+(12*number_entries)+4) > (exif+length))
+    xc property.c:1726:57 cxx_gt_to_ge               if ((directory+2+(12*number_entries)+4) > (exif+length))
+    xc property.c:1730:65 cxx_lt_to_le               if ((tag_offset1 != 0) && ((size_t) tag_offset1 < length) &&
+    xc property.c:1731:28 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
+    xc property.c:1764:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 128)
+    xc property.c:1789:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    xc property.c:1789:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    xc property.c:1798:18 cxx_ne_to_eq               if (extent != 0)
+    xc property.c:1800:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    xc property.c:1800:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    xc property.c:1803:22 cxx_ne_to_eq               if (extent != 0)
+    xc property.c:1809:18 cxx_ne_to_eq               if (extent != 0)
+    xc property.c:1811:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    xc property.c:1811:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    xc property.c:1814:22 cxx_ne_to_eq               if (extent != 0)
+    xc property.c:1822:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
+    xc property.c:1822:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
+    xc property.c:1876:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 17)
+    xc property.c:1933:43 cxx_le_to_lt               if ((xmp_namespace_length <= 2) ||
     x  property.c:2022:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
     x  property.c:2030:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(22,(ssize_t) length));
     x  property.c:2044:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
@@ -87,6 +178,10 @@ mutate: 778 mutants, 205s
     x  property.c:2220:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
     x  property.c:2228:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(22,(ssize_t) length));
     x  property.c:2242:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
+    xc property.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc property.c:2324:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    xc property.c:2324:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    xc property.c:2325:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
     xc property.c:2515:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     xc property.c:2515:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     xc property.c:2518:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) &&
@@ -176,6 +271,60 @@ mutate: 778 mutants, 205s
     xc property.c:4290:55 cxx_ne_to_eq               if ((property_info != image_info) && (property_info != (ImageInfo *) NULL))
      c property.c:4294:26 cxx_ne_to_eq               if (interpret_text != (char *) NULL)
     xc property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc property.c:4427:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc property.c:4434:24 cxx_le_to_lt               if (strlen(property) <= 1)
+    xc property.c:4444:24 cxx_gt_to_ge               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    xc property.c:4444:24 cxx_gt_to_le               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    xc property.c:4444:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    xc property.c:4444:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
+    xc property.c:4445:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
+    xc property.c:4475:48 cxx_eq_to_ne               if (LocaleCompare("background",property) == 0)
+    xc property.c:4500:26 cxx_lt_to_ge               if (colorspace < 0)
+    xc property.c:4500:26 cxx_lt_to_le               if (colorspace < 0)
+    xc property.c:4510:23 cxx_lt_to_ge               if (compose < 0)
+    xc property.c:4510:23 cxx_lt_to_le               if (compose < 0)
+    xc property.c:4522:27 cxx_lt_to_ge               if (compression < 0)
+    xc property.c:4522:27 cxx_lt_to_le               if (compression < 0)
+    xc property.c:4538:38 cxx_ne_to_eq               if ((flags & GreaterValue) != 0)
+    xc property.c:4540:32 cxx_gt_to_ge               if (image->delay > (size_t) floor(geometry_info.rho+0.5))
+    xc property.c:4540:32 cxx_gt_to_le               if (image->delay > (size_t) floor(geometry_info.rho+0.5))
+    xc property.c:4540:66 cxx_add_to_sub             if (image->delay > (size_t) floor(geometry_info.rho+0.5))
+    xc property.c:4541:62 cxx_add_to_sub             image->delay=(size_t) floor(geometry_info.rho+0.5);
+    xc property.c:4544:37 cxx_ne_to_eq               if ((flags & LessValue) != 0)
+    xc property.c:4546:43 cxx_lt_to_ge               if ((double) image->delay < floor(geometry_info.rho+0.5))
+    xc property.c:4546:43 cxx_lt_to_le               if ((double) image->delay < floor(geometry_info.rho+0.5))
+    xc property.c:4546:68 cxx_add_to_sub             if ((double) image->delay < floor(geometry_info.rho+0.5))
+    xc property.c:4548:40 cxx_add_to_sub             geometry_info.sigma+0.5));
+    xc property.c:4551:60 cxx_add_to_sub             image->delay=(size_t) floor(geometry_info.rho+0.5);
+    xc property.c:4552:36 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+    xc property.c:4554:34 cxx_add_to_sub             geometry_info.sigma+0.5));
+    xc property.c:4569:34 cxx_ne_to_eq               if ((flags & RhoValue) != 0)
+    xc property.c:4572:36 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
+    xc property.c:4587:23 cxx_lt_to_ge               if (dispose < 0)
+    xc property.c:4587:23 cxx_lt_to_le               if (dispose < 0)
+    xc property.c:4622:43 cxx_eq_to_ne               if (LocaleCompare("gamma",property) == 0)
+    xc property.c:4627:45 cxx_eq_to_ne               if (LocaleCompare("gravity",property) == 0)
+    xc property.c:4633:23 cxx_lt_to_ge               if (gravity < 0)
+    xc property.c:4633:23 cxx_lt_to_le               if (gravity < 0)
+    xc property.c:4661:25 cxx_lt_to_ge               if (intensity < 0)
+    xc property.c:4661:25 cxx_lt_to_le               if (intensity < 0)
+    xc property.c:4673:32 cxx_lt_to_ge               if (rendering_intent < 0)
+    xc property.c:4673:32 cxx_lt_to_le               if (rendering_intent < 0)
+    xc property.c:4685:27 cxx_lt_to_ge               if (interpolate < 0)
+    xc property.c:4685:27 cxx_lt_to_le               if (interpolate < 0)
+    xc property.c:4703:46 cxx_eq_to_ne               if (LocaleCompare("kurtosis",property) == 0)
+    xc property.c:4735:44 cxx_eq_to_ne               if (LocaleCompare("opaque",property) == 0)
+    xc property.c:4745:42 cxx_eq_to_ne               if (LocaleCompare("page",property) == 0)
+    xc property.c:4769:54 cxx_eq_to_ne               if (LocaleCompare("rendering-intent",property) == 0)
+    xc property.c:4776:32 cxx_lt_to_ge               if (rendering_intent < 0)
+    xc property.c:4776:32 cxx_lt_to_le               if (rendering_intent < 0)
+    xc property.c:4814:20 cxx_lt_to_ge               if (type < 0)
+    xc property.c:4814:20 cxx_lt_to_le               if (type < 0)
+    xc property.c:4824:43 cxx_eq_to_ne               if (LocaleCompare("units",property) == 0)
+    xc property.c:4830:21 cxx_lt_to_ge               if (units < 0)
+    xc property.c:4830:21 cxx_lt_to_le               if (units < 0)
+    xc property.c:4840:45 cxx_eq_to_ne               if (LocaleCompare("version",property) == 0)
+    xc property.c:4851:43 cxx_eq_to_ne               if (LocaleCompare("width",property) == 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
   full results: build-oracle/work/mutation-resweep-property.json

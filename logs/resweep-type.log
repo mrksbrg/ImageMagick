@@ -1,19 +1,20 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 250 mutants in MagickCore/type\.c$, 14 functions
-mutate: baseline over 14766 cases in 0s
+mutate: baseline over 15566 cases in 0s
   mutants: 25/250 (3s)
-  mutants: 50/250 (114s)
-  mutants: 75/250 (125s)
-  mutants: 100/250 (130s)
-  mutants: 125/250 (140s)
-  mutants: 150/250 (142s)
-  mutants: 175/250 (165s)
-  mutants: 200/250 (197s)
-  mutants: 225/250 (203s)
-  mutants: 250/250 (288s)
+  mutants: 50/250 (113s)
+  mutants: 75/250 (119s)
+  mutants: 100/250 (137s)
+  mutants: 125/250 (153s)
+  mutants: 150/250 (158s)
+  mutants: 175/250 (174s)
+  mutants: 200/250 (211s)
+  mutants: 225/250 (228s)
+  mutants: 250/250 (321s)
 
-mutate: 250 mutants, 288s
-  killed 192, survived 46 (0 capped), no coverage 12, errors 0
-  mutation score on reached code: 80.7%   overall: 76.8%
+mutate: 250 mutants, 321s
+  killed 188, survived 50 (4 capped), no coverage 12, errors 0
+  mutation score on reached code: 79.0%   overall: 75.2%
 
   function                           total killed survived no-cov
   LoadFontConfigFonts                   64     52       12      0
@@ -24,12 +25,12 @@ mutate: 250 mutants, 288s
   GetTypeList                           12      0        0     12
   DestroyTypeNode                        9      0        9      0
   IsTypeTreeInstantiated                 7      5        2      0
-  TypeComponentTerminus                  6      6        0      0
+  TypeComponentTerminus                  6      3        3      0
   AcquireTypeCache                       5      4        1      0
   GetTypeInfo                            3      3        0      0
   SetTypeNodePath                        3      3        0      0
   TypeInfoCompare                        1      1        0      0
-  TypeComponentGenesis                   1      1        0      0
+  TypeComponentGenesis                   1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  type.c:169:15 cxx_ne_to_eq               if (p->path != (char *) NULL)
@@ -78,6 +79,10 @@ mutate: 250 mutants, 288s
     x  type.c:1276:55 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"foundry") == 0)
     x  type.c:1281:56 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"fullname") == 0)
     x  type.c:1363:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
+    xc type.c:1386:22 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
+    xc type.c:1411:22 cxx_eq_to_ne               if (type_semaphore == (SemaphoreInfo *) NULL)
+     c type.c:1412:5 cxx_remove_void_call       ActivateSemaphoreInfo(&type_semaphore);
+    xc type.c:1417:3 cxx_remove_void_call       RelinquishSemaphoreInfo(&type_semaphore);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
   full results: build-oracle/work/mutation-resweep-type.json
