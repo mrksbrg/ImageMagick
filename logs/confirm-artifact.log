@@ -1,8 +1,9 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 9 mutants in MagickCore/artifact\.c$, 6 functions
-mutate: baseline over 26 cases in 0s
-  mutants: 9/9 (2s)
+mutate: baseline over 514 cases in 0s
+  mutants: 9/9 (86s)
 
-mutate: 9 mutants, 2s
+mutate: 9 mutants, 86s
   killed 0, survived 2 (0 capped), no coverage 7, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -19,4 +20,4 @@ mutate: 9 mutants, 2s
     x  artifact.c:472:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-artifact.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-artifact.json
