@@ -3346,3 +3346,107 @@ was not built: the reason to try it is gone.
   case on a driver built from a clone behind `5170fb874`; after the pull, 2297 windrv cases
   gave 0. The new cases are also clean from a cold pocl cache.
 - **`wide` is therefore an oracle build** from now on, through `WIDE=1`.
+
+### W01, rounds 2 and 3: more screens, the OpenCL API, and display driven by key presses (Windows, 2026-10-05, afternoon)
+
+**What one plain run reached** (catalogue at `cd77bc77c`, coverage of `cov-wide`):
+
+| File | Functions | Lines |
+| --- | --- | --- |
+| accelerate.c | 37/42 | 61% |
+| opencl.c | 49/72 | 60% |
+| xwindow.c | 40/71 | 37% |
+| animate.c | 3/6 | 51% |
+| display.c | 6/34 | 12% |
+| widget.c | 10/31 | 6% |
+
+Everything else in display.c and widget.c is the interactive program: commands, menus,
+dialogs, browsers.
+
+**Round 2** (`6278a30a1`):
+- **Other screens.** `x11` may name a screen and Xvfb options, e.g. `"640x480x8 -cc 0"`.
+  - Covered: 8-bit PseudoColor, StaticGray, GrayScale and StaticColor; 15-, 16- and 30-bit
+    TrueColor; 24-bit DirectColor.
+  - This Xvfb starts no screen of depth 1, 4 or 12.
+- **imdriver `opencl MODE [IMAGE]`** (opencl.c's public API, which no command calls):
+  - `GetOpenCLDevices` and the device getters;
+  - `SetOpenCLEnabled` and `SetOpenCLDeviceEnabled`;
+  - the kernel profile records after a blur (names and counts only; the times vary).
+- **imdriver `animate`**: `AnimateImages`, which only the wand API calls.
+- Driver cases that start with OpenCL off set `MAGICK_OCL_DEVICE=false`, which keeps OpenCL
+  off but still seeds the fixed profile. Without the profile, switching OpenCL on runs the
+  device benchmark, whose scores vary.
+
+**Round 3: `tools/oracle/driver/xevents.c`**, a harness helper like imdriver. It runs an X
+client and drives it with XTEST key presses and clicks. Script actions: `map`, `key:`,
+`type:`, `point:`, `click:`, `use:`, `grab:`. The oracle runs it as the step
+`["@xevents", SCRIPT, magick args...]` and builds it on demand into `build-oracle/xevents`.
+What makes it deterministic:
+- **Idle means blocked, not "some time later".** After each action the helper waits until the
+  client is blocked in poll or select with nothing unread on its X connection and nothing it
+  wrote still unread by the server (`pidfd_getfd`, then `FIONREAD` and `SIOCOUTQ` on the
+  client's socket). This works inside the bwrap sandbox, where there is no `ss`.
+- **`map` waits for the next `MapNotify` on the root window.** widget.c maps one window first
+  as a menu, then as a dialog.
+- **Focus.** There is no window manager. The helper focuses the newest window it waited for
+  that is still mapped, and `use:N` pins one, e.g. the image window while the Commands widget
+  stays open. Keys reach the file browser's text field only with the pointer over it.
+- **Grabs** are read until four reads in a row (30 ms apart) agree in size and pixels.
+- **X errors from windows that vanish mid-query are ignored.** Xlib's default handler exited
+  on them at random.
+- **Two of display's own timing dependences**, worked around in the cases:
+  - display handles `ConfigureNotify` only once `GetMagickTime()` has moved on from the event
+    (its *stasis*), so under a running clock a resized window is repainted or not depending
+    on a second boundary. Interactive cases therefore keep `SOURCE_DATE_EPOCH`; the other X11
+    cases drop it, because display's and animate's delay timers stop under a fixed epoch.
+  - display repaints a just-resized window from an `Expose` that may come before or after it
+    swaps in the new image. Every grab of the image window is therefore preceded by `@`
+    (Refresh).
+- **Saves must not reach the corpus.** The file browser starts in the image's directory, so
+  the save and open cases first copy their input into the case directory. Two early probes
+  saved into WSL's corpus; the files were removed at once.
+
+**Cases** (52): 14 single-key commands; 14 dialog commands (`ctrl+u`, the reply, Return);
+undo and a command chain; 17 menu commands (View, Transform, Enhance, Effects, F/X); saves as
+GIF, PPM, TIFF, PNG and MIFF; open; a confirmed quit (`display.confirmExit`); Help → Overview.
+All pass `selfcheck --repeat 6` at `-j12` next to a mutation run, and give the same results
+inside the sandbox.
+
+**Left out, each measured:**
+
+| What | Why |
+| --- | --- |
+| trim, shear, rotate (dialog), zoom; menu Roll, Contrast Stretch, Sigmoidal Contrast, Segment, Oil Paint, Charcoal, Add Border, Add Frame, Emboss, Reduce Noise, Add Noise, Preferences, Show Preview | they leave a widget open that `q` does not close |
+| Quantize, Show Matte, Background | they wait on a timer that the fixed epoch stops |
+| Show Histogram | it leaves a temporary file with a random name |
+| image info | its text differs between the sandbox and a plain run |
+| next image | display replaces the window under the script |
+| JPEG save | its quality dialog never settles |
+| Print, Browse Documentation | they start `lpr` and `xdg-open` |
+| About Display | it never settles |
+| `display -remote` with no window | it waits for one |
+| animate's window content | frames advance in `XDelay` sleeps that hold keys back, so a grab's frame depends on timing |
+| `AccelerateUnsharpMaskImage` | upstream commented out its call ("This kernel appears to be broken") |
+| `AccelerateContrastStretchImage` | no caller |
+| the OpenCL device benchmark | it times the devices; the fixed profile skips it on purpose |
+
+**Case families.** The new cases moved from `gaps` to families of their own: `x11`, `opencl`
+and `xevents` (`18f83d6b1`). mutate.py's 300-case cap gives every family a share of its slots.
+Inside `gaps`, the slow OpenCL cases lost to cheap CPU-only ones:
+- `checkAccelerateCondition` is reached by 1704 cases, and the 300 tried held no OpenCL case.
+- So its 24 mutants survived, although each is killed by hand: `cxx_ne_to_eq` at 113:28 sends
+  blur to the CPU path, whose output differs from the OpenCL path's.
+
+The first mutation run (`run1-mutation-x11cl`, 4574 of 9271 mutants) was stopped for that
+reason. `mutation-x11cl2` runs all mutants on the current catalogue.
+
+**Reach after rounds 2 and 3:**
+
+| File | Functions | Lines |
+| --- | --- | --- |
+| accelerate.c | 37/42 | 61% |
+| opencl.c | 61/72 | 68% |
+| xwindow.c | 47/71 | 45% |
+| animate.c | 4/6 | 53% |
+| display.c | 12/34 | 23% |
+| widget.c | 21/31 | 24% |
