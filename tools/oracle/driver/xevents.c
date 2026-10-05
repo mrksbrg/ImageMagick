@@ -4,8 +4,11 @@
 
   SCRIPT is a list of space-separated actions, run in order:
     map           wait for a new top-level window to be mapped, then give it the focus
-    key:NAME      press a key (an X keysym name: q, slash, F7, Return; ctrl+s, shift+Tab)
+    key:NAME      press a key (an X keysym name: q, slash, F7, Return; ctrl+s, shift+Tab);
+                  key:NAME*N presses it N times
     type:TEXT     type TEXT, one key per character ('_' stands for a space)
+    point:X,Y     move the pointer to X,Y in the focused window (widgets read the pointer)
+    click:X,Y     move it there and click the first button
     grab:FILE     write the focused window's pixels as PPM (24-bit TrueColor screens)
   After every key the helper waits until the client is idle: blocked in poll or select with
   nothing unread on its X connection (pidfd_getfd + FIONREAD), so the case does not depend on
@@ -210,18 +213,23 @@ static void Press(KeySym sym, int shift, int ctrl)
   WaitIdle();
 }
 
-static void Key(const char *spec)
+static void Key(const char *arg)
 {
-  int shift = 0, ctrl = 0;
+  int shift = 0, ctrl = 0, times = 1;
+  char spec[64], *star;
+  snprintf(spec, sizeof(spec), "%s", arg);
+  if ((star = strchr(spec, '*')) != NULL) { times = atoi(star + 1); *star = 0; }
+  char *name = spec;
   for (;;)
   {
-    if (strncmp(spec, "ctrl+", 5) == 0) { ctrl = 1; spec += 5; }
-    else if (strncmp(spec, "shift+", 6) == 0) { shift = 1; spec += 6; }
+    if (strncmp(name, "ctrl+", 5) == 0) { ctrl = 1; name += 5; }
+    else if (strncmp(name, "shift+", 6) == 0) { shift = 1; name += 6; }
     else break;
   }
-  KeySym sym = XStringToKeysym(spec);
+  KeySym sym = XStringToKeysym(name);
   if (sym == NoSymbol) Fail("unknown key name");
-  Press(sym, shift, ctrl);
+  while (times-- > 0)
+    Press(sym, shift, ctrl);
 }
 
 static void Type(const char *text)
@@ -243,6 +251,15 @@ static int SameImage(XImage *a, XImage *b)
 
 /* The server may not yet have drawn what the idle client sent it, so the window is read until
    three reads in a row agree. */
+static void Point(const char *xy)
+{
+  int x = 0, y = 0;
+  if (sscanf(xy, "%d,%d", &x, &y) != 2) Fail("point:X,Y");
+  Refocus();
+  XWarpPointer(dpy, None, focus, 0, 0, 0, 0, x, y);
+  WaitIdle();
+}
+
 static void Grab(const char *file)
 {
   XWindowAttributes a;
@@ -299,6 +316,9 @@ int main(int argc, char **argv)
       else if (strncmp(tok, "key:", 4) == 0) Key(tok + 4);
       else if (strncmp(tok, "type:", 5) == 0) Type(tok + 5);
       else if (strncmp(tok, "grab:", 5) == 0) Grab(tok + 5);
+      else if (strncmp(tok, "point:", 6) == 0) Point(tok + 6);
+      else if (strncmp(tok, "click:", 6) == 0) { Point(tok + 6); XTestFakeButtonEvent(dpy, 1, True, CurrentTime);
+        XTestFakeButtonEvent(dpy, 1, False, CurrentTime); WaitIdle(); }
       else Fail("unknown action");
     }
     free(script);

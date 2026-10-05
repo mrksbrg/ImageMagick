@@ -4956,6 +4956,22 @@ GAP_XEVENTS_CASES += [
     ("xevents display several commands", "map key:slash key:h key:equal key:asciitilde key:period grab:out.ppm key:q",
      ["display", img("rose_alpha")]),
 ]
+# The file browser (ctrl+s, ctrl+o) starts in the image's directory, so these cases first copy
+# their input into the case directory: a save then cannot land in the corpus. Keys reach the
+# browser's text field only with the pointer over it (point:170,355); Right and BackSpace clear
+# the preset name. Print (ctrl+p) would start lpr, and New leaves a widget open: left out; so do
+# saves as MIFF and PNG (today's date in them: X11 cases run without SOURCE_DATE_EPOCH) and JPEG
+# (its quality dialog never settles). The copies are stripped of their date properties for the
+# same reason. Each entry: label, script, magick arguments, files copied in first.
+_XEV_FIELD = "map point:170,355 key:Right*16 key:BackSpace*16 type:"
+GAP_XEVENTS_FILE_CASES = [("xevents display save as %s" % ext,
+                           "map key:ctrl+s " + _XEV_FIELD + "out.%s key:Return%s key:q" % (ext, extra),
+                           ["display", "rose.miff"], ["rose"])
+                          for ext, extra in (("gif", ""), ("ppm", ""), ("tiff", ""))]
+GAP_XEVENTS_FILE_CASES += [
+    ("xevents display open palette.miff", "map key:ctrl+o " + _XEV_FIELD + "palette.miff key:Return grab:out.ppm key:q",
+     ["display", "rose.miff"], ["rose", "palette"]),
+]
 # label, steps, environment. MAGICK_OCL_DEVICE=false starts with OpenCL off but still gets the
 # fixed device profile (oracle.py, seed_opencl_profile): without one, switching OpenCL on runs
 # ImageMagick's device benchmark, whose scores and choice vary from run to run.
@@ -4999,6 +5015,9 @@ def _gap_x11_opencl_cases():
         yield _with_run(_case("gaps", label, steps, []), env=env)
     for label, script, args in GAP_XEVENTS_CASES:
         yield _with_run(_case("gaps", label, [["@xevents", script] + args], ["out.ppm"]), x11=True)
+    for label, script, args, names in GAP_XEVENTS_FILE_CASES:
+        copies = [[img(n), "-strip", "%s.miff" % n] for n in names]
+        yield _with_run(_case("gaps", label, copies + [["@xevents", script] + args], ["out.ppm"]), x11=True)
 
 
 def _gap_image_cases(entries):
