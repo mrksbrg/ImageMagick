@@ -1,32 +1,55 @@
-  casemap: 500/14746 (3s)
-  casemap: 1000/14746 (6s)
-  casemap: 1500/14746 (10s)
-  casemap: 2000/14746 (13s)
-  casemap: 2500/14746 (16s)
-  casemap: 3000/14746 (19s)
-  casemap: 3500/14746 (22s)
-  casemap: 4000/14746 (25s)
-  casemap: 4500/14746 (28s)
-  casemap: 5000/14746 (30s)
-  casemap: 5500/14746 (33s)
-  casemap: 6000/14746 (36s)
-  casemap: 6500/14746 (38s)
-  casemap: 7000/14746 (41s)
-  casemap: 7500/14746 (44s)
-  casemap: 8000/14746 (52s)
-  casemap: 8500/14746 (55s)
-  casemap: 9000/14746 (59s)
-  casemap: 9500/14746 (63s)
-  casemap: 10000/14746 (67s)
-  casemap: 10500/14746 (69s)
-  casemap: 11000/14746 (72s)
-  casemap: 11500/14746 (75s)
-  casemap: 12000/14746 (77s)
-  casemap: 12500/14746 (80s)
-  casemap: 13000/14746 (83s)
-  casemap: 13500/14746 (86s)
-  casemap: 14000/14746 (89s)
-  casemap: 14500/14746 (92s)
-  casemap: 14746/14746 (98s)
-casemap: 14746 cases, 4434 functions reached, 0 cases without a profile, 102s
-23 new cases since 656676901
+  casemap: 500/14762 (6s)
+  casemap: 1000/14762 (11s)
+  casemap: 1500/14762 (16s)
+  casemap: 2000/14762 (21s)
+  casemap: 2500/14762 (25s)
+  casemap: 3000/14762 (31s)
+  casemap: 3500/14762 (36s)
+  casemap: 4000/14762 (40s)
+  casemap: 4500/14762 (44s)
+  casemap: 5000/14762 (48s)
+  casemap: 5500/14762 (52s)
+  casemap: 6000/14762 (56s)
+  casemap: 6500/14762 (59s)
+casemap: no profile for morphology/8148d7daee: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_8148d7daee/2744878.profraw: No such file or directory
+
+casemap: no profile for morphology/eacce4a3a9: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_eacce4a3a9/merged.profdata: No such file or directory
+
+casemap: no profile for morphology/8ec168096a: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_8ec168096a/merged.profdata: No such file or directory
+
+casemap: no profile for morphology/87d7ccc0a1: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_87d7ccc0a1/merged.profdata: No such file or directory
+
+casemap: no profile for morphology/af2726e86d: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_af2726e86d/merged.profdata: No such file or directory
+
+casemap: no profile for morphology/a56f40648b: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_a56f40648b/merged.profdata: No such file or directory
+
+casemap: no profile for morphology/374709b514: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_374709b514/merged.profdata: No such file or directory
+
+casemap: no profile for morphology/1eb2b1ead1: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_1eb2b1ead1/2744870.profraw: No such file or directory
+
+Traceback (most recent call last):
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 106, in <module>
+    build_map()
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 73, in build_map
+    per_case = oracle.parallel(one, cases, oracle.default_jobs(), "casemap")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/oracle.py", line 627, in parallel
+    results[it["id"]] = fut.result()
+                        ^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/jovyan/sysroot/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 71, in one
+    return functions_of(case["id"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 50, in functions_of
+    out = subprocess.run([PROFDATA, "show", "--covered", "--all-functions", merged],
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/jovyan/sysroot/usr/bin/llvm-profdata-18', 'show', '--covered', '--all-functions', '/home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/morphology_7ce679b519/merged.profdata']' returned non-zero exit status 1.
