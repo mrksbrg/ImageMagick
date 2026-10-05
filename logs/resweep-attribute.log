@@ -1,8 +1,29 @@
 mutate: 532 mutants in MagickCore/attribute\.c$, 24 functions
-mutate: baseline over 13815 cases in 0s
-mutate: resuming, 532 mutants already done
+mutate: baseline over 13817 cases in 0s
+  mutants: 25/532 (1s)
+  mutants: 50/532 (1s)
+  mutants: 75/532 (2s)
+  mutants: 100/532 (8s)
+  mutants: 125/532 (9s)
+  mutants: 150/532 (9s)
+  mutants: 175/532 (9s)
+  mutants: 200/532 (13s)
+  mutants: 225/532 (17s)
+  mutants: 250/532 (20s)
+  mutants: 275/532 (21s)
+  mutants: 300/532 (24s)
+  mutants: 325/532 (27s)
+  mutants: 350/532 (29s)
+  mutants: 375/532 (30s)
+  mutants: 400/532 (42s)
+  mutants: 425/532 (43s)
+  mutants: 450/532 (44s)
+  mutants: 475/532 (81s)
+  mutants: 500/532 (101s)
+  mutants: 525/532 (143s)
+  mutants: 532/532 (203s)
 
-mutate: 532 mutants, 0s
+mutate: 532 mutants, 203s
   killed 439, survived 85 (25 capped), no coverage 8, errors 0
   mutation score on reached code: 83.8%   overall: 82.5%
 
@@ -13,12 +34,12 @@ mutate: 532 mutants, 0s
   GetImageDepth                         49     39       10      0
   GetEdgeBoundingBox                    27     20        7      0
   GetEdgeBackgroundColor                27     27        0      0
-  SetImageDepth                         27     14       13      0
+  SetImageDepth                         27     13       14      0
   GetImageConvexHull                    25     21        4      0
   SetImageType                          25     23        2      0
   GetEdgeBackgroundCensus               21     17        4      0
   TraceConvexHull                       21     20        1      0
-  IdentifyImageGray                     17     16        1      0
+  IdentifyImageGray                     17     17        0      0
   IdentifyImageMonochrome               13     12        1      0
   IsImageOpaque                         11     10        1      0
   GetImageQuantumDepth                   9      9        0      0
@@ -85,7 +106,6 @@ mutate: 532 mutants, 0s
     x  attribute.c:1380:31 cxx_lt_to_le               if (bounding_box[i].x < point.x)
     x  attribute.c:1382:31 cxx_lt_to_le               if (bounding_box[i].y < point.y)
     x  attribute.c:1390:19 cxx_lt_to_le               for (i=0; i < 4; i++)
-    xc attribute.c:1583:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  attribute.c:1671:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc attribute.c:1752:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  attribute.c:1882:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
@@ -104,6 +124,7 @@ mutate: 532 mutants, 0s
     x  attribute.c:2056:58 cxx_div_to_mul             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
     x  attribute.c:2071:14 cxx_ne_to_eq               if (status != MagickFalse)
     xc attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    xc attribute.c:2098:13 cxx_ge_to_gt               if (depth >= MAGICKCORE_QUANTUM_DEPTH)
     xc attribute.c:2108:28 cxx_eq_to_ne               if (image->storage_class == PseudoClass)
     xc attribute.c:2117:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->colors; i++)
     xc attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
