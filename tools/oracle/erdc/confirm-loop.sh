@@ -73,7 +73,8 @@ echo "== confirm-loop started $(date), last confirmed $(cat $LAST_FILE)"
 while true; do
   last=$(cat $LAST_FILE)
   if git fetch -q origin refactoring-setup && \
-     ! git diff --quiet "$last" FETCH_HEAD -- tools/oracle/cases.py 2>/dev/null; then
+     ! git diff --quiet "$last" FETCH_HEAD -- tools/oracle/cases.py tools/oracle/profilecases.py \
+       tools/oracle/driver/imdriver.c 2>/dev/null; then
     exec 9> $SETUP/step7.lock
     flock 9   # waits while another queue holds the lock
     round "$last"
