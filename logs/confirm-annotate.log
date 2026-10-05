@@ -5,7 +5,7 @@ mutate: baseline over 24 cases in 0s
   mutants: 75/159 (3s)
   mutants: 100/159 (3s)
   mutants: 125/159 (3s)
-  mutants: 150/159 (4s)
+  mutants: 150/159 (3s)
   mutants: 159/159 (4s)
 
 mutate: 159 mutants, 4s
@@ -88,4 +88,4 @@ mutate: 159 mutants, 4s
     x  annotate.c:2156:3 cxx_remove_void_call       FreetypeDone(memory,library,stream);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-annotate.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-annotate.json

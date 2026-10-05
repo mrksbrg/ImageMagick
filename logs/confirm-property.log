@@ -1,5 +1,7 @@
 mutate: 81 mutants in MagickCore/property\.c$, 11 functions
-mutate: baseline over 804 cases in 0s
+  baseline: 500/578 (1s)
+  baseline: 578/578 (2s)
+mutate: baseline over 801 cases in 2s
   mutants: 25/81 (0s)
   mutants: 50/81 (2s)
   mutants: 75/81 (4s)
@@ -60,4 +62,4 @@ mutate: 81 mutants, 30s
     x  property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ce1d65ece-property.json
+  full results: build-oracle/work/mutation-confirm-5170fb874-property.json
