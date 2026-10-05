@@ -1,32 +1,50 @@
-  casemap: 500/14762 (3s)
-  casemap: 1000/14762 (6s)
-  casemap: 1500/14762 (9s)
-  casemap: 2000/14762 (12s)
-  casemap: 2500/14762 (15s)
-  casemap: 3000/14762 (18s)
-  casemap: 3500/14762 (21s)
-  casemap: 4000/14762 (24s)
-  casemap: 4500/14762 (26s)
-  casemap: 5000/14762 (29s)
-  casemap: 5500/14762 (32s)
-  casemap: 6000/14762 (34s)
-  casemap: 6500/14762 (37s)
-  casemap: 7000/14762 (39s)
-  casemap: 7500/14762 (42s)
-  casemap: 8000/14762 (50s)
-  casemap: 8500/14762 (53s)
-  casemap: 9000/14762 (57s)
-  casemap: 9500/14762 (61s)
-  casemap: 10000/14762 (65s)
-  casemap: 10500/14762 (67s)
-  casemap: 11000/14762 (70s)
-  casemap: 11500/14762 (73s)
-  casemap: 12000/14762 (75s)
-  casemap: 12500/14762 (77s)
-  casemap: 13000/14762 (80s)
-  casemap: 13500/14762 (83s)
-  casemap: 14000/14762 (86s)
-  casemap: 14500/14762 (89s)
-  casemap: 14762/14762 (95s)
-casemap: 14762 cases, 4448 functions reached, 0 cases without a profile, 99s
-2458 new cases since 310d2a3b3
+  casemap: 500/14762 (5s)
+  casemap: 1000/14762 (9s)
+  casemap: 1500/14762 (13s)
+  casemap: 2000/14762 (17s)
+  casemap: 2500/14762 (21s)
+  casemap: 3000/14762 (26s)
+  casemap: 3500/14762 (30s)
+  casemap: 4000/14762 (34s)
+  casemap: 4500/14762 (38s)
+  casemap: 5000/14762 (42s)
+  casemap: 5500/14762 (45s)
+  casemap: 6000/14762 (49s)
+  casemap: 6500/14762 (53s)
+  casemap: 7000/14762 (57s)
+  casemap: 7500/14762 (61s)
+casemap: no profile for windrv/2ddc4de468: error: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/windrv_2ddc4de468/3293057.profraw: No such file or directory
+
+casemap: no profile for windrv/491faa989c: warning: /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/casemap-raw/windrv_491faa989c/3293429.profraw: success
+error: no profile can be merged
+
+Traceback (most recent call last):
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 106, in <module>
+    build_map()
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 73, in build_map
+    per_case = oracle.parallel(one, cases, oracle.default_jobs(), "casemap")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/oracle.py", line 633, in parallel
+    results[it["id"]] = fut.result()
+                        ^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/jovyan/sysroot/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 68, in one
+    oracle.run_case(cov_bin, "casemap", case, manifest,
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/oracle.py", line 372, in run_case
+    rc, step_out, step_err = run_step(argv, d, stdin_path, env=env_for(binary, d, extra_env),
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/oracle.py", line 436, in run_step
+    return (r.returncode, normalise(read_capped(out_path), d),
+                                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/oracle.py", line 350, in read_capped
+    size = os.path.getsize(path)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen genericpath>", line 62, in getsize
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/work/runs/casemap/preview_dc0242e3b9.stdout'
