@@ -2648,6 +2648,26 @@ where the authentic version, two statements later, tests `cache_methods->...`. R
 GetOneVirtualPixelFromStream is never installed, and GetOneVirtualPixel on a streaming image
 falls back to the ordinary pixel cache.
 
+**A sixth upstream bug.** WriteImages with adjoin off into a caller's memory blob
+(`image_info->blob`, set with SetImageInfoBlob) writes each frame through WriteImage, which
+attaches the same buffer to the frame's blob (AttachBlob: length and extent both the caller's
+length). When a frame outgrows the buffer, WriteBlob's SetBlobExtent reallocs it, which frees
+the caller's block. WriteImage's CloseBlob then detaches the frame's blob, so by the time
+WriteImages calls SyncBlobStream the blob's data is already NULL: it returns early, and
+`write_info->blob` still holds the freed pointer. The next frame attaches that pointer and
+writes into freed memory (valgrind: "Invalid write ... inside a block of size 1,048,576
+free'd"; then realloc of it: "Invalid free()"), and the new buffer is lost (a leak). The
+caller's `image_info` is const and never learns of the new buffer either. Traced with gdb on
+the wide build's imdriver (`blob writeimages rose.miff TIFF 3 noadjoin`, 1 MB buffer): frame 1
+attaches 0x...eff010, TIFF seeks to the blob's end (the caller's length, 1 MB) and appends, the
+realloc moves the data to 0x...dea010, SyncBlobStream sees data NULL, frame 2 attaches
+0x...eff010 again and segfaults. PPM, MIFF, PNG and BMP stay inside a 1 MB buffer, so they pass
+now; with the first driver's 4096-byte buffer they outgrew it in the first frame, which gave the
+`realloc(): invalid next size` and `double free` crashes seen then. ImageToBlob avoids all of
+this by marking the image's blob exempt (CloseBlob then keeps the data) and starting at length
+0; WriteImages does neither for a caller's blob. Adjoined writes are one WriteImage call, so
+only the hand-over after the first frame matters there, and those cases pass.
+
 Trusted now, Windows: **33 of 36**. Far: fx.c, cache.c, blob.c (86).
 
 **cache.c 81 → 100, trusted.** First a rerun of its survivors against all windrv cases (the
@@ -2720,8 +2740,8 @@ commands of yesterday, seven rounds:
   printed.
 - WriteImages into a caller's memory blob (`image_info->blob`), frame by frame and adjoined:
   SyncBlobStream's hand-over of each later frame's buffer to the list's owner (21 killed).
-  **Possibly a sixth upstream bug, not analysed:** with adjoin off, MIFF, PNG, TIFF, PPM and BMP
-  corrupt the heap (`realloc(): invalid next size`, `double free or corruption`); no case uses them.
+  **A sixth upstream bug (analysed 2026-10-05 night, see below):** with adjoin off, a frame that
+  outgrows the caller's buffer leaves the next frame writing into freed memory. No case uses it.
 - ReadBlobString through zlib (a `.gz` text image) and CloseBlob's status after reading, which
   shows its error checks; a last line after a CRLF line, whose `\r` the strip leaves in the
   buffer just past the line's end (`string[i-1]` → `string[i+1]`).
