@@ -1,12 +1,13 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 81 mutants in MagickCore/attribute\.c$, 16 functions
-mutate: baseline over 24 cases in 0s
+mutate: baseline over 488 cases in 0s
   mutants: 25/81 (0s)
   mutants: 50/81 (0s)
-  mutants: 75/81 (1s)
-  mutants: 81/81 (1s)
+  mutants: 75/81 (0s)
+  mutants: 81/81 (79s)
 
-mutate: 81 mutants, 1s
-  killed 0, survived 13 (0 capped), no coverage 68, errors 0
+mutate: 81 mutants, 79s
+  killed 0, survived 15 (0 capped), no coverage 66, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -18,7 +19,7 @@ mutate: 81 mutants, 1s
   GetImageMinimumBoundingBox             6      0        0      6
   GetEdgeBackgroundCensus                4      0        0      4
   GetImageConvexHull                     4      0        0      4
-  SetImageDepth                          2      0        0      2
+  SetImageDepth                          2      0        2      0
   SetImageType                           2      0        2      0
   TraceConvexHull                        1      0        0      1
   getProjection                          1      0        0      1
@@ -39,8 +40,10 @@ mutate: 81 mutants, 1s
        attribute.c:1107:15 cxx_lt_to_ge               if (depth < current_depth[i])
        attribute.c:1107:15 cxx_lt_to_le               if (depth < current_depth[i])
     x  attribute.c:1882:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
     x  attribute.c:2315:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  attribute.c:2388:57 cxx_eq_to_ne               if (IssRGBCompatibleColorspace(image->colorspace) == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-5170fb874-attribute.json
+  full results: build-oracle/work/mutation-confirm-6278a30a1-attribute.json
