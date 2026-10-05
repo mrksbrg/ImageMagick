@@ -1,89 +1,151 @@
+imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 377 mutants in MagickCore/string\.c$, 38 functions
-mutate: baseline over 14766 cases in 0s
-  mutants: 25/377 (1s)
-  mutants: 50/377 (1s)
-  mutants: 75/377 (2s)
-  mutants: 100/377 (3s)
-  mutants: 125/377 (4s)
-  mutants: 150/377 (4s)
-  mutants: 175/377 (5s)
-  mutants: 200/377 (5s)
-  mutants: 225/377 (6s)
-  mutants: 250/377 (7s)
-  mutants: 275/377 (7s)
-  mutants: 300/377 (12s)
-  mutants: 325/377 (14s)
-  mutants: 350/377 (15s)
-  mutants: 375/377 (136s)
-  mutants: 377/377 (144s)
+mutate: baseline over 15566 cases in 0s
+  mutants: 25/377 (3s)
+  mutants: 50/377 (52s)
+  mutants: 75/377 (54s)
+  mutants: 100/377 (61s)
+  mutants: 125/377 (100s)
+  mutants: 150/377 (102s)
+  mutants: 175/377 (102s)
+  mutants: 200/377 (111s)
+  mutants: 225/377 (119s)
+  mutants: 250/377 (121s)
+  mutants: 275/377 (125s)
+  mutants: 300/377 (135s)
+  mutants: 325/377 (137s)
+  mutants: 350/377 (140s)
+  mutants: 375/377 (244s)
+  mutants: 377/377 (267s)
 
-mutate: 377 mutants, 144s
-  killed 335, survived 38 (4 capped), no coverage 4, errors 0
-  mutation score on reached code: 89.8%   overall: 88.9%
+mutate: 377 mutants, 267s
+  killed 269, survived 104 (64 capped), no coverage 4, errors 0
+  mutation score on reached code: 72.1%   overall: 71.4%
 
   function                           total killed survived no-cov
   StringToStrings                       60     47       13      0
-  StringToArgv                          37     37        0      0
+  StringToArgv                          37     35        2      0
   PrintStringInfo                       30     28        2      0
-  CopyMagickString                      20     20        0      0
+  CopyMagickString                      20      9       11      0
   StripMagickString                     20     18        2      0
-  ConfigureFileToStringInfo             19     19        0      0
-  SubstituteString                      15     15        0      0
-  EscapeString                          14      8        6      0
+  ConfigureFileToStringInfo             19      6       13      0
+  SubstituteString                      15     10        5      0
+  EscapeString                          14      7        7      0
   StringToArrayOfDoubles                14     13        1      0
-  InterpretSiPrefixValue                12     12        0      0
-  ConcatenateMagickString               10     10        0      0
-  CloneString                            9      9        0      0
+  InterpretSiPrefixValue                12      6        6      0
+  ConcatenateMagickString               10      5        5      0
+  CloneString                            9      5        4      0
   ConcatenateString                      9      7        2      0
   FormatMagickSize                       9      8        1      0
   ConcatenateStringInfo                  8      5        3      0
-  AcquireString                          7      7        0      0
-  ConstantString                         7      7        0      0
-  SetStringInfoLength                    7      7        0      0
+  AcquireString                          7      5        2      0
+  ConstantString                         7      5        2      0
+  SetStringInfoLength                    7      5        2      0
   SplitStringInfo                        7      6        1      0
-  StringInfoToHexString                  7      7        0      0
-  AcquireStringInfo                      6      6        0      0
+  StringInfoToHexString                  7      6        1      0
+  AcquireStringInfo                      6      4        2      0
   BlobToStringInfo                       6      4        2      0
   FileToString                           5      4        1      0
-  IsStringTrue                           5      5        0      0
-  IsStringFalse                          5      5        0      0
+  IsStringTrue                           5      3        2      0
+  IsStringFalse                          5      2        3      0
   StringInfoToString                     5      3        2      0
-  CompareStringInfo                      4      3        1      0
+  CompareStringInfo                      4      2        2      0
   StringToken                            4      4        0      0
-  DestroyStringInfo                      3      3        0      0
+  DestroyStringInfo                      3      0        3      0
   CloneStringInfo                        2      2        0      0
   DestroyStringList                      2      0        0      2
   FileToStringInfo                       2      1        1      0
   StringInfoToDigest                     2      0        0      2
   GetEnvironmentValue                    1      1        0      0
-  SanitizeString                         1      1        0      0
+  SanitizeString                         1      0        1      0
   SetStringInfo                          1      1        0      0
   SetStringInfoDatum                     1      1        0      0
   StringToStringInfo                     1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
+    xc string.c:107:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    xc string.c:114:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    xc string.c:160:28 cxx_ge_to_gt               if (~string_info->length >= (MagickPathExtent-1))
+    xc string.c:165:63 cxx_mul_to_div             (void) memset(string_info->datum,0,(length+MagickPathExtent)*
     x  string.c:200:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:214:46 cxx_mul_to_div             (void) memset(string_info->datum,0,length*sizeof(*string_info->datum));
+    xc string.c:260:24 cxx_ne_to_eq               if (*destination != (char *) NULL)
+    xc string.c:264:20 cxx_eq_to_ne               if (*destination == (char *) NULL)
+    xc string.c:270:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    xc string.c:277:45 cxx_mul_to_div             (void) memcpy(*destination,source,length*sizeof(**destination));
+    x  string.c:362:25 cxx_lt_to_ge               return(target->length < source->length ? -1 : 1);
     x  string.c:362:25 cxx_lt_to_le               return(target->length < source->length ? -1 : 1);
+    xc string.c:415:20 cxx_sub_to_add             count=(size_t) (q-destination);
+    xc string.c:416:11 cxx_sub_to_add             i=length-count;
+     c string.c:418:17 cxx_add_to_sub             return(count+strlen(p));
+    xc string.c:429:15 cxx_add_to_sub             return(count+(size_t) (p-source));
+    xc string.c:429:27 cxx_sub_to_add             return(count+(size_t) (p-source));
     xc string.c:477:15 cxx_lt_to_le               if (~length < source_length)
     xc string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:528:15 cxx_lt_to_le               if (~length < source->length)
     x  string.c:531:15 cxx_lt_to_le               if (~length < MagickPathExtent)
        string.c:534:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
+    xc string.c:596:15 cxx_lt_to_le               if ((offset < 0) || (offset != (MagickOffsetType) ((ssize_t) offset)))
+     c string.c:598:28 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:603:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
+     c string.c:608:28 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:612:11 cxx_ne_to_eq               if (map != (void *) NULL)
+     c string.c:626:19 cxx_lt_to_ge               for (i=0; i < length; i+=(size_t) count)
+     c string.c:626:19 cxx_lt_to_le               for (i=0; i < length; i+=(size_t) count)
+     c string.c:630:19 cxx_le_to_gt               if (count <= 0)
+     c string.c:630:19 cxx_le_to_lt               if (count <= 0)
+     c string.c:633:13 cxx_lt_to_ge               if (i < length)
+     c string.c:633:13 cxx_lt_to_le               if (i < length)
+     c string.c:635:32 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:641:24 cxx_sub_to_add             file=close_utf8(file)-1;
+    xc string.c:687:15 cxx_ge_to_gt               if (~length >= 1UL)
+    xc string.c:692:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    xc string.c:745:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:745:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:747:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:747:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:749:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:749:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:751:25 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:751:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:757:29 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:757:36 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:760:21 cxx_sub_to_add             return((size_t) (p-source));
+    xc string.c:816:26 cxx_ne_to_eq               if (string_info->datum != (unsigned char *) NULL)
+    xc string.c:819:25 cxx_ne_to_eq               if (string_info->name != (char *) NULL)
+    xc string.c:821:25 cxx_ne_to_eq               if (string_info->path != (char *) NULL)
     x  string.c:907:21 cxx_ne_to_eq               for (p=source; *p != '\0'; p++)
     x  string.c:909:13 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
     x  string.c:909:29 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
-    x  string.c:911:21 cxx_lt_to_le               if (~length < 1)
-    x  string.c:913:15 cxx_post_inc_to_post_dec   length++;
+       string.c:911:21 cxx_lt_to_ge               if (~length < 1)
+       string.c:911:21 cxx_lt_to_le               if (~length < 1)
+       string.c:913:15 cxx_post_inc_to_post_dec   length++;
     x  string.c:918:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
     x  string.c:973:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  string.c:1024:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc string.c:1117:21 cxx_ge_to_gt               for (i=0; (extent >= bytes) && (units[i+1] != (const char *) NULL); i++)
+    xc string.c:1321:15 cxx_ge_to_gt               if ((*q >= 'E') && (*q <= 'z'))
+    xc string.c:1321:30 cxx_le_to_lt               if ((*q >= 'E') && (*q <= 'z'))
+    xc string.c:1354:17 cxx_ge_to_gt               if (e >= MagickEpsilon)
+    xc string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
+    xc string.c:1368:30 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
+    xc string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
+    xc string.c:1408:33 cxx_eq_to_ne               if (LocaleCompare(value,"on") == 0)
+    xc string.c:1410:34 cxx_eq_to_ne               if (LocaleCompare(value,"yes") == 0)
+    xc string.c:1447:36 cxx_eq_to_ne               if (LocaleCompare(value,"false") == 0)
+    xc string.c:1449:34 cxx_eq_to_ne               if (LocaleCompare(value,"off") == 0)
+    xc string.c:1451:33 cxx_eq_to_ne               if (LocaleCompare(value,"no") == 0)
     x  string.c:1502:15 cxx_lt_to_le               for (i=0; i < string_info->length; i++)
     x  string.c:1503:15 cxx_lt_to_le               if ((p[i] < 32) && (isspace((int)p[i]) == 0))
+    x  string.c:1624:34 cxx_ne_to_eq               for (p+=strspn(p,allowlist); p != q; p+=(ptrdiff_t) strspn(p,allowlist))
+    xc string.c:1733:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+     c string.c:1737:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
     x  string.c:1840:14 cxx_gt_to_ge               if (offset > string_info->length)
+    x  string.c:1931:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:1997:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
     x  string.c:2002:58 cxx_mul_to_div             (void) memcpy(string,(char *) string_info->datum,length*sizeof(*string));
+       string.c:2105:21 cxx_ge_to_gt               for (i--; i >= 0; i--)
+       string.c:2105:21 cxx_ge_to_lt               for (i--; i >= 0; i--)
     xc string.c:2211:29 cxx_lt_to_le               while ((*p != '\0') && (i < *count))
        string.c:2365:17 cxx_ne_to_eq               if (count != (size_t *) NULL)
     x  string.c:2370:37 cxx_lt_to_le               if (((int) ((unsigned char) *p) < 32) &&
@@ -100,6 +162,11 @@ mutate: 377 mutants, 144s
        string.c:2486:33 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
     x  string.c:2594:21 cxx_sub_to_add             return((size_t) (q-p+1));
     x  string.c:2594:23 cxx_add_to_sub             return((size_t) (q-p+1));
+    xc string.c:2660:24 cxx_gt_to_ge               if (replace_extent > search_extent)
+    xc string.c:2660:24 cxx_gt_to_le               if (replace_extent > search_extent)
+    xc string.c:2666:31 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
+    xc string.c:2666:46 cxx_sub_to_add             extent=strlen(*string)+replace_extent-search_extent+1;
+    xc string.c:2666:60 cxx_add_to_sub             extent=strlen(*string)+replace_extent-search_extent+1;
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
   full results: build-oracle/work/mutation-resweep-string.json
