@@ -1,23 +1,8 @@
 mutate: 377 mutants in MagickCore/string\.c$, 38 functions
-mutate: baseline over 14563 cases in 0s
-  mutants: 25/377 (2s)
-  mutants: 50/377 (7s)
-  mutants: 75/377 (43s)
-  mutants: 100/377 (47s)
-  mutants: 125/377 (51s)
-  mutants: 150/377 (64s)
-  mutants: 175/377 (68s)
-  mutants: 200/377 (83s)
-  mutants: 225/377 (90s)
-  mutants: 250/377 (91s)
-  mutants: 275/377 (93s)
-  mutants: 300/377 (98s)
-  mutants: 325/377 (100s)
-  mutants: 350/377 (104s)
-  mutants: 375/377 (216s)
-  mutants: 377/377 (230s)
+mutate: baseline over 14723 cases in 0s
+mutate: resuming, 377 mutants already done
 
-mutate: 377 mutants, 230s
+mutate: 377 mutants, 0s
   killed 285, survived 88 (49 capped), no coverage 4, errors 0
   mutation score on reached code: 76.4%   overall: 75.6%
 
@@ -103,9 +88,9 @@ mutate: 377 mutants, 230s
     x  string.c:907:21 cxx_ne_to_eq               for (p=source; *p != '\0'; p++)
     x  string.c:909:13 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
     x  string.c:909:29 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
-       string.c:911:21 cxx_lt_to_ge               if (~length < 1)
-       string.c:911:21 cxx_lt_to_le               if (~length < 1)
-       string.c:913:15 cxx_post_inc_to_post_dec   length++;
+    x  string.c:911:21 cxx_lt_to_ge               if (~length < 1)
+    x  string.c:911:21 cxx_lt_to_le               if (~length < 1)
+    x  string.c:913:15 cxx_post_inc_to_post_dec   length++;
     x  string.c:918:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
     x  string.c:973:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  string.c:1024:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
