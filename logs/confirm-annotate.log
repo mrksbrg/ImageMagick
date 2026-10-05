@@ -1,16 +1,16 @@
-mutate: 163 mutants in MagickCore/annotate\.c$, 17 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/163 (2s)
-  mutants: 50/163 (4s)
-  mutants: 75/163 (4s)
-  mutants: 100/163 (4s)
-  mutants: 125/163 (4s)
-  mutants: 150/163 (4s)
-  mutants: 163/163 (23s)
+mutate: 159 mutants in MagickCore/annotate\.c$, 15 functions
+mutate: baseline over 24 cases in 0s
+  mutants: 25/159 (2s)
+  mutants: 50/159 (3s)
+  mutants: 75/159 (3s)
+  mutants: 100/159 (3s)
+  mutants: 125/159 (3s)
+  mutants: 150/159 (4s)
+  mutants: 159/159 (4s)
 
-mutate: 163 mutants, 23s
-  killed 4, survived 56 (0 capped), no coverage 103, errors 0
-  mutation score on reached code: 6.7%   overall: 2.5%
+mutate: 159 mutants, 4s
+  killed 0, survived 56 (0 capped), no coverage 103, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   RenderPostscript                      81      0        0     81
@@ -20,10 +20,8 @@ mutate: 163 mutants, 23s
   AnnotateImage                          5      0        0      5
   FormatMagickCaption                    4      0        0      4
   RenderX11                              4      0        0      4
-  AnnotateComponentTerminus              3      3        0      0
   GetMultilineTypeMetrics                3      0        3      0
   GetTypeMetrics                         2      0        2      0
-  AnnotateComponentGenesis               1      1        0      0
   ReplaceSpaceWithNewline                1      0        0      1
   FreetypeReadStream                     1      0        1      0
   IsEmptyOutline                         1      0        0      1
@@ -90,4 +88,4 @@ mutate: 163 mutants, 23s
     x  annotate.c:2156:3 cxx_remove_void_call       FreetypeDone(memory,library,stream);
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-annotate.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-annotate.json

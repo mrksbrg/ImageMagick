@@ -1,33 +1,23 @@
-mutate: 139 mutants in MagickCore/property\.c$, 19 functions
-mutate: baseline over 2098 cases in 0s
-  mutants: 25/139 (43s)
-  mutants: 50/139 (43s)
-  mutants: 75/139 (45s)
-  mutants: 100/139 (48s)
-  mutants: 125/139 (55s)
-  mutants: 139/139 (80s)
+mutate: 81 mutants in MagickCore/property\.c$, 11 functions
+mutate: baseline over 804 cases in 0s
+  mutants: 25/81 (0s)
+  mutants: 50/81 (2s)
+  mutants: 75/81 (4s)
+  mutants: 81/81 (30s)
 
-mutate: 139 mutants, 80s
-  killed 58, survived 35 (0 capped), no coverage 46, errors 0
-  mutation score on reached code: 62.4%   overall: 41.7%
+mutate: 81 mutants, 30s
+  killed 0, survived 35 (0 capped), no coverage 46, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  GetEXIFProperty                       25     25        0      0
   InterpretImageProperties              24      0       24      0
   GetMagickProperty                     22      0        0     22
-  SetImageProperty                      16     16        0      0
   Get8BIMProperty                        9      0        0      9
   GetMagickPropertyLetter                9      0        9      0
   TracePSClippath                        6      0        0      6
-  GetICCProperty                         5      5        0      0
-  GetIPTCProperty                        4      4        0      0
-  CloneImageProperties                   3      3        0      0
   DefineImageProperty                    3      0        0      3
   TraceSVGClippath                       3      0        0      3
-  GetXMPProperty                         2      2        0      0
-  GetImageProperty                       2      2        0      0
   RemoveImageProperty                    2      0        0      2
-  DeleteImageProperty                    1      1        0      0
   ReadPropertyMSBShort                   1      0        0      1
   GetNextImageProperty                   1      0        1      0
   ResetImagePropertyIterator             1      0        1      0
@@ -70,4 +60,4 @@ mutate: 139 mutants, 80s
     x  property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-property.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-property.json

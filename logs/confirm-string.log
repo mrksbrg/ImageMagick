@@ -1,43 +1,29 @@
-mutate: 81 mutants in MagickCore/string\.c$, 29 functions
-mutate: baseline over 2458 cases in 0s
-  mutants: 25/81 (16s)
-  mutants: 50/81 (25s)
-  mutants: 75/81 (41s)
-  mutants: 81/81 (44s)
+mutate: 42 mutants in MagickCore/string\.c$, 16 functions
+  baseline: 1/1 (0s)
+mutate: baseline over 157 cases in 1s
+  mutants: 25/42 (2s)
+  mutants: 42/42 (4s)
 
-mutate: 81 mutants, 44s
-  killed 39, survived 29 (0 capped), no coverage 13, errors 0
-  mutation score on reached code: 57.4%   overall: 48.1%
+mutate: 42 mutants, 4s
+  killed 0, survived 29 (0 capped), no coverage 13, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   StringToStrings                       13      0       13      0
-  ConfigureFileToStringInfo              9      9        0      0
   EscapeString                           6      0        6      0
-  CopyMagickString                       5      5        0      0
-  InterpretSiPrefixValue                 5      5        0      0
-  SubstituteString                       5      5        0      0
   ConcatenateStringInfo                  3      0        3      0
-  DestroyStringInfo                      3      3        0      0
-  AcquireString                          2      2        0      0
-  AcquireStringInfo                      2      2        0      0
   BlobToStringInfo                       2      0        2      0
   ConcatenateString                      2      0        2      0
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
-  SetStringInfoLength                    2      2        0      0
   StringInfoToDigest                     2      0        0      2
   StringInfoToString                     2      0        0      2
-  StringToArgv                           2      2        0      0
   StripMagickString                      2      0        0      2
-  CloneString                            1      1        0      0
   CompareStringInfo                      1      0        1      0
-  ConcatenateMagickString                1      1        0      0
-  ConstantString                         1      1        0      0
   FileToString                           1      0        1      0
   FileToStringInfo                       1      0        0      1
   FormatMagickSize                       1      0        1      0
   SplitStringInfo                        1      0        0      1
-  StringInfoToHexString                  1      1        0      0
   StringToArrayOfDoubles                 1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
@@ -72,4 +58,4 @@ mutate: 81 mutants, 44s
        string.c:2486:33 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-8810b1471-string.json
+  full results: build-oracle/work/mutation-confirm-ce1d65ece-string.json
