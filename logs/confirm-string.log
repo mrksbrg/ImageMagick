@@ -1,6 +1,6 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 42 mutants in MagickCore/string\.c$, 16 functions
-mutate: baseline over 1 cases in 0s
+mutate: baseline over 2 cases in 0s
   mutants: 25/42 (0s)
   mutants: 42/42 (0s)
 
@@ -31,4 +31,4 @@ mutate: 42 mutants, 0s
     x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-d64dfdf9d-string.json
+  full results: build-oracle/work/mutation-confirm-cacfed986-string.json
