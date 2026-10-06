@@ -5041,11 +5041,10 @@ def _xev_menu_grab(menu, item, items):
         101 + 32 * _XEV_MENUS.index(menu), y)
 
 
+# No file browser here: it shows its directory's path, which in the case directory names the
+# run (mbase-..., mut-<hash>), so every mutant's grab differed (1818 false kills, 2026-10-06);
+# opened on the corpus it fails. Check new grab cases across two case-directory names.
 GAP_XEVENTS_GRAB_CASES = [
-    ("xevents grab: file browser, open", "map key:ctrl+o map grab:out.ppm " + _XEV_FIELD[4:] + "rose.miff key:Return key:q",
-     ["rose"]),
-    ("xevents grab: file browser, save", "map key:ctrl+s map grab:out.ppm " + _XEV_FIELD[4:] + "out.miff key:Return key:q",
-     ["rose"]),
     ("xevents grab: dialog, empty", "map key:F3 map grab:out.ppm key:ctrl+u type:0x1 key:Return key:q", []),
     ("xevents grab: dialog, typed", "map key:F3 map key:ctrl+u type:0x1 grab:out.ppm key:Return key:q", []),
     ("xevents grab: Commands widget", "map click:20,20 map grab:out.ppm use:1 key:q", []),
