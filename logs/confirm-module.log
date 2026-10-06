@@ -1,12 +1,24 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
-mutate: 7 mutants in MagickCore/module\.c$, 1 functions
-mutate: baseline over 0 cases in 0s
-  mutants: 7/7 (0s)
-
-mutate: 7 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 7, errors 0
-
-  function                           total killed survived no-cov
-  InvokeDynamicImageFilter               7      0        0      7
-
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-module.json
+Traceback (most recent call last):
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/mutate.py", line 643, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/mutate.py", line 523, in main
+    fmap = casemap.load_map(cases)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/imagemagick-mutation/ImageMagick/tools/oracle/casemap.py", line 89, in load_map
+    m = json.load(f)
+        ^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/sysroot/usr/lib/python3.12/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 1 column 10491849 (char 10491848)
