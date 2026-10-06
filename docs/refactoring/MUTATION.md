@@ -3576,3 +3576,23 @@ main run had hidden them). 201 verdicts (`31335954f`): 115 unobservable, 84 gaps
 - display.c's unreached functions are its interactive edit modes (draw, crop, ROI, annotate,
   colour, matte, chop, composite, paste, pan, trim, magnify, tile): mouse drags inside widgets
   that `q` does not close. That is case work for a later round, not verdicts.
+
+**W01 gate, interim** (2026-10-06 morning; `x11cl2`, `x11cl2-fam`, `x11cl2-err`, `x11cl2-ocl3`,
+oldest first). The error rerun (the 2176 mutants lost to MemoryError) killed 199 in widget.c and
+433 in xwindow.c. The round with the three new opencl cases killed 8 of the 825 open accelerate.c
+and opencl.c mutants.
+
+| File | Mutants | Killed | Unobservable | Unmatched | Unreached | No coverage | Adjusted |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| accelerate.c | 1077 | 486 | 285 | 48 | 3 | 255 | 61% |
+| opencl.c | 464 | 238 | 76 | 92 | 8 | 50 | 61% |
+| xwindow.c | 1856 | 442 | 68 | 281 | 317 | 748 | 25% |
+| animate.c | 501 | 78 | 38 | 192 | 168 | 25 | 17% |
+| widget.c | 2476 | 319 | 33 | 498 | 418 | 1208 | 13% |
+| display.c | 2897 | 224 | 201 | 296 | 459 | 1717 | 8% |
+
+accelerate.c's reachable Compute* functions are nearly all ready; its no-coverage is
+ContrastStretch and UnsharpMask (no caller, call commented out upstream). The error rerun used
+the 300-case cap over the whole catalogue, which crowded out the slow X11 cases before (opencl.c);
+its 1544 survivors are now rerun uncapped against the x11, opencl and xevents families
+(`x11cl2-errfam`).
