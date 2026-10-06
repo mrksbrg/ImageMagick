@@ -1,20 +1,20 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 174 mutants in MagickCore/visual-effects\.c$, 22 functions
-mutate: baseline over 40 cases in 0s
+mutate: baseline over 1 cases in 0s
   mutants: 25/174 (0s)
   mutants: 50/174 (0s)
-  mutants: 75/174 (36s)
-  mutants: 100/174 (36s)
-  mutants: 125/174 (36s)
-  mutants: 150/174 (42s)
-  mutants: 174/174 (85s)
+  mutants: 75/174 (0s)
+  mutants: 100/174 (0s)
+  mutants: 125/174 (0s)
+  mutants: 150/174 (0s)
+  mutants: 174/174 (2s)
 
-mutate: 174 mutants, 85s
-  killed 0, survived 46 (0 capped), no coverage 128, errors 0
+mutate: 174 mutants, 2s
+  killed 0, survived 11 (0 capped), no coverage 163, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  PlasmaImageProxy                      34      0       34      0
+  PlasmaImageProxy                      34      0        0     34
   ColorMatrixImage                      18      0        0     18
   ImplodeImage                          12      0        0     12
   MorphImages                           12      0        0     12
@@ -32,47 +32,12 @@ mutate: 174 mutants, 85s
   PolaroidImage                          3      0        0      3
   VignetteImage                          2      0        0      2
   CharcoalImage                          1      0        0      1
-  PlasmaImage                            1      0        1      0
+  PlasmaImage                            1      0        0      1
   ShadowImage                            1      0        0      1
   SketchImage                            1      0        0      1
   HatTransform                           1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
-    x  visual-effects.c:1429:24 cxx_sub_to_add             if ((fabs(segment->x2-segment->x1) < MagickEpsilon) &&
-    x  visual-effects.c:1429:38 cxx_lt_to_le               if ((fabs(segment->x2-segment->x1) < MagickEpsilon) &&
-    x  visual-effects.c:1430:24 cxx_sub_to_add             (fabs(segment->y2-segment->y1) < MagickEpsilon))
-    x  visual-effects.c:1430:38 cxx_lt_to_le               (fabs(segment->y2-segment->y1) < MagickEpsilon))
-    x  visual-effects.c:1468:24 cxx_sub_to_add             if ((fabs(segment->x1-x_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1468:32 cxx_lt_to_ge               if ((fabs(segment->x1-x_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1468:32 cxx_lt_to_le               if ((fabs(segment->x1-x_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1469:24 cxx_sub_to_add             (fabs(segment->x2-x_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1469:32 cxx_lt_to_le               (fabs(segment->x2-x_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1470:24 cxx_sub_to_add             (fabs(segment->y1-y_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1470:32 cxx_lt_to_ge               (fabs(segment->y1-y_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1470:32 cxx_lt_to_le               (fabs(segment->y1-y_mid) < MagickEpsilon) &&
-    x  visual-effects.c:1471:24 cxx_sub_to_add             (fabs(segment->y2-y_mid) < MagickEpsilon))
-    x  visual-effects.c:1471:32 cxx_lt_to_le               (fabs(segment->y2-y_mid) < MagickEpsilon))
-    x  visual-effects.c:1478:24 cxx_sub_to_add             if ((fabs(segment->x1-x_mid) >= MagickEpsilon) ||
-    x  visual-effects.c:1478:32 cxx_ge_to_gt               if ((fabs(segment->x1-x_mid) >= MagickEpsilon) ||
-    x  visual-effects.c:1479:24 cxx_sub_to_add             (fabs(segment->x2-x_mid) >= MagickEpsilon))
-    x  visual-effects.c:1479:32 cxx_ge_to_gt               (fabs(segment->x2-x_mid) >= MagickEpsilon))
-    x  visual-effects.c:1502:27 cxx_sub_to_add             if (fabs(segment->x1-segment->x2) >= MagickEpsilon)
-    x  visual-effects.c:1502:41 cxx_ge_to_gt               if (fabs(segment->x1-segment->x2) >= MagickEpsilon)
-    x  visual-effects.c:1528:32 cxx_ge_to_gt               if ((fabs(segment->y1-y_mid) >= MagickEpsilon) ||
-    x  visual-effects.c:1529:32 cxx_ge_to_gt               (fabs(segment->y2-y_mid) >= MagickEpsilon))
-    x  visual-effects.c:1531:28 cxx_sub_to_add             if ((fabs(segment->x1-x_mid) >= MagickEpsilon) ||
-    x  visual-effects.c:1531:36 cxx_ge_to_gt               if ((fabs(segment->x1-x_mid) >= MagickEpsilon) ||
-    x  visual-effects.c:1531:36 cxx_ge_to_lt               if ((fabs(segment->x1-x_mid) >= MagickEpsilon) ||
-    x  visual-effects.c:1532:28 cxx_sub_to_add             (fabs(segment->y2-y_mid) >= MagickEpsilon))
-    x  visual-effects.c:1532:36 cxx_ge_to_gt               (fabs(segment->y2-y_mid) >= MagickEpsilon))
-    x  visual-effects.c:1557:27 cxx_sub_to_add             if (fabs(segment->y1-segment->y2) >= MagickEpsilon)
-    x  visual-effects.c:1557:41 cxx_ge_to_gt               if (fabs(segment->y1-segment->y2) >= MagickEpsilon)
-    x  visual-effects.c:1583:24 cxx_sub_to_add             if ((fabs(segment->x1-segment->x2) >= MagickEpsilon) ||
-    x  visual-effects.c:1583:38 cxx_ge_to_gt               if ((fabs(segment->x1-segment->x2) >= MagickEpsilon) ||
-    x  visual-effects.c:1584:24 cxx_sub_to_add             (fabs(segment->y1-segment->y2) >= MagickEpsilon))
-    x  visual-effects.c:1584:38 cxx_ge_to_gt               (fabs(segment->y1-segment->y2) >= MagickEpsilon))
-    x  visual-effects.c:1610:38 cxx_lt_to_le               (fabs(segment->y2-segment->y1) < 3.0))
-    x  visual-effects.c:1632:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  visual-effects.c:3502:13 cxx_lt_to_le               for ( ; i < (ssize_t) extent; i++)
     x  visual-effects.c:3551:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  visual-effects.c:3573:44 cxx_mul_to_div             if (AcquireMagickResource(WidthResource,4*image->columns) == MagickFalse)
@@ -86,4 +51,4 @@ mutate: 174 mutants, 85s
        visual-effects.c:3778:21 cxx_eq_to_ne               if (proceed == MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-visual-effects.json
+  full results: build-oracle/work/mutation-confirm-b193b8838-visual-effects.json
