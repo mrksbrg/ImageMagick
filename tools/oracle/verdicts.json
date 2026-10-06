@@ -23411,6 +23411,696 @@
    "src": "if (image != (Image *) NULL)",
    "verdict": "equivalent",
    "why": "the pinged image keeps a reference to the caller's blob, which was attached exempt and is never freed by ImageMagick; the image's size, attributes and names are the same"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "clStatus|=clEnv->library->clSetKernelArg(equalizeKernel,i++,sizeof(cl_float4),&black);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last clSetKernelArg is not read again"
+  },
+  {
+   "at": 86,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "equalizeMapBuffer = clEnv->library->clCreateBuffer(device->context, mem_flags, length * sizeof(PixelPacket), hostPtr, &clStatus);",
+   "verdict": "unobservable",
+   "why": "the equalize map buffer: the Equalize kernel never reads it (getRedF4 tests .z of white and black, which the host leaves 0; upstream bug)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (map!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (equalizeMapBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (equalize_map!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (histogramBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (histogram!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (histogramKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(histogramKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (equalizeKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(equalizeKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device, queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeEqualizeImage: a skipped release or free leaks a buffer, kernel or block, which the CLI cannot show"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "for (i=0; i <= (ssize_t) MaxMap; i++)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->channel_mask & SyncChannels) != 0)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->channel_mask & RedChannel) != 0)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->channel_mask & GreenChannel) != 0)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->channel_mask & BlueChannel) != 0)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->channel_mask & AlphaChannel) != 0)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_le_to_gt",
+   "nth": 1,
+   "src": "for (i=0; i <= (ssize_t) MaxMap; i++)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_le_to_lt",
+   "nth": 1,
+   "src": "for (i=0; i <= (ssize_t) MaxMap; i++)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i=0; i <= (ssize_t) MaxMap; i++)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if ((image->channel_mask & SyncChannels) != 0)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (white.x != black.x)",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & RedChannel) != 0) && (white.x != black.x))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & RedChannel) != 0) && (white.x != black.x))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 1,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "(MagickRealType) ((MaxMap*(map[i].x-black.x))/(white.x-black.x)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & GreenChannel) != 0) && (white.y != black.y))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & GreenChannel) != 0) && (white.y != black.y))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].y-black.y))/(white.y-black.y)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].y-black.y))/(white.y-black.y)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].y-black.y))/(white.y-black.y)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].y-black.y))/(white.y-black.y)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & BlueChannel) != 0) && (white.z != black.z))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & BlueChannel) != 0) && (white.z != black.z))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].z-black.z))/(white.z-black.z)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].z-black.z))/(white.z-black.z)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].z-black.z))/(white.z-black.z)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].z-black.z))/(white.z-black.z)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & AlphaChannel) != 0) && (white.w != black.w))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & AlphaChannel) != 0) && (white.w != black.w))",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].w-black.w))/(white.w-black.w)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].w-black.w))/(white.w-black.w)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].w-black.w))/(white.w-black.w)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(MagickRealType) ((MaxMap*(map[i].w-black.w))/(white.w-black.w)));",
+   "verdict": "unobservable",
+   "why": "OpenCL -equalize writes no pixel (upstream bug, MUTATION.md W01): the Equalize kernel tests getRedF4(white) != getRedF4(black), i.e. .z, but the host accumulates the intensity in .x, so .z is 0 on both sides; the histogram integration and the map never reach the output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (image->storage_class == PseudoClass)",
+   "verdict": "equivalent",
+   "why": "inverted, the PseudoClass test sends the DirectClass image into the colormap loop: it has no colours, or a colormap its pixels do not use and no DirectClass writer stores"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (cl_uint) image->colors; i++)",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (cl_uint) image->colors; i++)",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; i < (cl_uint) image->colors; i++)",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if ((image->channel_mask & SyncChannels) != 0)",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (white.x != black.x)",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & RedChannel) != 0) && (white.x != black.x))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & RedChannel) != 0) && (white.x != black.x))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & GreenChannel) != 0) && (white.y != black.y))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & GreenChannel) != 0) && (white.y != black.y))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & BlueChannel) != 0) && (white.z != black.z))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & BlueChannel) != 0) && (white.z != black.z))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & AlphaChannel) != 0) && (white.w != black.w))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (((image->channel_mask & AlphaChannel) != 0) && (white.w != black.w))",
+   "verdict": "equivalent",
+   "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
   }
  ]
 }

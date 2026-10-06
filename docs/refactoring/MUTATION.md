@@ -3475,3 +3475,35 @@ reason. `mutation-x11cl2` runs all mutants on the current catalogue.
 | animate.c | 4/6 | 53% |
 | display.c | 12/34 | 23% |
 | widget.c | 21/31 | 24% |
+
+### W01: the x11cl2 run, and a seventh upstream bug (Windows, 2026-10-06, night)
+
+**The main run** (`mutation-x11cl2`, 9271 mutants, whole catalogue): killed 1107, survived 1985,
+no coverage 4003, **errors 2176**. The errors are not results: `ORACLE_MEM_GB` was set on
+mutate.py itself, and at 24 jobs its own threads passed the 2 GB cap (`172d53190` moves the cap
+to the children). They are being rerun at 8 jobs (`x11cl2-err`), beside a rerun of the
+survivors and unreached mutants against the `x11`, `opencl` and `xevents` families, uncapped
+(`x11cl2-fam`, 5988 mutants). Figures per file follow once both are in.
+
+**A seventh upstream bug: OpenCL `-equalize` returns its input unchanged.** ComputeEqualizeImage
+(accelerate.c) integrates the histogram into `map[i].x` (the Histogram kernel counts into
+component 2, the host adds that to `intensity.x`) and passes `white=map[MaxMap]` and
+`black=map[0]` to the Equalize kernel. The kernel tests `getRedF4(white) != getRedF4(black)`,
+and `getRedF4` returns `.z` (CLPixelType is BGRA). `.z` is 0 on both sides, so the kernel writes
+no pixel, and ComputeEqualizeImage reports success, so the CPU path does not run either.
+Checked on the wide base build: `rose_alpha.miff -equalize` with `MAGICK_OCL_DEVICE=CPU` is
+identical to the input (AE 0, PAE 0), while the CPU path's result differs from it (AE 430,
+PAE 44%). The ContrastStretch kernel has the same test (line 1137), but nothing calls it. Only
+RGBA DirectClass images reach the kernel path (checkAccelerateConditionRGBA), so of the 64
+equalize cases that reach AccelerateEqualizeImage, one (`opencl rose_alpha -equalize`) runs it.
+
+**Verdicts, ComputeEqualizeImage** (69 of its 76 survivors):
+- 39 unobservable: the histogram integration and the map (1930-1972), which the bug keeps out of
+  the output. With the bug fixed they would be observable, so not equivalent.
+- 13 equivalent: the PseudoClass branch (1980-2010), which DirectClass-only admission keeps out
+  of reach; and the inverted PseudoClass test (1975), which sends the DirectClass image into the
+  colormap loop: it has no colours, or a colormap its pixels do not use.
+- 1 unobservable (the map buffer's size, 2056), 1 equivalent (the argument counter after the last
+  clSetKernelArg, 2077), 14 unobservable (frees and releases in the clean-up: leaks).
+- Open: 1791 (the logging test) and the mapped and read lengths (1888, 1893, 2100-2106). Under
+  pocl's CL_MEM_USE_HOST_PTR a short map may not matter; that needs a probe, not a reading.
