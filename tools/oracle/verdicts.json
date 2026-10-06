@@ -26401,6 +26401,2016 @@
    "src": "if (outputReady == MagickFalse)",
    "verdict": "equivalent",
    "why": "the test after ComputeResizeImage's second filter pass: either outcome goes to cleanup next (3937 sits just above the label; 3909 jumps over the else branch to it)"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/opencl.c",
+   "function": "ReadAccelerateTimer",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "return (double)timer->clocks/(double)timer->freq;",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/opencl.c",
+   "function": "StartAccelerateTimer",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "timer->start=(long long)s.tv_sec*(long long)1.0E3+(long long)s.tv_usec/",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/opencl.c",
+   "function": "StartAccelerateTimer",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "timer->start=(long long)s.tv_sec*(long long)1.0E3+(long long)s.tv_usec/",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 70,
+   "file": "MagickCore/opencl.c",
+   "function": "StartAccelerateTimer",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "timer->start=(long long)s.tv_sec*(long long)1.0E3+(long long)s.tv_usec/",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/opencl.c",
+   "function": "StopAccelerateTimer",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "n=(long long)s.tv_sec*(long long)1.0E3+(long long)s.tv_usec/",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/opencl.c",
+   "function": "StopAccelerateTimer",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "n=(long long)s.tv_sec*(long long)1.0E3+(long long)s.tv_usec/",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/opencl.c",
+   "function": "StopAccelerateTimer",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "n=(long long)s.tv_sec*(long long)1.0E3+(long long)s.tv_usec/",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (inputImage == (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "InitAccelerateTimer(&timer);",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "for (i=0; i<=2; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "for (i=0; i<=2; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i=0; i<=2; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (i > 0)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (i > 0)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "StartAccelerateTimer(&timer);",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (is_cpu == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->opencl != (MagickCLCacheInfo) NULL)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 1,
+   "src": "if (i > 0)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_gt_to_le",
+   "nth": 1,
+   "src": "if (i > 0)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "StopAccelerateTimer(&timer);",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blurredImage != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (unsharpedImage != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/opencl.c",
+   "function": "RunOpenCLBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resizedImage != (Image *) NULL)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (cache_file == (FILE *) NULL)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j = 0; j < i; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (j = 0; j < i; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (j = 0; j < i; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLBenchmarks",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device->score != MAGICKCORE_OPENCL_UNDEFINED_SCORE)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (device->score == MAGICKCORE_OPENCL_UNDEFINED_SCORE)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RunDeviceBenchmark(clEnv,testEnv,device);",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "for (j = i+1; j < clEnv->number_devices; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (j = i+1; j < clEnv->number_devices; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (j = i+1; j < clEnv->number_devices; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (j = i+1; j < clEnv->number_devices; j++)",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "BenchmarkOpenCLDevices",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CacheOpenCLBenchmarks(clEnv);",
+   "verdict": "unobservable",
+   "why": "the OpenCL device benchmark and its timer: it times blur, unsharp and resize on each device to rank them; the oracle seeds a fixed device profile so it never runs, as its results depend on timing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LogOpenCLBuildFailure(device,kernel,exception);",
+   "verdict": "unobservable",
+   "why": "LogOpenCLBuildFailure writes the build log only after clBuildProgram fails, which pocl never does for ImageMagick's kernels"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < n; i++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < n; i++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < n; i++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "if (n * sizeof(size_t) != stringLength)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (n * sizeof(size_t) != stringLength)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 3,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "j=n*sizeof(size_t);",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < 4; i++, j++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < 4; i++, j++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < 4; i++, j++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < 4; i++, j++)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (j < stringLength)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "StringSignature",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (j < stringLength)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLKernel",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (status != CL_SUCCESS)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "CacheOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (status == CL_SUCCESS)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadCachedOpenCLKernels",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (binaryProgram == (unsigned char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadCachedOpenCLKernels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return((status != CL_SUCCESS) || (binaryStatus != CL_SUCCESS) ? MagickFalse :",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadCachedOpenCLKernels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "return((status != CL_SUCCESS) || (binaryStatus != CL_SUCCESS) ? MagickFalse :",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (*ptr != '\\0')",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*ptr == ' ') || (*ptr == '\\\\') || (*ptr == '/') || (*ptr == ':') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*ptr == ' ') || (*ptr == '\\\\') || (*ptr == '/') || (*ptr == ':') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*ptr == ' ') || (*ptr == '\\\\') || (*ptr == '/') || (*ptr == ':') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 62,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*ptr == ' ') || (*ptr == '\\\\') || (*ptr == '/') || (*ptr == ':') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*ptr == '*') || (*ptr == '?') || (*ptr == '\"') || (*ptr == '<') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*ptr == '*') || (*ptr == '?') || (*ptr == '\"') || (*ptr == '<') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*ptr == '*') || (*ptr == '?') || (*ptr == '\"') || (*ptr == '<') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*ptr == '*') || (*ptr == '?') || (*ptr == '\"') || (*ptr == '<') ||",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*ptr == '>' || *ptr == '|'))",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(*ptr == '>' || *ptr == '|'))",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (loaded == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "CompileOpenCLKernel",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CacheOpenCLKernel(device,filename,exception);",
+   "verdict": "unobservable",
+   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevices",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (clEnv->devices != (MagickCLDevice *) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevices",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/opencl.c",
+   "function": "DestroyMagickCLCacheInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (info->buffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "DestroyMagickCLCacheInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&info->events_semaphore);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "DestroyMagickCLCacheInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(info->device);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "AcquireMagickCLCacheInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyMagickCLCacheInfo(info);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DumpOpenCLProfileData();",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_directory != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&cache_directory_lock);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (default_CLEnv != (MagickCLEnv) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&openCL_lock);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (openCL_library != (MagickLibrary *) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/opencl.c",
+   "function": "OpenCLTerminus",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (openCL_library->library != (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "DestroyMagickCLCacheInfoAndPixels",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MemoryResource,info->length);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "DestroyMagickCLCacheInfoAndPixels",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyMagickCLCacheInfo(info);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLCacheInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (info == (MagickCLCacheInfo) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLCacheInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyMagickCLCacheInfoAndPixels((cl_event) NULL,0,info);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLCacheInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyMagickCLCacheInfo(info);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (device == (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevice",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device->program != (cl_program) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevice",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "while (device->command_queues_index >= 0)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLDevice",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&device->lock);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (clEnv == (MagickCLEnv) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishSemaphoreInfo(&clEnv->lock);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickCLDevices(clEnv);",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (clEnv->contexts != (cl_context *) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) clEnv->number_contexts; i++)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (ssize_t) clEnv->number_contexts; i++)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/opencl.c",
+   "function": "RelinquishMagickCLEnv",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (clEnv->contexts[i] != (cl_context) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (default_CLEnv->devices[i]->profile_kernels != MagickFalse)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (i == default_CLEnv->number_devices)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (log == (FILE *) NULL)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((device->profile_kernels == MagickFalse) ||",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(device->profile_records == (KernelProfileRecord *) NULL))",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (device->profile_records[j] != (KernelProfileRecord) NULL)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "(int) (profile->total/profile->count),(int) profile->count,",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 1,
+   "file": "MagickCore/opencl.c",
+   "function": "DumpOpenCLProfileData",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "j++;",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "elapsed=end-start;",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(device->lock);",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 62,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (elapsed > profile_record->max)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/opencl.c",
+   "function": "RecordProfileData",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (elapsed > profile_record->max)",
+   "verdict": "gap",
+   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/opencl.c",
+   "function": "GetCurrentOpenCLEnv",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(default_CLEnv->benchmark_thread_id != GetMagickThreadId()))",
+   "verdict": "unobservable",
+   "why": "the benchmark thread test in GetCurrentOpenCLEnv: benchmark_thread_id is set only while the device benchmark runs, which the fixed profile prevents"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLPlatformString",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "value=(char *) AcquireCriticalMemory(length*sizeof(*value));",
+   "verdict": "equivalent",
+   "why": "length*sizeof(char) as length/sizeof(char): sizeof(char) is 1"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLDeviceString",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "value=(char *) AcquireCriticalMemory(length*sizeof(*value));",
+   "verdict": "equivalent",
+   "why": "length*sizeof(char) as length/sizeof(char): sizeof(char) is 1"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLDevices",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (length != (size_t *) NULL)",
+   "verdict": "gap",
+   "why": "an API getter's 'if (length != NULL) *length=0' when OpenCL is off (GetOpenCLDevices) or a device has no profile records (GetOpenCLKernelProfileRecords): imdriver passes an initialised length, so a caller that does not would be needed"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLKernelProfileRecords",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (length != (size_t *) NULL)",
+   "verdict": "gap",
+   "why": "an API getter's 'if (length != NULL) *length=0' when OpenCL is off (GetOpenCLDevices) or a device has no profile records (GetOpenCLKernelProfileRecords): imdriver passes an initialised length, so a caller that does not would be needed"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "MagickCreateDirectory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return(status == 0 ? MagickTrue : MagickFalse);",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (home != (char *) NULL)",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (status == MagickFalse)",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (status != MagickFalse)",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "if (status == MagickFalse)",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (status != MagickFalse)",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "temp=(char*) AcquireCriticalMemory(strlen(path)+1);",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/opencl.c",
+   "function": "GetOpenCLCacheDirectory",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "(void) CopyMagickString(temp,path,strlen(path)+1);",
+   "verdict": "gap",
+   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
+  },
+  {
+   "at": 54,
+   "file": "MagickCore/opencl.c",
+   "function": "IsSameOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((LocaleCompare(a->platform_name,b->platform_name) == 0) &&",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/opencl.c",
+   "function": "IsSameOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(LocaleCompare(a->vendor_name,b->vendor_name) == 0) &&",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/opencl.c",
+   "function": "IsSameOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(LocaleCompare(a->name,b->name) == 0) &&",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/opencl.c",
+   "function": "IsSameOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(LocaleCompare(a->version,b->version) == 0) &&",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/opencl.c",
+   "function": "IsSameOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(a->max_clock_frequency == b->max_clock_frequency) &&",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/opencl.c",
+   "function": "IsSameOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(a->max_compute_units == b->max_compute_units))",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "SelectOpenCLDevice",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "SelectOpenCLDevice",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "SelectOpenCLDevice",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "for (j = i+1; j < clEnv->number_devices; j++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/opencl.c",
+   "function": "SelectOpenCLDevice",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (j = i+1; j < clEnv->number_devices; j++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/opencl.c",
+   "function": "AcquireMagickCLCacheInfo",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "device->requested++;",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLBenchmarks",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLBenchmarks",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLBenchmarks",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "AutoSelectOpenCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "AutoSelectOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "AutoSelectOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "AutoSelectOpenCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "AutoSelectOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "HasOpenCLDevices",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "HasOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "HasOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "HasOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < number_platforms; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDevices",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i = 0; i < number_platforms; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (i = 0; i < number_platforms; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDevices",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (j = 0; j < number_devices; j++,next++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/opencl.c",
+   "function": "InitializeOpenCL",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (clEnv->number_devices > 0)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (clEnv->number_devices == 1)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "LockSemaphoreInfo(openCL_lock);",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "for (i = 0; i < clEnv->number_devices; i++)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (clEnv->devices[i]->enabled == MagickFalse)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((device == (MagickCLDevice) NULL) || (score < best_score))",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((device == (MagickCLDevice) NULL) || (score < best_score))",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((device == (MagickCLDevice) NULL) || (score < best_score))",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice)NULL)",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "device->requested++;",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "RequestOpenCLDevice",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(openCL_lock);",
+   "verdict": "gap",
+   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/opencl.c",
+   "function": "AcquireOpenCLCommandQueue",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((device->profile_kernels == MagickFalse) &&",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/opencl.c",
+   "function": "AcquireOpenCLCommandQueue",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(device->command_queues_index >= 0))",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/opencl.c",
+   "function": "CopyMagickCLCacheInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(info->device,queue);",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "ReleaseOpenCLCommandQueue",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (queue == (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/opencl.c",
+   "function": "ReleaseOpenCLCommandQueue",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((device->profile_kernels != MagickFalse) ||",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/opencl.c",
+   "function": "ReleaseOpenCLCommandQueue",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "(device->command_queues_index >= MAGICKCORE_OPENCL_COMMAND_QUEUES-1))",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/opencl.c",
+   "function": "ReleaseOpenCLCommandQueue",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "(device->command_queues_index >= MAGICKCORE_OPENCL_COMMAND_QUEUES-1))",
+   "verdict": "unobservable",
+   "why": "the command-queue pool: whether a queue is taken from the device's pool or created, and whether a released queue goes back or is finished and released, changes only reuse; a skipped release leaks"
+  },
+  {
+   "at": 52,
+   "file": "MagickCore/opencl.c",
+   "function": "HasOpenCLDevices",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "strlen(accelerateKernels)+strlen(accelerateKernels2)+1);",
+   "verdict": "unobservable",
+   "why": "the kernel source buffer two bytes short (strlen(a)+strlen(b)-1): the copy of both sources overruns the heap by two bytes, which a memory checker would report; the compiled kernels are the same"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for ( ; *q != '\\0'; q++)",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (quote != 0)",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == quote)",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '\"') || (*q == '\\''))",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '\"') || (*q == '\\''))",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == '[')",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "bracket_depth++;",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == ']')",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bracket_depth > 0)",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if (bracket_depth > 0)",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '>') && (bracket_depth == 0))",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '>') && (bracket_depth == 0))",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDeviceBenchmark",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
+   "verdict": "gap",
+   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
   }
  ]
 }

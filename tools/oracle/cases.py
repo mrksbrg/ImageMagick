@@ -4904,6 +4904,10 @@ GAP_OPENCL_CASES += [("opencl huge -wavelet-denoise 5%",
 # A resize to exactly the work-group size (256 on pocl), for resizeHorizontalFilter's and
 # resizeVerticalFilter's `resized < workgroupSize` tests and the local memory they size.
 GAP_OPENCL_CASES += [("opencl rose_alpha -resize 256x256!", _ocl_step([img("rose_alpha")], "-resize 256x256!"), {})]
+# Three accelerated operators in one command: each waits on the events the one before left on
+# the image's OpenCL cache, so CopyOpenCLEvents merges two event lists (opencl.c).
+GAP_OPENCL_CASES += [("opencl rose_alpha chained blur, resize, local contrast",
+                      _ocl_step([img("rose_alpha")], "-blur 0x2 -resize 50% -local-contrast 10x20"), {})]
 # The device choice: GPU finds none (the CPU path), true takes the profile's best device, false
 # leaves OpenCL off. Each entry: label, environment.
 GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
