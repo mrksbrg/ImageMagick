@@ -403,8 +403,8 @@
   "col": 22,
   "function": "vision.c:PerimeterThreshold",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/c7894f63c3",
+  "cases": 1,
+  "killer": "gaps/c6bf0494c0",
   "why": "stdout differs"
  },
  {
@@ -930,10 +930,10 @@
   "line": 307,
   "col": 22,
   "function": "vision.c:CircularityThreshold",
-  "status": "survived",
+  "status": "killed",
   "cases": 2,
-  "capped": false,
-  "line_executed": true
+  "killer": "gaps/8c2ca91c0d",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/vision.c:307:55:307:57",
@@ -8001,7 +8001,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "gaps/430f91c9e1",
-  "why": "stdout differs"
+  "why": "exit status [0] -> [-6]; stdout differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/vision.c:1591:60:1591:62",
