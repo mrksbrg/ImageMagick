@@ -1,12 +1,12 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 81 mutants in MagickCore/property\.c$, 11 functions
-mutate: baseline over 506 cases in 0s
+mutate: baseline over 2 cases in 0s
   mutants: 25/81 (0s)
-  mutants: 50/81 (120s)
-  mutants: 75/81 (202s)
-  mutants: 81/81 (206s)
+  mutants: 50/81 (3s)
+  mutants: 75/81 (4s)
+  mutants: 81/81 (4s)
 
-mutate: 81 mutants, 206s
+mutate: 81 mutants, 4s
   killed 0, survived 35 (0 capped), no coverage 46, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -61,4 +61,4 @@ mutate: 81 mutants, 206s
     x  property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-property.json
+  full results: build-oracle/work/mutation-confirm-b193b8838-property.json
