@@ -3013,9 +3013,9 @@
   "col": 53,
   "function": "InterpretImageFilename",
   "status": "killed",
-  "cases": 65,
-  "killer": "token/35ea92b6c2",
-  "why": "exit status [0, 0] -> [0, 1]; stdout differs; stderr differs; frame%d-0.miff only in candidate; frame%d-1.miff only in candidate; frame%d-2.miff only in candidate; frame%d-3.miff only in candidate; fr"
+  "cases": 39,
+  "killer": "gaps/51c0d2bdff",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/image.c:1746:18:1746:20",
@@ -4405,7 +4405,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/image.c:2439:46:2439:48",
