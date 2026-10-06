@@ -1,48 +1,24 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 29 mutants in MagickCore/locale\.c$, 12 functions
-mutate: baseline over 4 cases in 0s
-  mutants: 25/29 (3s)
-  mutants: 29/29 (3s)
+mutate: baseline over 0 cases in 0s
+  mutants: 25/29 (0s)
+  mutants: 29/29 (0s)
 
-mutate: 29 mutants, 3s
-  killed 0, survived 20 (0 capped), no coverage 9, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 29 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 29, errors 0
 
   function                           total killed survived no-cov
-  LoadLocaleCache                        9      0        9      0
-  IsLocaleTreeInstantiated               4      0        4      0
-  GetLocaleOptions                       3      0        3      0
+  LoadLocaleCache                        9      0        0      9
+  IsLocaleTreeInstantiated               4      0        0      4
+  GetLocaleOptions                       3      0        0      3
   LocaleFatalErrorHandler                3      0        0      3
   GetLocaleInfoList                      2      0        0      2
   GetLocaleList                          2      0        0      2
-  DestroyLocaleNode                      1      0        1      0
-  DestroyLocaleOptions                   1      0        1      0
-  FormatLocaleFileList                   1      0        1      0
+  DestroyLocaleNode                      1      0        0      1
+  DestroyLocaleOptions                   1      0        0      1
+  FormatLocaleFileList                   1      0        0      1
   LocaleInfoCompare                      1      0        0      1
   GetLocaleValue                         1      0        0      1
-  ChopLocaleComponents                   1      0        1      0
+  ChopLocaleComponents                   1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
-    x  locale.c:305:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
-    x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  locale.c:832:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
-    x  locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
-    x  locale.c:926:28 cxx_eq_to_ne               if (locale_semaphore == (SemaphoreInfo *) NULL)
-       locale.c:927:9 cxx_remove_void_call       ActivateSemaphoreInfo(&locale_semaphore);
-    x  locale.c:941:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:949:22 cxx_eq_to_ne               if (locale == (char *) NULL)
-    x  locale.c:1139:54 cxx_gt_to_ge               for (count=0; (count < (ssize_t) components) && (p > path); p--)
-    x  locale.c:1277:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-    x  locale.c:1284:47 cxx_eq_to_ne               if (LocaleCompare(keyword,"locale") == 0)
-    x  locale.c:1290:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
-       locale.c:1314:42 cxx_add_to_sub             path,locale,depth+1,exception);
-    x  locale.c:1327:24 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
-    x  locale.c:1327:39 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
-    x  locale.c:1331:22 cxx_ne_to_eq               if (*token != '=')
-    x  locale.c:1369:65 cxx_gt_to_ge               while ((isspace((int) ((unsigned char) *q)) != 0) && (q > p))
-    x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-ff3dbf4dd-locale.json
+  full results: build-oracle/work/mutation-confirm-f51f7cbc7-locale.json
