@@ -3507,3 +3507,45 @@ equalize cases that reach AccelerateEqualizeImage, one (`opencl rose_alpha -equa
   clSetKernelArg, 2077), 14 unobservable (frees and releases in the clean-up: leaks).
 - Open: 1791 (the logging test) and the mapped and read lengths (1888, 1893, 2100-2106). Under
   pocl's CL_MEM_USE_HOST_PTR a short map may not matter; that needs a probe, not a reading.
+
+**accelerate.c, read after its family rerun** (2026-10-06, night). 299 verdicts in all: the 69
+above, and 230 more (`a36661721`). By kind:
+- *Clean-up* (unobservable, ~150): every Compute* function ends with releases of buffers,
+  kernels, queues and devices behind `!= NULL` tests; a skipped release leaks. The destroy behind
+  `outputReady == MagickFalse` runs only after an OpenCL failure, which pocl never gives here.
+- *Lengths under `CL_MEM_USE_HOST_PTR`* (unobservable): the pixel cache is aligned, so the image
+  buffers wrap the host memory, and pocl, a CPU device, works in it directly. A buffer, map or
+  read length cut short (`length/sizeof`) changes nothing it shows; a discrete GPU would copy only
+  part. The copy branches (`CL_MEM_COPY_HOST_PTR`, `clEnqueueReadBuffer`) are not taken.
+- *Pass and launch arithmetic* (equivalent): ComputeLocalContrastImage and
+  ComputeWaveletDenoiseImage split a launch into passes; their kernels bounds-check every write
+  and each work item writes only its own row, pixel or tile from inputs no item writes. So any
+  pass count of at least 1, one pass more, and launch sizes that still cover the image give the
+  same pixels. (In float, `3999999999` is `4e9`, so the pass formula never yields 0.) Blur's
+  launch rounds up by a chunk, and BlurRow/BlurColumn guard `x < columns`, `y < rows`.
+- *Argument counters* (equivalent): `i++` in the last clSetKernelArg of a list.
+- *Logging* (unobservable): `IsEventLogging()` tests.
+- *Overruns a memory checker would see* (unobservable): one-past loops over the motion-blur
+  filter and offset buffers, the function parameters and the resize coefficients.
+- *Unresolved* (24): the local-memory sizes of blur and resize, which pocl tolerates but a GPU
+  may not, and Despeckle's `k <= 2`, which writes a third `cl_mem` past its array on the stack.
+- *Gaps* (2): ComputeLocalContrastImage's pass offset (`x*gsize` → `x/gsize`) matters only with
+  two passes, which need rows × columns × radius ≥ 4·10⁹ (a 3000×3000 image at radius 100).
+
+**Two new opencl cases** (deterministic over 4 runs): `opencl huge -wavelet-denoise 5%`
+(1600×1300, two passes; by hand it kills the pass loop, its offset, the `outputReady` break and
+two size mutants) and `opencl rose_alpha -resize 256x256!` (exactly pocl's work-group size; kills
+`resizedColumns < workgroupSize`, its vertical twin and a local-memory size). They run in a round
+once the x11cl2 reruns end. Still open: `alpha_trait > CopyPixelTrait` in the matte flags (1487,
+1501, 3333; differs only when the trait is exactly Copy) and `support < 0.5` (3502, 3681; a
+`filter:support=0.25` probe at 50% did not kill it).
+
+**opencl.c waits for its rerun.** The main run's 300-case cap left opencl.c's mutants tried
+against cheap CPU-only cases: `GetOpenCLCacheDirectory() == NULL` (1828), which turns OpenCL off
+when inverted, survived 300 cases and is killed by hand by `opencl rose_alpha -local-contrast`.
+Its family rerun (stage 2 of `x11cl2-fam`, uncapped) comes first; verdicts after.
+
+**A minor upstream bug, opencl.c StringSignature:** the tail of a kernel's source is copied into
+`char padded[4]` and read back as `p.u[0]`, a `size_t`: 8 bytes on 64-bit, so 4 bytes past the
+array, and the string's last 5 to 7 bytes count only in part. Only the kernel-cache file name
+depends on it, so at worst a cache miss.
