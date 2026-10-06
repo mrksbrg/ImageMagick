@@ -3596,3 +3596,32 @@ ContrastStretch and UnsharpMask (no caller, call commented out upstream). The er
 the 300-case cap over the whole catalogue, which crowded out the slow X11 cases before (opencl.c);
 its 1544 survivors are now rerun uncapped against the x11, opencl and xevents families
 (`x11cl2-errfam`).
+
+**W01: the uncapped error rerun and the widget grabs** (2026-10-06, morning).
+- `x11cl2-errfam`: the error rerun's 1544 survivors (widget.c, xwindow.c), uncapped against
+  the x11, opencl and xevents families: **0 killed**. Its 300-case cap had not hidden kills.
+- **Widget grabs.** Every older case grabs the image window after a widget has closed, so no
+  widget's drawing was compared. Eight cases grabbed a widget while open (`cacfed986`): the
+  file browser for open and save, a dialog empty and typed, the Commands widget, three menus.
+- **1818 false kills, and why.** The first round (`x11cl2-grab`) reported 1937 kills, 1818 of
+  them by the two file-browser cases. The browser draws its directory's absolute path, and
+  mutate.py runs the baseline (`mbase-…`) and each mutant (`mut-<hash>`) in differently named
+  case directories, so its grab differed for every mutant. The determinism check reused one
+  directory name and passed. Both cases are gone (`e204fba33`; opened on the corpus instead, the
+  browser still differs, and fails); their kills were removed from the report (the original
+  kept as `.invalid-browser`), and those 1818 mutants rerun against the six other grab cases
+  (`x11cl2-grab2`): 0 killed. **119 real kills**, all in widget.c (13% → 18%).
+- **Every x11 and xevents case run in two directory names** (`mbase-side-…`, `mut-side-…`):
+  304 cases, **0 differ**. A new case is now checked that way, not only for repeat runs.
+- 31 more verdicts (unobservable): removed `XSetWMName`/`XSetWMIconName` (Xvfb runs no window
+  manager; a grab reads only the window's pixels) and `XDelay` (it only waits; xevents waits for
+  idle after every key).
+
+| File | Killed | Adjusted |
+| --- | --- | --- |
+| accelerate.c | 486 | 61% |
+| opencl.c | 238 | 61% |
+| xwindow.c | 442 | 25% |
+| widget.c | 438 | 18% |
+| animate.c | 78 | 17% |
+| display.c | 224 | 8% |

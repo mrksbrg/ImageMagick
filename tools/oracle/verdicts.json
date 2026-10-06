@@ -31311,6 +31311,316 @@
    "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
    "verdict": "gap",
    "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,1500);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateBackgroundImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,resources.delay*(delay == 0 ? 10 : delay));",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateBackgroundImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XDelay(display,resources.delay*(delay == 0 ? 10 : delay));",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,resource_info->delay*(delay == 0 ? 10 : delay));",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,SuspendTime);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,1500);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XDelay(display,1500);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "XDelay(display,1500);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "XDelay(display,1500);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XOpenImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,(size_t) (1000*StringToLong(seconds)));",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayBackgroundImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,delay == 0UL ? 10UL : delay);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,SuspendTime << 2);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDrawBeveledButton",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,SuspendTime << 2);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XCommandWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,SuspendTime);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,delay);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,delay);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xwindow.c",
+   "function": "XCheckRefreshWindows",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,SuspendTime);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xwindow.c",
+   "function": "XCheckRefreshWindows",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XDelay(display,SuspendTime << 1);",
+   "verdict": "unobservable",
+   "why": "XDelay only waits (a pause before a menu or between animation steps); xevents waits for the client to be idle after every key, so the output is the same"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->image.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->image.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetWMName(display,windows->image.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XCommandWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->command.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XCommandWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMIconName(display,windows->command.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMIconName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMIconName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMIconName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetWMIconName(display,windows->widget.id,&window_name);",
+   "verdict": "unobservable",
+   "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
   }
  ]
 }
