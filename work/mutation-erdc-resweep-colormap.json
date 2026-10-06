@@ -57,7 +57,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/7e6bc5621f",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:131:20:131:21",
@@ -127,7 +127,7 @@
   "col": 5,
   "function": "AcquireImageColormap",
   "status": "killed",
-  "cases": 44,
+  "cases": 43,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
