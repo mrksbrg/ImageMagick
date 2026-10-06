@@ -3669,3 +3669,14 @@ few the rounds missed (opencl.c 61% → 65%, xwindow.c 25% → 28%):
 | widget.c | 19% | 52% |
 | animate.c | 17% | 95% |
 | display.c | 14% | 73% |
+
+**Every case in two directory names** (2026-10-07, night). After the file-browser grabs, the
+whole wide catalogue (13831 cases) was run in two differently named case directories, as
+mutate.py runs a baseline (`mbase-…`) and a mutant (`mut-<hash>`). **3 differ**: the windrv
+blob cases for PS, EPS and PS2 ("length only"). PostScript's `%%Title` holds the path of the
+temporary file ImageToBlob writes, which lies in the case directory, so even the length follows
+the directory's name. They had been credited with 9 kills in blob.c (`sdlcases-windrv-blob`);
+hand-run in one directory, none of the three kills any of them, the PDF cases kill two
+(3816, 3824), and **7 were false**. The report is corrected (the original kept as
+`.invalid-ps`), the three cases are gone, and **blob.c stays trusted** (97% adjusted, every
+function at 80% or more).
