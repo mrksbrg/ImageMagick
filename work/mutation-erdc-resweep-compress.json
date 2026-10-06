@@ -237,7 +237,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "encode/042453c174",
-  "why": "exit status [0] -> [-6]; stderr differs; enc.pdf differs"
+  "why": "exit status [0] -> [-6]; enc.pdf differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:313:30:313:31",
@@ -273,7 +273,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "encode/042453c174",
-  "why": "exit status [0] -> [-6]; stderr differs; enc.pdf differs"
+  "why": "exit status [0] -> [-6]; enc.pdf differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:318:5:318:35",
@@ -993,7 +993,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "gaps/b1b7141fcb",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:564:17:564:19",
@@ -1245,7 +1245,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "gaps/b1b7141fcb",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:612:46:612:48",
@@ -2241,7 +2241,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "encode/06ccec9c71",
-  "why": "exit status [0] -> [-6]; enc.ps3 differs"
+  "why": "exit status [0] -> [-6]; stderr differs; enc.ps3 differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compress.c:1012:40:1012:42",
