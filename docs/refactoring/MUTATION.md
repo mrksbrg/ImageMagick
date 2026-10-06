@@ -3643,3 +3643,12 @@ Return, ctrl+v, a click to place it). Their round (`x11cl2-cutpaste`) killed **4
 **11% → 13%**, reach 54% → 57%. Color and Matte, entered from Image Edit, keep the Commands
 window (no new window maps), and a click on the image then changes nothing and the mode does
 not exit, with Escape, a second q, or a click on Dismiss: parked.
+
+**Modes behind the Commands widget** (`7abfec089`). Draw, Color, Matte and Rotate keep the
+Commands widget open, and on the default screen it covers the 70×46 rose window, so a drag at
+image coordinates landed on the widget and opened a menu (the hangs seen before). With display
+`-geometry +300+50` each exits cleanly. Their round (`x11cl2-modes`) killed **46** (XInfoWidget
+14, XDrawEditImage 10, XColorEditImage 5, XMatteEditImage 4, …); display.c reach **57% → 73%**,
+adjusted 13% → 14%. Draw's grab shows its position readout but no element yet, Rotate's no
+rotation, and Color's and Matte's click leaves the pixel as it was: the next step for each is
+an observable effect.
