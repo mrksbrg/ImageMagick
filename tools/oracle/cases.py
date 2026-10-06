@@ -5051,6 +5051,30 @@ GAP_XEVENTS_GRAB_CASES = [
 ] + [("xevents grab: %s menu" % menu, _xev_menu_grab(menu, item, items), [])
      for menu, item, items in (("View", "Half Size", _XEV_VIEW), ("Transform", "Flip", _XEV_TRANSFORM),
                                ("Enhance", "Spiff", _XEV_ENHANCE))]
+# Drags (xevents press/move/release, 2026-10-06): display's crop and chop modes. c enters crop
+# mode (its mode widget maps; use:1 keeps the image window), a drag marks the rectangle, arrow
+# keys move its corner, Return crops and Escape gives up; Transform > Chop reuses the Commands
+# window (no new map) and chops along the line dragged. Left out, measured: Region of Interest
+# never settles and leaves temporary files; in Draw, Escape quits display; Color and Matte do
+# not exit after a click.
+def _xev_menu_pick(menu, item, items):
+    i = items.index(item)
+    y = 12 + 20.2 * i + (5 if i == len(items) - 1 else 0)
+    return "map click:20,20 map click:65,%d map click:40,%d" % (101 + 32 * _XEV_MENUS.index(menu), y)
+
+
+GAP_XEVENTS_CASES += [
+    ("xevents display crop by drag", "map key:c map use:1 drag:10,10,50,40 key:Return grab:out.ppm key:q",
+     ["display", img("rose")]),
+    ("xevents display crop by drag, corner moved", "map key:c map use:1 drag:10,10,50,40 key:Right key:Down "
+     "key:Return grab:out.ppm key:q", ["display", img("rose")]),
+    ("xevents display crop by drag, escaped", "map key:c map use:1 drag:10,10,50,40 key:Escape grab:out.ppm key:q",
+     ["display", img("rose")]),
+    ("xevents display chop, horizontal", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
+     " use:1 drag:5,20,60,20 grab:out.ppm key:q", ["display", img("rose")]),
+    ("xevents display chop, vertical", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
+     " use:1 drag:30,5,30,40 grab:out.ppm key:q", ["display", img("rose")]),
+]
 GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(menu, item, items, reply),
                        ["display", img("rose")]) for menu, item, items, reply in _XEV_MENU_ITEMS]
 # Widgets grabbed themselves, without the @ before the grab that the image-window cases get: the

@@ -9,6 +9,12 @@
     type:TEXT     type TEXT, one key per character ('_' stands for a space)
     point:X,Y     move the pointer to X,Y in the focused window (widgets read the pointer)
     click:X,Y     move it there and click the first button
+    press:X,Y     move it there and press the first button (held until release:)
+    move:X,Y      move it there, the button still held (display's crop, ROI and draw modes
+                  follow the pointer while the button is down)
+    release:X,Y   move it there and release the first button
+    drag:X1,Y1,X2,Y2[,N]
+                  press at X1,Y1, move to X2,Y2 in N steps (default 4), release there
     use:N         keep the focus on the Nth window waited for (1: the first) until the next map,
                   e.g. the image window while display's Commands widget stays open
     grab:FILE     write the focused window's pixels as PPM (24-bit TrueColor screens)
@@ -254,6 +260,30 @@ static void Point(const char *xy)
   WaitIdle();
 }
 
+/* The first button down or up at X,Y in the focused window; the pointer is moved there first. */
+static void Button(const char *xy, Bool down)
+{
+  Point(xy);
+  XTestFakeButtonEvent(dpy, 1, down, CurrentTime);
+  WaitIdle();
+}
+
+static void Drag(const char *arg)
+{
+  int x1, y1, x2, y2, n = 4, i;
+  char xy[64];
+  if (sscanf(arg, "%d,%d,%d,%d,%d", &x1, &y1, &x2, &y2, &n) < 4) Fail("drag:X1,Y1,X2,Y2[,N]");
+  if (n < 1) n = 1;
+  (void) snprintf(xy, sizeof(xy), "%d,%d", x1, y1);
+  Button(xy, True);
+  for (i = 1; i <= n; i++)
+  {
+    (void) snprintf(xy, sizeof(xy), "%d,%d", x1 + (x2 - x1) * i / n, y1 + (y2 - y1) * i / n);
+    Point(xy);
+  }
+  Button(xy, False);
+}
+
 static void Grab(const char *file)
 {
   XWindowAttributes a;
@@ -314,6 +344,10 @@ int main(int argc, char **argv)
       else if (strncmp(tok, "use:", 4) == 0) { pinned = atoi(tok + 4) - 1; Refocus(); }
       else if (strncmp(tok, "click:", 6) == 0) { Point(tok + 6); XTestFakeButtonEvent(dpy, 1, True, CurrentTime);
         XTestFakeButtonEvent(dpy, 1, False, CurrentTime); WaitIdle(); }
+      else if (strncmp(tok, "press:", 6) == 0) Button(tok + 6, True);
+      else if (strncmp(tok, "move:", 5) == 0) Point(tok + 5);
+      else if (strncmp(tok, "release:", 8) == 0) Button(tok + 8, False);
+      else if (strncmp(tok, "drag:", 5) == 0) Drag(tok + 5);
       else Fail("unknown action");
     }
     free(script);
