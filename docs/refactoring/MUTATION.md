@@ -3652,3 +3652,20 @@ image coordinates landed on the widget and opened a menu (the hangs seen before)
 adjusted 13% → 14%. Draw's grab shows its position readout but no element yet, Rotate's no
 rotation, and Color's and Matte's click leaves the pixel as it was: the next step for each is
 an observable effect.
+
+**W01 confirmation sweep** (`x11cl3`, 2026-10-06 evening to 00:07): all 9271 mutants of the six
+files against the whole current catalogue, capped at 1500 cases a mutant (4 capped). The first
+attempt at 24 jobs was OOM-killed five times where it reached opencl.c (pocl cases and the
+device-benchmark mutants); it resumed in two stages, opencl.c alone at 8 jobs. Killed 2152,
+survived 4084, no coverage 3035. Gated alone it gives the same figures as all of the day's
+reports merged with it, so the rounds' kills hold when every case runs together; and it adds a
+few the rounds missed (opencl.c 61% → 65%, xwindow.c 25% → 28%):
+
+| File | Adjusted | Reach |
+| --- | --- | --- |
+| opencl.c | 65% | 89% |
+| accelerate.c | 61% | 76% |
+| xwindow.c | 28% | 60% |
+| widget.c | 19% | 52% |
+| animate.c | 17% | 95% |
+| display.c | 14% | 73% |
