@@ -657,7 +657,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_le_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:522:20:522:22",
@@ -1279,9 +1279,9 @@
   "col": 45,
   "function": "segment.c:Classify",
   "status": "killed",
-  "cases": 2,
-  "killer": "unary/c7b6ca0e15",
-  "why": "out.miff differs"
+  "cases": 27,
+  "killer": "mogrify/b2a10af37b",
+  "why": "work.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:626:90:626:91",
@@ -2217,7 +2217,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:831:48:831:50",
@@ -2229,7 +2229,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_gt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:832:33:832:34",
@@ -2289,7 +2289,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_le_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:840:26:840:28",
@@ -2301,7 +2301,7 @@
   "status": "killed",
   "cases": 8,
   "killer": "unary/970e28e7e6",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:840:48:840:50",
@@ -2325,7 +2325,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/ea3b44a78a",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:841:33:841:34",
