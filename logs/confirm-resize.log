@@ -1,17 +1,17 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 181 mutants in MagickCore/resize\.c$, 32 functions
-mutate: baseline over 73 cases in 0s
+mutate: baseline over 1 cases in 0s
   mutants: 25/181 (0s)
   mutants: 50/181 (0s)
   mutants: 75/181 (0s)
-  mutants: 100/181 (16s)
-  mutants: 125/181 (16s)
-  mutants: 150/181 (16s)
-  mutants: 175/181 (19s)
-  mutants: 181/181 (26s)
+  mutants: 100/181 (0s)
+  mutants: 125/181 (0s)
+  mutants: 150/181 (0s)
+  mutants: 175/181 (0s)
+  mutants: 181/181 (0s)
 
-mutate: 181 mutants, 26s
-  killed 0, survived 43 (0 capped), no coverage 138, errors 0
+mutate: 181 mutants, 0s
+  killed 0, survived 33 (0 capped), no coverage 148, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -20,7 +20,7 @@ mutate: 181 mutants, 26s
   AcquireResizeFilter                   17      0       17      0
   CubicSpline                            9      0        0      9
   SampleImage                            7      0        0      7
-  ThumbnailImage                         7      0        7      0
+  ThumbnailImage                         7      0        0      7
   InterpolativeResizeImage               6      0        0      6
   MagicKernelSharp2021                   5      0        0      5
   BesselOrderOne                         5      0        0      5
@@ -28,7 +28,7 @@ mutate: 181 mutants, 26s
   Fish2X                                 4      0        0      4
   MagnifyImage                           4      0        0      4
   MagicKernelSharp2013                   3      0        0      3
-  SincFast                               3      0        3      0
+  SincFast                               3      0        0      3
   HorizontalFilter                       3      0        3      0
   Quadratic                              2      0        0      2
   Hq2XHelper                             2      0        0      2
@@ -50,9 +50,6 @@ mutate: 181 mutants, 26s
 
   survivors (equivalent, or a gap in the catalogue):
     x  resize.c:244:9 cxx_lt_to_le               if (x < 2.0)
-    x  resize.c:523:9 cxx_gt_to_ge               if (x > 4.0)
-       resize.c:525:44 cxx_mul_to_div             const double alpha=(double) (MagickPI*x);
-       resize.c:526:33 cxx_div_to_mul             return(sin((double) alpha)/alpha);
     x  resize.c:984:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
        resize.c:1008:28 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
        resize.c:1008:28 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
@@ -85,13 +82,6 @@ mutate: 181 mutants, 26s
     x  resize.c:3733:39 cxx_mul_to_div             alpha=contribution[j].weight*QuantumScale*(double)
     x  resize.c:3798:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  resize.c:3888:5 cxx_remove_void_call       AppendImageProfileProperty(resize_image,"hdrgm","hdrgm:Transform",
-    x  resize.c:4621:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  resize.c:4635:41 cxx_mul_to_div             x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double)
-    x  resize.c:4638:21 cxx_gt_to_ge               if ((x_factor > 4) && (y_factor > 4))
-    x  resize.c:4638:39 cxx_gt_to_ge               if ((x_factor > 4) && (y_factor > 4))
-    x  resize.c:4647:21 cxx_gt_to_ge               if ((x_factor > 2) && (y_factor > 2))
-    x  resize.c:4675:8 cxx_remove_void_call       ResetImageProfileIterator(thumbnail_image);
-    x  resize.c:4692:17 cxx_ne_to_eq               if (mime_type != (const char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-resize.json
+  full results: build-oracle/work/mutation-confirm-b193b8838-resize.json
