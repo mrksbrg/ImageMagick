@@ -3549,3 +3549,30 @@ Its family rerun (stage 2 of `x11cl2-fam`, uncapped) comes first; verdicts after
 `char padded[4]` and read back as `p.u[0]`, a `size_t`: 8 bytes on 64-bit, so 4 bytes past the
 array, and the string's last 5 to 7 bytes count only in part. Only the kernel-cache file name
 depends on it, so at worst a cache miss.
+
+**opencl.c, after its uncapped family rerun** (stage 2 of `x11cl2-fam`; it killed 14 more,
+among them nine in GetOpenCLCacheDirectory and the cache-directory test at 1828, so the capped
+main run had hidden them). 201 verdicts (`31335954f`): 115 unobservable, 84 gaps, 2 equivalent.
+- Unobservable: the device benchmark and its timer (it times devices; the fixed profile skips
+  it), clean-up at exit and of a cache's OpenCL buffer, the command-queue pool, and the
+  kernel-binary cache (its file name, saving and loading: a miss rebuilds the same kernels).
+- Gaps: one platform with one device (pocl): device loops run once, IsSameOpenCLDevice never
+  compares two, RequestOpenCLDevice returns before its scoring; kernel profiling (API only, and
+  its log carries timings); the profile parser's `<!DOCTYPE` and comments (the seeded profile has
+  neither); the cache directory when MAGICK_OPENCL_CACHE_DIR is unset or missing.
+- A new case chains blur, resize and local contrast, so CopyOpenCLEvents merges two event lists
+  (kills its one-past loop by hand). Open: AutoSelectOpenCLDevices with the CPU and GPU options,
+  event retain and wait-list handling, LoadOpenCLDevices' memsets and its error paths, two unlocks.
+
+**The X11 files: 290 verdicts so far** (`483ec8380`, `21d5eae3d`):
+- 200 unobservable: removed `XSetCursorState` (the busy cursor is in no grab) and
+  `XCheckRefreshWindows` (the `@` before every xevents grab repaints the window; animate compares
+  no window content) in display.c, animate.c, widget.c and xwindow.c.
+- display.c, 90 gaps: `XConfigureImageColormap` after a command (matters only on a colormapped
+  visual; the xevents cases run on the 24-bit default screen), `CatchException` (no driven command
+  leaves a warning), and XDisplayImage's auto-advance timer (only with an image delay or `-update`).
+  A `display -delay 100` xevents case does not work: with a delay display polls its event loop,
+  so xevents never sees it idle ("client never became idle").
+- display.c's unreached functions are its interactive edit modes (draw, crop, ROI, annotate,
+  colour, matte, chop, composite, paste, pan, trim, magnify, tile): mouse drags inside widgets
+  that `q` does not close. That is case work for a later round, not verdicts.
