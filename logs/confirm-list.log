@@ -1,11 +1,11 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 34 mutants in MagickCore/list\.c$, 14 functions
-mutate: baseline over 1 cases in 0s
+mutate: baseline over 2 cases in 0s
   mutants: 25/34 (0s)
   mutants: 34/34 (0s)
 
 mutate: 34 mutants, 0s
-  killed 0, survived 2 (0 capped), no coverage 32, errors 0
+  killed 0, survived 1 (0 capped), no coverage 33, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -21,12 +21,11 @@ mutate: 34 mutants, 0s
   RemoveFirstImageFromList               1      0        0      1
   RemoveLastImageFromList                1      0        0      1
   ReplaceImageInList                     1      0        0      1
-  ReplaceImageInListReturnLast           1      0        1      0
+  ReplaceImageInListReturnLast           1      0        0      1
   ReverseImageList                       1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
        list.c:152:19 cxx_ne_to_eq               if (image != (Image *) NULL)
-    x  list.c:1256:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-d64dfdf9d-list.json
+  full results: build-oracle/work/mutation-confirm-cacfed986-list.json
