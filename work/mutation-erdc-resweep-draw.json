@@ -1121,7 +1121,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:705:16:705:18",
@@ -11589,7 +11589,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "mvg/7e4bad791d",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:3829:53:3829:54",
@@ -20391,7 +20391,7 @@
   "col": 46,
   "function": "GetDrawInfo",
   "status": "killed",
-  "cases": 26,
+  "cases": 25,
   "killer": "preview/0f9731f50e",
   "why": "preview:out.miff differs"
  },
@@ -20463,7 +20463,7 @@
   "col": 14,
   "function": "GetDrawInfo",
   "status": "killed",
-  "cases": 89,
+  "cases": 88,
   "killer": "gaps/ed5a7f7a5d",
   "why": "out.miff differs"
  },
@@ -22625,7 +22625,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:6490:15:6490:16",
@@ -24137,7 +24137,7 @@
   "status": "killed",
   "cases": 15,
   "killer": "gaps/59d708bd70",
-  "why": "exit status [0] -> ['timeout']; m.miff missing in candidate; magick-PXryIAVvKJjQiNL95ZwXXzkY6HUcXrTL only in candidate; magick-nes5UiuaoalYG6_-1fe7qK0qcuc6TrAb only in candidate"
+  "why": "exit status [0] -> ['timeout']; m.miff missing in candidate; magick-3Hkm-eY0_xE2byq0ZGdFOtZ7GvOYaqnv only in candidate; magick-S2uieiecHvXsbYt9VkFnTfl0zWTQlvYG only in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:6900:23:6900:24",
@@ -24689,7 +24689,7 @@
   "status": "killed",
   "cases": 7,
   "killer": "draw/9295185bae",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7023:63:7023:65",
