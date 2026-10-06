@@ -2301,7 +2301,7 @@
   "status": "killed",
   "cases": 22,
   "killer": "gaps/9fa6e0114e",
-  "why": "exit status [0] -> [-6]; stdout differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/layer.c:1009:69:1009:70",
@@ -3043,9 +3043,9 @@
   "col": 25,
   "function": "layer.c:OptimizeLayerFrames",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/985a25d8a1",
-  "why": "out.miff differs"
+  "cases": 2,
+  "killer": "gaps/5936d60f4e",
+  "why": "stdout differs; out.miff differs"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/layer.c:1275:34:1275:35",
@@ -3369,7 +3369,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "gaps/5936d60f4e",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stdout differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/layer.c:1357:16:1357:18",
