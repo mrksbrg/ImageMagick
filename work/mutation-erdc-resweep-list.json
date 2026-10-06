@@ -139,9 +139,9 @@
   "col": 49,
   "function": "CloneImages",
   "status": "killed",
-  "cases": 1,
-  "killer": "sequence/8efcbf4641",
-  "why": "out.miff differs"
+  "cases": 2,
+  "killer": "gaps/5936d60f4e",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:248:62:248:64",
@@ -153,7 +153,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "sequence/8efcbf4641",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:252:15:252:16",
