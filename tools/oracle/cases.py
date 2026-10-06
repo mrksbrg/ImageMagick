@@ -5029,6 +5029,29 @@ _XEV_MENU_ITEMS = ([("View", it, _XEV_VIEW, r) for it, r in (("Half Size", None)
                    [("F/X", it, _XEV_FX, r) for it, r in (("Solarize...", "50%"), ("Sepia Tone...", "80%"),
                                                         ("Swirl...", "60"), ("Implode...", "0.5"),
                                                         ("Vignette...", "0x5"), ("Wave...", "5x30"))])
+# The widgets grabbed while open (W01, 2026-10-06): the cases above grab the image window after
+# a widget has closed, so the widgets' drawing (bevels, text, highlights, layout) was never
+# compared. Here the grab comes right after the widget maps, with no @ before it (@ would go to
+# the widget). Each entry: label, script, files copied in first (display opens the first copy,
+# so the file browser lists the case directory, not the corpus; else display opens rose).
+def _xev_menu_grab(menu, item, items):
+    i = items.index(item)
+    y = 12 + 20.2 * i + (5 if i == len(items) - 1 else 0)
+    return "map click:20,20 map click:65,%d map grab:out.ppm click:40,%d use:1 key:q" % (
+        101 + 32 * _XEV_MENUS.index(menu), y)
+
+
+GAP_XEVENTS_GRAB_CASES = [
+    ("xevents grab: file browser, open", "map key:ctrl+o map grab:out.ppm " + _XEV_FIELD[4:] + "rose.miff key:Return key:q",
+     ["rose"]),
+    ("xevents grab: file browser, save", "map key:ctrl+s map grab:out.ppm " + _XEV_FIELD[4:] + "out.miff key:Return key:q",
+     ["rose"]),
+    ("xevents grab: dialog, empty", "map key:F3 map grab:out.ppm key:ctrl+u type:0x1 key:Return key:q", []),
+    ("xevents grab: dialog, typed", "map key:F3 map key:ctrl+u type:0x1 grab:out.ppm key:Return key:q", []),
+    ("xevents grab: Commands widget", "map click:20,20 map grab:out.ppm use:1 key:q", []),
+] + [("xevents grab: %s menu" % menu, _xev_menu_grab(menu, item, items), [])
+     for menu, item, items in (("View", "Half Size", _XEV_VIEW), ("Transform", "Flip", _XEV_TRANSFORM),
+                               ("Enhance", "Spiff", _XEV_ENHANCE))]
 GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(menu, item, items, reply),
                        ["display", img("rose")]) for menu, item, items, reply in _XEV_MENU_ITEMS]
 # Widgets grabbed themselves, without the @ before the grab that the image-window cases get: the
@@ -5093,6 +5116,11 @@ def _gap_x11_opencl_cases():
     for label, script, files in GAP_XEVENTS_WIDGET_CASES:
         yield _with_run(_with_inputs(_case("xevents", label, [["@xevents", script, "display", img("rose")]],
                                            ["out.ppm"]), files=files or None), env=_XEV_ENV, x11=True)
+    for label, script, names in GAP_XEVENTS_GRAB_CASES:
+        copies = [[img(n), "-strip", "%s.miff" % n] for n in names]
+        target = "%s.miff" % names[0] if names else img("rose")
+        yield _with_run(_case("xevents", label, copies + [["@xevents", script, "display", target]], ["out.ppm"]),
+                        env=_XEV_ENV, x11=True)
     for label, script, args, names in GAP_XEVENTS_FILE_CASES:
         copies = [[img(n), "-strip", "%s.miff" % n] for n in names]
         yield _with_run(_case("xevents", label, copies + [["@xevents", script.replace("grab:", "key:at grab:")] + args],
