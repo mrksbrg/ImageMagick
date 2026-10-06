@@ -3625,3 +3625,15 @@ its 1544 survivors are now rerun uncapped against the x11, opencl and xevents fa
 | widget.c | 438 | 18% |
 | animate.c | 78 | 17% |
 | display.c | 224 | 8% |
+
+**W01: drags** (2026-10-06, midday). xevents gained `press:`, `move:`, `release:` and
+`drag:X1,Y1,X2,Y2[,N]` (`0817fdf97`), and five display cases use them: crop by drag (plain,
+corner moved with the arrow keys, given up with Escape) and chop along a horizontal and a
+vertical line. Each matches over 3 runs and across two case-directory names. The round
+(`x11cl2-drag`, 6125 open display.c/widget.c/xwindow.c mutants against the five) killed **84**:
+XCropImage 38, XChopImage 26, XSetCropGeometry 7, and 13 elsewhere. display.c **8% → 11%**
+adjusted, reach 41% → 54%.
+
+Measured and left out: Region of Interest (never settles; leaves temporary files), Draw (a drag
+draws nothing the grab shows, and Escape out of the mode loses the image window), Color and
+Matte (they do not exit after a click).
