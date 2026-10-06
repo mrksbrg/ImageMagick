@@ -1,7 +1,7 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 616 mutants in MagickCore/draw\.c$, 40 functions
-  baseline: 1/1 (0s)
-mutate: baseline over 1 cases in 1s
+  baseline: 8/8 (0s)
+mutate: baseline over 8 cases in 1s
   mutants: 25/616 (0s)
   mutants: 50/616 (0s)
   mutants: 75/616 (0s)
@@ -25,10 +25,10 @@ mutate: baseline over 1 cases in 1s
   mutants: 525/616 (0s)
   mutants: 550/616 (0s)
   mutants: 575/616 (0s)
-  mutants: 600/616 (0s)
-  mutants: 616/616 (0s)
+  mutants: 600/616 (6s)
+  mutants: 616/616 (7s)
 
-mutate: 616 mutants, 0s
+mutate: 616 mutants, 7s
   killed 0, survived 21 (0 capped), no coverage 595, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -98,4 +98,4 @@ mutate: 616 mutants, 0s
     x  draw.c:6213:42 cxx_ne_to_eq               if (draw_info->image_info->server_name != (char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-d64dfdf9d-draw.json
+  full results: build-oracle/work/mutation-confirm-cacfed986-draw.json
