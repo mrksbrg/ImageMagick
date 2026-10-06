@@ -30411,6 +30411,906 @@
    "src": "XCheckRefreshWindows(display,windows);",
    "verdict": "unobservable",
    "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "DisplayImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 11,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 12,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 13,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 14,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 15,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 16,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 17,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 18,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 19,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 20,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 21,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 22,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 23,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 24,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XOpenImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "CatchException(exception);",
+   "verdict": "gap",
+   "why": "CatchException after a command: it prints a warning the command left; none of the commands the cases drive leaves one"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 11,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 12,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 13,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 14,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 15,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 16,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 17,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 18,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 19,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 20,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 21,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 22,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 23,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 24,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 25,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 26,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 27,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 28,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 29,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 30,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 31,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 32,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 33,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 34,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 35,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 36,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 37,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 38,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 39,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XRotateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XConfigureImageColormap(display,resource_info,windows,*image,exception);",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XConfigureImageColormap(display,resource_info,windows,",
+   "verdict": "gap",
+   "why": "XConfigureImageColormap after a command changed the image: it matters only on a colormapped visual; the xevents cases run on the default 24-bit TrueColor screen, so an xevents case on an 8-bit PseudoColor screen is needed"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (timer < GetMagickTime())",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (timer < GetMagickTime())",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 1,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 2,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 2,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 3,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 3,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 4,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 4,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 4,
+   "src": "timer=GetMagickTime()+(time_t) (delay == 0 ? 1 : delay)+1;",
+   "verdict": "gap",
+   "why": "the auto-advance timer of XDisplayImage runs only with an image delay or -update, which no display case sets; with -delay, a mutant that sets the timer in the past or tests < as >= would advance at once even under the pinned clock (SOURCE_DATE_EPOCH)"
   }
  ]
 }
