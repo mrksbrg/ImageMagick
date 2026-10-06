@@ -1,17 +1,16 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 174 mutants in MagickCore/visual-effects\.c$, 22 functions
-mutate: baseline over 1 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/174 (0s)
   mutants: 50/174 (0s)
   mutants: 75/174 (0s)
   mutants: 100/174 (0s)
   mutants: 125/174 (0s)
   mutants: 150/174 (0s)
-  mutants: 174/174 (2s)
+  mutants: 174/174 (0s)
 
-mutate: 174 mutants, 2s
-  killed 0, survived 11 (0 capped), no coverage 163, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 174 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 174, errors 0
 
   function                           total killed survived no-cov
   PlasmaImageProxy                      34      0        0     34
@@ -22,7 +21,7 @@ mutate: 174 mutants, 2s
   TintImage                             11      0        0     11
   SepiaToneImage                        10      0        0     10
   SteganoImage                          10      0        0     10
-  WaveletDenoiseImage                   10      0       10      0
+  WaveletDenoiseImage                   10      0        0     10
   BlueShiftImage                         8      0        0      8
   ColorizeImage                          7      0        0      7
   StereoAnaglyphImage                    7      0        0      7
@@ -35,20 +34,6 @@ mutate: 174 mutants, 2s
   PlasmaImage                            1      0        0      1
   ShadowImage                            1      0        0      1
   SketchImage                            1      0        0      1
-  HatTransform                           1      0        1      0
+  HatTransform                           1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  visual-effects.c:3502:13 cxx_lt_to_le               for ( ; i < (ssize_t) extent; i++)
-    x  visual-effects.c:3551:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  visual-effects.c:3573:44 cxx_mul_to_div             if (AcquireMagickResource(WidthResource,4*image->columns) == MagickFalse)
-       visual-effects.c:3584:18 cxx_ne_to_eq               if (kernel != (float *) NULL)
-       visual-effects.c:3586:23 cxx_ne_to_eq               if (pixels_info != (MemoryInfo *) NULL)
-    x  visual-effects.c:3677:20 cxx_mul_to_div             p=kernel+id*(ssize_t) image->columns;
-    x  visual-effects.c:3700:20 cxx_mul_to_div             p=kernel+id*(ssize_t) image->rows;
-    x  visual-effects.c:3717:52 cxx_lt_to_le               if ((double) pixels[(ssize_t) high_pass+i] < -magnitude)
-    x  visual-effects.c:3720:54 cxx_gt_to_ge               if ((double) pixels[(ssize_t) high_pass+i] > magnitude)
-    x  visual-effects.c:3771:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
-       visual-effects.c:3778:21 cxx_eq_to_ne               if (proceed == MagickFalse)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-b193b8838-visual-effects.json
+  full results: build-oracle/work/mutation-confirm-d64dfdf9d-visual-effects.json
