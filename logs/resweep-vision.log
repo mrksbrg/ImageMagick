@@ -15,33 +15,33 @@ mutate: baseline over 62 cases in 0s
   mutants: 300/749 (4s)
   mutants: 325/749 (5s)
   mutants: 350/749 (6s)
-  mutants: 375/749 (10s)
+  mutants: 375/749 (11s)
   mutants: 400/749 (15s)
   mutants: 425/749 (22s)
-  mutants: 450/749 (31s)
-  mutants: 475/749 (39s)
-  mutants: 500/749 (47s)
-  mutants: 525/749 (58s)
-  mutants: 550/749 (65s)
-  mutants: 575/749 (71s)
-  mutants: 600/749 (74s)
-  mutants: 625/749 (77s)
-  mutants: 650/749 (84s)
-  mutants: 675/749 (89s)
-  mutants: 700/749 (93s)
-  mutants: 725/749 (101s)
-  mutants: 749/749 (209s)
+  mutants: 450/749 (33s)
+  mutants: 475/749 (41s)
+  mutants: 500/749 (50s)
+  mutants: 525/749 (60s)
+  mutants: 550/749 (67s)
+  mutants: 575/749 (73s)
+  mutants: 600/749 (77s)
+  mutants: 625/749 (79s)
+  mutants: 650/749 (87s)
+  mutants: 675/749 (92s)
+  mutants: 700/749 (96s)
+  mutants: 725/749 (103s)
+  mutants: 749/749 (212s)
 
-mutate: 749 mutants, 209s
-  killed 634, survived 115 (0 capped), no coverage 0, errors 0
-  mutation score on reached code: 84.6%   overall: 84.6%
+mutate: 749 mutants, 212s
+  killed 632, survived 117 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.4%   overall: 84.4%
 
   function                           total killed survived no-cov
   ConnectedComponentsImage             416    339       77      0
   AngleThreshold                        58     46       12      0
   EccentricityThreshold                 50     47        3      0
-  CircularityThreshold                  47     43        4      0
-  PerimeterThreshold                    44     40        4      0
+  CircularityThreshold                  47     42        5      0
+  PerimeterThreshold                    44     39        5      0
   MajorAxisThreshold                    40     37        3      0
   MinorAxisThreshold                    40     35        5      0
   IntegralImage                         33     29        4      0
@@ -53,10 +53,12 @@ mutate: 749 mutants, 209s
        vision.c:134:40 cxx_sub_to_add             return((int) (q->bounding_box.width-p->bounding_box.width));
     x  vision.c:164:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
     x  vision.c:185:20 cxx_lt_to_le               for (y=(-1); y < (ssize_t) bounding_box.height; y++)
+    x  vision.c:200:22 cxx_lt_to_le               for (x=(-1); x < (ssize_t) bounding_box.width; x++)
     x  vision.c:230:41 cxx_eq_to_ne               if ((ssize_t) pixels[2*v+u] == i)
        vision.c:241:27 cxx_post_inc_to_post_dec   pattern[0]++;  /* diagonal */
     x  vision.c:271:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
     x  vision.c:292:20 cxx_lt_to_le               for (y=(-1); y < (ssize_t) bounding_box.height; y++)
+    x  vision.c:307:22 cxx_lt_to_le               for (x=(-1); x < (ssize_t) bounding_box.width; x++)
     x  vision.c:337:41 cxx_eq_to_ne               if ((ssize_t) pixels[2*v+u] == i)
        vision.c:348:27 cxx_post_inc_to_post_dec   pattern[0]++;  /* diagonal */
     x  vision.c:380:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
