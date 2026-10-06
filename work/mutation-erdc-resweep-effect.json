@@ -405,7 +405,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/e307b90246",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/effect.c:233:38:233:39",
@@ -2395,8 +2395,8 @@
   "col": 25,
   "function": "AdaptiveSharpenImage",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/5a0e9f0179",
+  "cases": 2,
+  "killer": "unary/4744843a6b",
   "why": "out.miff differs"
  },
  {
@@ -3894,10 +3894,10 @@
   "line": 1084,
   "col": 25,
   "function": "BilateralBlurImage",
-  "status": "killed",
-  "cases": 9,
-  "killer": "mogrify/7c370df5a3",
-  "why": "work.miff differs"
+  "status": "survived",
+  "cases": 14,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/effect.c:1084:59:1084:61",
@@ -4881,7 +4881,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "opencl/e8be4a50d4",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/effect.c:1292:16:1292:17",
@@ -5229,7 +5229,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "opencl/e8be4a50d4",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/effect.c:1380:28:1380:29",
@@ -9031,8 +9031,8 @@
   "col": 25,
   "function": "MotionBlurImage",
   "status": "killed",
-  "cases": 22,
-  "killer": "opencl/772835f2e6",
+  "cases": 10,
+  "killer": "opencl/73c2534119",
   "why": "out.miff differs"
  },
  {
@@ -13401,7 +13401,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/6d8d6459d2",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_minus_to_noop:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/effect.c:4056:11:4056:12",
