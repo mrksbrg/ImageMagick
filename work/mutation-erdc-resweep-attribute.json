@@ -271,8 +271,8 @@
   "col": 3,
   "function": "attribute.c:GetEdgeBoundingBox",
   "status": "killed",
-  "cases": 2,
-  "killer": "unary/be6b162a17",
+  "cases": 1,
+  "killer": "unary/5e34b35e38",
   "why": "stderr differs; out.miff differs"
  },
  {
@@ -2325,7 +2325,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "format/e37fad76a6",
-  "why": "exit status [0] -> [-6]; stderr differs"
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/attribute.c:861:38:861:40",
@@ -5907,7 +5907,7 @@
   "col": 15,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 297,
+  "cases": 296,
   "killer": "decode/51eef41a71",
   "why": "stdout differs"
  },
@@ -5943,7 +5943,7 @@
   "col": 16,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 297,
+  "cases": 296,
   "killer": "decode/51eef41a71",
   "why": "stdout differs"
  },
