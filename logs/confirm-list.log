@@ -1,11 +1,11 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 34 mutants in MagickCore/list\.c$, 14 functions
-mutate: baseline over 479 cases in 0s
+mutate: baseline over 2 cases in 0s
   mutants: 25/34 (0s)
-  mutants: 34/34 (77s)
+  mutants: 34/34 (2s)
 
-mutate: 34 mutants, 77s
-  killed 0, survived 5 (0 capped), no coverage 29, errors 0
+mutate: 34 mutants, 2s
+  killed 0, survived 2 (0 capped), no coverage 32, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -15,21 +15,18 @@ mutate: 34 mutants, 77s
   DeleteImages                           2      0        0      2
   CloneImageList                         1      0        1      0
   DuplicateImages                        1      0        0      1
-  GetImageFromList                       1      0        1      0
+  GetImageFromList                       1      0        0      1
   ImageListToArray                       1      0        0      1
   InsertImageInList                      1      0        0      1
-  RemoveFirstImageFromList               1      0        1      0
+  RemoveFirstImageFromList               1      0        0      1
   RemoveLastImageFromList                1      0        0      1
-  ReplaceImageInList                     1      0        1      0
+  ReplaceImageInList                     1      0        0      1
   ReplaceImageInListReturnLast           1      0        1      0
   ReverseImageList                       1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
        list.c:152:19 cxx_ne_to_eq               if (image != (Image *) NULL)
-    x  list.c:640:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  list.c:1095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  list.c:1195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  list.c:1256:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-list.json
+  full results: build-oracle/work/mutation-confirm-b193b8838-list.json
