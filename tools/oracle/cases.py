@@ -5075,6 +5075,16 @@ GAP_XEVENTS_CASES += [
     # Copy a region, then paste it (ctrl+v reuses the mode widget's window; a click places it).
     ("xevents display copy and paste", "map key:ctrl+c map use:1 drag:10,10,50,40 key:Return key:ctrl+v "
      "use:1 click:20,20 key:Return grab:out.ppm key:q", ["display", img("rose")]),
+    # Modes that keep the Commands widget open over the (small) image window: the image is placed
+    # at +300+50, clear of it, else the drag lands on the widget and opens a menu.
+    ("xevents display draw by drag", _xev_menu_pick("Image Edit", "Draw...", _XEV_EDIT) +
+     " use:1 drag:10,10,60,40 grab:out.ppm key:Escape key:q", ["display", "-geometry", "+300+50", img("rose")]),
+    ("xevents display color edit, a click", _xev_menu_pick("Image Edit", "Color...", _XEV_EDIT) +
+     " use:1 click:30,20 key:Escape grab:out.ppm key:q", ["display", "-geometry", "+300+50", img("rose")]),
+    ("xevents display matte edit, a click", _xev_menu_pick("Image Edit", "Matte...", _XEV_EDIT) +
+     " use:1 click:30,20 key:Escape grab:out.ppm key:q", ["display", "-geometry", "+300+50", img("rose")]),
+    ("xevents display rotate by drag", _xev_menu_pick("Transform", "Rotate...", _XEV_TRANSFORM) +
+     " use:1 drag:10,10,60,10 grab:out.ppm key:q", ["display", "-geometry", "+300+50", img("rose")]),
     ("xevents display chop, horizontal", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
      " use:1 drag:5,20,60,20 grab:out.ppm key:q", ["display", img("rose")]),
     ("xevents display chop, vertical", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
