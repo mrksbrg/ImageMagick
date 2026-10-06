@@ -28411,6 +28411,2006 @@
    "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
    "verdict": "gap",
    "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: no grab includes the cursor, and animate cases compare no window content (frames advance in timed sleeps)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XConfigureImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XConfigureImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 11,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 12,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 11,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 13,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 12,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 14,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 13,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 15,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 14,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 16,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 15,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 17,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 16,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 18,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 17,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 19,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 18,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 20,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 19,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 21,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 20,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 22,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 21,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 23,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 22,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 24,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 23,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 25,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 24,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 26,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 25,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 27,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 26,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 28,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 27,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 29,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 28,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 30,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 29,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 31,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 30,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 32,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 31,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 33,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 32,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 34,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 33,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 35,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 34,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 36,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 35,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 37,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 36,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 38,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 37,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 39,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 38,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 40,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 39,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 41,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 40,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 42,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 41,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 43,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 42,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 44,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 43,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 45,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 44,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 46,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 45,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 46,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 47,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 47,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMakePanImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMakePanImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XOpenImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XOpenImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XRotateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XRotateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XSaveImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XSaveImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XMenuWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xwindow.c",
+   "function": "XConfigureImageColormap",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickTrue);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xwindow.c",
+   "function": "XConfigureImageColormap",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XSetCursorState(display,windows,MagickFalse);",
+   "verdict": "unobservable",
+   "why": "XSetCursorState sets the watch (busy) or default cursor: a window grab (XGetImage) does not include the cursor, and nothing else reads it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued; animate cases compare no window content (frames advance in timed sleeps), only exit status and text"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued; animate cases compare no window content (frames advance in timed sleeps), only exit status and text"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued; animate cases compare no window content (frames advance in timed sleeps), only exit status and text"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XImageCache",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 11,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 12,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 13,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 14,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 15,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 16,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 17,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 18,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 19,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 20,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 21,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 22,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 23,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 24,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 25,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 26,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 27,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 28,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 29,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 30,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 31,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 32,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 33,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 34,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 35,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 36,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 37,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 38,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 39,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 40,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 41,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 42,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 43,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 44,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 45,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 46,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMagickCommand",
+   "mutator": "cxx_remove_void_call",
+   "nth": 47,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XMakePanImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XOpenImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XRotateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XSaveImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XMenuWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xwindow.c",
+   "function": "XConfigureImageColormap",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "XCheckRefreshWindows(display,windows);",
+   "verdict": "unobservable",
+   "why": "XCheckRefreshWindows handles Expose events already queued before a long operation; the xevents cases press @ (refresh) before every grab, which repaints the whole window, and only a grab is compared"
   }
  ]
 }
