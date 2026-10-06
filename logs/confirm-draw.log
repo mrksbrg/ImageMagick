@@ -1,35 +1,34 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 616 mutants in MagickCore/draw\.c$, 40 functions
-  baseline: 500/580 (3s)
-  baseline: 580/580 (14s)
-mutate: baseline over 580 cases in 15s
+  baseline: 2/2 (1s)
+mutate: baseline over 2 cases in 2s
   mutants: 25/616 (0s)
   mutants: 50/616 (0s)
   mutants: 75/616 (0s)
   mutants: 100/616 (0s)
   mutants: 125/616 (0s)
   mutants: 150/616 (0s)
-  mutants: 175/616 (50s)
-  mutants: 200/616 (50s)
-  mutants: 225/616 (50s)
-  mutants: 250/616 (50s)
-  mutants: 275/616 (50s)
-  mutants: 300/616 (50s)
-  mutants: 325/616 (51s)
-  mutants: 350/616 (51s)
-  mutants: 375/616 (51s)
-  mutants: 400/616 (51s)
-  mutants: 425/616 (51s)
-  mutants: 450/616 (51s)
-  mutants: 475/616 (51s)
-  mutants: 500/616 (51s)
-  mutants: 525/616 (51s)
-  mutants: 550/616 (51s)
-  mutants: 575/616 (51s)
-  mutants: 600/616 (128s)
-  mutants: 616/616 (149s)
+  mutants: 175/616 (3s)
+  mutants: 200/616 (3s)
+  mutants: 225/616 (3s)
+  mutants: 250/616 (3s)
+  mutants: 275/616 (3s)
+  mutants: 300/616 (3s)
+  mutants: 325/616 (3s)
+  mutants: 350/616 (3s)
+  mutants: 375/616 (3s)
+  mutants: 400/616 (3s)
+  mutants: 425/616 (3s)
+  mutants: 450/616 (3s)
+  mutants: 475/616 (3s)
+  mutants: 500/616 (3s)
+  mutants: 525/616 (3s)
+  mutants: 550/616 (3s)
+  mutants: 575/616 (3s)
+  mutants: 600/616 (3s)
+  mutants: 616/616 (5s)
 
-mutate: 616 mutants, 149s
+mutate: 616 mutants, 5s
   killed 0, survived 35 (0 capped), no coverage 581, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -113,4 +112,4 @@ mutate: 616 mutants, 149s
     x  draw.c:6213:42 cxx_ne_to_eq               if (draw_info->image_info->server_name != (char *) NULL)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-draw.json
+  full results: build-oracle/work/mutation-confirm-b193b8838-draw.json

@@ -1,14 +1,13 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 89 mutants in MagickCore/profile\.c$, 22 functions
-mutate: baseline over 7 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/89 (0s)
   mutants: 50/89 (0s)
   mutants: 75/89 (0s)
-  mutants: 89/89 (1s)
+  mutants: 89/89 (0s)
 
-mutate: 89 mutants, 1s
-  killed 0, survived 2 (0 capped), no coverage 87, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 89 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 89, errors 0
 
   function                           total killed survived no-cov
   TransformQuantumPixels                22      0        0     22
@@ -27,16 +26,11 @@ mutate: 89 mutants, 1s
   GetXMPOffsets                          2      0        0      2
   TryAccumulate                          2      0        0      2
   SyncXMPProfile                         2      0        0      2
-  GetNextImageProfile                    1      0        1      0
+  GetNextImageProfile                    1      0        0      1
   TransformDoublePixels                  1      0        0      1
   RemoveImageProfile                     1      0        0      1
-  ResetImageProfileIterator              1      0        1      0
+  ResetImageProfileIterator              1      0        0      1
   ValidateXMPProfile                     1      0        0      1
   SetImageProfileInternal                1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  profile.c:374:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-ec8ded5ae-profile.json
+  full results: build-oracle/work/mutation-confirm-b193b8838-profile.json
