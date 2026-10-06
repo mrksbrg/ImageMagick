@@ -5070,6 +5070,11 @@ GAP_XEVENTS_CASES += [
      "key:Return grab:out.ppm key:q", ["display", img("rose")]),
     ("xevents display crop by drag, escaped", "map key:c map use:1 drag:10,10,50,40 key:Escape grab:out.ppm key:q",
      ["display", img("rose")]),
+    ("xevents display cut by drag", "map key:ctrl+x map use:1 drag:10,10,50,40 key:Return grab:out.ppm key:q",
+     ["display", img("rose")]),
+    # Copy a region, then paste it (ctrl+v reuses the mode widget's window; a click places it).
+    ("xevents display copy and paste", "map key:ctrl+c map use:1 drag:10,10,50,40 key:Return key:ctrl+v "
+     "use:1 click:20,20 key:Return grab:out.ppm key:q", ["display", img("rose")]),
     ("xevents display chop, horizontal", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
      " use:1 drag:5,20,60,20 grab:out.ppm key:q", ["display", img("rose")]),
     ("xevents display chop, vertical", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
