@@ -24101,6 +24101,2306 @@
    "src": "if (((image->channel_mask & AlphaChannel) != 0) && (white.w != black.w))",
    "verdict": "equivalent",
    "why": "PseudoClass branch of ComputeEqualizeImage: checkAccelerateCondition admits DirectClass images only, so no input gets here"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "clStatus|=clEnv->library->clSetKernelArg(blurRowKernel,i++,sizeof(unsigned int),(void *)&imageRows);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last clSetKernelArg is not read again"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "clStatus|=clEnv->library->clSetKernelArg(blurColumnKernel,i++,sizeof(unsigned int),(void *)&imageRows);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last clSetKernelArg is not read again"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImage_view != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (tempImageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageKernelBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blurRowKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(blurRowKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blurColumnKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(blurColumnKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device, queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImage != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeLocalContrastImage: a skipped release or destroy leaks, which the CLI cannot show; 2793 runs only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (x = 0; x < (int) passes; ++x) {",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (one pass more: its offset is passes*gsize >= rows, so every item returns)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (x = 0; x < (int) passes; ++x) {",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (one pass more: its offset is passes*gsize >= rows, so every item returns)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "goffset[1] = x * gsize[1];",
+   "verdict": "gap",
+   "why": "the pass offset x*gsize as x/gsize: with passes >= 2 the later passes redo the first rows and the rest keep the clone's pixels; passes >= 2 needs rows*columns*radius >= 4e9 (e.g. 3000x3000 with -local-contrast 100), minutes under pocl, so no case"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "goffset[1] = x * gsize[1];",
+   "verdict": "gap",
+   "why": "the pass offset x*gsize as x/gsize: with passes >= 2 the later passes redo the first rows and the rest keep the clone's pixels; passes >= 2 needs rows*columns*radius >= 4e9 (e.g. 3000x3000 with -local-contrast 100), minutes under pocl, so no case"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 80,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "imageBuffer = clEnv->library->clCreateBuffer(device->context, mem_flags, length * sizeof(CLPixelPacket), (void*)inputPixels, &clStatus);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 3,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 108,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clEnv->library->clEnqueueMapBuffer(queue, filteredImageBuffer, CL_TRUE, CL_MAP_READ|CL_MAP_WRITE, 0, length * sizeof(CLPixelPacket), 0, NULL, NULL, &clStatus);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 4,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 94,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clStatus = clEnv->library->clEnqueueReadBuffer(queue, filteredImageBuffer, CL_TRUE, 0, length * sizeof(CLPixelPacket), filteredPixels, 0, NULL, NULL);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "iRadius = (cl_int) ((image->rows > image->columns ? image->rows : image->columns) * 0.002f * fabs(radius));",
+   "verdict": "equivalent",
+   "why": "the larger of rows and columns with >= for >: the same value when they are equal"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "passes = (unsigned int) ((((1.0f * imageRows) * imageColumns * iRadius) + 3999999999) / 4000000000.0f);",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (the pass count; 3999999999 is 4e9 in float, so the formula gives at least 1 and the clamp never acts)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "passes = (unsigned int) ((((1.0f * imageRows) * imageColumns * iRadius) + 3999999999) / 4000000000.0f);",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (the pass count; 3999999999 is 4e9 in float, so the formula gives at least 1 and the clamp never acts)"
+  },
+  {
+   "at": 86,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "passes = (unsigned int) ((((1.0f * imageRows) * imageColumns * iRadius) + 3999999999) / 4000000000.0f);",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (the pass count; 3999999999 is 4e9 in float, so the formula gives at least 1 and the clamp never acts)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "passes = (passes < 1) ? 1: passes;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (the pass count; 3999999999 is 4e9 in float, so the formula gives at least 1 and the clamp never acts)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "passes = (passes < 1) ? 1: passes;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (the pass count; 3999999999 is 4e9 in float, so the formula gives at least 1 and the clamp never acts)"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "gsize[1] = (image->rows + passes - 1) / passes;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "gsize[1] = (image->rows + passes - 1) / passes;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "gsize[0] = ((image->columns + 3) / 4) * 4;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "gsize[1] = ((((image->rows + 63) / 64) + (passes + 1)) / passes) * 64;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "gsize[1] = ((((image->rows + 63) / 64) + (passes + 1)) / passes) * 64;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "gsize[1] = ((((image->rows + 63) / 64) + (passes + 1)) / passes) * 64;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeLocalContrastImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "gsize[1] = ((((image->rows + 63) / 64) + (passes + 1)) / passes) * 64;",
+   "verdict": "equivalent",
+   "why": "ComputeLocalContrastImage splits the rows into passes only to bound one launch; both kernels bounds-check (x >= width or y >= height returns) and each work item writes only its own row or pixel from inputs no item writes, so any passes >= 1, extra passes past the image, and launch sizes that still cover it give the same pixels (a larger launch, or for 2732:36 rows-63, which still gives at least rows: for rows < 63 the size_t wraps to exactly 64)"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(blurRowKernel,i++,sizeof(cl_mem),(void *)&tempImageBuffer);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(blurColumnKernel,i++,sizeof(cl_mem),(void *)&filteredImageBuffer);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "clStatus|=clEnv->library->clSetKernelArg(motionBlurKernel,i++,sizeof(unsigned int), &matte);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 49,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(rotationalBlurKernel,i++,sizeof(cl_mem),(void *)&filteredImageBuffer);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(filteredImageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (tempImageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(tempImageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageKernelBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageKernelBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blurRowKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(blurRowKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blurColumnKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(blurColumnKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((outputReady == MagickFalse) && (filteredImage != (Image *) NULL))",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImage_view != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageKernelBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (motionBlurKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(motionBlurKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (outputReady == MagickFalse && filteredImage != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeMotionBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(filteredImageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (sinThetaBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(sinThetaBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cosThetaBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(cosThetaBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (rotationalBlurKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(rotationalBlurKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((outputReady == MagickFalse) && (filteredImage != (Image *) NULL))",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeRotationalBlurImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "length * sizeof(CLPixelPacket), (void*)inputPixels, &clStatus);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 2,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "CL_MAP_READ|CL_MAP_WRITE, 0, length * sizeof(CLPixelPacket), 0, NULL,",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 3,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "length * sizeof(CLPixelPacket), filteredPixels, 0, NULL, NULL);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 73,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(blurRowKernel,i++,sizeof(cl_float4)*(chunkSize+kernelWidth),(void *) NULL);",
+   "verdict": "unresolved",
+   "why": "the local-memory argument shrinks by 2*kernelWidth float4s; pocl on the CPU does not fault on the overrun and every blur case gives the same pixels, but that is pocl's layout, not a proof (a GPU could differ or fail)"
+  },
+  {
+   "at": 76,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(blurColumnKernel,i++,sizeof(cl_float4)*(chunkSize+kernelWidth),(void *) NULL);",
+   "verdict": "unresolved",
+   "why": "the local-memory argument shrinks by 2*kernelWidth float4s; pocl on the CPU does not fault on the overrun and every blur case gives the same pixels, but that is pocl's layout, not a proof (a GPU could differ or fail)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "CL_TRUE, CL_MAP_WRITE, 0, width * sizeof(float), 0, NULL, NULL, &clStatus);",
+   "verdict": "unobservable",
+   "why": "the filter and offset buffers are mapped for writing with a short length (width/sizeof): pocl maps the whole host-side buffer, so every weight still lands where the kernel reads it"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "CL_MAP_WRITE, 0, width * sizeof(cl_int2), 0, NULL, NULL, &clStatus);",
+   "verdict": "unobservable",
+   "why": "the filter and offset buffers are mapped for writing with a short length (width/sizeof): pocl maps the whole host-side buffer, so every weight still lands where the kernel reads it"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < width; i++)",
+   "verdict": "unobservable",
+   "why": "the loop fills one element past the mapped filter/offset buffer (width+1 of width): a heap overrun a memory checker would report; the kernel reads only width elements, so the output is the same"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeMotionBlurImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (i = 0; i < width; i++)",
+   "verdict": "unobservable",
+   "why": "the loop fills one element past the mapped filter/offset buffer (width+1 of width): a heap overrun a memory checker would report; the kernel reads only width elements, so the output is the same"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "gsize[0]=chunkSize*((image->columns+chunkSize-1)/chunkSize);",
+   "verdict": "equivalent",
+   "why": "a larger launch: one chunk more per row or column; BlurRow writes only where get_global_id(0) < columns and BlurColumn where get_global_id(1) < rows, and both clamp their reads to the canvas"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "gsize[0]=chunkSize*((image->columns+chunkSize-1)/chunkSize);",
+   "verdict": "equivalent",
+   "why": "a larger launch: one chunk more per row or column; BlurRow writes only where get_global_id(0) < columns and BlurColumn where get_global_id(1) < rows, and both clamp their reads to the canvas"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "gsize[1]=chunkSize*((image->rows+chunkSize-1)/chunkSize);",
+   "verdict": "equivalent",
+   "why": "a larger launch: one chunk more per row or column; BlurRow writes only where get_global_id(0) < columns and BlurColumn where get_global_id(1) < rows, and both clamp their reads to the canvas"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeBlurImage",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "gsize[1]=chunkSize*((image->rows+chunkSize-1)/chunkSize);",
+   "verdict": "equivalent",
+   "why": "a larger launch: one chunk more per row or column; BlurRow writes only where get_global_id(0) < columns and BlurColumn where get_global_id(1) < rows, and both clamp their reads to the canvas"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(contrastKernel,i++,sizeof(cl_int),&sign);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(functionKernel,i++,sizeof(cl_mem),(void *)&parametersBuffer);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(grayscaleKernel,i++,sizeof(cl_uint),&intensityMethod);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 57,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "clStatus|=clEnv->library->clSetKernelArg(modulateKernel,i++,sizeof(cl_float),&color);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(horizontalKernel,i++,gammaAccumulatorLocalMemorySize,NULL);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(verticalKernel,i++,gammaAccumulatorLocalMemorySize, NULL);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "status|=SetOpenCLKernelArg(denoiseKernel,i++,sizeof(cl_uint),(void *)&height);",
+   "verdict": "equivalent",
+   "why": "the argument counter after the last kernel argument is not read again"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (contrastKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(contrastKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeContrastImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImage_view != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (k = 0; k < 2; k++)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (tempImageBuffer[k]!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (hullPass1!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(hullPass1);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (hullPass2!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(hullPass2);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (outputReady == MagickFalse && filteredImage != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeDespeckleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (horizontalKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of resizeHorizontalFilter/resizeVerticalFilter: a skipped kernel release leaks, which the CLI cannot show"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(horizontalKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of resizeHorizontalFilter/resizeVerticalFilter: a skipped kernel release leaks, which the CLI cannot show"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (verticalKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of resizeHorizontalFilter/resizeVerticalFilter: a skipped kernel release leaks, which the CLI cannot show"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(verticalKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of resizeHorizontalFilter/resizeVerticalFilter: a skipped kernel release leaks, which the CLI cannot show"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (parametersBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(parametersBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (functionKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(functionKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeFunctionImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (grayscaleKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(grayscaleKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeGrayscaleImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (modulateKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(modulateKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeModulateImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(filteredImageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (tempImageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(tempImageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cubicCoefficientsBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(cubicCoefficientsBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((outputReady == MagickFalse) && (filteredImage != (Image *) NULL))",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeResizeImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (imageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(imageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (filteredImageBuffer != (cl_mem) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLMemObject(filteredImageBuffer);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (denoiseKernel != (cl_kernel) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(denoiseKernel);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (queue != (cl_command_queue) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLCommandQueue(device,queue);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (device != (MagickCLDevice) NULL)",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLDevice(device);",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((outputReady == MagickFalse) && (filteredImage != (Image *) NULL))",
+   "verdict": "unobservable",
+   "why": "clean-up of ComputeWaveletDenoiseImage: a skipped release or destroy leaks, which the CLI cannot show; the outputReady test destroys the result only after an OpenCL failure, which pocl never gives here"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i = 0; i < 7; i++)",
+   "verdict": "unobservable",
+   "why": "ComputeResizeImage's interpolation-coefficient copy loop runs one step more (i <= 7): it reads one float past resizeFilterCoefficient's 7 and writes coefficientBuffer[7], one past its end on the stack; the kernel reads 7 (a memory checker would report it)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (k = 0; k < 2; k++)",
+   "verdict": "unresolved",
+   "why": "Despeckle's buffer loop runs once more (k <= 2): it creates tempImageBuffer[2], one past the array on the stack; the output is the same in every case, but where the pointer lands depends on the stack layout"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 80,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "imageBuffer = clEnv->library->clCreateBuffer(device->context, mem_flags, length * sizeof(CLPixelPacket), (void*)inputPixels, &clStatus);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 3,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 108,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clEnv->library->clEnqueueMapBuffer(queue, filteredImageBuffer, CL_TRUE, CL_MAP_READ|CL_MAP_WRITE, 0, length * sizeof(CLPixelPacket), 0, NULL, NULL, &clStatus);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 4,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 94,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeDespeckleImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clStatus = clEnv->library->clEnqueueReadBuffer(queue, filteredImageBuffer, CL_TRUE, 0, length * sizeof(CLPixelPacket), filteredPixels, 0, NULL, NULL);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 100,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clEnv->library->clEnqueueMapBuffer(queue, imageBuffer, CL_TRUE, CL_MAP_READ|CL_MAP_WRITE, 0, length * sizeof(CLPixelPacket), 0, NULL, NULL, &clStatus);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 2,
+   "src": "length = image->columns * image->rows;",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 86,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clStatus = clEnv->library->clEnqueueReadBuffer(queue, imageBuffer, CL_TRUE, 0, length * sizeof(CLPixelPacket), inputPixels, 0, NULL, NULL);",
+   "verdict": "unobservable",
+   "why": "a buffer, map or read length: the pixel cache is aligned, so the buffers are CL_MEM_USE_HOST_PTR and pocl (a CPU device) works in the host memory itself; a short length changes nothing it shows (a discrete GPU would copy only part); the copy branch is not taken"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeGrayscaleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "guards a LogMagickEvent call: without -debug events nothing is logged either way, and logs are not compared"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "numCachedPixels=(int) ceil((pixelPerWorkgroup-1)/xFactor+2*support);",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((number_channels == 4) || (number_channels == 2))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((number_channels == 4) || (number_channels == 2))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "gammaAccumulatorLocalMemorySize=chunkSize*sizeof(float);",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (totalLocalMemorySize <= device->local_memory_size)",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "pixelPerWorkgroup=pixelPerWorkgroup/2;",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "chunkSize=chunkSize/2;",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((pixelPerWorkgroup == 0) || (chunkSize == 0))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((pixelPerWorkgroup == 0) || (chunkSize == 0))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "gsize[0]=(resizedColumns+pixelPerWorkgroup-1)/pixelPerWorkgroup*",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 44,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "numCachedPixels=(int)ceil((pixelPerWorkgroup-1)/yFactor+2*support);",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((number_channels == 4) || (number_channels == 2))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((number_channels == 4) || (number_channels == 2))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "gammaAccumulatorLocalMemorySize=chunkSize*sizeof(float);",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (totalLocalMemorySize <= device->local_memory_size)",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "pixelPerWorkgroup=pixelPerWorkgroup/2;",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "chunkSize=chunkSize/2;",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((pixelPerWorkgroup == 0) || (chunkSize == 0))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((pixelPerWorkgroup == 0) || (chunkSize == 0))",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "gsize[1]=(resizedRows+pixelPerWorkgroup-1)/pixelPerWorkgroup*",
+   "verdict": "unresolved",
+   "why": "resize work-group tuning (local-memory sizes, the halving loop when they exceed the device's local memory, the launch width): the kernel's result should not depend on them, and on pocl every case gives the same pixels, but the summation order follows the chunk size, so this is not proven; the halving branch needs a device with less local memory"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "passes=(size_t) ((((1.0f*image->columns)*image->rows)+1999999.0f)/2000000.0f);",
+   "verdict": "equivalent",
+   "why": "ComputeWaveletDenoiseImage's pass count: every tile is placed by its group id plus the launch offset, reads are mirrored and writes kept inside the image, so any passes >= 1 that cover the rows give the same pixels (passes > 1 from 2 Mpixel; checked by hand on 1600x1300)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "passes=(passes < 1) ? 1 : passes;",
+   "verdict": "equivalent",
+   "why": "ComputeWaveletDenoiseImage's pass count: every tile is placed by its group id plus the launch offset, reads are mirrored and writes kept inside the image, so any passes >= 1 that cover the rows give the same pixels (passes > 1 from 2 Mpixel; checked by hand on 1600x1300)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "passes=(passes < 1) ? 1 : passes;",
+   "verdict": "equivalent",
+   "why": "ComputeWaveletDenoiseImage's pass count: every tile is placed by its group id plus the launch offset, reads are mirrored and writes kept inside the image, so any passes >= 1 that cover the rows give the same pixels (passes > 1 from 2 Mpixel; checked by hand on 1600x1300)"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeWaveletDenoiseImage",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "gsize[1]=((((height+(SIZE-1))/SIZE)+passes-1)/passes)*4;",
+   "verdict": "equivalent",
+   "why": "ComputeWaveletDenoiseImage's pass count: every tile is placed by its group id plus the launch offset, reads are mirrored and writes kept inside the image, so any passes >= 1 that cover the rows give the same pixels (passes > 1 from 2 Mpixel; checked by hand on 1600x1300)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeFunctionImage",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i<number_parameters; i++)",
+   "verdict": "unobservable",
+   "why": "the parameter copy loop runs once more (i <= n): it reads parameters[n] and writes one float past parametersBufferPtr (a heap overrun a memory checker would report); the buffer is made from the first n, which the kernel reads"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (outputReady == MagickFalse)",
+   "verdict": "equivalent",
+   "why": "the test after ComputeResizeImage's second filter pass: either outcome goes to cleanup next (3937 sits just above the label; 3909 jumps over the else branch to it)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeResizeImage",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "if (outputReady == MagickFalse)",
+   "verdict": "equivalent",
+   "why": "the test after ComputeResizeImage's second filter pass: either outcome goes to cleanup next (3937 sits just above the label; 3909 jumps over the else branch to it)"
   }
  ]
 }

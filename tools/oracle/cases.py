@@ -4897,6 +4897,13 @@ GAP_OPENCL_CASES += [("opencl large %s" % op,
                      for op in ("-blur 0x8", "-resize 33%", "-resize 180%", "-unsharp 5x3", "-equalize",
                                 "-local-contrast 30x40", "-motion-blur 0x12+75", "-wavelet-denoise 8%",
                                 "-despeckle", "-rotational-blur 5", "-modulate 80,120,60", "-contrast")]
+# ComputeWaveletDenoiseImage splits its launch into passes of about 2 Mpixel; 1600x1300 gives
+# two, so the pass loop and its row offset are compared (W01, 2026-10-06). A gradient is cheap.
+GAP_OPENCL_CASES += [("opencl huge -wavelet-denoise 5%",
+                      _ocl_step(["-size", "1600x1300", "gradient:red-blue"], "-wavelet-denoise 5%"), {})]
+# A resize to exactly the work-group size (256 on pocl), for resizeHorizontalFilter's and
+# resizeVerticalFilter's `resized < workgroupSize` tests and the local memory they size.
+GAP_OPENCL_CASES += [("opencl rose_alpha -resize 256x256!", _ocl_step([img("rose_alpha")], "-resize 256x256!"), {})]
 # The device choice: GPU finds none (the CPU path), true takes the profile's best device, false
 # leaves OpenCL off. Each entry: label, environment.
 GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
