@@ -3510,7 +3510,7 @@ equalize cases that reach AccelerateEqualizeImage, one (`opencl rose_alpha -equa
 
 **accelerate.c, read after its family rerun** (2026-10-06, night). 299 verdicts in all: the 69
 above, and 230 more (`a36661721`). By kind:
-- *Clean-up* (unobservable, ~150): every Compute* function ends with releases of buffers,
+- *Clean-up* (unobservable, 146): every Compute* function ends with releases of buffers,
   kernels, queues and devices behind `!= NULL` tests; a skipped release leaks. The destroy behind
   `outputReady == MagickFalse` runs only after an OpenCL failure, which pocl never gives here.
 - *Lengths under `CL_MEM_USE_HOST_PTR`* (unobservable): the pixel cache is aligned, so the image
@@ -3527,7 +3527,7 @@ above, and 230 more (`a36661721`). By kind:
 - *Logging* (unobservable): `IsEventLogging()` tests.
 - *Overruns a memory checker would see* (unobservable): one-past loops over the motion-blur
   filter and offset buffers, the function parameters and the resize coefficients.
-- *Unresolved* (24): the local-memory sizes of blur and resize, which pocl tolerates but a GPU
+- *Unresolved* (23): the local-memory sizes of blur and resize, which pocl tolerates but a GPU
   may not, and Despeckle's `k <= 2`, which writes a third `cl_mem` past its array on the stack.
 - *Gaps* (2): ComputeLocalContrastImage's pass offset (`x*gsize` → `x/gsize`) matters only with
   two passes, which need rows × columns × radius ≥ 4·10⁹ (a 3000×3000 image at radius 100).
