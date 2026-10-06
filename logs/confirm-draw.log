@@ -1,7 +1,6 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 616 mutants in MagickCore/draw\.c$, 40 functions
-  baseline: 8/8 (0s)
-mutate: baseline over 8 cases in 1s
+mutate: baseline over 0 cases in 0s
   mutants: 25/616 (0s)
   mutants: 50/616 (0s)
   mutants: 75/616 (0s)
@@ -25,12 +24,11 @@ mutate: baseline over 8 cases in 1s
   mutants: 525/616 (0s)
   mutants: 550/616 (0s)
   mutants: 575/616 (0s)
-  mutants: 600/616 (6s)
-  mutants: 616/616 (7s)
+  mutants: 600/616 (0s)
+  mutants: 616/616 (0s)
 
-mutate: 616 mutants, 7s
-  killed 0, survived 21 (0 capped), no coverage 595, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 616 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 616, errors 0
 
   function                           total killed survived no-cov
   RenderMVGContent                     141      0        0    141
@@ -45,7 +43,7 @@ mutate: 616 mutants, 7s
   TracePath                             18      0        0     18
   ConvertPathToPolygon                  17      0        0     17
   DrawAffineImage                       16      0        0     16
-  DestroyDrawInfo                       14      0       14      0
+  DestroyDrawInfo                       14      0        0     14
   AffineEdge                            14      0        0     14
   ClonePolygonEdgesTLS                  13      0        0     13
   TraceSquareLinecap                    12      0        0     12
@@ -60,10 +58,10 @@ mutate: 616 mutants, 7s
   DrawClippingMask                       4      0        0      4
   GetMVGMacros                           4      0        0      4
   DrawPatternPath                        4      0        0      4
-  GetDrawInfo                            4      0        4      0
+  GetDrawInfo                            4      0        0      4
   DrawCompositeMask                      3      0        0      3
   StopInfoCompare                        3      0        0      3
-  CloneDrawInfo                          2      0        2      0
+  CloneDrawInfo                          2      0        0      2
   DestroyPolygonInfo                     2      0        0      2
   DestroyPolygonTLS                      2      0        0      2
   DrawStrokePolygon                      2      0        0      2
@@ -71,31 +69,7 @@ mutate: 616 mutants, 7s
   AcquirePolygonTLS                      1      0        0      1
   DestroyEdge                            1      0        0      1
   DrawRoundLinecap                       1      0        0      1
-  GetAffineMatrix                        1      0        1      0
+  GetAffineMatrix                        1      0        0      1
   TraceRectangle                         1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  draw.c:338:30 cxx_ne_to_eq               if (draw_info->server_name != (char *) NULL)
-    x  draw.c:345:50 cxx_ge_to_gt               for (x=0; fabs(draw_info->dash_pattern[x]) >= MagickEpsilon; x++) ;
-    x  draw.c:975:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  draw.c:977:21 cxx_ne_to_eq               if (draw_info->id != (char *) NULL)
-    x  draw.c:979:28 cxx_ne_to_eq               if (draw_info->primitive != (char *) NULL)
-    x  draw.c:981:23 cxx_ne_to_eq               if (draw_info->text != (char *) NULL)
-    x  draw.c:983:27 cxx_ne_to_eq               if (draw_info->geometry != (char *) NULL)
-    x  draw.c:989:23 cxx_ne_to_eq               if (draw_info->font != (char *) NULL)
-    x  draw.c:991:26 cxx_ne_to_eq               if (draw_info->metrics != (char *) NULL)
-    x  draw.c:993:25 cxx_ne_to_eq               if (draw_info->family != (char *) NULL)
-    x  draw.c:995:27 cxx_ne_to_eq               if (draw_info->encoding != (char *) NULL)
-    x  draw.c:997:26 cxx_ne_to_eq               if (draw_info->density != (char *) NULL)
-    x  draw.c:999:30 cxx_ne_to_eq               if (draw_info->server_name != (char *) NULL)
-    x  draw.c:1002:31 cxx_ne_to_eq               if (draw_info->dash_pattern != (double *) NULL)
-    x  draw.c:1005:33 cxx_ne_to_eq               if (draw_info->gradient.stops != (StopInfo *) NULL)
-    x  draw.c:1008:28 cxx_ne_to_eq               if (draw_info->clip_mask != (char *) NULL)
-    x  draw.c:6130:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  draw.c:6177:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  draw.c:6202:70 cxx_ne_to_eq               draw_info->debug=(GetLogEventMask() & (DrawEvent | AnnotateEvent)) != 0 ?
-    x  draw.c:6210:46 cxx_ge_to_gt               if (fabs(draw_info->image_info->pointsize) >= MagickEpsilon)
-    x  draw.c:6213:42 cxx_ne_to_eq               if (draw_info->image_info->server_name != (char *) NULL)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-cacfed986-draw.json
+  full results: build-oracle/work/mutation-confirm-0416d431d-draw.json
