@@ -1341,7 +1341,7 @@
   "status": "killed",
   "cases": 7,
   "killer": "unary/72829334f0",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/shear.c:349:41:349:42",
@@ -1675,8 +1675,8 @@
   "col": 10,
   "function": "shear.c:RadonTransform",
   "status": "killed",
-  "cases": 1,
-  "killer": "unary/f08dbedb5a",
+  "cases": 2,
+  "killer": "unary/cb85d68208",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
@@ -1711,8 +1711,8 @@
   "col": 18,
   "function": "shear.c:RadonTransform",
   "status": "killed",
-  "cases": 1,
-  "killer": "unary/f08dbedb5a",
+  "cases": 2,
+  "killer": "unary/cb85d68208",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
@@ -1903,8 +1903,8 @@
   "col": 10,
   "function": "shear.c:RadonTransform",
   "status": "killed",
-  "cases": 2,
-  "killer": "unary/cb85d68208",
+  "cases": 1,
+  "killer": "unary/f08dbedb5a",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
@@ -1951,8 +1951,8 @@
   "col": 18,
   "function": "shear.c:RadonTransform",
   "status": "killed",
-  "cases": 1,
-  "killer": "unary/f08dbedb5a",
+  "cases": 2,
+  "killer": "unary/cb85d68208",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
@@ -3105,7 +3105,7 @@
   "status": "killed",
   "cases": 6,
   "killer": "unary/5026bf0ffa",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/shear.c:842:46:842:48",
