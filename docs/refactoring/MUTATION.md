@@ -3637,3 +3637,9 @@ adjusted, reach 41% → 54%.
 Measured and left out: Region of Interest (never settles; leaves temporary files), Draw (a drag
 draws nothing the grab shows, and Escape out of the mode loses the image window), Color and
 Matte (they do not exit after a click).
+
+Two more drag cases (`2122a805d`): cut by drag (ctrl+x) and copy then paste (ctrl+c, a drag,
+Return, ctrl+v, a click to place it). Their round (`x11cl2-cutpaste`) killed **45**; display.c
+**11% → 13%**, reach 54% → 57%. Color and Matte, entered from Image Edit, keep the Commands
+window (no new window maps), and a click on the image then changes nothing and the mode does
+not exit, with Escape, a second q, or a click on Dismiss: parked.
