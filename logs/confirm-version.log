@@ -1,15 +1,20 @@
 imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 6 mutants in MagickCore/version\.c$, 4 functions
-mutate: baseline over 0 cases in 0s
-  mutants: 6/6 (0s)
+mutate: baseline over 5 cases in 0s
+  mutants: 6/6 (1s)
 
-mutate: 6 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 6, errors 0
+mutate: 6 mutants, 1s
+  killed 0, survived 1 (0 capped), no coverage 5, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetMagickHomeURL                       3      0        0      3
   GetMagickQuantumRange                  1      0        0      1
   CRC32                                  1      0        0      1
-  GetMagickVersion                       1      0        0      1
+  GetMagickVersion                       1      0        1      0
 
-  full results: build-oracle/work/mutation-confirm-0416d431d-version.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  version.c:625:15 cxx_ne_to_eq               if (version != (size_t *) NULL)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-6a32d62bf-version.json
