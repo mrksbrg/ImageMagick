@@ -1121,7 +1121,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:705:16:705:18",
@@ -1409,7 +1409,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "stderr differs; out.miff differs"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:780:27:780:29",
@@ -7543,7 +7543,7 @@
   "col": 30,
   "function": "draw.c:GetMVGMacros",
   "status": "killed",
-  "cases": 187,
+  "cases": 186,
   "killer": "gaps/bcaf95f030",
   "why": "out.miff differs"
  },
@@ -9667,7 +9667,7 @@
   "col": 23,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 216,
+  "cases": 215,
   "killer": "gaps/7863c1c16a",
   "why": "exit status [1] -> [0]; stderr differs; out.miff only in candidate"
  },
@@ -10435,7 +10435,7 @@
   "col": 64,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 71,
+  "cases": 72,
   "killer": "decode/1cfe20dbc4",
   "why": "stdout differs"
  },
@@ -11601,7 +11601,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "mvg/7e4bad791d",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:3831:54:3831:56",
@@ -11743,7 +11743,7 @@
   "col": 59,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 200,
+  "cases": 199,
   "killer": "gaps/6d097e6054",
   "why": "exit status [1] -> [0]; stderr differs; out.miff only in candidate"
  },
@@ -12067,7 +12067,7 @@
   "col": 51,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 74,
+  "cases": 66,
   "killer": "gaps/6444e1436d",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -12295,7 +12295,7 @@
   "col": 50,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 186,
+  "cases": 185,
   "killer": "gaps/79791c4365",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -12727,7 +12727,7 @@
   "col": 70,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 224,
+  "cases": 223,
   "killer": "gaps/d225acc3a0",
   "why": "out.miff differs"
  },
@@ -12823,7 +12823,7 @@
   "col": 30,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 192,
+  "cases": 191,
   "killer": "gaps/819952c3f0",
   "why": "out.miff differs"
  },
@@ -13795,7 +13795,7 @@
   "col": 69,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 194,
+  "cases": 193,
   "killer": "gaps/2044c1ae36",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -14035,7 +14035,7 @@
   "col": 42,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 205,
+  "cases": 204,
   "killer": "gaps/952775177d",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -14215,7 +14215,7 @@
   "col": 43,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 67,
+  "cases": 68,
   "killer": "draw/5a1c4435f7",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -14227,7 +14227,7 @@
   "col": 43,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 191,
+  "cases": 190,
   "killer": "gaps/ad6322181c",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -14239,7 +14239,7 @@
   "col": 20,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 67,
+  "cases": 68,
   "killer": "draw/5a1c4435f7",
   "why": "out.miff differs"
  },
@@ -14251,7 +14251,7 @@
   "col": 12,
   "function": "draw.c:RenderMVGContent",
   "status": "killed",
-  "cases": 67,
+  "cases": 68,
   "killer": "draw/5a1c4435f7",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
@@ -18283,7 +18283,7 @@
   "col": 48,
   "function": "draw.c:DrawPolygonPrimitive",
   "status": "killed",
-  "cases": 159,
+  "cases": 158,
   "killer": "gaps/2666c82728",
   "why": "out.miff differs"
  },
@@ -18615,7 +18615,7 @@
   "col": 44,
   "function": "DrawPrimitive",
   "status": "killed",
-  "cases": 64,
+  "cases": 65,
   "killer": "unary/111c667d96",
   "why": "out.miff differs"
  },
@@ -19599,7 +19599,7 @@
   "col": 14,
   "function": "DrawPrimitive",
   "status": "killed",
-  "cases": 205,
+  "cases": 204,
   "killer": "gaps/55d2973d00",
   "why": "stdout differs; out.miff differs"
  },
@@ -19647,7 +19647,7 @@
   "col": 14,
   "function": "DrawPrimitive",
   "status": "killed",
-  "cases": 194,
+  "cases": 193,
   "killer": "gaps/13e7d2d487",
   "why": "stdout differs; out.miff differs"
  },
@@ -20079,7 +20079,7 @@
   "col": 29,
   "function": "DrawPrimitive",
   "status": "killed",
-  "cases": 210,
+  "cases": 209,
   "killer": "gaps/8c5e18790c",
   "why": "out.miff differs"
  },
@@ -21773,7 +21773,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:6443:13:6443:14",
@@ -24137,7 +24137,7 @@
   "status": "killed",
   "cases": 15,
   "killer": "gaps/59d708bd70",
-  "why": "exit status [0] -> ['timeout']; m.miff missing in candidate; magick-oCE7q2YQ9f9ZVI6QOWjAervWxgRhZX9o only in candidate; magick-vGlwq2brescvZowy5d-JGyCVdBDqE5nZ only in candidate"
+  "why": "exit status [0] -> ['timeout']; m.miff missing in candidate; magick-_ZlTTGt9ADQV7jgmzSxXF_qi2GwVJolB only in candidate; magick-iBpMZshvqNmK8Io4LHYg5JmGadJcbzyz only in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:6900:23:6900:24",
@@ -25829,7 +25829,7 @@
   "status": "killed",
   "cases": 4,
   "killer": "gaps/741ea0b42d",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7268:16:7268:18",
@@ -25865,7 +25865,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7283:15:7283:16",
