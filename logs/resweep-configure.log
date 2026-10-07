@@ -1,19 +1,18 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 142 mutants in MagickCore/configure\.c$, 16 functions
-mutate: baseline over 15583 cases in 0s
+mutate: baseline over 15579 cases in 0s
   mutants: 25/142 (0s)
   mutants: 50/142 (1s)
   mutants: 75/142 (1s)
   mutants: 100/142 (1s)
-  mutants: 125/142 (1s)
+  mutants: 125/142 (2s)
   mutants: 142/142 (131s)
 
 mutate: 142 mutants, 131s
-  killed 80, survived 34 (10 capped), no coverage 28, errors 0
-  mutation score on reached code: 70.2%   overall: 56.3%
+  killed 86, survived 28 (10 capped), no coverage 28, errors 0
+  mutation score on reached code: 75.4%   overall: 60.6%
 
   function                           total killed survived no-cov
-  LoadConfigureCache                    42     24       18      0
+  LoadConfigureCache                    42     30       12      0
   ListConfigureInfo                     14     14        0      0
   GetConfigureInfoList                  12     11        1      0
   GetConfigureList                      12      0        0     12
@@ -47,24 +46,18 @@ mutate: 142 mutants, 131s
     xc configure.c:906:14 cxx_ne_to_eq               if (home != (char *) NULL)
     x  configure.c:1031:31 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
        configure.c:1032:9 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
-    x  configure.c:1186:23 cxx_add_to_sub             extent=strlen(token)+MagickPathExtent;
     x  configure.c:1209:22 cxx_eq_to_ne               if (*q == quote)
-    x  configure.c:1222:41 cxx_gt_to_ge               if (bracket_depth > 0)
     x  configure.c:1240:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
     x  configure.c:1240:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
-       configure.c:1249:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-       configure.c:1249:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-       configure.c:1249:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
-       configure.c:1253:22 cxx_ne_to_eq               if (*token != '=')
-       configure.c:1256:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
-       configure.c:1258:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-       configure.c:1258:25 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
-       configure.c:1267:19 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
-       configure.c:1268:29 cxx_ne_to_eq               if (*path != '\0')
-       configure.c:1271:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
-       configure.c:1276:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+    x  configure.c:1249:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  configure.c:1249:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  configure.c:1249:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  configure.c:1253:22 cxx_ne_to_eq               if (*token != '=')
+    x  configure.c:1256:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+    x  configure.c:1258:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  configure.c:1268:29 cxx_ne_to_eq               if (*path != '\0')
+    x  configure.c:1271:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
        configure.c:1279:44 cxx_add_to_sub             file_xml,path,depth+1,exception);
-       configure.c:1336:55 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"stealth") == 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
   full results: build-oracle/work/mutation-resweep-configure.json

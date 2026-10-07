@@ -1,57 +1,46 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 148 mutants in MagickCore/mime\.c$, 14 functions
-mutate: baseline over 15583 cases in 0s
+mutate: baseline over 15579 cases in 0s
   mutants: 25/148 (0s)
-  mutants: 50/148 (0s)
-  mutants: 75/148 (0s)
-  mutants: 100/148 (0s)
-  mutants: 125/148 (1s)
-  mutants: 148/148 (130s)
+  mutants: 50/148 (1s)
+  mutants: 75/148 (1s)
+  mutants: 100/148 (1s)
+  mutants: 125/148 (2s)
+  mutants: 148/148 (131s)
 
-mutate: 148 mutants, 130s
-  killed 50, survived 34 (4 capped), no coverage 64, errors 0
-  mutation score on reached code: 59.5%   overall: 33.8%
+mutate: 148 mutants, 131s
+  killed 121, survived 24 (4 capped), no coverage 3, errors 0
+  mutation score on reached code: 83.4%   overall: 81.8%
 
   function                           total killed survived no-cov
-  GetMimeInfo                           47      0        0     47
-  LoadMimeCache                         33     11       22      0
+  GetMimeInfo                           47     47        0      0
+  LoadMimeCache                         33     25        8      0
   ListMimeInfo                          18     18        0      0
   GetMimeInfoList                       12     11        1      0
-  GetMimeList                           12      0        0     12
+  GetMimeList                           12     10        2      0
   IsMimeCacheInstantiated                7      5        2      0
   MimeComponentTerminus                  6      3        3      0
   DestroyMimeElement                     5      0        5      0
   MagickToMime                           3      0        0      3
   AcquireMimeCache                       1      1        0      0
   MimeInfoCompare                        1      1        0      0
-  GetMimeDescription                     1      0        0      1
-  GetMimeType                            1      0        0      1
+  GetMimeDescription                     1      0        1      0
+  GetMimeType                            1      0        1      0
   MimeComponentGenesis                   1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
     x  mime.c:458:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:555:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:582:7 cxx_remove_void_call       qsort((void *) aliases,(size_t) i,sizeof(*aliases),MimeCompare);
+    x  mime.c:615:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  mime.c:646:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  mime.c:678:26 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)
        mime.c:679:9 cxx_remove_void_call       ActivateSemaphoreInfo(&mime_semaphore);
-       mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-       mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
-       mime.c:840:19 cxx_ge_to_lt               if (depth >= MagickMaxRecursionDepth)
-       mime.c:849:13 cxx_remove_void_call       GetPathComponent(filename,HeadPath,path);
-       mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
-       mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
-       mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
+    x  mime.c:838:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
+    x  mime.c:840:19 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  mime.c:850:23 cxx_ne_to_eq               if (*path != '\0')
+    x  mime.c:853:28 cxx_eq_to_ne               if (*attribute == *DirectorySeparator)
+    x  mime.c:858:26 cxx_ne_to_eq               if (file_xml != (char *) NULL)
        mime.c:861:24 cxx_add_to_sub             depth+1,exception);
-    x  mime.c:879:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-    x  mime.c:886:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-    x  mime.c:890:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
-    x  mime.c:909:26 cxx_ne_to_eq               for (p=token; *p != '\0'; )
-    x  mime.c:911:18 cxx_eq_to_ne               if (*p == '\\')
-    x  mime.c:914:55 cxx_ne_to_eq               if (isdigit((int) ((unsigned char) *p)) != 0)
-    x  mime.c:921:36 cxx_post_inc_to_post_dec   mime_info->length++;
-    x  mime.c:938:32 cxx_post_inc_to_post_dec   mime_info->length++;
-    x  mime.c:942:28 cxx_post_inc_to_post_dec   mime_info->length++;
-    x  mime.c:945:34 cxx_ne_to_eq               if (mime_info->data_type != StringData)
-    x  mime.c:959:16 cxx_eq_to_ne               if (*c == ':')
-    x  mime.c:963:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
     x  mime.c:969:19 cxx_ne_to_eq               if (attribute != (const char *) NULL)
     x  mime.c:981:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
     xc mime.c:1054:22 cxx_eq_to_ne               if (mime_semaphore == (SemaphoreInfo *) NULL)

@@ -1,32 +1,31 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 269 mutants in MagickCore/policy\.c$, 19 functions
-mutate: baseline over 15583 cases in 0s
-  mutants: 25/269 (33s)
-  mutants: 50/269 (34s)
+mutate: baseline over 15579 cases in 0s
+  mutants: 25/269 (34s)
+  mutants: 50/269 (42s)
   mutants: 75/269 (43s)
   mutants: 100/269 (78s)
-  mutants: 125/269 (132s)
-  mutants: 150/269 (142s)
-  mutants: 175/269 (175s)
-  mutants: 200/269 (191s)
-  mutants: 225/269 (228s)
-  mutants: 250/269 (229s)
-  mutants: 269/269 (255s)
+  mutants: 125/269 (141s)
+  mutants: 150/269 (157s)
+  mutants: 175/269 (171s)
+  mutants: 200/269 (196s)
+  mutants: 225/269 (207s)
+  mutants: 250/269 (222s)
+  mutants: 269/269 (262s)
 
-mutate: 269 mutants, 255s
-  killed 106, survived 120 (95 capped), no coverage 43, errors 0
-  mutation score on reached code: 46.9%   overall: 39.4%
+mutate: 269 mutants, 262s
+  killed 138, survived 99 (86 capped), no coverage 32, errors 0
+  mutation score on reached code: 58.2%   overall: 51.3%
 
   function                           total killed survived no-cov
-  IsRightsAuthorizedByName              50      3       47      0
-  LoadPolicyCache                       46     29       17      0
-  IsPathContainsSymlink                 29      6       23      0
+  IsRightsAuthorizedByName              50     11       39      0
+  LoadPolicyCache                       46     30       16      0
+  IsPathContainsSymlink                 29     19       10      0
   SetMagickSecurityPolicyValue          20      0        0     20
   GetPolicyInfo                         19     14        5      0
   ListPolicyInfo                        19     19        0      0
   AcquirePolicyCache                    12      6        6      0
   GetPolicyInfoList                     11     10        1      0
-  GetPolicyList                         11      0        0     11
+  GetPolicyList                         11      9        2      0
   SetMagickSecurityPolicy               10      0        0     10
   AcquirePolicyString                    8      5        3      0
   IsPathAuthorized                       8      3        5      0
@@ -35,7 +34,7 @@ mutate: 269 mutants, 255s
   DestroyPolicyElement                   5      1        4      0
   GetPolicyValue                         4      1        3      0
   ValidateSecurityPolicy                 2      0        0      2
-  IsPolicyPathSeparator                  1      0        1      0
+  IsPolicyPathSeparator                  1      1        0      0
   PolicyComponentGenesis                 1      0        1      0
 
   survivors (equivalent, or a gap in the catalogue):
@@ -54,32 +53,20 @@ mutate: 269 mutants, 255s
     xc policy.c:472:15 cxx_ge_to_gt               if (~length >= pad)
     xc policy.c:473:58 cxx_mul_to_div             destination=(char *) AcquireMagickMemory((length+pad)*sizeof(*destination));
     xc policy.c:477:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    x  policy.c:496:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  policy.c:502:50 cxx_add_to_sub             GetNumberOfElementsInLinkedList(policy_cache)+1UL,sizeof(*policies));
     xc policy.c:561:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc policy.c:569:14 cxx_eq_to_ne               if ((value == (const char *) NULL) || (*value == '\0'))
     xc policy.c:569:49 cxx_eq_to_ne               if ((value == (const char *) NULL) || (*value == '\0'))
-    x  policy.c:607:12 cxx_eq_to_ne               return(c == *DirectorySeparator ? MagickTrue : MagickFalse);
-    x  policy.c:621:12 cxx_eq_to_ne               if (path == (const char *) NULL)
-    x  policy.c:625:33 cxx_ne_to_eq               if (IsPolicyPathSeparator(*p) != MagickFalse)
-       policy.c:630:18 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
-       policy.c:630:22 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-       policy.c:630:22 cxx_ge_to_lt               if ((offset+1) >= (ssize_t) sizeof(partial))
-       policy.c:632:21 cxx_post_inc_to_post_dec   partial[offset++]=(*DirectorySeparator);
-    x  policy.c:636:13 cxx_ne_to_eq               while (*p != '\0')
+    x  policy.c:630:18 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
+    x  policy.c:630:22 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
     x  policy.c:648:15 cxx_add_to_sub             ((i+1) < (ssize_t) sizeof(component)))
     x  policy.c:648:19 cxx_lt_to_le               ((i+1) < (ssize_t) sizeof(component)))
-    x  policy.c:651:11 cxx_eq_to_ne               if (i == 0)
-    x  policy.c:660:17 cxx_gt_to_ge               if ((offset > 0) && (partial[offset-1] != *DirectorySeparator))
-    x  policy.c:660:17 cxx_gt_to_le               if ((offset > 0) && (partial[offset-1] != *DirectorySeparator))
     x  policy.c:660:40 cxx_sub_to_add             if ((offset > 0) && (partial[offset-1] != *DirectorySeparator))
-    x  policy.c:660:44 cxx_ne_to_eq               if ((offset > 0) && (partial[offset-1] != *DirectorySeparator))
     x  policy.c:665:20 cxx_add_to_sub             if ((offset+1) >= (ssize_t) sizeof(partial))
     x  policy.c:665:24 cxx_ge_to_gt               if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:665:24 cxx_ge_to_lt               if ((offset+1) >= (ssize_t) sizeof(partial))
-    x  policy.c:667:23 cxx_post_inc_to_post_dec   partial[offset++]=(*DirectorySeparator);
     x  policy.c:673:16 cxx_add_to_sub             if ((offset+i) >= (ssize_t) sizeof(partial))
     x  policy.c:673:20 cxx_ge_to_gt               if ((offset+i) >= (ssize_t) sizeof(partial))
-    x  policy.c:673:20 cxx_ge_to_lt               if ((offset+i) >= (ssize_t) sizeof(partial))
-    x  policy.c:678:12 cxx_ne_to_eq               if (*p != '\0')
     x  policy.c:689:35 cxx_ne_to_eq               if (IsPolicyPathSeparator(*p) != MagickFalse)
     xc policy.c:703:29 cxx_eq_to_ne               (is_symlink_utf8(path) == MagickFalse))) ? MagickTrue : MagickFalse;
     xc policy.c:704:15 cxx_ne_to_eq               if ((status != MagickFalse) && (symlink_follow_allowed == MagickFalse))
@@ -89,10 +76,8 @@ mutate: 269 mutants, 255s
     xc policy.c:817:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
      c policy.c:821:12 cxx_eq_to_ne               name == (const char *) NULL ? "undefined" : name,
      c policy.c:823:15 cxx_eq_to_ne               pattern == (const char *) NULL ? "undefined" : pattern);
-    xc policy.c:827:14 cxx_eq_to_ne               if (status == MagickFalse)
      c policy.c:829:45 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
     xc policy.c:839:3 cxx_remove_void_call       ResetLinkedListIterator(policy_cache);
-    xc policy.c:841:13 cxx_ne_to_eq               for ( ; p != (ElementInfo *) NULL; p=p->next)
     xc policy.c:852:15 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
     xc policy.c:852:70 cxx_ne_to_eq               if ((name != (char *) NULL) && (LocaleCompare(name,policy->name) != 0))
     xc policy.c:855:24 cxx_eq_to_ne               if (policy->domain == PathPolicyDomain)
@@ -117,18 +102,12 @@ mutate: 269 mutants, 255s
     xc policy.c:894:80 cxx_ne_to_eq               (GlobExpression(canonical_candidate,policy->pattern,MagickFalse) != MagickFalse))
     xc policy.c:897:37 cxx_ne_to_eq               if ((canonical_directory != (char *) NULL) &&
     xc policy.c:898:81 cxx_ne_to_eq               (GlobExpression(canonical_directory,policy->pattern,MagickFalse) != MagickFalse))
-    xc policy.c:901:15 cxx_eq_to_ne               if (match == MagickFalse)
     xc policy.c:905:27 cxx_ne_to_eq               if (matched_canonical != MagickFalse)
     xc policy.c:915:27 cxx_ne_to_eq               if (canonical_directory != (char *) NULL)
     xc policy.c:917:27 cxx_ne_to_eq               if (canonical_candidate != (char *) NULL)
     xc policy.c:919:22 cxx_ne_to_eq               if (canonical_path != (char *) NULL)
-    xc policy.c:925:19 cxx_ne_to_eq               if (matched_any != MagickFalse)
-    xc policy.c:927:40 cxx_ne_to_eq               if (((rights & ReadPolicyRights) != 0) &&
     xc policy.c:928:50 cxx_eq_to_ne               ((effective_rights & ReadPolicyRights) == 0))
-    xc policy.c:930:41 cxx_ne_to_eq               if (((rights & WritePolicyRights) != 0) &&
     xc policy.c:931:51 cxx_eq_to_ne               ((effective_rights & WritePolicyRights) == 0))
-    xc policy.c:933:43 cxx_ne_to_eq               if (((rights & ExecutePolicyRights) != 0) &&
-    xc policy.c:934:53 cxx_eq_to_ne               ((effective_rights & ExecutePolicyRights) == 0))
     xc policy.c:940:29 cxx_ne_to_eq               if (canonical_matched_any != MagickFalse)
     xc policy.c:944:44 cxx_ne_to_eq               if ((canonical_denied_mask & rights) != 0)
     xc policy.c:947:41 cxx_ne_to_eq               if ((GetLogEventMask() & PolicyEvent) != 0)
@@ -152,7 +131,6 @@ mutate: 269 mutants, 255s
     xc policy.c:1224:32 cxx_ne_to_eq               if (file_xml != (char *) NULL)
      c policy.c:1227:35 cxx_add_to_sub             path,depth+1,exception);
     xc policy.c:1253:20 cxx_eq_to_ne               if (status == MagickFalse)
-    xc policy.c:1301:54 cxx_eq_to_ne               if (LocaleCompare((char *) keyword,"rights") == 0)
     xc policy.c:1334:17 cxx_ne_to_eq               return(status != 0 ? MagickTrue : MagickFalse);
     xc policy.c:1357:24 cxx_eq_to_ne               if (policy_semaphore == (SemaphoreInfo *) NULL)
     xc policy.c:1382:24 cxx_eq_to_ne               if (policy_semaphore == (SemaphoreInfo *) NULL)
