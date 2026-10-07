@@ -1,93 +1,35 @@
 mutate: 89 mutants in MagickCore/profile\.c$, 22 functions
-  baseline: 40/40 (0s)
-mutate: baseline over 58 cases in 1s
+mutate: baseline over 0 cases in 0s
   mutants: 25/89 (0s)
   mutants: 50/89 (0s)
-  mutants: 75/89 (2s)
-  mutants: 89/89 (4s)
+  mutants: 75/89 (0s)
+  mutants: 89/89 (0s)
 
-mutate: 89 mutants, 4s
-  killed 0, survived 53 (0 capped), no coverage 36, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 89 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 89, errors 0
 
   function                           total killed survived no-cov
   TransformQuantumPixels                22      0        0     22
-  ProfileImage                          15      0       15      0
-  SyncExifProfile                       10      0       10      0
-  GetXMPNumeratorAndDenominator          6      0        6      0
+  ProfileImage                          15      0        0     15
+  SyncExifProfile                       10      0        0     10
+  GetXMPNumeratorAndDenominator          6      0        0      6
   DestroyPixelTLS                        4      0        0      4
   DestroyTransformTLS                    3      0        0      3
-  WriteTo8BimProfile                     3      0        3      0
-  GetProfilesFromResourceBlock           3      0        3      0
-  ReplaceXMPValue                        3      0        3      0
+  WriteTo8BimProfile                     3      0        0      3
+  GetProfilesFromResourceBlock           3      0        0      3
+  ReplaceXMPValue                        3      0        0      3
   AcquirePixelTLS                        2      0        0      2
   AcquireTransformTLS                    2      0        0      2
   CMSExceptionHandler                    2      0        0      2
-  Sync8BimProfile                        2      0        2      0
-  GetXMPOffsets                          2      0        2      0
-  TryAccumulate                          2      0        2      0
-  SyncXMPProfile                         2      0        2      0
-  GetNextImageProfile                    1      0        1      0
+  Sync8BimProfile                        2      0        0      2
+  GetXMPOffsets                          2      0        0      2
+  TryAccumulate                          2      0        0      2
+  SyncXMPProfile                         2      0        0      2
+  GetNextImageProfile                    1      0        0      1
   TransformDoublePixels                  1      0        0      1
-  RemoveImageProfile                     1      0        1      0
-  ResetImageProfileIterator              1      0        1      0
-  ValidateXMPProfile                     1      0        1      0
-  SetImageProfileInternal                1      0        1      0
+  RemoveImageProfile                     1      0        0      1
+  ResetImageProfileIterator              1      0        0      1
+  ValidateXMPProfile                     1      0        0      1
+  SetImageProfileInternal                1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  profile.c:374:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1030:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1046:13 cxx_remove_void_call       ResetImageProfileIterator(image);
-    x  profile.c:1069:51 cxx_eq_to_ne               (CompareStringInfo(icc_profile,profile) == 0))
-    x  profile.c:1076:40 cxx_ne_to_eq               if (LocaleCompare(value,"1") != 0)
-    x  profile.c:1077:13 cxx_remove_void_call       SetsRGBImageProfile(image,exception);
-    x  profile.c:1079:43 cxx_ne_to_eq               if (LocaleCompare(value,"R98.") != 0)
-    x  profile.c:1080:13 cxx_remove_void_call       SetsRGBImageProfile(image,exception);
-    x  profile.c:1124:13 cxx_remove_void_call       cmsDeleteContext(cms_context);
-    x  profile.c:1177:13 cxx_remove_void_call       SetLCMSInfoTranslate(&source_info,0.0);
-    x  profile.c:1274:13 cxx_remove_void_call       SetLCMSInfoTranslate(&target_info,0.0);
-       profile.c:1425:41 cxx_ne_to_eq               if (source_info.profile != (cmsHPROFILE) NULL)
-       profile.c:1427:41 cxx_ne_to_eq               if (target_info.profile != (cmsHPROFILE) NULL)
-       profile.c:1463:17 cxx_remove_void_call       TransformQuantumPixels(id,image,&source_info,&target_info,
-    x  profile.c:1516:37 cxx_ne_to_eq               if (target_info.profile != (cmsHPROFILE) NULL)
-    x  profile.c:1520:9 cxx_remove_void_call       cmsDeleteContext(cms_context);
-    x  profile.c:1559:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1732:22 cxx_add_to_sub             if (((length_byte+1) & 0x01) != 0)
-    x  profile.c:1734:11 cxx_gt_to_ge               if (p > (datum+length-4))
-    x  profile.c:1740:61 cxx_gt_to_ge               if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))
-    x  profile.c:1825:22 cxx_add_to_sub             if (((length_byte+1) & 0x01) != 0)
-    x  profile.c:1827:11 cxx_gt_to_ge               if (p > (datum+length-4))
-    x  profile.c:1831:46 cxx_gt_to_ge               if ((p > (datum+length-count)) || (count > (ssize_t) length) ||
-    x  profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
-    x  profile.c:2043:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:2372:14 cxx_lt_to_le               if (length < 16)
-    x  profile.c:2393:18 cxx_lt_to_le               if (length < 16)
-    x  profile.c:2411:40 cxx_ge_to_gt               if ((offset < 0) || ((size_t) offset >= length))
-    x  profile.c:2434:26 cxx_lt_to_le               if (directory_length < 6)
-    x  profile.c:2440:19 cxx_lt_to_le               for ( ; entry < number_entries; entry++)
-    x  profile.c:2459:13 cxx_gt_to_ge               if (q > (exif+length-12))
-    x  profile.c:2466:39 cxx_ge_to_gt               if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))
-    x  profile.c:2485:23 cxx_lt_to_le               if (~length < number_bytes)
-    x  profile.c:2570:35 cxx_mul_to_div             if ((directory+2+(12*number_entries)) > (exif+length))
-    x  profile.c:2570:53 cxx_gt_to_ge               if ((directory+2+(12*number_entries)) > (exif+length))
-    x  profile.c:2616:16 cxx_lt_to_le               if (length < 7)
-    x  profile.c:2620:16 cxx_ge_to_gt               if ((count >= (ssize_t) length) || (count < 0))
-    x  profile.c:2668:18 cxx_gt_to_ge               if (new_length > length)
-    x  profile.c:2671:59 cxx_sub_to_add             (void) memmove(datum+start+value_length,datum+end,length-end);
-    x  profile.c:2674:18 cxx_lt_to_le               if (new_length < length)
-    x  profile.c:2696:38 cxx_sub_to_add             if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||
-    x  profile.c:2697:42 cxx_gt_to_ge               (((size_t) (pos-datum)+tag_length) > length) ||
-    x  profile.c:2716:12 cxx_gt_to_ge               if (term > (double) MAGICK_ULONG_MAX)
-    x  profile.c:2719:43 cxx_gt_to_ge               if ((accumulated < 0.0) || (accumulated > (double) MAGICK_ULONG_MAX))
-    x  profile.c:2744:13 cxx_le_to_lt               if (value <= MagickEpsilon)
-    x  profile.c:2746:13 cxx_gt_to_ge               if (value > (double) MAGICK_ULONG_MAX)
-    x  profile.c:2763:15 cxx_lt_to_le               for (i=0; i < 128; i++)
-    x  profile.c:2763:23 cxx_post_inc_to_post_dec   for (i=0; i < 128; i++)
-    x  profile.c:2780:35 cxx_le_to_lt               if (fabs(approximation-value) <= MagickEpsilon)
-    x  profile.c:2783:18 cxx_le_to_lt               if (fraction <= 0.0)
-    x  profile.c:2815:36 cxx_sub_to_add             if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
-    x  profile.c:2815:58 cxx_gt_to_ge               if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-ac79170c0-profile.json
+  full results: build-oracle/work/mutation-confirm-b900ce8c9-profile.json
