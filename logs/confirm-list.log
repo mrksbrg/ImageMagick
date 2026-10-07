@@ -1,38 +1,32 @@
 mutate: 34 mutants in MagickCore/list\.c$, 14 functions
-mutate: baseline over 30 cases in 0s
+mutate: baseline over 29 cases in 0s
   mutants: 25/34 (0s)
   mutants: 34/34 (2s)
 
 mutate: 34 mutants, 2s
-  killed 0, survived 9 (0 capped), no coverage 25, errors 0
+  killed 0, survived 3 (0 capped), no coverage 31, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   SpliceImageIntoList                    9      0        0      9
   SyncImageList                          8      0        0      8
-  CloneImages                            5      0        5      0
+  CloneImages                            5      0        0      5
   DeleteImages                           2      0        0      2
   CloneImageList                         1      0        1      0
   DuplicateImages                        1      0        0      1
   GetImageFromList                       1      0        0      1
   ImageListToArray                       1      0        1      0
   InsertImageInList                      1      0        0      1
-  RemoveFirstImageFromList               1      0        1      0
+  RemoveFirstImageFromList               1      0        0      1
   RemoveLastImageFromList                1      0        0      1
-  ReplaceImageInList                     1      0        0      1
-  ReplaceImageInListReturnLast           1      0        1      0
+  ReplaceImageInList                     1      0        1      0
+  ReplaceImageInListReturnLast           1      0        0      1
   ReverseImageList                       1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
        list.c:152:19 cxx_ne_to_eq               if (image != (Image *) NULL)
-    x  list.c:237:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  list.c:255:17 cxx_gt_to_ge               if (first > (ssize_t) length)
-    x  list.c:267:20 cxx_gt_to_ge               if (last > (ssize_t) length)
-    x  list.c:279:27 cxx_gt_to_ge               step=(ssize_t) (first > last ? -step : step);
-    x  list.c:280:18 cxx_gt_to_ge               for ( ; step > 0 ? (last-first) >= 0 : (last-first) <= 0; first+=step)
     x  list.c:880:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  list.c:1095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  list.c:1256:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  list.c:1195:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-96b821c39-list.json
+  full results: build-oracle/work/mutation-confirm-ac79170c0-list.json
