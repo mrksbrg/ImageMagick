@@ -33191,6 +33191,166 @@
    "src": "(active->right->key != (void *) NULL))",
    "verdict": "unobservable",
    "why": "with relinquish functions this skips freeing a node's key or value (a leak; the driver's Freed prints nothing); without them the inverted test would call a NULL function, a call the compiler treats as unreachable and drops (hand-run: reset of 7 nodes with and without mode:free, same output, no crash)"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/matrix.c",
+   "function": "SetMatrixExtent",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((MagickSizeType) offset >= length)",
+   "verdict": "equivalent",
+   "why": "SetMatrixExtent runs once, on the new temporary file, whose size (0) is always below length"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/matrix.c",
+   "function": "SetMatrixExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "extent=(MagickOffsetType) length-1;",
+   "verdict": "unobservable",
+   "why": "writes the extent's marker byte one byte further: the temporary file is one byte longer, and only its first length bytes are ever read"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/matrix.c",
+   "function": "SetMatrixExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (matrix_info->synchronize != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only whether, and over which range, posix_fallocate reserves the temporary file's space: the bytes read back are the same"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/matrix.c",
+   "function": "SetMatrixExtent",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(void) posix_fallocate(matrix_info->file,offset+1,extent-offset);",
+   "verdict": "unobservable",
+   "why": "only whether, and over which range, posix_fallocate reserves the temporary file's space: the bytes read back are the same"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/matrix.c",
+   "function": "SetMatrixExtent",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "(void) posix_fallocate(matrix_info->file,offset+1,extent-offset);",
+   "verdict": "unobservable",
+   "why": "only whether, and over which range, posix_fallocate reserves the temporary file's space: the bytes read back are the same"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMatrixInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (synchronize != (const char *) NULL)",
+   "verdict": "unobservable",
+   "why": "MAGICK_SYNCHRONIZE is never set: the inverted test reads IsStringTrue(NULL), which is false, and DestroyString(NULL) returns NULL; with it set, only posix_fallocate would be skipped"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMatrixInfo",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "((size_t) matrix_info->length <= GetMaxMemoryRequest()))",
+   "verdict": "equivalent",
+   "why": "a matrix of exactly the maximum memory request (by default 256 MiB) is never acquired"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMatrixInfo",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (matrix_info->elements == NULL)",
+   "verdict": "unobservable",
+   "why": "after a successful allocation the inverted test maps an anonymous region in its place (the allocation leaks); every user fills the matrix before reading it (NullMatrix for -hough-lines and deskew, a writing pass for -canny and -connected-components), and their cases all survive it"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMatrixInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MemoryResource,matrix_info->length);",
+   "verdict": "unobservable",
+   "why": "only the memory and map resources' bookkeeping, which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/matrix.c",
+   "function": "AcquireMatrixInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MapResource,matrix_info->length);",
+   "verdict": "unobservable",
+   "why": "only the memory and map resources' bookkeeping, which no output shows"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/matrix.c",
+   "function": "WriteMatrixElements",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(matrix_info->semaphore);",
+   "verdict": "unobservable",
+   "why": "the unlock on the lseek failure path; lseek on the matrix's own temporary file never fails"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/matrix.c",
+   "function": "ReadMatrixElements",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(matrix_info->semaphore);",
+   "verdict": "unobservable",
+   "why": "the unlock on the lseek failure path; lseek on the matrix's own temporary file never fails"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "WriteMatrixElements",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (MagickOffsetType) length; i+=count)",
+   "verdict": "equivalent",
+   "why": "the loop moves every byte before i reaches length; one more pass reads or writes 0 bytes, gets 0 and stops, and a count of exactly 0 never comes inside the loop"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/matrix.c",
+   "function": "WriteMatrixElements",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "equivalent",
+   "why": "the loop moves every byte before i reaches length; one more pass reads or writes 0 bytes, gets 0 and stops, and a count of exactly 0 never comes inside the loop"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/matrix.c",
+   "function": "ReadMatrixElements",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < (MagickOffsetType) length; i+=count)",
+   "verdict": "equivalent",
+   "why": "the loop moves every byte before i reaches length; one more pass reads or writes 0 bytes, gets 0 and stops, and a count of exactly 0 never comes inside the loop"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/matrix.c",
+   "function": "ReadMatrixElements",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "equivalent",
+   "why": "the loop moves every byte before i reaches length; one more pass reads or writes 0 bytes, gets 0 and stops, and a count of exactly 0 never comes inside the loop"
   }
  ]
 }
