@@ -1,6 +1,5 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 155 mutants in MagickCore/enhance\.c$, 30 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 3 cases in 0s
   mutants: 25/155 (0s)
   mutants: 50/155 (0s)
   mutants: 75/155 (0s)
@@ -10,7 +9,8 @@ mutate: baseline over 0 cases in 0s
   mutants: 155/155 (0s)
 
 mutate: 155 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 155, errors 0
+  killed 0, survived 5 (0 capped), no coverage 150, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ContrastStretchImage                  19      0        0     19
@@ -27,7 +27,7 @@ mutate: 155 mutants, 0s
   ClipCLAHEHistogram                     5      0        0      5
   ContrastImage                          5      0        0      5
   LevelImage                             5      0        0      5
-  NegateImage                            5      0        0      5
+  NegateImage                            5      0        5      0
   WhiteBalanceImage                      5      0        0      5
   GrayscaleImage                         4      0        0      4
   MapCLAHEHistogram                      3      0        0      3
@@ -44,4 +44,12 @@ mutate: 155 mutants, 0s
   ModulateLCHab                          1      0        0      1
   ModulateLCHuv                          1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-f51f7cbc7-enhance.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  enhance.c:3975:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  enhance.c:3978:17 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  enhance.c:4045:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:4050:21 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:4052:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-6f677a7f0-enhance.json
