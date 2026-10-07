@@ -1,25 +1,26 @@
 mutate: 181 mutants in MagickCore/resize\.c$, 32 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 13 cases in 0s
   mutants: 25/181 (0s)
   mutants: 50/181 (0s)
   mutants: 75/181 (0s)
   mutants: 100/181 (0s)
   mutants: 125/181 (0s)
   mutants: 150/181 (0s)
-  mutants: 175/181 (0s)
-  mutants: 181/181 (0s)
+  mutants: 175/181 (1s)
+  mutants: 181/181 (1s)
 
-mutate: 181 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 181, errors 0
+mutate: 181 mutants, 1s
+  killed 0, survived 25 (0 capped), no coverage 156, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ScaleImage                            41      0        0     41
   LiquidRescaleImage                    40      0        0     40
-  AcquireResizeFilter                   17      0        0     17
+  AcquireResizeFilter                   17      0       17      0
   CubicSpline                            9      0        0      9
   SampleImage                            7      0        0      7
   ThumbnailImage                         7      0        0      7
-  InterpolativeResizeImage               6      0        0      6
+  InterpolativeResizeImage               6      0        6      0
   MagicKernelSharp2021                   5      0        0      5
   BesselOrderOne                         5      0        0      5
   VerticalFilter                         5      0        0      5
@@ -33,12 +34,12 @@ mutate: 181 mutants, 0s
   DestroyContributionTLS                 2      0        0      2
   AcquireContributionTLS                 2      0        0      2
   ResizeImage                            2      0        0      2
-  CubicBC                                1      0        0      1
+  CubicBC                                1      0        1      0
   Lagrange                               1      0        0      1
   Triangle                               1      0        0      1
   Welch                                  1      0        0      1
   I0                                     1      0        0      1
-  GetResizeFilterWeight                  1      0        0      1
+  GetResizeFilterWeight                  1      0        1      0
   Eagle2X                                1      0        0      1
   Scale2X                                1      0        0      1
   Epbx2X                                 1      0        0      1
@@ -46,4 +47,32 @@ mutate: 181 mutants, 0s
   MinifyImage                            1      0        0      1
   ResampleImage                          1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-9b9a5abd8-resize.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  resize.c:244:9 cxx_lt_to_le               if (x < 2.0)
+    x  resize.c:984:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       resize.c:1008:28 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1008:28 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1008:49 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1008:49 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1015:20 cxx_ne_to_eq               if (artifact != (const char *) NULL)
+       resize.c:1018:32 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1018:32 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1018:53 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
+       resize.c:1018:53 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+    x  resize.c:1032:53 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
+    x  resize.c:1099:65 cxx_mul_to_div             resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
+    x  resize.c:1099:71 cxx_mul_to_div             resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
+    x  resize.c:1101:16 cxx_gt_to_ge               if ( value > 0.5 )
+    x  resize.c:1132:17 cxx_lt_to_le               if (lobes < 1)
+    x  resize.c:1141:34 cxx_gt_to_ge               if (resize_filter->support > 16)
+    x  resize.c:1158:27 cxx_lt_to_le               if (resize_filter->blur < MagickEpsilon)
+    x  resize.c:1705:38 cxx_lt_to_le               if ((resize_filter->window_support < MagickEpsilon) ||
+    x  resize.c:1782:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  resize.c:1829:19 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  resize.c:1847:20 cxx_eq_to_ne               if (status == MagickFalse)
+    x  resize.c:1854:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       resize.c:1862:17 cxx_post_inc_to_post_dec   progress++;
+       resize.c:1865:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-96b821c39-resize.json
