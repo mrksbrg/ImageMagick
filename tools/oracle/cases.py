@@ -6067,6 +6067,30 @@ def _windrv_cases():
                     "q" * 5000, "P" * 5000, "T" * 5000, "N" * 5000, "D" * 50, "T" * 5000, "A" * 5000,
                     "T" * 5000, "T" * 5000, "T" * 5000, "y" * 5000, "Z" * 5000),
         "percent": '<!DOCTYPE r [ <!ENTITY e "a%b"> <!ENTITY g "&lt;"> ]>\n<r>&e;&g;</r>\n',
+        # sixth wave (2026-10-07, after the kills sweep1007 could not reproduce were dropped;
+        # hand-run they kill 49): text before the root, unquoted and spaced attributes, ATTLIST
+        # defaults and non-CDATA values ParseEntities normalises, character references of two to
+        # four UTF-8 bytes, parameter entities, comments and PIs in the internal subset, a DOCTYPE
+        # without one, an entity value holding "]>", an invalid entity name, unterminated documents
+        "lead": '  text before <r a="1">x</r>',
+        "lead2": '\n\n<!-- c -->\n<r/>',
+        "noquote": '<r a=1 b="2">x</r>\n',
+        "spaces": '<r  a = "1"   b= "2" >x</r >\n',
+        "attlist": '<!DOCTYPE r [ <!ATTLIST r a CDATA "da" b CDATA "db"> <!ATTLIST s k NMTOKEN "  x   y  " '
+                   'm CDATA "m1"> <!ATTLIST r c ID #IMPLIED> ]>\n<r b="given"><s/><s k="  p   q  "/><s m="  sp  ace "/></r>\n',
+        "ws_attr": '<!DOCTYPE r [ <!ATTLIST r k NMTOKEN #IMPLIED> ]>\n<r k="\t  a \n  b\t "/>\n',
+        "charref": '<r a="&#x4E2D;&#x10000;&#128;&#2047;&#2048;&#65535;">&#x4E2D;&#x1F600;&#169;&#x7F;&#x80;'
+                   '&#x800;&#xFFFF;&#x10FFFF;</r>\n',
+        # (as probed: "%%" doubled, which ParseInternalDoctype reads as a stray '%')
+        "pent": '<!DOCTYPE r [ <!ENTITY %% p "<!ENTITY q \'qq\'>"> %%p; <!ENTITY %% s "x"> <!ENTITY t "%%s;y"> ]>\n'
+                '<r>&q;&t;</r>\n',
+        "notation": '<!DOCTYPE r [ <!NOTATION n SYSTEM "x"> <!ELEMENT r ANY> <!-- comment in dtd --> <?pi in dtd?> '
+                    '<!ENTITY e "z"> ]>\n<r>&e;</r>\n',
+        "badent": '<!DOCTYPE r [ <!ENTITY 1e "x"> <!ENTITY e x> <!ENTITY f "y"> <!ENTITY> ]>\n<r>&f;&e;&1e;</r>\n',
+        "doctypenosubset": '<!DOCTYPE r SYSTEM "r.dtd">\n<r>x</r>\n',
+        "doctypebracket": '<!DOCTYPE r [ <!ENTITY e "]>"> ]>\n<r>&e;</r>\n',
+        "unterminated2": '<r><a k="v"',
+        "unterminated3": '<r>text',
     }
     for name, ops in (
             ("plain", "print child:b attr:k sibling attr:k attr:zz next top attr:a attr:b"),
@@ -6079,7 +6103,9 @@ def _windrv_cases():
             ("big", "print"), ("big", "child:e299 attr:k top addchild:z:0 content:%s top print" % ("Z" * 5000)),
             ("pis", "print"), ("control", "print"), ("huge", "print"), ("percent", "print"),
             ("nested", "path:a[1]/b/q:0 path:a[0]/n:2 path:a/b/c/d:0 print"),
-    ):
+    ) + tuple((name, "print") for name in ("lead", "lead2", "noquote", "spaces", "attlist", "ws_attr", "charref", "pent",
+                                           "notation", "badent", "doctypenosubset", "doctypebracket",
+                                           "unterminated2", "unterminated3")):
         yield _with_inputs(_windrv("xml %s: %s" % (name, ops), tuple(["xml", "%s.xml" % name] + ops.split())),
                            files={"%s.xml" % name: xml_docs[name]})
     for ops in ("addchild:a:0 addchild:b:0 content:hi top child:a sibling print",
