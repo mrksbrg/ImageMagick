@@ -32891,6 +32891,306 @@
    "src": "if (blob_info->file_info.file != (FILE *) NULL)",
    "verdict": "unobservable",
    "why": "enters the block for an in-memory blob with no FILE: without -synchronize (no command line writes an in-memory blob with it) only the status test runs, and the status is 0, so ferror is never called"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/color.c",
+   "function": "DestroyColorElement",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p->path != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only leaves a colour element's path or name unfreed when the cache is destroyed: a leak"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/color.c",
+   "function": "DestroyColorElement",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (p->name != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only leaves a colour element's path or name unfreed when the cache is destroyed: a leak"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for ( ; *q != '\\0'; q++)",
+   "verdict": "unobservable",
+   "why": "changes how far the DOCTYPE is skipped; whatever part of it is left is read as unknown keywords, which LoadColorCache ignores (hand-run 2026-10-07: a DOCTYPE holding a quoted ]> and nested brackets gives the same -list color)"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*q == quote)",
+   "verdict": "unobservable",
+   "why": "changes how far the DOCTYPE is skipped; whatever part of it is left is read as unknown keywords, which LoadColorCache ignores (hand-run 2026-10-07: a DOCTYPE holding a quoted ]> and nested brackets gives the same -list color)"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (bracket_depth > 0)",
+   "verdict": "unobservable",
+   "why": "changes how far the DOCTYPE is skipped; whatever part of it is left is read as unknown keywords, which LoadColorCache ignores (hand-run 2026-10-07: a DOCTYPE holding a quoted ]> and nested brackets gives the same -list color)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '>') && (bracket_depth == 0))",
+   "verdict": "unobservable",
+   "why": "changes how far the DOCTYPE is skipped; whatever part of it is left is read as unknown keywords, which LoadColorCache ignores (hand-run 2026-10-07: a DOCTYPE holding a quoted ]> and nested brackets gives the same -list color)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((*q == '>') && (bracket_depth == 0))",
+   "verdict": "unobservable",
+   "why": "changes how far the DOCTYPE is skipped; whatever part of it is left is read as unknown keywords, which LoadColorCache ignores (hand-run 2026-10-07: a DOCTYPE holding a quoted ]> and nested brackets gives the same -list color)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (((*token != '/') && (*(token+1) != '>')) && (*q != '\\0'))",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*token != '=')",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (LocaleCompare(keyword,\"file\") == 0)",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*path != '\\0')",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (*token == *DirectorySeparator)",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug); this only changes how the <include> element's attributes are scanned or which one names the file, and any tokens left over are ignored as unknown keywords (hand-run: same -list color)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "equivalent",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug), so includes never nest and depth stays 0 here"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (file_xml != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug): file_xml is always NULL, and LoadColorCache given NULL returns at once, so only the status, which nothing reports, could change"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/color.c",
+   "function": "LoadColorCache",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "path,depth+1,exception);",
+   "verdict": "unobservable",
+   "why": "every configuration <include> loads nothing (FileToXML returns NULL for a regular file: MUTATION.md, upstream bug): the recursive load never runs"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/exception.c",
+   "function": "ThrowMagickExceptionList",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "n=vsnprintf(reason+length,MagickPathExtent-length,format,operands);",
+   "verdict": "unobservable",
+   "why": "only a message longer than MagickPathExtent is written further; the message ThrowException keeps is cut at MagickPathExtent either way and the bytes past reason are never read (hand-run: a 5000-character file name and format give the same output)"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/exception.c",
+   "function": "ThrowMagickExceptionList",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (n < 0)",
+   "verdict": "equivalent",
+   "why": "vsnprintf returns a negative count only on an encoding error, which C-locale formats never give; terminating the buffer at its end changes nothing for a shorter message"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/exception.c",
+   "function": "ThrowMagickExceptionList",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (n < 0)",
+   "verdict": "equivalent",
+   "why": "vsnprintf returns a negative count only on an encoding error, which C-locale formats never give; terminating the buffer at its end changes nothing for a shorter message"
+  },
+  {
+   "at": 48,
+   "file": "MagickCore/exception.c",
+   "function": "ThrowMagickExceptionList",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((severity >= WarningException) && (severity < ErrorException))",
+   "verdict": "unobservable",
+   "why": "only an exception of exactly ErrorException or FatalErrorException severity is labelled differently, and nothing in ImageMagick throws those generic severities (API only)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/exception.c",
+   "function": "ThrowMagickExceptionList",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (severity >= FatalErrorException)",
+   "verdict": "unobservable",
+   "why": "only an exception of exactly ErrorException or FatalErrorException severity is labelled differently, and nothing in ImageMagick throws those generic severities (API only)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/exception.c",
+   "function": "ThrowMagickExceptionList",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((severity >= ErrorException) && (severity < FatalErrorException))",
+   "verdict": "equivalent",
+   "why": "FatalErrorException is labelled fatal by the next test either way"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/quantum-import.c",
+   "function": "ScaleFloatPixel",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (pixel < (double) -FLT_MAX)",
+   "verdict": "equivalent",
+   "why": "clamping at the boundary returns the boundary: a value of exactly -FLT_MAX or FLT_MAX comes back unchanged either way"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/quantum-import.c",
+   "function": "ScaleFloatPixel",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if (pixel > (double) FLT_MAX)",
+   "verdict": "equivalent",
+   "why": "clamping at the boundary returns the boundary: a value of exactly -FLT_MAX or FLT_MAX comes back unchanged either way"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/splay-tree.c",
+   "function": "BalanceSplayTree",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (splay_tree->nodes <= 2)",
+   "verdict": "equivalent",
+   "why": "the tree is balanced only after a splay deeper than MaxSplayTreeDepth, so it never has exactly two nodes here"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/splay-tree.c",
+   "function": "ResetSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if ((splay_tree->relinquish_value != (void *(*)(void *)) NULL) &&",
+   "verdict": "unobservable",
+   "why": "with relinquish functions this skips freeing a node's key or value (a leak; the driver's Freed prints nothing); without them the inverted test would call a NULL function, a call the compiler treats as unreachable and drops (hand-run: reset of 7 nodes with and without mode:free, same output, no crash)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/splay-tree.c",
+   "function": "ResetSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(active->right->value != (void *) NULL))",
+   "verdict": "unobservable",
+   "why": "with relinquish functions this skips freeing a node's key or value (a leak; the driver's Freed prints nothing); without them the inverted test would call a NULL function, a call the compiler treats as unreachable and drops (hand-run: reset of 7 nodes with and without mode:free, same output, no crash)"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/splay-tree.c",
+   "function": "ResetSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if ((splay_tree->relinquish_key != (void *(*)(void *)) NULL) &&",
+   "verdict": "unobservable",
+   "why": "with relinquish functions this skips freeing a node's key or value (a leak; the driver's Freed prints nothing); without them the inverted test would call a NULL function, a call the compiler treats as unreachable and drops (hand-run: reset of 7 nodes with and without mode:free, same output, no crash)"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/splay-tree.c",
+   "function": "ResetSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(active->right->key != (void *) NULL))",
+   "verdict": "unobservable",
+   "why": "with relinquish functions this skips freeing a node's key or value (a leak; the driver's Freed prints nothing); without them the inverted test would call a NULL function, a call the compiler treats as unreachable and drops (hand-run: reset of 7 nodes with and without mode:free, same output, no crash)"
   }
  ]
 }

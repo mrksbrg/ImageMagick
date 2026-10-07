@@ -3746,3 +3746,65 @@ reach. No longer trusted:
 
 The Mac's reports from the same early period may hold kills of the same kind; ERDC's confirm
 loop reruns survivors, not kills, so it would not see them.
+
+## Upstream bug: a colors.xml colour given by name deadlocks every command (Windows, 2026-10-07)
+
+A user or site `colors.xml` (here `~/.config/ImageMagick/colors.xml`) with an entry whose
+value is a colour name, `<color name="caseblue" color="blue" compliance="X11"/>`, makes
+**every** command that looks up a colour hang, `magick xc:red info:` included. The backtrace:
+`IsColorCacheInstantiated` takes `color_semaphore` and calls `AcquireColorCache`, whose
+`LoadColorCache` resolves the value with `QueryColorCompliance("blue")`, which calls
+`IsColorCacheInstantiated` again and blocks on the same, non-recursive, mutex. Values written as
+`#0000FF` or `rgb(...)` are parsed without the cache and work. Found because a probe case timed
+out unmutated (the oracle drops such cases from a baseline, so no false kill came of it). A
+second oddity on the way: an entry without a `compliance` attribute is listed but never found by
+name ("unrecognized color").
+
+**For the owner:** a real defect (likely worth reporting); the campaign keeps the behaviour, and
+the colors.xml cases avoid colour names.
+
+## After sweep1007: cases and verdicts for the files that lost trust (Windows, 2026-10-07, afternoon)
+
+Each gap was probed by hand (`blobprobe.py`, `xmlprobe.py`, `multiprobe.py`: the open mutants
+against candidate cases, every candidate run twice for determinism), the cases that killed
+something went into the catalogue, and the rest got verdicts after reading the code.
+
+- **xml-tree.c 70% → 89%.** 11 driver cases feed ConvertUTF16ToUTF8 byte strings that magick
+  writes as gray pixels (case files must be ASCII): NewXMLTree takes any text starting with
+  0xFE or 0xFF for UTF-16 but measures it with `strlen`, so real UTF-16 stops at its first zero
+  byte and the converted text can never hold a '<' (every such document ends in "root tag
+  missing"). 14 documents for the parser (text before the root, unquoted attributes, ATTLIST
+  defaults and non-CDATA normalisation, two- to four-byte character references, parameter
+  entities, comments and PIs in the internal subset, unterminated documents). The official round
+  `xml1007` killed **60**. 58 verdicts: FileToXML's 32 (the include bug: every regular file
+  returns NULL) and the conversion's 26. Still under 80%: the `DestroyXMLTree*` family (frees
+  only; an index-shifting mutant there does not crash either, because the internal subset's
+  general entities never reach `root->entities` in these documents — not yet understood) and
+  IsSkipTag.
+- **blob.c 77% → 93%.** 12 cases: `@-` reads an option's value from stdin, which FileToBlob
+  reads through its stream branch even from a file (small, empty, 64 KB, 1.3 MB, stdin twice);
+  an empty `@file` (the read loop after a failed map); `ppm:fd:1` (OpenBlob's descriptor
+  branch); a PPM read under a path policy granting reading only (the rights OpenBlob asks for);
+  BMP and two-frame PCX custom streams (TellBlob's teller, the list writer's seeker and teller).
+  The official round `blob1007` killed **24**. 67 verdicts: CloseBlob's I/O-error paths (a
+  hand-run with `-synchronize`, gzip, bzip2, PNG, TIFF and stdout writes kills none: the raised
+  status reaches no output), SyncBlob's stdout flush, UnmapBlob's unused result, OpenBlob's FIFO
+  branch and descriptor 0, leaks. Still under 80%: SyncBlobStream, EOFBlob's bzip2 end test,
+  BlobToImage's and CustomStreamToImage's filename restoration (the driver prints no names).
+- **color.c**: three colors.xml cases of the case's own (listed, used, malformed) kill 28 of
+  LoadColorCache's 45 open mutants by hand; 13 verdicts (the include bug, DOCTYPE leftovers
+  read as unknown keywords, DestroyColorElement's leaks).
+- **exception.c, quantum-import.c, splay-tree.c**: verdicts (an over-long message is cut at
+  MagickPathExtent either way; the generic ErrorException/FatalErrorException severities are
+  API only; clamping at ±FLT_MAX returns the boundary; a two-node tree is never balanced;
+  ResetSplayTree's inverted relinquish tests only leak, or call a NULL function the compiler
+  drops — hand-run, no crash).
+- **cache.c** is open: `-limit memory 0 -limit map 0` does not force a disk cache (some caches
+  still open in memory or as a map); `1` does, and then ClonePixelCacheOnDisk returns through
+  `copy_file_range`, so its read/write loop runs only without it (macOS). The driver's
+  `cache IMAGE disk` uses limits of 0 and so may never have put metacontent on disk.
+- **Trace logging, a question for the owner.** A case with its own `log.xml`
+  (`MAGICK_CONFIGURE_PATH=.`, `events="Trace,Blob"`, `format="%m %e"`) gives deterministic
+  trace output with no times, PIDs or function names, and kills every `IsEventLogging()` guard
+  mutant it reaches. That would make `-debug` output part of the oracle's contract, so it waits
+  for the owner's decision; those mutants stay open.

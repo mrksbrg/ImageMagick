@@ -3139,6 +3139,32 @@ GAP_STEP_CASES += [
        "out.miff"]],
      {_POLICY: _policy('<policy domain="system" name="shred" value="2"/>')}),
 ]
+# color.c (2026-10-07): a colors.xml of the case's own, found the same way, listed and used:
+# a DOCTYPE whose default holds "]>" in quotes, a comment with '>', compliance lists, a stealth
+# entry, single quotes, an include; and a malformed one (a stray attribute, a missing '=', a
+# </policy> close, a colour without a name, an unknown element). Not used: a colour given by
+# name (color="blue"), which deadlocks every command (MUTATION.md, upstream bug: LoadColorCache
+# queries the colour cache it is loading). An entry without compliance is never found by name.
+# Hand-run they kill 28 of LoadColorCache's 45 open mutants.
+_COLORS = ".config/ImageMagick/colors.xml"
+_COLORS_XML = ('<?xml version="1.0"?>\n<!DOCTYPE colormap [\n<!ELEMENT colormap (color)+>\n'
+               '<!ATTLIST color name CDATA "x]>y">\n]>\n<!-- a > comment -->\n<colormap>\n'
+               '  <color name="casecolor" color="rgb(10,20,30)" compliance="SVG, X11"/>\n'
+               '  <color name="casehidden" color="#405060" compliance="XPM" stealth="True"/>\n'
+               '  <color name="caseblue" color="#0000FF" compliance="X11"/>\n  <include file="more.xml"/>\n'
+               "  <color name='casequote' color='#112233'/>\n</colormap>\n")
+GAP_STEP_CASES += [
+    ("colors.xml of the case's own, listed", [["-list", "color"]],
+     {_COLORS: _COLORS_XML,
+      ".config/ImageMagick/more.xml": '<colormap><color name="casemore" color="#010203"/></colormap>'}),
+    ("colors.xml of the case's own, used",
+     [["xc:casecolor", "xc:casehidden", "xc:caseblue", "xc:casequote", "+append", "-format",
+       "%[pixel:p{0,0}] %[pixel:p{1,0}] %[pixel:p{2,0}] %[pixel:p{3,0}]", "info:"]], {_COLORS: _COLORS_XML}),
+    ("colors.xml malformed, listed", [["-list", "color"]],
+     {_COLORS: '<colormap>\n  <color junk name="casebad" color="#010101"/>\n  <color name "casenoeq" color="#020202"/>\n'
+               '  <color name="casepolicy" color="#030303"></policy>\n  <color color="#040404"/>\n'
+               '  <color name="casecase" color="#050505" compliance="none"/>\n  <unknown x="1"/>\n</colormap>\n'}),
+]
 # type.c (Mac): a type.xml of the case's own, found the same way. Glyph paths relative to
 # the case directory and to type.xml's own directory (both reach the corpus font), one
 # that does not exist (the entry is dropped), a stealth entry and an include
