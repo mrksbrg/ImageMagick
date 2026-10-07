@@ -1,13 +1,13 @@
 mutate: 126 mutants in MagickCore/shear\.c$, 9 functions
-mutate: baseline over 1 cases in 0s
-  mutants: 25/126 (0s)
-  mutants: 50/126 (0s)
-  mutants: 75/126 (0s)
-  mutants: 100/126 (0s)
-  mutants: 125/126 (0s)
-  mutants: 126/126 (0s)
+mutate: baseline over 7 cases in 0s
+  mutants: 25/126 (1s)
+  mutants: 50/126 (1s)
+  mutants: 75/126 (1s)
+  mutants: 100/126 (1s)
+  mutants: 125/126 (1s)
+  mutants: 126/126 (1s)
 
-mutate: 126 mutants, 0s
+mutate: 126 mutants, 1s
   killed 0, survived 29 (0 capped), no coverage 97, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -54,4 +54,4 @@ mutate: 126 mutants, 0s
     x  shear.c:1102:7 cxx_remove_void_call       AppendImageProfileProperty(rotate_image,"hdrgm","hdrgm:Transform",
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-96b821c39-shear.json
+  full results: build-oracle/work/mutation-confirm-ac79170c0-shear.json
