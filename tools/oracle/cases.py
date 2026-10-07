@@ -5194,19 +5194,17 @@ GAP_XEVENTS_WIDGET_CASES = [
     ("xevents display help overview",
      "map click:20,20 map click:65,388 map click:40,12 map grab:out.ppm click:397,607 use:1 key:q", {}),
 ]
-# label, steps, environment. MAGICK_OCL_DEVICE=false starts with OpenCL off but still gets the
-# fixed device profile (oracle.py, seed_opencl_profile): without one, switching OpenCL on runs
-# ImageMagick's device benchmark, whose scores and choice vary from run to run.
+# label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
+# switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
+# to run. Not used: MAGICK_OCL_DEVICE=false, which runs that benchmark in spite of the profile
+# (the 10-07 selfcheck: score 3.6 to 4.7, the device enabled or not; no kill rested on them),
+# nor profile of rose_alpha or palette, whose blur re-runs the benchmark too (score 10.4 to 11.3
+# between two runs; their 3 kills were taken out and rerun).
 GAP_OPENCL_DRIVER_CASES = [("opencl driver %s" % " ".join(args), [["@driver", "opencl"] + list(args)], env)
                            for args in (("list",), ("list", img("rose")), ("off", img("rose")),
                                         ("on", img("rose")), ("deviceoff", img("rose")),
-                                        ("profile", img("rose")), ("profile", img("rose_alpha")),
-                                        ("profile", img("palette")))
+                                        ("profile", img("rose")))
                            for env in (_OCL_ENV, {"MAGICK_OCL_DEVICE": "GPU"})]
-GAP_OPENCL_DRIVER_CASES += [("opencl driver, OpenCL off: list", [["@driver", "opencl", "list"]],
-                             {"MAGICK_OCL_DEVICE": "false"}),
-                            ("opencl driver, OpenCL off: on", [["@driver", "opencl", "on", img("rose")]],
-                             {"MAGICK_OCL_DEVICE": "false"})]
 
 
 def _gap_cases():
