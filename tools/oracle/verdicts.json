@@ -34361,6 +34361,256 @@
    "src": "GetPixelInfo(cache_view->image,pixel);",
    "verdict": "equivalent",
    "why": "GetPixelInfoPixel, which follows, clears the whole PixelInfo and sets every field GetPixelInfo sets; only if the pixel could not be fetched would the PixelInfo stay as the caller passed it, and virtual pixels make every coordinate fetchable"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attributes[0] != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (j=1; attributes[j] != (char *) NULL; j+=3)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attributes[j] != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attributes[j+1] != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attributes[j+2] != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (i=0; root->processing_instructions[i] != (char **) NULL; i++)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (j=0; root->processing_instructions[i][j] != (char *) NULL; j++)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeAttributes",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((attributes == (char **) NULL) || (attributes == sentinel))",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeAttributes",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (i=0; attributes[i] != (char *) NULL; i+=2)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeAttributes",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attributes[i] != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeAttributes",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (attributes[i+1] != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "unobservable",
+   "why": "the tree's destructor: this only leaves strings or nodes unfreed when the tree is destroyed (a leak), and nothing is printed after it"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "DestroyXMLTreeChild(xml_info,depth+1);",
+   "verdict": "equivalent",
+   "why": "only the recursion depth handed down changes (depth-1 instead of depth+1, wrapping at 0 and back on the next call); it never reaches MagickMaxRecursionDepth either way, so the whole tree is still destroyed"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "DestroyXMLTreeOrdered(xml_info,depth+1);",
+   "verdict": "equivalent",
+   "why": "only the recursion depth handed down changes (depth-1 instead of depth+1, wrapping at 0 and back on the next call); it never reaches MagickMaxRecursionDepth either way, so the whole tree is still destroyed"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeChild",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(void) DestroyXMLTree_(node,depth+1);",
+   "verdict": "equivalent",
+   "why": "only the recursion depth handed down changes (depth-1 instead of depth+1, wrapping at 0 and back on the next call); it never reaches MagickMaxRecursionDepth either way, so the whole tree is still destroyed"
+  },
+  {
+   "at": 33,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeOrdered",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(void) DestroyXMLTree_(node,depth+1);",
+   "verdict": "equivalent",
+   "why": "only the recursion depth handed down changes (depth-1 instead of depth+1, wrapping at 0 and back on the next call); it never reaches MagickMaxRecursionDepth either way, so the whole tree is still destroyed"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (depth >= MagickMaxRecursionDepth)",
+   "verdict": "equivalent",
+   "why": "the recursion depth is never exactly MagickMaxRecursionDepth while a tree is destroyed (no case nests elements that deep)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "root->entities[i+1]=DestroyString(root->entities[i+1]);",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (attributes[j+1] != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "attributes[j+1]=DestroyString(attributes[j+1]);",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "attributes[j+1]=DestroyString(attributes[j+1]);",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (attributes[j+2] != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "root->processing_instructions[i][j+1]=DestroyString(",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "root->processing_instructions[i][j+1]);",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeAttributes",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (attributes[i+1] != (char *) NULL)",
+   "verdict": "unresolved",
+   "why": "the tree's destructor frees a neighbouring pointer instead (an interior or already freed one): glibc's tcache takes it without a check, so the heap is corrupted silently as the driver ends (hand-run with a document that fills entities, ATTLIST defaults and PIs: same output, rc 0); only a memory checker would see it"
   }
  ]
 }

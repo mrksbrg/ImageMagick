@@ -3850,3 +3850,30 @@ confirmed, ClonePixelCacheRepository's mismatched-morphology path copies
 upstream bug reachable only through the API.
 
 Open still: blob.c 93%, xml-tree.c 89%, stream.c (its buffer-size mutants overrun silently).
+
+## Upstream bugs: xml-tree.c's internal subset (Windows, 2026-10-07, evening)
+
+Found while trying to make XMLTree's destructors run (through `imdriver xml FILE print`):
+
+- **A non-circular entity is reported as circular.** An internal-subset entity whose value holds
+  `&amp;`, `&lt;` or a reference to an earlier entity (`<!ENTITY f "y"><!ENTITY e "x&f;">`)
+  fails with "circular entity declaration e" and the whole document is rejected (NewXMLTree
+  returns NULL). A character reference (`&#65;`) is fine.
+- **Everything after an `<!ATTLIST>` in the internal subset is ignored.** `<!ATTLIST b k CDATA
+  "dflt"><!ENTITY e "hello">` leaves `&e;` unexpanded, and a second ATTLIST gives no default; the
+  same declarations in the other order work.
+- **Processing instructions are printed twice.** XMLTreeInfoToXML of `<?pi one?>…<r/>…<?pk
+  four?>` prints `<?pi one?>` twice before the root and `<?pk four?>` twice after it, and copies of
+  the ones before the root after it too.
+
+They mattered here because the catalogue's DOCTYPE documents (`doctype`, `chained`, `percent`)
+never stored a general entity, so the destructor's entity loop never ran. A document with its
+entities first (`xml full`, `2be…`) does run it, and kills 2 more by hand.
+
+**The destructors, and stream.c, want a memory checker.** XMLTree's destructors and stream.c's
+buffer sizes have mutants that free a neighbouring pointer or write past a buffer: glibc's tcache
+accepts such a free without a check and the overrun lands in slack, so the output is the same
+and the process ends with 0 (hand-run). They are marked `unresolved`, not unobservable. **For the
+owner:** a Mull build with AddressSanitizer (`-fsanitize=address`, its reports as a failure of the
+mutant's run) would make this whole class observable; it is a new kind of harness, so it waits
+for your decision.
