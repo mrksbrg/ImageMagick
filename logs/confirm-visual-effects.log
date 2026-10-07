@@ -1,6 +1,5 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 174 mutants in MagickCore/visual-effects\.c$, 22 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 3 cases in 0s
   mutants: 25/174 (0s)
   mutants: 50/174 (0s)
   mutants: 75/174 (0s)
@@ -10,7 +9,8 @@ mutate: baseline over 0 cases in 0s
   mutants: 174/174 (0s)
 
 mutate: 174 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 174, errors 0
+  killed 0, survived 7 (0 capped), no coverage 167, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   PlasmaImageProxy                      34      0        0     34
@@ -23,7 +23,7 @@ mutate: 174 mutants, 0s
   SteganoImage                          10      0        0     10
   WaveletDenoiseImage                   10      0        0     10
   BlueShiftImage                         8      0        0      8
-  ColorizeImage                          7      0        0      7
+  ColorizeImage                          7      0        7      0
   StereoAnaglyphImage                    7      0        0      7
   AddNoiseImage                          5      0        0      5
   SolarizeImage                          5      0        0      5
@@ -36,4 +36,14 @@ mutate: 174 mutants, 0s
   SketchImage                            1      0        0      1
   HatTransform                           1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-f51f7cbc7-visual-effects.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  visual-effects.c:568:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  visual-effects.c:586:3 cxx_remove_void_call       GetPixelInfo(colorize_image,&blend_percentage);
+    x  visual-effects.c:597:26 cxx_ne_to_eq               if ((flags & PsiValue) != 0)
+    x  visual-effects.c:603:30 cxx_ne_to_eq               if ((flags & ChiValue) != 0)
+    x  visual-effects.c:658:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       visual-effects.c:666:17 cxx_post_inc_to_post_dec   progress++;
+       visual-effects.c:669:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-6f677a7f0-visual-effects.json
