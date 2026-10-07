@@ -3680,3 +3680,69 @@ hand-run in one directory, none of the three kills any of them, the PDF cases ki
 (3816, 3824), and **7 were false**. The report is corrected (the original kept as
 `.invalid-ps`), the three cases are gone, and **blob.c stays trusted** (97% adjusted, every
 function at 80% or more).
+
+## Confirmation sweep sweep1007: 1118 earlier kills do not reproduce; 25 of 36 regular files stay trusted (Windows, 2026-10-07)
+
+**The sweep.** All 34 regular Windows files with mutants in `mull-sdl-win` (constitute.c and
+semaphore.c have none there) against the current catalogue, capped at 1500 cases a mutant
+(`sweep1007` and `sweep1007b`, 10-06 23:30 to 10-07 13:15, stopped once by the WSL restart for
+the RAM upgrade and resumed).
+
+**imdriver had stopped linking** (`6f677a7f0`). Since `6278a30a1` (10-05) the driver's `opencl`
+command called `GetOpenCLDeviceVendorName`, which `opencl.h` declares but `opencl.c` does not
+stub in a build without OpenCL (the other OpenCL API functions have stubs: an upstream
+omission). Every regular build lost its driver, here and on ERDC ("undefined reference" in
+its logs). The baseline is taken on the Mull build, whose 10-05 driver still existed, so this
+gave no false kills; but the coverage build had no driver, so driver cases reached nothing
+and were seldom chosen. With the call guarded, the driver was rebuilt in base, cov and
+`mull-sdl-win`, the catalogue re-indexed, and every mutant the sweep left open run against all
+2481 driver cases, uncapped (`sweep1007drv`): **2404 killed**. ERDC pulled the fix by itself
+(confirm round at `6f677a7f0`, 2484 driver cases).
+
+**INFO is not deterministic** (`85c783276`). ERDC's selfcheck flagged `windrv/64fdd3e389`
+(custom stream of 1 rose INFO); here it differed in 1 run of 8. INFO writes the user and
+elapsed time. The three INFO blob cases are gone; 61 kills (47 mutants) rested on them, and
+rerun against the rest of the catalogue (`infofix`) **11 are killed again, 36 survive**.
+
+**1118 earlier kills do not reproduce.** Gated alone, sweep1007 with the driver round gave
+lower figures than all reports merged (xml-tree.c 70% against 99%, blob.c 77% against 96%).
+Over the 34 files, **1122** mutants killed in an earlier report survive every case today. Only
+54 cases had killed them; rerun against exactly those cases, uncapped, **4** are killed
+(`lost1007`), and the 591 from the first full runs (09-30), rerun on the build they were
+measured with (`mull-sweep-linux`), give **3** (`lost1007full`). Hand-runs show the outputs
+byte for byte equal: `CloneBlobInfo`'s `mapped != MagickFalse` flipped only changes the map
+resource's bookkeeping, which `stream read rose_alpha` never prints, yet it was recorded as
+"stdout differs". Where they came from:
+
+| Source | Lost kills | Likely cause |
+| --- | --- | --- |
+| `full-*` (09-30, Mull defaults) | 591 | not established: the baseline cache key then held neither the shared libraries (10-03) nor the delegate programs (10-04) |
+| `sdlcases-windrv*` (10-03, 10-04) | 407 | the driver joined the baseline cache key only at `4628b7d42` (10-04 22:41): a rebuilt driver against a cached baseline |
+| `sweep1003`–`sweep1005*` | 124 | not established |
+
+A kill the current oracle cannot reproduce protects nothing, so the 1118 are taken out of the
+55 reports that held them (each kept as `.invalid-lost1007`). With them gone, alone and merged
+give the same figure for every file.
+
+**Result.** Trusted: colorspace, composite, distort, feature, fx, gem, histogram, linked-list,
+magick, monitor, montage, morphology, option, prepress, quantize, quantum, quantum-export,
+registry, resample, resource, signature, timer, token, plus constitute and semaphore (not
+swept): **25 of 36**. Their functions under 80% are the ones already written down as out of
+reach. No longer trusted:
+
+| File | Adjusted | Functions under 80% (reachable) |
+| --- | --- | --- |
+| xml-tree.c | 70% | FileToXML 14%, ConvertUTF16ToUTF8 12%, ParseEntities 57%, DestroyXMLTree* 0–52%, ParseInternalDoctype 73%, NewXMLTree 76%, IsSkipTag 67% |
+| blob.c | 77% | FileToBlob 22%, CloseBlob 28%, SyncBlob 20%, SyncBlobStream 33%, TellBlob 0%, UnmapBlob 0%, EOFBlob 67%, GetBlobError 33%, DetachBlob 50%, SetStreamBuffering 33%, CustomStreamToImage 75%, BlobToImage 78%, OpenBlob 79% |
+| color.c | 83% | LoadColorCache 9%, DestroyColorElement 33% |
+| exception.c | 83% | ThrowMagickExceptionList 57% |
+| cache.c | 89% | ClonePixelCacheOnDisk 21%, GetPixelCacheTileSize 25%, Get{Virtual,Authentic}Metacontent 0%, GetPixelCachePixels 50%, ClosePixelCacheOnDisk 50%, Read/WritePixelCacheMetacontent 62–63%, GetOneVirtualPixelInfo 67%, SetPixelCacheMethods 70%, ClonePixelCacheRepository 75%, ReshapePixelCache 75% |
+| matrix.c | 91% | SetMatrixExtent 50%, Read/WriteMatrixElements 75%, AcquireMatrixInfo 77% |
+| stream.c | 91% | ValidatePixelCacheMorphology 10%, GetVirtualPixelStream 48%, QueueAuthenticPixelsStream 60%, ReadStream 60% |
+| pixel.c | 92% | GetPixelInfoIntensity 17%, GetPixelIntensity 41%, InterpolatePixelChannel 65%, SetPixelMetaChannels 67%, AlphaBlendPixelInfo 75%, InterpolatePixelChannels 78%, InterpolatePixelInfo 79% |
+| splay-tree.c | 95% | BalanceSplayTree 75%, ResetSplayTree 79% |
+| quantum-import.c | 97% | ScaleFloatPixel 50% |
+| cache-view.c | 96% | GetOneCacheViewVirtualPixelInfo 67% |
+
+The Mac's reports from the same early period may hold kills of the same kind; ERDC's confirm
+loop reruns survivors, not kills, so it would not see them.
