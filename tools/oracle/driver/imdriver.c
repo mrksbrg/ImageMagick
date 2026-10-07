@@ -880,6 +880,15 @@ static void Describe(const char *what,Image *image,ExceptionInfo *exception)
   }
 }
 
+/* the names BlobToImage and CustomStreamToImage restore on each frame read back through a
+   temporary file (the format, the caller's filename, the magick filename) */
+static void Names(const char *what,Image *images)
+{
+  Image *p;
+  for (p=images; p != (Image *) NULL; p=GetNextImageInList(p))
+    (void) printf("%s names: %s | %s | %s\n",what,p->magick,p->filename,p->magick_filename);
+}
+
 static int Blob(int argc,char **argv,ExceptionInfo *exception)
 {
   /* blob toblob IMAGE FORMAT FRAMES          ImageToBlob/ImagesToBlob, BlobToImage, PingBlob
@@ -972,6 +981,7 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
         {
           back=BlobToImage(image_info,blob,length,exception);
           Describe("back",back,exception);
+          Names("back",back);
           if (back != (Image *) NULL) back=DestroyImageList(back);
           back=PingBlob(image_info,blob,length,exception);
           if (back != (Image *) NULL)
@@ -1008,6 +1018,7 @@ static int Blob(int argc,char **argv,ExceptionInfo *exception)
       s.offset=0;
       back=CustomStreamToImage(image_info,exception);
       Describe("back",back,exception);
+      Names("back",back);
       if (back != (Image *) NULL) back=DestroyImageList(back);
       image_info->custom_stream=(CustomStreamInfo *) NULL;
       custom=DestroyCustomStreamInfo(custom);
