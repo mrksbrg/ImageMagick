@@ -1,24 +1,25 @@
 mutate: 377 mutants in MagickCore/string\.c$, 38 functions
-mutate: baseline over 15579 cases in 2s
+  baseline: 1/1 (0s)
+mutate: baseline over 15650 cases in 1s
   mutants: 25/377 (1s)
-  mutants: 50/377 (46s)
+  mutants: 50/377 (45s)
   mutants: 75/377 (50s)
   mutants: 100/377 (57s)
-  mutants: 125/377 (75s)
-  mutants: 150/377 (93s)
-  mutants: 175/377 (94s)
-  mutants: 200/377 (101s)
-  mutants: 225/377 (110s)
-  mutants: 250/377 (114s)
-  mutants: 275/377 (119s)
-  mutants: 300/377 (126s)
-  mutants: 325/377 (128s)
-  mutants: 350/377 (132s)
-  mutants: 375/377 (234s)
-  mutants: 377/377 (258s)
+  mutants: 125/377 (76s)
+  mutants: 150/377 (96s)
+  mutants: 175/377 (97s)
+  mutants: 200/377 (102s)
+  mutants: 225/377 (114s)
+  mutants: 250/377 (118s)
+  mutants: 275/377 (124s)
+  mutants: 300/377 (130s)
+  mutants: 325/377 (133s)
+  mutants: 350/377 (136s)
+  mutants: 375/377 (238s)
+  mutants: 377/377 (263s)
 
-mutate: 377 mutants, 258s
-  killed 277, survived 96 (59 capped), no coverage 4, errors 0
+mutate: 377 mutants, 263s
+  killed 277, survived 96 (60 capped), no coverage 4, errors 0
   mutation score on reached code: 74.3%   overall: 73.5%
 
   function                           total killed survived no-cov
@@ -132,7 +133,7 @@ mutate: 377 mutants, 258s
     xc string.c:1733:15 cxx_lt_to_le               if (~length < MagickPathExtent)
      c string.c:1737:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
     x  string.c:1840:14 cxx_gt_to_ge               if (offset > string_info->length)
-    x  string.c:1931:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    xc string.c:1931:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:1997:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
     x  string.c:2002:58 cxx_mul_to_div             (void) memcpy(string,(char *) string_info->datum,length*sizeof(*string));
        string.c:2105:21 cxx_ge_to_gt               for (i--; i >= 0; i--)
