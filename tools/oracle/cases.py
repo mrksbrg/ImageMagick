@@ -6465,6 +6465,11 @@ def _windrv_cases():
             for meta in ("0", "3", "8"):
                 yield _windrv("cache %s in %s, metacontent %s" % (name, storage, meta),
                               ("cache", img(name), storage, meta))
+    # a memory limit of 1 byte and no map limit: the cache is a MapCache (GetPixelCachePixels
+    # hands its pixels out for a memory or map cache only; hand-run: 1 killed)
+    case = _windrv("cache rose as a map (MAGICK_MEMORY_LIMIT=1), metacontent 0", ("cache", img("rose"), "memory", "0"))
+    case["env"] = {"MAGICK_MEMORY_LIMIT": "1"}
+    yield _with_inputs(case)
     # blob.c: blob input over a file (DiscardBlobBytes, ReadBlobMSBLongLong, ErrorBlob,
     # ReadBlobString over LF, CRLF and CR endings, a line longer than its 4 KB buffer and a last
     # line without one, EOFBlob, DuplicateBlob, ImageToFile) and SetBlobExtent on a file opened

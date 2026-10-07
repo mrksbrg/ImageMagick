@@ -34111,6 +34111,76 @@
    "src": "UnlockSemaphoreInfo(cache_info->file_semaphore);",
    "verdict": "unobservable",
    "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheMethods",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_methods->destroy_pixel_handler != (DestroyPixelHandler) NULL)",
+   "verdict": "unobservable",
+   "why": "SetPixelCacheMethods' only caller is ReadStream: with the test inverted the stream's DestroyPixelStream is not installed and the cache keeps DestroyImagePixelCache, which only changes how the stream's cache is freed at the end; nothing is printed after it"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheMethods",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_methods->get_virtual_metacontent_from_handler !=",
+   "verdict": "unobservable",
+   "why": "SetPixelCacheMethods' only caller is ReadStream, and stream metacontent exists only through the API (no command line sets metacontent_extent): whether the stream's metacontent handler is installed changes nothing a case reads"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheMethods",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_methods->get_authentic_metacontent_from_handler !=",
+   "verdict": "unobservable",
+   "why": "SetPixelCacheMethods' only caller is ReadStream, and stream metacontent exists only through the API (no command line sets metacontent_extent): whether the stream's metacontent handler is installed changes nothing a case reads"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/cache.c",
+   "function": "GetVirtualMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->methods.get_virtual_metacontent_from_handler != (GetVirtualMetacontentFromHandler) NULL)",
+   "verdict": "equivalent",
+   "why": "skipping the handler, or not returning its result, falls through to the nexus lookup, which gives the same metacontent: the cache's own handler is that lookup, and the stream's metacontent is API-only"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/cache.c",
+   "function": "GetVirtualMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (metacontent != (const void *) NULL)",
+   "verdict": "equivalent",
+   "why": "skipping the handler, or not returning its result, falls through to the nexus lookup, which gives the same metacontent: the cache's own handler is that lookup, and the stream's metacontent is API-only"
+  },
+  {
+   "at": 63,
+   "file": "MagickCore/cache.c",
+   "function": "GetAuthenticMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->methods.get_authentic_metacontent_from_handler !=",
+   "verdict": "equivalent",
+   "why": "skipping the handler, or not returning its result, falls through to the nexus lookup, which gives the same metacontent: the cache's own handler is that lookup, and the stream's metacontent is API-only"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "ClosePixelCacheOnDisk",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(FileResource,1);",
+   "verdict": "unobservable",
+   "why": "only the file resource's bookkeeping, which no output shows"
   }
  ]
 }
