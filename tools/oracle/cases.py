@@ -3194,6 +3194,10 @@ GAP_STEP_CASES += [
     ("colors.xml of the case's own, used",
      [["xc:casecolor", "xc:casehidden", "xc:caseblue", "xc:casequote", "+append", "-format",
        "%[pixel:p{0,0}] %[pixel:p{1,0}] %[pixel:p{2,0}] %[pixel:p{3,0}]", "info:"]], {_COLORS: _COLORS_XML}),
+    # cache.c: a tall image on disk, a rotated clone composited over it (GetPixelCacheTileSize's
+    # disk tile width; hand-run: 1 killed)
+    ("tall image on disk, rotated clone composited", [["-limit", "memory", "0", "-limit", "map", "0", "{C}/tall.miff",
+                                                       "(", "+clone", "-rotate", "90", ")", "-composite", "out.miff"]], {}),
     ("colors.xml malformed, listed", [["-list", "color"]],
      {_COLORS: '<colormap>\n  <color junk name="casebad" color="#010101"/>\n  <color name "casenoeq" color="#020202"/>\n'
                '  <color name="casepolicy" color="#030303"></policy>\n  <color color="#040404"/>\n'

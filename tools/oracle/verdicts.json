@@ -33511,6 +33511,266 @@
    "src": "if (number_meta_channels >= (size_t) (MaxPixelChannels-MetaPixelChannels))",
    "verdict": "equivalent",
    "why": "at exactly MaxPixelChannels-MetaPixelChannels (54) meta channels ResetPixelChannelMap rejects the map anyway: hand-run, -combine of 58 images fails with the same maximum-channels error with and without the mutant"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(cache_info->file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; this only sends the copy to the read/write loop instead, which copies the same bytes"
+  },
+  {
+   "at": 70,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fstat(cache_info->file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; this only sends the copy to the read/write loop instead, which copies the same bytes"
+  },
+  {
+   "at": 70,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fstat(cache_info->file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; this only sends the copy to the read/write loop instead, which copies the same bytes"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "} while ((count < 0) && (errno == EINTR));",
+   "verdict": "equivalent",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there on its first try: count equals the length, so the EINTR retry test and the partial-copy tests after it are never reached with a different outcome"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "} while ((count < 0) && (errno == EINTR));",
+   "verdict": "equivalent",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there on its first try: count equals the length, so the EINTR retry test and the partial-copy tests after it are never reached with a different outcome"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "} while ((count < 0) && (errno == EINTR));",
+   "verdict": "equivalent",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there on its first try: count equals the length, so the EINTR retry test and the partial-copy tests after it are never reached with a different outcome"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (count < 0)",
+   "verdict": "equivalent",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there on its first try: count equals the length, so the EINTR retry test and the partial-copy tests after it are never reached with a different outcome"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (count < 0)",
+   "verdict": "equivalent",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there on its first try: count equals the length, so the EINTR retry test and the partial-copy tests after it are never reached with a different outcome"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "if ((lseek(cache_info->file,0,SEEK_SET) < 0) ||",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "if ((lseek(cache_info->file,0,SEEK_SET) < 0) ||",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "(lseek(clone_info->file,0,SEEK_SET) < 0))",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "(lseek(clone_info->file,0,SEEK_SET) < 0))",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (buffer == (unsigned char *) NULL)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "while (extent < cache_info->length)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "while (extent < cache_info->length)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "while (offset < count)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "while (offset < count)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 71,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "number_bytes=MagickWrite(clone_info->file,buffer+offset,(size_t) (count-",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (number_bytes <= 0)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (number_bytes <= 0)",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheOnDisk",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return(extent == cache_info->length ? MagickTrue : MagickFalse);",
+   "verdict": "unobservable",
+   "why": "on Linux sendfile copies the whole disk cache in one call (any cache under 2 GB), so ClonePixelCacheOnDisk returns there; the rewinds and the read/write loop run only after a partial sendfile or without sendfile (macOS), which no case on this platform reaches"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/cache.c",
+   "function": "GetPixelCacheTileSize",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "*width=2048UL/(MagickMax(cache_info->number_channels,1)*sizeof(Quantum));",
+   "verdict": "unobservable",
+   "why": "only the tile size -rotate (shear.c) walks the image in; any tile size covers every pixel once, so the rotated pixels are the same"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/cache.c",
+   "function": "GetPixelCacheTileSize",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (GetImagePixelCacheType(image) == DiskCache)",
+   "verdict": "unobservable",
+   "why": "only the tile size -rotate (shear.c) walks the image in; any tile size covers every pixel once, so the rotated pixels are the same"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/cache.c",
+   "function": "GetPixelCacheTileSize",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "*width=8192UL/(MagickMax(cache_info->number_channels,1)*sizeof(Quantum));",
+   "verdict": "unobservable",
+   "why": "only the tile size -rotate (shear.c) walks the image in; any tile size covers every pixel once, so the rotated pixels are the same"
   }
  ]
 }
