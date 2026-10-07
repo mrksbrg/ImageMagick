@@ -273,7 +273,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/37b19f2b80",
-  "why": "stderr differs; out.miff differs"
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/attribute.c:283:18:283:20",
@@ -2419,7 +2419,7 @@
   "col": 47,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 78,
+  "cases": 79,
   "killer": "gaps/8853179637",
   "why": "stdout differs"
  },
@@ -2431,7 +2431,7 @@
   "col": 19,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 26,
+  "cases": 28,
   "killer": "decode/a2cb4551d5",
   "why": "stdout differs"
  },
@@ -2443,7 +2443,7 @@
   "col": 19,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -2455,7 +2455,7 @@
   "col": 47,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
@@ -2467,7 +2467,7 @@
   "col": 34,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 26,
+  "cases": 28,
   "killer": "decode/a2cb4551d5",
   "why": "stdout differs"
  },
@@ -2479,7 +2479,7 @@
   "col": 34,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 76,
+  "cases": 77,
   "killer": "feature/7ba2b282ee",
   "why": "stdout differs"
  },
@@ -2491,7 +2491,7 @@
   "col": 61,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 71,
+  "cases": 72,
   "killer": "gaps/4b8b3001b4",
   "why": "stdout differs"
  },
@@ -2503,7 +2503,7 @@
   "col": 78,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -2539,7 +2539,7 @@
   "col": 80,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -2575,7 +2575,7 @@
   "col": 79,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -2587,7 +2587,7 @@
   "col": 24,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -2599,7 +2599,7 @@
   "col": 28,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 26,
+  "cases": 28,
   "killer": "decode/a2cb4551d5",
   "why": "stdout differs"
  },
@@ -2623,7 +2623,7 @@
   "col": 19,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
+  "cases": 9,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -2683,7 +2683,7 @@
   "col": 15,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 66,
+  "cases": 67,
   "killer": "gaps/9af321a0bf",
   "why": "stdout differs"
  },
@@ -2888,7 +2888,7 @@
   "function": "GetImageDepth",
   "status": "killed",
   "cases": 6,
-  "killer": "gaps/fa20d7fa74",
+  "killer": "gaps/74fc85c9ef",
   "why": "stdout differs"
  },
  {
@@ -4515,7 +4515,7 @@
   "col": 15,
   "function": "IdentifyImageGray",
   "status": "killed",
-  "cases": 138,
+  "cases": 142,
   "killer": "gaps/d2bcf947d2",
   "why": "stdout differs"
  },
@@ -4851,7 +4851,7 @@
   "col": 50,
   "function": "IdentifyImageType",
   "status": "killed",
-  "cases": 21,
+  "cases": 20,
   "killer": "identify/0852d8efbf",
   "why": "stdout differs"
  },
@@ -4875,7 +4875,7 @@
   "col": 30,
   "function": "IdentifyImageType",
   "status": "killed",
-  "cases": 22,
+  "cases": 21,
   "killer": "gaps/a976cf937e",
   "why": "stdout differs"
  },
@@ -5762,10 +5762,10 @@
   "line": 2098,
   "col": 13,
   "function": "SetImageDepth",
-  "status": "survived",
-  "cases": 300,
-  "capped": true,
-  "line_executed": true
+  "status": "killed",
+  "cases": 262,
+  "killer": "gaps/c38725b7af",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ge_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/attribute.c:2098:13:2098:15",
@@ -5787,7 +5787,7 @@
   "col": 17,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 173,
+  "cases": 174,
   "killer": "gaps/31402e37f5",
   "why": "out.miff differs"
  },
@@ -5799,7 +5799,7 @@
   "col": 49,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 173,
+  "cases": 174,
   "killer": "gaps/31402e37f5",
   "why": "out.miff differs"
  },
@@ -5907,7 +5907,7 @@
   "col": 15,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 292,
+  "cases": 298,
   "killer": "decode/51eef41a71",
   "why": "stdout differs"
  },
@@ -5943,7 +5943,7 @@
   "col": 16,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 292,
+  "cases": 298,
   "killer": "decode/51eef41a71",
   "why": "stdout differs"
  },
@@ -5979,7 +5979,7 @@
   "col": 17,
   "function": "SetImageDepth",
   "status": "killed",
-  "cases": 85,
+  "cases": 82,
   "killer": "gaps/65e85b929b",
   "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
