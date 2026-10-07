@@ -3808,3 +3808,23 @@ something went into the catalogue, and the rest got verdicts after reading the c
   trace output with no times, PIDs or function names, and kills every `IsEventLogging()` guard
   mutant it reaches. That would make `-debug` output part of the oracle's contract, so it waits
   for the owner's decision; those mutants stay open.
+
+### pixel.c trusted again; 31 of 36 (Windows, 2026-10-07, evening)
+
+**pixel.c 92% → 97%, trusted.** A probe of 153 candidates (11 interpolation methods × images
+with alpha, CMYK and CMYK with alpha × `-fx`, `-interpolative-resize` and `-distort`; the 9
+`-intensity` methods through `-grayscale`, `-colorspace gray` and `%[fx:intensity]` in sRGB and
+linear RGB) and a second one at exact quarter offsets: 29 cases kept (`pixelgap`), official
+rounds `r1007-pixel` (127 killed) and `r1007-pixel2` (4). 16 verdicts: GetPixelInfoIntensity's
+non-default methods have no command-line caller (the callers without an image use Rec709Luma;
+SteganoImage uses composite's image, and composite has no `-intensity`; hand-run, `-stegano` and
+`-tint` over every method change nothing), and the meta-channel limit is checked again by
+ResetPixelChannelMap (a 58-image `-combine` fails the same way with the mutant).
+
+**Trusted now: 31 of 36** (color, exception, matrix, quantum-import, splay-tree and pixel back
+since the sweep). Open: blob.c 93% (SyncBlobStream, EOFBlob, BlobToImage, CustomStreamToImage),
+xml-tree.c 89% (the destructors, IsSkipTag), cache.c (disk paths), stream.c (its open mutants
+make buffers too small and overrun them silently: `unresolved` without a memory checker, as in
+the earlier property.c verdicts), cache-view.c (one mutant: a PixelInfo left uninitialised).
+The uncapped rerun of the 126 survivors the 1500-case cap left (`uncap1007`) has killed every
+one of the first 70.
