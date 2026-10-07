@@ -34181,6 +34181,166 @@
    "src": "RelinquishMagickResource(FileResource,1);",
    "verdict": "unobservable",
    "why": "only the file resource's bookkeeping, which no output shows"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "clone_info->metacontent_extent*sizeof(unsigned char));",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "(clone_info->metacontent_extent != 0))",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 1,
+   "src": "for (y=0; y < (ssize_t) cache_info->rows; y++)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_lt_to_le",
+   "nth": 1,
+   "src": "for (y=0; y < (ssize_t) cache_info->rows; y++)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 1,
+   "src": "for (y=0; y < (ssize_t) cache_info->rows; y++)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (status == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if (y >= (ssize_t) clone_info->rows)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 1,
+   "src": "if (y >= (ssize_t) clone_info->rows)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (pixels == (Quantum *) NULL)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "if (status == MagickFalse)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 3,
+   "src": "if (pixels == (Quantum *) NULL)",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((clone_nexus[id]->metacontent != (void *) NULL) &&",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(cache_nexus[id]->metacontent != (void *) NULL))",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "cache_nexus[id]->metacontent,length*sizeof(unsigned char));",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent), and the driver's clones have the same morphology, so this metacontent copy never runs for a case"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "length=cache_info->number_channels*sizeof(*cache_info->channel_map);",
+   "verdict": "equivalent",
+   "why": "compares fewer bytes of the channel maps, but two caches that agree on colorspace, alpha trait, channel mask and channel count (all compared first) have the same channel map"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "length=cache_info->number_channels*sizeof(*cache_info->channel_map);",
+   "verdict": "equivalent",
+   "why": "compares fewer bytes of the channel maps, but two caches that agree on colorspace, alpha trait, channel mask and channel count (all compared first) have the same channel map"
   }
  ]
 }
