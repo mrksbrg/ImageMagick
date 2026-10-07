@@ -1,46 +1,44 @@
 mutate: 181 mutants in MagickCore/resize\.c$, 32 functions
-  baseline: 285/285 (3s)
-mutate: baseline over 303 cases in 3s
+mutate: baseline over 0 cases in 0s
   mutants: 25/181 (0s)
   mutants: 50/181 (0s)
   mutants: 75/181 (0s)
-  mutants: 100/181 (4s)
-  mutants: 125/181 (5s)
-  mutants: 150/181 (5s)
-  mutants: 175/181 (47s)
-  mutants: 181/181 (47s)
+  mutants: 100/181 (0s)
+  mutants: 125/181 (0s)
+  mutants: 150/181 (0s)
+  mutants: 175/181 (0s)
+  mutants: 181/181 (0s)
 
-mutate: 181 mutants, 47s
-  killed 0, survived 55 (0 capped), no coverage 126, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 181 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 181, errors 0
 
   function                           total killed survived no-cov
   ScaleImage                            41      0        0     41
   LiquidRescaleImage                    40      0        0     40
-  AcquireResizeFilter                   17      0       17      0
+  AcquireResizeFilter                   17      0        0     17
   CubicSpline                            9      0        0      9
-  SampleImage                            7      0        7      0
-  ThumbnailImage                         7      0        7      0
+  SampleImage                            7      0        0      7
+  ThumbnailImage                         7      0        0      7
   InterpolativeResizeImage               6      0        0      6
   MagicKernelSharp2021                   5      0        0      5
-  BesselOrderOne                         5      0        5      0
-  VerticalFilter                         5      0        5      0
+  BesselOrderOne                         5      0        0      5
+  VerticalFilter                         5      0        0      5
   Fish2X                                 4      0        0      4
   MagnifyImage                           4      0        0      4
   MagicKernelSharp2013                   3      0        0      3
-  SincFast                               3      0        3      0
-  HorizontalFilter                       3      0        3      0
+  SincFast                               3      0        0      3
+  HorizontalFilter                       3      0        0      3
   Quadratic                              2      0        0      2
   Hq2XHelper                             2      0        0      2
-  DestroyContributionTLS                 2      0        2      0
-  AcquireContributionTLS                 2      0        2      0
-  ResizeImage                            2      0        2      0
-  CubicBC                                1      0        1      0
+  DestroyContributionTLS                 2      0        0      2
+  AcquireContributionTLS                 2      0        0      2
+  ResizeImage                            2      0        0      2
+  CubicBC                                1      0        0      1
   Lagrange                               1      0        0      1
   Triangle                               1      0        0      1
   Welch                                  1      0        0      1
   I0                                     1      0        0      1
-  GetResizeFilterWeight                  1      0        1      0
+  GetResizeFilterWeight                  1      0        0      1
   Eagle2X                                1      0        0      1
   Scale2X                                1      0        0      1
   Epbx2X                                 1      0        0      1
@@ -48,62 +46,4 @@ mutate: 181 mutants, 47s
   MinifyImage                            1      0        0      1
   ResampleImage                          1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  resize.c:244:9 cxx_lt_to_le               if (x < 2.0)
-    x  resize.c:523:9 cxx_gt_to_ge               if (x > 4.0)
-       resize.c:525:44 cxx_mul_to_div             const double alpha=(double) (MagickPI*x);
-       resize.c:526:33 cxx_div_to_mul             return(sin((double) alpha)/alpha);
-    x  resize.c:984:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-       resize.c:1008:28 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1008:28 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1008:49 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1008:49 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1015:20 cxx_ne_to_eq               if (artifact != (const char *) NULL)
-       resize.c:1018:32 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1018:32 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1018:53 cxx_lt_to_ge               if ((UndefinedFilter < option) && (option < SentinelFilter))
-       resize.c:1018:53 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
-    x  resize.c:1032:53 cxx_lt_to_le               if ((UndefinedFilter < option) && (option < SentinelFilter))
-    x  resize.c:1099:65 cxx_mul_to_div             resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
-    x  resize.c:1099:71 cxx_mul_to_div             resize_filter->coefficient[2]=MagickSafeReciprocal(Magick2PI*value*value);
-    x  resize.c:1101:16 cxx_gt_to_ge               if ( value > 0.5 )
-    x  resize.c:1132:17 cxx_lt_to_le               if (lobes < 1)
-    x  resize.c:1141:34 cxx_gt_to_ge               if (resize_filter->support > 16)
-    x  resize.c:1158:27 cxx_lt_to_le               if (resize_filter->blur < MagickEpsilon)
-    x  resize.c:1545:9 cxx_lt_to_le               if (x < 0.0)
-       resize.c:1546:8 cxx_minus_to_noop          x=(-x);
-    x  resize.c:1547:9 cxx_lt_to_le               if (x < 8.0)
-    x  resize.c:1551:9 cxx_lt_to_le               if (p < 0.0)
-       resize.c:1552:8 cxx_minus_to_noop          q=(-q);
-    x  resize.c:1705:38 cxx_lt_to_le               if ((resize_filter->window_support < MagickEpsilon) ||
-    x  resize.c:3302:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) GetMagickResourceLimit(ThreadResource); i++)
-    x  resize.c:3303:25 cxx_ne_to_eq               if (contribution[i] != (ContributionInfo *) NULL)
-    x  resize.c:3326:46 cxx_mul_to_div             (void) memset(contribution,0,number_threads*sizeof(*contribution));
-    x  resize.c:3327:15 cxx_lt_to_le               for (i=0; i < (ssize_t) number_threads; i++)
-    x  resize.c:3373:15 cxx_lt_to_le               if (support < 0.5)
-    x  resize.c:3445:21 cxx_lt_to_le               for (i=0; i < n; i++)
-    x  resize.c:3487:48 cxx_le_to_lt               (GetPixelWriteMask(resize_image,q) <= (QuantumRange/2)))
-    x  resize.c:3587:15 cxx_lt_to_le               if (support < 0.5)
-    x  resize.c:3659:21 cxx_lt_to_le               for (i=0; i < n; i++)
-    x  resize.c:3663:55 cxx_sub_to_add             image->columns,(size_t) (contribution[n-1].pixel-contribution[0].pixel+1),
-    x  resize.c:3702:48 cxx_le_to_lt               (GetPixelWriteMask(resize_image,q) <= (QuantumRange/2)))
-    x  resize.c:3733:39 cxx_mul_to_div             alpha=contribution[j].weight*QuantumScale*(double)
-    x  resize.c:3798:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  resize.c:3888:5 cxx_remove_void_call       AppendImageProfileProperty(resize_image,"hdrgm","hdrgm:Transform",
-    x  resize.c:3956:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-       resize.c:3985:58 cxx_div_to_mul             sample_offset.x=sample_offset.y=geometry_info.rho/100.0-MagickEpsilon;
-       resize.c:3985:64 cxx_sub_to_add             sample_offset.x=sample_offset.y=geometry_info.rho/100.0-MagickEpsilon;
-       resize.c:3986:34 cxx_ne_to_eq               if ((flags & SigmaValue) != 0)
-       resize.c:3987:46 cxx_div_to_mul             sample_offset.y=geometry_info.sigma/100.0-MagickEpsilon;
-       resize.c:3987:52 cxx_sub_to_add             sample_offset.y=geometry_info.sigma/100.0-MagickEpsilon;
-    x  resize.c:4031:45 cxx_le_to_lt               if (GetPixelWriteMask(sample_image,q) <= (QuantumRange/2))
-    x  resize.c:4621:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  resize.c:4635:41 cxx_mul_to_div             x_factor=(ssize_t) (image->columns*MagickSafeReciprocal((double)
-    x  resize.c:4638:21 cxx_gt_to_ge               if ((x_factor > 4) && (y_factor > 4))
-    x  resize.c:4638:39 cxx_gt_to_ge               if ((x_factor > 4) && (y_factor > 4))
-    x  resize.c:4647:21 cxx_gt_to_ge               if ((x_factor > 2) && (y_factor > 2))
-    x  resize.c:4675:8 cxx_remove_void_call       ResetImageProfileIterator(thumbnail_image);
-    x  resize.c:4692:17 cxx_ne_to_eq               if (mime_type != (const char *) NULL)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-6f677a7f0-resize.json
+  full results: build-oracle/work/mutation-confirm-85c783276-resize.json
