@@ -2687,7 +2687,12 @@ static int OpenCLCmd(int argc,char **argv,ExceptionInfo *exception)
   for (i=0; i < n; i++)
     printf("device %.20g: %s | %s | %s | type %d | enabled %d | score %g\n",(double) i,
       GetOpenCLDeviceName(devices[i]) != (const char *) NULL ? GetOpenCLDeviceName(devices[i]) : "(null)",
+#if defined(MAGICKCORE_OPENCL_SUPPORT)
       GetOpenCLDeviceVendorName(devices[i]) != (const char *) NULL ? GetOpenCLDeviceVendorName(devices[i]) : "(null)",
+#else
+      /* opencl.h declares it, but opencl.c has no stub without OpenCL (n is 0 there anyway) */
+      "(null)",
+#endif
       GetOpenCLDeviceVersion(devices[i]) != (const char *) NULL ? GetOpenCLDeviceVersion(devices[i]) : "(null)",
       (int) GetOpenCLDeviceType(devices[i]),(int) GetOpenCLDeviceEnabled(devices[i]),
       GetOpenCLDeviceBenchmarkScore(devices[i]));
