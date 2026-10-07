@@ -6095,9 +6095,10 @@ def _windrv_cases():
                               ("rose", "GIF", 3), ("rose", "MIFF", 2), ("rose", "TIFF", 2), ("rose", "PNG", 2),
                               # formats without blob support: the temporary-file route
                               # (not HTML: WriteHTMLImage through ImageToBlob frees an invalid pointer
-                              # in DestroyImageInfo, an upstream crash; not JSON: it varies between runs)
+                              # in DestroyImageInfo, an upstream crash; not JSON: it varies between runs;
+                              # not INFO: it writes the elapsed time, e.g. 0.000u 0:00.001, ERDC 2026-10-07)
                               ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "SHTML", 1),
-                              ("rose", "INFO", 1), ("rose", "VICAR", 1),
+                              ("rose", "VICAR", 1),
                               # MAT: no blob support, but read back: the temporary-file route both ways
                               ("rose", "MAT", 1), ("rose", "MAT", 2), ("rose_alpha", "MAT", 1)):
         yield _windrv("blob of %d %s %s" % (frames, name, fmt), ("blob", "toblob", img(name), fmt, str(frames)))
@@ -6118,8 +6119,8 @@ def _windrv_cases():
     # 7 false kills in blob.c (2026-10-07). PDF's length does not.
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
                               ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2),
-                              ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1), ("rose", "INFO", 1),
-                              ("rose", "MAT", 1), ("rose", "MAT", 2)):
+                              ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1),
+                              ("rose", "MAT", 1), ("rose", "MAT", 2)):  # not INFO: see above
         for seekable in ("1", "0"):
             yield _windrv("custom stream of %d %s %s%s" % (frames, name, fmt, "" if seekable == "1" else ", no seek"),
                           ("blob", "custom", img(name), fmt, str(frames), seekable))
