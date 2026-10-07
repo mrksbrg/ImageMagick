@@ -3896,3 +3896,12 @@ for your decision.
 **Trusted: 34 of 36.** Not trusted: xml-tree.c (above) and stream.c (buffer-size mutants
 overrun silently: unresolved without a memory checker). Both wait for the owner's decisions on
 trace logging and an AddressSanitizer mutation build.
+
+**Whole-catalogue determinism after the day's ~110 cases** (2026-10-07, 20:00–21:00). The WIDE
+catalogue run 4 times (selfcheck) and in two directory names: the only real finding was six
+OpenCL driver cases that re-run ImageMagick's device benchmark in spite of the pinned profile
+(`MAGICK_OCL_DEVICE=false`, and the profile command on rose_alpha and palette): their score and
+device choice vary. They are dropped (`e8600164c`); the 3 kills that rested on them (accelerate.c
+2, opencl.c 1) were rerun against the other OpenCL cases and **all 3 are killed again**
+(`x11cl2-oclfix`), so the W01 figures stand. The three xevents drag cases that differed did so
+only by timing out under 12 parallel runs; one at a time they agree.
