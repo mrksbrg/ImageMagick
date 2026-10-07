@@ -69,7 +69,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-9]; out.miff missing in candidate"
+  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/policy.c:230:21:230:23",
@@ -151,7 +151,7 @@
   "col": 44,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -163,7 +163,7 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -187,7 +187,7 @@
   "col": 45,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -199,7 +199,7 @@
   "col": 25,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -211,7 +211,7 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -247,7 +247,7 @@
   "col": 13,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -259,7 +259,7 @@
   "col": 65,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -295,7 +295,7 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -319,7 +319,7 @@
   "col": 62,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -331,7 +331,7 @@
   "col": 50,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -355,7 +355,7 @@
   "col": 12,
   "function": "policy.c:GetPolicyInfo",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -404,7 +404,7 @@
   "function": "GetPolicyInfoList",
   "status": "killed",
   "cases": 2,
-  "killer": "xmlgap/e2ac1bd50f",
+  "killer": "xmlgap/98a93a8f53",
   "why": "exit status [1] -> [-6]; stderr differs"
  },
  {
@@ -619,7 +619,7 @@
   "col": 44,
   "function": "GetPolicyList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "gaps/3babda0f49",
   "why": "stdout differs"
  },
@@ -643,7 +643,7 @@
   "col": 16,
   "function": "GetPolicyList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "gaps/3babda0f49",
   "why": "stdout differs"
  },
@@ -656,7 +656,7 @@
   "function": "GetPolicyList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/7eee9921fd",
+  "killer": "gaps/3babda0f49",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
@@ -667,7 +667,7 @@
   "col": 15,
   "function": "GetPolicyList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "gaps/3babda0f49",
   "why": "stdout differs"
  },
@@ -679,7 +679,7 @@
   "col": 26,
   "function": "GetPolicyList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "gaps/3babda0f49",
   "why": "stdout differs"
  },
@@ -692,7 +692,7 @@
   "function": "GetPolicyList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/7eee9921fd",
+  "killer": "gaps/3babda0f49",
   "why": "stdout differs"
  },
  {
@@ -703,7 +703,7 @@
   "col": 17,
   "function": "GetPolicyList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "gaps/3babda0f49",
   "why": "exit status [0] -> [-11]; stdout differs"
  },
@@ -716,7 +716,7 @@
   "function": "GetPolicyList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/7eee9921fd",
+  "killer": "gaps/3babda0f49",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -727,7 +727,7 @@
   "col": 9,
   "function": "GetPolicyList",
   "status": "killed",
-  "cases": 2,
+  "cases": 1,
   "killer": "gaps/3babda0f49",
   "why": "stdout differs"
  },
@@ -1363,7 +1363,7 @@
   "col": 14,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -1411,7 +1411,7 @@
   "col": 13,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -1723,7 +1723,7 @@
   "col": 15,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -1795,7 +1795,7 @@
   "col": 19,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -1807,7 +1807,7 @@
   "col": 40,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs; stderr differs"
  },
@@ -1831,7 +1831,7 @@
   "col": 41,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs; stderr differs"
  },
@@ -1855,7 +1855,7 @@
   "col": 43,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -1867,7 +1867,7 @@
   "col": 53,
   "function": "IsRightsAuthorizedByName",
   "status": "killed",
-  "cases": 120,
+  "cases": 141,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs; stderr differs"
  },
@@ -2072,7 +2072,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 2,
-  "killer": "xmlgap/e2ac1bd50f",
+  "killer": "xmlgap/98a93a8f53",
   "why": "stdout differs"
  },
  {
@@ -2084,7 +2084,7 @@
   "function": "ListPolicyInfo",
   "status": "killed",
   "cases": 2,
-  "killer": "xmlgap/e2ac1bd50f",
+  "killer": "xmlgap/98a93a8f53",
   "why": "stdout differs"
  },
  {
@@ -2227,7 +2227,7 @@
   "col": 23,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 127,
+  "cases": 150,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -2635,7 +2635,7 @@
   "col": 38,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 127,
+  "cases": 150,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -2647,7 +2647,7 @@
   "col": 45,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 127,
+  "cases": 150,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -2683,7 +2683,7 @@
   "col": 54,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 127,
+  "cases": 150,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -2695,7 +2695,7 @@
   "col": 52,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -2707,7 +2707,7 @@
   "col": 55,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 127,
+  "cases": 150,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs"
  },
@@ -2719,7 +2719,7 @@
   "col": 54,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 127,
+  "cases": 150,
   "killer": "gaps/23beb731cb",
   "why": "stdout differs; stderr differs"
  },
@@ -2731,7 +2731,7 @@
   "col": 55,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
@@ -2743,7 +2743,7 @@
   "col": 53,
   "function": "policy.c:LoadPolicyCache",
   "status": "killed",
-  "cases": 252,
+  "cases": 247,
   "killer": "gaps/05db0c618f",
   "why": "stdout differs"
  },
