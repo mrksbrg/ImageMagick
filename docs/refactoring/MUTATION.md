@@ -3828,3 +3828,25 @@ make buffers too small and overrun them silently: `unresolved` without a memory 
 the earlier property.c verdicts), cache-view.c (one mutant: a PixelInfo left uninitialised).
 The uncapped rerun of the 126 survivors the 1500-case cap left (`uncap1007`) has killed every
 one of the first 70.
+
+### cache.c and cache-view.c trusted again; 33 of 36 (Windows, 2026-10-07, evening)
+
+**cache.c 89% → 98%, cache-view.c 96% → 100%, both trusted.** Three cases: a tall image on a
+disk cache with a rotated clone composited over it (GetPixelCacheTileSize), a driver `cache`
+case with `MAGICK_MEMORY_LIMIT=1` and no map limit, so the cache is a MapCache
+(GetPixelCachePixels), and `-reshape 100x100` past the image's area (ReshapePixelCache refuses
+it). 85 verdicts: ClonePixelCacheOnDisk's fallback never runs on Linux (sendfile copies a disk
+cache under 2 GB in one call); the metacontent transfers (metacontent exists only through the
+API; the driver moves it a row at a time or as a narrower region; whole-or-per-row transfers;
+the distributed-cache branch, which needs a server); the stream's cache handlers; GetPixelInfo
+before GetPixelInfoPixel (which clears and sets every field again). A probe of 42 more driver
+`cache` cases (seven larger images, memory and disk, metacontent 1, 7 and 64) killed nothing.
+
+Two things learned on the way: `-limit memory 0 -limit map 0` on the command line does not put
+every cache on disk (some still open in memory or as a map), while a limit of 1 does; the
+driver's `disk` mode, through SetMagickResourceLimit, does reach the disk paths. And, not yet
+confirmed, ClonePixelCacheRepository's mismatched-morphology path copies
+`min(metacontent_extent)` bytes of metacontent per row (one pixel's worth), which looks like an
+upstream bug reachable only through the API.
+
+Open still: blob.c 93%, xml-tree.c 89%, stream.c (its buffer-size mutants overrun silently).
