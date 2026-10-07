@@ -3868,7 +3868,7 @@ Found while trying to make XMLTree's destructors run (through `imdriver xml FILE
 
 They mattered here because the catalogue's DOCTYPE documents (`doctype`, `chained`, `percent`)
 never stored a general entity, so the destructor's entity loop never ran. A document with its
-entities first (`xml full`, `2be…`) does run it, and kills 2 more by hand.
+entities first (`xml full: print`, `windrv/d84cf8da74`) does run it, and kills 2 more by hand.
 
 **The destructors, and stream.c, want a memory checker.** XMLTree's destructors and stream.c's
 buffer sizes have mutants that free a neighbouring pointer or write past a buffer: glibc's tcache
