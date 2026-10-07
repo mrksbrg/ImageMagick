@@ -32791,6 +32791,106 @@
    "src": "status=setvbuf(blob_info->file_info.file,(char *) NULL,size == 0 ?",
    "verdict": "unobservable",
    "why": "only the stdio buffer's size or mode (stream:buffer-size): how the bytes are written, not which"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (*type != 'r')",
+   "verdict": "unobservable",
+   "why": "applies the -synchronize setting to streams opened for reading instead of writing: a read stream is flushed at close (nothing changes) and a written one is not fsynced (durability only)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((status != MagickFalse) && S_ISFIFO(blob_info->properties.st_mode))",
+   "verdict": "equivalent",
+   "why": "no case uses a FIFO: when the path exists it is not one, and when it does not, the zeroed properties are not a FIFO either, so the test is false both ways"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (blob_info->file_info.file == (FILE *) NULL)",
+   "verdict": "unobservable",
+   "why": "inside the FIFO branch, which no case reaches (no FIFOs)"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (file >= 0)",
+   "verdict": "equivalent",
+   "why": "open() returns 0 only when descriptor 0 is closed; the oracle always gives a case a stdin (a file or /dev/null), so every descriptor it opens is above 0"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 1,
+   "src": "if (file >= 0)",
+   "verdict": "equivalent",
+   "why": "open() returns 0 only when descriptor 0 is closed; the oracle always gives a case a stdin (a file or /dev/null), so every descriptor it opens is above 0"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (blob_info->file_info.file != (FILE *) NULL)",
+   "verdict": "unobservable",
+   "why": "leaves the FILE opened before the gzip/bzip2 magic was seen open (a leak); the reads go through the gz/bz handle either way"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (blob_info->file_info.file != (FILE *) NULL)",
+   "verdict": "unobservable",
+   "why": "leaves the FILE opened before the gzip/bzip2 magic was seen open (a leak); the reads go through the gz/bz handle either way"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MapResource,length);",
+   "verdict": "unobservable",
+   "why": "only the map resource's bookkeeping after a failed map, which no output shows"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "OpenBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (image_info->file != (FILE *) NULL)",
+   "verdict": "unobservable",
+   "why": "keeps the mapped file's FILE open (exempt stays false) until CloseBlob's BlobStream branch closes it; the reads come from the map either way"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blob_info->file_info.file != (FILE *) NULL)",
+   "verdict": "unobservable",
+   "why": "enters the block for an in-memory blob with no FILE: without -synchronize (no command line writes an in-memory blob with it) only the status test runs, and the status is 0, so ferror is never called"
   }
  ]
 }
