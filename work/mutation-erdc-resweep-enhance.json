@@ -1737,7 +1737,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/53dee96cf2",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/enhance.c:662:24:662:26",
@@ -2025,7 +2025,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/53dee96cf2",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/enhance.c:705:47:705:49",
@@ -12213,7 +12213,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/3fb876fcfc",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/enhance.c:4392:41:4392:43",
