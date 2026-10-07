@@ -1,10 +1,10 @@
 mutate: 51 mutants in MagickCore/utility\.c$, 9 functions
-mutate: baseline over 1 cases in 0s
+mutate: baseline over 31 cases in 0s
   mutants: 25/51 (0s)
-  mutants: 50/51 (0s)
-  mutants: 51/51 (0s)
+  mutants: 50/51 (2s)
+  mutants: 51/51 (2s)
 
-mutate: 51 mutants, 0s
+mutate: 51 mutants, 2s
   killed 0, survived 17 (0 capped), no coverage 34, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -39,4 +39,4 @@ mutate: 51 mutants, 0s
        utility.c:994:29 cxx_post_inc_to_post_dec   for (i=1; i < count; i++)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-9b9a5abd8-utility.json
+  full results: build-oracle/work/mutation-confirm-96b821c39-utility.json
