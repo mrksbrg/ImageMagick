@@ -3877,3 +3877,22 @@ and the process ends with 0 (hand-run). They are marked `unresolved`, not unobse
 owner:** a Mull build with AddressSanitizer (`-fsanitize=address`, its reports as a failure of the
 mutant's run) would make this whole class observable; it is a new kind of harness, so it waits
 for your decision.
+
+### blob.c trusted again; 34 of 36 (Windows, 2026-10-07, night)
+
+- **blob.c 93% → 96%, trusted.** The driver now prints the names a frame read back through a
+  temporary file gets (`imdriver blob`, `07ffdbd20`): BlobToImage's and CustomStreamToImage's
+  restoring loops became observable, and the round `r1007-blob2` over every blob driver case
+  killed 5. SyncBlobStream's 4: its hand-over matters only once a frame outgrows the caller's
+  buffer, which is where the sixth upstream bug lives; the driver's buffer is never outgrown
+  (verdicts).
+- **xml-tree.c 89% → 91%.** An XMP document with `rdf:Bag` and `rdf:Seq` (IsSkipTag) and the
+  `full` document (round `r1007-xml2`: 3 killed). Still under 80%: DestroyXMLTreeRoot 61% and
+  DestroyXMLTreeAttributes 75% — their open mutants are the unresolved frees (a memory checker)
+  and the trace-logging guard (the owner's question).
+- **The uncapped rerun** (`uncap1007`, every survivor the 1500-case cap had stopped): 70 of 126
+  killed, 53 survive with every reaching case run, 3 errors.
+
+**Trusted: 34 of 36.** Not trusted: xml-tree.c (above) and stream.c (buffer-size mutants
+overrun silently: unresolved without a memory checker). Both wait for the owner's decisions on
+trace logging and an AddressSanitizer mutation build.
