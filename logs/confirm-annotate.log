@@ -1,31 +1,91 @@
 mutate: 159 mutants in MagickCore/annotate\.c$, 15 functions
-mutate: baseline over 0 cases in 0s
-  mutants: 25/159 (0s)
-  mutants: 50/159 (0s)
-  mutants: 75/159 (0s)
-  mutants: 100/159 (0s)
-  mutants: 125/159 (0s)
-  mutants: 150/159 (0s)
-  mutants: 159/159 (0s)
+mutate: baseline over 24 cases in 0s
+  mutants: 25/159 (2s)
+  mutants: 50/159 (3s)
+  mutants: 75/159 (3s)
+  mutants: 100/159 (3s)
+  mutants: 125/159 (3s)
+  mutants: 150/159 (4s)
+  mutants: 159/159 (4s)
 
-mutate: 159 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 159, errors 0
+mutate: 159 mutants, 4s
+  killed 0, survived 56 (0 capped), no coverage 103, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   RenderPostscript                      81      0        0     81
-  RenderFreetype                        40      0        0     40
-  RenderType                             7      0        0      7
+  RenderFreetype                        40      0       40      0
+  RenderType                             7      0        7      0
   IsValidPostscriptFontname              7      0        0      7
   AnnotateImage                          5      0        0      5
   FormatMagickCaption                    4      0        0      4
   RenderX11                              4      0        0      4
-  GetMultilineTypeMetrics                3      0        0      3
-  GetTypeMetrics                         2      0        0      2
+  GetMultilineTypeMetrics                3      0        3      0
+  GetTypeMetrics                         2      0        2      0
   ReplaceSpaceWithNewline                1      0        0      1
-  FreetypeReadStream                     1      0        0      1
+  FreetypeReadStream                     1      0        1      0
   IsEmptyOutline                         1      0        0      1
-  FreetypeAlloc                          1      0        0      1
-  FreetypeRealloc                        1      0        0      1
-  FreetypeInit                           1      0        0      1
+  FreetypeAlloc                          1      0        1      0
+  FreetypeRealloc                        1      0        1      0
+  FreetypeInit                           1      0        1      0
 
-  full results: build-oracle/work/mutation-confirm-96b821c39-annotate.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  annotate.c:800:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  annotate.c:867:15 cxx_lt_to_ge               for (i=0; i < (ssize_t) count; i++)
+    x  annotate.c:867:15 cxx_lt_to_le               for (i=0; i < (ssize_t) count; i++)
+    x  annotate.c:933:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  annotate.c:945:24 cxx_ne_to_eq               if (draw_info->debug != MagickFalse)
+    x  annotate.c:1056:28 cxx_ne_to_eq               if ((type_info != (const TypeInfo *) NULL) &&
+    x  annotate.c:1060:23 cxx_lt_to_ge               for (i=0; i < (ssize_t) number_families; i++)
+    x  annotate.c:1060:23 cxx_lt_to_le               for (i=0; i < (ssize_t) number_families; i++)
+    x  annotate.c:1069:12 cxx_ne_to_eq               if (font != (char *) NULL)
+       annotate.c:1071:34 cxx_ne_to_eq               if (IsPathAccessible(font) != MagickFalse)
+    x  annotate.c:1097:21 cxx_eq_to_ne               if (type_info == (const TypeInfo *) NULL)
+    x  annotate.c:1109:26 cxx_ne_to_eq               if (type_info->metrics != (char *) NULL)
+    x  annotate.c:1350:14 cxx_gt_to_ge               if (offset > stream->size)
+    x  annotate.c:1447:14 cxx_le_to_lt               if (extent <= 0)
+    x  annotate.c:1460:14 cxx_le_to_lt               if (extent <= 0)
+    x  annotate.c:1513:7 cxx_remove_void_call       FT_Set_Default_Properties(*alibrary);
+       annotate.c:1667:21 cxx_ne_to_eq               if (type_info != (const TypeInfo *) NULL)
+    x  annotate.c:1692:37 cxx_ge_to_gt               stream->size=attributes.st_size >= 0 ? (unsigned long)
+    x  annotate.c:1703:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1709:27 cxx_ne_to_eq               if ((draw_info->metrics != (char *) NULL) &&
+    x  annotate.c:1710:45 cxx_ne_to_eq               (IsPathAccessible(draw_info->metrics) != MagickFalse))
+    x  annotate.c:1758:11 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+       annotate.c:1790:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1813:39 cxx_gt_to_ge               if (face->size->metrics.max_advance > MagickEpsilon)
+    x  annotate.c:1829:7 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+    x  annotate.c:1835:24 cxx_ne_to_eq               if (draw_info->debug != MagickFalse)
+       annotate.c:1838:23 cxx_ne_to_eq               draw_info->font != (char *) NULL ? draw_info->font : "none",
+       annotate.c:1839:16 cxx_ne_to_eq               encoding != (char *) NULL ? encoding : "none",
+       annotate.c:1840:27 cxx_ne_to_eq               draw_info->encoding != (char *) NULL ? draw_info->encoding : "none",
+    x  annotate.c:1843:25 cxx_eq_to_ne               if (draw_info->render == MagickFalse)
+    x  annotate.c:1881:32 cxx_ne_to_eq               if (image->storage_class != DirectClass)
+    x  annotate.c:1887:23 cxx_lt_to_le               if (GetUTFCode(p) < 0)
+    x  annotate.c:1926:21 cxx_ne_to_eq               if (glyph.image != (FT_Glyph) NULL)
+    x  annotate.c:1928:9 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
+    x  annotate.c:1944:22 cxx_lt_to_le               if ((bounds.xMin < metrics->bounds.x1) && (bounds.xMin != 0))
+    x  annotate.c:1946:22 cxx_lt_to_le               if ((bounds.yMin < metrics->bounds.y1) && (bounds.yMin != 0))
+    x  annotate.c:1948:22 cxx_gt_to_ge               if ((bounds.xMax > metrics->bounds.x2) && (bounds.xMax != 0))
+    x  annotate.c:1950:22 cxx_gt_to_ge               if ((bounds.yMax > metrics->bounds.y2) && (bounds.yMax != 0))
+    x  annotate.c:1953:37 cxx_ne_to_eq               (draw_info->stroke_pattern != (Image *) NULL)) &&
+    x  annotate.c:1960:35 cxx_minus_to_noop          annotate_info->affine.ty=(-glyph.origin.y/64.0);
+    x  annotate.c:1960:50 cxx_div_to_mul             annotate_info->affine.ty=(-glyph.origin.y/64.0);
+    x  annotate.c:2031:25 cxx_lt_to_le               if ((x_offset < 0) || (x_offset >= (ssize_t) image->columns))
+    x  annotate.c:2037:24 cxx_ne_to_eq               active=q != (Quantum *) NULL ? MagickTrue : MagickFalse;
+    x  annotate.c:2045:23 cxx_ne_to_eq               if (q != (Quantum *) NULL)
+    x  annotate.c:2060:41 cxx_ge_to_gt               fill_opacity=fill_opacity >= 0.5 ? 1.0 : 0.0;
+    x  annotate.c:2068:17 cxx_remove_void_call       GetPixelInfo(image,&fill_color);
+    x  annotate.c:2086:24 cxx_eq_to_ne               if (active == MagickFalse)
+    x  annotate.c:2100:41 cxx_ne_to_eq               (draw_info->stroke_pattern != (Image *) NULL)) &&
+    x  annotate.c:2110:50 cxx_gt_to_ge               if (strlen(annotate_info->primitive) > 7)
+    x  annotate.c:2115:45 cxx_ge_to_gt               if ((fabs(draw_info->interword_spacing) >= MagickEpsilon) &&
+    x  annotate.c:2127:27 cxx_gt_to_ge               if (metrics->origin.x > metrics->width)
+    x  annotate.c:2132:16 cxx_ne_to_eq               if (grapheme != (GraphemeInfo *) NULL)
+    x  annotate.c:2134:12 cxx_ne_to_eq               if (utf8 != (unsigned char *) NULL)
+    x  annotate.c:2136:19 cxx_ne_to_eq               if (glyph.image != (FT_Glyph) NULL)
+    x  annotate.c:2138:7 cxx_remove_void_call       FT_Done_Glyph(glyph.image);
+    x  annotate.c:2156:3 cxx_remove_void_call       FreetypeDone(memory,library,stream);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-ac79170c0-annotate.json
