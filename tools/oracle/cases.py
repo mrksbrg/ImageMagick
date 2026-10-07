@@ -2386,6 +2386,23 @@ def _blob_gap_cases():
     yield _with_inputs(_op_to("blobgap", "text: with empty, CRLF and unterminated lines",
                               ["-size", "60x60", "-pointsize", "10", "text:t.txt"] + FLOAT_OUT, "out.miff"),
                        files={"t.txt": "ab\n\ncd\r\nef"})
+    # FileToBlob's stream branch: "@-" reads an option's value from stdin, which FileToBlob
+    # treats as a stream even when it is a file. Small, empty, past one read (64 KB) and
+    # large (1.3 MB, the buffer's growth) (2026-10-07, hand-run: 14 killed)
+    big = "".join("line %05d of a long comment read from stdin\n" % i for i in range(30000))
+    for label, text, fmt in (("small", "hello from stdin\n", "%c"), ("empty", "", "[%c]"),
+                             ("big", big, "%[fx:0]%c"), ("64k", "x" * 65536, "%c")):
+        yield _with_inputs(_case("blobgap", "comment from %s stdin (@-)" % label,
+                                 [[img("rose"), "-set", "comment", "@-", "-format", fmt, "info:"]], []),
+                           files={"t.txt": text}, stdin="t.txt")
+    # stdin read twice (FileToBlob leaves it open: the second read finds its end) and an empty
+    # file read through the mapped branch (no map: the read loop's end test) (hand-run: 3 killed)
+    yield _with_inputs(_case("blobgap", "comment and label from stdin (@- twice)",
+                             [[img("rose"), "-set", "comment", "@-", "-set", "label", "@-", "-format", "[%c][%l]",
+                               "info:"]], []), files={"t.txt": "once\n"}, stdin="t.txt")
+    yield _with_inputs(_case("blobgap", "comment from an empty file (@e.txt)",
+                             [[img("rose"), "-set", "comment", "@e.txt", "-format", "[%c]", "info:"]], []),
+                       files={"e.txt": ""})
 
 
 # fx.c: loops of 300 iterations, where an element that should not push would

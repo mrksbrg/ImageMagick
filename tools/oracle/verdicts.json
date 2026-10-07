@@ -32201,6 +32201,206 @@
    "src": "if (utf8 != (char *) NULL)",
    "verdict": "unobservable",
    "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); the terminator is skipped only if the resize failed, and NewXMLTree terminates the text at its last character itself"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "LogMagickEvent is called without -debug, and then returns at once: no case enables event logging"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "after a policy denial ThrowPolicyException returns NULL at once: the descriptor is closed either way, and the local value of file is never used again"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((file == fileno(stdin)) || (offset < 0) ||",
+   "verdict": "equivalent",
+   "why": "only chooses which branch reads the file: the stream branch reads a regular file to its end and the mapped branch copies it whole, so both give the same bytes (stdin redirected from a file maps as well)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((file == fileno(stdin)) || (offset < 0) ||",
+   "verdict": "equivalent",
+   "why": "only chooses which branch reads the file: the stream branch reads a regular file to its end and the mapped branch copies it whole, so both give the same bytes (stdin redirected from a file maps as well)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(offset != (MagickOffsetType) ((ssize_t) offset)))",
+   "verdict": "equivalent",
+   "why": "only chooses which branch reads the file: the stream branch reads a regular file to its end and the mapped branch copies it whole, so both give the same bytes (stdin redirected from a file maps as well)"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "equivalent",
+   "why": "only chooses which branch reads the file: the stream branch reads a regular file to its end and the mapped branch copies it whole, so both give the same bytes (stdin redirected from a file maps as well)"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((file == fileno(stdin)) || (offset < 0) ||",
+   "verdict": "equivalent",
+   "why": "only an empty file takes the other branch, and both branches return an empty string for it"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~i < ((size_t) count+quantum+1))",
+   "verdict": "equivalent",
+   "why": "the overflow guard compares ~i, which stays near SIZE_MAX for any input that fits in memory, against a few megabytes: one more or one less never changes it"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (~i < ((size_t) count+quantum+1))",
+   "verdict": "equivalent",
+   "why": "the overflow guard compares ~i, which stays near SIZE_MAX for any input that fits in memory, against a few megabytes: one more or one less never changes it"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "quantum+1,sizeof(*blob));",
+   "verdict": "unobservable",
+   "why": "grows the stream buffer by one byte less: the next read is at most quantum bytes at offset i+count and the terminator at the data's end, both still inside (stdin from a file reads its size at once, then 0)"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((i+(size_t) count) >= extent)",
+   "verdict": "equivalent",
+   "why": "every caller passes an extent of SIZE_MAX or ~0UL, which i+count never reaches (or, mutated, i-count)"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((i+(size_t) count) >= extent)",
+   "verdict": "equivalent",
+   "why": "every caller passes an extent of SIZE_MAX or ~0UL, which i+count never reaches (or, mutated, i-count)"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~(*length) >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "~length is never exactly MagickPathExtent-1 (that would be a file of SIZE_MAX-4095 bytes)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (map != (unsigned char *) NULL)",
+   "verdict": "equivalent",
+   "why": "with the test inverted a mapped file is read again by the read loop (the same bytes; the map is left unmapped, a leak), and an empty file's failed map copies and unmaps nothing"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < *length; i+=(size_t) count)",
+   "verdict": "equivalent",
+   "why": "the read loop runs only when the map fails, which for a regular file means it is empty: with length 0 a read of 0 bytes returns 0 and the loop ends either way"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < *length; i+=(size_t) count)",
+   "verdict": "equivalent",
+   "why": "the read loop runs only when the map fails, which for a regular file means it is empty: with length 0 a read of 0 bytes returns 0 and the loop ends either way"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_le_to_gt",
+   "nth": 1,
+   "src": "if (count <= 0)",
+   "verdict": "equivalent",
+   "why": "the read loop runs only when the map fails, which for a regular file means it is empty: with length 0 a read of 0 bytes returns 0 and the loop ends either way"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_le_to_lt",
+   "nth": 1,
+   "src": "if (count <= 0)",
+   "verdict": "equivalent",
+   "why": "the read loop runs only when the map fails, which for a regular file means it is empty: with length 0 a read of 0 bytes returns 0 and the loop ends either way"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_sub_to_add",
+   "nth": 1,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "equivalent",
+   "why": "the error path is entered only by a short read, which a regular file never gives; its descriptor's local value is not used after the return"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/blob.c",
+   "function": "FileToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (LocaleCompare(filename,\"-\") != 0)",
+   "verdict": "unobservable",
+   "why": "the mapped branch is never taken for stdin (fileno(stdin) takes the stream branch), so this only leaves a regular file's descriptor open: a leak"
   }
  ]
 }
