@@ -1,42 +1,41 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 722 mutants in MagickCore/image\.c$, 47 functions
-mutate: baseline over 15583 cases in 0s
+mutate: baseline over 15280 cases in 0s
   mutants: 25/722 (55s)
-  mutants: 50/722 (56s)
-  mutants: 75/722 (58s)
-  mutants: 100/722 (64s)
-  mutants: 125/722 (74s)
-  mutants: 150/722 (106s)
-  mutants: 175/722 (125s)
-  mutants: 200/722 (128s)
-  mutants: 225/722 (159s)
-  mutants: 250/722 (175s)
-  mutants: 275/722 (199s)
-  mutants: 300/722 (201s)
-  mutants: 325/722 (206s)
-  mutants: 350/722 (233s)
-  mutants: 375/722 (242s)
-  mutants: 400/722 (256s)
-  mutants: 425/722 (287s)
-  mutants: 450/722 (311s)
-  mutants: 475/722 (335s)
-  mutants: 500/722 (344s)
-  mutants: 525/722 (348s)
+  mutants: 50/722 (55s)
+  mutants: 75/722 (57s)
+  mutants: 100/722 (62s)
+  mutants: 125/722 (73s)
+  mutants: 150/722 (102s)
+  mutants: 175/722 (123s)
+  mutants: 200/722 (124s)
+  mutants: 225/722 (154s)
+  mutants: 250/722 (170s)
+  mutants: 275/722 (194s)
+  mutants: 300/722 (195s)
+  mutants: 325/722 (203s)
+  mutants: 350/722 (227s)
+  mutants: 375/722 (236s)
+  mutants: 400/722 (249s)
+  mutants: 425/722 (289s)
+  mutants: 450/722 (317s)
+  mutants: 475/722 (330s)
+  mutants: 500/722 (343s)
+  mutants: 525/722 (345s)
   mutants: 550/722 (356s)
-  mutants: 575/722 (359s)
-  mutants: 600/722 (364s)
-  mutants: 625/722 (367s)
-  mutants: 650/722 (370s)
+  mutants: 575/722 (361s)
+  mutants: 600/722 (363s)
+  mutants: 625/722 (365s)
+  mutants: 650/722 (371s)
   mutants: 675/722 (378s)
-  mutants: 700/722 (412s)
-  mutants: 722/722 (497s)
+  mutants: 700/722 (411s)
+  mutants: 722/722 (495s)
 
-mutate: 722 mutants, 497s
-  killed 464, survived 218 (171 capped), no coverage 40, errors 0
-  mutation score on reached code: 68.0%   overall: 64.3%
+mutate: 722 mutants, 495s
+  killed 465, survived 217 (174 capped), no coverage 40, errors 0
+  mutation score on reached code: 68.2%   overall: 64.4%
 
   function                           total killed survived no-cov
-  SetImageInfo                          79     42       37      0
+  SetImageInfo                          79     43       36      0
   SyncImageSettings                     54     36       18      0
   InterpretImageFilename                46     28       18      0
   AppendImages                          40     34        6      0
@@ -48,7 +47,7 @@ mutate: 722 mutants, 497s
   SmushImages                           23     20        3      0
   CloneImage                            22     15        7      0
   SetImageMask                          20     19        1      0
-  GetImageMask                          19     13        6      0
+  GetImageMask                          19     17        2      0
   IsHighDynamicRangeImage               19     17        2      0
   DestroyImage                          18      5       13      0
   IsValidFormatSpecifier                17     16        1      0
@@ -61,11 +60,11 @@ mutate: 722 mutants, 497s
   NewMagickImage                        12      0        0     12
   ResetImagePixels                      12      6        6      0
   SetImageColor                         11      0        0     11
-  SetImageInfoFromExtension             11     10        1      0
+  SetImageInfoFromExtension             11      5        6      0
   SetImageExtent                         9      6        3      0
   GetImageInfo                           7      4        3      0
   ClipImagePath                          6      3        3      0
-  AcquireNextImage                       5      2        3      0
+  AcquireNextImage                       5      3        2      0
   IsTaintImage                           5      0        0      5
   ModifyImage                            5      0        0      5
   ReferenceImage                         4      2        2      0
@@ -113,7 +112,6 @@ mutate: 722 mutants, 497s
     xc image.c:305:75 cxx_add_to_sub             image->delay=(size_t) CastDoubleToSsizeT(floor(geometry_info.rho+
     xc image.c:308:77 cxx_add_to_sub             image->ticks_per_second=CastDoubleToSsizeT(floor(geometry_info.sigma+
     xc image.c:385:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc image.c:392:18 cxx_ne_to_eq               if (image_info != (ImageInfo *) NULL)
     xc image.c:395:3 cxx_remove_void_call       DestroyBlob(GetNextImageInList(image));
     x  image.c:482:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:494:21 cxx_gt_to_ge               if (next->depth > depth)
@@ -172,11 +170,7 @@ mutate: 722 mutants, 497s
     xc image.c:1381:19 cxx_ne_to_eq               if (synchronize != (const char *) NULL)
     xc image.c:1391:54 cxx_ne_to_eq               image_info->debug=(GetLogEventMask() & ImageEvent) != 0 ? MagickTrue :
     x  image.c:1469:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-       image.c:1475:47 cxx_eq_to_ne               if ((image->channels & ReadMaskChannel) == 0)
-       image.c:1487:52 cxx_eq_to_ne               if ((image->channels & CompositeMaskChannel) == 0)
     x  image.c:1526:17 cxx_lt_to_le               for (x=0; x < (ssize_t) image->columns; x++)
-       image.c:1532:11 cxx_remove_void_call       SetPixelGray(mask_image,GetPixelReadMask(image,p),q);
-       image.c:1542:11 cxx_remove_void_call       SetPixelGray(mask_image,GetPixelCompositeMask(image,p),q);
     xc image.c:1624:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  image.c:1692:32 cxx_post_inc_to_post_dec   for ( ; i < (length-1); i++)
     xc image.c:1718:19 cxx_ne_to_eq               if (literal != (char *) NULL)
@@ -217,6 +211,11 @@ mutate: 722 mutants, 497s
     xc image.c:2732:13 cxx_gt_to_ge               (rows > (size_t) MAGICK_SSIZE_MAX))
     xc image.c:2742:20 cxx_gt_to_ge               if (image->depth > (8*sizeof(MagickSizeType)))
     xc image.c:2831:33 cxx_ne_to_eq               (magick_info->format_type != UndefinedFormatType))
+    xc image.c:2834:23 cxx_eq_to_ne               while ((format_type == UndefinedFormatType) &&
+    xc image.c:2835:34 cxx_ne_to_eq               (format_type_formats[i] != (char *) NULL))
+    xc image.c:2837:17 cxx_eq_to_ne               if ((*magic == *format_type_formats[i]) &&
+    xc image.c:2845:21 cxx_eq_to_ne               if (format_type == ExplicitFormatType)
+    xc image.c:2850:34 cxx_eq_to_ne               if (LocaleCompare(magic,"RGB") == 0)
     xc image.c:2890:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc image.c:2895:18 cxx_eq_to_ne               if (*component == '\0')
     xc image.c:2921:50 cxx_ne_to_eq               for (q=(char *) image_info->scenes; *q != '\0'; p++)
@@ -232,7 +231,6 @@ mutate: 722 mutants, 497s
     xc image.c:2935:22 cxx_gt_to_le               if (last > image_info->number_scenes)
     xc image.c:2939:55 cxx_sub_to_add             image_info->number_scenes-=image_info->scene-1;
     xc image.c:2951:7 cxx_remove_void_call       GetPathComponent(path,ExtensionPath,component);
-    xc image.c:2984:7 cxx_remove_void_call       LocaleUpper(magic);
     xc image.c:2990:29 cxx_eq_to_ne               if (delegate_info == (const DelegateInfo *) NULL)
     xc image.c:2992:30 cxx_eq_to_ne               if ((delegate_info == (const DelegateInfo *) NULL) &&
     xc image.c:2993:59 cxx_eq_to_ne               ((*component != '\0') && (IsGlob(component) == MagickFalse)))

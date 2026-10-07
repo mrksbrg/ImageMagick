@@ -55,7 +55,7 @@
   "col": 19,
   "function": "locale.c:AcquireLocaleSplayTree",
   "status": "killed",
-  "cases": 103,
+  "cases": 61,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -68,7 +68,7 @@
   "function": "locale.c:AcquireLocaleSplayTree",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -80,7 +80,7 @@
   "function": "locale.c:AcquireLocaleSplayTree",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -91,7 +91,7 @@
   "col": 42,
   "function": "locale.c:AcquireLocaleSplayTree",
   "status": "killed",
-  "cases": 7,
+  "cases": 4,
   "killer": "info/6a09ec7c60",
   "why": "stdout differs"
  },
@@ -200,7 +200,7 @@
   "function": "GetLocaleInfo_",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -212,8 +212,8 @@
   "function": "GetLocaleInfo_",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:531:12:531:14",
@@ -224,7 +224,7 @@
   "function": "GetLocaleInfo_",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -236,7 +236,7 @@
   "function": "GetLocaleInfo_",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -247,7 +247,7 @@
   "col": 7,
   "function": "GetLocaleInfo_",
   "status": "killed",
-  "cases": 7,
+  "cases": 4,
   "killer": "info/6a09ec7c60",
   "why": "stdout differs"
  },
@@ -259,7 +259,7 @@
   "col": 7,
   "function": "GetLocaleInfo_",
   "status": "killed",
-  "cases": 7,
+  "cases": 4,
   "killer": "info/6a09ec7c60",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
@@ -272,8 +272,8 @@
   "function": "GetLocaleInfo_",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "exit status [1] -> ['timeout']; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:585:44:585:46",
@@ -308,7 +308,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -320,8 +320,8 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 2,
-  "killer": "gaps/19d209ea93",
-  "why": "stdout differs"
+  "killer": "gaps/91eb155846",
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:619:16:619:18",
@@ -332,7 +332,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -344,7 +344,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "exit status [0] -> [1]; stderr differs"
  },
  {
@@ -356,7 +356,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -368,7 +368,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -380,7 +380,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -392,7 +392,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -404,7 +404,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -416,7 +416,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -438,8 +438,10 @@
   "line": 707,
   "col": 24,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:711:9:711:11",
@@ -448,8 +450,10 @@
   "line": 711,
   "col": 9,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 2,
+  "killer": "gaps/c270bd21de",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:714:46:714:47",
@@ -458,8 +462,10 @@
   "line": 714,
   "col": 46,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 2,
+  "killer": "gaps/c270bd21de",
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:715:16:715:18",
@@ -468,8 +474,10 @@
   "line": 715,
   "col": 16,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 2,
+  "killer": "gaps/c270bd21de",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:717:3:717:38",
@@ -478,8 +486,10 @@
   "line": 717,
   "col": 3,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/9d5bfdfff7",
+  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:719:15:719:17",
@@ -488,8 +498,10 @@
   "line": 719,
   "col": 15,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 2,
+  "killer": "gaps/c270bd21de",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:721:21:721:23",
@@ -498,8 +510,10 @@
   "line": 721,
   "col": 21,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 2,
+  "killer": "gaps/c270bd21de",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:722:52:722:54",
@@ -508,8 +522,10 @@
   "line": 722,
   "col": 52,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/9d5bfdfff7",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:723:17:723:19",
@@ -518,8 +534,10 @@
   "line": 723,
   "col": 17,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 2,
+  "killer": "gaps/c270bd21de",
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:726:3:726:40",
@@ -528,8 +546,10 @@
   "line": 726,
   "col": 3,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "killed",
+  "cases": 1,
+  "killer": "gaps/9d5bfdfff7",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:727:3:727:73",
@@ -538,8 +558,10 @@
   "line": 727,
   "col": 3,
   "function": "GetLocaleList",
-  "status": "no-coverage",
-  "cases": 0
+  "status": "survived",
+  "cases": 2,
+  "capped": false,
+  "line_executed": true
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:767:12:767:14",
@@ -550,7 +572,7 @@
   "function": "GetLocaleMessage",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -562,7 +584,7 @@
   "function": "GetLocaleMessage",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -574,7 +596,7 @@
   "function": "GetLocaleMessage",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -598,7 +620,7 @@
   "function": "GetLocaleOptions",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -622,7 +644,7 @@
   "function": "GetLocaleOptions",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -634,8 +656,8 @@
   "function": "GetLocaleOptions",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> [-6]; stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "exit status [1] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:864:3:864:36",
@@ -668,7 +690,7 @@
   "function": "locale.c:IsLocaleTreeInstantiated",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -704,8 +726,8 @@
   "function": "locale.c:IsLocaleTreeInstantiated",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:929:24:929:26",
@@ -716,7 +738,7 @@
   "function": "locale.c:IsLocaleTreeInstantiated",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -800,8 +822,8 @@
   "function": "locale.c:IsLocaleTreeInstantiated",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "exit status [1] -> ['timeout']; stderr differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:956:23:956:25",
@@ -812,7 +834,7 @@
   "function": "locale.c:IsLocaleTreeInstantiated",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -872,7 +894,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -884,7 +906,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -896,7 +918,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -908,7 +930,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -920,7 +942,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -932,7 +954,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -944,7 +966,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -956,7 +978,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -968,7 +990,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -980,7 +1002,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
  {
@@ -992,7 +1014,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1004,7 +1026,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1016,7 +1038,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1028,7 +1050,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1052,7 +1074,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1064,7 +1086,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1076,7 +1098,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1088,7 +1110,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1100,7 +1122,7 @@
   "function": "locale.c:ChopLocaleComponents",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1142,7 +1164,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1153,7 +1175,7 @@
   "col": 23,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 103,
+  "cases": 61,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -1166,7 +1188,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1178,7 +1200,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1190,7 +1212,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1202,7 +1224,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1214,7 +1236,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1225,7 +1247,7 @@
   "col": 22,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 176,
+  "cases": 112,
   "killer": "gaps/19d209ea93",
   "why": "stdout differs"
  },
@@ -1238,7 +1260,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1250,7 +1272,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1262,7 +1284,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1274,7 +1296,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1286,7 +1308,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1297,7 +1319,7 @@
   "col": 41,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 193,
+  "cases": 106,
   "killer": "gaps/c22eb68f8c",
   "why": "stdout differs"
  },
@@ -1310,7 +1332,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1322,7 +1344,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1334,7 +1356,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1346,7 +1368,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1357,7 +1379,7 @@
   "col": 42,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 109,
+  "cases": 64,
   "killer": "gaps/1c46a980f2",
   "why": "stdout differs"
  },
@@ -1369,7 +1391,7 @@
   "col": 55,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 109,
+  "cases": 64,
   "killer": "gaps/1c46a980f2",
   "why": "stdout differs"
  },
@@ -1381,7 +1403,7 @@
   "col": 54,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 109,
+  "cases": 64,
   "killer": "gaps/1c46a980f2",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
@@ -1394,7 +1416,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1502,8 +1524,8 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "exit status [1] -> ['timeout']; stderr differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:1302:19:1302:59",
@@ -1574,7 +1596,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1622,7 +1644,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1633,7 +1655,7 @@
   "col": 9,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 103,
+  "cases": 61,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -1646,7 +1668,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1658,7 +1680,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1670,7 +1692,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1682,7 +1704,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1694,7 +1716,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1706,7 +1728,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1718,7 +1740,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1730,7 +1752,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1742,7 +1764,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1754,7 +1776,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1766,7 +1788,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1790,7 +1812,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1802,8 +1824,8 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
-  "why": "exit status [1] -> ['timeout']; stdout differs; stderr differs"
+  "killer": "sequence/27f5475e4a",
+  "why": "exit status [1] -> ['timeout']; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:1389:45:1389:47",
@@ -1814,7 +1836,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1826,7 +1848,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1838,7 +1860,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1850,7 +1872,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1862,7 +1884,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1874,7 +1896,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1886,7 +1908,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1898,7 +1920,7 @@
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
   "cases": 1,
-  "killer": "windrv/3f1ce096a0",
+  "killer": "sequence/27f5475e4a",
   "why": "stderr differs"
  },
  {
@@ -1945,7 +1967,7 @@
   "col": 13,
   "function": "LocaleCompare",
   "status": "killed",
-  "cases": 231,
+  "cases": 222,
   "killer": "gaps/855daf7162",
   "why": "stdout differs"
  },
@@ -2161,9 +2183,9 @@
   "col": 21,
   "function": "LocaleUpper",
   "status": "killed",
-  "cases": 142,
-  "killer": "gaps/9f0b5964a1",
-  "why": "exit status [0, 1] -> [0, 0]; stdout differs; stderr differs"
+  "cases": 75,
+  "killer": "gaps/9ede1b5681",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:1678:24:1678:26",

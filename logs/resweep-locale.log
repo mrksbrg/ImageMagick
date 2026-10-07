@@ -1,24 +1,23 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 191 mutants in MagickCore/locale\.c$, 26 functions
-mutate: baseline over 15583 cases in 0s
+mutate: baseline over 15579 cases in 0s
   mutants: 25/191 (1s)
-  mutants: 50/191 (33s)
-  mutants: 75/191 (34s)
+  mutants: 50/191 (30s)
+  mutants: 75/191 (30s)
   mutants: 100/191 (49s)
-  mutants: 125/191 (61s)
-  mutants: 150/191 (86s)
-  mutants: 175/191 (98s)
-  mutants: 191/191 (204s)
+  mutants: 125/191 (53s)
+  mutants: 150/191 (84s)
+  mutants: 175/191 (91s)
+  mutants: 191/191 (198s)
 
-mutate: 191 mutants, 204s
-  killed 122, survived 54 (51 capped), no coverage 15, errors 0
-  mutation score on reached code: 69.3%   overall: 63.9%
+mutate: 191 mutants, 198s
+  killed 131, survived 56 (51 capped), no coverage 4, errors 0
+  mutation score on reached code: 70.1%   overall: 68.6%
 
   function                           total killed survived no-cov
   LoadLocaleCache                       66     47       19      0
   IsLocaleTreeInstantiated              13      5        8      0
   GetLocaleInfoList                     12     10        2      0
-  GetLocaleList                         11      0        0     11
+  GetLocaleList                         11      9        2      0
   ListLocaleInfo                        10     10        0      0
   ChopLocaleComponents                  10      9        1      0
   LocaleNCompare                        10      9        1      0
@@ -58,6 +57,8 @@ mutate: 191 mutants, 204s
     x  locale.c:585:44 cxx_eq_to_ne               if (LocaleCompare((*p)->path,(*q)->path) == 0)
     x  locale.c:611:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:635:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleInfoCompare);
+    x  locale.c:707:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  locale.c:727:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleTagCompare);
     xc locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc locale.c:832:7 cxx_remove_void_call       ResetLinkedListIterator(paths);
     xc locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
