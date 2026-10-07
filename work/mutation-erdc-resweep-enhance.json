@@ -1977,7 +1977,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/89b6e9f8ef",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/enhance.c:688:19:688:21",
@@ -7027,8 +7027,8 @@
   "col": 19,
   "function": "EqualizeImage",
   "status": "killed",
-  "cases": 1,
-  "killer": "msl/853265bffc",
+  "cases": 9,
+  "killer": "unary/f82e5e9036",
   "why": "out.miff differs"
  },
  {
@@ -10929,7 +10929,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "opencl/fe8f42d5f4",
-  "why": "exit status [0] -> [-6]; out.miff differs"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/enhance.c:3831:46:3831:48",
