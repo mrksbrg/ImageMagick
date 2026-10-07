@@ -1,69 +1,96 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 549 mutants in MagickCore/profile\.c$, 44 functions
-mutate: baseline over 12829 cases in 0s
+  baseline: 500/13666 (2s)
+  baseline: 1000/13666 (3s)
+  baseline: 1500/13666 (5s)
+  baseline: 2000/13666 (7s)
+  baseline: 2500/13666 (8s)
+  baseline: 3000/13666 (11s)
+  baseline: 3500/13666 (13s)
+  baseline: 4000/13666 (15s)
+  baseline: 4500/13666 (16s)
+  baseline: 5000/13666 (18s)
+  baseline: 5500/13666 (20s)
+  baseline: 6000/13666 (22s)
+  baseline: 6500/13666 (24s)
+  baseline: 7000/13666 (26s)
+  baseline: 7500/13666 (28s)
+  baseline: 8000/13666 (29s)
+  baseline: 8500/13666 (31s)
+  baseline: 9000/13666 (40s)
+  baseline: 9500/13666 (42s)
+  baseline: 10000/13666 (45s)
+  baseline: 10500/13666 (47s)
+  baseline: 11000/13666 (48s)
+  baseline: 11500/13666 (50s)
+  baseline: 12000/13666 (51s)
+  baseline: 12500/13666 (53s)
+  baseline: 13000/13666 (54s)
+  baseline: 13500/13666 (55s)
+  baseline: 13666/13666 (56s)
+mutate: baseline over 14990 cases in 57s
   mutants: 25/549 (1s)
   mutants: 50/549 (2s)
   mutants: 75/549 (3s)
-  mutants: 100/549 (10s)
-  mutants: 125/549 (22s)
-  mutants: 150/549 (29s)
-  mutants: 175/549 (42s)
-  mutants: 200/549 (49s)
-  mutants: 225/549 (56s)
-  mutants: 250/549 (61s)
-  mutants: 275/549 (64s)
-  mutants: 300/549 (69s)
-  mutants: 325/549 (73s)
-  mutants: 350/549 (75s)
-  mutants: 375/549 (77s)
-  mutants: 400/549 (81s)
-  mutants: 425/549 (84s)
-  mutants: 450/549 (84s)
-  mutants: 475/549 (85s)
-  mutants: 500/549 (86s)
-  mutants: 525/549 (94s)
-  mutants: 549/549 (224s)
+  mutants: 100/549 (7s)
+  mutants: 125/549 (18s)
+  mutants: 150/549 (23s)
+  mutants: 175/549 (29s)
+  mutants: 200/549 (34s)
+  mutants: 225/549 (39s)
+  mutants: 250/549 (40s)
+  mutants: 275/549 (42s)
+  mutants: 300/549 (44s)
+  mutants: 325/549 (46s)
+  mutants: 350/549 (48s)
+  mutants: 375/549 (51s)
+  mutants: 400/549 (53s)
+  mutants: 425/549 (55s)
+  mutants: 450/549 (56s)
+  mutants: 475/549 (57s)
+  mutants: 500/549 (58s)
+  mutants: 525/549 (64s)
+  mutants: 549/549 (194s)
 
-mutate: 549 mutants, 224s
-  killed 389, survived 135 (9 capped), no coverage 25, errors 0
-  mutation score on reached code: 74.2%   overall: 70.9%
+mutate: 549 mutants, 194s
+  killed 455, survived 72 (7 capped), no coverage 22, errors 0
+  mutation score on reached code: 86.3%   overall: 82.9%
 
   function                           total killed survived no-cov
-  SyncExifProfile                      114     79       35      0
+  SyncExifProfile                      114    104       10      0
   ProfileImage                          71     56       15      0
-  Sync8BimProfile                       34     31        3      0
-  WriteTo8BimProfile                    32     26        6      0
-  GetProfilesFromResourceBlock          24     18        6      0
+  Sync8BimProfile                       34     32        2      0
+  WriteTo8BimProfile                    32     29        3      0
+  GetProfilesFromResourceBlock          24     21        3      0
   TransformDoublePixels                 22     21        1      0
   TransformQuantumPixels                22      0        0     22
-  GetXMPNumeratorAndDenominator         20     12        8      0
+  GetXMPNumeratorAndDenominator         20     14        6      0
   UpdateClipPath                        20     20        0      0
-  Update8BIMClipPath                    20     16        4      0
-  SetImageProfileInternal               19     14        5      0
-  PatchCorruptProfile                   16      7        9      0
-  GetXMPOffsets                         15     11        4      0
-  SyncXMPProfile                        15     12        3      0
-  WriteProfileDimension                 12      8        4      0
+  Update8BIMClipPath                    20     20        0      0
+  SetImageProfileInternal               19     18        1      0
+  PatchCorruptProfile                   16     16        0      0
+  GetXMPOffsets                         15     13        2      0
+  SyncXMPProfile                        15     13        2      0
+  WriteProfileDimension                 12     12        0      0
   ReplaceXMPValue                       10      7        3      0
   AcquirePixelTLS                        8      6        2      0
   AcquireTransformTLS                    6      4        2      0
   CMSExceptionHandler                    6      4        2      0
-  TryAccumulate                          6      3        3      0
+  TryAccumulate                          6      4        2      0
   SyncImageProfiles                      6      6        0      0
   DestroyPixelTLS                        5      1        4      0
   DestroyTransformTLS                    5      2        3      0
   CloneImageProfiles                     4      1        3      0
-  AppendImageProfileProperty             3      1        2      0
+  AppendImageProfileProperty             3      3        0      0
   DeleteImageProfile                     3      2        1      0
-  RemoveImageProfile                     3      0        0      3
+  RemoveImageProfile                     3      2        1      0
   ResetImageProfileIterator              3      2        1      0
-  ValidateXMPProfile                     3      1        2      0
-  AcquireProfileStringInfo               3      2        1      0
+  ValidateXMPProfile                     3      2        1      0
+  AcquireProfileStringInfo               3      3        0      0
   GetImageProfile                        2      1        1      0
   GetNextImageProfile                    2      1        1      0
   ReadProfileByte                        2      2        0      0
   ReadProfileMSBLong                     2      2        0      0
-  ReadProfileMSBShort                    2      1        1      0
+  ReadProfileMSBShort                    2      2        0      0
   DestroyImageProfiles                   1      1        0      0
   SetsRGBImageProfile                    1      1        0      0
   BlobToProfileStringInfo                1      1        0      0
@@ -75,8 +102,6 @@ mutate: 549 mutants, 224s
   WriteProfileShort                      1      1        0      0
 
   survivors (equivalent, or a gap in the catalogue):
-     c profile.c:143:16 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
-     c profile.c:143:53 cxx_eq_to_ne               if ((current == (const char *) NULL) || (*current == '\0'))
     xc profile.c:231:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc profile.c:235:27 cxx_ne_to_eq               if (image->profiles != (void *) NULL)
      c profile.c:236:9 cxx_remove_void_call       DestroyImageProfiles(image);
@@ -112,104 +137,43 @@ mutate: 549 mutants, 224s
        profile.c:1463:17 cxx_remove_void_call       TransformQuantumPixels(id,image,&source_info,&target_info,
     x  profile.c:1516:37 cxx_ne_to_eq               if (target_info.profile != (cmsHPROFILE) NULL)
     x  profile.c:1520:9 cxx_remove_void_call       cmsDeleteContext(cms_context);
+    x  profile.c:1559:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc profile.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:1723:19 cxx_lt_to_le               for (p=datum; p < (datum+length-16); )
     x  profile.c:1732:22 cxx_add_to_sub             if (((length_byte+1) & 0x01) != 0)
     x  profile.c:1734:11 cxx_gt_to_ge               if (p > (datum+length-4))
-    x  profile.c:1740:16 cxx_lt_to_le               if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))
     x  profile.c:1740:61 cxx_gt_to_ge               if ((count < 0) || (p > (datum+length-count)) || (count > (ssize_t) length))
-    x  profile.c:1772:62 cxx_sub_to_add             (void) memcpy(extract_profile->datum,datum,offset-4);
-    x  profile.c:1817:19 cxx_lt_to_le               for (p=datum; p < (datum+length-16); )
     x  profile.c:1825:22 cxx_add_to_sub             if (((length_byte+1) & 0x01) != 0)
     x  profile.c:1827:11 cxx_gt_to_ge               if (p > (datum+length-4))
-    x  profile.c:1831:27 cxx_sub_to_add             if ((p > (datum+length-count)) || (count > (ssize_t) length) ||
     x  profile.c:1831:46 cxx_gt_to_ge               if ((p > (datum+length-count)) || (count > (ssize_t) length) ||
-    x  profile.c:1832:16 cxx_le_to_lt               (count <= 0))
-    x  profile.c:1964:37 cxx_eq_to_ne               if (((LocaleCompare(name, "exif") == 0) || (LocaleCompare(name, "app1") == 0)) &&
-    x  profile.c:1964:75 cxx_eq_to_ne               if (((LocaleCompare(name, "exif") == 0) || (LocaleCompare(name, "app1") == 0)) &&
-    x  profile.c:1965:37 cxx_gt_to_ge               (GetStringInfoLength(profile) > 2))
-    x  profile.c:1965:37 cxx_gt_to_le               (GetStringInfoLength(profile) > 2))
-       profile.c:1981:28 cxx_ne_to_eq               if (exif_profile != (StringInfo *) NULL)
-       profile.c:1983:15 cxx_remove_void_call       SetStringInfoDatum(exif_profile,profile_start);
-       profile.c:1984:15 cxx_remove_void_call       ConcatenateStringInfo(exif_profile,profile);
-       profile.c:1985:15 cxx_remove_void_call       SetStringInfoLength(profile,GetStringInfoLength(exif_profile));
-       profile.c:1986:15 cxx_remove_void_call       SetStringInfo(profile,exif_profile);
-       profile.c:2009:16 cxx_eq_to_ne               if (document == (xmlDocPtr) NULL)
-       profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
+    x  profile.c:2015:3 cxx_remove_void_call       xmlFreeDoc(document);
     x  profile.c:2043:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  profile.c:2046:32 cxx_gt_to_ge               if ((length == 0) || (length > GetMaxProfileSize()))
-       profile.c:2048:18 cxx_ne_to_eq               if (length != 0)
-    x  profile.c:2056:34 cxx_eq_to_ne               if ((LocaleCompare(name,"xmp") == 0) &&
-    x  profile.c:2071:15 cxx_gt_to_ge               if ((length > 4) && (LocaleCompare(key,"app1") == 0) &&
-    x  profile.c:2097:14 cxx_gt_to_ge               if (length > GetMaxProfileSize())
-    x  profile.c:2257:15 cxx_lt_to_le               if (*length < 2)
-    x  profile.c:2311:35 cxx_le_to_lt               if ((format == 3) && (dimension <= MAGICK_USHORT_MAX))
-    x  profile.c:2316:17 cxx_gt_to_ge               if (dimension > UINT32_MAX)
-    x  profile.c:2318:14 cxx_eq_to_ne               if (format == 3)
-       profile.c:2319:5 cxx_remove_void_call       WriteProfileShort(endian,4,entry+2);
     x  profile.c:2372:14 cxx_lt_to_le               if (length < 16)
     x  profile.c:2393:18 cxx_lt_to_le               if (length < 16)
-    x  profile.c:2411:15 cxx_lt_to_le               if ((offset < 0) || ((size_t) offset >= length))
     x  profile.c:2411:40 cxx_ge_to_gt               if ((offset < 0) || ((size_t) offset >= length))
-    x  profile.c:2428:20 cxx_lt_to_le               if ((directory < exif) || (directory > (exif+length-2)))
-    x  profile.c:2428:42 cxx_gt_to_ge               if ((directory < exif) || (directory > (exif+length-2)))
-    x  profile.c:2433:28 cxx_sub_to_add             directory_length=length-(size_t) (directory-exif);
-    x  profile.c:2433:48 cxx_sub_to_add             directory_length=length-(size_t) (directory-exif);
     x  profile.c:2434:26 cxx_lt_to_le               if (directory_length < 6)
-    x  profile.c:2438:44 cxx_sub_to_add             if (number_entries > ((directory_length-6)/12))
-    x  profile.c:2438:47 cxx_div_to_mul             if (number_entries > ((directory_length-6)/12))
     x  profile.c:2440:19 cxx_lt_to_le               for ( ; entry < number_entries; entry++)
     x  profile.c:2459:13 cxx_gt_to_ge               if (q > (exif+length-12))
-    x  profile.c:2466:19 cxx_lt_to_le               if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))
     x  profile.c:2466:39 cxx_ge_to_gt               if ((format < 0) || ((format-1) >= EXIF_NUM_FORMATS))
-    x  profile.c:2482:23 cxx_lt_to_le               if ((offset < 0) ||
-    x  profile.c:2483:32 cxx_add_to_sub             ((size_t) (offset+(ssize_t) number_bytes) > length))
     x  profile.c:2485:23 cxx_lt_to_le               if (~length < number_bytes)
-    x  profile.c:2495:52 cxx_eq_to_ne               WriteProfileDimension(endian,tag_value == TAG_IMAGE_WIDTH ?
-    x  profile.c:2503:52 cxx_eq_to_ne               WriteProfileDimension(endian,tag_value == TAG_PIXEL_X_DIMENSION ?
-    x  profile.c:2554:23 cxx_eq_to_ne               (tag_value == TAG_INTEROP_OFFSET)) && (format == 4) &&
-    x  profile.c:2558:32 cxx_lt_to_le               if (((size_t) offset < (length-1)) &&
-    x  profile.c:2558:41 cxx_sub_to_add             if (((size_t) offset < (length-1)) &&
-    x  profile.c:2559:22 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
-    x  profile.c:2564:20 cxx_post_inc_to_post_dec   entry++;
     x  profile.c:2570:35 cxx_mul_to_div             if ((directory+2+(12*number_entries)) > (exif+length))
     x  profile.c:2570:53 cxx_gt_to_ge               if ((directory+2+(12*number_entries)) > (exif+length))
-    x  profile.c:2570:53 cxx_gt_to_le               if ((directory+2+(12*number_entries)) > (exif+length))
-    x  profile.c:2572:70 cxx_mul_to_div             offset=(ssize_t) ReadProfileLong(endian,directory+2+(12*
-    x  profile.c:2574:27 cxx_ne_to_eq               if ((offset != 0) && ((size_t) offset < (length-1)) &&
-    x  profile.c:2574:53 cxx_lt_to_ge               if ((offset != 0) && ((size_t) offset < (length-1)) &&
-    x  profile.c:2574:53 cxx_lt_to_le               if ((offset != 0) && ((size_t) offset < (length-1)) &&
-    x  profile.c:2574:62 cxx_sub_to_add             if ((offset != 0) && ((size_t) offset < (length-1)) &&
-    x  profile.c:2575:26 cxx_lt_to_ge               (level < (MaxDirectoryStack-2)))
-    x  profile.c:2575:26 cxx_lt_to_le               (level < (MaxDirectoryStack-2)))
     x  profile.c:2616:16 cxx_lt_to_le               if (length < 7)
     x  profile.c:2620:16 cxx_ge_to_gt               if ((count >= (ssize_t) length) || (count < 0))
-    x  profile.c:2627:46 cxx_lt_to_le               if ((count > (ssize_t) length) || (count < 0))
     x  profile.c:2668:18 cxx_gt_to_ge               if (new_length > length)
     x  profile.c:2671:59 cxx_sub_to_add             (void) memmove(datum+start+value_length,datum+end,length-end);
     x  profile.c:2674:18 cxx_lt_to_le               if (new_length < length)
     x  profile.c:2696:38 cxx_sub_to_add             if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||
-    x  profile.c:2696:46 cxx_lt_to_le               if ((pos == (char *) NULL) || ((pos-datum) < 1) || (*(pos-1) != '<') ||
-    x  profile.c:2697:29 cxx_add_to_sub             (((size_t) (pos-datum)+tag_length) > length) ||
     x  profile.c:2697:42 cxx_gt_to_ge               (((size_t) (pos-datum)+tag_length) > length) ||
     x  profile.c:2716:12 cxx_gt_to_ge               if (term > (double) MAGICK_ULONG_MAX)
-    x  profile.c:2719:20 cxx_lt_to_le               if ((accumulated < 0.0) || (accumulated > (double) MAGICK_ULONG_MAX))
     x  profile.c:2719:43 cxx_gt_to_ge               if ((accumulated < 0.0) || (accumulated > (double) MAGICK_ULONG_MAX))
     x  profile.c:2744:13 cxx_le_to_lt               if (value <= MagickEpsilon)
     x  profile.c:2746:13 cxx_gt_to_ge               if (value > (double) MAGICK_ULONG_MAX)
     x  profile.c:2763:15 cxx_lt_to_le               for (i=0; i < 128; i++)
     x  profile.c:2763:23 cxx_post_inc_to_post_dec   for (i=0; i < 128; i++)
-    x  profile.c:2779:22 cxx_div_to_mul             approximation=num/(double) den;
-    x  profile.c:2780:27 cxx_sub_to_add             if (fabs(approximation-value) <= MagickEpsilon)
     x  profile.c:2780:35 cxx_le_to_lt               if (fabs(approximation-value) <= MagickEpsilon)
     x  profile.c:2783:18 cxx_le_to_lt               if (fraction <= 0.0)
     x  profile.c:2815:36 cxx_sub_to_add             if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
     x  profile.c:2815:58 cxx_gt_to_ge               if ((fabs(image->resolution.x-image->resolution.y) > MagickEpsilon) ||
-    x  profile.c:2816:19 cxx_eq_to_ne               (*value == '\0'))
-    x  profile.c:2978:41 cxx_le_to_lt               if ((count != 0) && ((size_t) count <= length))
-    x  profile.c:2986:16 cxx_lt_to_le               if ((count < 0) || ((size_t) count > length))
-    x  profile.c:2991:13 cxx_gt_to_ge               if ((id > 1999) && (id < 2999))
-    x  profile.c:2991:28 cxx_lt_to_le               if ((id > 1999) && (id < 2999))
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
   full results: build-oracle/work/mutation-resweep-profile.json
