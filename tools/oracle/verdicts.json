@@ -33351,6 +33351,166 @@
    "src": "if (count <= 0)",
    "verdict": "equivalent",
    "why": "the loop moves every byte before i reaches length; one more pass reads or writes 0 bytes, gets 0 and stops, and a count of exactly 0 never comes inside the loop"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "intensity=(red+green+blue)/3.0;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "intensity=(red+green+blue)/3.0;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "intensity=(red+green+blue)/3.0;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "intensity=(MagickMin(MagickMin(red,green),blue)+",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "MagickMax(MagickMax(red,green),blue))/2.0;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 51,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "intensity=(MagickRealType) (((double) red*red+green*green+blue*blue)/",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 68,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "intensity=(MagickRealType) (((double) red*red+green*green+blue*blue)/",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (pixel->colorspace == RGBColorspace)",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "intensity=0.298839*red+0.586811*green+0.114350*blue;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (pixel->colorspace == sRGBColorspace)",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "intensity=0.298839*red+0.586811*green+0.114350*blue;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (pixel->colorspace == sRGBColorspace)",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "intensity=0.212656*red+0.715158*green+0.072186*blue;",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 55,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "intensity=(MagickRealType) (sqrt((double) red*red+green*green+blue*blue)/",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 72,
+   "file": "MagickCore/pixel.c",
+   "function": "GetPixelInfoIntensity",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "intensity=(MagickRealType) (sqrt((double) red*red+green*green+blue*blue)/",
+   "verdict": "unobservable",
+   "why": "only the intensity methods other than the default reach these lines, and no command line gets one here: the callers that pass no image (colormap and quantize sorts, -tint) use Rec709Luma, SteganoImage passes a clone of composite's image, and composite has no -intensity option (X11 aside; API otherwise; hand-run: -stegano and -tint over every method change nothing)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/pixel.c",
+   "function": "SetPixelMetaChannels",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (number_meta_channels >= (size_t) (MaxPixelChannels-MetaPixelChannels))",
+   "verdict": "equivalent",
+   "why": "at exactly MaxPixelChannels-MetaPixelChannels (54) meta channels ResetPixelChannelMap rejects the map anyway: hand-run, -combine of 58 images fails with the same maximum-channels error with and without the mutant"
   }
  ]
 }

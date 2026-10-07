@@ -2435,6 +2435,12 @@ def _pixel_gap_cases():
     for op, meth, image in _PIXEL_GAP:
         yield _case("pixelgap", "%s -interpolate %s, %s" % (op, meth, image),
                     [images[image] + ["-interpolate", meth] + ops[op] + ["-depth", "16", "out.miff"]], ["out.miff"])
+    # sample points at exact quarter offsets: Average's blend test, Blend's 0.25/0.75 cut-offs
+    # (hand-run: 4 killed)
+    for meth, fx, fy in (("Average", "0.25", "0.75"), ("Blend", "0.75", "0.25")):
+        yield _case("pixelgap", "fx -interpolate %s, alpha, at +%s,+%s" % (meth, fx, fy),
+                    [[img("rose_alpha"), "-interpolate", meth, "-fx", "p{i+%s,j+%s}" % (fx, fy), "-depth", "16",
+                      "out.miff"]], ["out.miff"])
     for meth, cs in _PIXEL_GAP_INTENSITY:
         yield _case("pixelgap", "%%[fx:intensity] -intensity %s in %s" % (meth, cs),
                     [[img("rose"), "-colorspace", cs, "-intensity", meth, "-format", "%[fx:intensity]", "info:"]], [])
