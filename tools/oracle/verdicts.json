@@ -33771,6 +33771,346 @@
    "src": "*width=8192UL/(MagickMax(cache_info->number_channels,1)*sizeof(Quantum));",
    "verdict": "unobservable",
    "why": "only the tile size -rotate (shear.c) walks the image in; any tile size covers every pixel once, so the rotated pixels are the same"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "extent=(MagickSizeType) length*nexus_info->region.height;",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent); the driver writes and reads it a row at a time or as a region narrower than a row, where extent is never used: only a full-width transfer of several rows would copy extent bytes at once"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "extent=length*nexus_info->region.height;",
+   "verdict": "unobservable",
+   "why": "metacontent exists only through the API (no command line or coder sets metacontent_extent); the driver writes and reads it a row at a time or as a region narrower than a row, where extent is never used: only a full-width transfer of several rows would copy extent bytes at once"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(extent == (MagickSizeType) ((size_t) extent)))",
+   "verdict": "equivalent",
+   "why": "only chooses one transfer of the whole region or one per row: the same bytes reach the same places either way"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "(extent <= MagickMaxBufferExtent))",
+   "verdict": "equivalent",
+   "why": "only chooses one transfer of the whole region or one per row: the same bytes reach the same places either way"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "(extent <= MagickMaxBufferExtent))",
+   "verdict": "equivalent",
+   "why": "only chooses one transfer of the whole region or one per row: the same bytes reach the same places either way"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(extent == (MagickSizeType) ((size_t) extent)))",
+   "verdict": "equivalent",
+   "why": "only chooses one transfer of the whole region or one per row: the same bytes reach the same places either way"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "(extent <= MagickMaxBufferExtent))",
+   "verdict": "equivalent",
+   "why": "only chooses one transfer of the whole region or one per row: the same bytes reach the same places either way"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "(extent <= MagickMaxBufferExtent))",
+   "verdict": "equivalent",
+   "why": "only chooses one transfer of the whole region or one per row: the same bytes reach the same places either way"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "the unlock on the path where the disk cache cannot be opened, which never happens to the oracle's own cache file"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "UnlockSemaphoreInfo(cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "the unlock on the path where the disk cache cannot be opened, which never happens to the oracle's own cache file"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsFileDescriptorLimitExceeded() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only closes the cache file after the transfer although the descriptor limit is not reached; the next transfer reopens it and finds the same bytes"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsFileDescriptorLimitExceeded() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only closes the cache file after the transfer although the descriptor limit is not reached; the next transfer reopens it and finds the same bytes"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "LockSemaphoreInfo(cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((cache_info->columns != nexus_info->region.width) ||",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(extent > MagickMaxBufferExtent))",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(extent > MagickMaxBufferExtent))",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "for (y=0; y < (ssize_t) rows; y++)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "for (y=0; y < (ssize_t) rows; y++)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (y=0; y < (ssize_t) rows; y++)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (count != (MagickOffsetType) length)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_mul_to_div",
+   "nth": 1,
+   "src": "p+=(ptrdiff_t) (cache_info->metacontent_extent*",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "region.y++;",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "UnlockSemaphoreInfo(cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "LockSemaphoreInfo(cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((cache_info->columns != nexus_info->region.width) ||",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "(extent > MagickMaxBufferExtent))",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "(extent > MagickMaxBufferExtent))",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 2,
+   "src": "for (y=0; y < (ssize_t) rows; y++)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_lt_to_le",
+   "nth": 2,
+   "src": "for (y=0; y < (ssize_t) rows; y++)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 31,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 2,
+   "src": "for (y=0; y < (ssize_t) rows; y++)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (count != (MagickOffsetType) length)",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_mul_to_div",
+   "nth": 2,
+   "src": "q+=(ptrdiff_t) (cache_info->metacontent_extent*",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "region.y++;",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "UnlockSemaphoreInfo(cache_info->file_semaphore);",
+   "verdict": "unobservable",
+   "why": "inside the DistributedCache branch, which needs a distributed cache server (written off with distribute-cache.c)"
   }
  ]
 }
