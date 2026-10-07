@@ -34341,6 +34341,26 @@
    "src": "length=cache_info->number_channels*sizeof(*cache_info->channel_map);",
    "verdict": "equivalent",
    "why": "compares fewer bytes of the channel maps, but two caches that agree on colorspace, alpha trait, channel mask and channel count (all compared first) have the same channel map"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache.c",
+   "function": "GetOneVirtualPixelInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(image,pixel);",
+   "verdict": "equivalent",
+   "why": "GetPixelInfoPixel, which follows, clears the whole PixelInfo and sets every field GetPixelInfo sets; only if the pixel could not be fetched would the PixelInfo stay as the caller passed it, and virtual pixels make every coordinate fetchable"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/cache-view.c",
+   "function": "GetOneCacheViewVirtualPixelInfo",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "GetPixelInfo(cache_view->image,pixel);",
+   "verdict": "equivalent",
+   "why": "GetPixelInfoPixel, which follows, clears the whole PixelInfo and sets every field GetPixelInfo sets; only if the pixel could not be fetched would the PixelInfo stay as the caller passed it, and virtual pixels make every coordinate fetchable"
   }
  ]
 }

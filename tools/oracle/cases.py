@@ -3198,6 +3198,9 @@ GAP_STEP_CASES += [
     # disk tile width; hand-run: 1 killed)
     ("tall image on disk, rotated clone composited", [["-limit", "memory", "0", "-limit", "map", "0", "{C}/tall.miff",
                                                        "(", "+clone", "-rotate", "90", ")", "-composite", "out.miff"]], {}),
+    # cache.c: -reshape to a larger area than the image's (ReshapePixelCache refuses it;
+    # hand-run: 1 killed)
+    ("-reshape to a larger area", [["{C}/rose.miff", "-reshape", "100x100", "-format", "%wx%h %#\\n", "info:"]], {}),
     ("colors.xml malformed, listed", [["-list", "color"]],
      {_COLORS: '<colormap>\n  <color junk name="casebad" color="#010101"/>\n  <color name "casenoeq" color="#020202"/>\n'
                '  <color name="casepolicy" color="#030303"></policy>\n  <color color="#040404"/>\n'
