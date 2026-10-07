@@ -1121,7 +1121,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:705:16:705:18",
@@ -15415,8 +15415,8 @@
   "col": 34,
   "function": "draw.c:DestroyEdge",
   "status": "killed",
-  "cases": 2,
-  "killer": "mvg/7e4bad791d",
+  "cases": 1,
+  "killer": "draw/20f4646909",
   "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
@@ -24137,7 +24137,7 @@
   "status": "killed",
   "cases": 11,
   "killer": "gaps/59d708bd70",
-  "why": "exit status [0] -> ['timeout']; m.miff missing in candidate; magick-nNYb4j8YLa82JjRR084y3HmRIbEWw05a only in candidate; magick-sYZIYu8RctzkBtBnvbNOCcJbmvMhglDX only in candidate"
+  "why": "exit status [0] -> ['timeout']; m.miff missing in candidate; magick-7r0whZXHs3hNlO0SBZHvIUWJDyH5i2p3 only in candidate; magick-BU8eblsm3yaRby07MEnU8qcQ7uBHNNcg only in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:6900:23:6900:24",
@@ -24689,7 +24689,7 @@
   "status": "killed",
   "cases": 11,
   "killer": "gaps/59d708bd70",
-  "why": "exit status [0] -> [-6]; m.miff missing in candidate"
+  "why": "exit status [0] -> [1]; stderr differs; m.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7023:63:7023:65",
@@ -25865,7 +25865,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/4e01a3bab1",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7283:15:7283:16",
@@ -30029,7 +30029,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/144f3fd39e",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7934:9:7934:10",
