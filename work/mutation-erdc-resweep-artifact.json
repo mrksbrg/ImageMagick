@@ -97,7 +97,7 @@
   "col": 24,
   "function": "DeleteImageArtifact",
   "status": "killed",
-  "cases": 4,
+  "cases": 18,
   "killer": "format/e37fad76a6",
   "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
@@ -181,7 +181,7 @@
   "col": 26,
   "function": "GetImageArtifact",
   "status": "killed",
-  "cases": 19,
+  "cases": 18,
   "killer": "gaps/2f9555c8d7",
   "why": "stdout differs; out.miff differs"
  },
@@ -218,7 +218,7 @@
   "function": "GetNextImageArtifact",
   "status": "killed",
   "cases": 1,
-  "killer": "identify/46075343f4",
+  "killer": "gaps/daa830fdbe",
   "why": "stdout differs"
  },
  {
@@ -262,7 +262,7 @@
   "function": "ResetImageArtifactIterator",
   "status": "killed",
   "cases": 1,
-  "killer": "identify/46075343f4",
+  "killer": "gaps/daa830fdbe",
   "why": "stdout differs"
  },
  {
@@ -274,7 +274,7 @@
   "function": "ResetImageArtifactIterator",
   "status": "killed",
   "cases": 1,
-  "killer": "identify/46075343f4",
+  "killer": "gaps/daa830fdbe",
   "why": "stdout differs"
  },
  {
