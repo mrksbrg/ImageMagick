@@ -1,9 +1,9 @@
 mutate: 1193 mutants in MagickCore/effect\.c$, 25 functions
-mutate: baseline over 607 cases in 3s
+mutate: baseline over 602 cases in 3s
   mutants: 25/1193 (0s)
   mutants: 50/1193 (0s)
   mutants: 75/1193 (1s)
-  mutants: 100/1193 (1s)
+  mutants: 100/1193 (2s)
   mutants: 125/1193 (2s)
   mutants: 150/1193 (2s)
   mutants: 175/1193 (3s)
@@ -17,47 +17,47 @@ mutate: baseline over 607 cases in 3s
   mutants: 375/1193 (5s)
   mutants: 400/1193 (6s)
   mutants: 425/1193 (6s)
-  mutants: 450/1193 (6s)
+  mutants: 450/1193 (7s)
   mutants: 475/1193 (7s)
-  mutants: 500/1193 (8s)
-  mutants: 525/1193 (11s)
+  mutants: 500/1193 (9s)
+  mutants: 525/1193 (13s)
   mutants: 550/1193 (17s)
   mutants: 575/1193 (17s)
-  mutants: 600/1193 (17s)
+  mutants: 600/1193 (18s)
   mutants: 625/1193 (18s)
-  mutants: 650/1193 (18s)
-  mutants: 675/1193 (19s)
+  mutants: 650/1193 (19s)
+  mutants: 675/1193 (20s)
   mutants: 700/1193 (20s)
-  mutants: 725/1193 (21s)
-  mutants: 750/1193 (24s)
-  mutants: 775/1193 (62s)
-  mutants: 800/1193 (147s)
-  mutants: 825/1193 (203s)
+  mutants: 725/1193 (22s)
+  mutants: 750/1193 (26s)
+  mutants: 775/1193 (61s)
+  mutants: 800/1193 (143s)
+  mutants: 825/1193 (204s)
   mutants: 850/1193 (217s)
-  mutants: 875/1193 (223s)
-  mutants: 900/1193 (241s)
-  mutants: 925/1193 (246s)
-  mutants: 950/1193 (251s)
-  mutants: 975/1193 (253s)
-  mutants: 1000/1193 (255s)
-  mutants: 1025/1193 (256s)
-  mutants: 1050/1193 (257s)
-  mutants: 1075/1193 (258s)
-  mutants: 1100/1193 (259s)
-  mutants: 1125/1193 (262s)
-  mutants: 1150/1193 (262s)
-  mutants: 1175/1193 (267s)
-  mutants: 1193/1193 (392s)
+  mutants: 875/1193 (224s)
+  mutants: 900/1193 (240s)
+  mutants: 925/1193 (251s)
+  mutants: 950/1193 (254s)
+  mutants: 975/1193 (256s)
+  mutants: 1000/1193 (258s)
+  mutants: 1025/1193 (259s)
+  mutants: 1050/1193 (259s)
+  mutants: 1075/1193 (261s)
+  mutants: 1100/1193 (262s)
+  mutants: 1125/1193 (263s)
+  mutants: 1150/1193 (265s)
+  mutants: 1175/1193 (268s)
+  mutants: 1193/1193 (395s)
 
-mutate: 1193 mutants, 392s
-  killed 1006, survived 187 (1 capped), no coverage 0, errors 0
-  mutation score on reached code: 84.3%   overall: 84.3%
+mutate: 1193 mutants, 395s
+  killed 1007, survived 186 (1 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.4%   overall: 84.4%
 
   function                           total killed survived no-cov
-  SelectiveBlurImage                   115     90       25      0
+  SelectiveBlurImage                   115     91       24      0
   AdaptiveSharpenImage                 114     89       25      0
   AdaptiveBlurImage                    113     86       27      0
-  BilateralBlurImage                   108     92       16      0
+  BilateralBlurImage                   108     91       17      0
   LocalContrastImage                    98     94        4      0
   PreviewImage                          87     77       10      0
   RotationalBlurImage                   67     60        7      0
@@ -65,7 +65,7 @@ mutate: 1193 mutants, 392s
   Hull                                  65     56        9      0
   DespeckleImage                        61     54        7      0
   KuwaharaImage                         60     52        8      0
-  MotionBlurImage                       55     48        7      0
+  MotionBlurImage                       55     49        6      0
   EmbossImage                           41     37        4      0
   SharpenImage                          37     31        6      0
   UnsharpMaskImage                      29     24        5      0
@@ -151,6 +151,7 @@ mutate: 1193 mutants, 392s
        effect.c:1052:56 cxx_add_to_sub             BlurGaussian(BlurDistance(x,y,x+u-mid.x,y+v-mid.y),spatial_sigma);
        effect.c:1052:58 cxx_sub_to_add             BlurGaussian(BlurDistance(x,y,x+u-mid.x,y+v-mid.y),spatial_sigma);
        effect.c:1073:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+    x  effect.c:1084:25 cxx_lt_to_le               for (v=0; v < (ssize_t) MagickMax(height,1); v++)
     x  effect.c:1103:21 cxx_lt_to_le               for (v=0; v < (ssize_t) MagickMax(height,1); v++)
     x  effect.c:1127:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
        effect.c:1135:17 cxx_post_inc_to_post_dec   progress++;
@@ -194,7 +195,6 @@ mutate: 1193 mutants, 392s
     x  effect.c:2353:34 cxx_mul_to_div             MagickSigma)))/(MagickSQ2PI*MagickSigma));
     x  effect.c:2400:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  effect.c:2513:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
-    x  effect.c:2520:25 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
     x  effect.c:2535:21 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
     x  effect.c:2557:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
        effect.c:2565:17 cxx_post_inc_to_post_dec   progress++;
@@ -232,7 +232,6 @@ mutate: 1193 mutants, 392s
     x  effect.c:3645:36 cxx_lt_to_le               if (fabs(contrast) < threshold)
     x  effect.c:3658:38 cxx_lt_to_le               if (fabs((double) gamma) < MagickEpsilon)
     x  effect.c:3660:17 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[center+i],q);
-    x  effect.c:3667:21 cxx_lt_to_le               for (v=0; v < (ssize_t) width; v++)
     x  effect.c:3672:32 cxx_lt_to_le               if (fabs(contrast) < threshold)
     x  effect.c:3683:74 cxx_mul_to_div             luminance_pixels+=(ptrdiff_t) GetPixelChannels(luminance_image)*
     x  effect.c:3686:34 cxx_lt_to_le               if (fabs((double) gamma) < MagickEpsilon)
