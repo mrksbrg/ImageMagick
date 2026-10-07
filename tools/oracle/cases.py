@@ -6186,6 +6186,9 @@ def _windrv_cases():
         # an upstream bug), defaults on two attributes, PIs before, between and after (hand-run: 2 killed)
         "full": '<?pi one?><!DOCTYPE r [<!ENTITY e "hello"><!ENTITY g "gee"><!ATTLIST b k CDATA "dflt" '
                 'm CDATA "m2"><!ATTLIST c n CDATA "n1">]><?pj two three?><r>&e;&g;<b/><c/><b k="z"/></r><?pk four?>',
+        # XMP: rdf:Bag and rdf:Seq, the tags NewXMLTree skips (IsSkipTag; hand-run: 1 killed)
+        "rdf": '<x:xmpmeta><rdf:RDF><rdf:Description a="1"><dc:subject><rdf:Bag><rdf:li>one</rdf:li><rdf:li>two</rdf:li>'
+               '</rdf:Bag></dc:subject><dc:seq><rdf:Seq><rdf:li>s</rdf:li></rdf:Seq></dc:seq></rdf:Description></rdf:RDF></x:xmpmeta>',
     }
     for name, ops in (
             ("plain", "print child:b attr:k sibling attr:k attr:zz next top attr:a attr:b"),
@@ -6200,7 +6203,7 @@ def _windrv_cases():
             ("nested", "path:a[1]/b/q:0 path:a[0]/n:2 path:a/b/c/d:0 print"),
     ) + tuple((name, "print") for name in ("lead", "lead2", "noquote", "spaces", "attlist", "ws_attr", "charref", "pent",
                                            "notation", "badent", "doctypenosubset", "doctypebracket",
-                                           "unterminated2", "unterminated3", "full")):
+                                           "unterminated2", "unterminated3", "full", "rdf")):
         yield _with_inputs(_windrv("xml %s: %s" % (name, ops), tuple(["xml", "%s.xml" % name] + ops.split())),
                            files={"%s.xml" % name: xml_docs[name]})
     for ops in ("addchild:a:0 addchild:b:0 content:hi top child:a sibling print",
