@@ -1,19 +1,19 @@
-imdriver not built, see /home/jovyan/imagemagick-mutation/ImageMagick/build-oracle/base/709936345fbeaad8b3345e2c3cb53653a5c0e969/make.log
 mutate: 126 mutants in MagickCore/shear\.c$, 9 functions
-mutate: baseline over 0 cases in 0s
-  mutants: 25/126 (0s)
-  mutants: 50/126 (0s)
-  mutants: 75/126 (0s)
-  mutants: 100/126 (0s)
-  mutants: 125/126 (0s)
-  mutants: 126/126 (0s)
+mutate: baseline over 7 cases in 0s
+  mutants: 25/126 (1s)
+  mutants: 50/126 (1s)
+  mutants: 75/126 (1s)
+  mutants: 100/126 (1s)
+  mutants: 125/126 (1s)
+  mutants: 126/126 (1s)
 
-mutate: 126 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 126, errors 0
+mutate: 126 mutants, 1s
+  killed 0, survived 29 (0 capped), no coverage 97, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   ShearRotateImage                      45      0        0     45
-  IntegralRotateImage                   29      0        0     29
+  IntegralRotateImage                   29      0       29      0
   XShearImage                           16      0        0     16
   YShearImage                           13      0        0     13
   RadonTransform                         7      0        0      7
@@ -22,4 +22,36 @@ mutate: 126 mutants, 0s
   DeskewImage                            3      0        0      3
   ShearImage                             3      0        0      3
 
-  full results: build-oracle/work/mutation-confirm-f51f7cbc7-shear.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  shear.c:781:29 cxx_lt_to_le               for (tile_y=0; tile_y < (ssize_t) image->rows; tile_y+=(ssize_t) tile_height)
+    x  shear.c:808:26 cxx_add_to_sub             if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:808:44 cxx_gt_to_ge               if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:808:44 cxx_gt_to_le               if ((tile_width+(size_t) tile_x) > image->columns)
+       shear.c:809:49 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:809:57 cxx_add_to_sub             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:809:78 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+    x  shear.c:812:45 cxx_gt_to_ge               if ((tile_height+(size_t) tile_y) > image->rows)
+    x  shear.c:833:64 cxx_add_to_sub             rotate_image->columns-(tile_y+(ssize_t) height),y+tile_x,height,
+    x  shear.c:866:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:873:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:878:20 cxx_sub_to_add             image->rows-1,image->rows);
+    x  shear.c:944:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:949:67 cxx_post_inc_to_post_dec   proceed=SetImageProgress(image,RotateImageTag,progress++,
+       shear.c:951:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:956:20 cxx_sub_to_add             image->rows-1,image->rows);
+    x  shear.c:981:29 cxx_lt_to_le               for (tile_y=0; tile_y < (ssize_t) image->rows; tile_y+=(ssize_t) tile_height)
+    x  shear.c:1008:26 cxx_add_to_sub             if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:1008:44 cxx_gt_to_ge               if ((tile_width+(size_t) tile_x) > image->columns)
+    x  shear.c:1008:44 cxx_gt_to_le               if ((tile_width+(size_t) tile_x) > image->columns)
+       shear.c:1009:49 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:1009:57 cxx_add_to_sub             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+       shear.c:1009:78 cxx_sub_to_add             width=(size_t) ((ssize_t) tile_width-(tile_x+(ssize_t) tile_width-
+    x  shear.c:1012:45 cxx_gt_to_ge               if ((tile_height+(size_t) tile_y) > image->rows)
+    x  shear.c:1068:37 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       shear.c:1075:25 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  shear.c:1080:20 cxx_sub_to_add             image->rows-1,image->rows);
+    x  shear.c:1094:14 cxx_ne_to_eq               if (status != MagickFalse)
+    x  shear.c:1102:7 cxx_remove_void_call       AppendImageProfileProperty(rotate_image,"hdrgm","hdrgm:Transform",
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-6f677a7f0-shear.json
