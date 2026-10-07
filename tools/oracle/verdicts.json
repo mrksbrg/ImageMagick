@@ -32401,6 +32401,396 @@
    "src": "if (LocaleCompare(filename,\"-\") != 0)",
    "verdict": "unobservable",
    "why": "the mapped branch is never taken for stdin (fileno(stdin) takes the stream branch), so this only leaves a regular file's descriptor open: a leak"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 1,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 2,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 3,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 4,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 5,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 6,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 7,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 8,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 9,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 10,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 11,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 12,
+   "src": "ThrowBlobException(blob_info);",
+   "verdict": "unobservable",
+   "why": "ThrowBlobException runs here only after an I/O call fails (fflush, fsync, fclose, pclose, gzclose, gzerror, BZ2_bzerror), which no case causes, and the status it raises reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (status != 0)",
+   "verdict": "unobservable",
+   "why": "raises the blob's error status after a successful flush, fsync or close; CloseBlob then returns false, which reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (status != 0)",
+   "verdict": "unobservable",
+   "why": "raises the blob's error status after a successful flush, fsync or close; CloseBlob then returns false, which reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (status != 0)",
+   "verdict": "unobservable",
+   "why": "raises the blob's error status after a successful flush, fsync or close; CloseBlob then returns false, which reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (status != 0)",
+   "verdict": "unobservable",
+   "why": "raises the blob's error status after a successful flush, fsync or close; CloseBlob then returns false, which reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 5,
+   "src": "if (status != 0)",
+   "verdict": "unobservable",
+   "why": "raises the blob's error status after a successful flush, fsync or close; CloseBlob then returns false, which reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 6,
+   "src": "if (status != 0)",
+   "verdict": "unobservable",
+   "why": "raises the blob's error status after a successful flush, fsync or close; CloseBlob then returns false, which reaches no output (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((status != 0) && (ferror(blob_info->file_info.file) != 0))",
+   "verdict": "equivalent",
+   "why": "without an I/O error both status and ferror() are 0, so the condition stays false whichever side is flipped"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((status != 0) && (ferror(blob_info->file_info.file) != 0))",
+   "verdict": "equivalent",
+   "why": "without an I/O error both status and ferror() are 0, so the condition stays false whichever side is flipped"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if ((status != 0) && (ferror(blob_info->file_info.file) != 0))",
+   "verdict": "equivalent",
+   "why": "without an I/O error both status and ferror() are 0, so the condition stays false whichever side is flipped"
+  },
+  {
+   "at": 56,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if ((status != 0) && (ferror(blob_info->file_info.file) != 0))",
+   "verdict": "equivalent",
+   "why": "without an I/O error both status and ferror() are 0, so the condition stays false whichever side is flipped"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "((blob_info->mode == WriteBlobMode) ||",
+   "verdict": "equivalent",
+   "why": "status is SyncBlob's result, 0 without an I/O error, so the condition stays false whatever the mode"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(blob_info->mode == WriteBinaryBlobMode) ||",
+   "verdict": "equivalent",
+   "why": "status is SyncBlob's result, 0 without an I/O error, so the condition stays false whatever the mode"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(blob_info->mode == AppendBlobMode) ||",
+   "verdict": "equivalent",
+   "why": "status is SyncBlob's result, 0 without an I/O error, so the condition stays false whatever the mode"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(blob_info->mode == AppendBinaryBlobMode)))",
+   "verdict": "equivalent",
+   "why": "status is SyncBlob's result, 0 without an I/O error, so the condition stays false whatever the mode"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (blob_info->synchronize != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "flushes and fsyncs a stream that was not asked to be synchronised, or skips that for -synchronize: durability only, the bytes written are the same (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/blob.c",
+   "function": "CloseBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (blob_info->synchronize != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "flushes and fsyncs a stream that was not asked to be synchronised, or skips that for -synchronize: durability only, the bytes written are the same (hand-run 2026-10-07: writes with -synchronize to a file, gzip, bzip2, PNG, TIFF and stdout, and gzip/bzip2 round trips, kill none of CloseBlob's error-path mutants)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "SyncBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((blob_info->mode == WriteBlobMode) ||",
+   "verdict": "unobservable",
+   "why": "only decides whether stdout is flushed here (stdio flushes it at exit anyway) or a read-only stdin is flushed at its close (nothing is read after)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "SyncBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(blob_info->mode == WriteBinaryBlobMode) ||",
+   "verdict": "unobservable",
+   "why": "only decides whether stdout is flushed here (stdio flushes it at exit anyway) or a read-only stdin is flushed at its close (nothing is read after)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "SyncBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(blob_info->mode == AppendBlobMode) ||",
+   "verdict": "unobservable",
+   "why": "only decides whether stdout is flushed here (stdio flushes it at exit anyway) or a read-only stdin is flushed at its close (nothing is read after)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/blob.c",
+   "function": "SyncBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "(blob_info->mode == AppendBinaryBlobMode))",
+   "verdict": "unobservable",
+   "why": "only decides whether stdout is flushed here (stdio flushes it at exit anyway) or a read-only stdin is flushed at its close (nothing is read after)"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/blob.c",
+   "function": "UnmapBlob",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "return(status == -1 ? MagickFalse : MagickTrue);",
+   "verdict": "equivalent",
+   "why": "no caller uses UnmapBlob's result: every call casts it to void"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/blob.c",
+   "function": "GetBlobError",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->blob->status != 0) && (image->blob->error_number != 0))",
+   "verdict": "equivalent",
+   "why": "a blob's status and error_number are both 0 until an I/O error (only ThrowBlobException sets them), so flipping either side leaves errno alone"
+  },
+  {
+   "at": 61,
+   "file": "MagickCore/blob.c",
+   "function": "GetBlobError",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((image->blob->status != 0) && (image->blob->error_number != 0))",
+   "verdict": "equivalent",
+   "why": "a blob's status and error_number are both 0 until an I/O error (only ThrowBlobException sets them), so flipping either side leaves errno alone"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/blob.c",
+   "function": "DetachBlob",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "RelinquishMagickResource(MapResource,blob_info->length);",
+   "verdict": "unobservable",
+   "why": "only the map resource's bookkeeping, which no output shows (-list resource prints the limits, not their use)"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/blob.c",
+   "function": "SetStreamBuffering",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (option != (const char *) NULL)",
+   "verdict": "unobservable",
+   "why": "only the stdio buffer's size or mode (stream:buffer-size): how the bytes are written, not which"
+  },
+  {
+   "at": 60,
+   "file": "MagickCore/blob.c",
+   "function": "SetStreamBuffering",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "status=setvbuf(blob_info->file_info.file,(char *) NULL,size == 0 ?",
+   "verdict": "unobservable",
+   "why": "only the stdio buffer's size or mode (stream:buffer-size): how the bytes are written, not which"
   }
  ]
 }

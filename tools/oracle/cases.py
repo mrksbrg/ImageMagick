@@ -2403,6 +2403,13 @@ def _blob_gap_cases():
     yield _with_inputs(_case("blobgap", "comment from an empty file (@e.txt)",
                              [[img("rose"), "-set", "comment", "@e.txt", "-format", "[%c]", "info:"]], []),
                        files={"e.txt": ""})
+    # OpenBlob: an "fd:" name (the descriptor branch: fdopen of stdout), and a file whose path
+    # policy grants reading only, read (the rights OpenBlob asks for) (hand-run: 4 killed)
+    yield _case("blobgap", "write PPM to fd:1", [[img("rose"), "-depth", "8", "ppm:fd:1"]], [])
+    yield _with_inputs(_case("blobgap", "read a PPM whose path policy allows reading only",
+                             [["x.ppm", "-format", "%wx%h %#", "info:"]], []),
+                       files={_POLICY: _policy('<policy domain="path" rights="read" pattern="*.ppm" />'),
+                              "x.ppm": "P3\n2 2\n255\n255 0 0 0 255 0\n0 0 255 255 255 255\n"})
 
 
 # fx.c: loops of 300 iterations, where an element that should not push would
@@ -6180,7 +6187,10 @@ def _windrv_cases():
     for name, fmt, frames in (("rose", "MIFF", 1), ("rose", "PNG", 1), ("rose", "TIFF", 1), ("rose", "GIF", 1),
                               ("rose", "JPEG", 1), ("rose", "GIF", 3), ("rose", "TIFF", 2), ("rose", "MIFF", 2),
                               ("rose", "MPC", 1), ("rose", "MPC", 2), ("rose", "HTML", 1),
-                              ("rose", "MAT", 1), ("rose", "MAT", 2)):  # not INFO: see above
+                              ("rose", "MAT", 1), ("rose", "MAT", 2),  # not INFO: see above
+                              # BMP asks the stream where it is (TellBlob's teller); PCX of two
+                              # frames, the list writer's seeker and teller (hand-run: 3 killed)
+                              ("rose", "BMP", 1), ("rose", "PCX", 2)):
         for seekable in ("1", "0"):
             yield _windrv("custom stream of %d %s %s%s" % (frames, name, fmt, "" if seekable == "1" else ", no seek"),
                           ("blob", "custom", img(name), fmt, str(frames), seekable))
