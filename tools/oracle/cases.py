@@ -2412,6 +2412,34 @@ def _blob_gap_cases():
                               "x.ppm": "P3\n2 2\n255\n255 0 0 0 255 0\n0 0 255 255 255 255\n"})
 
 
+# pixel.c (2026-10-07): the interpolation methods on images with alpha and in CMYK (with and
+# without alpha), through -fx (InterpolatePixelChannel), -interpolative-resize
+# (InterpolatePixelChannels) and -distort (InterpolatePixelInfo), and the -intensity methods
+# through %[fx:intensity] in sRGB and linear RGB. The cases that first killed something among
+# 153 candidates (hand-run: 127 of 205 open mutants).
+_PIXEL_GAP = (
+    ("fx", "Spline", "alpha"), ("fx", "Catrom", "alpha"), ("fx", "Blend", "alpha"), ("ires", "Blend", "alpha"),
+    ("ires", "Spline", "alpha"), ("ires", "Catrom", "alpha"), ("fx", "Mesh", "alpha"), ("ires", "Average", "alpha"),
+    ("distort", "Spline", "cmyka"), ("distort", "Catrom", "cmyka"), ("fx", "Average", "alpha"),
+    ("distort", "Spline", "alpha"), ("distort", "Mesh", "cmyka"), ("distort", "Mesh", "alpha"),
+    ("fx", "Average9", "cmyka"), ("fx", "Average16", "alpha"), ("distort", "Blend", "cmyka"),
+    ("distort", "Blend", "alpha"), ("distort", "Average9", "cmyka"), ("distort", "Average", "cmyka"))
+_PIXEL_GAP_INTENSITY = (("Average", "sRGB"), ("Rec601Luminance", "sRGB"), ("RMS", "sRGB"), ("MS", "sRGB"),
+                        ("Lightness", "sRGB"), ("Rec709Luminance", "RGB"), ("Rec601Luminance", "RGB"))
+
+
+def _pixel_gap_cases():
+    images = {"alpha": [img("rose_alpha")], "cmyka": [img("rose_alpha"), "-colorspace", "cmyk"]}
+    ops = {"distort": ["-virtual-pixel", "edge", "-distort", "SRT", "0.73,17"],
+           "fx": ["-fx", "p{i*0.71+0.37,j*0.67+0.61}"], "ires": ["-interpolative-resize", "57x41"]}
+    for op, meth, image in _PIXEL_GAP:
+        yield _case("pixelgap", "%s -interpolate %s, %s" % (op, meth, image),
+                    [images[image] + ["-interpolate", meth] + ops[op] + ["-depth", "16", "out.miff"]], ["out.miff"])
+    for meth, cs in _PIXEL_GAP_INTENSITY:
+        yield _case("pixelgap", "%%[fx:intensity] -intensity %s in %s" % (meth, cs),
+                    [[img("rose"), "-colorspace", cs, "-intensity", meth, "-format", "%[fx:intensity]", "info:"]], [])
+
+
 # fx.c: loops of 300 iterations, where an element that should not push would
 # overflow the value stack (GetFunction's do_push for while and do), and for()
 # and while() with too many arguments (hand-run: 3 killed).
@@ -5283,7 +5311,7 @@ def generate(lists, writable_formats):
         _multi_cases(), _sequence_cases(), _compare_cases(lists), _text_output_cases(),
         _montage_cases(), _encode_cases(writable_formats), _raw_cases(writable_formats),
         _quantum_cases(writable_formats), _quantum_gap7_cases(writable_formats), _pixel_jxl_cases(writable_formats),
-        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(), _fx_gap12_cases(), _cache_gap3_cases(), _token_gap_cases(), _quantum_gap8_cases(), _fx_gap13_cases(), _quantum_gap9_cases(), _quantum_gap10_cases(), _morph_gap5_cases(), _fx_gap14_cases(), _fx_gap15_cases(), _color_gap3_cases(), _quantize_gap11_cases(), _windrv_cases(),
+        _constitute_cases(), _glob_cases(), _read_blob_string_cases(), _blob_path_cases(), _distort_poly_cases(), _fx_gap_cases(), _composite_gap_cases(), _compose_colorspace_gap_cases(), _feature_cases(), _resample_cases(), _sparse_color_gap_cases(), _meta_channel_gap_cases(), _exception_gap_cases(), _auto_level_gap_cases(), _matrix_gap_cases(), _stream_gap_cases(), _signature_gap_cases(), _quantize_gap_cases(), _resource_gap_cases(), _quantize_gap2_cases(), _distort_gap_cases(), _fx_gap2_cases(), _cache_gap_cases(), _xml_gap_cases(), _color_gap_cases(), _texture_gap_cases(), _distort_args_gap_cases(), _fx_gap3_cases(), _matrix_gap2_cases(), _quantize_gap3_cases(), _quantize_gap4_cases(), _montage_gap_cases(), _compose_over_gap_cases(), _seamless_gap_cases(), _fx_gap4_cases(), _opacity_line_gap_cases(), _opacity_line_gap2_cases(), _signature_gap2_cases(), _histogram_gap3_cases(), _stream_gap2_cases(), _color_gap2_cases(), _timer_gap_cases(), _monitor_gap_cases(), _montage_gap2_cases(), _morph_gap_cases(), _morph_gap2_cases(), _morph_gap3_cases(), _morph_gap4_cases(), _quantize_gap5_cases(), _quantize_gap6_cases(), _quantize_gap7_cases(), _quantize_gap8_cases(), _quantize_gap9_cases(), _quantize_gap10_cases(), _cache_gap2_cases(), _fx_gap5_cases(), _fx_gap6_cases(), _fx_gap7_cases(), _fx_gap8_cases(), _fx_gap9_cases(), _fx_gap10_cases(), _fx_gap11_cases(), _matrix_gap3_cases(), _resample_gap_cases(), _blob_gap_cases(), _pixel_gap_cases(), _fx_gap12_cases(), _cache_gap3_cases(), _token_gap_cases(), _quantum_gap8_cases(), _fx_gap13_cases(), _quantum_gap9_cases(), _quantum_gap10_cases(), _morph_gap5_cases(), _fx_gap14_cases(), _fx_gap15_cases(), _color_gap3_cases(), _quantize_gap11_cases(), _windrv_cases(),
         _decode_cases(lists),
         _infra_cache_cases(), _infra_blob_cases(), _infra_filename_cases(),
         _infra_property_cases(),
