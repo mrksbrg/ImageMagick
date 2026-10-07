@@ -6086,6 +6086,23 @@ def _windrv_cases():
                 "path:a/b/c:0 path:a/b/d:5 path:a/e:2 content:<&> top print",
                 "content:t&ext addchild:x:9 addchild:y:1 top print"):
         yield _windrv("xml from NewXMLTreeTag: %s" % ops, tuple(["xml", "-root"] + ops.split()))
+    # ConvertUTF16ToUTF8: NewXMLTree takes any text whose first byte is 0xFE or 0xFF for UTF-16,
+    # but measures it with strlen, so real UTF-16 stops at its first zero byte and every such
+    # text ends in "root tag missing". The conversion still runs: case files must be ASCII, so
+    # magick writes the bytes (one gray pixel each, none zero) and the driver parses them. Short
+    # and past the 4 KB growth, big- and little-endian, with surrogate pairs (kills 10, hand-run)
+    for label, first, n, fx in (
+            ("BE short", 254, 41, "(40+mod(i*37,200))/255"), ("LE short", 255, 41, "(40+mod(i*37,200))/255"),
+            ("BE long", 254, 9001, "(40+mod(i*37,200))/255"), ("LE long", 255, 9001, "(40+mod(i*37,200))/255"),
+            ("BE surrogates", 254, 401, "(mod(i,4)==1?216:mod(i,4)==3?220:(30+mod(i*13,90)))/255"),
+            ("LE surrogates", 255, 401, "(mod(i,4)==0?216:mod(i,4)==2?220:(30+mod(i*13,90)))/255"),
+            ("BE ascii-ish", 254, 33, "(1+mod(i,127))/255"), ("LE ascii-ish", 255, 34, "(1+mod(i,127))/255"),
+            ("BE lone high surrogate at the end", 254, 3, "(mod(i,2)==1?216:65)/255"),
+            # nothing to convert: the final resize to length+1 (kills 2, hand-run)
+            ("BE two bytes", 254, 1, "65/255"), ("LE three bytes", 255, 2, "(65+i)/255")):
+        yield _case("windrv", "xml of UTF-16-looking bytes, %s" % label,
+                    [["-size", "1x1", "xc:gray(%d)" % first, "(", "-size", "%dx1" % n, "xc:", "-fx", fx, ")",
+                      "+append", "-depth", "8", "gray:u.xml"]] + _driver("xml", "u.xml", "print"), [])
     # blob.c: ImageToBlob and ImagesToBlob, BlobToImage and PingBlob back; custom streams over a
     # memory buffer (with and without seek and tell), ImageToCustomStream, ImagesToCustomStream
     # and CustomStreamToImage; MSBOrderLong and MSBOrderShort; FileToImage into a blob. PS is

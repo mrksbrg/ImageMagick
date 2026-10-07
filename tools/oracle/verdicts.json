@@ -31621,6 +31621,586 @@
    "src": "XSetWMIconName(display,windows->widget.id,&window_name);",
    "verdict": "unobservable",
    "why": "XSetWMName/XSetWMIconName set the window title and icon name, which only a window manager shows: Xvfb runs none, and a grab reads only the window's own pixels"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_gt_to_le",
+   "nth": 0,
+   "src": "if ((fstat(file,&file_stats) == 0) && (file_stats.st_size > 0))",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 14,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (i=0; xml != (char *) NULL; i+=(size_t) count)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (~((size_t) i) < (quantum+1))",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (~((size_t) i) < (quantum+1))",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if (~((size_t) i) < (quantum+1))",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "xml=(char *) ResizeQuantumMemory(xml,i+quantum+1,sizeof(*xml));",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "xml=(char *) ResizeQuantumMemory(xml,i+quantum+1,sizeof(*xml));",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "if ((i+(size_t) count) >= extent)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((i+(size_t) count) >= extent)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if ((i+(size_t) count) >= extent)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (LocaleCompare(filename,\"-\") != 0)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (xml == (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (file == -1)",
+   "verdict": "unobservable",
+   "why": "the non-seekable branch runs only for stdin or a pipe; every caller (the seven configuration loaders' <include>) passes a regular file's path, which is seekable"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "xml=(char *) AcquireQuantumMemory(length+MagickPathExtent,sizeof(*xml));",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (map != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < length; i+=(size_t) count)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=0; i < length; i+=(size_t) count)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_le_to_gt",
+   "nth": 1,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_le_to_lt",
+   "nth": 1,
+   "src": "if (count <= 0)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if (i < length)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (i < length)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "file=close_utf8(file)-1;",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (LocaleCompare(filename,\"-\") != 0)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 2,
+   "src": "if (file == -1)",
+   "verdict": "unobservable",
+   "why": "never reached: FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file), because length is always SIZE_MAX and this allocation guard always refuses"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (~length >= (MagickPathExtent-1))",
+   "verdict": "equivalent",
+   "why": "FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file): length is always SIZE_MAX (~length is 0), so the guard refuses either way"
+  },
+  {
+   "at": 8,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (xml == (char *) NULL)",
+   "verdict": "equivalent",
+   "why": "FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file): xml is always NULL here; with the test inverted, MapBlob of SIZE_MAX bytes fails, the read into NULL fails at once (EFAULT), the file is closed and NULL returned all the same"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (file == -1)",
+   "verdict": "equivalent",
+   "why": "an include whose file is missing: the original returns NULL at once; the mutant goes on with descriptor -1 (lseek fails, so the stream branch; read fails, close_utf8 gives -1) and returns NULL too. An existing file gives NULL either way (FileToXML(path,~0UL) returns NULL for every regular file (MUTATION.md, upstream bug: no configuration <include> ever loads a file))"
+  },
+  {
+   "at": 39,
+   "file": "MagickCore/xml-tree.c",
+   "function": "FileToXML",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((file == fileno(stdin)) || (offset < 0) ||",
+   "verdict": "unobservable",
+   "why": "only an empty included file differs (offset 0: the stream branch reads it as an empty string, where the original returns NULL); an empty string loads nothing, and only a -debug configure trace would show the extra load, which no case uses (traces carry times)"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(void) memcpy(utf8,content,*length*sizeof(*utf8));",
+   "verdict": "equivalent",
+   "why": "sizeof(char) is 1: multiplying or dividing by it is the same"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "for (i=2; i < (ssize_t) (*length-1); i+=2)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this only adds a code unit at the end (from the string's terminator), and NewXMLTree overwrites the last character with NUL before it looks for '<'"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "for (i=2; i < (ssize_t) (*length-1); i+=2)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this only adds a code unit at the end (from the string's terminator), and NewXMLTree overwrites the last character with NUL before it looks for '<'"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "c=(encoding != 0) ? ((content[i] & 0xff) << 8) | (content[i+1] & 0xff) :",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes how a code unit is assembled (byte order or neighbour), and no assembly of two non-zero bytes gives 0x3C"
+  },
+  {
+   "at": 59,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "c=(encoding != 0) ? ((content[i] & 0xff) << 8) | (content[i+1] & 0xff) :",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes how a code unit is assembled (byte order or neighbour), and no assembly of two non-zero bytes gives 0x3C"
+  },
+  {
+   "at": 11,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "((content[i+1] & 0xff) << 8) | (content[i] & 0xff);",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes how a code unit is assembled (byte order or neighbour), and no assembly of two non-zero bytes gives 0x3C"
+  },
+  {
+   "at": 15,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "byte=(encoding != 0) ? ((content[i] & 0xff) << 8) |",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes how a code unit is assembled (byte order or neighbour), and no assembly of two non-zero bytes gives 0x3C"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(content[i+1] & 0xff) : ((content[i+1] & 0xff) << 8) |",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes how a code unit is assembled (byte order or neighbour), and no assembly of two non-zero bytes gives 0x3C"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_add_to_sub",
+   "nth": 0,
+   "src": "(content[i+1] & 0xff) : ((content[i+1] & 0xff) << 8) |",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes how a code unit is assembled (byte order or neighbour), and no assembly of two non-zero bytes gives 0x3C"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 7,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_le_to_gt",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_le_to_lt",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 46,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 66,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "if ((c >= 0xd800) && (c <= 0xdfff) && ((i+=2) < (ssize_t) (*length-1)))",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes whether a unit is paired as a surrogate, and a pair gives a code point of 0x10000 or more, written as bytes of 0x80 and up"
+  },
+  {
+   "at": 34,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_gt_to_ge",
+   "nth": 0,
+   "src": "if ((size_t) (j+MagickPathExtent) > extent)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); the buffer only grows one step earlier"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 1,
+   "src": "if (utf8 == (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); with the test inverted the first growth returns the buffer unfilled, with the same length: its bytes (malloc's fill under the oracle) hold no '<' either"
+  },
+  {
+   "at": 6,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (c < 0x80)",
+   "verdict": "equivalent",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases): c < 0x80 and c <= 0x80 agree, since c is never below 0x100"
+  },
+  {
+   "at": 1,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "j++;",
+   "verdict": "equivalent",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases): the one-byte branch (c < 0x80) never runs"
+  },
+  {
+   "at": 18,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "for (bits=0; byte != 0; byte/=2)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes the bit count or the lead byte of a multi-byte sequence, whose bytes stay at 0x80 and up (or below 0x20), never 0x3C"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "bits=(bits-2)/5;",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes the bit count or the lead byte of a multi-byte sequence, whose bytes stay at 0x80 and up (or below 0x20), never 0x3C"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "utf8[j++]=(char) ((0xFF << (7-bits)) | (c >> (6*bits)));",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes the bit count or the lead byte of a multi-byte sequence, whose bytes stay at 0x80 and up (or below 0x20), never 0x3C"
+  },
+  {
+   "at": 47,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "utf8[j++]=(char) ((0xFF << (7-bits)) | (c >> (6*bits)));",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes the bit count or the lead byte of a multi-byte sequence, whose bytes stay at 0x80 and up (or below 0x20), never 0x3C"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "while (bits != 0)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); this changes the bit count or the lead byte of a multi-byte sequence, whose bytes stay at 0x80 and up (or below 0x20), never 0x3C"
+  },
+  {
+   "at": 9,
+   "file": "MagickCore/xml-tree.c",
+   "function": "ConvertUTF16ToUTF8",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (utf8 != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "NewXMLTree measures the text with strlen, so every code unit has a non-zero byte (c >= 0x100) and the converted text can never hold a '<': any text reaching here ends in 'root tag missing' (the 'xml of UTF-16-looking bytes' cases); the terminator is skipped only if the resize failed, and NewXMLTree terminates the text at its last character itself"
   }
  ]
 }
