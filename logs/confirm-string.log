@@ -1,61 +1,27 @@
 mutate: 42 mutants in MagickCore/string\.c$, 16 functions
-  baseline: 78/78 (0s)
-mutate: baseline over 155 cases in 1s
-  mutants: 25/42 (2s)
-  mutants: 42/42 (4s)
+mutate: baseline over 0 cases in 0s
+  mutants: 25/42 (0s)
+  mutants: 42/42 (0s)
 
-mutate: 42 mutants, 4s
-  killed 0, survived 29 (0 capped), no coverage 13, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 42 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 42, errors 0
 
   function                           total killed survived no-cov
-  StringToStrings                       13      0       13      0
-  EscapeString                           6      0        6      0
-  ConcatenateStringInfo                  3      0        3      0
-  BlobToStringInfo                       2      0        2      0
-  ConcatenateString                      2      0        2      0
+  StringToStrings                       13      0        0     13
+  EscapeString                           6      0        0      6
+  ConcatenateStringInfo                  3      0        0      3
+  BlobToStringInfo                       2      0        0      2
+  ConcatenateString                      2      0        0      2
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
   StringInfoToDigest                     2      0        0      2
   StringInfoToString                     2      0        0      2
   StripMagickString                      2      0        0      2
-  CompareStringInfo                      1      0        1      0
-  FileToString                           1      0        1      0
+  CompareStringInfo                      1      0        0      1
+  FileToString                           1      0        0      1
   FileToStringInfo                       1      0        0      1
-  FormatMagickSize                       1      0        1      0
+  FormatMagickSize                       1      0        0      1
   SplitStringInfo                        1      0        0      1
   StringToArrayOfDoubles                 1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  string.c:200:15 cxx_lt_to_le               if (~length < MagickPathExtent)
-    x  string.c:214:46 cxx_mul_to_div             (void) memset(string_info->datum,0,length*sizeof(*string_info->datum));
-    x  string.c:362:25 cxx_lt_to_le               return(target->length < source->length ? -1 : 1);
-    x  string.c:477:15 cxx_lt_to_le               if (~length < source_length)
-    x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
-    x  string.c:528:15 cxx_lt_to_le               if (~length < source->length)
-    x  string.c:531:15 cxx_lt_to_le               if (~length < MagickPathExtent)
-       string.c:534:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
-    x  string.c:907:21 cxx_ne_to_eq               for (p=source; *p != '\0'; p++)
-    x  string.c:909:13 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
-    x  string.c:909:29 cxx_eq_to_ne               if ((*p == '\\') || (*p == escape))
-    x  string.c:911:21 cxx_lt_to_le               if (~length < 1)
-    x  string.c:913:15 cxx_post_inc_to_post_dec   length++;
-    x  string.c:918:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
-    x  string.c:973:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  string.c:1117:21 cxx_ge_to_gt               for (i=0; (extent >= bytes) && (units[i+1] != (const char *) NULL); i++)
-       string.c:2365:17 cxx_ne_to_eq               if (count != (size_t *) NULL)
-    x  string.c:2370:37 cxx_lt_to_le               if (((int) ((unsigned char) *p) < 32) &&
-       string.c:2402:25 cxx_lt_to_ge               for (j=0; j < i; j++)
-       string.c:2402:25 cxx_lt_to_le               for (j=0; j < i; j++)
-       string.c:2402:31 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
-    x  string.c:2434:19 cxx_lt_to_le               for (i=0; i < (ssize_t) lines; i++)
-       string.c:2443:25 cxx_lt_to_ge               for (j=0; j < i; j++)
-       string.c:2443:25 cxx_lt_to_le               for (j=0; j < i; j++)
-       string.c:2443:31 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
-    x  string.c:2482:24 cxx_add_to_sub             textlist[i]+1),sizeof(**textlist));
-       string.c:2486:27 cxx_lt_to_ge               for (j=0; j < i; j++)
-       string.c:2486:27 cxx_lt_to_le               for (j=0; j < i; j++)
-       string.c:2486:33 cxx_post_inc_to_post_dec   for (j=0; j < i; j++)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-6f677a7f0-string.json
+  full results: build-oracle/work/mutation-confirm-85c783276-string.json
