@@ -1,16 +1,17 @@
 mutate: 23 mutants in MagickCore/locale\.c$, 11 functions
-mutate: baseline over 1 cases in 0s
-  mutants: 23/23 (0s)
+  baseline: 22/22 (0s)
+mutate: baseline over 133 cases in 0s
+  mutants: 23/23 (8s)
 
-mutate: 23 mutants, 0s
-  killed 0, survived 14 (0 capped), no coverage 9, errors 0
+mutate: 23 mutants, 8s
+  killed 0, survived 16 (0 capped), no coverage 7, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   LoadLocaleCache                        7      0        7      0
   LocaleFatalErrorHandler                3      0        0      3
   GetLocaleInfoList                      2      0        0      2
-  GetLocaleList                          2      0        0      2
+  GetLocaleList                          2      0        2      0
   GetLocaleOptions                       2      0        2      0
   IsLocaleTreeInstantiated               2      0        2      0
   DestroyLocaleNode                      1      0        1      0
@@ -22,6 +23,8 @@ mutate: 23 mutants, 0s
   survivors (equivalent, or a gap in the catalogue):
     x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
     x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    x  locale.c:707:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  locale.c:727:3 cxx_remove_void_call       qsort((void *) messages,(size_t) i,sizeof(*messages),LocaleTagCompare);
     x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
     x  locale.c:941:22 cxx_eq_to_ne               if (locale == (char *) NULL)
@@ -36,4 +39,4 @@ mutate: 23 mutants, 0s
     x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-96b821c39-locale.json
+  full results: build-oracle/work/mutation-confirm-ac79170c0-locale.json
