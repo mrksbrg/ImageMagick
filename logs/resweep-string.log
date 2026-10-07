@@ -1,26 +1,25 @@
 mutate: 377 mutants in MagickCore/string\.c$, 38 functions
-  baseline: 1/1 (0s)
-mutate: baseline over 15650 cases in 1s
+mutate: baseline over 15646 cases in 4s
   mutants: 25/377 (1s)
-  mutants: 50/377 (45s)
-  mutants: 75/377 (50s)
-  mutants: 100/377 (57s)
-  mutants: 125/377 (76s)
-  mutants: 150/377 (96s)
+  mutants: 50/377 (46s)
+  mutants: 75/377 (51s)
+  mutants: 100/377 (58s)
+  mutants: 125/377 (66s)
+  mutants: 150/377 (95s)
   mutants: 175/377 (97s)
-  mutants: 200/377 (102s)
-  mutants: 225/377 (114s)
-  mutants: 250/377 (118s)
-  mutants: 275/377 (124s)
-  mutants: 300/377 (130s)
-  mutants: 325/377 (133s)
-  mutants: 350/377 (136s)
-  mutants: 375/377 (238s)
-  mutants: 377/377 (263s)
+  mutants: 200/377 (98s)
+  mutants: 225/377 (111s)
+  mutants: 250/377 (112s)
+  mutants: 275/377 (112s)
+  mutants: 300/377 (126s)
+  mutants: 325/377 (129s)
+  mutants: 350/377 (134s)
+  mutants: 375/377 (231s)
+  mutants: 377/377 (259s)
 
-mutate: 377 mutants, 263s
-  killed 277, survived 96 (60 capped), no coverage 4, errors 0
-  mutation score on reached code: 74.3%   overall: 73.5%
+mutate: 377 mutants, 259s
+  killed 279, survived 94 (57 capped), no coverage 4, errors 0
+  mutation score on reached code: 74.8%   overall: 74.0%
 
   function                           total killed survived no-cov
   StringToStrings                       60     47       13      0
@@ -46,7 +45,7 @@ mutate: 377 mutants, 263s
   AcquireStringInfo                      6      4        2      0
   BlobToStringInfo                       6      4        2      0
   FileToString                           5      4        1      0
-  IsStringTrue                           5      3        2      0
+  IsStringTrue                           5      5        0      0
   IsStringFalse                          5      2        3      0
   StringInfoToString                     5      3        2      0
   CompareStringInfo                      4      3        1      0
@@ -123,8 +122,6 @@ mutate: 377 mutants, 263s
     xc string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
     xc string.c:1368:30 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
     xc string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
-    xc string.c:1408:33 cxx_eq_to_ne               if (LocaleCompare(value,"on") == 0)
-    xc string.c:1410:34 cxx_eq_to_ne               if (LocaleCompare(value,"yes") == 0)
     xc string.c:1447:36 cxx_eq_to_ne               if (LocaleCompare(value,"false") == 0)
     xc string.c:1449:34 cxx_eq_to_ne               if (LocaleCompare(value,"off") == 0)
     xc string.c:1451:33 cxx_eq_to_ne               if (LocaleCompare(value,"no") == 0)
@@ -133,7 +130,7 @@ mutate: 377 mutants, 263s
     xc string.c:1733:15 cxx_lt_to_le               if (~length < MagickPathExtent)
      c string.c:1737:69 cxx_add_to_sub             string_info->datum=(unsigned char *) AcquireQuantumMemory(length+
     x  string.c:1840:14 cxx_gt_to_ge               if (offset > string_info->length)
-    xc string.c:1931:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+    x  string.c:1931:15 cxx_lt_to_le               if (~length < MagickPathExtent)
     x  string.c:1997:15 cxx_ge_to_gt               if (~length >= (MagickPathExtent-1))
     x  string.c:2002:58 cxx_mul_to_div             (void) memcpy(string,(char *) string_info->datum,length*sizeof(*string));
        string.c:2105:21 cxx_ge_to_gt               for (i--; i >= 0; i--)
