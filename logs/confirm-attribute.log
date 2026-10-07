@@ -1,12 +1,13 @@
 mutate: 81 mutants in MagickCore/attribute\.c$, 16 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 22 cases in 0s
   mutants: 25/81 (0s)
   mutants: 50/81 (0s)
   mutants: 75/81 (0s)
-  mutants: 81/81 (0s)
+  mutants: 81/81 (1s)
 
-mutate: 81 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 81, errors 0
+mutate: 81 mutants, 1s
+  killed 0, survived 2 (0 capped), no coverage 79, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetImageBoundingBox                   18      0        0     18
@@ -17,7 +18,7 @@ mutate: 81 mutants, 0s
   GetImageMinimumBoundingBox             6      0        0      6
   GetEdgeBackgroundCensus                4      0        0      4
   GetImageConvexHull                     4      0        0      4
-  SetImageDepth                          2      0        0      2
+  SetImageDepth                          2      0        2      0
   SetImageType                           2      0        0      2
   TraceConvexHull                        1      0        0      1
   getProjection                          1      0        0      1
@@ -26,4 +27,9 @@ mutate: 81 mutants, 0s
   IdentifyImageType                      1      0        0      1
   IsImageOpaque                          1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-9b9a5abd8-attribute.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-96b821c39-attribute.json
