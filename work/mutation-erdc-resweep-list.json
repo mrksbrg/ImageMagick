@@ -139,9 +139,9 @@
   "col": 49,
   "function": "CloneImages",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/5936d60f4e",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs; out.miff missing in candidate"
+  "cases": 1,
+  "killer": "sequence/8efcbf4641",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:248:62:248:64",
@@ -1161,7 +1161,7 @@
   "status": "killed",
   "cases": 21,
   "killer": "preview/0f9731f50e",
-  "why": "exit status [0] -> [-9]; preview:out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; preview:out.miff missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:728:24:728:26",
@@ -1185,7 +1185,7 @@
   "status": "killed",
   "cases": 21,
   "killer": "preview/0f9731f50e",
-  "why": "exit status [0] -> [-9]; preview:out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; preview:out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:734:6:734:8",
