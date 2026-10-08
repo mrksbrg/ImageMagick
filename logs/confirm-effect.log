@@ -1,5 +1,5 @@
 mutate: 185 mutants in MagickCore/effect\.c$, 22 functions
-mutate: baseline over 3 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/185 (0s)
   mutants: 50/185 (0s)
   mutants: 75/185 (0s)
@@ -10,8 +10,7 @@ mutate: baseline over 3 cases in 0s
   mutants: 185/185 (0s)
 
 mutate: 185 mutants, 0s
-  killed 0, survived 10 (0 capped), no coverage 175, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+  killed 0, survived 0 (0 capped), no coverage 185, errors 0
 
   function                           total killed survived no-cov
   AdaptiveBlurImage                     27      0        0     27
@@ -26,28 +25,15 @@ mutate: 185 mutants, 0s
   RotationalBlurImage                    7      0        0      7
   MotionBlurImage                        6      0        0      6
   SharpenImage                           6      0        0      6
-  UnsharpMaskImage                       5      0        5      0
+  UnsharpMaskImage                       5      0        0      5
   EmbossImage                            4      0        0      4
-  LocalContrastImage                     4      0        4      0
+  LocalContrastImage                     4      0        0      4
   SpreadImage                            4      0        0      4
   DestroyBilateralTLS                    3      0        0      3
   GetMotionBlurKernel                    3      0        0      3
   AcquireBilateralTLS                    2      0        0      2
-  BlurImage                              1      0        1      0
+  BlurImage                              1      0        0      1
   EdgeImage                              1      0        0      1
   GaussianBlurImage                      1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  effect.c:782:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  effect.c:2064:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  effect.c:2143:17 cxx_mul_to_div             pixels+=id*scanLineSize;
-    x  effect.c:2183:43 cxx_sub_to_add             (x != (ssize_t) image->columns-1))
-    x  effect.c:2222:17 cxx_mul_to_div             pixels+=id*scanLineSize;
-    x  effect.c:4299:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  effect.c:4370:13 cxx_remove_void_call       SetPixelChannel(unsharp_image,channel,p[i],q);
-    x  effect.c:4385:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
-       effect.c:4393:17 cxx_post_inc_to_post_dec   progress++;
-       effect.c:4395:21 cxx_eq_to_ne               if (proceed == MagickFalse)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-3da6b8dfb-effect.json
+  full results: build-oracle/work/mutation-confirm-285045324-effect.json
