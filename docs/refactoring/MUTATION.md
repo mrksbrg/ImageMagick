@@ -3985,6 +3985,6 @@ Trace and debug logging (`-debug`, LogMagickEvent, the `IsEventLogging()` guards
 cache's debug ticks) is not part of what the oracle protects: refactorings may legitimately add,
 move or drop trace calls, and trace text names modules and functions. No trace cases (a case's own
 `log.xml` would have made them deterministic); instead the logging-only survivors of every
-Windows file get `unobservable` verdicts citing the decision: 289 (W01 138: xwindow.c 42,
+Windows file get `unobservable` verdicts citing the decision: 289 survivors, 279 new verdicts (10 had one already; W01 138: xwindow.c 42,
 display.c 39, animate.c 29, accelerate.c 15, widget.c 13; regular files 151). **For the Mac:**
 the same decision applies to its files' logging guards.
