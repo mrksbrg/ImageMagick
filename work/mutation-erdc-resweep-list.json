@@ -153,7 +153,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "infra/e689a9cc0f",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:252:15:252:16",
@@ -213,7 +213,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "infra/e689a9cc0f",
-  "why": "exit status [0] -> ['timeout']; magick-2I_I9Hfki6slhzLmgHxDnbF23B737Xbj only in candidate; out.miff missing in candidate"
+  "why": "exit status [0] -> ['timeout']; magick-ja5137HrEDyzq5JfnT1kNGb0SdKVwGJf only in candidate; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:261:12:261:14",
@@ -357,7 +357,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "infra/e689a9cc0f",
-  "why": "exit status [0] -> ['timeout']; magick-4c2tg1fb3k1a57JU4XFuQNHRNOJM8Agw only in candidate; out.miff missing in candidate"
+  "why": "exit status [0] -> ['timeout']; magick-NxKUOmHXv-Ry3B7zIWrJVTCQ_hut424o only in candidate; out.miff missing in candidate"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:280:29:280:30",
@@ -369,7 +369,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "infra/e689a9cc0f",
-  "why": "exit status [0] -> ['timeout']; magick-1iNtg31JhiVTSl0DpCP-0hQiaimz0jT3 only in candidate; out.miff missing in candidate"
+  "why": "exit status [0] -> ['timeout']; magick-8_0jkd1gdqf1e_-4N6A69EJFGxKsXr4h only in candidate; out.miff missing in candidate"
  },
  {
   "id": "cxx_ge_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:280:37:280:39",
@@ -1161,7 +1161,7 @@
   "status": "killed",
   "cases": 19,
   "killer": "preview/0f9731f50e",
-  "why": "exit status [0] -> [-6]; stderr differs; preview:out.miff missing in candidate"
+  "why": "exit status [0] -> [-9]; preview:out.miff missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:728:24:728:26",
@@ -1185,7 +1185,7 @@
   "status": "killed",
   "cases": 19,
   "killer": "preview/0f9731f50e",
-  "why": "exit status [0] -> [-9]; preview:out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; preview:out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/list.c:734:6:734:8",
