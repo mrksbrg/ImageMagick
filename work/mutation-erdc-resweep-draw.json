@@ -1121,7 +1121,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/20f4646909",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:705:16:705:18",
@@ -4447,8 +4447,8 @@
   "col": 52,
   "function": "draw.c:DrawDashPolygon",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/8b1ae6c9cb",
+  "cases": 1,
+  "killer": "gaps/b12070f7ef",
   "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
@@ -11589,7 +11589,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "mvg/7e4bad791d",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:3829:53:3829:54",
@@ -25829,7 +25829,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "draw/9ddcf96d03",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/draw.c:7268:16:7268:18",
