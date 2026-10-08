@@ -5037,6 +5037,19 @@ for _screen in ("640x480x8", "640x480x16", "640x480x15", "640x480x30", "640x480x
          [["display", "-window", "root", img("palette")],
           ["import", "-window", "root", "-colors", "8", "ppm:out.ppm"]], {}, _screen),
         ("x11 %s driver animate" % _screen, [["@driver", "animate", img("rose"), img("palette")]], {}, _screen)]
+# X resources of the case's own (~/.displayrc, read through XGetResourceDatabase with HOME as the
+# case directory): colour recovery, gamma, a private colormap, borders and colours, no pixmap or
+# shared memory (2026-10-08, hand-run: 3 killed in xwindow.c)
+_X11_RC = ("*colorRecovery: True\n*gammaCorrect: True\n*displayGamma: 1.6\n*colormap: private\n*borderWidth: 5\n"
+           "*background: #102030\n*foreground: yellow\n*matteColor: #405060\n*font: fixed\n*usePixmap: False\n"
+           "*sharedMemory: False\n*backdrop: True\n*gravity: NorthWest\n*magnify: 2\n*undoCache: 16\n*update: True\n"
+           "*quantum: 2\n*displayWarnings: False\n")
+_X11_RC_FILES = {".displayrc": _X11_RC, ".magickrc": _X11_RC, ".importrc": _X11_RC}
+GAP_X11_SCREEN_CASES += [
+    ("x11 640x480x8 display -window root with X resources", [["display", "-window", "root", img("rose")], _X11_GRAB],
+     _X11_RC_FILES, "640x480x8"),
+    ("x11 640x480x8 animate window with X resources", [["animate"] + _X11_SHOW + [img("rose"), img("palette")]],
+     _X11_RC_FILES, "640x480x8")]
 GAP_X11_SCREEN_CASES += [
     ("x11 driver animate", [["@driver", "animate", img("rose"), img("rose_alpha"), img("gray16")]], {}, True),
     ("x11 driver animate, one frame", [["@driver", "animate", img("tall")]], {}, True)]
