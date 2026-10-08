@@ -34661,6 +34661,56 @@
    "src": "if ((colorspace != HSLColorspace) && (colorspace != UndefinedColorspace))",
    "verdict": "unobservable",
    "why": "only decides whether modulate runs on the OpenCL kernel or the CPU path, which give the same pixels: hand-run 2026-10-08, -modulate with modulate:colorspace HSL, HSB and HWB under pocl, every pair identical with and without the mutant"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/accelerate.c",
+   "function": "padGlobalWorkgroupSizeToLocalWorkgroupSize",
+   "mutator": "cxx_sub_to_add",
+   "nth": 0,
+   "src": "return ((orgGlobalSize+(localGroupSize-1))/localGroupSize*localGroupSize);",
+   "verdict": "unobservable",
+   "why": "pads the global work size by a different amount: the histogram serves only the OpenCL -equalize, whose kernel writes no pixel (the seventh upstream bug, MUTATION.md), so its counts change nothing a case sees; only a launch that failed would show (the CPU path takes over), and this one does not fail (it survived every equalize case under pocl)"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/accelerate.c",
+   "function": "padGlobalWorkgroupSizeToLocalWorkgroupSize",
+   "mutator": "cxx_div_to_mul",
+   "nth": 0,
+   "src": "return ((orgGlobalSize+(localGroupSize-1))/localGroupSize*localGroupSize);",
+   "verdict": "unobservable",
+   "why": "pads the global work size by a different amount: the histogram serves only the OpenCL -equalize, whose kernel writes no pixel (the seventh upstream bug, MUTATION.md), so its counts change nothing a case sees; only a launch that failed would show (the CPU path takes over), and this one does not fail (it survived every equalize case under pocl)"
+  },
+  {
+   "at": 58,
+   "file": "MagickCore/accelerate.c",
+   "function": "LaunchHistogramKernel",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "clStatus|=clEnv->library->clSetKernelArg(histogramKernel,i++,sizeof(cl_mem),(void *)&histogramBuffer);",
+   "verdict": "unobservable",
+   "why": "sets the following kernel arguments at the wrong indices: the histogram serves only the OpenCL -equalize, whose kernel writes no pixel (the seventh upstream bug, MUTATION.md), so its counts change nothing a case sees; only a launch that failed would show (the CPU path takes over), and this one does not fail (it survived every equalize case under pocl)"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/accelerate.c",
+   "function": "LaunchHistogramKernel",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (histogramKernel!=NULL)",
+   "verdict": "unobservable",
+   "why": "only decides whether the histogram kernel is released: a leak, nothing printed"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/accelerate.c",
+   "function": "LaunchHistogramKernel",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "ReleaseOpenCLKernel(histogramKernel);",
+   "verdict": "unobservable",
+   "why": "only decides whether the histogram kernel is released: a leak, nothing printed"
   }
  ]
 }
