@@ -34651,6 +34651,16 @@
    "src": "if (owner->blob == (BlobInfo *) NULL)",
    "verdict": "unobservable",
    "why": "SyncBlobStream hands the live buffer to the caller's ImageInfo and to the list's owner; ImageToBlob and ImagesToBlob read image->blob themselves right after, and WriteImages' hand-over matters only once a frame outgrows the caller's buffer, which is where the sixth upstream bug (a use after free, MUTATION.md) lives; the driver's 1 MB buffer is never outgrown, so nothing it prints changes (hand-run: all eight WriteImages cases, same output)"
+  },
+  {
+   "at": 16,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((colorspace != HSLColorspace) && (colorspace != UndefinedColorspace))",
+   "verdict": "unobservable",
+   "why": "only decides whether modulate runs on the OpenCL kernel or the CPU path, which give the same pixels: hand-run 2026-10-08, -modulate with modulate:colorspace HSL, HSB and HWB under pocl, every pair identical with and without the mutant"
   }
  ]
 }
