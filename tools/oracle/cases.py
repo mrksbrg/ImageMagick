@@ -5211,6 +5211,15 @@ GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(
 _XEV_CONFIRM = {".displayrc": "display.confirmExit: True\n", ".magickrc": "display.confirmExit: True\n"}
 GAP_XEVENTS_WIDGET_CASES = [
     ("xevents display quit, confirmed", "map key:q map grab:out.ppm key:Return", _XEV_CONFIRM),
+    # the confirmation by the mouse (XConfirmWidget's button and motion events, 2026-10-08): Yes;
+    # Cancel or Dismiss, then quit again; Yes pressed, dragged off, released, then clicked
+    ("xevents display quit, Yes clicked", "map key:q map grab:out.ppm click:37,147", _XEV_CONFIRM),
+    ("xevents display quit, Cancel clicked, then confirmed",
+     "map key:q map grab:out.ppm click:172,147 use:1 key:q map key:Return", _XEV_CONFIRM),
+    ("xevents display quit, Dismiss clicked, then confirmed",
+     "map key:q map grab:out.ppm click:105,147 use:1 key:q map key:Return", _XEV_CONFIRM),
+    ("xevents display quit, Yes dragged off, then clicked",
+     "map key:q map press:37,147 move:120,40 release:120,40 grab:out.ppm click:37,147", _XEV_CONFIRM),
     ("xevents display help overview",
      "map click:20,20 map click:65,388 map click:40,12 map grab:out.ppm click:397,607 use:1 key:q", {}),
     # Miscellany > Preferences (2026-10-08): toggles (display gamma; Floyd/Steinberg), the grab
