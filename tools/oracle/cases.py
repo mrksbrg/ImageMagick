@@ -5139,7 +5139,15 @@ _XEV_MENU_ITEMS = ([("View", it, _XEV_VIEW, r) for it, r in (("Half Size", None)
                                                                  ("Hue...", "120"))] +
                    [("F/X", it, _XEV_FX, r) for it, r in (("Solarize...", "50%"), ("Sepia Tone...", "80%"),
                                                         ("Swirl...", "60"), ("Implode...", "0.5"),
-                                                        ("Vignette...", "0x5"), ("Wave...", "5x30"))])
+                                                        ("Vignette...", "0x5"), ("Wave...", "5x30"))] +
+                   # 2026-10-08: more of Effects, Enhance and Transform (left out, measured:
+                   # Threshold, Edge Detect, Spread, Shade, Raise and Normalize time out; Rotate
+                   # Left and Blur grabbed the same as Rotate Right and Sharpen)
+                   [("Effects", it, _XEV_EFFECTS, r) for it, r in (("Despeckle", None), ("Sharpen...", "0x1"))] +
+                   [("Enhance", it, _XEV_ENHANCE, r) for it, r in (("Saturation...", "50"), ("Brightness...", "120"),
+                                                                 ("Gamma...", "1.5"), ("Equalize", None),
+                                                                 ("Negate", None), ("Grayscale", None))] +
+                   [("Transform", it, _XEV_TRANSFORM, r) for it, r in (("Flop", None), ("Rotate Right", None))])
 # The widgets grabbed while open (W01, 2026-10-06): the cases above grab the image window after
 # a widget has closed, so the widgets' drawing (bevels, text, highlights, layout) was never
 # compared. Here the grab comes right after the widget maps, with no @ before it (@ would go to
