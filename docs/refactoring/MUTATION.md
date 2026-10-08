@@ -3905,3 +3905,13 @@ device choice vary. They are dropped (`e8600164c`); the 3 kills that rested on t
 2, opencl.c 1) were rerun against the other OpenCL cases and **all 3 are killed again**
 (`x11cl2-oclfix`), so the W01 figures stand. The three xevents drag cases that differed did so
 only by timing out under 12 parallel runs; one at a time they agree.
+
+## Confirmation sweep sweep1008 (Windows, 2026-10-07/08, night)
+
+All 34 regular files with mutants in `mull-sdl-win`, against the catalogue at the end of 10-07
+(the day's cases, the driver's names line, the nondeterministic cases gone), capped at 1500 cases
+a mutant, in two halves (21:20 to 06:13). **Gated alone, each file gives the same adjusted figure
+as all its reports merged** (linked-list.c 95% against 96% and magick.c 77% against 78%, where a
+few kills came from uncapped reruns; no function crosses 80% either way), so the day's kills hold
+when every case runs together. **Trusted: 34 of 36**, unchanged; xml-tree.c (91%) and stream.c
+(91%) wait for a memory checker and the trace-logging decision.
