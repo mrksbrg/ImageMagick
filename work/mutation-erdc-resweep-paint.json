@@ -1999,9 +1999,9 @@
   "col": 15,
   "function": "paint.c:DestroyHistogramTLS",
   "status": "killed",
-  "cases": 15,
-  "killer": "preview/f447ab3322",
-  "why": "exit status [0] -> [-6]; stderr differs; preview:out.miff missing in candidate"
+  "cases": 13,
+  "killer": "mogrify/b7eb1a4581",
+  "why": "exit status [0, 0] -> [0, -6]; stderr differs; work.miff differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/paint.c:676:68:676:70",
@@ -2421,7 +2421,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/d5a2309ac6",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/paint.c:806:53:806:55",
@@ -2827,8 +2827,8 @@
   "col": 3,
   "function": "OpaquePaintImage",
   "status": "killed",
-  "cases": 3,
-  "killer": "unary/eaf77927d3",
+  "cases": 2,
+  "killer": "unary/8cc395194f",
   "why": "out.miff differs"
  },
  {
