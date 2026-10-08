@@ -5260,7 +5260,16 @@ GAP_XEVENTS_WIDGET_CASES = [
     ("xevents display short cuts menu, %s" % label, "map press3:30,20 map " + steps + " use:1 key:q", {})
     for label, steps in (("shown", "grab:out.ppm release3:5,5"),
                          ("dragged over its items", "move:30,40 move:30,80 move:30,120 grab:out.ppm release3:5,5"),
-                         ("moved out and back", "move:30,60 move:200,60 move:30,100 grab:out.ppm release3:5,5"))]
+                         ("moved out and back", "move:30,60 move:200,60 move:30,100 grab:out.ppm release3:5,5"))] + [
+    # The emboss dialog (F3) by the mouse (XDialogWidget's button and motion events, 2026-10-08):
+    # a click in the reply field and on Emboss, a click on Cancel, Emboss pressed and the pointer
+    # dragged off before the release, a double click then a middle-button paste in the field
+    ("xevents display dialog by the mouse, %s" % label, "map key:F3 map " + steps + " use:1 key:q", {})
+    for label, steps in (("typed, Emboss clicked", "click:100,62 key:ctrl+u type:0x2 grab:out.ppm click:205,101"),
+                         ("Cancel clicked", "grab:out.ppm click:291,101"),
+                         ("Emboss pressed, dragged off",
+                          "press:205,101 move:100,20 release:100,20 grab:out.ppm click:291,101"),
+                         ("pasted with the middle button", "click:40,62 click:40,62 click2:120,62 grab:out.ppm key:Return"))]
 # label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
 # switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
 # to run. Not used: MAGICK_OCL_DEVICE=false, which runs that benchmark in spite of the profile
