@@ -3,22 +3,22 @@ mutate: baseline over 602 cases in 2s
   mutants: 25/1193 (0s)
   mutants: 50/1193 (0s)
   mutants: 75/1193 (1s)
-  mutants: 100/1193 (1s)
+  mutants: 100/1193 (2s)
   mutants: 125/1193 (2s)
   mutants: 150/1193 (2s)
   mutants: 175/1193 (3s)
   mutants: 200/1193 (3s)
-  mutants: 225/1193 (4s)
+  mutants: 225/1193 (3s)
   mutants: 250/1193 (4s)
   mutants: 275/1193 (4s)
-  mutants: 300/1193 (5s)
+  mutants: 300/1193 (4s)
   mutants: 325/1193 (5s)
   mutants: 350/1193 (5s)
-  mutants: 375/1193 (6s)
+  mutants: 375/1193 (5s)
   mutants: 400/1193 (6s)
-  mutants: 425/1193 (7s)
+  mutants: 425/1193 (6s)
   mutants: 450/1193 (7s)
-  mutants: 475/1193 (8s)
+  mutants: 475/1193 (7s)
   mutants: 500/1193 (9s)
   mutants: 525/1193 (12s)
   mutants: 550/1193 (17s)
@@ -29,29 +29,29 @@ mutate: baseline over 602 cases in 2s
   mutants: 675/1193 (19s)
   mutants: 700/1193 (20s)
   mutants: 725/1193 (21s)
-  mutants: 750/1193 (26s)
-  mutants: 775/1193 (59s)
+  mutants: 750/1193 (25s)
+  mutants: 775/1193 (51s)
   mutants: 800/1193 (139s)
-  mutants: 825/1193 (200s)
-  mutants: 850/1193 (215s)
+  mutants: 825/1193 (205s)
+  mutants: 850/1193 (217s)
   mutants: 875/1193 (222s)
-  mutants: 900/1193 (235s)
-  mutants: 925/1193 (248s)
-  mutants: 950/1193 (251s)
-  mutants: 975/1193 (252s)
-  mutants: 1000/1193 (254s)
-  mutants: 1025/1193 (256s)
-  mutants: 1050/1193 (256s)
-  mutants: 1075/1193 (256s)
-  mutants: 1100/1193 (258s)
-  mutants: 1125/1193 (260s)
-  mutants: 1150/1193 (261s)
-  mutants: 1175/1193 (265s)
-  mutants: 1193/1193 (391s)
+  mutants: 900/1193 (245s)
+  mutants: 925/1193 (251s)
+  mutants: 950/1193 (253s)
+  mutants: 975/1193 (254s)
+  mutants: 1000/1193 (256s)
+  mutants: 1025/1193 (257s)
+  mutants: 1050/1193 (258s)
+  mutants: 1075/1193 (259s)
+  mutants: 1100/1193 (260s)
+  mutants: 1125/1193 (262s)
+  mutants: 1150/1193 (263s)
+  mutants: 1175/1193 (266s)
+  mutants: 1193/1193 (393s)
 
-mutate: 1193 mutants, 391s
-  killed 1008, survived 185 (1 capped), no coverage 0, errors 0
-  mutation score on reached code: 84.5%   overall: 84.5%
+mutate: 1193 mutants, 393s
+  killed 1007, survived 186 (1 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.4%   overall: 84.4%
 
   function                           total killed survived no-cov
   SelectiveBlurImage                   115     91       24      0
@@ -65,7 +65,7 @@ mutate: 1193 mutants, 391s
   Hull                                  65     56        9      0
   DespeckleImage                        61     54        7      0
   KuwaharaImage                         60     52        8      0
-  MotionBlurImage                       55     49        6      0
+  MotionBlurImage                       55     48        7      0
   EmbossImage                           41     37        4      0
   SharpenImage                          37     31        6      0
   UnsharpMaskImage                      29     24        5      0
@@ -194,6 +194,7 @@ mutate: 1193 mutants, 391s
     x  effect.c:2353:34 cxx_mul_to_div             MagickSigma)))/(MagickSQ2PI*MagickSigma));
     x  effect.c:2400:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  effect.c:2513:13 cxx_remove_void_call       SetPixelChannel(blur_image,channel,p[i],q);
+    x  effect.c:2520:25 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
     x  effect.c:2535:21 cxx_lt_to_le               for (j=0; j < (ssize_t) width; j++)
     x  effect.c:2557:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
        effect.c:2565:17 cxx_post_inc_to_post_dec   progress++;

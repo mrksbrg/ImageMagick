@@ -429,7 +429,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/6752e50a28",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/visual-effects.c:381:46:381:48",
@@ -6009,7 +6009,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/4ec8a53df5",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/visual-effects.c:2237:53:2237:55",
@@ -9021,7 +9021,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/3d374ebe6f",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/visual-effects.c:3407:49:3407:50",
@@ -9249,7 +9249,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "opencl/ef92fee60b",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/visual-effects.c:3495:42:3495:44",
