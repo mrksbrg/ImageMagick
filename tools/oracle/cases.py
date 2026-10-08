@@ -4999,6 +4999,20 @@ GAP_OPENCL_CASES += [("opencl rose_alpha -resize 256x256!", _ocl_step([img("rose
 # the image's OpenCL cache, so CopyOpenCLEvents merges two event lists (opencl.c).
 GAP_OPENCL_CASES += [("opencl rose_alpha chained blur, resize, local contrast",
                       _ocl_step([img("rose_alpha")], "-blur 0x2 -resize 50% -local-contrast 10x20"), {})]
+# 2026-10-08 candidates for accelerate.c's open checks (a round keeps those that kill): gray with
+# alpha (two channels, which checkAccelerateCondition sends to the CPU), channel masks without all
+# of RGBA, modulate in colourspaces other than HSL, -grayscale's intensity methods
+GAP_OPENCL_CASES += [("opencl %s" % label, _ocl_step(inputs, op), {}) for label, inputs, op in (
+    ("graya -blur 0x1.5", [img("rose_alpha"), "-colorspace", "gray"], "-blur 0x1.5"),
+    ("graya -unsharp", [img("rose_alpha"), "-colorspace", "gray"], "-unsharp 0x1+1.5+0.05"),
+    ("graya -resize 57%", [img("rose_alpha"), "-colorspace", "gray"], "-resize 57%"),
+    ("graya -contrast-stretch", [img("rose_alpha"), "-colorspace", "gray"], "-contrast-stretch 5%x5%"),
+    ("rose -channel R -motion-blur", [img("rose")], "-channel R -motion-blur 0x3+30"),
+    ("rose -channel RG -local-contrast", [img("rose")], "-channel RG -local-contrast 10x20"),
+    ("rose -modulate in HSB", [img("rose")], "-define modulate:colorspace=HSB -modulate 120,80,110"),
+    ("rose -modulate in HWB", [img("rose")], "-define modulate:colorspace=HWB -modulate 90,130,95"),
+    ("rose -grayscale Rec601Luma", [img("rose")], "-grayscale Rec601Luma"),
+    ("rose -grayscale Average", [img("rose")], "-grayscale Average"))]
 # The device choice: GPU finds none (the CPU path), true takes the profile's best device, false
 # leaves OpenCL off. Each entry: label, environment.
 GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
