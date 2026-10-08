@@ -1,9 +1,8 @@
 mutate: 23 mutants in MagickCore/locale\.c$, 11 functions
-  baseline: 2/2 (0s)
-mutate: baseline over 18 cases in 1s
-  mutants: 23/23 (9s)
+mutate: baseline over 11 cases in 0s
+  mutants: 23/23 (6s)
 
-mutate: 23 mutants, 9s
+mutate: 23 mutants, 6s
   killed 0, survived 14 (0 capped), no coverage 9, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -37,4 +36,4 @@ mutate: 23 mutants, 9s
     x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-e5f3490bf-locale.json
+  full results: build-oracle/work/mutation-confirm-805a50f4f-locale.json
