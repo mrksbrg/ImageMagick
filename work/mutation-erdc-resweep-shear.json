@@ -1365,7 +1365,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/5731d0d121",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/shear.c:354:24:354:26",
@@ -2361,7 +2361,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/5731d0d121",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/shear.c:594:23:594:24",
@@ -2467,9 +2467,9 @@
   "col": 15,
   "function": "DeskewImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "unary/cb85d68208",
-  "why": "out.miff differs"
+  "cases": 11,
+  "killer": "gaps/d5452807d7",
+  "why": "stdout differs; out.miff differs"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/shear.c:607:29:607:30",
@@ -3103,9 +3103,9 @@
   "col": 25,
   "function": "IntegralRotateImage",
   "status": "killed",
-  "cases": 6,
-  "killer": "gaps/cc16e392b0",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "cases": 3,
+  "killer": "unary/9de8e9242e",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/shear.c:842:46:842:48",
