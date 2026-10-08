@@ -5246,7 +5246,14 @@ GAP_XEVENTS_WIDGET_CASES = [
     ("xevents display add noise browser, %s" % label, "map click:20,20 map click:65,261 map click:40,73 map " + steps, {})
     for label, steps in (("Impulse picked", "click:60,85 grab:out.ppm click:159,358 use:1 key:q"),
                          ("Impulse noise added", "click:60,85 click:159,358 use:1 key:at grab:out.ppm key:q"),
-                         ("cancelled", "grab:out.ppm click:237,358 use:1 key:q"))]
+                         ("cancelled", "grab:out.ppm click:237,358 use:1 key:q"))] + [
+    # Help > Overview scrolled (XTextViewWidget, 2026-10-08): by Page Down, by the scroll bar's
+    # arrow, by paging in its trough then Home and End. Not used: XNoticeWidget (Edit > Paste with
+    # nothing copied), which polls a timer to dismiss itself, so display never goes idle for xevents
+    ("xevents display help overview, %s" % label,
+     "map click:20,20 map click:65,388 map click:40,12 map " + steps + " grab:out.ppm click:397,607 use:1 key:q", {})
+    for label, steps in (("paged down", "key:Next*3"), ("scrolled by the arrow", "click:419,577*10"),
+                         ("paged in the trough, Home, End", "click:419,400*3 key:Home key:End"))]
 # label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
 # switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
 # to run. Not used: MAGICK_OCL_DEVICE=false, which runs that benchmark in spite of the profile
