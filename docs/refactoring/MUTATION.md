@@ -3978,3 +3978,13 @@ matte** is dead code (XGetWindowInfo sets `shape=MagickFalse` always, "Fedora 30
 shape extension"). A drag over the Commands widget's buttons changes nothing visible and was not
 kept. Measured by the round `x11cl2-widgets1008` (queued behind the W01 confirmation sweep
 `x11cl4`).
+
+## Owner's decision: debug logging is outside the oracle's contract (2026-10-08)
+
+Trace and debug logging (`-debug`, LogMagickEvent, the `IsEventLogging()` guards, the pixel
+cache's debug ticks) is not part of what the oracle protects: refactorings may legitimately add,
+move or drop trace calls, and trace text names modules and functions. No trace cases (a case's own
+`log.xml` would have made them deterministic); instead the logging-only survivors of every
+Windows file get `unobservable` verdicts citing the decision: 289 (W01 138: xwindow.c 42,
+display.c 39, animate.c 29, accelerate.c 15, widget.c 13; regular files 151). **For the Mac:**
+the same decision applies to its files' logging guards.

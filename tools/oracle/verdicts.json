@@ -34711,6 +34711,2796 @@
    "src": "ReleaseOpenCLKernel(histogramKernel);",
    "verdict": "unobservable",
    "why": "only decides whether the histogram kernel is released: a leak, nothing printed"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "AttachCustomStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "BlobToFile",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "DuplicateBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ErrorBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "FileToImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ImageToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ImageToFile",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ImagesToBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ImagesToCustomStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "InjectImageBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "PingBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ReadBlobString",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "SetBlobExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "BlobToImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "CustomStreamToImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "DestroyCustomStreamInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "GetBlobStreamHandler",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "ImageToCustomStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/blob.c",
+   "function": "TellBlob",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "ClipPixelCacheNexus",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheMethods",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "DestroyImagePixelCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "GetPixelCacheColorspace",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "GetPixelCacheStorageClass",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "MaskPixelCacheNexus",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "PersistPixelCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/cache.c",
+   "function": "PersistPixelCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((cache_info->debug != MagickFalse) &&",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/cache.c",
+   "function": "ReadPixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(CacheTick(nexus_info->region.y,cache_info->rows) != MagickFalse))",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "ReshapePixelCache",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheMethods",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "SetCacheAlphaChannel",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if ((cache_info->debug != MagickFalse) &&",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 50,
+   "file": "MagickCore/cache.c",
+   "function": "WritePixelCacheMetacontent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "(CacheTick(nexus_info->region.y,cache_info->rows) != MagickFalse))",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/cache.c",
+   "function": "ClonePixelCacheRepository",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (cache_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "GetPixelCacheTileSize",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache.c",
+   "function": "SetPixelCacheVirtualMethod",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "CloneCacheView",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "GetCacheViewColorspace",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "GetCacheViewExtent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "GetCacheViewImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "GetCacheViewStorageClass",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "SetCacheViewStorageClass",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/cache-view.c",
+   "function": "SetCacheViewVirtualPixelMethod",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/color.c",
+   "function": "GetColorInfoList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/color.c",
+   "function": "GetColorList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/color.c",
+   "function": "GetColorTuple",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/color.c",
+   "function": "IsEquivalentImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "GetImageColorspaceType",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "sRGBTransformImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "SetImageColorspace",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "SetImageGray",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "SetImageMonochrome",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "TransformImageColorspace",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/colorspace.c",
+   "function": "TransformsRGBImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/composite.c",
+   "function": "CompositeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/composite.c",
+   "function": "TextureImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/constitute.c",
+   "function": "ConstituteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/constitute.c",
+   "function": "PingImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/constitute.c",
+   "function": "PingImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/distort.c",
+   "function": "AffineTransformImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/distort.c",
+   "function": "DistortResizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/distort.c",
+   "function": "DistortImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/distort.c",
+   "function": "RotateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/distort.c",
+   "function": "SparseColorImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/feature.c",
+   "function": "CannyEdgeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/feature.c",
+   "function": "GetImageFeatures",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/feature.c",
+   "function": "HoughLineImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/feature.c",
+   "function": "MeanShiftImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/fx.c",
+   "function": "FxImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/gem.c",
+   "function": "GetOptimalKernelWidth1D",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/gem.c",
+   "function": "GetOptimalKernelWidth2D",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/histogram.c",
+   "function": "ClassifyImageColors",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/histogram.c",
+   "function": "IdentifyPaletteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/histogram.c",
+   "function": "IsHistogramImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/histogram.c",
+   "function": "IsPaletteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/magick.c",
+   "function": "GetImageMagick",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/magick.c",
+   "function": "GetMagickInfoList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/magick.c",
+   "function": "GetMagickList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/montage.c",
+   "function": "DestroyMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/montage.c",
+   "function": "GetMontageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/montage.c",
+   "function": "MontageImageList",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/morphology.c",
+   "function": "MorphologyImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/option.c",
+   "function": "GetNextImageOption",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/option.c",
+   "function": "RemoveImageOption",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/option.c",
+   "function": "ResetImageOptions",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/option.c",
+   "function": "ResetImageOptionIterator",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/pixel.c",
+   "function": "ExportImagePixels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/pixel.c",
+   "function": "ImportImagePixels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/pixel.c",
+   "function": "SortImagePixels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/prepress.c",
+   "function": "GetImageTotalInkDensity",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "CompressImageColormap",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "GetImageQuantizeError",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "KmeansImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/quantize.c",
+   "function": "KmeansImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "PosterizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "QuantizeImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "RemapImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantize.c",
+   "function": "RemapImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/quantum.c",
+   "function": "SetQuantumEndian",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/registry.c",
+   "function": "GetNextImageRegistry",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/registry.c",
+   "function": "RemoveImageRegistry",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/registry.c",
+   "function": "ResetImageRegistryIterator",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/registry.c",
+   "function": "SetImageRegistry",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/resample.c",
+   "function": "AcquireResampleFilter",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/resample.c",
+   "function": "DestroyResampleFilter",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/resample.c",
+   "function": "SetResampleFilterInterpolateMethod",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/resample.c",
+   "function": "SetResampleFilterVirtualPixelMethod",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "DestroySignatureInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "FinalizeSignature",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "GetSignatureBlocksize",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "GetSignatureDigest",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "GetSignatureDigestsize",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "InitializeSignature",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/signature.c",
+   "function": "SignatureImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "DeleteNodeByValueFromSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "GetNextValueInSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "GetRootValueFromSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "GetNumberOfNodesInSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "RemoveNodeByValueFromSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "RemoveNodeFromSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/splay-tree.c",
+   "function": "ResetSplayTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "GetAuthenticMetacontentFromStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "GetAuthenticPixelsStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "GetAuthenticPixelsFromStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "GetVirtualPixelsStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "GetVirtualMetacontentFromStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "GetVirtualPixelStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "ReadStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "StreamImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "StreamImagePixels",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "SyncAuthenticPixelsStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/stream.c",
+   "function": "WriteStream",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/token.c",
+   "function": "DestroyTokenInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "AddPathToXMLTree",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTreeRoot",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "DestroyXMLTree_",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "GetNextXMLTreeTag",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "GetXMLTreeAttribute",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "GetXMLTreeChild",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "GetXMLTreeContent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "GetXMLTreeSibling",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "GetXMLTreeTag",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "SetXMLTreeContent",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xml-tree.c",
+   "function": "XMLTreeInfoToXML",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateContrastImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeContrastStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateContrastStretchImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "ComputeEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateEqualizeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateFunctionImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateGrayscaleImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateModulateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/accelerate.c",
+   "function": "AccelerateRotationalBlurImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/animate.c",
+   "function": "AnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateBackgroundImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateBackgroundImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateBackgroundImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 4,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 5,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 6,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 7,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 8,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 9,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (image_list[scene]->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 10,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 11,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 12,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 13,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 14,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 15,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 16,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 17,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 18,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 19,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 20,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 21,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/animate.c",
+   "function": "XAnimateImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 22,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "DisplayImages",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "RemoteDisplayCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XCompositeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XCompositeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XCompositeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XCompositeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XConfigureImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XPasteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XPasteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XPasteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XPasteImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayBackgroundImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayBackgroundImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 1,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 2,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 3,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 4,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 5,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 6,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 7,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 8,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 9,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 10,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 11,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 12,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 13,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 14,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 15,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 16,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 17,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 18,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 19,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 20,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 21,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 22,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 23,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/display.c",
+   "function": "XDisplayImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 24,
+   "src": "if (resource_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XColorBrowserWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XCommandWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XConfirmWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XDialogWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XFileBrowserWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XFontBrowserWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XInfoWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XListBrowserWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XMenuWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XNoticeWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XPreferencesWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XProgressMonitorWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/widget.c",
+   "function": "XTextViewWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XAnnotateImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XBestIconSize",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XBestPixel",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XBestVisualInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XCheckDefineCursor",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XCheckRefreshWindows",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XClientWindow",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XConstrainWindowPosition",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XDestroyWindowColors",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XDisplayImageInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XDrawImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XError",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XFreeResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XFreeStandardColormap",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetAnnotateInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetMapInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetPixelInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetResourceInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetWindowColor",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetWindowImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XGetWindowInfo",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XHighlightEllipse",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XHighlightLine",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XHighlightRectangle",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XImportImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakeImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakeImageLSBFirst",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakeImageMSBFirst",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakeMagnifyImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakePixmap",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakeStandardColormap",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XMakeWindow",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XQueryPosition",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XRefreshWindow",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XRemoteCommand",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XRenderImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (draw_info->debug != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XRetainWindowColors",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XSelectWindow",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XSetCursorState",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XWindowByID",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XWindowByName",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 21,
+   "file": "MagickCore/xwindow.c",
+   "function": "XWindowByProperty",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (IsEventLogging() != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
   }
  ]
 }
