@@ -109,6 +109,10 @@ def env_for(binary, case_dir, extra_env=None):
         env["MALLOC_PERTURB_"] = "165"
     if "LLVM_PROFILE_FILE" in os.environ:
         env["LLVM_PROFILE_FILE"] = os.environ["LLVM_PROFILE_FILE"]
+    # An AddressSanitizer build (SANITIZE=address build.sh mull) is run with the caller's
+    # ASAN_OPTIONS, e.g. ASAN_OPTIONS=detect_leaks=0:exitcode=86 so a report kills the mutant.
+    if "ASAN_OPTIONS" in os.environ:
+        env["ASAN_OPTIONS"] = os.environ["ASAN_OPTIONS"]
     for name, value in (extra_env or {}).items():  # per-case profiles, Mull mutant switches
         if value is None:  # a case may remove a variable: X11 cases drop SOURCE_DATE_EPOCH
             env.pop(name, None)

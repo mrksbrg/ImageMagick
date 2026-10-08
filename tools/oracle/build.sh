@@ -8,8 +8,11 @@
 #                                          candidate with Mull mutants in matching
 #                                          files, in build-oracle/mull-<name>;
 #                                          defaults plus statement deletion,
-#                                          MULL_MUTATORS="..." to choose others
-#   tools/oracle/build.sh wide             candidate with X11 and OpenCL as well,
+#                                          MULL_MUTATORS="..." to choose others;
+#                                          SANITIZE=address adds AddressSanitizer
+#                                          (for the survivors glibc forgives; run
+#                                          mutate.py --bin with ASAN_OPTIONS set)
+#   tools/oracle/build.sh wide            candidate with X11 and OpenCL as well,
 #                                          in build-oracle/wide (WIDE=1 cand)
 #   tools/oracle/build.sh win              on Windows, from MSYS2 UCRT64: gcc,
 #                                          compiles nt-base.c, nt-feature.c and
@@ -147,15 +150,21 @@ case "${1:-}" in
       ldflags="$LINK_FLAGS"
     fi
     [ -x "$llvm/clang" ] && [ -f "$plugin" ] || { echo "$llvm/clang or $plugin missing" >&2; exit 1; }
+    # SANITIZE=address: memory errors a mutant causes become reports, not silence (glibc's
+    # tcache takes an invalid free without a word). driver/build.sh links imdriver with it too.
+    san=""
+    [ -n "${SANITIZE:-}" ] && san="-fsanitize=$SANITIZE -fno-omit-frame-pointer"
     if [ ! -f "$bld/Makefile" ]; then
       (cd "$bld" && CC="$llvm/clang" CXX="$llvm/clang++" \
-         CFLAGS="$OPT_CFLAGS -grecord-command-line -fpass-plugin=$plugin" \
-         CXXFLAGS="$OPT_CFLAGS" LDFLAGS="$ldflags" \
+         CFLAGS="$OPT_CFLAGS $san -grecord-command-line -fpass-plugin=$plugin" \
+         CXXFLAGS="$OPT_CFLAGS $san" LDFLAGS="$ldflags $san" \
          "$ROOT/configure" "${CONFIG_FLAGS[@]}" > configure.log 2>&1) \
         || { echo "configure failed, see $bld/configure.log" >&2; exit 1; }
     fi
     make -C "$bld" -j"$JOBS" utilities/magick > "$bld/make.log" 2>&1 \
       || { tail -30 "$bld/make.log" >&2; echo "build failed, see $bld/make.log" >&2; exit 1; }
+    "$ROOT/tools/oracle/driver/build.sh" "$bld" > /dev/null 2>> "$bld/make.log" \
+      || echo "imdriver not built, see $bld/make.log" >&2
     echo "$bld/utilities/magick"
     ;;
   wide)
