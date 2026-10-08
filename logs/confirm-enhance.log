@@ -1,5 +1,5 @@
 mutate: 155 mutants in MagickCore/enhance\.c$, 30 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 3 cases in 0s
   mutants: 25/155 (0s)
   mutants: 50/155 (0s)
   mutants: 75/155 (0s)
@@ -9,10 +9,11 @@ mutate: baseline over 0 cases in 0s
   mutants: 155/155 (0s)
 
 mutate: 155 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 155, errors 0
+  killed 0, survived 25 (0 capped), no coverage 130, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  ContrastStretchImage                  19      0        0     19
+  ContrastStretchImage                  19      0       19      0
   EqualizeImage                         16      0        0     16
   CLAHEImage                            12      0        0     12
   ColorDecisionListImage                 9      0        0      9
@@ -22,7 +23,7 @@ mutate: 155 mutants, 0s
   EnhanceImage                           6      0        0      6
   GammaImage                             6      0        0      6
   LevelizeImage                          6      0        0      6
-  ModulateImage                          6      0        0      6
+  ModulateImage                          6      0        6      0
   ClipCLAHEHistogram                     5      0        0      5
   ContrastImage                          5      0        0      5
   LevelImage                             5      0        0      5
@@ -43,4 +44,32 @@ mutate: 155 mutants, 0s
   ModulateLCHab                          1      0        0      1
   ModulateLCHuv                          1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-e8600164c-enhance.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  enhance.c:1597:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+       enhance.c:1611:21 cxx_ne_to_eq               if (histogram != (double *) NULL)
+       enhance.c:1613:23 cxx_ne_to_eq               if (stretch_map != (Quantum *) NULL)
+       enhance.c:1615:17 cxx_ne_to_eq               if (white != (Quantum *) NULL)
+       enhance.c:1617:17 cxx_ne_to_eq               if (black != (Quantum *) NULL)
+    x  enhance.c:1665:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetPixelChannels(image); i++)
+    x  enhance.c:1676:17 cxx_le_to_lt               for (j=0; j <= (ssize_t) MaxMap; j++)
+    x  enhance.c:1696:41 cxx_mul_to_div             (void) memset(stretch_map,0,(MaxMap+1)*GetPixelChannels(image)*
+    x  enhance.c:1696:65 cxx_mul_to_div             (void) memset(stretch_map,0,(MaxMap+1)*GetPixelChannels(image)*
+    x  enhance.c:1709:13 cxx_lt_to_le               if (j < (ssize_t) black[i])
+    x  enhance.c:1712:15 cxx_gt_to_ge               if (j > (ssize_t) white[i])
+    x  enhance.c:1728:19 cxx_lt_to_le               for (j=0; j < (ssize_t) image->colors; j++)
+    x  enhance.c:1735:39 cxx_add_to_sub             image->colormap[j].red))+(size_t) i];
+    x  enhance.c:1751:61 cxx_ne_to_eq               if ((GetPixelAlphaTraits(image) & UpdatePixelTrait) != 0)
+    x  enhance.c:1755:38 cxx_mul_to_div             GetPixelChannels(image)*ScaleQuantumToMap(ClampToQuantum(
+    x  enhance.c:1756:41 cxx_add_to_sub             image->colormap[j].alpha))+(size_t) i];
+    x  enhance.c:1806:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:1814:17 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:1817:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+    x  enhance.c:3690:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  enhance.c:3715:27 cxx_lt_to_le               if (illuminant_type < 0)
+    x  enhance.c:3724:17 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
+    x  enhance.c:3907:33 cxx_ne_to_eq               if (image->progress_monitor != (MagickProgressMonitor) NULL)
+       enhance.c:3915:17 cxx_post_inc_to_post_dec   progress++;
+       enhance.c:3917:21 cxx_eq_to_ne               if (proceed == MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-3da6b8dfb-enhance.json
