@@ -5205,7 +5205,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "convert/4f3f5e5b39",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/enhance.c:1786:46:1786:48",
@@ -5719,8 +5719,8 @@
   "col": 52,
   "function": "EnhanceImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "unary/d337a70d7d",
+  "cases": 1,
+  "killer": "unary/80d67a51e1",
   "why": "out.miff differs"
  },
  {
@@ -7579,7 +7579,7 @@
   "col": 24,
   "function": "GrayscaleImage",
   "status": "survived",
-  "cases": 123,
+  "cases": 116,
   "capped": false,
   "line_executed": true
  },
@@ -7951,7 +7951,7 @@
   "col": 33,
   "function": "GrayscaleImage",
   "status": "survived",
-  "cases": 123,
+  "cases": 116,
   "capped": false,
   "line_executed": true
  },
@@ -7963,7 +7963,7 @@
   "col": 17,
   "function": "GrayscaleImage",
   "status": "survived",
-  "cases": 123,
+  "cases": 116,
   "capped": false,
   "line_executed": false
  },
@@ -7975,7 +7975,7 @@
   "col": 21,
   "function": "GrayscaleImage",
   "status": "survived",
-  "cases": 123,
+  "cases": 116,
   "capped": false,
   "line_executed": false
  },
