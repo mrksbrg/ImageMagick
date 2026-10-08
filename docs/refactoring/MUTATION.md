@@ -3988,3 +3988,40 @@ move or drop trace calls, and trace text names modules and functions. No trace c
 Windows file get `unobservable` verdicts citing the decision: 289 survivors, 279 new verdicts (10 had one already; W01 138: xwindow.c 42,
 display.c 39, animate.c 29, accelerate.c 15, widget.c 13; regular files 151). **For the Mac:**
 the same decision applies to its files' logging guards.
+
+## AddressSanitizer for the survivors glibc forgives (2026-10-08, owner approved)
+
+glibc's tcache takes an invalid or double free without a word, and a write one past a small
+array goes unseen, so some survivors were `unresolved` on a hypothesis of silent heap damage.
+`SANITIZE=address tools/oracle/build.sh mull <regex> asan` builds the Mull binary with
+AddressSanitizer (build-oracle/mull-asan; the 34-file regex of mull-sdl-win, so mutant ids
+match); oracle.py passes `ASAN_OPTIONS` through. Used narrowly, with
+`ASAN_OPTIONS=detect_leaks=0:exitcode=86:allocator_may_return_null=1:malloc_fill_byte=165:max_malloc_fill_size=1073741824:hard_rss_limit_mb=2500`
+(no leak reports: ImageMagick leaves its caches to exit; a report exits 86, which kills; malloc
+returns NULL as glibc's does; glibc's fill byte). Do not set ORACLE_MEM_GB with it: `prlimit --as`
+stops ASan's shadow mapping, so `hard_rss_limit_mb` caps memory instead. Mull and ASan together
+need about 3 GB per compile job.
+
+Targets: every open or `unresolved` survivor of xml-tree.c (52) and stream.c (62) and the
+`unresolved` ones of matrix.c, signature.c, distort.c and resource.c (7); default case cap.
+The baseline under ASan (2540 cases) has no report: nothing new upstream. Results: 26 kills, every
+one an ASan report on a case that passes without it:
+
+| file | run | killed | what |
+|---|---|---|---|
+| xml-tree.c | 52 | 5 | index arithmetic in DestroyXMLTreeAttributes, DestroyXMLTreeRoot, ParseEntities, ParseProcessingInstructions; NewXMLTree |
+| stream.c | 62 | 20 | `x < number_pixels` -> `<=` in StreamImagePixels, one per storage type and map: a pixel written past the buffer |
+| others | 7 | 1 | TransformSignature's schedule loop to `i <= 64`: W[64], one past a stack array |
+
+It also refuted the hypothesis behind six DestroyXMLTreeRoot verdicts: the neighbouring slot the
+mutant touches was destroyed a step earlier and is NULL, so they store a NULL into a NULL slot
+(`equivalent`, 3) or skip a free (a leak, `unobservable`, 3). 13 `unresolved` verdicts on mutants
+now killed were dropped; the 15 survivors ASan ran without a report say so in their verdicts.
+
+**xml-tree.c is trusted** (93%; every reached function at 80%+): 35 of the 36 regular files.
+stream.c stays short (QueueAuthenticPixelsStream, GetVirtualPixelStream,
+ValidatePixelCacheMorphology, ReadStream).
+
+W01 the same day: the widget round (42 cases, 5950 mutants) took widget.c from 460 to 1092 kills
+(adjusted 19% -> 45%); a case for the OpenCL cache directory made from scratch killed the last
+open mutant of a reached opencl.c function, so **opencl.c is trusted** (99%), with accelerate.c.
