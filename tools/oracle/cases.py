@@ -5230,7 +5230,17 @@ GAP_XEVENTS_WIDGET_CASES = [
     for label, steps in (("item selected", "click:150,160 grab:out.ppm click:175,360"),
                          ("scrolled, item selected", "click:262,290*5 click:150,100 grab:out.ppm click:175,360"),
                          ("reset, cancelled", "click:37,88 grab:out.ppm click:240,360"),
-                         ("cancelled", "grab:out.ppm click:240,360"))]
+                         ("cancelled", "grab:out.ppm click:240,360"))] + [
+    # Image Edit > Annotate..., Font Name > Browser... (XFontBrowserWidget, 2026-10-08): the X
+    # server's font list (this machine's fonts), pick, scroll, reset, Select or Cancel; Dismiss
+    # leaves Annotate mode
+    ("xevents display font browser, %s" % label,
+     "map click:20,20 map click:65,325 map click:40,12 click:65,101 map click:40,203 map " + steps +
+     " click:65,261 use:1 key:q", {})
+    for label, steps in (("item selected", "click:200,150 grab:out.ppm click:434,376"),
+                         ("scrolled, item selected", "click:517,48*6 click:200,120 grab:out.ppm click:434,376"),
+                         ("reset, cancelled", "click:37,88 grab:out.ppm click:497,376"),
+                         ("cancelled", "grab:out.ppm click:497,376"))]
 # label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
 # switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
 # to run. Not used: MAGICK_OCL_DEVICE=false, which runs that benchmark in spite of the profile
