@@ -5253,7 +5253,14 @@ GAP_XEVENTS_WIDGET_CASES = [
     ("xevents display help overview, %s" % label,
      "map click:20,20 map click:65,388 map click:40,12 map " + steps + " grab:out.ppm click:397,607 use:1 key:q", {})
     for label, steps in (("paged down", "key:Next*3"), ("scrolled by the arrow", "click:419,577*10"),
-                         ("paged in the trough, Home, End", "click:419,400*3 key:Home key:End"))]
+                         ("paged in the trough, Home, End", "click:419,400*3 key:Home key:End"))] + [
+    # The third button's Short Cuts menu (XMenuWidget without a submenu, 2026-10-08; xevents'
+    # press3:/release3:): shown, dragged over its items, moved out and back, then released on
+    # its title, which picks nothing (Restore never lets display idle; after Undo q is lost)
+    ("xevents display short cuts menu, %s" % label, "map press3:30,20 map " + steps + " use:1 key:q", {})
+    for label, steps in (("shown", "grab:out.ppm release3:5,5"),
+                         ("dragged over its items", "move:30,40 move:30,80 move:30,120 grab:out.ppm release3:5,5"),
+                         ("moved out and back", "move:30,60 move:200,60 move:30,100 grab:out.ppm release3:5,5"))]
 # label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
 # switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
 # to run. Not used: MAGICK_OCL_DEVICE=false, which runs that benchmark in spite of the profile

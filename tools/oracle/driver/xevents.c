@@ -13,6 +13,8 @@
     move:X,Y      move it there, the button still held (display's crop, ROI and draw modes
                   follow the pointer while the button is down)
     release:X,Y   move it there and release the first button
+                  click, press and release take a button number too (click3:X,Y, press3:X,Y,
+                  release3:X,Y: display's command menu is on the third)
     drag:X1,Y1,X2,Y2[,N]
                   press at X1,Y1, move to X2,Y2 in N steps (default 4), release there
     use:N         keep the focus on the Nth window waited for (1: the first) until the next map,
@@ -260,12 +262,27 @@ static void Point(const char *xy)
   WaitIdle();
 }
 
-/* The first button down or up at X,Y in the focused window; the pointer is moved there first. */
-static void Button(const char *xy, Bool down)
+/* Button b down or up at X,Y in the focused window; the pointer is moved there first. */
+static void ButtonN(const char *xy, unsigned int b, Bool down)
 {
   Point(xy);
-  XTestFakeButtonEvent(dpy, 1, down, CurrentTime);
+  XTestFakeButtonEvent(dpy, b, down, CurrentTime);
   WaitIdle();
+}
+
+static void Button(const char *xy, Bool down)
+{
+  ButtonN(xy, 1, down);
+}
+
+/* click3:, press3:, release3: (any button 1 to 5): 1 when tok is NAME followed by a digit and ':' */
+static int Numbered(const char *tok, const char *name, unsigned int *b, const char **xy)
+{
+  size_t n = strlen(name);
+  if ((strncmp(tok, name, n) != 0) || (tok[n] < '1') || (tok[n] > '5') || (tok[n + 1] != ':')) return 0;
+  *b = (unsigned int) (tok[n] - '0');
+  *xy = tok + n + 2;
+  return 1;
 }
 
 static void Drag(const char *arg)
@@ -334,6 +351,8 @@ int main(int argc, char **argv)
   for (i = 1; i < sep; i++)
   {
     char *script = strdup(argv[i]), *save = NULL, *tok;
+    unsigned int nb = 1;
+    const char *nxy = NULL;
     for (tok = strtok_r(script, " ", &save); tok; tok = strtok_r(NULL, " ", &save))
     {
       if (strcmp(tok, "map") == 0) Map();
@@ -348,6 +367,9 @@ int main(int argc, char **argv)
       else if (strncmp(tok, "move:", 5) == 0) Point(tok + 5);
       else if (strncmp(tok, "release:", 8) == 0) Button(tok + 8, False);
       else if (strncmp(tok, "drag:", 5) == 0) Drag(tok + 5);
+      else if (Numbered(tok, "click", &nb, &nxy)) { ButtonN(nxy, nb, True); ButtonN(nxy, nb, False); }
+      else if (Numbered(tok, "press", &nb, &nxy)) ButtonN(nxy, nb, True);
+      else if (Numbered(tok, "release", &nb, &nxy)) ButtonN(nxy, nb, False);
       else Fail("unknown action");
     }
     free(script);
