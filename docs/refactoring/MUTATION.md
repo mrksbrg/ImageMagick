@@ -3915,3 +3915,27 @@ as all its reports merged** (linked-list.c 95% against 96% and magick.c 77% agai
 few kills came from uncapped reruns; no function crosses 80% either way), so the day's kills hold
 when every case runs together. **Trusted: 34 of 36**, unchanged; xml-tree.c (91%) and stream.c
 (91%) wait for a memory checker and the trace-logging decision.
+
+## W01: accelerate.c trusted (Windows, 2026-10-08, morning)
+
+Every function of accelerate.c a case reaches now kills at least 80% (adjusted 61% → 66%; the
+uncalled ones are out of reach and written down: AccelerateContrastStretchImage has no caller,
+AccelerateUnsharpMaskImage's call is commented out upstream, and their Compute* kernels with
+them). The steps:
+
+- Ten OpenCL candidates for the open accelerate checks; one stays, **`opencl graya -resize
+  57%`** (gray with alpha, two channels): round `x11cl2-ocl1008` killed 31 (accelerate.c 14,
+  opencl.c 17). The other nine (partial channel masks, modulate in HSB and HWB, two -grayscale
+  methods) killed nothing beyond it.
+- **Resize work-group tuning, 20 earlier "unresolved" verdicts, are killed** (`x11cl2-rsz1008`)
+  by `opencl driver profile {C}/rose.miff`: the profile prints the kernels each device ran with
+  their counts, and the tuning mutants change how often the resize kernels launch. The earlier
+  capped rounds had never paired them with that case.
+- Verdicts: modulate's OpenCL-or-CPU choice gives the same pixels (HSL, HSB and HWB hand-run);
+  the histogram launch and its padding serve only the OpenCL `-equalize`, whose kernel writes no
+  pixel (the seventh upstream bug), so the histogram is unobservable; the kernel's release.
+- **Nondeterminism caught on the way:** OpenCL `-grayscale MS` varies (rose 1 of 4, tiny 1 of 8,
+  tall 3 of 8) and is dropped (7 cases); its one kill (opencl.c) was rerun and holds.
+
+W01 now: accelerate.c 66% (trusted), opencl.c 69%, xwindow.c 28%, widget.c 19%, animate.c 17%,
+display.c 14%.
