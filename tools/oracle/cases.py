@@ -5010,6 +5010,13 @@ GAP_OPENCL_CASES += [("opencl graya -resize 57%",
 # leaves OpenCL off. Each entry: label, environment.
 GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
                            for dev in ("GPU", "true", "false")]
+# The OpenCL cache directory made from scratch: with OpenCL off, a relative
+# MAGICK_OPENCL_CACHE_DIR that does not exist yet is created, then ImageMagick/ inside it, each
+# only if the mkdir before succeeded (MagickCreateDirectory's status). A second step writes into
+# ocl/ImageMagick, so a missing directory shows (the oracle compares files, not directories).
+GAP_OPENCL_CACHE_DIR_CASES = [("opencl cache directory made, then written into",
+                               [["rose:", "-blur", "0x2", "null:"], ["rose:", "ocl/ImageMagick/seen.ppm"]],
+                               {"MAGICK_OPENCL_CACHE_DIR": "ocl"})]
 # Round 2 (W01): other screens, for xwindow.c's colormap, dither and visual paths (8-bit
 # PseudoColor, StaticGray, GrayScale and StaticColor; 15-, 16- and 30-bit TrueColor; 24-bit
 # DirectColor); AnimateImages and opencl.c's API through imdriver. (`display -remote` with no
@@ -5327,6 +5334,8 @@ def _gap_x11_opencl_cases():
     for label, env in GAP_OPENCL_DEVICE_CASES:
         yield _with_run(_case("opencl", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
                               ["out.miff"]), env=env)
+    for label, steps, env in GAP_OPENCL_CACHE_DIR_CASES:
+        yield _with_run(_case("opencl", label, steps, ["ocl/ImageMagick/seen.ppm"]), env=env)
     for label, steps, files, screen in GAP_X11_SCREEN_CASES:
         yield _with_run(_with_inputs(_case("x11", label, steps, ["out.ppm"]), files=files or None),
                         x11=screen)
