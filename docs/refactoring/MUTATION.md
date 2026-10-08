@@ -3951,3 +3951,30 @@ version, clock and compute units); without a match ImageMagick benchmarks again 
 varies. So such cases need the oracle to expand a placeholder (say `{OCL_DEVICE}`) in a case's
 files to this machine's device line, from `opencl-profile.xml`. **For the owner:** a small oracle
 extension; not done without your go-ahead.
+
+### W01: widgets opened by the mouse and the menus (Windows, 2026-10-08, afternoon)
+
+37 xevents and X11 cases, each measured in place first (the widget grabbed with `xevprobe.py`,
+its buttons located on the grab), then checked twice and in two directory names:
+
+- **Widgets no case had opened:** Miscellany > Preferences (toggles, Apply writes `~/.displayrc`
+  through XUserPreferences, or Cancel); the colour browser (Image Edit > Color, Pixel Color >
+  Browser); the font browser (Image Edit > Annotate, Font Name > Browser; it lists this
+  machine's X fonts); the list browser (Effects > Add Noise). Each: pick, scroll, reset, select or
+  cancel.
+- **Mouse paths of widgets the keys had reached:** the emboss dialog (a click in the field, Emboss
+  and Cancel clicked, a press dragged off, a middle-button paste); the quit confirmation (Yes,
+  Cancel, Dismiss, a press dragged off); the help text scrolled (Page Down, the arrow, the trough,
+  Home and End); the third button's Short Cuts menu (shown, dragged over, moved out and back),
+  for which xevents gained buttons by number (`click3:`, `press3:`, `release3:`).
+- **X resources of the case's own** (`~/.displayrc`: colour recovery, gamma, a private colormap,
+  borders and colours) for a root-window display and an animate window.
+
+Out of reach, measured: **XNoticeWidget** polls a timer to dismiss itself, so display never goes
+idle for xevents (as with `display -delay`); **animate's keys** likewise (it polls while it plays;
+with `-loop 1` it is gone before the first map); **xwindow.c's 1-, 2- and 4-bit paths and XYBitmap**
+need a screen of that depth, and this Xvfb starts only 8, 15, 16, 24 and 30; **the shaped-window
+matte** is dead code (XGetWindowInfo sets `shape=MagickFalse` always, "Fedora 30 has a broken
+shape extension"). A drag over the Commands widget's buttons changes nothing visible and was not
+kept. Measured by the round `x11cl2-widgets1008` (queued behind the W01 confirmation sweep
+`x11cl4`).
