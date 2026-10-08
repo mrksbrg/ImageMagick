@@ -5221,7 +5221,16 @@ GAP_XEVENTS_WIDGET_CASES = [
      {}),
     ("xevents display preferences, cancelled",
      "map click:20,20 map click:65,357 map click:40,158 map click:25,96 grab:out.ppm click:303,248 use:1 key:q", {}),
-]
+] + [
+    # Image Edit > Color..., Pixel Color > Browser... (XColorBrowserWidget, 2026-10-08): pick from
+    # the list, scroll it, reset, then Select or Cancel; Dismiss leaves Color mode
+    ("xevents display color browser, %s" % label,
+     "map click:20,20 map click:65,325 map click:40,52 click:65,133 map click:40,203 map " + steps +
+     " click:65,293 use:1 key:q", {})
+    for label, steps in (("item selected", "click:150,160 grab:out.ppm click:175,360"),
+                         ("scrolled, item selected", "click:262,290*5 click:150,100 grab:out.ppm click:175,360"),
+                         ("reset, cancelled", "click:37,88 grab:out.ppm click:240,360"),
+                         ("cancelled", "grab:out.ppm click:240,360"))]
 # label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
 # switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
 # to run. Not used: MAGICK_OCL_DEVICE=false, which runs that benchmark in spite of the profile
