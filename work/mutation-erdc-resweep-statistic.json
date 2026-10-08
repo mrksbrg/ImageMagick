@@ -6987,7 +6987,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "identify/15d9590616",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_le_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/statistic.c:1981:14:1981:16",
@@ -7191,7 +7191,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "identify/15d9590616",
-  "why": "stdout differs"
+  "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/statistic.c:2000:13:2000:14",
@@ -8679,7 +8679,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "identify/15d9590616",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/statistic.c:2280:19:2280:21",
@@ -9565,8 +9565,8 @@
   "col": 15,
   "function": "statistic.c:DestroyPixelListTLS",
   "status": "killed",
-  "cases": 32,
-  "killer": "unary/e1d6cf3180",
+  "cases": 42,
+  "killer": "unary/70cceedaa5",
   "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
