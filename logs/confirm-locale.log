@@ -1,10 +1,9 @@
 mutate: 23 mutants in MagickCore/locale\.c$, 11 functions
-mutate: baseline over 1 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 23/23 (0s)
 
 mutate: 23 mutants, 0s
-  killed 0, survived 1 (0 capped), no coverage 22, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+  killed 0, survived 0 (0 capped), no coverage 23, errors 0
 
   function                           total killed survived no-cov
   LoadLocaleCache                        7      0        0      7
@@ -14,13 +13,9 @@ mutate: 23 mutants, 0s
   GetLocaleOptions                       2      0        0      2
   IsLocaleTreeInstantiated               2      0        0      2
   DestroyLocaleNode                      1      0        0      1
-  FormatLocaleFileList                   1      0        1      0
+  FormatLocaleFileList                   1      0        0      1
   LocaleInfoCompare                      1      0        0      1
   GetLocaleValue                         1      0        0      1
   ChopLocaleComponents                   1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-3da6b8dfb-locale.json
+  full results: build-oracle/work/mutation-confirm-285045324-locale.json

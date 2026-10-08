@@ -1,15 +1,14 @@
 mutate: 51 mutants in MagickCore/utility\.c$, 9 functions
-mutate: baseline over 7 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/51 (0s)
-  mutants: 50/51 (1s)
-  mutants: 51/51 (1s)
+  mutants: 50/51 (0s)
+  mutants: 51/51 (0s)
 
-mutate: 51 mutants, 1s
-  killed 0, survived 17 (0 capped), no coverage 34, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+mutate: 51 mutants, 0s
+  killed 0, survived 0 (0 capped), no coverage 51, errors 0
 
   function                           total killed survived no-cov
-  ExpandFilenames                       17      0       17      0
+  ExpandFilenames                       17      0        0     17
   Base64Decode                           7      0        0      7
   GetExecutionPath                       5      0        0      5
   MagickDelay                            5      0        0      5
@@ -19,24 +18,4 @@ mutate: 51 mutants, 1s
   GetPathComponents                      3      0        0      3
   ExpandFilename                         2      0        0      2
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  utility.c:796:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  utility.c:829:20 cxx_gt_to_ge               if (parameters > 0)
-    x  utility.c:834:36 cxx_post_inc_to_post_dec   for (j=0; j < parameters; j++)
-    x  utility.c:847:5 cxx_remove_void_call       GetPathComponent(option,MagickPath,magick);
-    x  utility.c:894:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (length-1); j++)
-    x  utility.c:894:40 cxx_sub_to_add             for (j=0; j < (ssize_t) (length-1); j++)
-    x  utility.c:914:24 cxx_add_to_sub             *number_arguments+count+(ssize_t) number_files+1),sizeof(*vector));
-    x  utility.c:914:53 cxx_add_to_sub             *number_arguments+count+(ssize_t) number_files+1),sizeof(*vector));
-       utility.c:917:21 cxx_lt_to_ge               for (j=0; j < (ssize_t) number_files; j++)
-       utility.c:917:21 cxx_lt_to_le               for (j=0; j < (ssize_t) number_files; j++)
-       utility.c:917:48 cxx_post_inc_to_post_dec   for (j=0; j < (ssize_t) number_files; j++)
-    x  utility.c:952:28 cxx_ge_to_gt               if (strlen(filename) >= (MagickPathExtent-1))
-    x  utility.c:974:33 cxx_ge_to_gt               if (strlen(file_path) >= (MagickPathExtent-1))
-    x  utility.c:988:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-       utility.c:994:19 cxx_lt_to_ge               for (i=1; i < count; i++)
-       utility.c:994:19 cxx_lt_to_le               for (i=1; i < count; i++)
-       utility.c:994:29 cxx_post_inc_to_post_dec   for (i=1; i < count; i++)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-3da6b8dfb-utility.json
+  full results: build-oracle/work/mutation-confirm-285045324-utility.json
