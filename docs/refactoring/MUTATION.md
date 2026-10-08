@@ -4025,3 +4025,12 @@ ValidatePixelCacheMorphology, ReadStream).
 W01 the same day: the widget round (42 cases, 5950 mutants) took widget.c from 460 to 1092 kills
 (adjusted 19% -> 45%); a case for the OpenCL cache directory made from scratch killed the last
 open mutant of a reached opencl.c function, so **opencl.c is trusted** (99%), with accelerate.c.
+
+stream.c's 42 survivors after that round, rerun under ASan uncapped (`--max-cases 0`; 329 cases
+reach them): no kill. The pixel-buffer lengths in QueueAuthenticPixelsStream and
+GetVirtualPixelStream (`columns*rows` -> `/`, `<` -> `<=` on the reuse test) look like memory errors
+but are not: rows is 1 for nearly every coder, so `columns/rows` equals `columns*rows`, and the one
+whole-image queue found (QOI, 70x46, hand-run with gdb) meets a stream buffer already sized for the
+image (51520 bytes), which a shorter length simply reuses. DDS (4x4 blocks) and tiled TIFF still
+queue one row at a time in stream mode. stream.c stays short; those mutants are candidates for
+verdicts, not cases.
