@@ -1281,7 +1281,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "compare/78b32ff69e",
-  "why": "exit status [1] -> [-6]; stderr differs; diff.miff missing in candidate"
+  "why": "exit status [1] -> ['timeout']; stderr differs; diff.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compare.c:592:42:592:44",
@@ -3897,7 +3897,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "compare/eba063c0d9",
-  "why": "exit status [1] -> [-6]; stderr differs; diff.miff missing in candidate"
+  "why": "exit status [1] -> ['timeout']; stderr differs; diff.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compare.c:1407:38:1407:40",
@@ -6249,7 +6249,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "compare/13b0389325",
-  "why": "stderr differs; diff.miff differs"
+  "why": "exit status [1] -> [0]; stdout differs; stderr differs; diff.miff differs"
  },
  {
   "id": "cxx_minus_to_noop:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compare.c:2168:50:2168:51",
