@@ -3939,3 +3939,15 @@ them). The steps:
 
 W01 now: accelerate.c 66% (trusted), opencl.c 69%, xwindow.c 28%, widget.c 19%, animate.c 17%,
 display.c 14%.
+
+**opencl.c (69%): what is left, and what it would take.** Its open functions load and use the
+device profile (LoadOpenCLDeviceBenchmark 59%, AutoSelectOpenCLDevices, SelectOpenCLDevice,
+RequestOpenCLDevice, LoadOpenCLBenchmarks, HasOpenCLDevices) or run the benchmark itself (no
+cases: timing). A case can bring a profile of its own (the oracle seeds one only where none is
+given), and profile variants (a DOCTYPE, comments, a device without a score, a CPU score above or
+below the device's, attributes without '=') would reach the parser and the selection. But a
+profile only takes effect when one entry matches the device exactly (platform, vendor, name,
+version, clock and compute units); without a match ImageMagick benchmarks again and the result
+varies. So such cases need the oracle to expand a placeholder (say `{OCL_DEVICE}`) in a case's
+files to this machine's device line, from `opencl-profile.xml`. **For the owner:** a small oracle
+extension; not done without your go-ahead.
