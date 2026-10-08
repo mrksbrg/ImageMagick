@@ -1,21 +1,40 @@
 mutate: 23 mutants in MagickCore/locale\.c$, 11 functions
-mutate: baseline over 0 cases in 0s
-  mutants: 23/23 (0s)
+  baseline: 2/2 (0s)
+mutate: baseline over 18 cases in 1s
+  mutants: 23/23 (9s)
 
-mutate: 23 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 23, errors 0
+mutate: 23 mutants, 9s
+  killed 0, survived 14 (0 capped), no coverage 9, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  LoadLocaleCache                        7      0        0      7
+  LoadLocaleCache                        7      0        7      0
   LocaleFatalErrorHandler                3      0        0      3
   GetLocaleInfoList                      2      0        0      2
   GetLocaleList                          2      0        0      2
-  GetLocaleOptions                       2      0        0      2
-  IsLocaleTreeInstantiated               2      0        0      2
-  DestroyLocaleNode                      1      0        0      1
-  FormatLocaleFileList                   1      0        0      1
+  GetLocaleOptions                       2      0        2      0
+  IsLocaleTreeInstantiated               2      0        2      0
+  DestroyLocaleNode                      1      0        1      0
+  FormatLocaleFileList                   1      0        1      0
   LocaleInfoCompare                      1      0        0      1
   GetLocaleValue                         1      0        0      1
-  ChopLocaleComponents                   1      0        0      1
+  ChopLocaleComponents                   1      0        1      0
 
-  full results: build-oracle/work/mutation-confirm-285045324-locale.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  locale.c:187:18 cxx_ne_to_eq               if (p->message != (char *) NULL)
+    x  locale.c:366:16 cxx_eq_to_ne               if (locale == (locale_t) NULL)
+    x  locale.c:822:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  locale.c:864:3 cxx_remove_void_call       ResetLinkedListIterator(messages);
+    x  locale.c:941:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    x  locale.c:949:22 cxx_eq_to_ne               if (locale == (char *) NULL)
+    x  locale.c:1139:54 cxx_gt_to_ge               for (count=0; (count < (ssize_t) components) && (p > path); p--)
+    x  locale.c:1284:47 cxx_eq_to_ne               if (LocaleCompare(keyword,"locale") == 0)
+    x  locale.c:1290:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+       locale.c:1314:42 cxx_add_to_sub             path,locale,depth+1,exception);
+    x  locale.c:1327:24 cxx_ne_to_eq               while ((*token != '>') && (*q != '\0'))
+    x  locale.c:1331:22 cxx_ne_to_eq               if (*token != '=')
+    x  locale.c:1369:65 cxx_gt_to_ge               while ((isspace((int) ((unsigned char) *q)) != 0) && (q > p))
+    x  locale.c:1416:16 cxx_ne_to_eq               if (*token != '=')
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-e5f3490bf-locale.json
