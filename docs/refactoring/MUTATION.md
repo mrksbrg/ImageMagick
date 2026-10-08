@@ -4003,7 +4003,7 @@ stops ASan's shadow mapping, so `hard_rss_limit_mb` caps memory instead. Mull an
 need about 3 GB per compile job.
 
 Targets: every open or `unresolved` survivor of xml-tree.c (52) and stream.c (62) and the
-`unresolved` ones of matrix.c, signature.c, distort.c and resource.c (7); default case cap.
+`unresolved` ones of matrix.c, signature.c, distort.c and resource.c (7); mutate.py's default cap of 300 cases per mutant.
 The baseline under ASan (2540 cases) has no report: nothing new upstream. Results: 26 kills, every
 one an ASan report on a case that passes without it:
 
