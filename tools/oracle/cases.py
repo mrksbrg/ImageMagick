@@ -5213,6 +5213,14 @@ GAP_XEVENTS_WIDGET_CASES = [
     ("xevents display quit, confirmed", "map key:q map grab:out.ppm key:Return", _XEV_CONFIRM),
     ("xevents display help overview",
      "map click:20,20 map click:65,388 map click:40,12 map grab:out.ppm click:397,607 use:1 key:q", {}),
+    # Miscellany > Preferences (2026-10-08): toggles (display gamma; Floyd/Steinberg), the grab
+    # while open, then Apply (XUserPreferences writes ~/.displayrc into the case directory) or
+    # Cancel; not the backdrop toggle, after which q no longer reaches display
+    ("xevents display preferences, applied",
+     "map click:20,20 map click:65,357 map click:40,158 map click:25,96 click:25,180 grab:out.ppm click:45,248 use:1 key:q",
+     {}),
+    ("xevents display preferences, cancelled",
+     "map click:20,20 map click:65,357 map click:40,158 map click:25,96 grab:out.ppm click:303,248 use:1 key:q", {}),
 ]
 # label, steps, environment. Without the fixed device profile (oracle.py, seed_opencl_profile)
 # switching OpenCL on runs ImageMagick's device benchmark, whose scores and choice vary from run
