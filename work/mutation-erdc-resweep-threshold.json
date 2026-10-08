@@ -3381,7 +3381,7 @@
   "status": "killed",
   "cases": 24,
   "killer": "unary/e307b90246",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/threshold.c:1152:46:1152:48",
@@ -5841,7 +5841,7 @@
   "status": "killed",
   "cases": 4,
   "killer": "unary/bd641381d8",
-  "why": "exit status [0] -> [-6]; stderr differs"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/threshold.c:2300:57:2300:59",
