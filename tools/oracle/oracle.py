@@ -49,7 +49,7 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "11"        # bump when normalisation or execution changes
+HARNESS_VERSION = "12"        # bump when normalisation or execution changes (12: OpenCL profile pinned across clock jitter)
 # WIDE=1, as for build.sh: the builds with X11 and OpenCL (base-wide, cov-wide, ...), with a
 # case map and line coverage of their own (casemap-wide.json, oracle-wide.profdata, ...).
 WIDE = "-wide" if os.environ.get("WIDE") else ""
@@ -203,6 +203,13 @@ def opencl_profile(binary):
             shutil.rmtree(tmp, ignore_errors=True)
         xml = re.sub(r'(<device name="CPU" score=")[^"]*', r"\g<1>1e+06", xml)
         xml = re.sub(r'(<device platform=[^>]* score=")[^"]*', r"\g<1>1", xml)
+        # ImageMagick matches a device's maxClockFrequency exactly, and pocl reports the clock
+        # that WSL sees, which moves by a MHz between boots (3792, then 3791): an unmatched
+        # profile means a timed benchmark, which the CPU path won, so every OpenCL case ran
+        # without OpenCL (2026-10-09). One entry per nearby clock keeps the device pinned.
+        xml = re.sub(r'(\s*<device platform=[^>]*maxClockFrequency=")(\d+)("[^>]*/>)',
+                     lambda m: "".join("%s%d%s" % (m.group(1), int(m.group(2)) + k, m.group(3))
+                                       for k in range(-3, 4)), xml)
         with tempfile.NamedTemporaryFile("w", dir=WORK, delete=False) as f:
             f.write(xml)
         os.replace(f.name, OPENCL_PROFILE)  # parallel cases may race to write the same

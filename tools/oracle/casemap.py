@@ -39,8 +39,9 @@ def catalogue_digest(cases):
 def functions_of(case_id):
     d = os.path.join(RAW, case_id.replace("/", "_"))
     raws = sorted(glob.glob(os.path.join(d, "*.profraw")))
-    if not raws:
-        return []
+    if not raws:  # every case runs magick or imdriver: none left a profile (aborted, timed out)
+        sys.stderr.write("casemap: no profile for %s: no .profraw written\n" % case_id)
+        return None
     merged = os.path.join(d, "merged.profdata")
     r = subprocess.run([PROFDATA, "merge", "-sparse", "-o", merged] + raws,
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -62,15 +63,25 @@ def build_map():
     shutil.rmtree(RAW, ignore_errors=True)
     start = time.time()
 
-    def one(case):
+    def one(case, timeout=None):
         d = os.path.join(RAW, case["id"].replace("/", "_"))
         os.makedirs(d, exist_ok=True)
         oracle.run_case(cov_bin, "casemap", case, manifest,
-                        {"LLVM_PROFILE_FILE": os.path.join(d, "%p.profraw")})
+                        {"LLVM_PROFILE_FILE": os.path.join(d, "%p.profraw")}, timeout)
         shutil.rmtree(oracle.case_dir("casemap", case), ignore_errors=True)
         return functions_of(case["id"])
 
-    per_case = oracle.parallel(one, cases, oracle.default_jobs(), "casemap")
+    # OpenCL cases apart, few at a time and with a long timeout: when the device profile does not
+    # match, ImageMagick benchmarks the devices (about 150 s of CPU on the coverage build), and
+    # among a full set of parallel cases they hit oracle.TIMEOUT, were killed before writing a
+    # profile, and mapped to nothing (2026-10-09; the mismatch itself is fixed in
+    # oracle.opencl_profile). The sweeps x11cl4 and x11cl5 took 520 accelerate.c mutants for
+    # unreached.
+    ocl = [c for c in cases if c.get("env", {}).get("MAGICK_OCL_DEVICE")]
+    rest = [c for c in cases if not c.get("env", {}).get("MAGICK_OCL_DEVICE")]
+    per_case = oracle.parallel(one, rest, oracle.default_jobs(), "casemap")
+    per_case.update(oracle.parallel(lambda c: one(c, 600), ocl, min(4, oracle.default_jobs()),
+                                    "casemap opencl"))
     by_function, unmapped = {}, sorted(c for c, n in per_case.items() if n is None)
     for cid, names in per_case.items():
         for n in names or []:
