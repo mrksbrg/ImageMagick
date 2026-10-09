@@ -4071,3 +4071,14 @@ do not count for trust: for these two files only reports made under HARNESS_VERS
 accelerate.c's. The seven-entry profile of `37bd98970` could hide mutants of the device matching
 itself; `6ea93d4cc` writes one entry at this boot's clock (/proc/cpuinfo), and x11cl7 reruns both
 files under it.
+
+x11cl7 (06:11, one profile entry at this boot's clock) repeats x11cl6 exactly (727 killed), so the
+seven-entry profile hid nothing. Its 509 survivors rerun uncapped (`x11cl8-uncap`): 1 kill
+(DumpOpenCLProfileData, by the cache-directory case: the log lands in ocl/ImageMagick). The
+`support < 0.5` -> `<=` mutants of both resize filters are equivalent (support is 0.5 only at scale
+1.0; `e4b7434b4`), which leaves the filters at 78% (36 of 46); their other survivors are the
+work-group tuning ones, `unresolved` (summation order follows the chunk size). Where W01's two
+OpenCL files stand under HARNESS_VERSION 13: accelerate.c 62%, short in resizeHorizontalFilter,
+resizeVerticalFilter (78%) and cloneImage (0%); opencl.c 62%, fourteen functions short, of
+which the profile parser (LoadOpenCLDeviceBenchmark, 15 survivors) needs cases that bring a
+profile of their own naming this boot's clock: the `{OCL_DEVICE}` placeholder, the owner's call.
