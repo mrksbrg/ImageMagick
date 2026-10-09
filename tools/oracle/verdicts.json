@@ -27469,8 +27469,8 @@
    "mutator": "cxx_sub_to_add",
    "nth": 0,
    "src": "elapsed=end-start;",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+   "verdict": "unobservable",
+   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
   },
   {
    "at": 0,
@@ -27489,8 +27489,8 @@
    "mutator": "cxx_lt_to_ge",
    "nth": 0,
    "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+   "verdict": "unobservable",
+   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
   },
   {
    "at": 13,
@@ -27499,8 +27499,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+   "verdict": "unobservable",
+   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
   },
   {
    "at": 62,
@@ -27509,8 +27509,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+   "verdict": "unobservable",
+   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
   },
   {
    "at": 12,
@@ -27519,8 +27519,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (elapsed > profile_record->max)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+   "verdict": "unobservable",
+   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
   },
   {
    "at": 12,
@@ -27529,8 +27529,8 @@
    "mutator": "cxx_gt_to_le",
    "nth": 0,
    "src": "if (elapsed > profile_record->max)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
+   "verdict": "unobservable",
+   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
   },
   {
    "at": 36,
