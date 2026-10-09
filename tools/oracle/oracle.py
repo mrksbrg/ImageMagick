@@ -49,7 +49,7 @@ FIXED_MTIME = 1000000000       # 2001-09-09; file dates end up in properties
 # Prepended to every magick invocation by run_case, e.g. a sandbox (mutate.py).
 WRAPPER = []
 TIMEOUT = 30                   # the slowest legitimate case takes under 3s
-HARNESS_VERSION = "12"        # bump when normalisation or execution changes (12: OpenCL profile pinned across clock jitter)
+HARNESS_VERSION = "13"        # bump when normalisation or execution changes (13: OpenCL profile at this boot's clock)
 # WIDE=1, as for build.sh: the builds with X11 and OpenCL (base-wide, cov-wide, ...), with a
 # case map and line coverage of their own (casemap-wide.json, oracle-wide.profdata, ...).
 WIDE = "-wide" if os.environ.get("WIDE") else ""
@@ -203,18 +203,36 @@ def opencl_profile(binary):
             shutil.rmtree(tmp, ignore_errors=True)
         xml = re.sub(r'(<device name="CPU" score=")[^"]*', r"\g<1>1e+06", xml)
         xml = re.sub(r'(<device platform=[^>]* score=")[^"]*', r"\g<1>1", xml)
-        # ImageMagick matches a device's maxClockFrequency exactly, and pocl reports the clock
-        # that WSL sees, which moves by a MHz between boots (3792, then 3791): an unmatched
-        # profile means a timed benchmark, which the CPU path won, so every OpenCL case ran
-        # without OpenCL (2026-10-09). One entry per nearby clock keeps the device pinned.
-        xml = re.sub(r'(\s*<device platform=[^>]*maxClockFrequency=")(\d+)("[^>]*/>)',
-                     lambda m: "".join("%s%d%s" % (m.group(1), int(m.group(2)) + k, m.group(3))
-                                       for k in range(-3, 4)), xml)
         with tempfile.NamedTemporaryFile("w", dir=WORK, delete=False) as f:
             f.write(xml)
         os.replace(f.name, OPENCL_PROFILE)  # parallel cases may race to write the same
     with open(OPENCL_PROFILE) as f:
-        return f.read()
+        xml = f.read()
+    # ImageMagick matches a device's maxClockFrequency exactly, and pocl takes it from the clock
+    # the CPU reports, which under WSL moves by a MHz between boots (3792, then 3791.999 read as
+    # 3791): with the profile of an earlier boot every OpenCL case benchmarked the devices, the
+    # CPU path won, and OpenCL ran disabled (2026-10-09). So the clock is this boot's. (Several
+    # entries for nearby clocks would also match, but would hide mutants of the matching itself.)
+    clock = cpu_clock()
+    if clock is not None:
+        xml = re.sub(r'(maxClockFrequency=")\d+', r"\g<1>%d" % clock, xml)
+    return xml
+
+
+_CPU_CLOCK = []
+
+
+def cpu_clock():
+    """The CPU clock in whole MHz as pocl reports it (cpu MHz in /proc/cpuinfo, truncated), or
+    None where there is no such line (macOS)."""
+    if not _CPU_CLOCK:
+        try:
+            with open("/proc/cpuinfo") as f:
+                m = re.search(r"^cpu MHz\s*:\s*([\d.]+)", f.read(), re.M)
+            _CPU_CLOCK.append(int(float(m.group(1))) if m else None)
+        except OSError:
+            _CPU_CLOCK.append(None)
+    return _CPU_CLOCK[0]
 
 
 def seed_opencl_profile(binary, d):
