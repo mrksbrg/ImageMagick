@@ -4082,3 +4082,12 @@ OpenCL files stand under HARNESS_VERSION 13: accelerate.c 62%, short in resizeHo
 resizeVerticalFilter (78%) and cloneImage (0%); opencl.c 62%, fourteen functions short, of
 which the profile parser (LoadOpenCLDeviceBenchmark, 15 survivors) needs cases that bring a
 profile of their own naming this boot's clock: the `{OCL_DEVICE}` placeholder, the owner's call.
+
+**x11cl9 (08:50, HARNESS_VERSION 13, OpenCL in use): accelerate.c trusted again.** After the
+owner's go for the `{OCL_DEVICE}` placeholder (`df4fda10c`: three cases that bring a device profile
+of their own for the parser), cloneImage's five survivors read as equivalent (`b7ed47eb1`:
+GetAuthenticOpenCLBuffer syncs a shared cache itself) and two steep downscales for the resize
+filters' halving loop (`96dba1c94`), the sweep alone (1541 mutants) kills 752 (727 before).
+accelerate.c: every reached function at 80%+ (64% adjusted), on this report alone, made under
+the fixed harness. opencl.c: 62% -> 66%, LoadOpenCLDeviceBenchmark now passes; thirteen functions
+still short (LoadOpenCLDevices, HasOpenCLDevices, GetOpenCLCacheDirectory, ...).
