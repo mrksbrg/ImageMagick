@@ -5047,6 +5047,12 @@ GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev}
 GAP_OPENCL_CACHE_DIR_CASES = [("opencl cache directory made, then written into",
                                [["rose:", "-blur", "0x2", "null:"], ["rose:", "ocl/ImageMagick/seen.ppm"]],
                                {"MAGICK_OPENCL_CACHE_DIR": "ocl"})]
+# The same without MAGICK_OPENCL_CACHE_DIR (and XDG_CACHE_HOME, which the oracle never sets): the
+# directory falls back to $HOME/.cache/ImageMagick, $HOME being the case directory
+# (GetOpenCLCacheDirectory's HOME branch, 2026-10-09).
+GAP_OPENCL_CACHE_DIR_CASES += [("opencl cache directory under $HOME/.cache, then written into",
+                                [["rose:", "-blur", "0x2", "null:"], ["rose:", ".cache/ImageMagick/seen.ppm"]],
+                                {"MAGICK_OPENCL_CACHE_DIR": None})]
 # Round 2 (W01): other screens, for xwindow.c's colormap, dither and visual paths (8-bit
 # PseudoColor, StaticGray, GrayScale and StaticColor; 15-, 16- and 30-bit TrueColor; 24-bit
 # DirectColor); AnimateImages and opencl.c's API through imdriver. (`display -remote` with no
@@ -5373,7 +5379,7 @@ def _gap_x11_opencl_cases():
         yield _with_run(_case("opencl", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
                               ["out.miff"]), env=env)
     for label, steps, env in GAP_OPENCL_CACHE_DIR_CASES:
-        yield _with_run(_case("opencl", label, steps, ["ocl/ImageMagick/seen.ppm"]), env=env)
+        yield _with_run(_case("opencl", label, steps, [steps[-1][-1]]), env=env)
     for label, steps, files, screen in GAP_X11_SCREEN_CASES:
         yield _with_run(_with_inputs(_case("x11", label, steps, ["out.ppm"]), files=files or None),
                         x11=screen)
