@@ -37361,6 +37361,26 @@
    "src": "if (IsEventLogging() != MagickFalse)",
    "verdict": "unobservable",
    "why": "only decides whether or what is logged: debug and trace logging is outside the oracle's contract (owner's decision, 2026-10-08)"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeHorizontalFilter",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (support < 0.5)",
+   "verdict": "equivalent",
+   "why": "support equals 0.5 only when scale is 1.0 (scale=MAX(1/factor+epsilon,1.0) is at least 1, and a support of 0.5 times a scale above 1 is not 0.5); the branch then sets support=0.5 and scale=1.0, the values they already hold"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/accelerate.c",
+   "function": "resizeVerticalFilter",
+   "mutator": "cxx_lt_to_le",
+   "nth": 0,
+   "src": "if (support < 0.5)",
+   "verdict": "equivalent",
+   "why": "support equals 0.5 only when scale is 1.0 (scale=MAX(1/factor+epsilon,1.0) is at least 1, and a support of 0.5 times a scale above 1 is not 0.5); the branch then sets support=0.5 and scale=1.0, the values they already hold"
   }
  ]
 }
