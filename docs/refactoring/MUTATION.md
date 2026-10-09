@@ -4034,3 +4034,28 @@ whole-image queue found (QOI, 70x46, hand-run with gdb) meets a stream buffer al
 image (51520 bytes), which a shorter length simply reuses. DDS (4x4 blocks) and tiled TIFF still
 queue one row at a time in stream mode. stream.c stays short; those mutants are candidates for
 verdicts, not cases.
+
+## W01: the OpenCL device was off since about 10-07 (found 2026-10-09)
+
+The confirmation sweep x11cl5 (all six W01 files, 8807 mutants, done 03:25) matches the merged
+gate for animate.c, display.c, opencl.c, widget.c and xwindow.c, but gave accelerate.c 26%
+against 68% merged: 775 mutants no-coverage, as in x11cl4, where x11cl3 had killed 520 of them.
+Two faults, both in the harness, fixed in `37bd98970`:
+
+- **The pinned profile stopped matching.** ImageMagick compares a device's maxClockFrequency
+  exactly; pocl under WSL reported 3791 where the profile (made in an earlier boot) said 3792.
+  Every OpenCL case then benchmarked the devices, the CPU path won (4.8 against 12), and
+  OpenCL ran disabled: the cases compared the CPU path. The profile now carries one device entry
+  per clock within 3 MHz; HARNESS_VERSION 12 drops the cached baselines.
+- **casemap hid the cases that lost their profile.** A benchmarking OpenCL case on the coverage
+  build takes about 150 s of CPU; among 16 parallel cases it was killed at the timeout before
+  writing a .profraw and was mapped to nothing, with "0 cases without a profile" printed. Such a
+  case is now reported unmapped, and OpenCL cases run in a pass of their own (4 jobs, 600 s).
+  `oracle.py run --function` picks cases from this map, so it would have left out the OpenCL
+  cases for accelerate.c's functions.
+
+Consequences: accelerate.c's trust rests on x11cl3 (before the drift) and must be confirmed with
+OpenCL in use (sweep x11cl6, accelerate.c and opencl.c, running). The 10-08 OpenCL rounds
+(`x11cl2-ocl1008`: one candidate kept, `opencl graya -resize 57%`, and its resize-kernel kills)
+ran with the device benchmarking, which itself runs the resize kernels: they are rechecked by
+x11cl6, not taken as they stand.
