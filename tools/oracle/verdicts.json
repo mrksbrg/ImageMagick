@@ -37381,6 +37381,56 @@
    "src": "if (support < 0.5)",
    "verdict": "equivalent",
    "why": "support equals 0.5 only when scale is 1.0 (scale=MAX(1/factor+epsilon,1.0) is at least 1, and a support of 0.5 times a scale above 1 is not 0.5); the branch then sets support=0.5 and scale=1.0, the values they already hold"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/accelerate.c",
+   "function": "cloneImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (((image->channel_mask & RedChannel) != 0) &&",
+   "verdict": "equivalent",
+   "why": "cloneImage's SyncImagePixelCache on the clone is redundant: the Compute* caller then takes the clone's and the image's OpenCL buffers through GetAuthenticOpenCLBuffer, which syncs any cache that is shared (reference_count > 1, as a fresh clone's is) or undefined, so the clone gets a private copy of the same pixels either way; the mutant only moves which image makes the copy"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/accelerate.c",
+   "function": "cloneImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "((image->channel_mask & GreenChannel) != 0) &&",
+   "verdict": "equivalent",
+   "why": "cloneImage's SyncImagePixelCache on the clone is redundant: the Compute* caller then takes the clone's and the image's OpenCL buffers through GetAuthenticOpenCLBuffer, which syncs any cache that is shared (reference_count > 1, as a fresh clone's is) or undefined, so the clone gets a private copy of the same pixels either way; the mutant only moves which image makes the copy"
+  },
+  {
+   "at": 37,
+   "file": "MagickCore/accelerate.c",
+   "function": "cloneImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "((image->channel_mask & BlueChannel) != 0) &&",
+   "verdict": "equivalent",
+   "why": "cloneImage's SyncImagePixelCache on the clone is redundant: the Compute* caller then takes the clone's and the image's OpenCL buffers through GetAuthenticOpenCLBuffer, which syncs any cache that is shared (reference_count > 1, as a fresh clone's is) or undefined, so the clone gets a private copy of the same pixels either way; the mutant only moves which image makes the copy"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/accelerate.c",
+   "function": "cloneImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "((image->channel_mask & AlphaChannel) != 0))",
+   "verdict": "equivalent",
+   "why": "cloneImage's SyncImagePixelCache on the clone is redundant: the Compute* caller then takes the clone's and the image's OpenCL buffers through GetAuthenticOpenCLBuffer, which syncs any cache that is shared (reference_count > 1, as a fresh clone's is) or undefined, so the clone gets a private copy of the same pixels either way; the mutant only moves which image makes the copy"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/accelerate.c",
+   "function": "cloneImage",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (clone != (Image *) NULL)",
+   "verdict": "equivalent",
+   "why": "cloneImage's SyncImagePixelCache on the clone is redundant: the Compute* caller then takes the clone's and the image's OpenCL buffers through GetAuthenticOpenCLBuffer, which syncs any cache that is shared (reference_count > 1, as a fresh clone's is) or undefined, so the clone gets a private copy of the same pixels either way; the mutant only moves which image makes the copy; the other branch (clone NULL) is reached only when CloneImage fails"
   }
  ]
 }
