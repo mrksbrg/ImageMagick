@@ -27669,8 +27669,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if ((LocaleCompare(a->platform_name,b->platform_name) == 0) &&",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+   "verdict": "unobservable",
+   "why": "IsSameOpenCLDevice's answer matters only in the device benchmark (BenchmarkOpenCLDevices copies a score to identical devices, CacheOpenCLBenchmarks skips duplicates in the profile it writes), which the oracle keeps out by design (its timings decide the device); its one caller outside it, SelectOpenCLDevice, enables the devices it matches, but they share the selected device's type, so the loop around enables them anyway (run with two devices, POCL_DEVICES, 2026-10-09: no difference)"
   },
   {
    "at": 46,
@@ -27679,8 +27679,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "(LocaleCompare(a->vendor_name,b->vendor_name) == 0) &&",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+   "verdict": "unobservable",
+   "why": "IsSameOpenCLDevice's answer matters only in the device benchmark (BenchmarkOpenCLDevices copies a score to identical devices, CacheOpenCLBenchmarks skips duplicates in the profile it writes), which the oracle keeps out by design (its timings decide the device); its one caller outside it, SelectOpenCLDevice, enables the devices it matches, but they share the selected device's type, so the loop around enables them anyway (run with two devices, POCL_DEVICES, 2026-10-09: no difference)"
   },
   {
    "at": 32,
@@ -27689,8 +27689,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "(LocaleCompare(a->name,b->name) == 0) &&",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+   "verdict": "unobservable",
+   "why": "IsSameOpenCLDevice's answer matters only in the device benchmark (BenchmarkOpenCLDevices copies a score to identical devices, CacheOpenCLBenchmarks skips duplicates in the profile it writes), which the oracle keeps out by design (its timings decide the device); its one caller outside it, SelectOpenCLDevice, enables the devices it matches, but they share the selected device's type, so the loop around enables them anyway (run with two devices, POCL_DEVICES, 2026-10-09: no difference)"
   },
   {
    "at": 38,
@@ -27699,8 +27699,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "(LocaleCompare(a->version,b->version) == 0) &&",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+   "verdict": "unobservable",
+   "why": "IsSameOpenCLDevice's answer matters only in the device benchmark (BenchmarkOpenCLDevices copies a score to identical devices, CacheOpenCLBenchmarks skips duplicates in the profile it writes), which the oracle keeps out by design (its timings decide the device); its one caller outside it, SelectOpenCLDevice, enables the devices it matches, but they share the selected device's type, so the loop around enables them anyway (run with two devices, POCL_DEVICES, 2026-10-09: no difference)"
   },
   {
    "at": 24,
@@ -27709,8 +27709,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "(a->max_clock_frequency == b->max_clock_frequency) &&",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+   "verdict": "unobservable",
+   "why": "IsSameOpenCLDevice's answer matters only in the device benchmark (BenchmarkOpenCLDevices copies a score to identical devices, CacheOpenCLBenchmarks skips duplicates in the profile it writes), which the oracle keeps out by design (its timings decide the device); its one caller outside it, SelectOpenCLDevice, enables the devices it matches, but they share the selected device's type, so the loop around enables them anyway (run with two devices, POCL_DEVICES, 2026-10-09: no difference)"
   },
   {
    "at": 22,
@@ -27719,8 +27719,8 @@
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "(a->max_compute_units == b->max_compute_units))",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
+   "verdict": "unobservable",
+   "why": "IsSameOpenCLDevice's answer matters only in the device benchmark (BenchmarkOpenCLDevices copies a score to identical devices, CacheOpenCLBenchmarks skips duplicates in the profile it writes), which the oracle keeps out by design (its timings decide the device); its one caller outside it, SelectOpenCLDevice, enables the devices it matches, but they share the selected device's type, so the loop around enables them anyway (run with two devices, POCL_DEVICES, 2026-10-09: no difference)"
   },
   {
    "at": 40,
