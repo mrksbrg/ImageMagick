@@ -5361,6 +5361,14 @@ def _gap_x11_opencl_cases():
     for label, steps, files in GAP_OPENCL_CASES:
         yield _with_run(_with_inputs(_case("opencl", label, steps, ["out.miff"]), files=files or None),
                         env=_OCL_ENV)
+    # Two OpenCL devices (pocl's CPU device twice, POCL_DEVICES): opencl.c's code for more than one
+    # device (RequestOpenCLDevice's choice and its lock, the per-device loops of HasOpenCLDevices
+    # and LoadOpenCLDevices), which one device never runs. Both match the pinned profile, so
+    # nothing is benchmarked; the output equals the one-device run (2026-10-09; hand-run on
+    # mull-x11cl: 8 kills of survivors whose verdicts said a second device was needed).
+    yield _with_run(_case("opencl", "opencl two devices, rose_alpha -blur 0x2 -resize 50% -local-contrast 10x20",
+                          _ocl_step([img("rose_alpha")], "-blur 0x2 -resize 50% -local-contrast 10x20"),
+                          ["out.miff"]), env=dict(_OCL_ENV, POCL_DEVICES="cpu cpu"))
     for label, env in GAP_OPENCL_DEVICE_CASES:
         yield _with_run(_case("opencl", label, [[img("rose"), "-blur", "0x2"] + FLOAT_OUT + ["out.miff"]],
                               ["out.miff"]), env=env)
