@@ -6,7 +6,7 @@
 #   nohup flock ~/imagemagick-mutation/setup/step7.lock ~/imagemagick-mutation/setup/day.sh \
 #     >> ~/imagemagick-mutation/setup/step7.log 2>&1 &
 #
-# 1. Pull and rebuild the indexes.
+# 1. Pull and rebuild the indexes; 1b. the night's new cases, uncapped, for five files.
 # 2. Statement deletion for the 38 Windows files ERDC can build: one build (sdlw), then
 #    only the cxx_remove_void_call mutants per file, capped at 1,500 cases
 #    (mutation-sdl-<file>.json), for the Windows agent to read.
@@ -36,6 +36,23 @@ git pull -q && git log --oneline -1
 python3 -u tools/oracle/casemap.py > build-oracle/casemap-day.log 2>&1 && \
   python3 -u tools/oracle/linecov.py > build-oracle/linecov-day.log 2>&1 || { echo "indexes failed"; exit 1; }
 echo "$(date +%H:%M) indexes rebuilt"
+
+echo "== day $(date): step 1b, the night's new cases, uncapped, for five files"
+# confirm.sh capped each survivor at the default case count over the whole gaps
+# family, so in functions most cases reach the new cases rarely ran. Rerun the
+# survivors against the 63 new cases only (their ids, in the repository), uncapped.
+NEW=$(cat tools/oracle/erdc/new-cases-2026-10-01.regex)
+for bf in erdc1:magic erdc1:memory erdc1:geometry erdc2:policy erdc2:image; do
+  b=${bf%%:*}; f=${bf##*:}
+  [ -f $W/mutation-conf2-$f.json ] && continue
+  python3 -c "
+import json; r = json.load(open('$W/mutation-conf1-$f.json'))
+open('$W/conf2-$f.ids', 'w').write(''.join(x['id'] + '\\n' for x in r if x['status'] != 'killed'))"
+  python3 -u tools/oracle/mutate.py --file "MagickCore/$f\\.c\$" --bin build-oracle/mull-$b/utilities/magick \
+    --name conf2-$f --ids $W/conf2-$f.ids --cases "$NEW" --max-cases 0 > build-oracle/conf2-$f.log 2>&1
+  echo "$(date +%H:%M) conf2-$f: $(grep -E 'killed [0-9]' build-oracle/conf2-$f.log || echo failed)"
+done
+push
 
 echo "== day $(date): step 2, statement deletion on the Windows files"
 BIN=build-oracle/mull-sdlw/utilities/magick

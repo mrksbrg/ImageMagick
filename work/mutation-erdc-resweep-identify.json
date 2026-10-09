@@ -668,7 +668,7 @@
   "function": "identify.c:PrintChannelPerceptualHash",
   "status": "killed",
   "cases": 1,
-  "killer": "identify/0b6cfd72ec",
+  "killer": "identify/bd1b5e2904",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -1123,7 +1123,7 @@
   "col": 61,
   "function": "IdentifyImage",
   "status": "killed",
-  "cases": 30,
+  "cases": 41,
   "killer": "gaps/dd16ed9cb2",
   "why": "exit status [0] -> ['timeout']; stdout differs; out.miff missing in candidate"
  },
@@ -1903,9 +1903,9 @@
   "col": 61,
   "function": "IdentifyImage",
   "status": "killed",
-  "cases": 54,
-  "killer": "gaps/fc0926ad35",
-  "why": "exit status [0] -> ['timeout']; stdout differs; out.miff missing in candidate"
+  "cases": 86,
+  "killer": "decode/a5f19831b1",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/identify.c:859:45:859:47",
@@ -2311,9 +2311,9 @@
   "col": 61,
   "function": "IdentifyImage",
   "status": "killed",
-  "cases": 54,
-  "killer": "gaps/fc0926ad35",
-  "why": "exit status [0] -> ['timeout']; stdout differs; out.miff missing in candidate"
+  "cases": 86,
+  "killer": "decode/a5f19831b1",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/identify.c:943:45:943:47",
@@ -2695,7 +2695,7 @@
   "col": 61,
   "function": "IdentifyImage",
   "status": "killed",
-  "cases": 54,
+  "cases": 95,
   "killer": "gaps/fc0926ad35",
   "why": "exit status [0] -> ['timeout']; stdout differs; out.miff missing in candidate"
  },
@@ -3007,8 +3007,8 @@
   "col": 49,
   "function": "IdentifyImage",
   "status": "killed",
-  "cases": 9,
-  "killer": "quantizegap4/4cfd6b5b11",
+  "cases": 34,
+  "killer": "decode/3dffb3db45",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -3979,8 +3979,8 @@
   "col": 21,
   "function": "IdentifyImage",
   "status": "killed",
-  "cases": 26,
-  "killer": "gaps/74fc85c9ef",
+  "cases": 52,
+  "killer": "decode/cf8a042b7c",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {

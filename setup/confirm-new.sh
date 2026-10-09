@@ -26,7 +26,8 @@ echo "== confirm-new $(date): pull, indexes, the cases since $SINCE"
 git pull -q && git log --oneline -1
 python3 -u tools/oracle/casemap.py > build-oracle/casemap-new.log 2>&1 && \
   python3 -u tools/oracle/linecov.py > build-oracle/linecov-new.log 2>&1 || { echo "indexes failed"; exit 1; }
-NEW=$(python3 tools/oracle/erdc/new-cases.py build-oracle/cand/utilities/magick $SINCE 2>> build-oracle/casemap-new.log)
+NEW=$(python3 tools/oracle/erdc/new-cases.py $BIN $SINCE 2>> build-oracle/casemap-new.log)
+[ -n "$NEW" ] || { echo "$(date +%H:%M) no new-case list; not rerunning against the whole catalogue"; exit 1; }
 echo "$(date +%H:%M) $(tail -1 build-oracle/casemap-new.log)"
 n=0
 for f in $MAC_FILES; do

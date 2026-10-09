@@ -1,5 +1,13 @@
 #!/bin/bash
-# Push ERDC's mutation reports and logs to the erdc-results branch of the fork.
+# On ERDC: push the mutation reports and logs to the fork's erdc-results branch.
+#
+#   ~/imagemagick-mutation/setup/push-results.sh
+#
+# The results live in a repository of their own (~/imagemagick-mutation/results),
+# so the ImageMagick checkout is never touched and only that repository holds the
+# token (a fine-grained token, Contents read and write on the fork only). Reports
+# are renamed mutation-erdc-*; MEASURED_AT and the commit message record the
+# ImageMagick commit they were measured on. See HARNESS-SPLIT.md.
 set -euo pipefail
 SRC=~/imagemagick-mutation/ImageMagick
 DST=~/imagemagick-mutation/results
