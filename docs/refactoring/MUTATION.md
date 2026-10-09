@@ -4059,3 +4059,15 @@ OpenCL in use (sweep x11cl6, accelerate.c and opencl.c, running). The 10-08 Open
 (`x11cl2-ocl1008`: one candidate kept, `opencl graya -resize 57%`, and its resize-kernel kills)
 ran with the device benchmarking, which itself runs the resize kernels: they are rechecked by
 x11cl6, not taken as they stand.
+
+**x11cl6 (05:10, OpenCL in use): accelerate.c and opencl.c are not trusted.** The sweep alone
+(1541 mutants: 727 killed, 509 survived, 305 no coverage) gives accelerate.c 62% with three
+reached functions short (resizeHorizontalFilter and resizeVerticalFilter 77%, cloneImage 0%) and
+opencl.c 62% with fourteen (LoadOpenCLDeviceBenchmark, LoadOpenCLDevices, HasOpenCLDevices and
+others). Merged, both still pass, but on kills from reports made while the device benchmarked,
+reaching code the fixed harness no longer runs (the benchmark, its resize kernels). Those kills
+do not count for trust: for these two files only reports made under HARNESS_VERSION 13 do.
+**opencl.c's "trusted" of 10-08 is withdrawn** (it rose 69% -> 98% during the drift), and so is
+accelerate.c's. The seven-entry profile of `37bd98970` could hide mutants of the device matching
+itself; `6ea93d4cc` writes one entry at this boot's clock (/proc/cpuinfo), and x11cl7 reruns both
+files under it.
