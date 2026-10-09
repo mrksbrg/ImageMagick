@@ -37431,6 +37431,26 @@
    "src": "if (clone != (Image *) NULL)",
    "verdict": "equivalent",
    "why": "cloneImage's SyncImagePixelCache on the clone is redundant: the Compute* caller then takes the clone's and the image's OpenCL buffers through GetAuthenticOpenCLBuffer, which syncs any cache that is shared (reference_count > 1, as a fresh clone's is) or undefined, so the clone gets a private copy of the same pixels either way; the mutant only moves which image makes the copy; the other branch (clone NULL) is reached only when CloneImage fails"
+  },
+  {
+   "at": 10,
+   "file": "MagickCore/opencl.c",
+   "function": "EnqueueOpenCLKernel",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (flush != MagickFalse)",
+   "verdict": "equivalent",
+   "why": "only whether clFlush runs after the enqueue: clFlush submits commands already queued and waits for nothing; every reader of the kernel's output waits on its events (or clFinish) first, so the pixels are the same, only when the device starts differs"
+  },
+  {
+   "at": 45,
+   "file": "MagickCore/opencl.c",
+   "function": "LoadOpenCLDevices",
+   "mutator": "cxx_mul_to_div",
+   "nth": 0,
+   "src": "(void) memset(devices,0,clEnv->number_devices*sizeof(cl_device_id));",
+   "verdict": "equivalent",
+   "why": "the memset zeroes fewer bytes of the cl_device_id array (number_devices/size rounds to 0), but clGetDeviceIDs writes every entry the loop then reads (number_devices of them, the count it returns)"
   }
  ]
 }
