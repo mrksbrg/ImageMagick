@@ -4091,3 +4091,19 @@ filters' halving loop (`96dba1c94`), the sweep alone (1541 mutants) kills 752 (7
 accelerate.c: every reached function at 80%+ (64% adjusted), on this report alone, made under
 the fixed harness. opencl.c: 62% -> 66%, LoadOpenCLDeviceBenchmark now passes; thirteen functions
 still short (LoadOpenCLDevices, HasOpenCLDevices, GetOpenCLCacheDirectory, ...).
+
+**opencl.c after x11cl10/11 (2026-10-09 evening): 75%, nine functions short, plateau for now.**
+Two cases and verdicts since x11cl9: a run on two OpenCL devices (`71ca5d357`, POCL_DEVICES="cpu
+cpu": 8 kills in RequestOpenCLDevice, HasOpenCLDevices, LoadOpenCLDevices), the cache directory
+under $HOME/.cache (`637d1b121`: 4 kills), and verdicts for RecordProfileData's timings,
+IsSameOpenCLDevice (benchmark-only), the clFlush flag and a memset (`8aa7597be`, `e12367b46`,
+`41e6cb6a9`). What is left needs one of: two *different* devices (RequestOpenCLDevice's choice and
+the `requested` counters balance kernels between devices; with identical devices every choice gives
+the same pixels; pocl's `basic` device differs, but it is not in the pinned profile, so a run with
+it benchmarks), a GPU (AutoSelectOpenCLDevices' CPU/GPU selection), or a failing OpenCL call or
+allocation (the error paths of LoadOpenCLDevices, RegisterCacheEvent, EnqueueOpenCLKernel). A
+cache directory that cannot be made (`MAGICK_OPENCL_CACHE_DIR=no/such/dir`) does reach
+LoadOpenCLBenchmarks' "cannot write the profile" branch deterministically, but OpenCL is then off
+before the branch's device selection matters (hand-run: no kill). A next step, if wanted: a
+profile entry per device (opencl_device_attributes for every device pocl lists) so that `cpu basic`
+runs without a benchmark.
