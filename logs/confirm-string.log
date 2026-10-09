@@ -1,17 +1,18 @@
 mutate: 42 mutants in MagickCore/string\.c$, 16 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 8 cases in 0s
   mutants: 25/42 (0s)
-  mutants: 42/42 (0s)
+  mutants: 42/42 (1s)
 
-mutate: 42 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 42, errors 0
+mutate: 42 mutants, 1s
+  killed 0, survived 2 (0 capped), no coverage 40, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   StringToStrings                       13      0        0     13
   EscapeString                           6      0        0      6
   ConcatenateStringInfo                  3      0        0      3
   BlobToStringInfo                       2      0        0      2
-  ConcatenateString                      2      0        0      2
+  ConcatenateString                      2      0        2      0
   DestroyStringList                      2      0        0      2
   PrintStringInfo                        2      0        0      2
   StringInfoToDigest                     2      0        0      2
@@ -24,4 +25,9 @@ mutate: 42 mutants, 0s
   SplitStringInfo                        1      0        0      1
   StringToArrayOfDoubles                 1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-1a0201e6c-string.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  string.c:477:15 cxx_lt_to_le               if (~length < source_length)
+    x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-daee3db85-string.json
