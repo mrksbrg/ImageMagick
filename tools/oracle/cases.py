@@ -5256,6 +5256,18 @@ GAP_XEVENTS_CASES += [
     ("xevents display chop, vertical", _xev_menu_pick("Transform", "Chop", _XEV_TRANSFORM) +
      " use:1 drag:30,5,30,40 grab:out.ppm key:q", ["display", img("rose")]),
 ]
+# The magnifier (plus): a q or Escape sent to the magnify window itself (use:2) closes it, which a
+# q to the image window did not; the grab, with no use before it, is the magnify window. Moved
+# with the arrow keys, its factor set with a digit (xwindow.c XMakeMagnifyImage, display.c's
+# magnify commands; 2026-10-10, hand-run on mull-x11cl: 62 survivors killed by these three).
+GAP_XEVENTS_CASES += [
+    ("xevents display magnifier moved right and down",
+     "map key:plus map use:2 key:Right*5 key:Down*5 grab:out.ppm key:q use:1 key:q", ["display", img("rose")]),
+    ("xevents display magnifier moved left and up, factor 5",
+     "map key:plus map use:2 key:Left*3 key:Up*3 key:5 grab:out.ppm key:Escape use:1 key:q", ["display", img("rose")]),
+    ("xevents display magnifier, rose_alpha",
+     "map key:plus map grab:out.ppm use:2 key:q use:1 key:q", ["display", img("rose_alpha")]),
+]
 GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(menu, item, items, reply),
                        ["display", img("rose")]) for menu, item, items, reply in _XEV_MENU_ITEMS]
 # Widgets grabbed themselves, without the @ before the grab that the image-window cases get: the
