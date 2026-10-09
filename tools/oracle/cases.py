@@ -5006,6 +5006,13 @@ GAP_OPENCL_CASES += [("opencl rose_alpha chained blur, resize, local contrast",
 # methods, killed nothing beyond it and were dropped)
 GAP_OPENCL_CASES += [("opencl graya -resize 57%",
                       _ocl_step([img("rose_alpha"), "-colorspace", "gray"], "-resize 57%"), {})]
+# Downscales so steep that a work group's cached pixels outgrow the device's local memory
+# (factor 0.0005: about 510000 pixels), so resizeHorizontalFilter's and resizeVerticalFilter's
+# halving loop runs (W01, 2026-10-09; hand-run on mull-x11cl with OpenCL in use: 4 survivors of
+# each filter killed, among them the halving and its fallback test).
+GAP_OPENCL_CASES += [("opencl %s" % label, _ocl_step(["-size", size, "gradient:red-blue"], op), {})
+                     for label, size, op in (("wide 20000x2 -resize 10x2!", "20000x2", "-resize 10x2!"),
+                                             ("tall 2x20000 -resize 2x10!", "2x20000", "-resize 2x10!"))]
 # Device profiles the case brings (opencl.c LoadOpenCLDeviceBenchmark's parser; 2026-10-09, after
 # the owner's go for the placeholder): the oracle writes {OCL_DEVICE} as this boot's device
 # (oracle.opencl_device_attributes). The CPU scores 1e+06 and the device 1, so a correct parse
