@@ -501,7 +501,7 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
     d = case_dir(side, case)
     shutil.rmtree(d, ignore_errors=True)
     os.makedirs(d)
-    write_case_files(d, case)
+    write_case_files(d, case, binary)
     rcs, outs, errs = [], [], []
     # stdin is a named file for the cases that read "-", and nothing otherwise;
     # inheriting the driver's stdin would make results depend on how it was run.
@@ -542,12 +542,26 @@ def run_case(binary, side, case, manifest, extra_env=None, timeout=None):
             "err_text": err[:600].decode(errors="replace")}
 
 
-def write_case_files(d, case):
+def write_case_files(d, case, binary=None):
     for name, text in case.get("files", {}).items():  # e.g. an MSL script
         path = os.path.join(d, name)  # a name may hold directories (.config/...)
         os.makedirs(os.path.dirname(path), exist_ok=True)
+        text = text.replace("{C}", CORPUS_REL)
+        if "{OCL_DEVICE}" in text:
+            text = text.replace("{OCL_DEVICE}", opencl_device_attributes(binary))
         with open(path, "w") as f:
-            f.write(text.replace("{C}", CORPUS_REL))
+            f.write(text)
+
+
+def opencl_device_attributes(binary):
+    """The attributes that identify this machine's OpenCL device in a device profile (platform,
+    vendor, name, version, maxClockFrequency at this boot's clock, maxComputeUnits), for a case
+    that brings a profile of its own: its files write `<device {OCL_DEVICE} score="..."/>`. A
+    static profile cannot name the clock, which moves between boots (opencl_profile). Where
+    binary finds no OpenCL device, attributes that match none."""
+    xml = opencl_profile(binary) if binary else None
+    m = re.search(r'<device (platform=[^>]*?) score="', xml or "")
+    return m.group(1) if m else 'platform="none" name="none"'
 
 
 def fix_dates(d):

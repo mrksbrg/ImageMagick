@@ -5006,6 +5006,29 @@ GAP_OPENCL_CASES += [("opencl rose_alpha chained blur, resize, local contrast",
 # methods, killed nothing beyond it and were dropped)
 GAP_OPENCL_CASES += [("opencl graya -resize 57%",
                       _ocl_step([img("rose_alpha"), "-colorspace", "gray"], "-resize 57%"), {})]
+# Device profiles the case brings (opencl.c LoadOpenCLDeviceBenchmark's parser; 2026-10-09, after
+# the owner's go for the placeholder): the oracle writes {OCL_DEVICE} as this boot's device
+# (oracle.opencl_device_attributes). The CPU scores 1e+06 and the device 1, so a correct parse
+# keeps OpenCL on, and -blur differs between the two paths. A decoy entry scoring the device
+# 1e+09 hides in a DOCTYPE's internal subset (behind a "]>" in double and single quotes and a
+# nested bracket) or in a comment: a parse that leaves the DOCTYPE or comment early reads the
+# decoy and turns the device off. One that never leaves it is caught by a last entry after the
+# DOCTYPE that turns the device off: the parse that swallows it keeps OpenCL on. (Not by losing
+# the only device entry: the device is then benchmarked, and which path wins varies; measured.)
+_OCL_PROFILE = ".opencl/ImageMagick/ImagemagickOpenCLDeviceProfile.xml"
+_OCL_CPU, _OCL_REAL, _OCL_DECOY = ('  <device name="CPU" score="1e+06"/>\n',
+                                   '  <device {OCL_DEVICE} score="1"/>\n',
+                                   '<device {OCL_DEVICE} score="1e+09"/>')
+# (a stray "]" at depth 0, which the parse ignores, and a quoted ">" outside the brackets)
+_OCL_DOCTYPE = ("  <!DOCTYPE devices ] SYSTEM \"x>y\" [ <!ENTITY a \"]>\"> <!ENTITY b ']>'> [nested] %s ]>\n"
+                % _OCL_DECOY)
+for _label, _xml in (("DOCTYPE after the device", _OCL_CPU + _OCL_REAL + _OCL_DOCTYPE),
+                     ("DOCTYPE before an entry turning the device off",
+                      _OCL_CPU + _OCL_REAL + _OCL_DOCTYPE + "  " + _OCL_DECOY + "\n"),
+                     ("comment after the device", _OCL_CPU + _OCL_REAL + "  <!-- %s -->\n" % _OCL_DECOY)):
+    GAP_OPENCL_CASES.append(("opencl profile with a %s, rose_alpha -blur 0x2" % _label,
+                             _ocl_step([img("rose_alpha")], "-blur 0x2"),
+                             {_OCL_PROFILE: "<devices>\n%s</devices>\n" % _xml}))
 # The device choice: GPU finds none (the CPU path), true takes the profile's best device, false
 # leaves OpenCL off. Each entry: label, environment.
 GAP_OPENCL_DEVICE_CASES = [("opencl device %s" % dev, {"MAGICK_OCL_DEVICE": dev})
