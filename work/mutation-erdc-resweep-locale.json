@@ -55,7 +55,7 @@
   "col": 19,
   "function": "locale.c:AcquireLocaleSplayTree",
   "status": "killed",
-  "cases": 61,
+  "cases": 64,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -162,10 +162,10 @@
   "line": 475,
   "col": 9,
   "function": "FormatLocaleStringList",
-  "status": "survived",
-  "cases": 300,
-  "capped": true,
-  "line_executed": true
+  "status": "killed",
+  "cases": 248,
+  "killer": "gaps/652fd5e599",
+  "why": "stdout differs; log-0.xml differs; log-1.xml missing in candidate; log-2.xml missing in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:475:9:475:10",
@@ -308,7 +308,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -319,9 +319,9 @@
   "col": 46,
   "function": "GetLocaleInfoList",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/c22eb68f8c",
-  "why": "stdout differs"
+  "cases": 1,
+  "killer": "gaps/91eb155846",
+  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:619:16:619:18",
@@ -332,7 +332,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -344,7 +344,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "exit status [0] -> [1]; stderr differs"
  },
  {
@@ -356,7 +356,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -368,7 +368,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -380,7 +380,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -392,7 +392,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -404,7 +404,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -416,7 +416,7 @@
   "function": "GetLocaleInfoList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -894,7 +894,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -906,7 +906,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -918,7 +918,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -930,7 +930,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -942,7 +942,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
  {
@@ -954,7 +954,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -966,7 +966,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -978,7 +978,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -990,7 +990,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -1002,7 +1002,7 @@
   "function": "ListLocaleInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c9e7d5af64",
+  "killer": "gaps/91eb155846",
   "why": "stdout differs"
  },
  {
@@ -1175,7 +1175,7 @@
   "col": 23,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 61,
+  "cases": 64,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -1247,7 +1247,7 @@
   "col": 22,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 107,
+  "cases": 115,
   "killer": "gaps/19d209ea93",
   "why": "stdout differs"
  },
@@ -1319,7 +1319,7 @@
   "col": 41,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 102,
+  "cases": 103,
   "killer": "gaps/c22eb68f8c",
   "why": "stdout differs"
  },
@@ -1379,7 +1379,7 @@
   "col": 42,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 64,
+  "cases": 65,
   "killer": "gaps/1c46a980f2",
   "why": "stdout differs"
  },
@@ -1391,7 +1391,7 @@
   "col": 55,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 64,
+  "cases": 65,
   "killer": "gaps/1c46a980f2",
   "why": "stdout differs"
  },
@@ -1403,7 +1403,7 @@
   "col": 54,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 64,
+  "cases": 65,
   "killer": "gaps/1c46a980f2",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
@@ -1655,7 +1655,7 @@
   "col": 9,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 61,
+  "cases": 64,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -1967,7 +1967,7 @@
   "col": 13,
   "function": "LocaleCompare",
   "status": "killed",
-  "cases": 231,
+  "cases": 225,
   "killer": "gaps/855daf7162",
   "why": "stdout differs"
  },
@@ -2183,7 +2183,7 @@
   "col": 21,
   "function": "LocaleUpper",
   "status": "killed",
-  "cases": 53,
+  "cases": 74,
   "killer": "gaps/9ede1b5681",
   "why": "stdout differs"
  },
