@@ -1,61 +1,61 @@
 mutate: 1136 mutants in MagickCore/resize\.c$, 55 functions
-mutate: baseline over 1895 cases in 0s
+mutate: baseline over 1898 cases in 0s
   mutants: 25/1136 (0s)
   mutants: 50/1136 (1s)
   mutants: 75/1136 (1s)
-  mutants: 100/1136 (2s)
+  mutants: 100/1136 (1s)
   mutants: 125/1136 (2s)
-  mutants: 150/1136 (23s)
-  mutants: 175/1136 (85s)
-  mutants: 200/1136 (137s)
-  mutants: 225/1136 (151s)
-  mutants: 250/1136 (163s)
-  mutants: 275/1136 (166s)
-  mutants: 300/1136 (168s)
-  mutants: 325/1136 (168s)
-  mutants: 350/1136 (169s)
-  mutants: 375/1136 (171s)
-  mutants: 400/1136 (172s)
-  mutants: 425/1136 (174s)
-  mutants: 450/1136 (175s)
-  mutants: 475/1136 (175s)
-  mutants: 500/1136 (176s)
-  mutants: 525/1136 (176s)
-  mutants: 550/1136 (177s)
-  mutants: 575/1136 (177s)
-  mutants: 600/1136 (178s)
-  mutants: 625/1136 (183s)
-  mutants: 650/1136 (185s)
-  mutants: 675/1136 (194s)
-  mutants: 700/1136 (206s)
-  mutants: 725/1136 (213s)
-  mutants: 750/1136 (228s)
-  mutants: 775/1136 (260s)
-  mutants: 800/1136 (289s)
-  mutants: 825/1136 (316s)
-  mutants: 850/1136 (336s)
-  mutants: 875/1136 (339s)
-  mutants: 900/1136 (346s)
-  mutants: 925/1136 (348s)
-  mutants: 950/1136 (349s)
-  mutants: 975/1136 (352s)
-  mutants: 1000/1136 (355s)
-  mutants: 1025/1136 (356s)
-  mutants: 1050/1136 (358s)
-  mutants: 1075/1136 (360s)
-  mutants: 1100/1136 (364s)
-  mutants: 1125/1136 (419s)
-  mutants: 1136/1136 (495s)
+  mutants: 150/1136 (20s)
+  mutants: 175/1136 (78s)
+  mutants: 200/1136 (134s)
+  mutants: 225/1136 (155s)
+  mutants: 250/1136 (168s)
+  mutants: 275/1136 (172s)
+  mutants: 300/1136 (174s)
+  mutants: 325/1136 (174s)
+  mutants: 350/1136 (177s)
+  mutants: 375/1136 (179s)
+  mutants: 400/1136 (181s)
+  mutants: 425/1136 (182s)
+  mutants: 450/1136 (183s)
+  mutants: 475/1136 (184s)
+  mutants: 500/1136 (184s)
+  mutants: 525/1136 (184s)
+  mutants: 550/1136 (185s)
+  mutants: 575/1136 (186s)
+  mutants: 600/1136 (187s)
+  mutants: 625/1136 (190s)
+  mutants: 650/1136 (192s)
+  mutants: 675/1136 (203s)
+  mutants: 700/1136 (213s)
+  mutants: 725/1136 (221s)
+  mutants: 750/1136 (238s)
+  mutants: 775/1136 (264s)
+  mutants: 800/1136 (295s)
+  mutants: 825/1136 (331s)
+  mutants: 850/1136 (347s)
+  mutants: 875/1136 (351s)
+  mutants: 900/1136 (362s)
+  mutants: 925/1136 (363s)
+  mutants: 950/1136 (365s)
+  mutants: 975/1136 (366s)
+  mutants: 1000/1136 (369s)
+  mutants: 1025/1136 (372s)
+  mutants: 1050/1136 (375s)
+  mutants: 1075/1136 (376s)
+  mutants: 1100/1136 (380s)
+  mutants: 1125/1136 (389s)
+  mutants: 1136/1136 (510s)
 
-mutate: 1136 mutants, 495s
-  killed 960, survived 136 (36 capped), no coverage 40, errors 0
-  mutation score on reached code: 87.6%   overall: 84.5%
+mutate: 1136 mutants, 510s
+  killed 958, survived 138 (38 capped), no coverage 40, errors 0
+  mutation score on reached code: 87.4%   overall: 84.3%
 
   function                           total killed survived no-cov
   ScaleImage                           217    181       36      0
-  HorizontalFilter                      89     86        3      0
+  HorizontalFilter                      89     85        4      0
   AcquireResizeFilter                   83     66       17      0
-  VerticalFilter                        80     75        5      0
+  VerticalFilter                        80     74        6      0
   Xbr2X                                 64     64        0      0
   MagnifyImage                          49     45        4      0
   CubicSpline                           47     38        9      0
@@ -188,10 +188,12 @@ mutate: 1136 mutants, 495s
     xc resize.c:3373:15 cxx_lt_to_le               if (support < 0.5)
     xc resize.c:3445:21 cxx_lt_to_le               for (i=0; i < n; i++)
     xc resize.c:3487:48 cxx_le_to_lt               (GetPixelWriteMask(resize_image,q) <= (QuantumRange/2)))
+    xc resize.c:3491:16 cxx_mul_to_div             k=y*(contribution[n-1].pixel-contribution[0].pixel+1)+
     xc resize.c:3587:15 cxx_lt_to_le               if (support < 0.5)
     xc resize.c:3659:21 cxx_lt_to_le               for (i=0; i < n; i++)
     xc resize.c:3663:55 cxx_sub_to_add             image->columns,(size_t) (contribution[n-1].pixel-contribution[0].pixel+1),
     xc resize.c:3702:48 cxx_le_to_lt               (GetPixelWriteMask(resize_image,q) <= (QuantumRange/2)))
+    xc resize.c:3706:77 cxx_mul_to_div             k=(ssize_t) ((contribution[j-start].pixel-contribution[0].pixel)*
     xc resize.c:3733:39 cxx_mul_to_div             alpha=contribution[j].weight*QuantumScale*(double)
     xc resize.c:3798:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc resize.c:3888:5 cxx_remove_void_call       AppendImageProfileProperty(resize_image,"hdrgm","hdrgm:Transform",
