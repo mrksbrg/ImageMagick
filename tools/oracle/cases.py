@@ -6640,6 +6640,14 @@ def _windrv_cases():
     case = _windrv("cache rose as a map (MAGICK_MEMORY_LIMIT=1), metacontent 0", ("cache", img("rose"), "memory", "0"))
     case["env"] = {"MAGICK_MEMORY_LIMIT": "1"}
     yield _with_inputs(case)
+    # magick.c SetMagickPrecision: the precision from MAGICK_PRECISION (no registry entry, no
+    # -precision), read when GetMagickPrecision first asks (2026-10-10). Its env and policy
+    # lookups were killed only by -list resource cases, whose output followed the machine's memory
+    # size: those kills stopped after the host's upgrade; this one prints a fixed number.
+    case = _case("format", "MAGICK_PRECISION=3 -format %[fx:pi] info:",
+                 [["xc:", "-format", "%[fx:pi]\\n", "info:"]], [])
+    case["env"] = {"MAGICK_PRECISION": "3"}
+    yield _with_inputs(case)
     # blob.c: blob input over a file (DiscardBlobBytes, ReadBlobMSBLongLong, ErrorBlob,
     # ReadBlobString over LF, CRLF and CR endings, a line longer than its 4 KB buffer and a last
     # line without one, EOFBlob, DuplicateBlob, ImageToFile) and SetBlobExtent on a file opened
