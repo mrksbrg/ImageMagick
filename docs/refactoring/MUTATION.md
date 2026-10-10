@@ -4140,3 +4140,32 @@ the three above, so the regular files' trust stands on sweep1009 alone (with the
 xml-tree.c's DestroyXMLTreeAttributes). magick.c's SetMagickPrecision lookups, killed before only
 by `-list resource` output that followed the machine's memory size, get a case of their own
 (`991aa9015`, MAGICK_PRECISION=3: hand-run, both killed).
+
+## x11cl12: W01 confirmation sweep, and stale baselines (2026-10-10)
+
+All six W01 files on mull-x11cl, capped at 1500 cases a mutant, catalogue at `f4a3881ef` (the
+magnifier and `import` cases), 09:30-16:55. Gated alone (adjusted): accelerate.c 64%, opencl.c 72%,
+xwindow.c 32%, display.c 15%, widget.c 45%, animate.c 17%. All W01 reports merged gave 68%, 100%,
+35%, 16%, 45% and 17%. **accelerate.c stays trusted**: every reached function at 80%+ on this report
+alone, the same 496 kills as x11cl9 and x11cl11.
+
+**72 earlier kills do not reproduce (lost12).** Rerun uncapped against the cases that had killed
+them, twice: 1 kill (animate.c 2706, a timeout, both times), 71 survive. 38 are DestroyXResources
+(xwindow.c), killed in x11cl5 by an OpenCL case while the device benchmarked; 17 are opencl.c's exit
+path (DumpOpenCLProfileData 11, OpenCLTerminus 6), killed in x11cl11 by `list resource`; 16 are
+single X11 mutants killed in x11cl3-5 by two `xevents` cases that have changed since (the `idle`
+token, XTEST grabs).
+
+**Why `list resource` killed opencl.c's exit path: a baseline from another machine state.**
+`-list resource` prints the physical memory and the open-file limit (Memory, Map, Area, File). The
+mutate baseline was cached per binary, catalogue and harness, not per machine: the caches of one
+binary hold 7.70174, 7.75643, 7.75644 and 19.5338 GiB (WSL memory settings and boots). A run on a
+baseline recorded at another size turns every mutant that the eight `-list resource` cases reach
+into a kill. `cfec1e6db` keys the cache by memory and the open-file limit as well. The regular
+files' trust rests on sweep1009 alone, whose only kills by these cases are 25 in resource.c; rerun
+on a fresh baseline (`res12`), all 25 are killed again.
+
+**Where W01 stands, on x11cl12 with lost12 (the figures that count):** accelerate.c 64% (trusted),
+opencl.c 72% (ten functions short: the nine of x11cl11 and DumpOpenCLProfileData 27%, whose kills
+were the false ones; the "75%" of x11cl10/11 included them), xwindow.c 32%, display.c 15%, widget.c
+45%, animate.c 17%.
