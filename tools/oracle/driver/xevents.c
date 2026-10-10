@@ -4,6 +4,8 @@
 
   SCRIPT is a list of space-separated actions, run in order:
     map           wait for a new top-level window to be mapped, then give it the focus
+    idle          wait until the client is connected and idle, for a client that maps no window
+                  (import waiting for a click); click:X,Y with no window waited for is on the root
     key:NAME      press a key (an X keysym name: q, slash, F7, Return; ctrl+s, shift+Tab);
                   key:NAME*N presses it N times
     type:TEXT     type TEXT, one key per character ('_' stands for a space)
@@ -258,7 +260,22 @@ static void Point(const char *xy)
   int x = 0, y = 0;
   if (sscanf(xy, "%d,%d", &x, &y) != 2) Fail("point:X,Y");
   Refocus();
-  XWarpPointer(dpy, None, focus, 0, 0, 0, 0, x, y);
+  /* no window waited for (import's click-to-select): the coordinates are the root window's */
+  XWarpPointer(dpy, None, focus != None ? focus : DefaultRootWindow(dpy), 0, 0, 0, 0, x, y);
+  WaitIdle();
+}
+
+/* idle: wait until the client has an X connection and is idle on it, for a client that maps no
+   window to wait for (import, which grabs the pointer and waits for a click). */
+static void IdleOnX(void)
+{
+  double end = Now() + 20;
+  while (xfd < 0)
+  {
+    if (Now() > end) Fail("client never connected to the X server");
+    FindXSocket();
+    Nap(10);
+  }
   WaitIdle();
 }
 
@@ -344,6 +361,9 @@ int main(int argc, char **argv)
   if ((dpy = XOpenDisplay(NULL)) == NULL) { fprintf(stderr, "xevents: no X server\n"); return 125; }
   if (!XTestQueryExtension(dpy, &ev, &er, &mj, &mn)) Fail("no XTEST");
   XSetErrorHandler(IgnoreError);
+  /* import grabs the server while it waits for the click that selects a window (XSelectWindow):
+     without this, the click it waits for would wait for the grab to end */
+  XTestGrabControl(dpy, True);
   XSelectInput(dpy, DefaultRootWindow(dpy), SubstructureNotifyMask);
   XSync(dpy, False);
   fflush(stdout);
@@ -356,6 +376,7 @@ int main(int argc, char **argv)
     for (tok = strtok_r(script, " ", &save); tok; tok = strtok_r(NULL, " ", &save))
     {
       if (strcmp(tok, "map") == 0) Map();
+      else if (strcmp(tok, "idle") == 0) IdleOnX();
       else if (strncmp(tok, "key:", 4) == 0) Key(tok + 4);
       else if (strncmp(tok, "type:", 5) == 0) Type(tok + 5);
       else if (strncmp(tok, "grab:", 5) == 0) Grab(tok + 5);

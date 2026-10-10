@@ -5268,6 +5268,16 @@ GAP_XEVENTS_CASES += [
     ("xevents display magnifier, rose_alpha",
      "map key:plus map grab:out.ppm use:2 key:q use:1 key:q", ["display", img("rose_alpha")]),
 ]
+# import with no -window: it grabs the server and the pointer and waits for a click or a dragged
+# region (xwindow.c XSelectWindow, XImportImage). xevents' idle waits for that, with no window to
+# map, and its clicks reach import through the grab (XTestGrabControl). The Xvfb root of a fresh
+# server is the same in every run. Each entry: label, script, magick arguments (2026-10-10,
+# hand-run on mull-x11cl: 26 + 18 + 15 kills, together covering all).
+GAP_XEVENTS_IMPORT_CASES = [
+    ("xevents import, region dragged", "idle drag:20,15,140,90,6", ["import", "out.miff"]),
+    ("xevents import -screen, region dragged up and left", "idle drag:140,90,20,15,6", ["import", "-screen", "out.miff"]),
+    ("xevents import -screen, root clicked", "idle click:5,5", ["import", "-screen", "out.miff"]),
+]
 GAP_XEVENTS_CASES += [("xevents display menu %s > %s" % (menu, item), _xev_menu(menu, item, items, reply),
                        ["display", img("rose")]) for menu, item, items, reply in _XEV_MENU_ITEMS]
 # Widgets grabbed themselves, without the @ before the grab that the image-window cases get: the
@@ -5402,6 +5412,9 @@ def _gap_x11_opencl_cases():
     for label, script, args in GAP_XEVENTS_CASES:
         yield _with_run(_case("xevents", label, [["@xevents", script.replace("grab:", "key:at grab:")] + args],
                               ["out.ppm"]), env=_XEV_ENV, x11=True)
+    for label, script, args in GAP_XEVENTS_IMPORT_CASES:
+        yield _with_run(_case("xevents", label, [["@xevents", script] + args], ["out.miff"]),
+                        env=_XEV_ENV, x11=True)
     for label, script, files in GAP_XEVENTS_WIDGET_CASES:
         yield _with_run(_with_inputs(_case("xevents", label, [["@xevents", script, "display", img("rose")]],
                                            ["out.ppm"]), files=files or None), env=_XEV_ENV, x11=True)
