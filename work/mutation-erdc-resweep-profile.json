@@ -19,7 +19,7 @@
   "col": 16,
   "function": "AppendImageProfileProperty",
   "status": "killed",
-  "cases": 124,
+  "cases": 123,
   "killer": "gaps/d2df8fd907",
   "why": "stdout differs"
  },
@@ -31,7 +31,7 @@
   "col": 53,
   "function": "AppendImageProfileProperty",
   "status": "killed",
-  "cases": 124,
+  "cases": 123,
   "killer": "gaps/d2df8fd907",
   "why": "stdout differs"
  },
@@ -224,8 +224,8 @@
   "function": "profile.c:DestroyPixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:482:19:482:21",
@@ -248,8 +248,8 @@
   "function": "profile.c:AcquirePixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:507:40:507:41",
@@ -272,8 +272,8 @@
   "function": "profile.c:AcquirePixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:511:15:511:16",
@@ -284,8 +284,8 @@
   "function": "profile.c:AcquirePixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:511:15:511:16",
@@ -308,8 +308,8 @@
   "function": "profile.c:AcquirePixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:513:52:513:53",
@@ -320,8 +320,8 @@
   "function": "profile.c:AcquirePixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:514:19:514:21",
@@ -332,8 +332,8 @@
   "function": "profile.c:AcquirePixelTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:526:15:526:16",
@@ -356,8 +356,8 @@
   "function": "profile.c:DestroyTransformTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:526:68:526:70",
@@ -368,8 +368,8 @@
   "function": "profile.c:DestroyTransformTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:527:22:527:24",
@@ -404,8 +404,8 @@
   "function": "profile.c:AcquireTransformTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:551:43:551:44",
@@ -428,8 +428,8 @@
   "function": "profile.c:AcquireTransformTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:552:15:552:16",
@@ -452,8 +452,8 @@
   "function": "profile.c:AcquireTransformTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:557:22:557:24",
@@ -464,8 +464,8 @@
   "function": "profile.c:AcquireTransformTLS",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:576:21:576:23",
@@ -548,8 +548,8 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:614:15:614:16",
@@ -560,8 +560,8 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:614:44:614:46",
@@ -572,8 +572,8 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_gt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:617:31:617:32",
@@ -584,7 +584,7 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 8,
-  "killer": "gaps/c8a81bee0a",
+  "killer": "gaps/e8d0fe884c",
   "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
@@ -595,8 +595,8 @@
   "col": 31,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -608,8 +608,8 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_gt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:622:31:622:32",
@@ -620,8 +620,8 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:626:3:627:35",
@@ -631,8 +631,8 @@
   "col": 3,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -643,9 +643,9 @@
   "col": 29,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/4fe557b1ed",
-  "why": "exit status [0] -> [-6]; stderr differs"
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:630:15:630:16",
@@ -655,8 +655,8 @@
   "col": 15,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -667,9 +667,9 @@
   "col": 15,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/4fe557b1ed",
-  "why": "exit status [0] -> [-6]; stderr differs"
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:630:44:630:46",
@@ -680,8 +680,8 @@
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:632:31:632:33",
@@ -703,8 +703,8 @@
   "col": 7,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/268f319344",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -715,8 +715,8 @@
   "col": 7,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 2,
+  "killer": "gaps/c0046a14d7",
   "why": "out.miff differs"
  },
  {
@@ -727,8 +727,8 @@
   "col": 31,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/268f319344",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -739,8 +739,8 @@
   "col": 31,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -751,8 +751,8 @@
   "col": 9,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 2,
+  "killer": "gaps/c0046a14d7",
   "why": "out.miff differs"
  },
  {
@@ -763,8 +763,8 @@
   "col": 9,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 2,
+  "killer": "gaps/c0046a14d7",
   "why": "out.miff differs"
  },
  {
@@ -775,8 +775,8 @@
   "col": 31,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 2,
+  "killer": "gaps/c0046a14d7",
   "why": "out.miff differs"
  },
  {
@@ -787,8 +787,8 @@
   "col": 31,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/fe7e50627f",
+  "cases": 1,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -799,8 +799,8 @@
   "col": 9,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/7512f63c4e",
+  "cases": 20,
+  "killer": "gaps/26f6e6e138",
   "why": "out.miff differs"
  },
  {
@@ -1031,7 +1031,7 @@
   "col": 36,
   "function": "profile.c:SetsRGBImageProfile",
   "status": "killed",
-  "cases": 3,
+  "cases": 5,
   "killer": "gaps/c77cdf14bf",
   "why": "out.miff differs"
  },
@@ -1056,8 +1056,8 @@
   "function": "ProfileImage",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1032:49:1032:51",
@@ -1068,8 +1068,8 @@
   "function": "ProfileImage",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1040:7:1040:39",
@@ -1079,7 +1079,7 @@
   "col": 7,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 7,
+  "cases": 6,
   "killer": "gaps/fb5412a032",
   "why": "out.miff differs"
  },
@@ -1091,7 +1091,7 @@
   "col": 50,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 7,
+  "cases": 6,
   "killer": "gaps/fb5412a032",
   "why": "out.miff differs"
  },
@@ -1103,7 +1103,7 @@
   "col": 39,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 7,
+  "cases": 6,
   "killer": "gaps/fb5412a032",
   "why": "out.miff differs"
  },
@@ -1128,8 +1128,8 @@
   "function": "ProfileImage",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1059:3:1059:54",
@@ -1140,8 +1140,8 @@
   "function": "ProfileImage",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1060:34:1060:36",
@@ -1152,7 +1152,7 @@
   "function": "ProfileImage",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
+  "killer": "gaps/ae6a48abff",
   "why": "stdout differs; stderr differs"
  },
  {
@@ -1164,7 +1164,7 @@
   "function": "ProfileImage",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
+  "killer": "gaps/ae6a48abff",
   "why": "stdout differs; stderr differs"
  },
  {
@@ -1175,9 +1175,9 @@
   "col": 24,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "cases": 6,
+  "killer": "gaps/fb5412a032",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1069:51:1069:53",
@@ -1247,9 +1247,9 @@
   "col": 24,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "cases": 6,
+  "killer": "gaps/fb5412a032",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1084:51:1084:53",
@@ -1259,9 +1259,9 @@
   "col": 51,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1111:25:1111:27",
@@ -1271,9 +1271,9 @@
   "col": 25,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "cases": 6,
+  "killer": "gaps/fb5412a032",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1117:9:1117:66",
@@ -1283,7 +1283,7 @@
   "col": 9,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 63,
+  "cases": 44,
   "killer": "gaps/650e2599a5",
   "why": "stderr differs"
  },
@@ -1295,9 +1295,9 @@
   "col": 33,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "cases": 6,
+  "killer": "gaps/fb5412a032",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1124:13:1124:42",
@@ -1319,7 +1319,7 @@
   "col": 53,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 7,
+  "cases": 6,
   "killer": "gaps/fb5412a032",
   "why": "out.miff differs"
  },
@@ -1331,9 +1331,9 @@
   "col": 26,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs"
+  "cases": 6,
+  "killer": "gaps/fb5412a032",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1155:29:1155:31",
@@ -1343,9 +1343,9 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1161:41:1161:43",
@@ -1355,9 +1355,9 @@
   "col": 41,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1176:13:1176:47",
@@ -1367,8 +1367,8 @@
   "col": 13,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1415,8 +1415,8 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 31,
-  "killer": "gaps/c8a81bee0a",
+  "cases": 34,
+  "killer": "gaps/e8d0fe884c",
   "why": "out.miff differs"
  },
  {
@@ -1427,7 +1427,7 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 84,
+  "cases": 26,
   "killer": "gaps/b63128f26a",
   "why": "out.miff differs"
  },
@@ -1439,8 +1439,8 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1451,7 +1451,7 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 77,
+  "cases": 61,
   "killer": "gaps/0ebd34ed72",
   "why": "out.miff differs"
  },
@@ -1463,9 +1463,9 @@
   "col": 37,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1273:13:1273:47",
@@ -1475,8 +1475,8 @@
   "col": 13,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1499,8 +1499,8 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 33,
-  "killer": "gaps/7512f63c4e",
+  "cases": 55,
+  "killer": "gaps/26f6e6e138",
   "why": "out.miff differs"
  },
  {
@@ -1511,8 +1511,8 @@
   "col": 21,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 33,
-  "killer": "gaps/7512f63c4e",
+  "cases": 55,
+  "killer": "gaps/26f6e6e138",
   "why": "out.miff differs"
  },
  {
@@ -1523,8 +1523,8 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 46,
-  "killer": "gaps/268f319344",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1535,8 +1535,8 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/7ada103ed5",
+  "cases": 26,
+  "killer": "gaps/b63128f26a",
   "why": "out.miff differs"
  },
  {
@@ -1547,8 +1547,8 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 13,
+  "killer": "gaps/c0046a14d7",
   "why": "out.miff differs"
  },
  {
@@ -1559,7 +1559,7 @@
   "col": 29,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 65,
+  "cases": 24,
   "killer": "gaps/8c4f07a526",
   "why": "out.miff differs"
  },
@@ -1583,9 +1583,9 @@
   "col": 27,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1411:37:1411:39",
@@ -1595,9 +1595,9 @@
   "col": 37,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1412:37:1412:39",
@@ -1607,9 +1607,9 @@
   "col": 37,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs; stderr differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "stderr differs; out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1420:67:1420:69",
@@ -1619,9 +1619,9 @@
   "col": 67,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1425:41:1425:43",
@@ -1655,8 +1655,8 @@
   "col": 40,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 31,
-  "killer": "gaps/c8a81bee0a",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1667,8 +1667,8 @@
   "col": 25,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1679,9 +1679,9 @@
   "col": 25,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1439:51:1439:53",
@@ -1691,9 +1691,9 @@
   "col": 51,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> ['timeout']; stdout differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1450:26:1450:28",
@@ -1703,8 +1703,8 @@
   "col": 26,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1715,8 +1715,8 @@
   "col": 21,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1727,8 +1727,8 @@
   "col": 27,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1739,8 +1739,8 @@
   "col": 17,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1763,8 +1763,8 @@
   "col": 24,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1775,7 +1775,7 @@
   "col": 43,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 51,
+  "cases": 46,
   "killer": "gaps/7abbdfbaed",
   "why": "stderr differs"
  },
@@ -1787,7 +1787,7 @@
   "col": 27,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 51,
+  "cases": 46,
   "killer": "gaps/7abbdfbaed",
   "why": "stderr differs"
  },
@@ -1799,7 +1799,7 @@
   "col": 31,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 51,
+  "cases": 46,
   "killer": "gaps/7abbdfbaed",
   "why": "stderr differs; out.miff differs"
  },
@@ -1811,8 +1811,8 @@
   "col": 48,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 13,
+  "killer": "gaps/c0046a14d7",
   "why": "out.miff differs"
  },
  {
@@ -1823,8 +1823,8 @@
   "col": 48,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 33,
-  "killer": "gaps/7512f63c4e",
+  "cases": 55,
+  "killer": "gaps/26f6e6e138",
   "why": "out.miff differs"
  },
  {
@@ -1835,9 +1835,9 @@
   "col": 48,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/a48ff0c01f",
-  "why": "stdout differs"
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1511:25:1511:27",
@@ -1847,8 +1847,8 @@
   "col": 25,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1859,8 +1859,8 @@
   "col": 57,
   "function": "ProfileImage",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/fe7e50627f",
+  "cases": 9,
+  "killer": "gaps/7fe311b11b",
   "why": "out.miff differs"
  },
  {
@@ -1967,8 +1967,8 @@
   "col": 33,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -1979,8 +1979,8 @@
   "col": 36,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -1991,8 +1991,8 @@
   "col": 37,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2003,9 +2003,9 @@
   "col": 20,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1723:19:1723:20",
@@ -2015,8 +2015,8 @@
   "col": 19,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2027,7 +2027,7 @@
   "col": 19,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 1,
+  "cases": 15,
   "killer": "gaps/a2f34a11aa",
   "why": "stdout differs"
  },
@@ -2039,8 +2039,8 @@
   "col": 45,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2063,9 +2063,9 @@
   "col": 34,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_gt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1734:11:1734:12",
@@ -2087,8 +2087,8 @@
   "col": 11,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2099,9 +2099,9 @@
   "col": 24,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1739:12:1739:14",
@@ -2111,9 +2111,9 @@
   "col": 12,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 6,
+  "killer": "gaps/63dc059a7e",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1740:16:1740:17",
@@ -2123,8 +2123,8 @@
   "col": 16,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2135,7 +2135,7 @@
   "col": 16,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 159,
+  "cases": 1,
   "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
@@ -2147,8 +2147,8 @@
   "col": 27,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2159,8 +2159,8 @@
   "col": 27,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2171,7 +2171,7 @@
   "col": 42,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
+  "cases": 137,
   "killer": "gaps/4fe557b1ed",
   "why": "out.8bim differs"
  },
@@ -2195,8 +2195,8 @@
   "col": 61,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2208,7 +2208,7 @@
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2219,8 +2219,8 @@
   "col": 40,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 7,
-  "killer": "gaps/aadbaa4493",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
@@ -2231,9 +2231,9 @@
   "col": 21,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1760:31:1760:32",
@@ -2243,7 +2243,7 @@
   "col": 31,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 20,
+  "cases": 6,
   "killer": "gaps/63dc059a7e",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
@@ -2255,7 +2255,7 @@
   "col": 53,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 20,
+  "cases": 6,
   "killer": "gaps/63dc059a7e",
   "why": "stdout differs"
  },
@@ -2267,8 +2267,8 @@
   "col": 31,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 7,
-  "killer": "gaps/aadbaa4493",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
@@ -2279,9 +2279,9 @@
   "col": 41,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1769:29:1769:31",
@@ -2291,7 +2291,7 @@
   "col": 29,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
+  "cases": 17,
   "killer": "gaps/44e8ba5db8",
   "why": "stdout differs"
  },
@@ -2303,9 +2303,9 @@
   "col": 53,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1770:77:1770:78",
@@ -2315,9 +2315,9 @@
   "col": 77,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 7,
-  "killer": "gaps/aadbaa4493",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1772:62:1772:63",
@@ -2327,7 +2327,7 @@
   "col": 62,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 15,
+  "cases": 17,
   "killer": "gaps/44e8ba5db8",
   "why": "stdout differs"
  },
@@ -2339,9 +2339,9 @@
   "col": 13,
   "function": "profile.c:WriteTo8BimProfile",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/4fe557b1ed",
-  "why": "out.8bim differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1817:19:1817:20",
@@ -2351,8 +2351,8 @@
   "col": 19,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2363,7 +2363,7 @@
   "col": 19,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 1,
+  "cases": 11,
   "killer": "gaps/a2f34a11aa",
   "why": "stdout differs"
  },
@@ -2375,8 +2375,8 @@
   "col": 45,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2399,8 +2399,8 @@
   "col": 34,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2423,8 +2423,8 @@
   "col": 11,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2435,8 +2435,8 @@
   "col": 12,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2447,8 +2447,8 @@
   "col": 12,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2459,7 +2459,7 @@
   "col": 27,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 4,
+  "cases": 9,
   "killer": "gaps/b59962cd72",
   "why": "stdout differs"
  },
@@ -2483,8 +2483,8 @@
   "col": 46,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2495,8 +2495,8 @@
   "col": 16,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2508,7 +2508,7 @@
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2519,7 +2519,7 @@
   "col": 19,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
+  "cases": 3,
   "killer": "gaps/435313a870",
   "why": "stdout differs"
  },
@@ -2531,7 +2531,7 @@
   "col": 19,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
+  "cases": 3,
   "killer": "gaps/435313a870",
   "why": "stdout differs"
  },
@@ -2543,9 +2543,9 @@
   "col": 50,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 49,
-  "killer": "gaps/d713ad966c",
-  "why": "stdout differs"
+  "cases": 53,
+  "killer": "gaps/90c5d62417",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_div_to_mul:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1853:50:1853:51",
@@ -2555,9 +2555,9 @@
   "col": 50,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 49,
-  "killer": "gaps/d713ad966c",
-  "why": "stdout differs"
+  "cases": 53,
+  "killer": "gaps/90c5d62417",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1857:36:1857:38",
@@ -2567,7 +2567,7 @@
   "col": 36,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 2,
+  "cases": 3,
   "killer": "gaps/435313a870",
   "why": "stdout differs"
  },
@@ -2579,8 +2579,8 @@
   "col": 21,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/aadbaa4493",
+  "cases": 7,
+  "killer": "gaps/63dc059a7e",
   "why": "stdout differs"
  },
  {
@@ -2591,7 +2591,7 @@
   "col": 21,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 6,
+  "cases": 12,
   "killer": "gaps/44e8ba5db8",
   "why": "stdout differs"
  },
@@ -2603,9 +2603,9 @@
   "col": 21,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "cases": 12,
+  "killer": "gaps/44e8ba5db8",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1917:21:1917:23",
@@ -2615,9 +2615,9 @@
   "col": 21,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1929:24:1929:26",
@@ -2627,9 +2627,9 @@
   "col": 24,
   "function": "profile.c:GetProfilesFromResourceBlock",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1945:33:1945:35",
@@ -2639,8 +2639,8 @@
   "col": 33,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2652,7 +2652,7 @@
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "exit status [0] -> [-11]; stdout differs"
  },
  {
@@ -2663,9 +2663,9 @@
   "col": 29,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 8,
-  "killer": "gaps/aadbaa4493",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "cases": 13,
+  "killer": "gaps/e2c7dcd20c",
+  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:1956:22:1956:24",
@@ -2675,8 +2675,8 @@
   "col": 22,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 40,
-  "killer": "gaps/ccdb35d024",
+  "cases": 60,
+  "killer": "gaps/fa20d7fa74",
   "why": "stdout differs"
  },
  {
@@ -2687,8 +2687,8 @@
   "col": 15,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 40,
-  "killer": "gaps/ccdb35d024",
+  "cases": 60,
+  "killer": "gaps/fa20d7fa74",
   "why": "stdout differs"
  },
  {
@@ -2699,8 +2699,8 @@
   "col": 37,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2711,7 +2711,7 @@
   "col": 75,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 14,
+  "cases": 21,
   "killer": "gaps/d2df8fd907",
   "why": "stdout differs"
  },
@@ -2723,7 +2723,7 @@
   "col": 37,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 14,
+  "cases": 21,
   "killer": "gaps/d2df8fd907",
   "why": "stdout differs"
  },
@@ -2735,8 +2735,8 @@
   "col": 37,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2747,8 +2747,8 @@
   "col": 52,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/ae6a48abff",
   "why": "stdout differs"
  },
  {
@@ -2759,8 +2759,8 @@
   "col": 52,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2771,8 +2771,8 @@
   "col": 28,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2783,8 +2783,8 @@
   "col": 15,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2795,8 +2795,8 @@
   "col": 15,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2807,8 +2807,8 @@
   "col": 15,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2819,8 +2819,8 @@
   "col": 15,
   "function": "profile.c:PatchCorruptProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2831,9 +2831,9 @@
   "col": 30,
   "function": "profile.c:ValidateXMPProfile",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2009:16:2009:18",
@@ -2843,7 +2843,7 @@
   "col": 16,
   "function": "profile.c:ValidateXMPProfile",
   "status": "killed",
-  "cases": 7,
+  "cases": 13,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -2880,7 +2880,7 @@
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2891,7 +2891,7 @@
   "col": 32,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 21,
+  "cases": 120,
   "killer": "gaps/dbdaa63e98",
   "why": "stdout differs"
  },
@@ -2904,7 +2904,7 @@
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2915,7 +2915,7 @@
   "col": 18,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 14,
+  "cases": 21,
   "killer": "gaps/d2df8fd907",
   "why": "stdout differs"
  },
@@ -2927,8 +2927,8 @@
   "col": 3,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/b41558b37b",
+  "cases": 2,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -2939,7 +2939,7 @@
   "col": 34,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 40,
+  "cases": 134,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -2952,7 +2952,7 @@
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -2964,7 +2964,7 @@
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "exit status [0] -> [-11]; stdout differs"
  },
  {
@@ -2975,7 +2975,7 @@
   "col": 15,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 14,
+  "cases": 21,
   "killer": "gaps/d2df8fd907",
   "why": "stdout differs"
  },
@@ -2987,8 +2987,8 @@
   "col": 15,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/d013377fcf",
+  "cases": 14,
+  "killer": "gaps/56621a0e09",
   "why": "out.jpg differs"
  },
  {
@@ -2999,8 +2999,8 @@
   "col": 50,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/d013377fcf",
+  "cases": 14,
+  "killer": "gaps/56621a0e09",
   "why": "out.jpg differs"
  },
  {
@@ -3011,9 +3011,9 @@
   "col": 76,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/d013377fcf",
-  "why": "out.jpg differs"
+  "cases": 6,
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2075:5:2075:21",
@@ -3023,9 +3023,9 @@
   "col": 5,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 27,
-  "killer": "gaps/f608e69aa1",
-  "why": "out.miff differs"
+  "cases": 6,
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2078:14:2078:16",
@@ -3036,7 +3036,7 @@
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
@@ -3047,8 +3047,8 @@
   "col": 37,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -3059,8 +3059,8 @@
   "col": 9,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/435313a870",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -3071,9 +3071,9 @@
   "col": 23,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 8,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2086:11:2086:48",
@@ -3083,8 +3083,8 @@
   "col": 11,
   "function": "profile.c:SetImageProfileInternal",
   "status": "killed",
-  "cases": 17,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -3095,7 +3095,7 @@
   "col": 14,
   "function": "AcquireProfileStringInfo",
   "status": "killed",
-  "cases": 10,
+  "cases": 80,
   "killer": "gaps/dbdaa63e98",
   "why": "stdout differs"
  },
@@ -3108,8 +3108,8 @@
   "function": "AcquireProfileStringInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2104:7:2104:38",
@@ -3120,7 +3120,7 @@
   "function": "AcquireProfileStringInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
+  "killer": "gaps/f42a221b41",
   "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
  {
@@ -3132,8 +3132,8 @@
   "function": "BlobToProfileStringInfo",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "killer": "gaps/f42a221b41",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2127:15:2127:17",
@@ -3144,7 +3144,7 @@
   "function": "SetImageProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/a2f34a11aa",
+  "killer": "gaps/f42a221b41",
   "why": "stdout differs"
  },
  {
@@ -3155,9 +3155,9 @@
   "col": 15,
   "function": "SetImageProfilePrivate",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "stdout differs; stderr differs"
+  "cases": 2,
+  "killer": "gaps/ae6a48abff",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2171:15:2171:16",
@@ -3168,7 +3168,7 @@
   "function": "profile.c:ReadProfileByte",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/435313a870",
+  "killer": "gaps/0186e54cc8",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -3179,7 +3179,7 @@
   "col": 15,
   "function": "profile.c:ReadProfileByte",
   "status": "killed",
-  "cases": 1,
+  "cases": 3,
   "killer": "gaps/435313a870",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
@@ -3192,7 +3192,7 @@
   "function": "profile.c:ReadProfileShort",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/435313a870",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3204,7 +3204,7 @@
   "function": "profile.c:ReadProfileLong",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/435313a870",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3216,7 +3216,7 @@
   "function": "profile.c:ReadProfileMSBLong",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/435313a870",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -3227,8 +3227,8 @@
   "col": 15,
   "function": "profile.c:ReadProfileMSBLong",
   "status": "killed",
-  "cases": 14,
-  "killer": "gaps/858b45d620",
+  "cases": 1,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -3240,7 +3240,7 @@
   "function": "profile.c:ReadProfileMSBShort",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/435313a870",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -3251,7 +3251,7 @@
   "col": 15,
   "function": "profile.c:ReadProfileMSBShort",
   "status": "killed",
-  "cases": 14,
+  "cases": 5,
   "killer": "gaps/858b45d620",
   "why": "stdout differs"
  },
@@ -3263,8 +3263,8 @@
   "col": 14,
   "function": "profile.c:WriteProfileLong",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/b41558b37b",
+  "cases": 1,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3276,7 +3276,7 @@
   "function": "profile.c:WriteProfileShort",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/435313a870",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3288,7 +3288,7 @@
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3299,9 +3299,9 @@
   "col": 37,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
-  "why": "stdout differs"
+  "cases": 2,
+  "killer": "gaps/56621a0e09",
+  "why": "out.jpg differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2309:54:2309:56",
@@ -3312,7 +3312,7 @@
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3323,9 +3323,9 @@
   "col": 15,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
-  "why": "stdout differs"
+  "cases": 2,
+  "killer": "gaps/56621a0e09",
+  "why": "out.jpg differs"
  },
  {
   "id": "cxx_le_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2311:35:2311:37",
@@ -3335,9 +3335,9 @@
   "col": 35,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
-  "why": "stdout differs"
+  "cases": 2,
+  "killer": "gaps/56621a0e09",
+  "why": "out.jpg differs"
  },
  {
   "id": "cxx_le_to_lt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2311:35:2311:37",
@@ -3347,7 +3347,7 @@
   "col": 35,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 13,
+  "cases": 20,
   "killer": "gaps/ce731947c0",
   "why": "stdout differs"
  },
@@ -3359,9 +3359,9 @@
   "col": 7,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
-  "why": "stdout differs"
+  "cases": 2,
+  "killer": "gaps/56621a0e09",
+  "why": "out.jpg differs"
  },
  {
   "id": "cxx_gt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2316:17:2316:18",
@@ -3371,7 +3371,7 @@
   "col": 17,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 13,
+  "cases": 20,
   "killer": "gaps/ce731947c0",
   "why": "stdout differs"
  },
@@ -3384,7 +3384,7 @@
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3395,7 +3395,7 @@
   "col": 14,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 13,
+  "cases": 20,
   "killer": "gaps/ce731947c0",
   "why": "stdout differs"
  },
@@ -3407,7 +3407,7 @@
   "col": 5,
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
-  "cases": 13,
+  "cases": 20,
   "killer": "gaps/ce731947c0",
   "why": "stdout differs"
  },
@@ -3420,7 +3420,7 @@
   "function": "profile.c:WriteProfileDimension",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3432,7 +3432,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3456,7 +3456,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3468,7 +3468,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3480,7 +3480,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3492,7 +3492,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3504,7 +3504,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3516,7 +3516,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3528,7 +3528,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3540,7 +3540,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3552,7 +3552,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3564,7 +3564,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3588,7 +3588,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3599,8 +3599,8 @@
   "col": 12,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 3,
+  "killer": "gaps/6b3d717664",
   "why": "stdout differs"
  },
  {
@@ -3612,7 +3612,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3624,7 +3624,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3635,7 +3635,7 @@
   "col": 15,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 48,
+  "cases": 38,
   "killer": "gaps/7d7da541c9",
   "why": "stdout differs"
  },
@@ -3660,7 +3660,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3672,7 +3672,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3684,7 +3684,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3696,7 +3696,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3707,7 +3707,7 @@
   "col": 20,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 15,
+  "cases": 21,
   "killer": "gaps/8ce96f5452",
   "why": "stdout differs"
  },
@@ -3719,8 +3719,8 @@
   "col": 42,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/8ce96f5452",
+  "cases": 1,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3732,7 +3732,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3743,7 +3743,7 @@
   "col": 28,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 21,
+  "cases": 3,
   "killer": "gaps/6b3d717664",
   "why": "stdout differs"
  },
@@ -3755,7 +3755,7 @@
   "col": 48,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 21,
+  "cases": 3,
   "killer": "gaps/6b3d717664",
   "why": "stdout differs"
  },
@@ -3768,7 +3768,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3791,9 +3791,9 @@
   "col": 24,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
-  "why": "stdout differs"
+  "cases": 2,
+  "killer": "gaps/56621a0e09",
+  "why": "out.jpg differs"
  },
  {
   "id": "cxx_gt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2438:24:2438:25",
@@ -3804,7 +3804,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3815,7 +3815,7 @@
   "col": 44,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 21,
+  "cases": 3,
   "killer": "gaps/6b3d717664",
   "why": "stdout differs"
  },
@@ -3827,7 +3827,7 @@
   "col": 47,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 21,
+  "cases": 3,
   "killer": "gaps/6b3d717664",
   "why": "stdout differs"
  },
@@ -3840,7 +3840,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3864,7 +3864,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3876,7 +3876,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "exit status [0] -> [-8]; stdout differs"
  },
  {
@@ -3900,7 +3900,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3912,7 +3912,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3924,7 +3924,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3935,7 +3935,7 @@
   "col": 19,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 9,
+  "cases": 16,
   "killer": "gaps/9910483f8c",
   "why": "stdout differs"
  },
@@ -3947,9 +3947,9 @@
   "col": 35,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 5,
-  "killer": "gaps/b06cb10174",
-  "why": "out.jpg differs"
+  "cases": 20,
+  "killer": "gaps/860afa0d0c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ge_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2466:39:2466:41",
@@ -3972,7 +3972,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3984,7 +3984,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -3995,9 +3995,9 @@
   "col": 22,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/d013377fcf",
-  "why": "out.jpg differs"
+  "cases": 16,
+  "killer": "gaps/9910483f8c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2471:39:2471:40",
@@ -4008,7 +4008,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4020,7 +4020,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4031,9 +4031,9 @@
   "col": 34,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/d013377fcf",
-  "why": "out.jpg differs"
+  "cases": 16,
+  "killer": "gaps/9910483f8c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_le_to_gt:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2474:24:2474:26",
@@ -4044,7 +4044,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4056,7 +4056,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4067,9 +4067,9 @@
   "col": 23,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2482:23:2482:24",
@@ -4079,7 +4079,7 @@
   "col": 23,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
+  "cases": 11,
   "killer": "gaps/af706eb945",
   "why": "stdout differs"
  },
@@ -4091,7 +4091,7 @@
   "col": 32,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
+  "cases": 11,
   "killer": "gaps/af706eb945",
   "why": "stdout differs"
  },
@@ -4103,9 +4103,9 @@
   "col": 57,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_gt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2483:57:2483:58",
@@ -4115,9 +4115,9 @@
   "col": 57,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2485:23:2485:24",
@@ -4127,9 +4127,9 @@
   "col": 23,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_lt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2485:23:2485:24",
@@ -4151,9 +4151,9 @@
   "col": 25,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/d013377fcf",
-  "why": "out.jpg differs"
+  "cases": 1,
+  "killer": "gaps/0186e54cc8",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2495:13:2496:66",
@@ -4163,9 +4163,9 @@
   "col": 13,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/d013377fcf",
-  "why": "out.jpg differs"
+  "cases": 1,
+  "killer": "gaps/0186e54cc8",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2495:52:2495:54",
@@ -4175,8 +4175,8 @@
   "col": 52,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4187,8 +4187,8 @@
   "col": 25,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4199,8 +4199,8 @@
   "col": 13,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4211,8 +4211,8 @@
   "col": 52,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4223,9 +4223,9 @@
   "col": 25,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2511:18:2511:79",
@@ -4235,9 +4235,9 @@
   "col": 18,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2511:71:2511:72",
@@ -4247,9 +4247,9 @@
   "col": 71,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2512:28:2512:30",
@@ -4259,9 +4259,9 @@
   "col": 28,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2513:20:2513:52",
@@ -4271,9 +4271,9 @@
   "col": 20,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/af706eb945",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2518:25:2518:27",
@@ -4283,9 +4283,9 @@
   "col": 25,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2520:18:2520:79",
@@ -4295,9 +4295,9 @@
   "col": 18,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2520:71:2520:72",
@@ -4307,9 +4307,9 @@
   "col": 71,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2521:28:2521:30",
@@ -4319,9 +4319,9 @@
   "col": 28,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2522:20:2522:52",
@@ -4331,9 +4331,9 @@
   "col": 20,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2527:25:2527:27",
@@ -4344,7 +4344,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4355,7 +4355,7 @@
   "col": 28,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
+  "cases": 7,
   "killer": "gaps/b41558b37b",
   "why": "stdout differs"
  },
@@ -4367,7 +4367,7 @@
   "col": 22,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 11,
+  "cases": 5,
   "killer": "gaps/f6b5f76906",
   "why": "out.miff differs"
  },
@@ -4380,7 +4380,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4391,9 +4391,9 @@
   "col": 25,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 9,
-  "killer": "gaps/9910483f8c",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2542:28:2542:30",
@@ -4403,8 +4403,8 @@
   "col": 28,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 9,
-  "killer": "gaps/9910483f8c",
+  "cases": 8,
+  "killer": "gaps/44e8ba5db8",
   "why": "stdout differs"
  },
  {
@@ -4415,9 +4415,9 @@
   "col": 22,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2544:69:2544:70",
@@ -4427,9 +4427,9 @@
   "col": 69,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 10,
-  "killer": "gaps/44e8ba5db8",
-  "why": "stdout differs"
+  "cases": 5,
+  "killer": "gaps/f6b5f76906",
+  "why": "out.miff differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2547:18:2547:79",
@@ -4439,8 +4439,8 @@
   "col": 18,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 9,
-  "killer": "gaps/9910483f8c",
+  "cases": 14,
+  "killer": "gaps/5443a18cec",
   "why": "stdout differs"
  },
  {
@@ -4451,8 +4451,8 @@
   "col": 73,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 9,
-  "killer": "gaps/9910483f8c",
+  "cases": 14,
+  "killer": "gaps/5443a18cec",
   "why": "stdout differs"
  },
  {
@@ -4463,8 +4463,8 @@
   "col": 23,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4475,7 +4475,7 @@
   "col": 23,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
+  "cases": 7,
   "killer": "gaps/b41558b37b",
   "why": "stdout differs"
  },
@@ -4487,8 +4487,8 @@
   "col": 58,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4499,8 +4499,8 @@
   "col": 23,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4511,8 +4511,8 @@
   "col": 46,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4523,8 +4523,8 @@
   "col": 32,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4535,7 +4535,7 @@
   "col": 32,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 15,
+  "cases": 21,
   "killer": "gaps/8ce96f5452",
   "why": "stdout differs"
  },
@@ -4547,7 +4547,7 @@
   "col": 41,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 15,
+  "cases": 21,
   "killer": "gaps/8ce96f5452",
   "why": "stdout differs"
  },
@@ -4559,8 +4559,8 @@
   "col": 22,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4571,7 +4571,7 @@
   "col": 22,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 8,
+  "cases": 15,
   "killer": "gaps/91ed02de8d",
   "why": "stdout differs"
  },
@@ -4583,8 +4583,8 @@
   "col": 30,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4595,8 +4595,8 @@
   "col": 53,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4608,7 +4608,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4620,7 +4620,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4632,7 +4632,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4667,8 +4667,8 @@
   "col": 53,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 36,
-  "killer": "gaps/e878bfdcf2",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4679,7 +4679,7 @@
   "col": 70,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 48,
+  "cases": 38,
   "killer": "gaps/7d7da541c9",
   "why": "stdout differs"
  },
@@ -4691,8 +4691,8 @@
   "col": 27,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 36,
-  "killer": "gaps/e878bfdcf2",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4703,7 +4703,7 @@
   "col": 53,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 17,
+  "cases": 1,
   "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
@@ -4715,7 +4715,7 @@
   "col": 53,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 17,
+  "cases": 1,
   "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
@@ -4727,7 +4727,7 @@
   "col": 62,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 17,
+  "cases": 1,
   "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
@@ -4739,7 +4739,7 @@
   "col": 26,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 40,
+  "cases": 6,
   "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
@@ -4751,7 +4751,7 @@
   "col": 26,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 40,
+  "cases": 6,
   "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
@@ -4763,8 +4763,8 @@
   "col": 24,
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
-  "cases": 8,
-  "killer": "gaps/91ed02de8d",
+  "cases": 6,
+  "killer": "gaps/83fbec5d6d",
   "why": "stdout differs"
  },
  {
@@ -4776,7 +4776,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -4788,7 +4788,7 @@
   "function": "profile.c:SyncExifProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/b41558b37b",
+  "killer": "gaps/0186e54cc8",
   "why": "stdout differs"
  },
  {
@@ -4979,7 +4979,7 @@
   "col": 46,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 10,
+  "cases": 3,
   "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
@@ -5015,8 +5015,8 @@
   "col": 26,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5027,8 +5027,8 @@
   "col": 11,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5039,8 +5039,8 @@
   "col": 32,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5051,8 +5051,8 @@
   "col": 37,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5063,9 +5063,9 @@
   "col": 11,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 36,
-  "killer": "gaps/40166d7755",
-  "why": "out.miff differs"
+  "cases": 34,
+  "killer": "gaps/830b564ca7",
+  "why": "out.8bim differs"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2636:32:2636:33",
@@ -5075,9 +5075,9 @@
   "col": 32,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 36,
-  "killer": "gaps/40166d7755",
-  "why": "out.miff differs"
+  "cases": 34,
+  "killer": "gaps/830b564ca7",
+  "why": "out.8bim differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2637:9:2637:71",
@@ -5099,8 +5099,8 @@
   "col": 26,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5111,8 +5111,8 @@
   "col": 11,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5123,8 +5123,8 @@
   "col": 32,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5135,8 +5135,8 @@
   "col": 37,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 4,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 3,
+  "killer": "gaps/1c34bc3f88",
   "why": "stdout differs"
  },
  {
@@ -5147,9 +5147,9 @@
   "col": 11,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 36,
-  "killer": "gaps/40166d7755",
-  "why": "out.miff differs"
+  "cases": 34,
+  "killer": "gaps/830b564ca7",
+  "why": "out.8bim differs"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2643:32:2643:33",
@@ -5159,9 +5159,9 @@
   "col": 32,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 36,
-  "killer": "gaps/40166d7755",
-  "why": "out.miff differs"
+  "cases": 34,
+  "killer": "gaps/830b564ca7",
+  "why": "out.8bim differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2644:9:2644:72",
@@ -5183,7 +5183,7 @@
   "col": 12,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 38,
+  "cases": 41,
   "killer": "gaps/f55de037b3",
   "why": "out.miff differs"
  },
@@ -5195,7 +5195,7 @@
   "col": 7,
   "function": "profile.c:Sync8BimProfile",
   "status": "killed",
-  "cases": 38,
+  "cases": 41,
   "killer": "gaps/f55de037b3",
   "why": "out.miff differs"
  },
@@ -5208,7 +5208,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5220,7 +5220,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5232,7 +5232,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5256,7 +5256,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5268,7 +5268,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5292,7 +5292,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 3,
-  "killer": "gaps/ccdb35d024",
+  "killer": "gaps/0015a27eec",
   "why": "stdout differs"
  },
  {
@@ -5316,7 +5316,7 @@
   "function": "profile.c:ReplaceXMPValue",
   "status": "killed",
   "cases": 3,
-  "killer": "gaps/ccdb35d024",
+  "killer": "gaps/0015a27eec",
   "why": "stdout differs"
  },
  {
@@ -5327,8 +5327,8 @@
   "col": 12,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5351,8 +5351,8 @@
   "col": 46,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5363,7 +5363,7 @@
   "col": 46,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 4,
+  "cases": 1,
   "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
@@ -5375,8 +5375,8 @@
   "col": 64,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5387,8 +5387,8 @@
   "col": 22,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5399,8 +5399,8 @@
   "col": 29,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5423,8 +5423,8 @@
   "col": 42,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5435,8 +5435,8 @@
   "col": 26,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5447,8 +5447,8 @@
   "col": 23,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "exit status [0] -> [-11]; stdout differs"
  },
  {
@@ -5459,8 +5459,8 @@
   "col": 30,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5471,8 +5471,8 @@
   "col": 41,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5483,8 +5483,8 @@
   "col": 11,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5495,8 +5495,8 @@
   "col": 21,
   "function": "profile.c:GetXMPOffsets",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
@@ -5580,7 +5580,7 @@
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5616,7 +5616,7 @@
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/44e8ba5db8",
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5627,7 +5627,7 @@
   "col": 20,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5639,7 +5639,7 @@
   "col": 15,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5675,7 +5675,7 @@
   "col": 52,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5687,7 +5687,7 @@
   "col": 52,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5699,7 +5699,7 @@
   "col": 18,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5711,7 +5711,7 @@
   "col": 22,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5723,7 +5723,7 @@
   "col": 27,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5735,7 +5735,7 @@
   "col": 35,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5759,7 +5759,7 @@
   "col": 23,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5771,7 +5771,7 @@
   "col": 18,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5795,7 +5795,7 @@
   "col": 18,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5807,7 +5807,7 @@
   "col": 21,
   "function": "profile.c:GetXMPNumeratorAndDenominator",
   "status": "killed",
-  "cases": 3,
+  "cases": 7,
   "killer": "gaps/ccdb35d024",
   "why": "stdout differs"
  },
@@ -5820,8 +5820,8 @@
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "gaps/2c5e3d04b4",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2807:7:2808:22",
@@ -5856,8 +5856,8 @@
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "gaps/2c5e3d04b4",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_sub_to_add:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2815:36:2815:37",
@@ -5903,7 +5903,7 @@
   "col": 19,
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
-  "cases": 4,
+  "cases": 1,
   "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
@@ -5915,8 +5915,8 @@
   "col": 11,
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5927,8 +5927,8 @@
   "col": 7,
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
-  "cases": 3,
-  "killer": "gaps/44e8ba5db8",
+  "cases": 1,
+  "killer": "gaps/2c5e3d04b4",
   "why": "stdout differs"
  },
  {
@@ -5940,8 +5940,8 @@
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "gaps/2c5e3d04b4",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2828:29:2828:30",
@@ -5976,8 +5976,8 @@
   "function": "profile.c:SyncXMPProfile",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/aadbaa4493",
-  "why": "exit status [0] -> [1]; stdout differs; stderr differs"
+  "killer": "gaps/2c5e3d04b4",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2835:7:2835:47",
@@ -6072,8 +6072,8 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
-  "why": "exit status [0] -> ['timeout']; stdout differs"
+  "killer": "gaps/3dd5e2bd2f",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2874:24:2874:26",
@@ -6084,7 +6084,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6096,7 +6096,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6108,7 +6108,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6120,7 +6120,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6132,7 +6132,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -6144,7 +6144,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6156,7 +6156,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6168,7 +6168,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6180,7 +6180,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6192,7 +6192,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6204,7 +6204,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6216,7 +6216,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6228,7 +6228,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6240,7 +6240,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6252,7 +6252,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6264,7 +6264,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6276,7 +6276,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6288,7 +6288,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6300,7 +6300,7 @@
   "function": "profile.c:UpdateClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/858b45d620",
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6312,8 +6312,8 @@
   "function": "Update8BIMClipPath",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/ffff622295",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs; out.miff missing in candidate"
+  "killer": "compare/c7a33e33b8",
+  "why": "exit status [1] -> [-6]; stderr differs; diff.miff missing in candidate"
  },
  {
   "id": "cxx_gt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2966:17:2966:18",
@@ -6323,9 +6323,9 @@
   "col": 17,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 15,
-  "killer": "gaps/f608e69aa1",
-  "why": "exit status [0] -> ['timeout']; clip.8bim missing in candidate; out.miff missing in candidate"
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_gt_to_le:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:2966:17:2966:18",
@@ -6335,8 +6335,8 @@
   "col": 17,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6347,8 +6347,8 @@
   "col": 40,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6359,8 +6359,8 @@
   "col": 40,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6371,8 +6371,8 @@
   "col": 40,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6383,8 +6383,8 @@
   "col": 40,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6395,8 +6395,8 @@
   "col": 16,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6407,8 +6407,8 @@
   "col": 41,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6419,7 +6419,7 @@
   "col": 41,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
+  "cases": 15,
   "killer": "gaps/858b45d620",
   "why": "stdout differs"
  },
@@ -6431,8 +6431,8 @@
   "col": 24,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6443,8 +6443,8 @@
   "col": 16,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6455,7 +6455,7 @@
   "col": 16,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
+  "cases": 15,
   "killer": "gaps/858b45d620",
   "why": "stdout differs"
  },
@@ -6467,8 +6467,8 @@
   "col": 40,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6479,8 +6479,8 @@
   "col": 40,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6491,7 +6491,7 @@
   "col": 13,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 114,
+  "cases": 4,
   "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
@@ -6503,8 +6503,8 @@
   "col": 13,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6515,8 +6515,8 @@
   "col": 28,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
  {
@@ -6527,7 +6527,7 @@
   "col": 28,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 114,
+  "cases": 4,
   "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  },
@@ -6539,8 +6539,8 @@
   "col": 7,
   "function": "Update8BIMClipPath",
   "status": "killed",
-  "cases": 67,
-  "killer": "gaps/858b45d620",
+  "cases": 4,
+  "killer": "gaps/3dd5e2bd2f",
   "why": "stdout differs"
  }
 ]
