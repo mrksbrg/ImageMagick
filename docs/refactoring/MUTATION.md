@@ -4169,3 +4169,13 @@ on a fresh baseline (`res12`), all 25 are killed again.
 opencl.c 72% (ten functions short: the nine of x11cl11 and DumpOpenCLProfileData 27%, whose kills
 were the false ones; the "75%" of x11cl10/11 included them), xwindow.c 32%, display.c 15%, widget.c
 45%, animate.c 17%.
+
+**cap12 (17:20-19:28): x11cl12's 59 capped survivors uncapped: none killed.** They sit in exit
+paths: DestroyXResources (38), DumpOpenCLProfileData (11), OpenCLTerminus (6), checkAccelerateCondition
+(2), DestroyXWidget and XComponentTerminus. Read: DestroyXResources releases X resources as display
+or animate quits (the process exits next, XCloseDisplay lets the server reclaim the rest; 142 runs
+get past its early return, none changes), and so does XComponentTerminus, which only calls it:
+**unobservable**. widget.c's file-scope `selection_info` is never assigned (the widgets' variable of
+that name is a local), so DestroyXWidget's test is always false: **equivalent** (`c51c55b77`).
+xwindow.c 32% -> 33%. DumpOpenCLProfileData's survivors need a case whose output holds the profile
+log (only the OpenCL cache-directory case puts it in the case directory).
