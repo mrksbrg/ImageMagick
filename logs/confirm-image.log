@@ -1,13 +1,12 @@
 mutate: 93 mutants in MagickCore/image\.c$, 27 functions
-mutate: baseline over 1 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/93 (0s)
   mutants: 50/93 (0s)
   mutants: 75/93 (0s)
   mutants: 93/93 (0s)
 
 mutate: 93 mutants, 0s
-  killed 0, survived 4 (0 capped), no coverage 89, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+  killed 0, survived 0 (0 capped), no coverage 93, errors 0
 
   function                           total killed survived no-cov
   NewMagickImage                        12      0        0     12
@@ -27,22 +26,15 @@ mutate: 93 mutants, 0s
   GetImageMask                           2      0        0      2
   IsHighDynamicRangeImage                2      0        0      2
   SetImageAlpha                          2      0        0      2
-  SetImageBackgroundColor                2      0        2      0
+  SetImageBackgroundColor                2      0        0      2
   CopyImagePixels                        1      0        0      1
   ResetImagePage                         1      0        0      1
-  SetImageStorageClass                   1      0        1      0
+  SetImageStorageClass                   1      0        0      1
   SetImageInfoCustomStream               1      0        0      1
   SetImageMask                           1      0        0      1
   SetImageVirtualPixelMethod             1      0        0      1
   StripImage                             1      0        0      1
   SyncImage                              1      0        0      1
-  SyncImagesSettings                     1      0        1      0
+  SyncImagesSettings                     1      0        0      1
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  image.c:2497:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  image.c:2502:47 cxx_eq_to_ne               ((image->alpha_trait & BlendPixelTrait) == 0))
-    x  image.c:2691:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  image.c:4110:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-c31754249-image.json
+  full results: build-oracle/work/mutation-confirm-f4a3881ef-image.json
