@@ -5,42 +5,42 @@ mutate: baseline over 62 cases in 0s
   mutants: 75/749 (1s)
   mutants: 100/749 (1s)
   mutants: 125/749 (1s)
-  mutants: 150/749 (1s)
+  mutants: 150/749 (2s)
   mutants: 175/749 (2s)
   mutants: 200/749 (2s)
   mutants: 225/749 (2s)
   mutants: 250/749 (3s)
   mutants: 275/749 (3s)
   mutants: 300/749 (4s)
-  mutants: 325/749 (5s)
-  mutants: 350/749 (9s)
-  mutants: 375/749 (14s)
-  mutants: 400/749 (18s)
-  mutants: 425/749 (25s)
-  mutants: 450/749 (35s)
-  mutants: 475/749 (44s)
-  mutants: 500/749 (59s)
-  mutants: 525/749 (71s)
-  mutants: 550/749 (84s)
-  mutants: 575/749 (97s)
-  mutants: 600/749 (103s)
-  mutants: 625/749 (109s)
-  mutants: 650/749 (130s)
-  mutants: 675/749 (132s)
-  mutants: 700/749 (132s)
-  mutants: 725/749 (133s)
-  mutants: 749/749 (244s)
+  mutants: 325/749 (4s)
+  mutants: 350/749 (6s)
+  mutants: 375/749 (11s)
+  mutants: 400/749 (15s)
+  mutants: 425/749 (23s)
+  mutants: 450/749 (31s)
+  mutants: 475/749 (40s)
+  mutants: 500/749 (51s)
+  mutants: 525/749 (60s)
+  mutants: 550/749 (71s)
+  mutants: 575/749 (76s)
+  mutants: 600/749 (78s)
+  mutants: 625/749 (80s)
+  mutants: 650/749 (89s)
+  mutants: 675/749 (98s)
+  mutants: 700/749 (103s)
+  mutants: 725/749 (130s)
+  mutants: 749/749 (213s)
 
-mutate: 749 mutants, 244s
-  killed 633, survived 116 (0 capped), no coverage 0, errors 0
-  mutation score on reached code: 84.5%   overall: 84.5%
+mutate: 749 mutants, 213s
+  killed 632, survived 117 (0 capped), no coverage 0, errors 0
+  mutation score on reached code: 84.4%   overall: 84.4%
 
   function                           total killed survived no-cov
   ConnectedComponentsImage             416    339       77      0
   AngleThreshold                        58     46       12      0
   EccentricityThreshold                 50     47        3      0
   CircularityThreshold                  47     42        5      0
-  PerimeterThreshold                    44     40        4      0
+  PerimeterThreshold                    44     39        5      0
   MajorAxisThreshold                    40     37        3      0
   MinorAxisThreshold                    40     35        5      0
   IntegralImage                         33     29        4      0
@@ -52,6 +52,7 @@ mutate: 749 mutants, 244s
        vision.c:134:40 cxx_sub_to_add             return((int) (q->bounding_box.width-p->bounding_box.width));
     x  vision.c:164:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
     x  vision.c:185:20 cxx_lt_to_le               for (y=(-1); y < (ssize_t) bounding_box.height; y++)
+    x  vision.c:200:22 cxx_lt_to_le               for (x=(-1); x < (ssize_t) bounding_box.width; x++)
     x  vision.c:230:41 cxx_eq_to_ne               if ((ssize_t) pixels[2*v+u] == i)
        vision.c:241:27 cxx_post_inc_to_post_dec   pattern[0]++;  /* diagonal */
     x  vision.c:271:15 cxx_lt_to_le               for (i=0; i < (ssize_t) component_image->colors; i++)
