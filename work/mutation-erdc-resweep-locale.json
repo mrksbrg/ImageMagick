@@ -55,7 +55,7 @@
   "col": 19,
   "function": "locale.c:AcquireLocaleSplayTree",
   "status": "killed",
-  "cases": 63,
+  "cases": 61,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -319,9 +319,9 @@
   "col": 46,
   "function": "GetLocaleInfoList",
   "status": "killed",
-  "cases": 2,
-  "killer": "gaps/91eb155846",
-  "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
+  "cases": 3,
+  "killer": "gaps/c22eb68f8c",
+  "why": "stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/locale.c:619:16:619:18",
@@ -451,7 +451,7 @@
   "col": 9,
   "function": "GetLocaleList",
   "status": "killed",
-  "cases": 1,
+  "cases": 2,
   "killer": "gaps/c270bd21de",
   "why": "stdout differs"
  },
@@ -463,7 +463,7 @@
   "col": 46,
   "function": "GetLocaleList",
   "status": "killed",
-  "cases": 1,
+  "cases": 2,
   "killer": "gaps/c270bd21de",
   "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
@@ -475,7 +475,7 @@
   "col": 16,
   "function": "GetLocaleList",
   "status": "killed",
-  "cases": 1,
+  "cases": 2,
   "killer": "gaps/c270bd21de",
   "why": "stdout differs"
  },
@@ -488,7 +488,7 @@
   "function": "GetLocaleList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c270bd21de",
+  "killer": "gaps/9d5bfdfff7",
   "why": "exit status [0] -> [1]; stdout differs; stderr differs"
  },
  {
@@ -499,7 +499,7 @@
   "col": 15,
   "function": "GetLocaleList",
   "status": "killed",
-  "cases": 1,
+  "cases": 2,
   "killer": "gaps/c270bd21de",
   "why": "stdout differs"
  },
@@ -511,7 +511,7 @@
   "col": 21,
   "function": "GetLocaleList",
   "status": "killed",
-  "cases": 1,
+  "cases": 2,
   "killer": "gaps/c270bd21de",
   "why": "stdout differs"
  },
@@ -524,7 +524,7 @@
   "function": "GetLocaleList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c270bd21de",
+  "killer": "gaps/9d5bfdfff7",
   "why": "stdout differs"
  },
  {
@@ -535,7 +535,7 @@
   "col": 17,
   "function": "GetLocaleList",
   "status": "killed",
-  "cases": 1,
+  "cases": 2,
   "killer": "gaps/c270bd21de",
   "why": "exit status [0] -> [-6]; stdout differs; stderr differs"
  },
@@ -548,7 +548,7 @@
   "function": "GetLocaleList",
   "status": "killed",
   "cases": 1,
-  "killer": "gaps/c270bd21de",
+  "killer": "gaps/9d5bfdfff7",
   "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
@@ -1175,7 +1175,7 @@
   "col": 23,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 63,
+  "cases": 61,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -1247,7 +1247,7 @@
   "col": 22,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 117,
+  "cases": 107,
   "killer": "gaps/19d209ea93",
   "why": "stdout differs"
  },
@@ -1319,7 +1319,7 @@
   "col": 41,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 133,
+  "cases": 102,
   "killer": "gaps/c22eb68f8c",
   "why": "stdout differs"
  },
@@ -1379,7 +1379,7 @@
   "col": 42,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 66,
+  "cases": 64,
   "killer": "gaps/1c46a980f2",
   "why": "stdout differs"
  },
@@ -1391,7 +1391,7 @@
   "col": 55,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 66,
+  "cases": 64,
   "killer": "gaps/1c46a980f2",
   "why": "stdout differs"
  },
@@ -1403,7 +1403,7 @@
   "col": 54,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 66,
+  "cases": 64,
   "killer": "gaps/1c46a980f2",
   "why": "exit status [0] -> [-6]; stdout differs"
  },
@@ -1655,7 +1655,7 @@
   "col": 9,
   "function": "locale.c:LoadLocaleCache",
   "status": "killed",
-  "cases": 63,
+  "cases": 61,
   "killer": "gaps/fec927ba9b",
   "why": "stdout differs"
  },
@@ -1967,7 +1967,7 @@
   "col": 13,
   "function": "LocaleCompare",
   "status": "killed",
-  "cases": 233,
+  "cases": 231,
   "killer": "gaps/855daf7162",
   "why": "stdout differs"
  },
@@ -2183,7 +2183,7 @@
   "col": 21,
   "function": "LocaleUpper",
   "status": "killed",
-  "cases": 108,
+  "cases": 53,
   "killer": "gaps/9ede1b5681",
   "why": "stdout differs"
  },

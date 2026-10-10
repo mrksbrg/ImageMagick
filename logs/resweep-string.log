@@ -1,31 +1,31 @@
 mutate: 377 mutants in MagickCore/string\.c$, 38 functions
-mutate: baseline over 15658 cases in 4s
+mutate: baseline over 15693 cases in 5s
   mutants: 25/377 (1s)
   mutants: 50/377 (45s)
-  mutants: 75/377 (50s)
-  mutants: 100/377 (59s)
-  mutants: 125/377 (65s)
-  mutants: 150/377 (93s)
-  mutants: 175/377 (95s)
-  mutants: 200/377 (96s)
-  mutants: 225/377 (109s)
-  mutants: 250/377 (110s)
-  mutants: 275/377 (111s)
-  mutants: 300/377 (122s)
-  mutants: 325/377 (126s)
-  mutants: 350/377 (131s)
-  mutants: 375/377 (230s)
-  mutants: 377/377 (257s)
+  mutants: 75/377 (51s)
+  mutants: 100/377 (56s)
+  mutants: 125/377 (80s)
+  mutants: 150/377 (95s)
+  mutants: 175/377 (96s)
+  mutants: 200/377 (104s)
+  mutants: 225/377 (113s)
+  mutants: 250/377 (116s)
+  mutants: 275/377 (123s)
+  mutants: 300/377 (131s)
+  mutants: 325/377 (132s)
+  mutants: 350/377 (136s)
+  mutants: 375/377 (238s)
+  mutants: 377/377 (263s)
 
-mutate: 377 mutants, 257s
-  killed 279, survived 94 (57 capped), no coverage 4, errors 0
-  mutation score on reached code: 74.8%   overall: 74.0%
+mutate: 377 mutants, 263s
+  killed 275, survived 98 (61 capped), no coverage 4, errors 0
+  mutation score on reached code: 73.7%   overall: 72.9%
 
   function                           total killed survived no-cov
   StringToStrings                       60     47       13      0
   StringToArgv                          37     35        2      0
   PrintStringInfo                       30     28        2      0
-  CopyMagickString                      20     14        6      0
+  CopyMagickString                      20     12        8      0
   StripMagickString                     20     18        2      0
   ConfigureFileToStringInfo             19      6       13      0
   SubstituteString                      15     10        5      0
@@ -45,7 +45,7 @@ mutate: 377 mutants, 257s
   AcquireStringInfo                      6      4        2      0
   BlobToStringInfo                       6      4        2      0
   FileToString                           5      4        1      0
-  IsStringTrue                           5      5        0      0
+  IsStringTrue                           5      3        2      0
   IsStringFalse                          5      2        3      0
   StringInfoToString                     5      3        2      0
   CompareStringInfo                      4      3        1      0
@@ -98,7 +98,9 @@ mutate: 377 mutants, 257s
     xc string.c:641:24 cxx_sub_to_add             file=close_utf8(file)-1;
     xc string.c:687:15 cxx_ge_to_gt               if (~length >= 1UL)
     xc string.c:692:44 cxx_mul_to_div             (void) memcpy(destination,source,length*sizeof(*destination));
+    xc string.c:745:32 cxx_sub_to_add             return((size_t) (p-source-1));
     xc string.c:747:32 cxx_sub_to_add             return((size_t) (p-source-1));
+    xc string.c:749:25 cxx_sub_to_add             return((size_t) (p-source-1));
     xc string.c:749:32 cxx_sub_to_add             return((size_t) (p-source-1));
     xc string.c:751:32 cxx_sub_to_add             return((size_t) (p-source-1));
     xc string.c:757:29 cxx_sub_to_add             return((size_t) (p-source-1));
@@ -122,6 +124,8 @@ mutate: 377 mutants, 257s
     xc string.c:1368:15 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
     xc string.c:1368:30 cxx_eq_to_ne               if ((*q == 'B') || (*q == 'P'))
     xc string.c:1371:16 cxx_ne_to_eq               if (sentinel != (char **) NULL)
+    xc string.c:1408:33 cxx_eq_to_ne               if (LocaleCompare(value,"on") == 0)
+    xc string.c:1410:34 cxx_eq_to_ne               if (LocaleCompare(value,"yes") == 0)
     xc string.c:1447:36 cxx_eq_to_ne               if (LocaleCompare(value,"false") == 0)
     xc string.c:1449:34 cxx_eq_to_ne               if (LocaleCompare(value,"off") == 0)
     xc string.c:1451:33 cxx_eq_to_ne               if (LocaleCompare(value,"no") == 0)

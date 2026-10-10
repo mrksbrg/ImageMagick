@@ -1,38 +1,38 @@
 mutate: 722 mutants in MagickCore/image\.c$, 47 functions
-mutate: baseline over 15345 cases in 0s
-  mutants: 25/722 (54s)
-  mutants: 50/722 (54s)
-  mutants: 75/722 (56s)
-  mutants: 100/722 (63s)
-  mutants: 125/722 (74s)
-  mutants: 150/722 (104s)
-  mutants: 175/722 (126s)
-  mutants: 200/722 (129s)
-  mutants: 225/722 (155s)
-  mutants: 250/722 (173s)
-  mutants: 275/722 (197s)
-  mutants: 300/722 (199s)
-  mutants: 325/722 (204s)
-  mutants: 350/722 (234s)
-  mutants: 375/722 (241s)
-  mutants: 400/722 (258s)
-  mutants: 425/722 (291s)
-  mutants: 450/722 (317s)
-  mutants: 475/722 (336s)
-  mutants: 500/722 (353s)
-  mutants: 525/722 (356s)
-  mutants: 550/722 (363s)
-  mutants: 575/722 (365s)
-  mutants: 600/722 (368s)
-  mutants: 625/722 (372s)
-  mutants: 650/722 (378s)
-  mutants: 675/722 (385s)
-  mutants: 700/722 (422s)
-  mutants: 722/722 (502s)
+mutate: baseline over 15380 cases in 0s
+  mutants: 25/722 (57s)
+  mutants: 50/722 (57s)
+  mutants: 75/722 (60s)
+  mutants: 100/722 (66s)
+  mutants: 125/722 (78s)
+  mutants: 150/722 (110s)
+  mutants: 175/722 (132s)
+  mutants: 200/722 (134s)
+  mutants: 225/722 (163s)
+  mutants: 250/722 (182s)
+  mutants: 275/722 (208s)
+  mutants: 300/722 (209s)
+  mutants: 325/722 (215s)
+  mutants: 350/722 (244s)
+  mutants: 375/722 (252s)
+  mutants: 400/722 (266s)
+  mutants: 425/722 (307s)
+  mutants: 450/722 (337s)
+  mutants: 475/722 (357s)
+  mutants: 500/722 (366s)
+  mutants: 525/722 (369s)
+  mutants: 550/722 (375s)
+  mutants: 575/722 (378s)
+  mutants: 600/722 (383s)
+  mutants: 625/722 (386s)
+  mutants: 650/722 (397s)
+  mutants: 675/722 (404s)
+  mutants: 700/722 (437s)
+  mutants: 722/722 (519s)
 
-mutate: 722 mutants, 502s
-  killed 470, survived 212 (169 capped), no coverage 40, errors 0
-  mutation score on reached code: 68.9%   overall: 65.1%
+mutate: 722 mutants, 519s
+  killed 464, survived 218 (175 capped), no coverage 40, errors 0
+  mutation score on reached code: 68.0%   overall: 64.3%
 
   function                           total killed survived no-cov
   SetImageInfo                          79     43       36      0
@@ -60,7 +60,7 @@ mutate: 722 mutants, 502s
   NewMagickImage                        12      0        0     12
   ResetImagePixels                      12      6        6      0
   SetImageColor                         11      0        0     11
-  SetImageInfoFromExtension             11     10        1      0
+  SetImageInfoFromExtension             11      4        7      0
   SetImageExtent                         9      6        3      0
   GetImageInfo                           7      4        3      0
   ClipImagePath                          6      3        3      0
@@ -211,6 +211,12 @@ mutate: 722 mutants, 502s
     xc image.c:2732:13 cxx_gt_to_ge               (rows > (size_t) MAGICK_SSIZE_MAX))
     xc image.c:2742:20 cxx_gt_to_ge               if (image->depth > (8*sizeof(MagickSizeType)))
     xc image.c:2831:33 cxx_ne_to_eq               (magick_info->format_type != UndefinedFormatType))
+    xc image.c:2834:23 cxx_eq_to_ne               while ((format_type == UndefinedFormatType) &&
+    xc image.c:2835:34 cxx_ne_to_eq               (format_type_formats[i] != (char *) NULL))
+    xc image.c:2837:17 cxx_eq_to_ne               if ((*magic == *format_type_formats[i]) &&
+    xc image.c:2838:54 cxx_eq_to_ne               (LocaleCompare(magic,format_type_formats[i]) == 0))
+    xc image.c:2845:21 cxx_eq_to_ne               if (format_type == ExplicitFormatType)
+    xc image.c:2850:34 cxx_eq_to_ne               if (LocaleCompare(magic,"RGB") == 0)
     xc image.c:2890:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     xc image.c:2895:18 cxx_eq_to_ne               if (*component == '\0')
     xc image.c:2921:50 cxx_ne_to_eq               for (q=(char *) image_info->scenes; *q != '\0'; p++)
