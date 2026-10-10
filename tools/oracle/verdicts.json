@@ -37451,6 +37451,16 @@
    "src": "(void) memset(devices,0,clEnv->number_devices*sizeof(cl_device_id));",
    "verdict": "equivalent",
    "why": "the memset zeroes fewer bytes of the cl_device_id array (number_devices/size rounds to 0), but clGetDeviceIDs writes every entry the loop then reads (number_devices of them, the count it returns)"
+  },
+  {
+   "at": 20,
+   "file": "MagickCore/linked-list.c",
+   "function": "SetHeadElementInLinkedList",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if (list_info->head == list_info->next)",
+   "verdict": "equivalent",
+   "why": "only the list's iteration cursor (list_info->next) changes; SetHeadElementInLinkedList's callers are the move-to-front lookups of the color, configure, delegate, log, mime and policy caches, file-static lists that are always walked from GetHeadElementInLinkedList by p->next and never through the cursor (GetNextValueInLinkedList is never called on them), so nothing reads it. Earlier kills by -list resource and -fuzz -transparent cases did not reproduce (2026-10-10: 0 of 3 runs each, uncapped in sweep1009)"
   }
  ]
 }
