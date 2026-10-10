@@ -783,10 +783,24 @@ def driver_fingerprint(binary):
     return file_sha(driver)[:8] if os.path.exists(driver) else "none"
 
 
+def machine_fingerprint():
+    """The physical memory and the open-file limit, which `-list resource` prints (Memory, Map,
+    Area and File follow them): a WSL boot can report a slightly different memory size, and a
+    baseline recorded on another boot then turns every mutant those cases reach into a false
+    kill (x11cl11: 17 in opencl.c's exit path, 2026-10-10)."""
+    import resource
+    try:
+        mem = os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES")
+    except (ValueError, OSError):
+        mem = 0
+    files = resource.getrlimit(resource.RLIMIT_NOFILE)[0]
+    return hashlib.sha256(("%d %d" % (mem, files)).encode()).hexdigest()
+
+
 def cache_path(binary, manifest):
-    key = "%s-%s-h%s-l%s-p%s-d%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
-                                     library_fingerprint(binary)[:8], program_fingerprint(binary)[:8],
-                                     driver_fingerprint(binary))
+    key = "%s-%s-h%s-l%s-p%s-d%s-m%s" % (file_sha(binary)[:16], manifest["digest"][:12], HARNESS_VERSION,
+                                         library_fingerprint(binary)[:8], program_fingerprint(binary)[:8],
+                                         driver_fingerprint(binary), machine_fingerprint()[:8])
     return os.path.join(WORK, "cache", key + ".json")
 
 
