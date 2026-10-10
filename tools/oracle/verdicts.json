@@ -37461,6 +37461,406 @@
    "src": "if (list_info->head == list_info->next)",
    "verdict": "equivalent",
    "why": "only the list's iteration cursor (list_info->next) changes; SetHeadElementInLinkedList's callers are the move-to-front lookups of the color, configure, delegate, log, mime and policy caches, file-static lists that are always walked from GetHeadElementInLinkedList by p->next and never through the cursor (GetNextValueInLinkedList is never called on them), so nothing reads it. Earlier kills by -list resource and -fuzz -transparent cases did not reproduce (2026-10-10: 0 of 3 runs each, uncapped in sweep1009)"
+  },
+  {
+   "at": 13,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_eq_to_ne",
+   "nth": 0,
+   "src": "if ((windows == (XWindows *) NULL) || (windows->display == (Display *) NULL))",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->group_leader);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->icon);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->image);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->info);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->magnify);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->pan);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->command);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->widget);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 29,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_post_inc_to_post_dec",
+   "nth": 0,
+   "src": "magick_windows[number_windows++]=(&windows->popup);",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 12,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_lt_to_ge",
+   "nth": 0,
+   "src": "for (i=0; i < (int) number_windows; i++)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->mapped != MagickFalse)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 28,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->name != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 30,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->cursor != (Cursor) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->busy_cursor != (Cursor) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 41,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->highlight_stipple != (Pixmap) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 38,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->shadow_stipple != (Pixmap) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (magick_windows[i]->segment_info != (void *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 17,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (segment_info != (XShmSegmentInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ge_to_gt",
+   "nth": 0,
+   "src": "if (segment_info[0].shmid >= 0)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 26,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ge_to_lt",
+   "nth": 0,
+   "src": "if (segment_info[0].shmid >= 0)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->icon_pixel != (XPixelInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->icon_pixel->pixels != (unsigned long *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->icon_pixel->annotate_context != (GC) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 24,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->pixel_info != (XPixelInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 32,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->pixel_info->pixels != (unsigned long *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 42,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->pixel_info->annotate_context != (GC) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 40,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->pixel_info->widget_context != (GC) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 43,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->pixel_info->highlight_context != (GC) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 23,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->font_info != (XFontStruct *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->class_hints != (XClassHint *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 35,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->class_hints->res_name != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 36,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->class_hints->res_class != (char *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 27,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->manager_hints != (XWMHints *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->map_info != (XStandardColormap *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 22,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->icon_map != (XStandardColormap *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->visual_info != (XVisualInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 25,
+   "file": "MagickCore/xwindow.c",
+   "function": "DestroyXResources",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (windows->icon_visual != (XVisualInfo *) NULL)",
+   "verdict": "unobservable",
+   "why": "releases the X windows, cursors, pixmaps, XImages, colormaps and hints as display or animate quits (and once more from MagickCoreTerminus): the program exits right after, XCloseDisplay lets the X server reclaim whatever is left, and nothing released here is read again. Uncapped (cap12), every one of the 142 runs past the early return gives the same output"
+  },
+  {
+   "at": 0,
+   "file": "MagickCore/xwindow.c",
+   "function": "XComponentTerminus",
+   "mutator": "cxx_remove_void_call",
+   "nth": 0,
+   "src": "DestroyXResources();",
+   "verdict": "unobservable",
+   "why": "the terminus only calls DestroyXResources at MagickCoreTerminus, after display or animate released their windows (or none were made): skipping it leaves resources the exiting process and the X server reclaim"
+  },
+  {
+   "at": 19,
+   "file": "MagickCore/widget.c",
+   "function": "DestroyXWidget",
+   "mutator": "cxx_ne_to_eq",
+   "nth": 0,
+   "src": "if (selection_info != (XWidgetInfo *) NULL)",
+   "verdict": "equivalent",
+   "why": "the file-scope selection_info is never assigned (the selection_info in the widgets is a local of the same name), so it is always NULL, and RelinquishMagickMemory(NULL) returns NULL: either branch leaves it NULL"
   }
  ]
 }
