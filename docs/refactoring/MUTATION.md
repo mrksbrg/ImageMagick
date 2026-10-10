@@ -4107,3 +4107,26 @@ LoadOpenCLBenchmarks' "cannot write the profile" branch deterministically, but O
 before the branch's device selection matters (hand-run: no kill). A next step, if wanted: a
 profile entry per device (opencl_device_attributes for every device pocl lists) so that `cpu basic`
 runs without a benchmark.
+
+## sweep1009: the regular files under HARNESS_VERSION 13 (2026-10-09/10, night)
+
+All 36 regular files, mull-sdl-win, capped at 1500 cases a mutant, catalogue at 781ecfc00 (after
+the casemap and OpenCL fixes). Alone against all reports merged, 31 of the 34 gated files give the
+same short functions. The three that differ:
+- **linked-list.c, SetHeadElementInLinkedList** (75% alone): line 1033 (`head == next` -> `!=`)
+  was killed by three cases in earlier sweeps (two `-list resource` with a time limit, `tall -fuzz
+  35% -transparent red`), but survived all 1045 reaching cases here and 0 of 3 hand runs per old
+  killer. Read: it only moves the list's iteration cursor, and the six callers (the move-to-front
+  lookups of the color, configure, delegate, log, mime and policy caches) walk their lists from
+  the head by p->next, never by the cursor: **equivalent** (`4a265ada8`). The old kills were
+  circumstantial.
+- **magick.c, SetMagickPrecision** (75% alone): its three killed-elsewhere mutants were capped at
+  1500 here and the killer (`info/6fd4b25b1e`, `-list resource`) was not in the sample; rerun
+  uncapped (`prec1010-magick`).
+- **xml-tree.c, DestroyXMLTreeAttributes** (75% alone): its passing kills are AddressSanitizer
+  reports (the 10-08 ASan round), which a sweep on the plain Mull build cannot make. Expected: the
+  file's trust depends on the ASan build for that function.
+
+W01, the same night: the magnifier round (`x11cl2-magnifier1010`, the three `daee3db85` cases
+against every open display.c, widget.c and xwindow.c mutant) killed 77: xwindow.c 29% -> 33%,
+display.c 15% -> 16%.
