@@ -26856,16 +26856,6 @@
    "at": 11,
    "file": "MagickCore/opencl.c",
    "function": "CacheOpenCLKernel",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (status != CL_SUCCESS)",
-   "verdict": "unobservable",
-   "why": "the kernel-binary cache (MAGICK_OPENCL_CACHE_DIR/magick_opencl_<device>_<signature>_64.bin): the file name (StringSignature, the device-name character filter), saving the built binary and loading it back; a miss or a different name only rebuilds the same kernels"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/opencl.c",
-   "function": "CacheOpenCLKernel",
    "mutator": "cxx_eq_to_ne",
    "nth": 0,
    "src": "if (status == CL_SUCCESS)",
@@ -27053,16 +27043,6 @@
    "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
   },
   {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "RelinquishMagickCLDevices",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "for (i = 0; i < clEnv->number_devices; i++)",
-   "verdict": "unobservable",
-   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
-  },
-  {
    "at": 40,
    "file": "MagickCore/opencl.c",
    "function": "RelinquishMagickCLDevices",
@@ -27109,16 +27089,6 @@
    "mutator": "cxx_remove_void_call",
    "nth": 0,
    "src": "DestroyMagickCLCacheInfo(info);",
-   "verdict": "unobservable",
-   "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
-  },
-  {
-   "at": 0,
-   "file": "MagickCore/opencl.c",
-   "function": "OpenCLTerminus",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "DumpOpenCLProfileData();",
    "verdict": "unobservable",
    "why": "clean-up: releases of devices, contexts, programs, queues, semaphores and the OpenCL library at exit (OpenCLTerminus, RelinquishMagickCLEnv/Device(s)) and of a pixel cache's OpenCL buffer, events and device reference (DestroyMagickCLCacheInfo*, RelinquishMagickCLCacheInfo); a skipped release leaks, and with one device the reference count steers nothing"
   },
@@ -27353,112 +27323,12 @@
    "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
   },
   {
-   "at": 47,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (default_CLEnv->devices[i]->profile_kernels != MagickFalse)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 6,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (i == default_CLEnv->number_devices)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (log == (FILE *) NULL)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 1,
-   "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_lt_to_le",
-   "nth": 1,
-   "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
    "at": 48,
    "file": "MagickCore/opencl.c",
    "function": "DumpOpenCLProfileData",
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 1,
    "src": "for (i = 0; i < default_CLEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 29,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((device->profile_kernels == MagickFalse) ||",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 25,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "(device->profile_records == (KernelProfileRecord *) NULL))",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 34,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while (device->profile_records[j] != (KernelProfileRecord) NULL)",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 21,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_div_to_mul",
-   "nth": 0,
-   "src": "(int) (profile->total/profile->count),(int) profile->count,",
-   "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 1,
-   "file": "MagickCore/opencl.c",
-   "function": "DumpOpenCLProfileData",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "j++;",
    "verdict": "gap",
    "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
   },
@@ -27470,7 +27340,7 @@
    "nth": 0,
    "src": "elapsed=end-start;",
    "verdict": "unobservable",
-   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
+   "why": "the profile log (case `opencl driver profilelog`, printed by imdriver ocllog) shows each kernel's calls and whether min <= average <= max; the times themselves vary from run to run, so no case may compare them. end+start shifts every time of a kernel alike: the calls and min <= average <= max stay"
   },
   {
    "at": 0,
@@ -27480,17 +27350,7 @@
    "nth": 0,
    "src": "UnlockSemaphoreInfo(device->lock);",
    "verdict": "gap",
-   "why": "kernel profiling (RecordProfileData's records, DumpOpenCLProfileData's log): off unless SetOpenCLKernelProfileEnabled is called, which no case does; imdriver could, but the log carries kernel timings, so only its counts could be compared"
-  },
-  {
-   "at": 13,
-   "file": "MagickCore/opencl.c",
-   "function": "RecordProfileData",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
-   "verdict": "unobservable",
-   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
+   "why": "the unlock on the path where the record array cannot grow (ResizeQuantumMemory fails): no case makes that allocation fail"
   },
   {
    "at": 13,
@@ -27499,18 +27359,8 @@
    "mutator": "cxx_lt_to_le",
    "nth": 0,
    "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
-   "verdict": "unobservable",
-   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
-  },
-  {
-   "at": 62,
-   "file": "MagickCore/opencl.c",
-   "function": "RecordProfileData",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((elapsed < profile_record->min) || (profile_record->count == 0))",
-   "verdict": "unobservable",
-   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
+   "verdict": "equivalent",
+   "why": "a time equal to the minimum replaces it with the same value"
   },
   {
    "at": 12,
@@ -27519,18 +27369,8 @@
    "mutator": "cxx_gt_to_ge",
    "nth": 0,
    "src": "if (elapsed > profile_record->max)",
-   "verdict": "unobservable",
-   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/opencl.c",
-   "function": "RecordProfileData",
-   "mutator": "cxx_gt_to_le",
-   "nth": 0,
-   "src": "if (elapsed > profile_record->max)",
-   "verdict": "unobservable",
-   "why": "only a kernel's timing (elapsed, min, max, total in microseconds from the OpenCL event's clock) changes: the timings differ from run to run, so no case may compare them; GetOpenCLKernelProfileRecords' callers in the catalogue print each record's name and count, which the mutant leaves alone, and the timings reach only the profiling log"
+   "verdict": "equivalent",
+   "why": "a time equal to the maximum replaces it with the same value"
   },
   {
    "at": 36,
@@ -27583,72 +27423,12 @@
    "why": "an API getter's 'if (length != NULL) *length=0' when OpenCL is off (GetOpenCLDevices) or a device has no profile records (GetOpenCLKernelProfileRecords): imdriver passes an initialised length, so a caller that does not would be needed"
   },
   {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "MagickCreateDirectory",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "return(status == 0 ? MagickTrue : MagickFalse);",
-   "verdict": "gap",
-   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
-  },
-  {
-   "at": 9,
-   "file": "MagickCore/opencl.c",
-   "function": "GetOpenCLCacheDirectory",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 1,
-   "src": "if (home != (char *) NULL)",
-   "verdict": "gap",
-   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/opencl.c",
-   "function": "GetOpenCLCacheDirectory",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 2,
-   "src": "if (status == MagickFalse)",
-   "verdict": "gap",
-   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/opencl.c",
-   "function": "GetOpenCLCacheDirectory",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 2,
-   "src": "if (status != MagickFalse)",
-   "verdict": "gap",
-   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/opencl.c",
-   "function": "GetOpenCLCacheDirectory",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 3,
-   "src": "if (status == MagickFalse)",
-   "verdict": "gap",
-   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
-  },
-  {
    "at": 11,
    "file": "MagickCore/opencl.c",
    "function": "GetOpenCLCacheDirectory",
    "mutator": "cxx_ne_to_eq",
    "nth": 3,
    "src": "if (status != MagickFalse)",
-   "verdict": "gap",
-   "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
-  },
-  {
-   "at": 47,
-   "file": "MagickCore/opencl.c",
-   "function": "GetOpenCLCacheDirectory",
-   "mutator": "cxx_add_to_sub",
-   "nth": 1,
-   "src": "temp=(char*) AcquireCriticalMemory(strlen(path)+1);",
    "verdict": "gap",
    "why": "the cache directory when MAGICK_OPENCL_CACHE_DIR is unset (the HOME/.cache/ImageMagick branch) or does not exist yet (mkdir's status): the oracle sets it to an existing directory in every OpenCL case"
   },
@@ -27843,16 +27623,6 @@
    "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
   },
   {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "AutoSelectOpenCLDevices",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 2,
-   "src": "for (i = 0; i < clEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
    "at": 40,
    "file": "MagickCore/opencl.c",
    "function": "AutoSelectOpenCLDevices",
@@ -27888,16 +27658,6 @@
    "function": "HasOpenCLDevices",
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 1,
-   "src": "for (i = 0; i < clEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 40,
-   "file": "MagickCore/opencl.c",
-   "function": "HasOpenCLDevices",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 2,
    "src": "for (i = 0; i < clEnv->number_devices; i++)",
    "verdict": "gap",
    "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
@@ -27929,16 +27689,6 @@
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 1,
    "src": "for (i = 0; i < number_platforms; i++)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 33,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDevices",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "for (j = 0; j < number_devices; j++,next++)",
    "verdict": "gap",
    "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
   },
@@ -27963,62 +27713,12 @@
    "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
   },
   {
-   "at": 0,
-   "file": "MagickCore/opencl.c",
-   "function": "RequestOpenCLDevice",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "LockSemaphoreInfo(openCL_lock);",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "RequestOpenCLDevice",
-   "mutator": "cxx_lt_to_ge",
-   "nth": 0,
-   "src": "for (i = 0; i < clEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 14,
-   "file": "MagickCore/opencl.c",
-   "function": "RequestOpenCLDevice",
-   "mutator": "cxx_lt_to_le",
-   "nth": 0,
-   "src": "for (i = 0; i < clEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
    "at": 40,
    "file": "MagickCore/opencl.c",
    "function": "RequestOpenCLDevice",
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "for (i = 0; i < clEnv->number_devices; i++)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 31,
-   "file": "MagickCore/opencl.c",
-   "function": "RequestOpenCLDevice",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (clEnv->devices[i]->enabled == MagickFalse)",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 12,
-   "file": "MagickCore/opencl.c",
-   "function": "RequestOpenCLDevice",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((device == (MagickCLDevice) NULL) || (score < best_score))",
    "verdict": "gap",
    "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
   },
@@ -28059,16 +27759,6 @@
    "mutator": "cxx_post_inc_to_post_dec",
    "nth": 0,
    "src": "device->requested++;",
-   "verdict": "gap",
-   "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
-  },
-  {
-   "at": 0,
-   "file": "MagickCore/opencl.c",
-   "function": "RequestOpenCLDevice",
-   "mutator": "cxx_remove_void_call",
-   "nth": 0,
-   "src": "UnlockSemaphoreInfo(openCL_lock);",
    "verdict": "gap",
    "why": "needs a second OpenCL platform or device: pocl gives one platform with one CPU device, so device loops run once (i-- and one step more end or overrun after it), IsSameOpenCLDevice never compares two, and RequestOpenCLDevice returns before its scoring path (number_devices == 1)"
   },
@@ -28151,146 +27841,6 @@
    "src": "strlen(accelerateKernels)+strlen(accelerateKernels2)+1);",
    "verdict": "unobservable",
    "why": "the kernel source buffer two bytes short (strlen(a)+strlen(b)-1): the copy of both sources overruns the heap by two bytes, which a memory checker would report; the compiled kernels are the same"
-  },
-  {
-   "at": 11,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "for ( ; *q != '\\0'; q++)",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 10,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "if (quote != 0)",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*q == quote)",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*q == '\"') || (*q == '\\''))",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 23,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*q == '\"') || (*q == '\\''))",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*q == '[')",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 13,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_post_inc_to_post_dec",
-   "nth": 0,
-   "src": "bracket_depth++;",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 7,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if (*q == ']')",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_gt_to_ge",
-   "nth": 0,
-   "src": "if (bracket_depth > 0)",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 18,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_gt_to_le",
-   "nth": 0,
-   "src": "if (bracket_depth > 0)",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 8,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*q == '>') && (bracket_depth == 0))",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 34,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_eq_to_ne",
-   "nth": 0,
-   "src": "if ((*q == '>') && (bracket_depth == 0))",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 33,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
-  },
-  {
-   "at": 46,
-   "file": "MagickCore/opencl.c",
-   "function": "LoadOpenCLDeviceBenchmark",
-   "mutator": "cxx_ne_to_eq",
-   "nth": 0,
-   "src": "while ((LocaleNCompare(q,\"->\",2) != 0) && (*q != '\\0'))",
-   "verdict": "gap",
-   "why": "the device-profile parser's <!DOCTYPE and <!-- handling: the profile the oracle seeds has neither; a case with its own profile file could reach them"
   },
   {
    "at": 0,
