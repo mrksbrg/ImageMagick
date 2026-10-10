@@ -1279,9 +1279,9 @@
   "col": 45,
   "function": "segment.c:Classify",
   "status": "killed",
-  "cases": 17,
-  "killer": "unary/c7b6ca0e15",
-  "why": "out.miff differs"
+  "cases": 25,
+  "killer": "mogrify/b2a10af37b",
+  "why": "work.miff differs"
  },
  {
   "id": "cxx_add_to_sub:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:626:90:626:91",
@@ -4127,7 +4127,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "unary/2133fa9f40",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/segment.c:1558:21:1558:23",
