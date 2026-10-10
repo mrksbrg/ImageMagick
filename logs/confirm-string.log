@@ -1,9 +1,9 @@
 mutate: 42 mutants in MagickCore/string\.c$, 16 functions
-mutate: baseline over 8 cases in 0s
+mutate: baseline over 1 cases in 0s
   mutants: 25/42 (0s)
-  mutants: 42/42 (1s)
+  mutants: 42/42 (0s)
 
-mutate: 42 mutants, 1s
+mutate: 42 mutants, 0s
   killed 0, survived 2 (0 capped), no coverage 40, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
@@ -30,4 +30,4 @@ mutate: 42 mutants, 1s
     x  string.c:480:15 cxx_lt_to_le               if (~length < MagickPathExtent)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-daee3db85-string.json
+  full results: build-oracle/work/mutation-confirm-c31754249-string.json

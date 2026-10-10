@@ -1,12 +1,12 @@
 mutate: 81 mutants in MagickCore/property\.c$, 11 functions
-mutate: baseline over 8 cases in 0s
+mutate: baseline over 1 cases in 0s
   mutants: 25/81 (0s)
-  mutants: 50/81 (1s)
-  mutants: 75/81 (2s)
-  mutants: 81/81 (2s)
+  mutants: 50/81 (0s)
+  mutants: 75/81 (0s)
+  mutants: 81/81 (0s)
 
-mutate: 81 mutants, 2s
-  killed 0, survived 35 (0 capped), no coverage 46, errors 0
+mutate: 81 mutants, 0s
+  killed 0, survived 33 (0 capped), no coverage 48, errors 0
   mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
@@ -19,8 +19,8 @@ mutate: 81 mutants, 2s
   TraceSVGClippath                       3      0        0      3
   RemoveImageProperty                    2      0        0      2
   ReadPropertyMSBShort                   1      0        0      1
-  GetNextImageProperty                   1      0        1      0
-  ResetImagePropertyIterator             1      0        1      0
+  GetNextImageProperty                   1      0        0      1
+  ResetImagePropertyIterator             1      0        0      1
 
   survivors (equivalent, or a gap in the catalogue):
     x  property.c:2515:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
@@ -32,7 +32,6 @@ mutate: 81 mutants, 2s
        property.c:2775:18 cxx_ne_to_eq               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
        property.c:2775:53 cxx_eq_to_ne               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
     x  property.c:2892:17 cxx_ne_to_eq               if (image != (Image *) NULL)
-    x  property.c:3640:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
     x  property.c:3779:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     x  property.c:3779:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     x  property.c:3782:21 cxx_ne_to_eq               if ((image_info != (ImageInfo *) NULL) && (IsEventLogging() != MagickFalse))
@@ -57,7 +56,6 @@ mutate: 81 mutants, 2s
     x  property.c:4288:52 cxx_ne_to_eq               if ((property_image != image) && (property_image != (Image *) NULL))
     x  property.c:4290:55 cxx_ne_to_eq               if ((property_info != image_info) && (property_info != (ImageInfo *) NULL))
        property.c:4294:26 cxx_ne_to_eq               if (interpret_text != (char *) NULL)
-    x  property.c:4373:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
-  full results: build-oracle/work/mutation-confirm-daee3db85-property.json
+  full results: build-oracle/work/mutation-confirm-c31754249-property.json
