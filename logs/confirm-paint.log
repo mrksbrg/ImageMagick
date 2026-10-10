@@ -1,12 +1,11 @@
 mutate: 68 mutants in MagickCore/paint\.c$, 8 functions
-mutate: baseline over 2 cases in 0s
+mutate: baseline over 0 cases in 0s
   mutants: 25/68 (0s)
   mutants: 50/68 (0s)
   mutants: 68/68 (0s)
 
 mutate: 68 mutants, 0s
-  killed 0, survived 2 (0 capped), no coverage 66, errors 0
-  mutation score on reached code: 0.0%   overall: 0.0%
+  killed 0, survived 0 (0 capped), no coverage 68, errors 0
 
   function                           total killed survived no-cov
   TransparentPaintImageChroma           31      0        0     31
@@ -14,13 +13,8 @@ mutate: 68 mutants, 0s
   OilPaintImage                          7      0        0      7
   TransparentPaintImage                  6      0        0      6
   OpaquePaintImage                       5      0        0      5
-  GradientImage                          2      0        2      0
+  GradientImage                          2      0        0      2
   DestroyHistogramTLS                    2      0        0      2
   AcquireHistogramTLS                    2      0        0      2
 
-  survivors (equivalent, or a gap in the catalogue):
-    x  paint.c:448:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    x  paint.c:584:44 cxx_eq_to_ne               if (LocaleCompare(artifact,"Circle") == 0)
-  (x: the oracle executes this line; c: capped, not every reaching case ran)
-
-  full results: build-oracle/work/mutation-confirm-daee3db85-paint.json
+  full results: build-oracle/work/mutation-confirm-c31754249-paint.json
