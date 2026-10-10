@@ -1,5 +1,5 @@
 mutate: 185 mutants in MagickCore/effect\.c$, 22 functions
-mutate: baseline over 0 cases in 0s
+mutate: baseline over 14 cases in 0s
   mutants: 25/185 (0s)
   mutants: 50/185 (0s)
   mutants: 75/185 (0s)
@@ -7,10 +7,11 @@ mutate: baseline over 0 cases in 0s
   mutants: 125/185 (0s)
   mutants: 150/185 (0s)
   mutants: 175/185 (0s)
-  mutants: 185/185 (0s)
+  mutants: 185/185 (1s)
 
-mutate: 185 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 185, errors 0
+mutate: 185 mutants, 1s
+  killed 0, survived 1 (0 capped), no coverage 184, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   AdaptiveBlurImage                     27      0        0     27
@@ -32,8 +33,12 @@ mutate: 185 mutants, 0s
   DestroyBilateralTLS                    3      0        0      3
   GetMotionBlurKernel                    3      0        0      3
   AcquireBilateralTLS                    2      0        0      2
-  BlurImage                              1      0        0      1
+  BlurImage                              1      0        1      0
   EdgeImage                              1      0        0      1
   GaussianBlurImage                      1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-f4a3881ef-effect.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  effect.c:782:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-2ae92bdc6-effect.json
