@@ -1,22 +1,22 @@
 mutate: 236 mutants in MagickCore/channel\.c$, 8 functions
-mutate: baseline over 1481 cases in 4s
+mutate: baseline over 1481 cases in 3s
   mutants: 25/236 (0s)
-  mutants: 50/236 (2s)
-  mutants: 75/236 (3s)
+  mutants: 50/236 (1s)
+  mutants: 75/236 (2s)
   mutants: 100/236 (4s)
   mutants: 125/236 (5s)
   mutants: 150/236 (30s)
-  mutants: 175/236 (64s)
-  mutants: 200/236 (108s)
-  mutants: 225/236 (135s)
-  mutants: 236/236 (260s)
+  mutants: 175/236 (61s)
+  mutants: 200/236 (99s)
+  mutants: 225/236 (132s)
+  mutants: 236/236 (252s)
 
-mutate: 236 mutants, 260s
-  killed 202, survived 32 (10 capped), no coverage 2, errors 0
-  mutation score on reached code: 86.3%   overall: 85.6%
+mutate: 236 mutants, 252s
+  killed 206, survived 28 (6 capped), no coverage 2, errors 0
+  mutation score on reached code: 88.0%   overall: 87.3%
 
   function                           total killed survived no-cov
-  SetImageAlphaChannel                  92     82       10      0
+  SetImageAlphaChannel                  92     86        6      0
   CombineImages                         43     33       10      0
   ChannelFxImage                        36     32        4      0
   SeparateImage                         24     19        5      0
@@ -52,11 +52,7 @@ mutate: 236 mutants, 260s
     xc channel.c:1015:50 cxx_ne_to_eq               if ((image->alpha_trait & BlendPixelTrait) != 0)
     xc channel.c:1134:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
     xc channel.c:1202:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
-    xc channel.c:1236:19 cxx_lt_to_ge               for (y=0; y < (ssize_t) image->rows; y++)
     xc channel.c:1236:19 cxx_lt_to_le               for (y=0; y < (ssize_t) image->rows; y++)
-    xc channel.c:1244:21 cxx_eq_to_ne               if ((status == MagickFalse) || (opaque == MagickFalse))
-    xc channel.c:1244:48 cxx_eq_to_ne               if ((status == MagickFalse) || (opaque == MagickFalse))
-    xc channel.c:1252:21 cxx_lt_to_ge               for (x=0; x < (ssize_t) image->columns; x++)
     xc channel.c:1269:50 cxx_eq_to_ne               if ((image->alpha_trait & BlendPixelTrait) == 0)
   (x: the oracle executes this line; c: capped, not every reaching case ran)
 
