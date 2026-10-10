@@ -5313,7 +5313,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "compare/67af9fc2be",
-  "why": "exit status [1] -> ['timeout']; stderr differs; diff.miff missing in candidate"
+  "why": "exit status [1] -> [-6]; stderr differs; diff.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compare.c:1888:38:1888:40",
@@ -6309,7 +6309,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "compare/62aa12ecf2",
-  "why": "exit status [1] -> [0]; stderr differs; diff.miff differs"
+  "why": "stderr differs; diff.miff differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/compare.c:2171:12:2171:14",
@@ -6439,8 +6439,8 @@
   "col": 19,
   "function": "compare.c:GetSSIMSimularity",
   "status": "killed",
-  "cases": 3,
-  "killer": "compare/a8366afaa1",
+  "cases": 4,
+  "killer": "compare/dd9dc7695b",
   "why": "stderr differs; diff.miff differs"
  },
  {
