@@ -2887,8 +2887,8 @@
   "col": 15,
   "function": "GetImageDepth",
   "status": "killed",
-  "cases": 8,
-  "killer": "gaps/855daf7162",
+  "cases": 6,
+  "killer": "gaps/daa830fdbe",
   "why": "stdout differs"
  },
  {
@@ -5069,7 +5069,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "gaps/37e32e9030",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_mul_to_div:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/attribute.c:1979:71:1979:72",
@@ -5369,7 +5369,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "gaps/31402e37f5",
-  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
+  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/attribute.c:2032:41:2032:43",
