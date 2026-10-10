@@ -20,7 +20,7 @@
   "function": "AcquireImageColormap",
   "status": "killed",
   "cases": 3,
-  "killer": "gaps/2f9555c8d7",
+  "killer": "gaps/c62de06d22",
   "why": "stdout differs; stderr differs; out.miff differs"
  },
  {
@@ -92,7 +92,7 @@
   "function": "AcquireImageColormap",
   "status": "killed",
   "cases": 3,
-  "killer": "gaps/2f9555c8d7",
+  "killer": "gaps/c62de06d22",
   "why": "out.miff differs"
  },
  {
@@ -127,7 +127,7 @@
   "col": 5,
   "function": "AcquireImageColormap",
   "status": "killed",
-  "cases": 39,
+  "cases": 31,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -139,7 +139,7 @@
   "col": 22,
   "function": "AcquireImageColormap",
   "status": "killed",
-  "cases": 39,
+  "cases": 31,
   "killer": "decode/108d33ad83",
   "why": "stdout differs"
  },
@@ -152,7 +152,7 @@
   "function": "AcquireImageColormap",
   "status": "killed",
   "cases": 3,
-  "killer": "gaps/2f9555c8d7",
+  "killer": "gaps/c62de06d22",
   "why": "out.miff differs"
  },
  {
@@ -176,7 +176,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
@@ -188,7 +188,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -200,8 +200,8 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
-  "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
+  "killer": "convert/dc83191eda",
+  "why": "exit status [0] -> [1]; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:212:41:212:43",
@@ -212,8 +212,8 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
-  "why": "exit status [0] -> ['timeout']; out.miff missing in candidate"
+  "killer": "convert/dc83191eda",
+  "why": "exit status [0] -> ['timeout']; stderr differs; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:223:16:223:18",
@@ -224,7 +224,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -236,7 +236,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -248,7 +248,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -260,8 +260,8 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "killer": "convert/dc83191eda",
+  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/colormap.c:231:46:231:48",
@@ -272,7 +272,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
@@ -284,7 +284,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -296,7 +296,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -308,7 +308,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -320,7 +320,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -332,7 +332,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
@@ -343,7 +343,7 @@
   "col": 7,
   "function": "CycleColormapImage",
   "status": "killed",
-  "cases": 13,
+  "cases": 11,
   "killer": "gaps/8266e40bd3",
   "why": "out.miff differs"
  },
@@ -356,7 +356,7 @@
   "function": "CycleColormapImage",
   "status": "killed",
   "cases": 1,
-  "killer": "unary/4320d6e150",
+  "killer": "convert/dc83191eda",
   "why": "out.miff differs"
  },
  {
