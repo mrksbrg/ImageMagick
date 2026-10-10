@@ -1,54 +1,54 @@
 mutate: 778 mutants in MagickCore/property\.c$, 28 functions
-mutate: baseline over 15046 cases in 0s
-  mutants: 25/778 (18s)
-  mutants: 50/778 (21s)
-  mutants: 75/778 (32s)
-  mutants: 100/778 (58s)
-  mutants: 125/778 (104s)
-  mutants: 150/778 (121s)
-  mutants: 175/778 (149s)
-  mutants: 200/778 (196s)
-  mutants: 225/778 (214s)
-  mutants: 250/778 (263s)
-  mutants: 275/778 (276s)
-  mutants: 300/778 (317s)
-  mutants: 325/778 (319s)
-  mutants: 350/778 (319s)
-  mutants: 375/778 (321s)
-  mutants: 400/778 (359s)
-  mutants: 425/778 (390s)
-  mutants: 450/778 (402s)
-  mutants: 475/778 (422s)
-  mutants: 500/778 (428s)
-  mutants: 525/778 (431s)
-  mutants: 550/778 (436s)
-  mutants: 575/778 (441s)
-  mutants: 600/778 (451s)
-  mutants: 625/778 (494s)
-  mutants: 650/778 (537s)
-  mutants: 675/778 (552s)
-  mutants: 700/778 (596s)
-  mutants: 725/778 (623s)
-  mutants: 750/778 (655s)
-  mutants: 775/778 (683s)
-  mutants: 778/778 (685s)
+mutate: baseline over 15047 cases in 0s
+  mutants: 25/778 (20s)
+  mutants: 50/778 (22s)
+  mutants: 75/778 (39s)
+  mutants: 100/778 (60s)
+  mutants: 125/778 (108s)
+  mutants: 150/778 (123s)
+  mutants: 175/778 (152s)
+  mutants: 200/778 (191s)
+  mutants: 225/778 (224s)
+  mutants: 250/778 (270s)
+  mutants: 275/778 (291s)
+  mutants: 300/778 (328s)
+  mutants: 325/778 (328s)
+  mutants: 350/778 (329s)
+  mutants: 375/778 (342s)
+  mutants: 400/778 (373s)
+  mutants: 425/778 (408s)
+  mutants: 450/778 (414s)
+  mutants: 475/778 (434s)
+  mutants: 500/778 (442s)
+  mutants: 525/778 (444s)
+  mutants: 550/778 (450s)
+  mutants: 575/778 (458s)
+  mutants: 600/778 (468s)
+  mutants: 625/778 (516s)
+  mutants: 650/778 (562s)
+  mutants: 675/778 (580s)
+  mutants: 700/778 (627s)
+  mutants: 725/778 (662s)
+  mutants: 750/778 (696s)
+  mutants: 775/778 (724s)
+  mutants: 778/778 (728s)
 
-mutate: 778 mutants, 685s
-  killed 476, survived 297 (256 capped), no coverage 5, errors 0
-  mutation score on reached code: 61.6%   overall: 61.2%
+mutate: 778 mutants, 728s
+  killed 478, survived 295 (254 capped), no coverage 5, errors 0
+  mutation score on reached code: 61.8%   overall: 61.4%
 
   function                           total killed survived no-cov
-  GetEXIFProperty                      158     74       84      0
+  GetEXIFProperty                      158     59       99      0
   GetMagickProperty                    124    102       22      0
   InterpretImageProperties             111     60       51      0
   SetImageProperty                      83     29       54      0
   Get8BIMProperty                       60     51        9      0
   TracePSClippath                       41     35        6      0
-  GetMagickPropertyLetter               35     19       16      0
-  GetXMPProperty                        30     13       17      0
+  GetMagickPropertyLetter               35     21       14      0
+  GetXMPProperty                        30     28        2      0
   TraceSVGClippath                      27     24        3      0
-  GetImageProperty                      26     20        6      0
-  GetIPTCProperty                       21     13        8      0
+  GetImageProperty                      26     22        4      0
+  GetIPTCProperty                       21     11       10      0
   GetICCProperty                        21      8       13      0
   ReadPropertyMSBLong                    5      5        0      0
   ReadPropertyMSBShort                   5      4        1      0
@@ -76,10 +76,12 @@ mutate: 778 mutants, 685s
     xc property.c:455:15 cxx_eq_to_ne               if (profile == (StringInfo *) NULL)
     xc property.c:463:15 cxx_lt_to_le               for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
     xc property.c:463:55 cxx_sub_to_add             for (i=0; i < (ssize_t) GetStringInfoLength(profile)-5; )
+    xc property.c:469:10 cxx_post_inc_to_post_dec   i++;
     xc property.c:481:56 cxx_sub_to_add             size_t remaining = GetStringInfoLength(profile)-(i+5);
     xc property.c:481:59 cxx_add_to_sub             size_t remaining = GetStringInfoLength(profile)-(i+5);
     xc property.c:483:21 cxx_ge_to_gt               if (~length >= 1)
     xc property.c:484:55 cxx_add_to_sub             message=(char *) AcquireQuantumMemory(length+1UL,sizeof(*message));
+    xc property.c:500:46 cxx_add_to_sub             i+=(((size_t) p[3] << 8) | (size_t) p[4])+5;
     xc property.c:504:21 cxx_ne_to_eq               if (attribute != (char *) NULL)
     x  property.c:590:15 cxx_lt_to_le               if (*length < 2)
     x  property.c:672:27 cxx_ne_to_eq               if (macroman_resource != (char *) NULL)
@@ -113,6 +115,9 @@ mutate: 778 mutants, 685s
     xc property.c:1372:36 cxx_le_to_lt               if ((c >= 'a') && (c <= 'f'))
     xc property.c:1373:33 cxx_sub_to_add             tag|=(size_t) (c-('a'-10));
     xc property.c:1377:26 cxx_ne_to_eq               } while (*property != '\0');
+    xc property.c:1385:20 cxx_post_inc_to_post_dec   for (i=0; ; i++)
+    xc property.c:1387:28 cxx_eq_to_ne               if (EXIFTag[i].tag == 0)
+    xc property.c:1389:60 cxx_eq_to_ne               if (LocaleCompare(EXIFTag[i].description,property) == 0)
     xc property.c:1401:14 cxx_lt_to_le               if (length < 6)
     xc property.c:1420:14 cxx_lt_to_le               if (length < 16)
     xc property.c:1427:12 cxx_eq_to_ne               if (id == 0x4D4D)
@@ -125,10 +130,13 @@ mutate: 778 mutants, 685s
     xc property.c:1485:62 cxx_add_to_sub             tag_value=(size_t) (ReadPropertyUnsignedShort(endian,q)+(ssize_t)
     xc property.c:1488:18 cxx_ge_to_gt               if (format >= (sizeof(tag_bytes)/sizeof(*tag_bytes)))
     xc property.c:1493:22 cxx_lt_to_le               if (components < 0)
+    xc property.c:1496:24 cxx_lt_to_le               if (number_bytes < components)
+    xc property.c:1498:24 cxx_le_to_lt               if (number_bytes <= 4)
     xc property.c:1509:27 cxx_lt_to_le               if ((dir_offset < 0) || (size_t) dir_offset >= length)
     xc property.c:1509:55 cxx_ge_to_gt               if ((dir_offset < 0) || (size_t) dir_offset >= length)
     xc property.c:1511:59 cxx_lt_to_le               if (((size_t) dir_offset+(size_t) number_bytes) < (size_t) dir_offset)
     xc property.c:1513:35 cxx_add_to_sub             if ((size_t) (dir_offset+(ssize_t) number_bytes) > length)
+    xc property.c:1517:30 cxx_eq_to_ne               if ((all != 0) || (tag == (size_t) tag_value))
     xc property.c:1523:18 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-tag_bytes[format])))
     xc property.c:1523:46 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-tag_bytes[format])))
     xc property.c:1532:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
@@ -141,16 +149,25 @@ mutate: 778 mutants, 685s
     xc property.c:1540:45 cxx_ne_to_eq               if (isprint((int) p[i]) != 0)
     xc property.c:1579:36 cxx_lt_to_ge               if (number_bytes < 24)
     xc property.c:1579:36 cxx_lt_to_le               if (number_bytes < 24)
+    xc property.c:1619:22 cxx_lt_to_ge               if ((p < exif) || (p > (exif+length-number_bytes)))
     xc property.c:1619:22 cxx_lt_to_le               if ((p < exif) || (p > (exif+length-number_bytes)))
     xc property.c:1619:36 cxx_gt_to_ge               if ((p < exif) || (p > (exif+length-number_bytes)))
+    xc property.c:1619:36 cxx_gt_to_le               if ((p < exif) || (p > (exif+length-number_bytes)))
     xc property.c:1619:50 cxx_sub_to_add             if ((p < exif) || (p > (exif+length-number_bytes)))
     xc property.c:1622:44 cxx_ge_to_gt               if (~((size_t) number_bytes) >= 1)
+    xc property.c:1622:44 cxx_ge_to_lt               if (~((size_t) number_bytes) >= 1)
     xc property.c:1623:74 cxx_add_to_sub             value=(char *) AcquireQuantumMemory((size_t) number_bytes+1UL,
+    xc property.c:1625:25 cxx_ne_to_eq               if (value != (char *) NULL)
+    xc property.c:1627:31 cxx_lt_to_ge               for (i=0; i < (ssize_t) number_bytes; i++)
     xc property.c:1627:31 cxx_lt_to_le               for (i=0; i < (ssize_t) number_bytes; i++)
+    xc property.c:1627:58 cxx_post_inc_to_post_dec   for (i=0; i < (ssize_t) number_bytes; i++)
+    xc property.c:1630:46 cxx_ne_to_eq               if ((isprint((int) p[i]) != 0) || (p[i] == '\0'))
+    xc property.c:1630:61 cxx_eq_to_ne               if ((isprint((int) p[i]) != 0) || (p[i] == '\0'))
     xc property.c:1670:33 cxx_lt_to_ge               if (tag_value < 0x10000)
     xc property.c:1670:33 cxx_lt_to_le               if (tag_value < 0x10000)
     xc property.c:1674:35 cxx_lt_to_ge               if (tag_value < 0x20000)
     xc property.c:1674:35 cxx_lt_to_le               if (tag_value < 0x20000)
+    xc property.c:1683:29 cxx_eq_to_ne               if (level == 2)
     xc property.c:1701:39 cxx_lt_to_ge               if (((size_t) tag_offset1 < length) &&
     xc property.c:1701:39 cxx_lt_to_le               if (((size_t) tag_offset1 < length) &&
     xc property.c:1702:24 cxx_lt_to_ge               (level < (MaxDirectoryStack-2)))
@@ -189,22 +206,7 @@ mutate: 778 mutants, 685s
     xc property.c:1822:11 cxx_remove_void_call       SetStringInfoLength(info,extent+1);
     xc property.c:1822:42 cxx_add_to_sub             SetStringInfoLength(info,extent+1);
     xc property.c:1876:36 cxx_lt_to_le               if (GetStringInfoLength(profile) < 17)
-    xc property.c:1883:26 cxx_ne_to_eq               for (p=xmp_profile; *p != '\0'; p++)
-    xc property.c:1884:13 cxx_eq_to_ne               if ((*p == '<') && (*(p+1) == 'x'))
-    xc property.c:1884:32 cxx_eq_to_ne               if ((*p == '<') && (*(p+1) == 'x'))
-    xc property.c:1918:41 cxx_le_to_gt               if ((xmp_namespace_length <= 2) ||
-    xc property.c:1918:41 cxx_le_to_lt               if ((xmp_namespace_length <= 2) ||
-    xc property.c:1919:57 cxx_sub_to_add             (*(xmp_namespace+(xmp_namespace_length-2)) != ':') ||
-    xc property.c:1919:62 cxx_ne_to_eq               (*(xmp_namespace+(xmp_namespace_length-2)) != ':') ||
-    xc property.c:1920:57 cxx_sub_to_add             (*(xmp_namespace+(xmp_namespace_length-1)) != '*'))
-    xc property.c:1920:62 cxx_ne_to_eq               (*(xmp_namespace+(xmp_namespace_length-1)) != '*'))
-    xc property.c:1928:39 cxx_eq_to_ne               if (SkipXMPValue(content) == MagickFalse)
-    xc property.c:1933:43 cxx_le_to_gt               if ((xmp_namespace_length <= 2) ||
     xc property.c:1933:43 cxx_le_to_lt               if ((xmp_namespace_length <= 2) ||
-    xc property.c:1934:59 cxx_sub_to_add             (*(xmp_namespace+(xmp_namespace_length-2)) != ':') ||
-    xc property.c:1934:64 cxx_ne_to_eq               (*(xmp_namespace+(xmp_namespace_length-2)) != ':') ||
-    xc property.c:1935:59 cxx_sub_to_add             (*(xmp_namespace+(xmp_namespace_length-1)) != '*'))
-    xc property.c:1935:64 cxx_ne_to_eq               (*(xmp_namespace+(xmp_namespace_length-1)) != '*'))
     x  property.c:2022:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
     x  property.c:2030:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(22,(ssize_t) length));
     x  property.c:2044:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
@@ -215,8 +217,6 @@ mutate: 778 mutants, 685s
     x  property.c:2228:42 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(22,(ssize_t) length));
     x  property.c:2242:46 cxx_sub_to_add             length=(size_t) ((ssize_t) length-MagickMin(24,(ssize_t) length));
     xc property.c:2318:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc property.c:2324:24 cxx_gt_to_ge               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
-    xc property.c:2324:24 cxx_gt_to_le               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
     xc property.c:2324:60 cxx_sub_to_add             if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
     xc property.c:2324:65 cxx_eq_to_ne               if ((property_length > 2) && (*(property+(property_length-2)) == ':') &&
     xc property.c:2325:35 cxx_sub_to_add             (*(property+(property_length-1)) == '*'))
@@ -233,8 +233,6 @@ mutate: 778 mutants, 685s
      c property.c:2775:53 cxx_eq_to_ne               if ((image != (Image *) NULL) && (image->next == (Image *) NULL))
     xc property.c:2800:25 cxx_eq_to_ne               (image->quality == 0 ? 92 : image->quality));
     xc property.c:2816:36 cxx_eq_to_ne               (image_info->number_scenes == 0 ? 2147483647 :
-    xc property.c:2879:27 cxx_ne_to_eq               if ((image->columns != 0) && (image->rows != 0))
-    xc property.c:2879:49 cxx_ne_to_eq               if ((image->columns != 0) && (image->rows != 0))
     xc property.c:2892:17 cxx_ne_to_eq               if (image != (Image *) NULL)
     x  property.c:2920:14 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
     x  property.c:2920:54 cxx_ne_to_eq               if ((image != (Image *) NULL) && (IsEventLogging() != MagickFalse))
