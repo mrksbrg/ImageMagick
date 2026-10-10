@@ -4130,3 +4130,13 @@ same short functions. The three that differ:
 W01, the same night: the magnifier round (`x11cl2-magnifier1010`, the three `daee3db85` cases
 against every open display.c, widget.c and xwindow.c mutant) killed 77: xwindow.c 29% -> 33%,
 display.c 15% -> 16%.
+
+**Kills that no longer reproduce (2026-10-10).** sweep1009 ran 94 mutants uncapped, with every
+reaching case, that older reports had killed: 93 of them were killed only by the early full-file
+runs (`mutation-full-*`, `mutation-sweep-linux`, 10-02/03: another Mull build, an older harness and
+catalogue), one (linked-list.c 1033) by Windows sweeps through `-list resource` cases. None of the
+93 moves a function across 80%: sweep1009 alone gives the merged figures' short functions apart from
+the three above, so the regular files' trust stands on sweep1009 alone (with the ASan round for
+xml-tree.c's DestroyXMLTreeAttributes). magick.c's SetMagickPrecision lookups, killed before only
+by `-list resource` output that followed the machine's memory size, get a case of their own
+(`991aa9015`, MAGICK_PRECISION=3: hand-run, both killed).
