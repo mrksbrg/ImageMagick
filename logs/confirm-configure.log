@@ -1,19 +1,42 @@
 mutate: 46 mutants in MagickCore/configure\.c$, 8 functions
-mutate: baseline over 0 cases in 0s
+  baseline: 7/7 (0s)
+mutate: baseline over 7 cases in 0s
   mutants: 25/46 (0s)
   mutants: 46/46 (0s)
 
 mutate: 46 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 46, errors 0
+  killed 0, survived 18 (0 capped), no coverage 28, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
   GetConfigureList                      12      0        0     12
-  LoadConfigureCache                    12      0        0     12
+  LoadConfigureCache                    12      0       12      0
   GetConfigureInfo                      11      0        0     11
   GetConfigureOption                     4      0        0      4
-  DestroyConfigureElement                3      0        0      3
-  IsConfigureCacheInstantiated           2      0        0      2
-  GetConfigureInfoList                   1      0        0      1
+  DestroyConfigureElement                3      0        3      0
+  IsConfigureCacheInstantiated           2      0        2      0
+  GetConfigureInfoList                   1      0        1      0
   GetConfigureValue                      1      0        0      1
 
-  full results: build-oracle/work/mutation-confirm-f4a3881ef-configure.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  configure.c:266:20 cxx_ne_to_eq               if (p->value != (char *) NULL)
+    x  configure.c:268:19 cxx_ne_to_eq               if (p->name != (char *) NULL)
+    x  configure.c:270:19 cxx_ne_to_eq               if (p->path != (char *) NULL)
+    x  configure.c:458:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  configure.c:1031:31 cxx_eq_to_ne               if (configure_semaphore == (SemaphoreInfo *) NULL)
+       configure.c:1032:9 cxx_remove_void_call       ActivateSemaphoreInfo(&configure_semaphore);
+    x  configure.c:1209:22 cxx_eq_to_ne               if (*q == quote)
+    x  configure.c:1240:42 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+    x  configure.c:1240:55 cxx_ne_to_eq               while ((LocaleNCompare(q,"->",2) != 0) && (*q != '\0'))
+    x  configure.c:1249:25 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  configure.c:1249:48 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  configure.c:1249:64 cxx_ne_to_eq               while (((*token != '/') && (*(token+1) != '>')) && (*q != '\0'))
+    x  configure.c:1253:22 cxx_ne_to_eq               if (*token != '=')
+    x  configure.c:1256:45 cxx_eq_to_ne               if (LocaleCompare(keyword,"file") == 0)
+    x  configure.c:1258:25 cxx_ge_to_gt               if (depth >= MagickMaxRecursionDepth)
+    x  configure.c:1268:29 cxx_ne_to_eq               if (*path != '\0')
+    x  configure.c:1271:30 cxx_eq_to_ne               if (*token == *DirectorySeparator)
+       configure.c:1279:44 cxx_add_to_sub             file_xml,path,depth+1,exception);
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-2ae92bdc6-configure.json
