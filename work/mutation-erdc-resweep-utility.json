@@ -81,7 +81,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "gaps/6444e1436d",
-  "why": "magick-13n3NIqr_oMZyBuBjBdMJPFbTENvE4HS only in candidate"
+  "why": "magick-P7J4BaRl18LXq0TJyaTByhrAWhnuWC6R only in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:206:47:206:49",
@@ -105,7 +105,7 @@
   "status": "killed",
   "cases": 2,
   "killer": "gaps/d38d0134d8",
-  "why": "stdout differs; magick-iposM1SDF0fs0BQrOS2aQ5xnVAR61PCX only in candidate"
+  "why": "stdout differs; magick-y-no8F50-jeGqYN5dmJc0MtyniJnwrDz only in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:221:24:221:26",
@@ -201,7 +201,7 @@
   "status": "killed",
   "cases": 21,
   "killer": "gaps/f8c5963ae7",
-  "why": "exit status [0] -> ['timeout']; stdout differs; magick-86geOukqlhP6BIFmyXsKDkmN1oYKxBYo only in candidate"
+  "why": "exit status [0] -> ['timeout']; stdout differs; magick-b_ytBegyQ-W0sRgq4iOEsD_uTogmGyrm only in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:249:24:249:26",
@@ -345,7 +345,7 @@
   "status": "killed",
   "cases": 10,
   "killer": "gaps/dff60ae4a8",
-  "why": "out.B.gz missing in candidate; out.G.gz missing in candidate; out.R.gz missing in candidate; \udcb0(,\udc8e\udcafU.B.gz only in candidate; \udcb0(,\udc8e\udcafU.G.gz only in candidate; \udcb0(,\udc8e\udcafU.R.gz only in candidate"
+  "why": "P\udcba\u04f3IV.B.gz only in candidate; P\udcba\u04f3IV.G.gz only in candidate; P\udcba\u04f3IV.R.gz only in candidate; out.B.gz missing in candidate; out.G.gz missing in candidate; out.R.gz missing in candidate"
  },
  {
   "id": "cxx_remove_void_call:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:320:7:320:47",
@@ -369,7 +369,7 @@
   "status": "killed",
   "cases": 14,
   "killer": "encode/c54cd0e55a",
-  "why": "VD\udc93\udc829V.png only in candidate; VD\udc93\udc829V_map.shtml only in candidate; enc.html differs; enc.png missing in candidate; enc_map.shtml missing in candidate"
+  "why": "VT\udcc9'AV.png only in candidate; VT\udcc9'AV_map.shtml only in candidate; enc.html differs; enc.png missing in candidate; enc_map.shtml missing in candidate"
  },
  {
   "id": "cxx_ne_to_eq:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:372:24:372:26",
@@ -2377,7 +2377,7 @@
   "col": 12,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -2401,7 +2401,7 @@
   "col": 30,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -2425,7 +2425,7 @@
   "col": 17,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -2473,7 +2473,7 @@
   "col": 40,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "exit status [0] -> [1]; stderr differs; out.miff missing in candidate"
  },
@@ -2485,7 +2485,7 @@
   "col": 50,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "out.miff differs"
  },
@@ -2497,7 +2497,7 @@
   "col": 50,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
@@ -2509,7 +2509,7 @@
   "col": 60,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "out.miff differs"
  },
@@ -2784,10 +2784,10 @@
   "line": 1375,
   "col": 46,
   "function": "GetPathComponent",
-  "status": "survived",
-  "cases": 300,
-  "capped": true,
-  "line_executed": true
+  "status": "killed",
+  "cases": 213,
+  "killer": "gaps/b188d296ca",
+  "why": "exit status [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] -> [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]; stderr differs; k%00d-9.miff missing in candidate; k%00d.miff-9.miff only in candidate; lit.miff missing in candidat"
  },
  {
   "id": "cxx_gt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:1375:53:1375:54",
@@ -3097,7 +3097,7 @@
   "col": 28,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "out.miff differs"
  },
@@ -3109,7 +3109,7 @@
   "col": 52,
   "function": "GetPathComponent",
   "status": "killed",
-  "cases": 193,
+  "cases": 192,
   "killer": "infra/79e1ddca5b",
   "why": "out.miff differs"
  },
@@ -4013,7 +4013,7 @@
   "status": "killed",
   "cases": 172,
   "killer": "gaps/b0b255df3b",
-  "why": "exit status [0] -> ['timeout']; magick-n48esXYymwu4Vmoil_xQFkML8ExctfNT only in candidate; out.miff missing in candidate"
+  "why": "exit status [0] -> ['timeout']; magick-hp9R5apPUttwto2njkdjVIB6ivRv8YbX only in candidate; out.miff missing in candidate"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/utility.c:2069:32:2069:33",

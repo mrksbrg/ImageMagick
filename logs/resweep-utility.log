@@ -1,27 +1,27 @@
 mutate: 350 mutants in MagickCore/utility\.c$, 20 functions
-mutate: baseline over 15693 cases in 0s
+mutate: baseline over 15697 cases in 0s
   mutants: 25/350 (1s)
   mutants: 50/350 (2s)
-  mutants: 75/350 (3s)
-  mutants: 100/350 (5s)
-  mutants: 125/350 (41s)
-  mutants: 150/350 (66s)
-  mutants: 175/350 (106s)
-  mutants: 200/350 (127s)
-  mutants: 225/350 (145s)
-  mutants: 250/350 (150s)
-  mutants: 275/350 (160s)
-  mutants: 300/350 (164s)
-  mutants: 325/350 (214s)
-  mutants: 350/350 (322s)
+  mutants: 75/350 (2s)
+  mutants: 100/350 (4s)
+  mutants: 125/350 (36s)
+  mutants: 150/350 (64s)
+  mutants: 175/350 (97s)
+  mutants: 200/350 (119s)
+  mutants: 225/350 (134s)
+  mutants: 250/350 (140s)
+  mutants: 275/350 (149s)
+  mutants: 300/350 (153s)
+  mutants: 325/350 (276s)
+  mutants: 350/350 (362s)
 
-mutate: 350 mutants, 322s
-  killed 232, survived 104 (56 capped), no coverage 14, errors 0
-  mutation score on reached code: 69.0%   overall: 66.3%
+mutate: 350 mutants, 362s
+  killed 233, survived 103 (55 capped), no coverage 14, errors 0
+  mutation score on reached code: 69.3%   overall: 66.6%
 
   function                           total killed survived no-cov
   ExpandFilenames                       86     51       35      0
-  GetPathComponent                      65     49       16      0
+  GetPathComponent                      65     50       15      0
   Base64Decode                          28     21        7      0
   Base64Encode                          26     22        4      0
   ShredFile                             24      1       23      0
@@ -105,7 +105,6 @@ mutate: 350 mutants, 322s
     xc utility.c:1317:27 cxx_ne_to_eq               if (literal != (char *) NULL)
     xc utility.c:1334:16 cxx_eq_to_ne               if (*p == '\0')
     xc utility.c:1337:72 cxx_lt_to_le               if ((p != component) && (*p == ':') && (IsPathDirectory(component) < 0) &&
-    xc utility.c:1375:46 cxx_sub_to_add             for (p=component+(strlen(component)-1); p > component; p--)
     xc utility.c:1375:53 cxx_gt_to_ge               for (p=component+(strlen(component)-1); p > component; p--)
     xc utility.c:1404:44 cxx_sub_to_add             for (p=component+(strlen(component)-1); p > component; p--)
     xc utility.c:1404:51 cxx_gt_to_ge               for (p=component+(strlen(component)-1); p > component; p--)
