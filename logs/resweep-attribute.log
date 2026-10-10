@@ -1,31 +1,31 @@
 mutate: 532 mutants in MagickCore/attribute\.c$, 24 functions
-mutate: baseline over 14392 cases in 0s
-  mutants: 25/532 (1s)
+mutate: baseline over 14393 cases in 0s
+  mutants: 25/532 (0s)
   mutants: 50/532 (1s)
-  mutants: 75/532 (3s)
+  mutants: 75/532 (2s)
   mutants: 100/532 (8s)
   mutants: 125/532 (9s)
-  mutants: 150/532 (10s)
+  mutants: 150/532 (9s)
   mutants: 175/532 (10s)
-  mutants: 200/532 (12s)
-  mutants: 225/532 (18s)
-  mutants: 250/532 (20s)
-  mutants: 275/532 (21s)
-  mutants: 300/532 (22s)
-  mutants: 325/532 (25s)
-  mutants: 350/532 (27s)
+  mutants: 200/532 (14s)
+  mutants: 225/532 (19s)
+  mutants: 250/532 (21s)
+  mutants: 275/532 (22s)
+  mutants: 300/532 (25s)
+  mutants: 325/532 (28s)
+  mutants: 350/532 (31s)
   mutants: 375/532 (46s)
-  mutants: 400/532 (50s)
-  mutants: 425/532 (51s)
-  mutants: 450/532 (52s)
-  mutants: 475/532 (84s)
-  mutants: 500/532 (103s)
-  mutants: 525/532 (142s)
-  mutants: 532/532 (216s)
+  mutants: 400/532 (52s)
+  mutants: 425/532 (53s)
+  mutants: 450/532 (54s)
+  mutants: 475/532 (98s)
+  mutants: 500/532 (117s)
+  mutants: 525/532 (144s)
+  mutants: 532/532 (218s)
 
-mutate: 532 mutants, 216s
-  killed 436, survived 88 (28 capped), no coverage 8, errors 0
-  mutation score on reached code: 83.2%   overall: 82.0%
+mutate: 532 mutants, 218s
+  killed 437, survived 87 (27 capped), no coverage 8, errors 0
+  mutation score on reached code: 83.4%   overall: 82.1%
 
   function                           total killed survived no-cov
   GetImageMinimumBoundingBox            91     85        6      0
@@ -34,7 +34,7 @@ mutate: 532 mutants, 216s
   GetImageDepth                         49     39       10      0
   GetEdgeBoundingBox                    27     20        7      0
   GetEdgeBackgroundColor                27     27        0      0
-  SetImageDepth                         27     13       14      0
+  SetImageDepth                         27     14       13      0
   GetImageConvexHull                    25     21        4      0
   SetImageType                          25     23        2      0
   GetEdgeBackgroundCensus               21     17        4      0
@@ -127,7 +127,6 @@ mutate: 532 mutants, 216s
     x  attribute.c:2056:58 cxx_div_to_mul             distortion[v+(ssize_t) channels]+=1.0*error/16.0;
     x  attribute.c:2071:14 cxx_ne_to_eq               if (status != MagickFalse)
     xc attribute.c:2095:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
-    xc attribute.c:2098:13 cxx_ge_to_gt               if (depth >= MAGICKCORE_QUANTUM_DEPTH)
     xc attribute.c:2108:28 cxx_eq_to_ne               if (image->storage_class == PseudoClass)
     xc attribute.c:2117:19 cxx_lt_to_ge               for (i=0; i < (ssize_t) image->colors; i++)
     xc attribute.c:2117:19 cxx_lt_to_le               for (i=0; i < (ssize_t) image->colors; i++)
