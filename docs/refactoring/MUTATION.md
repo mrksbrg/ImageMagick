@@ -4179,3 +4179,15 @@ get past its early return, none changes), and so does XComponentTerminus, which 
 that name is a local), so DestroyXWidget's test is always false: **equivalent** (`c51c55b77`).
 xwindow.c 32% -> 33%. DumpOpenCLProfileData's survivors need a case whose output holds the profile
 log (only the OpenCL cache-directory case puts it in the case directory).
+
+**The OpenCL profile log (2026-10-10 evening).** DumpOpenCLProfileData writes ImageMagickOpenCL.log
+at exit only while a device still profiles, and the driver's `profile` mode switched profiling off
+before then. `2ae92bdc6`: `opencl profilelog` leaves it on (two blurs, so each kernel runs twice),
+and `ocllog` prints the log with its times reduced to what holds whatever they are (the calls, and
+min <= average <= max). Against opencl.c's 192 open mutants (`ocllog1010b`): 11 killed,
+DumpOpenCLProfileData 27% -> 87%, RecordProfileData's min and max tests among them. The verdicts
+that the kills contradict are gone (45, mostly gap notes older cases had already overtaken), and
+RecordProfileData's `count == 0` -> `!=` has none (min then follows the last call: in range or not
+by timing alone). **opencl.c 74%, nine functions short**, the same nine as x11cl11. Upstream quirk:
+the log drops each kernel name's last character (`BlurRo`, `BlurColum`): CopyMagickString's length
+counts the terminator.
