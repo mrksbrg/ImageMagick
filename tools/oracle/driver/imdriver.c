@@ -2685,12 +2685,16 @@ static int ProfileCmd(int argc,char **argv,ExceptionInfo *exception)
   device off (deviceoff), or turns kernel profiling on (profile); with IMAGE, blurs it and prints
   the result's signature, and under profile the kernels each device ran (names and counts only:
   the times vary). Run it with MAGICK_OCL_DEVICE set (the case's env) for the devices to exist.
+  profilelog is profile with two blurs (so kernels run more than once) that leaves profiling on:
+  OpenCLTerminus then writes ImageMagickOpenCL.log into the OpenCL cache directory, for ocllog.
 */
 static int OpenCLCmd(int argc,char **argv,ExceptionInfo *exception)
 {
   const char *mode=(argc > 2) ? argv[2] : "list";
+  MagickBooleanType keep=strcmp(mode,"profilelog") == 0 ? MagickTrue : MagickFalse;
   MagickCLDevice *devices;
   size_t i, n=0;
+  int pass;
 
   printf("enabled at start %d\n",(int) GetOpenCLEnabled());
   devices=GetOpenCLDevices(&n,exception);
@@ -2714,9 +2718,9 @@ static int OpenCLCmd(int argc,char **argv,ExceptionInfo *exception)
   for (i=0; i < n; i++)
     if (strcmp(mode,"deviceoff") == 0)
       SetOpenCLDeviceEnabled(devices[i],MagickFalse);
-    else if (strcmp(mode,"profile") == 0)
+    else if ((strcmp(mode,"profile") == 0) || (keep != MagickFalse))
       SetOpenCLKernelProfileEnabled(devices[i],MagickTrue);
-  if (argc > 3)
+  for (pass=0; (argc > 3) && (pass < (keep != MagickFalse ? 2 : 1)); pass++)
     {
       ImageInfo *image_info=AcquireImageInfo();
       Image *image, *blurred;
@@ -2733,7 +2737,7 @@ static int OpenCLCmd(int argc,char **argv,ExceptionInfo *exception)
         image=DestroyImage(image);
       image_info=DestroyImageInfo(image_info);
     }
-  if (strcmp(mode,"profile") == 0)
+  if ((strcmp(mode,"profile") == 0) || (keep != MagickFalse))
     for (i=0; i < n; i++)
     {
       size_t j, m=0;
@@ -2741,9 +2745,41 @@ static int OpenCLCmd(int argc,char **argv,ExceptionInfo *exception)
       printf("device %.20g profile records %.20g\n",(double) i,(double) m);
       for (j=0; (records != (const KernelProfileRecord *) NULL) && (j < m); j++)
         printf("  %s count %lu\n",records[j]->kernel_name,records[j]->count);
-      SetOpenCLKernelProfileEnabled(devices[i],MagickFalse);
+      if (keep == MagickFalse)
+        SetOpenCLKernelProfileEnabled(devices[i],MagickFalse);
     }
   printf("enabled at end %d\n",(int) GetOpenCLEnabled());
+  return(0);
+}
+
+/*
+  ocllog FILE: the kernel profile log DumpOpenCLProfileData wrote (opencl profilelog in an earlier
+  step), with its times replaced by what holds whatever they are: a record line ("NAME average
+  calls min max") prints as NAME, the calls, and whether min <= average <= max. Other lines as
+  they are; "no log" when there is none.
+*/
+static int OclLogCmd(int argc,char **argv,ExceptionInfo *exception)
+{
+  char line[4096], name[4096];
+  FILE *log;
+  int average, calls, low, high;
+
+  (void) exception;
+  log=(argc > 2) ? fopen(argv[2],"rb") : (FILE *) NULL;
+  if (log == (FILE *) NULL)
+    {
+      printf("no log\n");
+      return(0);
+    }
+  while (fgets(line,sizeof(line),log) != (char *) NULL)
+  {
+    char tail;
+    if (sscanf(line,"%4095s %d %d %d %d %c",name,&average,&calls,&low,&high,&tail) == 5)
+      printf("record %s calls %d in range %d\n",name,calls,(low <= average) && (average <= high) ? 1 : 0);
+    else
+      fputs(line,stdout);
+  }
+  (void) fclose(log);
   return(0);
 }
 
@@ -2843,6 +2879,7 @@ int main(int argc,char **argv)
   else if (strcmp(argv[1],"selfkill") == 0) { (void) raise(SIGKILL); status=0; }
   else if (strcmp(argv[1],"drawinfo") == 0) status=DrawInfoCmd(argc,argv,exception);
   else if (strcmp(argv[1],"opencl") == 0) status=OpenCLCmd(argc,argv,exception);
+  else if (strcmp(argv[1],"ocllog") == 0) status=OclLogCmd(argc,argv,exception);
   else if (strcmp(argv[1],"animate") == 0) status=AnimateCmd(argc,argv,exception);
   else { (void) fprintf(stderr,"unknown command %s\n",argv[1]); status=2; }
   exception=DestroyExceptionInfo(exception);

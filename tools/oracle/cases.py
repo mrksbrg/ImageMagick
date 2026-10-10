@@ -5367,6 +5367,12 @@ GAP_OPENCL_DRIVER_CASES = [("opencl driver %s" % " ".join(args), [["@driver", "o
                                         ("on", img("rose")), ("deviceoff", img("rose")),
                                         ("profile", img("rose")))
                            for env in (_OCL_ENV, {"MAGICK_OCL_DEVICE": "GPU"})]
+# DumpOpenCLProfileData writes the kernel profile log at exit only while a device still profiles:
+# profilelog leaves profiling on (two blurs, so kernels run twice), and a second step prints the
+# log with its times reduced to what holds whatever they are (2026-10-10).
+GAP_OPENCL_DRIVER_CASES += [("opencl driver profilelog, then the kernel profile log",
+                             [["@driver", "opencl", "profilelog", img("rose")],
+                              ["@driver", "ocllog", ".opencl/ImageMagick/ImageMagickOpenCL.log"]], _OCL_ENV)]
 
 
 def _gap_cases():
