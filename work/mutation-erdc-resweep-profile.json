@@ -453,7 +453,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]; stdout differs"
+  "why": "exit status [0] -> ['timeout']; stdout differs"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:557:22:557:24",
@@ -643,9 +643,9 @@
   "col": 29,
   "function": "profile.c:TransformDoublePixels",
   "status": "killed",
-  "cases": 1,
-  "killer": "gaps/a48ff0c01f",
-  "why": "exit status [0] -> [-6]"
+  "cases": 2,
+  "killer": "gaps/4fe557b1ed",
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_lt_to_ge:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/profile.c:630:15:630:16",
