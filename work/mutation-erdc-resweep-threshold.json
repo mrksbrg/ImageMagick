@@ -3379,9 +3379,9 @@
   "col": 17,
   "function": "ClampImage",
   "status": "killed",
-  "cases": 11,
-  "killer": "unary/232a092a6a",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "cases": 89,
+  "killer": "unary/e307b90246",
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/threshold.c:1152:46:1152:48",
@@ -4329,7 +4329,7 @@
   "status": "killed",
   "cases": 1,
   "killer": "gaps/911cca0b40",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff missing in candidate"
+  "why": "exit status [0] -> [-6]; out.miff missing in candidate"
  },
  {
   "id": "cxx_eq_to_ne:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/threshold.c:1669:11:1669:13",
@@ -5841,7 +5841,7 @@
   "status": "killed",
   "cases": 11,
   "killer": "unary/bd641381d8",
-  "why": "exit status [0] -> [-6]; stderr differs; out.miff differs"
+  "why": "exit status [0] -> [-6]; stderr differs"
  },
  {
   "id": "cxx_post_inc_to_post_dec:/home/jovyan/imagemagick-mutation/ImageMagick/MagickCore/threshold.c:2300:57:2300:59",
