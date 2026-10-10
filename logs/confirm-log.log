@@ -1,21 +1,65 @@
 mutate: 64 mutants in MagickCore/log\.c$, 9 functions
-mutate: baseline over 0 cases in 0s
-  mutants: 25/64 (0s)
-  mutants: 50/64 (0s)
-  mutants: 64/64 (0s)
+mutate: baseline over 27 cases in 0s
+  mutants: 25/64 (2s)
+  mutants: 50/64 (2s)
+  mutants: 64/64 (3s)
 
-mutate: 64 mutants, 0s
-  killed 0, survived 0 (0 capped), no coverage 64, errors 0
+mutate: 64 mutants, 3s
+  killed 0, survived 40 (0 capped), no coverage 24, errors 0
+  mutation score on reached code: 0.0%   overall: 0.0%
 
   function                           total killed survived no-cov
-  TranslateEvent                        31      0        0     31
+  TranslateEvent                        31      0       31      0
   GetLogList                            12      0        0     12
   CloseMagickLog                         6      0        0      6
-  LogMagickEventList                     5      0        0      5
+  LogMagickEventList                     5      0        5      0
   SetLogFormat                           4      0        0      4
-  GetLogInfoList                         2      0        0      2
+  GetLogInfoList                         2      0        2      0
   SetLogName                             2      0        0      2
-  LogInfoCompare                         1      0        0      1
-  ListLogInfo                            1      0        0      1
+  LogInfoCompare                         1      0        1      0
+  ListLogInfo                            1      0        1      0
 
-  full results: build-oracle/work/mutation-confirm-f4a3881ef-log.json
+  survivors (equivalent, or a gap in the catalogue):
+    x  log.c:521:44 cxx_eq_to_ne               if (LocaleCompare((*p)->path,(*q)->path) == 0)
+    x  log.c:544:24 cxx_ne_to_eq               if (IsEventLogging() != MagickFalse)
+    x  log.c:571:7 cxx_remove_void_call       qsort((void *) preferences,(size_t) i,sizeof(*preferences),LogInfoCompare);
+    x  log.c:843:21 cxx_lt_to_le               for (j=0; j < (ssize_t) (8*sizeof(LogHandlerType)); j++)
+       log.c:1426:59 cxx_div_to_mul             "</entry>",timestamp,(unsigned long) (elapsed_time/60.0),
+       log.c:1428:33 cxx_sub_to_add             (1000000.0*(elapsed_time-floor(elapsed_time))+0.5),user_time,
+    x  log.c:1440:44 cxx_ge_to_gt               if ((size_t) (q-text+MagickPathExtent) >= extent)
+    x  log.c:1492:65 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetClientName(),extent-(q-text));
+    x  log.c:1492:68 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetClientName(),extent-(q-text));
+    x  log.c:1497:56 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,domain,extent-(q-text));
+    x  log.c:1497:59 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,domain,extent-(q-text));
+    x  log.c:1502:55 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,event,extent-(q-text));
+    x  log.c:1502:58 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,event,extent-(q-text));
+    x  log.c:1507:58 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,function,extent-(q-text));
+    x  log.c:1507:61 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,function,extent-(q-text));
+       log.c:1512:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+       log.c:1512:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+    x  log.c:1518:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+    x  log.c:1518:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+    x  log.c:1533:51 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,r,extent-(q-text));
+    x  log.c:1533:54 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,r,extent-(q-text));
+    x  log.c:1538:62 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetLogName(),extent-(q-text));
+    x  log.c:1538:65 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,GetLogName(),extent-(q-text));
+       log.c:1543:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+       log.c:1543:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%.17g",(double)
+       log.c:1549:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%lu:%02lu.%03lu",
+       log.c:1549:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%lu:%02lu.%03lu",
+       log.c:1550:40 cxx_div_to_mul             (unsigned long) (elapsed_time/60.0),(unsigned long) floor(fmod(
+       log.c:1551:68 cxx_sub_to_add             elapsed_time,60.0)),(unsigned long) (1000.0*(elapsed_time-floor(
+       log.c:1557:55 cxx_sub_to_add             q+=(ptrdiff_t) FormatMagickTime(seconds,extent-(q-text),q);
+       log.c:1557:58 cxx_sub_to_add             q+=(ptrdiff_t) FormatMagickTime(seconds,extent-(q-text),q);
+       log.c:1562:51 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%0.3fu",user_time);
+       log.c:1562:54 cxx_sub_to_add             q+=(ptrdiff_t) FormatLocaleString(q,extent-(q-text),"%0.3fu",user_time);
+    x  log.c:1567:70 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,MagickLibVersionText,extent-(q-text));
+    x  log.c:1567:73 cxx_sub_to_add             q+=(ptrdiff_t) CopyMagickString(q,MagickLibVersionText,extent-(q-text));
+    x  log.c:1622:9 cxx_lt_to_ge               if (n < 0)
+    x  log.c:1622:9 cxx_lt_to_le               if (n < 0)
+       log.c:1628:7 cxx_remove_void_call       UnlockSemaphoreInfo(log_info->event_semaphore);
+    x  log.c:1636:47 cxx_ne_to_eq               if ((log_info->handler_mask & DebugHandler) != 0)
+    x  log.c:1643:47 cxx_ne_to_eq               if ((log_info->handler_mask & EventHandler) != 0)
+  (x: the oracle executes this line; c: capped, not every reaching case ran)
+
+  full results: build-oracle/work/mutation-confirm-2ae92bdc6-log.json
